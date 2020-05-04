@@ -1,5 +1,21 @@
 body {
   font-family: sans-serif;
+  background-color: #f2f7fa;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr {
+  text-align: center;
+  margin: 0px;
+}
+
+hr {
+  border: 2px solid black;
 }
 
 a {
@@ -20,8 +36,71 @@ form div {
   display: inline-block;
 }
 
+.nav-item {
+  color: black;
+  text-transform: uppercase;
+  transition: 0.3s all ease;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px transparent;
+}
+
+.nav-item:hover {
+  color: #1a783e;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid #1a783e;
+}
+
+#title {
+  padding-top: 2%;
+}
+
+#navbar {
+  color: black;
+  font-size: larger;
+}
+
 #map {
-  height: 100%;
+  height: 500px;
+}
+
+#welcome {
+  padding-top: 300px;
+  padding-bottom: 300px;
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+#inner-welcome {
+  border: 5px solid black;
+  background-color: rgba(255, 255, 255, 0.65);
+  color: black;
+  padding: 15px;
+  max-width: 100%;
+  border-radius: 20px;
+}
+
+#about {
+  margin-top: 2%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 5%;
+}
+
+#bear-mountain {
+  background-image: url('./bearmountain.jpg');
+  background-size: cover;
+  max-width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#eagle {
+  max-width: 50%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Optional: Makes the sample page fill the window. */

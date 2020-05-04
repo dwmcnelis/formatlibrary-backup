@@ -5,11 +5,11 @@ import {connect} from 'react-redux'
  * COMPONENT
  */
 export const Species = props => {
-  const {email} = props
+  const {species} = props
 
   return (
     <div>
-      <h3>Browse by Species:</h3>
+      <h3>{species.name}</h3>
     </div>
   )
 }

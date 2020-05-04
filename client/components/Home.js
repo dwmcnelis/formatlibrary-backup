@@ -5,13 +5,17 @@ import {connect} from 'react-redux'
 /**
  * COMPONENT
  */
-export const UserHome = props => {
+export const Home = props => {
   const {email} = props
 
   return (
-    <div>
-      <h3>Welcome, {email}</h3>
-      <p>Nature was meant to be shared.</p>
+    <div id="bear-mountain">
+      <div id="welcome">
+        <div id="inner-welcome">
+          <h1>Greetings, {email}</h1>
+          <h2>Nature was meant to be shared.</h2>
+        </div>
+      </div>
     </div>
   )
 }
@@ -25,11 +29,11 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(UserHome)
+export default connect(mapState)(Home)
 
 /**
  * PROP TYPES
  */
-UserHome.propTypes = {
+Home.propTypes = {
   email: PropTypes.string
 }
