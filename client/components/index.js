@@ -5,4 +5,10 @@
  */
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
+export {default as Species} from './Species'
+export {default as SingleSpecies} from './SingleSpecies'
+export {default as Locations} from './Locations'
+export {default as SingleLocation} from './SingleLocation'
+export {default as NewSighting} from './NewSighting'
+export {default as About} from './About'
 export {Login, Signup} from './auth-form'
