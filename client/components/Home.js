@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
  * COMPONENT
  */
 export const Home = props => {
-  const {firstName} = props
+  const firstName = props.firstName || 'friend'
 
   return (
     <div id="bear-mountain">
