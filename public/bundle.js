@@ -305,44 +305,6 @@ Home.propTypes = {
 
 /***/ }),
 
-/***/ "./client/components/Location.js":
-/*!***************************************!*\
-  !*** ./client/components/Location.js ***!
-  \***************************************/
-/*! exports provided: Location, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Location", function() { return Location; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Map__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Map */ "./client/components/Map.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-
-
-/**
- * COMPONENT
- */
-
-var Location = function Location() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Browse by Location:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Map__WEBPACK_IMPORTED_MODULE_1__["default"], null));
-};
-/**
- * CONTAINER
- */
-
-var mapState = function mapState(state) {
-  return {
-    email: state.user.email
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapState)(Location));
-
-/***/ }),
-
 /***/ "./client/components/Map.js":
 /*!**********************************!*\
   !*** ./client/components/Map.js ***!
@@ -677,7 +639,6 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      console.log('fn', window.cloudinary.createUploadWidget);
       var myWidget = window.cloudinary.createUploadWidget({
         cloudName: 'dg1ouyroo',
         uploadPreset: 'ubguczgm'
@@ -810,9 +771,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Sighting", function() { return Sighting; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
 /**
@@ -821,13 +780,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var Sighting = function Sighting(props) {
   var sighting = props.sighting;
-  console.log('props', props);
-  console.log('sighting', sighting);
   var NS = sighting.latitude > 0 ? 'N' : 'S';
   var EW = sighting.longitude > 0 ? 'E' : 'W';
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "single-sighting"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/sightings/".concat(sighting.id),
     className: "single-sighting-link"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -1098,7 +1055,6 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Map__WEBPACK_IMPORTED_MODULE_5__["default"], {
         sightings: sightings
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), sightings.map(function (sighting) {
-        console.log(sighting);
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Sighting__WEBPACK_IMPORTED_MODULE_4__["default"], {
           key: sighting.id,
           sighting: sighting
@@ -1289,7 +1245,6 @@ var mapDispatch = function mapDispatch(dispatch) {
       var lastName = evt.target.lastName ? evt.target.lastName.value : '';
       var email = evt.target.email.value;
       var password = evt.target.password.value;
-      console.log('vars >>> 1.', email, '2.', password, '3', firstName, '4.', lastName, '5', method);
       dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_3__["auth"])(email, password, firstName, lastName, method));
     }
   };
@@ -1314,7 +1269,7 @@ AuthForm.propTypes = {
 /*!************************************!*\
   !*** ./client/components/index.js ***!
   \************************************/
-/*! exports provided: Navbar, Home, Map, Species, Sighting, AllSpecies, SingleSpecies, SingleSighting, Location, NewSighting, About, Login, Signup */
+/*! exports provided: Navbar, Home, Map, Species, Sighting, AllSpecies, SingleSpecies, SingleSighting, NewSighting, About, Login, Signup */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1343,26 +1298,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SingleSighting__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./SingleSighting */ "./client/components/SingleSighting.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SingleSighting", function() { return _SingleSighting__WEBPACK_IMPORTED_MODULE_7__["default"]; });
 
-/* harmony import */ var _Location__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Location */ "./client/components/Location.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Location", function() { return _Location__WEBPACK_IMPORTED_MODULE_8__["default"]; });
+/* harmony import */ var _NewSighting__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./NewSighting */ "./client/components/NewSighting.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NewSighting", function() { return _NewSighting__WEBPACK_IMPORTED_MODULE_8__["default"]; });
 
-/* harmony import */ var _NewSighting__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./NewSighting */ "./client/components/NewSighting.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NewSighting", function() { return _NewSighting__WEBPACK_IMPORTED_MODULE_9__["default"]; });
+/* harmony import */ var _About__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./About */ "./client/components/About.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "About", function() { return _About__WEBPACK_IMPORTED_MODULE_9__["default"]; });
 
-/* harmony import */ var _About__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./About */ "./client/components/About.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "About", function() { return _About__WEBPACK_IMPORTED_MODULE_10__["default"]; });
+/* harmony import */ var _auth_form__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./auth-form */ "./client/components/auth-form.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Login", function() { return _auth_form__WEBPACK_IMPORTED_MODULE_10__["Login"]; });
 
-/* harmony import */ var _auth_form__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./auth-form */ "./client/components/auth-form.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Login", function() { return _auth_form__WEBPACK_IMPORTED_MODULE_11__["Login"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Signup", function() { return _auth_form__WEBPACK_IMPORTED_MODULE_11__["Signup"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Signup", function() { return _auth_form__WEBPACK_IMPORTED_MODULE_10__["Signup"]; });
 
 /**
  * `components/index.js` exists simply as a 'central export' for our components.
  * This way, we can import all of our components from the same place, rather than
  * having to figure out which file they belong to!
  */
-
 
 
 
@@ -1838,8 +1789,7 @@ var saveSighting = function saveSighting(info) {
                   speciesId = species.id;
                 }
               });
-              console.log('speciesId', speciesId);
-              _context4.next = 11;
+              _context4.next = 10;
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("/api/sightings/".concat(userId, "/save"), {
                 userId: userId,
                 speciesId: speciesId,
@@ -1849,21 +1799,21 @@ var saveSighting = function saveSighting(info) {
                 description: description
               });
 
-            case 11:
-              _context4.next = 16;
+            case 10:
+              _context4.next = 15;
               break;
 
-            case 13:
-              _context4.prev = 13;
+            case 12:
+              _context4.prev = 12;
               _context4.t0 = _context4["catch"](0);
               console.log(_context4.t0);
 
-            case 16:
+            case 15:
             case "end":
               return _context4.stop();
           }
         }
-      }, _callee4, null, [[0, 13]]);
+      }, _callee4, null, [[0, 12]]);
     }))
   );
 }; // Sightings Reducer
@@ -45776,7 +45726,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
