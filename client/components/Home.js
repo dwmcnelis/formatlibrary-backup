@@ -24,7 +24,7 @@ export const Home = props => {
             <h1>Greetings, friend!</h1>
             <br />
             <h2 style={{fontStyle: 'italic'}}>
-              Login of Signup to contribute.
+              Login or Signup to contribute.
             </h2>
           </div>
         )}
