@@ -1,11 +1,13 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {Species} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const users = await User.findAll()
-    res.json(users)
+    const species = await Species.findAll({
+      order: [['commonName', 'ASC']]
+    })
+    res.json(species)
   } catch (err) {
     next(err)
   }
@@ -13,12 +15,13 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const user = await User.findAll({
+    const species = await Species.findOne({
       where: {
         id: req.params.id
       }
     })
-    res.json(user)
+
+    res.json(species)
   } catch (err) {
     next(err)
   }

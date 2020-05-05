@@ -1,29 +1,36 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import Species from 'Species'
+import Species from './Species'
+import {fetchAllSpecies} from '../store/species'
 
 /**
  * COMPONENT
  */
-export const AllSpecies = props => {
-  const {species} = props
+class AllSpecies extends React.Component {
+  componentDidMount() {
+    this.props.fetchAllSpecies()
+  }
 
-  return (
-    <div>
-      <h3>Browse by Species:</h3>
+  render() {
+    const {species} = this.props
+    return (
       <div>
-        {species.length ? (
-          <div>
-            {species.map(function(lifeform) {
-              return <Species key={lifeform.id} name={lifeform.name} />
-            })}
-          </div>
-        ) : (
-          <h3>'No Species'</h3>
-        )}
+        <br />
+        <h2>Browse by Species:</h2>
+        <div className="all-species-container">
+          {species.length ? (
+            <div className="all-species">
+              {species.map(function(lifeform) {
+                return <Species key={lifeform.id} lifeform={lifeform} />
+              })}
+            </div>
+          ) : (
+            <h3>'No Species'</h3>
+          )}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 /**
@@ -31,8 +38,12 @@ export const AllSpecies = props => {
  */
 const mapState = state => {
   return {
-    species: state.species
+    species: state.species.allSpecies
   }
 }
 
-export default connect(mapState)(AllSpecies)
+const mapDispatch = dispatch => ({
+  fetchAllSpecies: () => dispatch(fetchAllSpecies())
+})
+
+export default connect(mapState, mapDispatch)(AllSpecies)

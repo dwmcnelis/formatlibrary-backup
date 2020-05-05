@@ -6,9 +6,10 @@ import {
   About,
   NewSighting,
   Locations,
-  Species,
+  AllSpecies,
   SingleLocation,
   SingleSpecies,
+  SingleSighting,
   Login,
   Signup,
   Home
@@ -32,8 +33,9 @@ class Routes extends Component {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/species" component={Species} />
-        <Route path="/singlespecies" component={SingleSpecies} />
+        <Route exact path="/species" component={AllSpecies} />
+        <Route path="/species/:id" component={SingleSpecies} />
+        <Route path="/sightings/:id" component={SingleSighting} />
         <Route path="/locations" component={Locations} />
         <Route path="/singlelocation" component={SingleLocation} />
         <Route path="/about" component={About} />

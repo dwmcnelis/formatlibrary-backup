@@ -1,15 +1,20 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 /**
  * COMPONENT
  */
 export const Species = props => {
-  const {species} = props
+  const {lifeform} = props
 
   return (
-    <div>
-      <h3>{species.name}</h3>
+    <div className="single-species">
+      <h3>{lifeform.commonName}</h3>
+      <br />
+      <Link to={`/species/${lifeform.id}`} className="single-species-link">
+        <img className="species-image" src={lifeform.imageUrl} />
+      </Link>
     </div>
   )
 }
@@ -19,7 +24,7 @@ export const Species = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    species: state.species.species
   }
 }
 

@@ -20,9 +20,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/species" className="nav-item">
             Species
           </Link>
-          <Link to="/locations" className="nav-item">
+          {/*<Link to="/locations" className="nav-item">
             Locations
-          </Link>
+          </Link>*/}
           <Link to="/newsighting" className="nav-item">
             New Sighting
           </Link>
@@ -36,9 +36,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/species" className="nav-item">
             Species
           </Link>
-          <Link to="/locations" className="nav-item">
+          {/*<Link to="/locations" className="nav-item">
             Locations
-          </Link>
+          </Link>*/}
           <Link to="/about" className="nav-item">
             About
           </Link>

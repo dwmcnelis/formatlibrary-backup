@@ -6,6 +6,17 @@ const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
+    allowNull: false,
+    validate: {
+      isEmail: true
+    }
+  },
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  lastName: {
+    type: Sequelize.STRING,
     allowNull: false
   },
   password: {
@@ -23,6 +34,30 @@ const User = db.define('user', {
     get() {
       return () => this.getDataValue('salt')
     }
+  },
+  imageUrl: {
+    type: Sequelize.STRING,
+    defaultValue: 'https://i.imgur.com/ATdQhg1.jpg',
+    validate: {
+      isUrl: true
+    }
+  },
+  location: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  favCritter: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  level: {
+    type: Sequelize.STRING,
+    defaultValue: 'Beginner',
+    allowNull: false
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   },
   googleId: {
     type: Sequelize.STRING
