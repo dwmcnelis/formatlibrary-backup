@@ -7,29 +7,53 @@ import {auth} from '../store'
  * COMPONENT
  */
 const AuthForm = props => {
-  const {name, displayName, handleSubmit, error} = props
+  const {method, displayName, handleSubmit, error} = props
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
+    <div className="auth-container">
+      <form
+        onSubmit={evt => handleSubmit(evt, method)}
+        method={method}
+        className="auth-form"
+      >
+        {method === 'signup' && (
+          <div className="auth-item">
+            {/* <label htmlFor="firstName">
+            <small>First Name</small>
+          </label> */}
+            <input name="firstName" type="text" placeholder="First Name" />
+          </div>
+        )}
+        {method === 'signup' && (
+          <div className="auth-item">
+            {/* <label htmlFor="lastName">
+            <small>Last Name</small>
+          </label> */}
+            <input name="lastName" type="text" placeholder="Last Name" />
+          </div>
+        )}
+        <div className="auth-item">
+          {/* <label htmlFor="email">
             <small>Email</small>
-          </label>
-          <input name="email" type="text" />
+          </label> */}
+          <input name="email" type="text" placeholder="Email" />
         </div>
-        <div>
-          <label htmlFor="password">
+        <div className="auth-item">
+          {/* <label htmlFor="password">
             <small>Password</small>
-          </label>
-          <input name="password" type="password" />
+          </label> */}
+          <input name="password" type="password" placeholder="Password" />
         </div>
-        <div>
-          <button type="submit">{displayName}</button>
+        <div className="auth-item">
+          <button type="submit" className="btn">
+            {displayName}{' '}
+          </button>
+          <a className="btn-outline" href="/auth/google">
+            {displayName} with Google
+          </a>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
     </div>
   )
 }
@@ -43,7 +67,7 @@ const AuthForm = props => {
  */
 const mapLogin = state => {
   return {
-    name: 'login',
+    method: 'login',
     displayName: 'Login',
     error: state.user.error
   }
@@ -51,7 +75,7 @@ const mapLogin = state => {
 
 const mapSignup = state => {
   return {
-    name: 'signup',
+    method: 'signup',
     displayName: 'Sign Up',
     error: state.user.error
   }
@@ -59,12 +83,25 @@ const mapSignup = state => {
 
 const mapDispatch = dispatch => {
   return {
-    handleSubmit(evt) {
+    handleSubmit(evt, method) {
       evt.preventDefault()
-      const formName = evt.target.name
+      const firstName = evt.target.firstName ? evt.target.firstName.value : ''
+      const lastName = evt.target.lastName ? evt.target.lastName.value : ''
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      console.log(
+        'vars >>> 1.',
+        email,
+        '2.',
+        password,
+        '3',
+        firstName,
+        '4.',
+        lastName,
+        '5',
+        method
+      )
+      dispatch(auth(email, password, firstName, lastName, method))
     }
   }
 }
@@ -76,7 +113,7 @@ export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
  * PROP TYPES
  */
 AuthForm.propTypes = {
-  name: PropTypes.string.isRequired,
+  method: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object

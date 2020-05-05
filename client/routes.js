@@ -36,8 +36,6 @@ class Routes extends Component {
         <Route exact path="/species" component={AllSpecies} />
         <Route path="/species/:id" component={SingleSpecies} />
         <Route path="/sightings/:id" component={SingleSighting} />
-        <Route path="/locations" component={Locations} />
-        <Route path="/singlelocation" component={SingleLocation} />
         <Route path="/about" component={About} />
         {isLoggedIn && (
           <Switch>

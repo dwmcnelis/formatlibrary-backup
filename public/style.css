@@ -152,6 +152,8 @@ form div {
 .form-button {
   padding: 0.5rem 1.5rem;
   border-radius: 5px;
+  margin-left: 10%;
+  margin-right: 10%;
   text-transform: uppercase;
   font-size: 0.8rem;
   background: navy;
@@ -164,6 +166,38 @@ form div {
 .form-button:hover {
   background: #fff;
   color: navy;
+}
+
+/* AUTH FORM */
+
+.auth-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 3rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.auth-item input {
+  padding: 0.3rem 0;
+  border: none;
+  border-bottom: 1px solid #666;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+  width: 18rem;
+}
+
+.auth-item .btn {
+  margin-right: 1rem;
+}
+
+.auth-item:last-child {
+  margin-top: 1.5rem;
 }
 
 #title {
@@ -183,7 +217,7 @@ form div {
 }
 
 #welcome {
-  padding-top: 300px;
+  padding-top: 180px;
   padding-bottom: 300px;
   padding-left: 30%;
   padding-right: 30%;

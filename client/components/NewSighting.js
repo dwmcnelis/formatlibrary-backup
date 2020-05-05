@@ -30,42 +30,44 @@ class NewSighting extends React.Component {
   }
 
   checkUpload(result) {
-    console.log('result', result)
     if (result.event === 'success') {
       const imageUrl = result.info.secure_url
-
       const latStr = result.info.image_metadata.GPSLatitude
-      const latDegs = Number(latStr.substring(0, latStr.indexOf(' deg')))
-      const latMins = Number(
-        latStr.substring(latStr.indexOf('deg') + 4, latStr.indexOf(`'`))
-      )
-      const latSecs = Number(
-        latStr.substring(latStr.indexOf(`'`) + 2, latStr.indexOf(`"`))
-      )
-      const latDir = latStr.substring(latStr.length - 1)
-      const latSign = latDir === 'N' ? 1 : -1
-      const latitude = (
-        latSign *
-        (latDegs + latMins / 60 + latSecs / 3600)
-      ).toFixed(6)
-
       const lngStr = result.info.image_metadata.GPSLongitude
-      const lngDegs = Number(lngStr.substring(0, latStr.indexOf(' deg')))
-      const lngMins = Number(
-        lngStr.substring(latStr.indexOf('deg') + 4, latStr.indexOf(`'`))
-      )
-      const lngSecs = Number(
-        lngStr.substring(latStr.indexOf(`'`) + 2, latStr.indexOf(`"`))
-      )
-      const lngDir = lngStr.substring(latStr.length - 1)
-      const lngSign = lngDir === 'E' ? 1 : -1
-      const longitude = (
-        lngSign *
-        (lngDegs + lngMins / 60 + lngSecs / 3600)
-      ).toFixed(6)
+      let latitude = ''
+      let longitude = ''
 
-      console.log('latitude', latitude)
-      console.log('longitude', longitude)
+      if (latStr) {
+        const latDegs = Number(latStr.substring(0, latStr.indexOf(' deg')))
+        const latMins = Number(
+          latStr.substring(latStr.indexOf('deg') + 4, latStr.indexOf(`'`))
+        )
+        const latSecs = Number(
+          latStr.substring(latStr.indexOf(`'`) + 2, latStr.indexOf(`"`))
+        )
+        const latDir = latStr.substring(latStr.length - 1)
+        const latSign = latDir === 'N' ? 1 : -1
+        latitude = (
+          latSign *
+          (latDegs + latMins / 60 + latSecs / 3600)
+        ).toFixed(6)
+      }
+
+      if (lngStr) {
+        const lngDegs = Number(lngStr.substring(0, latStr.indexOf(' deg')))
+        const lngMins = Number(
+          lngStr.substring(latStr.indexOf('deg') + 4, latStr.indexOf(`'`))
+        )
+        const lngSecs = Number(
+          lngStr.substring(latStr.indexOf(`'`) + 2, latStr.indexOf(`"`))
+        )
+        const lngDir = lngStr.substring(latStr.length - 1)
+        const lngSign = lngDir === 'E' ? 1 : -1
+        longitude = (
+          lngSign *
+          (lngDegs + lngMins / 60 + lngSecs / 3600)
+        ).toFixed(6)
+      }
 
       this.setState({imageUrl, latitude, longitude})
     }
@@ -127,7 +129,7 @@ class NewSighting extends React.Component {
             <option value="Woolybear">Woolybear</option>
           </select>
 
-          <h3 className="form-label">Image URL:</h3>
+          <h3 className="form-label">* Image URL:</h3>
           <input
             className="form-input"
             value={this.state.imageUrl}
@@ -137,7 +139,7 @@ class NewSighting extends React.Component {
               })
             }}
           />
-          <h3 className="form-label">Latitude:</h3>
+          <h3 className="form-label">* Latitude:</h3>
           <input
             className="form-input"
             value={this.state.latitude}
@@ -147,7 +149,7 @@ class NewSighting extends React.Component {
               })
             }}
           />
-          <h3 className="form-label">Longitude:</h3>
+          <h3 className="form-label">* Longitude:</h3>
           <input
             className="form-input"
             value={this.state.longitude}
@@ -169,6 +171,8 @@ class NewSighting extends React.Component {
           />
 
           <div className="form-button-container">
+            <p>Fields with an * are required.</p>
+            <br />
             <button
               className="form-button"
               type="submit"

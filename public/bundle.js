@@ -270,13 +270,19 @@ var Home = function Home(props) {
     id: "bear-mountain"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "welcome"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, firstName ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "inner-welcome"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Greetings, ", firstName, "!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
     style: {
-      fontStyle: "italic"
+      fontStyle: 'italic'
     }
-  }, "Nature was meant to be shared."))));
+  }, "Nature was meant to be shared.")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "inner-welcome"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Greetings, friend!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    style: {
+      fontStyle: 'italic'
+    }
+  }, "Login of Signup to contribute."))));
 };
 /**
  * CONTAINER
@@ -452,9 +458,12 @@ __webpack_require__.r(__webpack_exports__);
 var Navbar = function Navbar(_ref) {
   var handleClick = _ref.handleClick,
       isLoggedIn = _ref.isLoggedIn;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: "/home",
+    className: "nav-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     id: "title"
-  }, "Nature Spotter"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+  }, "Nature Spotter")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
     id: "navbar"
   }, isLoggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/home",
@@ -473,6 +482,9 @@ var Navbar = function Navbar(_ref) {
     onClick: handleClick,
     className: "nav-item"
   }, "Logout")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: "/home",
+    className: "nav-item"
+  }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/species",
     className: "nav-item"
   }, "Species"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
@@ -619,26 +631,31 @@ function (_React$Component) {
   }, {
     key: "checkUpload",
     value: function checkUpload(result) {
-      console.log('result', result);
-
       if (result.event === 'success') {
         var imageUrl = result.info.secure_url;
         var latStr = result.info.image_metadata.GPSLatitude;
-        var latDegs = Number(latStr.substring(0, latStr.indexOf(' deg')));
-        var latMins = Number(latStr.substring(latStr.indexOf('deg') + 4, latStr.indexOf("'")));
-        var latSecs = Number(latStr.substring(latStr.indexOf("'") + 2, latStr.indexOf("\"")));
-        var latDir = latStr.substring(latStr.length - 1);
-        var latSign = latDir === 'N' ? 1 : -1;
-        var latitude = (latSign * (latDegs + latMins / 60 + latSecs / 3600)).toFixed(6);
         var lngStr = result.info.image_metadata.GPSLongitude;
-        var lngDegs = Number(lngStr.substring(0, latStr.indexOf(' deg')));
-        var lngMins = Number(lngStr.substring(latStr.indexOf('deg') + 4, latStr.indexOf("'")));
-        var lngSecs = Number(lngStr.substring(latStr.indexOf("'") + 2, latStr.indexOf("\"")));
-        var lngDir = lngStr.substring(latStr.length - 1);
-        var lngSign = lngDir === 'E' ? 1 : -1;
-        var longitude = (lngSign * (lngDegs + lngMins / 60 + lngSecs / 3600)).toFixed(6);
-        console.log('latitude', latitude);
-        console.log('longitude', longitude);
+        var latitude = '';
+        var longitude = '';
+
+        if (latStr) {
+          var latDegs = Number(latStr.substring(0, latStr.indexOf(' deg')));
+          var latMins = Number(latStr.substring(latStr.indexOf('deg') + 4, latStr.indexOf("'")));
+          var latSecs = Number(latStr.substring(latStr.indexOf("'") + 2, latStr.indexOf("\"")));
+          var latDir = latStr.substring(latStr.length - 1);
+          var latSign = latDir === 'N' ? 1 : -1;
+          latitude = (latSign * (latDegs + latMins / 60 + latSecs / 3600)).toFixed(6);
+        }
+
+        if (lngStr) {
+          var lngDegs = Number(lngStr.substring(0, latStr.indexOf(' deg')));
+          var lngMins = Number(lngStr.substring(latStr.indexOf('deg') + 4, latStr.indexOf("'")));
+          var lngSecs = Number(lngStr.substring(latStr.indexOf("'") + 2, latStr.indexOf("\"")));
+          var lngDir = lngStr.substring(latStr.length - 1);
+          var lngSign = lngDir === 'E' ? 1 : -1;
+          longitude = (lngSign * (lngDegs + lngMins / 60 + lngSecs / 3600)).toFixed(6);
+        }
+
         this.setState({
           imageUrl: imageUrl,
           latitude: latitude,
@@ -710,7 +727,7 @@ function (_React$Component) {
         value: "Woolybear"
       }, "Woolybear")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "form-label"
-      }, "Image URL:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "* Image URL:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-input",
         value: this.state.imageUrl,
         onChange: function onChange(event) {
@@ -720,7 +737,7 @@ function (_React$Component) {
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "form-label"
-      }, "Latitude:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "* Latitude:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-input",
         value: this.state.latitude,
         onChange: function onChange(event) {
@@ -730,7 +747,7 @@ function (_React$Component) {
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "form-label"
-      }, "Longitude:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "* Longitude:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-input",
         value: this.state.longitude,
         onChange: function onChange(event) {
@@ -750,7 +767,7 @@ function (_React$Component) {
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-button-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Fields with an * are required."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "form-button",
         type: "submit",
         onClick: function onClick() {
@@ -927,17 +944,17 @@ function (_React$Component) {
       var EW = sighting.longitude > 0 ? 'E' : 'W';
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, sighting ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         style: {
-          textAlign: "center"
+          textAlign: 'center'
         }
       }, poster.firstName, "'s ", species.commonName, " Sighting:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, sighting.latitude, '\xB0', NS, ", ", sighting.longitude, '\xB0', EW), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "single-sighting-image",
         src: sighting.imageUrl
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         style: {
-          textAlign: "center",
-          maxWidth: "75%",
-          paddingLeft: "20%",
-          paddingRight: "20%"
+          textAlign: 'center',
+          maxWidth: '75%',
+          paddingLeft: '20%',
+          paddingRight: '20%'
         }
       }, sighting.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Map__WEBPACK_IMPORTED_MODULE_4__["default"], {
         sightings: [sighting]
@@ -1063,18 +1080,18 @@ function (_React$Component) {
           sightings = _this$props.sightings;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, species ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, species.commonName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         style: {
-          fontStyle: "italic",
-          textAlign: "center"
+          fontStyle: 'italic',
+          textAlign: 'center'
         }
       }, species.scientificName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "single-species-image",
         src: species.imageUrl
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         style: {
-          textAlign: "center",
-          maxWidth: "75%",
-          paddingLeft: "20%",
-          paddingRight: "20%"
+          textAlign: 'center',
+          maxWidth: '75%',
+          paddingLeft: '20%',
+          paddingRight: '20%'
         }
       }, species.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Sightings:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), sightings.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "species-sightings"
@@ -1193,28 +1210,51 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 var AuthForm = function AuthForm(props) {
-  var name = props.name,
+  var method = props.method,
       displayName = props.displayName,
       handleSubmit = props.handleSubmit,
       error = props.error;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    onSubmit: handleSubmit,
-    name: name
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    htmlFor: "email"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Email")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "auth-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: function onSubmit(evt) {
+      return handleSubmit(evt, method);
+    },
+    method: method,
+    className: "auth-form"
+  }, method === 'signup' && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "auth-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    name: "firstName",
+    type: "text",
+    placeholder: "First Name"
+  })), method === 'signup' && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "auth-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    name: "lastName",
+    type: "text",
+    placeholder: "Last Name"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "auth-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     name: "email",
-    type: "text"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    htmlFor: "password"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Password")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    placeholder: "Email"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "auth-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     name: "password",
-    type: "password"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "submit"
-  }, displayName)), error && error.response && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " ", error.response.data, " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    type: "password",
+    placeholder: "Password"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "auth-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "submit",
+    className: "btn"
+  }, displayName, ' '), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "btn-outline",
     href: "/auth/google"
-  }, displayName, " with Google"));
+  }, displayName, " with Google")), error && error.response && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, " ", error.response.data, " ")));
 };
 /**
  * CONTAINER
@@ -1227,7 +1267,7 @@ var AuthForm = function AuthForm(props) {
 
 var mapLogin = function mapLogin(state) {
   return {
-    name: 'login',
+    method: 'login',
     displayName: 'Login',
     error: state.user.error
   };
@@ -1235,7 +1275,7 @@ var mapLogin = function mapLogin(state) {
 
 var mapSignup = function mapSignup(state) {
   return {
-    name: 'signup',
+    method: 'signup',
     displayName: 'Sign Up',
     error: state.user.error
   };
@@ -1243,12 +1283,14 @@ var mapSignup = function mapSignup(state) {
 
 var mapDispatch = function mapDispatch(dispatch) {
   return {
-    handleSubmit: function handleSubmit(evt) {
+    handleSubmit: function handleSubmit(evt, method) {
       evt.preventDefault();
-      var formName = evt.target.name;
+      var firstName = evt.target.firstName ? evt.target.firstName.value : '';
+      var lastName = evt.target.lastName ? evt.target.lastName.value : '';
       var email = evt.target.email.value;
       var password = evt.target.password.value;
-      dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_3__["auth"])(email, password, formName));
+      console.log('vars >>> 1.', email, '2.', password, '3', firstName, '4.', lastName, '5', method);
+      dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_3__["auth"])(email, password, firstName, lastName, method));
     }
   };
 };
@@ -1260,7 +1302,7 @@ var Signup = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapSign
  */
 
 AuthForm.propTypes = {
-  name: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
+  method: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
   displayName: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
   handleSubmit: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired,
   error: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object
@@ -1472,12 +1514,6 @@ function (_Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/sightings/:id",
         component: _components__WEBPACK_IMPORTED_MODULE_4__["SingleSighting"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/locations",
-        component: _components__WEBPACK_IMPORTED_MODULE_4__["Locations"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/singlelocation",
-        component: _components__WEBPACK_IMPORTED_MODULE_4__["SingleLocation"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/about",
         component: _components__WEBPACK_IMPORTED_MODULE_4__["About"]
@@ -2115,7 +2151,7 @@ var me = function me() {
     }()
   );
 };
-var auth = function auth(email, password, method) {
+var auth = function auth(email, password, firstName, lastName, method) {
   return (
     /*#__PURE__*/
     function () {
@@ -2131,7 +2167,9 @@ var auth = function auth(email, password, method) {
                 _context2.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/auth/".concat(method), {
                   email: email,
-                  password: password
+                  password: password,
+                  firstName: firstName,
+                  lastName: lastName
                 });
 
               case 3:
