@@ -5,9 +5,7 @@ import PropTypes from 'prop-types'
 import {
   About,
   NewSighting,
-  Locations,
   AllSpecies,
-  SingleLocation,
   SingleSpecies,
   SingleSighting,
   Login,

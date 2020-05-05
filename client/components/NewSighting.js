@@ -80,7 +80,6 @@ class NewSighting extends React.Component {
   }
 
   render() {
-    console.log('fn', window.cloudinary.createUploadWidget)
     let myWidget = window.cloudinary.createUploadWidget(
       {
         cloudName: 'dg1ouyroo',

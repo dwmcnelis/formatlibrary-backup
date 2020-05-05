@@ -88,8 +88,6 @@ export const saveSighting = info => {
         }
       })
 
-      console.log('speciesId', speciesId)
-
       await axios.put(`/api/sightings/${userId}/save`, {
         userId,
         speciesId,

@@ -63,7 +63,6 @@ class SingleSpecies extends React.Component {
                   <Map sightings={sightings} />
                   <br />
                   {sightings.map(function(sighting) {
-                    console.log(sighting)
                     return <Sighting key={sighting.id} sighting={sighting} />
                   })}
                 </div>

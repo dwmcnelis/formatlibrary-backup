@@ -1,5 +1,4 @@
 import React from 'react'
-import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 /**
@@ -7,8 +6,6 @@ import {Link} from 'react-router-dom'
  */
 export const Sighting = props => {
   const {sighting} = props
-  console.log('props', props)
-  console.log('sighting', sighting)
   const NS = sighting.latitude > 0 ? 'N' : 'S'
   const EW = sighting.longitude > 0 ? 'E' : 'W'
 
