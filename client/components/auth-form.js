@@ -45,12 +45,12 @@ const AuthForm = props => {
           <input name="password" type="password" placeholder="Password" />
         </div>
         <div className="auth-item">
-          <button type="submit" className="btn">
+          <button type="submit" className="form-button">
             {displayName}{' '}
           </button>
-          <a className="btn-outline" href="/auth/google">
+          {/* <a className="btn-outline" href="/auth/google">
             {displayName} with Google
-          </a>
+          </a>*/}
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
