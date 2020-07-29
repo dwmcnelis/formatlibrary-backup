@@ -2,14 +2,10 @@ import {createStore, combineReducers, applyMiddleware} from 'redux'
 import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
-import userReducer from './user'
-import speciesReducer from './species'
-import sightingsReducer from './sightings'
+import cardsReducer from './cards'
 
 const reducer = combineReducers({
-  user: userReducer,
-  species: speciesReducer,
-  sightings: sightingsReducer
+  cards: cardsReducer
 })
 
 const middleware = composeWithDevTools(
@@ -18,4 +14,3 @@ const middleware = composeWithDevTools(
 const store = createStore(reducer, middleware)
 
 export default store
-export * from './user'
