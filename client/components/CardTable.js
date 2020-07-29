@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Card from './Card.js'
+import Pagination from './Pagination.js'
 import {connect} from 'react-redux'
 import {fetchAllCards, fetchSomeCards, fetchFirstXCards} from '../store/cards'
 
@@ -39,6 +40,7 @@ class CardTable extends React.Component {
     this.changeCardsPerPage = this.changeCardsPerPage.bind(this)
     this.previousPage = this.previousPage.bind(this)
     this.nextPage = this.nextPage.bind(this)
+    this.goToPage = this.goToPage.bind(this)
   }
 
   changeCardsPerPage() {
@@ -50,23 +52,27 @@ class CardTable extends React.Component {
     })
   }
 
-  goToPage(num) {
+  goToPage(num, location) {
+    console.log('num', num)
     this.setState({page: num})
+    if (location === 'bottom') window.scrollTo(0, 0)
   }
 
-  previousPage() {
+  previousPage(location) {
     this.setState(state => {
       if (state.page <= 1) return
       return {page: state.page - 1}
     })
+    if (location === 'bottom') window.scrollTo(0, 0)
   }
 
-  nextPage() {
+  nextPage(location) {
     this.setState(state => {
       if (state.page >= Math.ceil(this.props.cards.length / state.cardsPerPage))
         return
       return {page: state.page + 1}
     })
+    if (location === 'bottom') window.scrollTo(0, 0)
   }
 
   applyFilter(filterId) {
@@ -75,14 +81,13 @@ class CardTable extends React.Component {
 
   componentDidMount() {
     if (!this.props.cards.length) {
-      this.props.fetchFirstXCards(this.state.cardsPerPage)
+      this.props.fetchFirstXCards(this.state.cardsPerPage * 7)
     }
   }
 
   async search() {
     try {
       const filters = this.state
-      console.log('fetching some...')
       await this.props.fetchSomeCards(filters)
       this.setState({page: 1})
     } catch (err) {
@@ -93,7 +98,6 @@ class CardTable extends React.Component {
   async componentDidUpdate() {
     if (!this.state.allFetched) {
       try {
-        console.log('fetching all...')
         await this.props.fetchAllCards()
         this.setState({allFetched: true})
       } catch (err) {
@@ -103,7 +107,6 @@ class CardTable extends React.Component {
   }
 
   render() {
-    console.log('this.state in render()', this.state)
     const lastIndex = this.state.page * this.state.cardsPerPage
     const firstIndex = lastIndex - this.state.cardsPerPage
     const cardsArray = this.props.cards.length
@@ -113,6 +116,7 @@ class CardTable extends React.Component {
     return (
       <div>
         <br />
+
         <div id="image" style={{float: 'left', margin: '0px 0px 0px 10pt'}}>
           <img
             src="https://i.imgur.com/C10Y7FJ.jpg"
@@ -127,13 +131,12 @@ class CardTable extends React.Component {
         <div id="h1" className="h1">
           Card Database
         </div>
-        <div id="h2" className="h2">
-          May 2002 - July 2020
-        </div>
+
         <div id="results" className="results">
           Search Results:{' '}
           {this.state.allFetched ? this.props.cards.length : 'Loading...'}
         </div>
+
         <div id="results" className="results">
           {'Cards Per Page: '}
           <select
@@ -581,6 +584,18 @@ class CardTable extends React.Component {
             </div>
           </div>
 
+          <div className="pagination">
+            <Pagination
+              location="top"
+              nextPage={this.nextPage}
+              previousPage={this.previousPage}
+              goToPage={this.goToPage}
+              cards={this.props.cards}
+              page={this.state.page}
+              cardsPerPage={this.state.cardsPerPage}
+            />
+          </div>
+
           <table id="cards">
             <tbody>
               {cardsArray.length ? (
@@ -593,265 +608,17 @@ class CardTable extends React.Component {
             </tbody>
           </table>
 
-          <button
-            type="submit"
-            onClick={() => {
-              this.previousPage()
-            }}
-          >{`<<`}</button>
-          {this.state.page > 3 ? (
-            this.state.page >
-            Math.ceil(this.props.cards.length / this.state.cardsPerPage) - 2 ? (
-              <button
-                type="submit"
-                onClick={() => {
-                  this.goToPage(
-                    Math.ceil(
-                      this.props.cards.length / this.state.cardsPerPage
-                    ) - 4
-                  )
-                }}
-              >
-                {' '}
-                {Math.ceil(this.props.cards.length / this.state.cardsPerPage) -
-                  4}{' '}
-              </button>
-            ) : (
-              <button
-                type="submit"
-                onClick={() => {
-                  this.goToPage(this.state.page - 2)
-                }}
-              >
-                {' '}
-                {this.state.page - 2}{' '}
-              </button>
-            )
-          ) : this.state.page === 1 ? (
-            <button
-              type="submit"
-              style={{backgroundColor: 'black', color: 'white'}}
-            >
-              {' '}
-              1{' '}
-            </button>
-          ) : (
-            <button
-              type="submit"
-              onClick={() => {
-                this.goToPage(1)
-              }}
-            >
-              {' '}
-              1{' '}
-            </button>
-          )}
-          {this.state.page > 3 ? (
-            this.state.page >
-            Math.ceil(this.props.cards.length / this.state.cardsPerPage) - 2 ? (
-              <button
-                type="submit"
-                onClick={() => {
-                  this.goToPage(
-                    Math.ceil(
-                      this.props.cards.length / this.state.cardsPerPage
-                    ) - 3
-                  )
-                }}
-              >
-                {' '}
-                {Math.ceil(this.props.cards.length / this.state.cardsPerPage) -
-                  3}{' '}
-              </button>
-            ) : (
-              <button
-                type="submit"
-                onClick={() => {
-                  this.goToPage(this.state.page - 1)
-                }}
-              >
-                {' '}
-                {this.state.page - 1}{' '}
-              </button>
-            )
-          ) : this.state.page === 2 ? (
-            <button
-              type="submit"
-              style={{backgroundColor: 'black', color: 'white'}}
-            >
-              {' '}
-              2{' '}
-            </button>
-          ) : (
-            <button
-              type="submit"
-              onClick={() => {
-                this.goToPage(2)
-              }}
-            >
-              {' '}
-              2{' '}
-            </button>
-          )}
-          {this.state.page > 3 ? (
-            this.state.page >
-            Math.ceil(this.props.cards.length / this.state.cardsPerPage) - 2 ? (
-              <button
-                type="submit"
-                onClick={() => {
-                  this.goToPage(
-                    Math.ceil(
-                      this.props.cards.length / this.state.cardsPerPage
-                    ) - 2
-                  )
-                }}
-              >
-                {' '}
-                {Math.ceil(this.props.cards.length / this.state.cardsPerPage) -
-                  2}{' '}
-              </button>
-            ) : (
-              <button
-                type="submit"
-                style={{backgroundColor: 'black', color: 'white'}}
-              >
-                {' '}
-                {this.state.page}{' '}
-              </button>
-            )
-          ) : this.state.page === 3 ? (
-            <button
-              type="submit"
-              style={{backgroundColor: 'black', color: 'white'}}
-            >
-              {' '}
-              3{' '}
-            </button>
-          ) : (
-            <button
-              type="submit"
-              onClick={() => {
-                this.goToPage(3)
-              }}
-            >
-              {' '}
-              3{' '}
-            </button>
-          )}
-          {this.state.page > 3 ? (
-            this.state.page >
-            Math.ceil(this.props.cards.length / this.state.cardsPerPage) - 2 ? (
-              this.state.page ===
-              Math.ceil(this.props.cards.length / this.state.cardsPerPage) -
-                1 ? (
-                <button
-                  type="submit"
-                  style={{backgroundColor: 'black', color: 'white'}}
-                >
-                  {' '}
-                  {Math.ceil(
-                    this.props.cards.length / this.state.cardsPerPage
-                  ) - 1}{' '}
-                </button>
-              ) : (
-                <button
-                  type="submit"
-                  onClick={() => {
-                    this.goToPage(
-                      Math.ceil(
-                        this.props.cards.length / this.state.cardsPerPage
-                      ) - 1
-                    )
-                  }}
-                >
-                  {' '}
-                  {Math.ceil(
-                    this.props.cards.length / this.state.cardsPerPage
-                  ) - 1}{' '}
-                </button>
-              )
-            ) : (
-              <button
-                type="submit"
-                onClick={() => {
-                  this.goToPage(this.state.page + 1)
-                }}
-              >
-                {' '}
-                {this.state.page + 1}{' '}
-              </button>
-            )
-          ) : (
-            <button
-              type="submit"
-              onClick={() => {
-                this.goToPage(4)
-              }}
-            >
-              {' '}
-              4{' '}
-            </button>
-          )}
-          {this.state.page > 3 ? (
-            this.state.page >
-            Math.ceil(this.props.cards.length / this.state.cardsPerPage) - 2 ? (
-              this.state.page ===
-              Math.ceil(this.props.cards.length / this.state.cardsPerPage) ? (
-                <button
-                  type="submit"
-                  style={{backgroundColor: 'black', color: 'white'}}
-                >
-                  {' '}
-                  {Math.ceil(
-                    this.props.cards.length / this.state.cardsPerPage
-                  )}{' '}
-                </button>
-              ) : (
-                <button
-                  type="submit"
-                  onClick={() => {
-                    this.goToPage(
-                      Math.ceil(
-                        this.props.cards.length / this.state.cardsPerPage
-                      )
-                    )
-                  }}
-                >
-                  {' '}
-                  {Math.ceil(
-                    this.props.cards.length / this.state.cardsPerPage
-                  )}{' '}
-                </button>
-              )
-            ) : (
-              <button
-                type="submit"
-                onClick={() => {
-                  this.goToPage(this.state.page + 2)
-                }}
-              >
-                {' '}
-                {this.state.page + 2}{' '}
-              </button>
-            )
-          ) : (
-            <button
-              type="submit"
-              onClick={() => {
-                this.goToPage(5)
-              }}
-            >
-              {' '}
-              5{' '}
-            </button>
-          )}
-
-          <button
-            type="submit"
-            onClick={() => {
-              this.nextPage()
-            }}
-          >{`>>`}</button>
+          <div className="pagination">
+            <Pagination
+              location="bottom"
+              nextPage={this.nextPage}
+              previousPage={this.previousPage}
+              goToPage={this.goToPage}
+              cards={this.props.cards}
+              page={this.state.page}
+              cardsPerPage={this.state.cardsPerPage}
+            />
+          </div>
         </div>
       </div>
     )
