@@ -3,17 +3,20 @@
 import React from 'react'
 
 const Pagination = props => {
-  console.log('props.page', props.page)
-  console.log(
-    'props.page <= Math.ceil(props.cards.length / props.cardsPerPage)',
-    props.page <= Math.ceil(props.cards.length / props.cardsPerPage)
-  )
-  console.log(
-    'Math.ceil(props.cards.length / props.cardsPerPage)',
-    Math.ceil(props.cards.length / props.cardsPerPage)
-  )
   return (
     <div>
+      {props.page !== 1 && props.cards.length ? (
+        <a
+          className="pageButton"
+          id="toStart"
+          type="submit"
+          onClick={() => {
+            props.goToPage(1)
+          }}
+        />
+      ) : (
+        ''
+      )}
       {props.page !== 1 && props.cards.length ? (
         <a
           className="pageButton"
@@ -456,6 +459,20 @@ const Pagination = props => {
         >
           ▶
         </a>
+      ) : (
+        ''
+      )}
+
+      {props.page !== Math.ceil(props.cards.length / props.cardsPerPage) &&
+      props.cards.length ? (
+        <a
+          className="pageButton"
+          id="toEnd"
+          type="submit"
+          onClick={() => {
+            props.goToPage(Math.ceil(props.cards.length / props.cardsPerPage))
+          }}
+        />
       ) : (
         ''
       )}

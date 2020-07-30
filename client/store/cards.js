@@ -27,9 +27,7 @@ export const fetchFirstXCards = x => {
 
 export const fetchSomeCards = filters => {
   return async dispatch => {
-    console.log('filters in fetchSomeCards() in redux store', filters)
     try {
-      console.log('trying...')
       const res = await axios.get(`/api/cards/some`, {params: filters})
       dispatch(setCards(res.data))
     } catch (error) {

@@ -22,6 +22,8 @@ import QuickPlay from '../../public/images/quick-play.png'
 import Field from '../../public/images/field.png'
 import Ritual from '../../public/images/ritual.png'
 import Counter from '../../public/images/counter.png'
+import Normal from '../../public/images/normal.png'
+import Equip from '../../public/images/equip.png'
 
 import Aqua from '../../public/images/aqua.png'
 import Beast from '../../public/images/beast.png'
@@ -37,6 +39,7 @@ import Insect from '../../public/images/insect.png'
 import Machine from '../../public/images/machine.png'
 import Plant from '../../public/images/plant.png'
 import Psychic from '../../public/images/psychic.png'
+import Pyro from '../../public/images/pyro.png'
 import Reptile from '../../public/images/reptile.png'
 import Rock from '../../public/images/rock.png'
 import SeaSerpent from '../../public/images/sea-serpent.png'
@@ -83,6 +86,7 @@ class Card extends React.Component {
     if (this.props.card.type === 'Machine') symbol3 = Machine
     if (this.props.card.type === 'Plant') symbol3 = Plant
     if (this.props.card.type === 'Psychic') symbol3 = Psychic
+    if (this.props.card.type === 'Pyro') symbol3 = Pyro
     if (this.props.card.type === 'Reptile') symbol3 = Reptile
     if (this.props.card.type === 'Rock') symbol3 = Rock
     if (this.props.card.type === 'Sea Serpent') symbol3 = SeaSerpent
@@ -100,6 +104,8 @@ class Card extends React.Component {
       if (this.props.card.category === 'Field') symbol2 = Field
       if (this.props.card.category === 'Ritual') symbol2 = Ritual
       if (this.props.card.category === 'Quick-Play') symbol2 = QuickPlay
+      if (this.props.card.category === 'Normal') symbol2 = Normal
+      if (this.props.card.category === 'Equip') symbol2 = Equip
     }
 
     if (this.props.card.card === 'Trap') {
@@ -107,6 +113,7 @@ class Card extends React.Component {
       symbol2 = ''
       if (this.props.card.category === 'Continous') symbol2 = Continuous
       if (this.props.card.category === 'Counter') symbol2 = Counter
+      if (this.props.card.category === 'Normal') symbol2 = Normal
     }
 
     if (
@@ -155,7 +162,7 @@ class Card extends React.Component {
                 colSpan="5"
                 style={{
                   textAlign: 'left',
-                  fontSize: '19px',
+                  fontSize: '24px',
                   borderBottom: '2px solid #CFDCE5'
                 }}
               >
@@ -164,7 +171,7 @@ class Card extends React.Component {
               <th
                 style={{
                   fontWeight: 'normal',
-                  fontSize: '15px',
+                  fontSize: '14px',
                   textAlign: 'right',
                   borderBottom: '2px solid #CFDCE5'
                 }}
@@ -176,7 +183,7 @@ class Card extends React.Component {
               <td width="90px" style={{borderRight: '2px solid #CFDCE5'}}>
                 <img
                   src={symbol}
-                  height="20px"
+                  height="24px"
                   style={{verticalAlign: 'middle'}}
                   alt="attribute/card-type"
                 />{' '}
@@ -187,7 +194,7 @@ class Card extends React.Component {
                   <img
                     src={symbol2}
                     margin="0px"
-                    height="20px"
+                    height="24px"
                     style={{verticalAlign: 'middle'}}
                     alt="level/category"
                   />{' '}
@@ -201,7 +208,7 @@ class Card extends React.Component {
                   <img
                     src={symbol3}
                     margin="0px"
-                    height="20px"
+                    height="24px"
                     style={{verticalAlign: 'middle'}}
                     alt="level/category"
                   />{' '}
@@ -229,7 +236,7 @@ class Card extends React.Component {
             <tr>
               <td
                 colSpan="6"
-                style={{fontSize: '15px', borderTop: '2px solid #CFDCE5'}}
+                style={{fontSize: '16px', borderTop: '2px solid #CFDCE5'}}
               >
                 {this.props.card.description}
               </td>

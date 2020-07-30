@@ -3,7 +3,7 @@ import CardTable from './CardTable.js'
 
 export const Home = () => {
   return (
-    <div>
+    <div style={{margin: '12px'}}>
       <CardTable />
     </div>
   )
