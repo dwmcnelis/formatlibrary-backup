@@ -152,7 +152,8 @@ h1 {
   background-color: #6d6f8a;
 }
 
-.optionButton {
+.optionButton,
+.clickedOptionButton {
   display: inline-block;
   padding: 6px 6px 6px 30px;
   border: 1px solid #000000;
@@ -163,8 +164,6 @@ h1 {
   text-decoration: none;
   font-weight: 500;
   font-size: 15px;
-  color: black;
-  background-color: #f5f7fa;
   text-align: left;
   transition: all 0.15s;
   background-repeat: no-repeat;
@@ -173,7 +172,19 @@ h1 {
   vertical-align: middle;
 }
 
-.attributeButton {
+.optionButton {
+  color: black;
+  background-color: #f5f7fa;
+}
+
+.clickedOptionButton {
+  color: white;
+  font-weight: 600;
+  background-color: #6d6f8a;
+}
+
+.attributeButton,
+.clickedAttributeButton {
   display: inline-block;
   padding: 6px 6px 6px 30px;
   border: 1px solid #000000;
@@ -184,8 +195,6 @@ h1 {
   text-decoration: none;
   font-weight: 500;
   font-size: 15px;
-  color: black;
-  background-color: #f5f7fa;
   text-align: left;
   transition: all 0.15s;
   background-repeat: no-repeat;
@@ -194,7 +203,19 @@ h1 {
   vertical-align: middle;
 }
 
-.typeButton {
+.attributeButton {
+  color: black;
+  background-color: #f5f7fa;
+}
+
+.clickedAttributeButton {
+  color: white;
+  font-weight: 600;
+  background-color: #6d6f8a;
+}
+
+.typeButton,
+.clickedTypeButton {
   display: inline-block;
   padding: 6px 6px 6px 30px;
   border: 1px solid #000000;
@@ -205,8 +226,6 @@ h1 {
   text-decoration: none;
   font-weight: 500;
   font-size: 15px;
-  color: black;
-  background-color: #f5f7fa;
   text-align: left;
   transition: all 0.15s;
   background-repeat: no-repeat;
@@ -215,32 +234,118 @@ h1 {
   vertical-align: middle;
 }
 
-.monsterButton {
+.typeButton {
+  color: black;
+  background-color: #f5f7fa;
+}
+
+.clickedTypeButton {
+  color: white;
+  font-weight: 600;
+  background-color: #6d6f8a;
+}
+
+.monsterButton,
+.clickedMonsterButton {
   display: inline-block;
   padding: 6px 6px 6px 6px;
   border: 1px solid #000000;
   margin: 0.1em 0.3em 0.1em 0em;
-  min-width: 88px;
+  min-width: 110px;
   border-radius: 8px;
   box-sizing: border-box;
   text-decoration: none;
   font-weight: 500;
   font-size: 15px;
-  color: black;
-  background-color: #f5f7fa;
   text-align: center;
   transition: all 0.15s;
+  background-repeat: no-repeat;
+  background-position: 4px;
+  background-size: 16px;
   vertical-align: middle;
 }
 
-#toEnd {
+.monsterButton {
+  color: black;
+  background-color: #f5f7fa;
+}
+
+.clickedMonsterButton {
+  color: white;
+  font-weight: 600;
+  background-color: #6d6f8a;
+}
+
+#to-end {
   background-image: url('./images/toEnd.png');
   background-position: 65%;
 }
 
-#toStart {
+#to-start {
   background-image: url('./images/toStart.png');
   background-position: 35%;
+}
+
+#normal-monster {
+  background-image: url('./images/monsterCard.jpg');
+}
+
+#effect {
+  background-image: url('./images/effectCard.png');
+}
+
+#fusion {
+  background-image: url('./images/fusionCard.jpg');
+}
+
+#ritual-monster {
+  background-image: url('./images/ritualCard.jpg');
+}
+
+#synchro {
+  background-image: url('./images/synchroCard.png');
+}
+
+#xyz {
+  background-image: url('./images/xyzCard.png');
+}
+
+#pendulum {
+  background-image: url('./images/pendulumCard.png');
+}
+
+#flip {
+  background-size: 24px;
+  background-image: url('./images/flip.png');
+}
+
+#gemini {
+  background-size: 24px;
+  background-image: url('./images/gemini.png');
+}
+
+#spirit {
+  background-size: 22px;
+  background-image: url('./images/spirit.png');
+}
+
+#toon {
+  background-size: 22px;
+  background-image: url('./images/toon.png');
+}
+
+#tuner {
+  background-size: 24px;
+  background-image: url('./images/tuner.png');
+}
+
+#union {
+  background-size: 24px;
+  background-image: url('./images/union.png');
+}
+
+#link {
+  background-image: url('./images/linkCard.png');
 }
 
 #dark {
@@ -379,9 +484,15 @@ h1 {
 .monsterButton:hover {
   cursor: pointer;
   text-shadow: 0 0 2em rgba(255, 255, 255, 1);
-  color: white;
+  color: black;
   font-weight: 800;
-  background-color: #6d6f8a;
+}
+
+.clickedAttributeButton:hover,
+.clickedTypeButton:hover,
+.clickedOptionButton:hover,
+.clickedMonsterButton:hover {
+  cursor: pointer;
 }
 
 .searchButton {
@@ -508,6 +619,11 @@ h1 {
   padding: 2px 4px 4px 4px;
   font-size: 15px;
   font-family: arial;
+}
+
+.refinedInnerWrapper {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .wrapper3 {
@@ -735,7 +851,9 @@ select option {
   border-style: solid;
   border-color: #565769;
   margin-bottom: 5px;
-  width: 99%;
+  vertical-align: middle;
+  margin-left: 4%;
+  margin-right: 4%;
 }
 
 #map {

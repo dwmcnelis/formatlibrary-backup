@@ -19,9 +19,6 @@ router.get('/all', async (req, res, next) => {
 
 router.get('/some', async (req, res, next) => {
   try {
-    console.log('here 1')
-    console.log('req.query', req.query)
-
     let maxDate
     let minDate
 
@@ -60,10 +57,7 @@ router.get('/some', async (req, res, next) => {
     if (maxDate) filters.date = {...filters.date, [Op.lte]: maxDate}
     if (minDate) filters.date = {...filters.date, [Op.gte]: minDate}
 
-    console.log('here 3')
-    console.log('filters in router.get(`/some`) in api', filters)
     const cards = await Card.findAll({where: filters})
-    console.log('got some cards...??')
     res.json(cards)
   } catch (err) {
     next(err)

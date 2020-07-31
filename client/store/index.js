@@ -3,9 +3,11 @@ import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import cardsReducer from './cards'
+import slidersReducer from './sliders'
 
 const reducer = combineReducers({
-  cards: cardsReducer
+  cards: cardsReducer,
+  sliders: slidersReducer
 })
 
 const middleware = composeWithDevTools(

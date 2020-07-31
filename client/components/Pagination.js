@@ -8,10 +8,10 @@ const Pagination = props => {
       {props.page !== 1 && props.cards.length ? (
         <a
           className="pageButton"
-          id="toStart"
+          id="to-start"
           type="submit"
           onClick={() => {
-            props.goToPage(1)
+            props.goToPage(1, props.location)
           }}
         />
       ) : (
@@ -467,10 +467,13 @@ const Pagination = props => {
       props.cards.length ? (
         <a
           className="pageButton"
-          id="toEnd"
+          id="to-end"
           type="submit"
           onClick={() => {
-            props.goToPage(Math.ceil(props.cards.length / props.cardsPerPage))
+            props.goToPage(
+              Math.ceil(props.cards.length / props.cardsPerPage),
+              props.location
+            )
           }}
         />
       ) : (

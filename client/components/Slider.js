@@ -1,9 +1,11 @@
 /* eslint-disable max-statements */
 
 import React from 'react'
+import {connect} from 'react-redux'
 import {Slider} from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import {withStyles, makeStyles} from '@material-ui/core/styles'
+import {setSliders} from '../store/sliders'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,11 +49,17 @@ function valuetext(value) {
   return `${value}`
 }
 
-export default function RangeSlider(props) {
+const RangeSlider = props => {
   const classes = useStyles()
   const points =
     props.type === 'range-slider' ? [props.min, props.max] : props.max
   const [value, setValue] = React.useState(points)
+
+  const handleCommit = (sliderId, newValue) => {
+    console.log('sliderId', sliderId)
+    console.log('newValue', newValue)
+    props.dispatch(setSliders({[sliderId]: newValue}))
+  }
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
@@ -80,6 +88,7 @@ export default function RangeSlider(props) {
         min={props.min}
         max={props.max}
         onChange={handleChange}
+        onChangeCommitted={() => handleCommit(props.id, value)}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
@@ -87,3 +96,11 @@ export default function RangeSlider(props) {
     </div>
   )
 }
+
+const mapDispatch = dispatch => ({
+  setSliders: sliders => {
+    return dispatch(setSliders(sliders))
+  }
+})
+
+export default connect(mapDispatch)(RangeSlider)
