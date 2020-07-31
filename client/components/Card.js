@@ -111,7 +111,7 @@ class Card extends React.Component {
     if (this.props.card.card === 'Trap') {
       symbol = Trap
       symbol2 = ''
-      if (this.props.card.category === 'Continous') symbol2 = Continuous
+      if (this.props.card.category === 'Continuous') symbol2 = Continuous
       if (this.props.card.category === 'Counter') symbol2 = Counter
       if (this.props.card.category === 'Normal') symbol2 = Normal
     }

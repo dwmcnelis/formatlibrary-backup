@@ -56,8 +56,6 @@ const RangeSlider = props => {
   const [value, setValue] = React.useState(points)
 
   const handleCommit = (sliderId, newValue) => {
-    console.log('sliderId', sliderId)
-    console.log('newValue', newValue)
     props.dispatch(setSliders({[sliderId]: newValue}))
   }
 

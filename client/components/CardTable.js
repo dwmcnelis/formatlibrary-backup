@@ -23,9 +23,9 @@ class CardTable extends React.Component {
       allFetched: false,
       advanced: false,
       queryParams: {
-        name: false,
-        description: false,
-        card: false,
+        name: null,
+        description: null,
+        card: null,
         attribute: {
           dark: false,
           light: false,
@@ -41,6 +41,8 @@ class CardTable extends React.Component {
           counter: false,
           equip: false,
           field: false,
+          ritual: false,
+          quickPlay: false,
           normalMonster: false,
           effect: false,
           fusion: false,
@@ -83,37 +85,12 @@ class CardTable extends React.Component {
           wingedBeast: false,
           wyrm: false,
           zombie: false
-        },
-        level: {
-          max: false,
-          min: false
-        },
-        atk: {
-          max: false,
-          min: false
-        },
-        def: {
-          max: false,
-          min: false
-        },
-        year: {
-          max: false,
-          min: false
-        },
-        month: {
-          max: false,
-          min: false
-        },
-        day: {
-          max: false,
-          min: false
         }
       }
     }
 
     this.applyFilter = this.applyFilter.bind(this)
     this.applySelector = this.applySelector.bind(this)
-    this.applySlider = this.applySlider.bind(this)
     this.search = this.search.bind(this)
     this.changeSearchType = this.changeSearchType.bind(this)
     this.changeCardsPerPage = this.changeCardsPerPage.bind(this)
@@ -169,7 +146,14 @@ class CardTable extends React.Component {
   }
 
   applySelector(selectorId) {
-    this.setState({[selectorId]: document.getElementById(selectorId).value})
+    this.setState(state => {
+      return {
+        queryParams: {
+          ...state.queryParams,
+          [selectorId]: document.getElementById(selectorId).value
+        }
+      }
+    })
   }
 
   applyFilter(filterType, filterId) {
@@ -181,13 +165,6 @@ class CardTable extends React.Component {
         }
       }
     })
-  }
-
-  applySlider(sliderId) {
-    console.log(
-      'document.getElementById(sliderId).value',
-      document.getElementById(sliderId).value
-    )
   }
 
   removeFilter(filterType, filterId) {
@@ -221,11 +198,8 @@ class CardTable extends React.Component {
   }
 
   async search() {
-    console.log('this.props.sliders', this.props.sliders)
-
-    console.log('this.state in search()', this.state)
     try {
-      const filters = this.state
+      const filters = {...this.state.queryParams, ...this.props.sliders}
       await this.props.fetchSomeCards(filters)
       this.setState({page: 1})
     } catch (err) {
@@ -245,7 +219,6 @@ class CardTable extends React.Component {
   }
 
   render() {
-    console.log('this.state', this.state)
     const lastIndex = this.state.page * this.state.cardsPerPage
     const firstIndex = lastIndex - this.state.cardsPerPage
     const cardsArray = this.props.cards.length
@@ -1607,7 +1580,7 @@ class CardTable extends React.Component {
             <div className="sliderWrapper0">
               <div className="sliderWrapper1">
                 <PrettoSlider
-                  id="level-slider"
+                  id="level"
                   type="range-slider"
                   symbol={Star}
                   label="Level"
@@ -1616,7 +1589,7 @@ class CardTable extends React.Component {
                   max={12}
                 />
                 <PrettoSlider
-                  id="atk-slider"
+                  id="atk"
                   type="range-slider"
                   symbol={Swords}
                   label="ATK"
@@ -1625,7 +1598,7 @@ class CardTable extends React.Component {
                   max={5000}
                 />
                 <PrettoSlider
-                  id="def-slider"
+                  id="def"
                   type="range-slider"
                   symbol={Shield}
                   label="DEF"
@@ -1637,7 +1610,7 @@ class CardTable extends React.Component {
 
               <div className="sliderWrapper1">
                 <PrettoSlider
-                  id="year-slider"
+                  id="year"
                   type="continuous-slider"
                   symbol={Calendar}
                   label="Year"
@@ -1646,7 +1619,7 @@ class CardTable extends React.Component {
                   max={2020}
                 />
                 <PrettoSlider
-                  id="month-slider"
+                  id="month"
                   type="continuous-slider"
                   symbol={Calendar}
                   label="Month"
@@ -1655,7 +1628,7 @@ class CardTable extends React.Component {
                   max={12}
                 />
                 <PrettoSlider
-                  id="day-slider"
+                  id="day"
                   type="continuous-slider"
                   symbol={Calendar}
                   label="Day"
