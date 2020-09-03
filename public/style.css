@@ -70,9 +70,19 @@ h1 {
   background-color: black;
 }
 
+#flexbox {
+  display: flex;
+  border: 1px solid red;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
+
 #slider {
   display: flex;
   align-items: center;
+  border: 1px solid blue;
   justify-content: space-between;
   flex-direction: row;
 }
@@ -677,170 +687,6 @@ select:focus {
 
 select option {
   font-weight: normal;
-}
-
-.nav-item {
-  color: black;
-  text-transform: uppercase;
-  transition: 0.3s all ease;
-  padding-bottom: 0.3rem;
-  border-bottom: 1px transparent;
-}
-
-.nav-item:hover {
-  color: #1a783e;
-  padding-bottom: 0.2rem;
-  border-bottom: 2px solid #1a783e;
-}
-
-.all-sightings-container {
-  padding: 0 3rem;
-}
-
-.all-sightings {
-  display: grid;
-  align-items: center;
-  grid-template-rows: repeat(3, 1fr);
-}
-
-.single-sighting {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2.5rem;
-}
-
-.sighting-image {
-  max-width: 200px;
-  max-height: 200px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.single-sighting-image {
-  max-width: 300px;
-  max-height: 300px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.sighting-description {
-  text-align: center;
-}
-
-.all-species-container {
-  padding: 0 3rem;
-}
-
-.all-species {
-  display: grid;
-  align-items: center;
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.single-species {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2.5rem;
-}
-
-.species-image {
-  max-width: 200px;
-  max-height: 200px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.single-species-image {
-  max-width: 300px;
-  max-height: 300px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.species-description {
-  text-align: center;
-}
-
-/* NEW SIGHTING FORM */
-.form-container {
-  display: flex;
-  justify-content: center;
-  padding-top: 3rem;
-  padding-left: 40%;
-  padding-right: 40%;
-  width: 15rem;
-  align-items: center;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-.form-input {
-  border: 1px solid rgb(182, 182, 182);
-  display: block;
-  width: 100%;
-  border-radius: 5px;
-  font-size: 0.8rem;
-}
-
-.form-label {
-  margin-bottom: 0.5rem;
-}
-
-.form-button {
-  padding: 0.5rem 1.5rem;
-  border-radius: 5px;
-  margin-left: 10%;
-  margin-right: 10%;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  background: navy;
-  color: #fff;
-  border: 1px solid navy;
-  transition: 0.2s all ease;
-  cursor: pointer;
-}
-
-.form-button:hover {
-  background: #fff;
-  color: navy;
-}
-
-/* AUTH FORM */
-
-.auth-container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 3rem;
-}
-
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.auth-item input {
-  padding: 0.3rem 0;
-  border: none;
-  border-bottom: 1px solid #666;
-  margin-bottom: 0.8rem;
-  font-size: 0.9rem;
-  width: 18rem;
-}
-
-.auth-item .btn {
-  margin-right: 1rem;
-}
-
-.auth-item:last-child {
-  margin-top: 1.5rem;
 }
 
 #myTable {
