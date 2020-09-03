@@ -2246,8 +2246,17 @@ class CardTable extends React.Component {
         <br />
 
         <div id="resultsWrapper0" className="resultsWrapper0">
-          <div id="results" className="results">
+          <div id="results" className="results" style={{width: '215px'}}>
             Results:{' '}
+            {this.state.cardsPerPage * this.state.page -
+              this.state.cardsPerPage +
+              1}
+            {'-'}
+            {this.props.cards.length >=
+            this.state.cardsPerPage * this.state.page
+              ? this.state.cardsPerPage * this.state.page
+              : this.props.cards.length}
+            {' of '}
             {this.state.allFetched ? this.props.cards.length : currentCardCount}
           </div>
 
@@ -2263,44 +2272,48 @@ class CardTable extends React.Component {
             />
           </div>
 
-          <div id="results" className="results">
-            {'Display: '}
-            <select
-              id="cardsPerPageSelector"
-              onChange={() => {
-                this.changeCardsPerPage()
-              }}
-            >
-              <option selected="selected" value="10">
-                10 Cards
-              </option>
-              <option value="25">25 Cards</option>
-              <option value="50">50 Cards</option>
-              <option value="100">100 Cards</option>
-            </select>
-          </div>
+          <div id="vertFlexbox">
+            <div id="results" className="results" style={{width: '215px'}}>
+              {'Display: '}
+              <select
+                id="cardsPerPageSelector"
+                style={{width: '105px'}}
+                onChange={() => {
+                  this.changeCardsPerPage()
+                }}
+              >
+                <option selected="selected" value="10">
+                  10 Cards
+                </option>
+                <option value="25">25 Cards</option>
+                <option value="50">50 Cards</option>
+                <option value="100">100 Cards</option>
+              </select>
+            </div>
 
-          <div id="results" className="results">
-            {'Sort: '}
-            <select
-              id="sortSelector"
-              onChange={() => {
-                this.sortCards()
-              }}
-            >
-              <option selected="selected" value="nameASC">
-                Name ⬇
-              </option>
-              <option value="nameDESC">Name ⬆</option>
-              <option value="atkASC">ATK ⬇</option>
-              <option value="atkDESC">ATK ⬆</option>
-              <option value="defASC">DEF ⬇</option>
-              <option value="defDESC">DEF ⬆</option>
-              <option value="levelASC">Level ⬇</option>
-              <option value="levelDESC">Level ⬆</option>
-              <option value="dateASC">Date ⬇</option>
-              <option value="dateDESC">Date ⬆</option>
-            </select>
+            <div className="results" style={{width: '215px'}}>
+              {'Sort By: '}
+              <select
+                id="sortSelector"
+                style={{width: '105px'}}
+                onChange={() => {
+                  this.sortCards()
+                }}
+              >
+                <option selected="selected" value="nameASC">
+                  Name ⬇
+                </option>
+                <option value="nameDESC">Name ⬆</option>
+                <option value="atkASC">ATK ⬇</option>
+                <option value="atkDESC">ATK ⬆</option>
+                <option value="defASC">DEF ⬇</option>
+                <option value="defDESC">DEF ⬆</option>
+                <option value="levelASC">Level ⬇</option>
+                <option value="levelDESC">Level ⬆</option>
+                <option value="dateASC">Date ⬇</option>
+                <option value="dateDESC">Date ⬆</option>
+              </select>
+            </div>
           </div>
         </div>
 
