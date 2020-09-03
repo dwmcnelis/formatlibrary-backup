@@ -72,7 +72,6 @@ h1 {
 
 #flexbox {
   display: flex;
-  border: 1px solid red;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
@@ -82,7 +81,6 @@ h1 {
 #slider {
   display: flex;
   align-items: center;
-  border: 1px solid blue;
   justify-content: space-between;
   flex-direction: row;
 }
