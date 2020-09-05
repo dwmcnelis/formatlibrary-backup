@@ -19,9 +19,6 @@ router.get('/all', async (req, res, next) => {
 
 router.get('/some', async (req, res, next) => {
   try {
-    console.log('route hit')
-    console.log('req.query', req.query)
-
     let date
 
     if (req.query.day || req.query.month || req.query.year) {
@@ -29,12 +26,17 @@ router.get('/some', async (req, res, next) => {
         .day || '31'}`
     }
 
-    console.log('date', date)
-
     const filters = {
       [Op.and]: [
         {attribute: {[Op.or]: []}},
         {type: {[Op.or]: []}},
+        {
+          [Op.or]: [
+            {category: {[Op.or]: []}},
+            {class: {[Op.or]: []}},
+            {subclass: {[Op.or]: []}}
+          ]
+        },
         {
           [Op.or]: [
             {category: {[Op.or]: []}},
@@ -47,13 +49,9 @@ router.get('/some', async (req, res, next) => {
 
     const $attribute = JSON.parse(req.query.attribute)
     const $type = JSON.parse(req.query.type)
-    const $category = JSON.parse(req.query.category)
+    const $monsterCategory = JSON.parse(req.query.monsterCategory)
+    const $spelltrapCategory = JSON.parse(req.query.spelltrapCategory)
     const $class = JSON.parse(req.query.class)
-
-    console.log('$category', $category)
-    console.log('$class', $class)
-    console.log('$attribute', $attribute)
-    console.log('$type', $type)
 
     if ($attribute.dark)
       filters[Op.and][0] = {
@@ -83,8 +81,6 @@ router.get('/some', async (req, res, next) => {
       filters[Op.and][0] = {
         attribute: {[Op.or]: [...filters[Op.and][0].attribute[Op.or], 'Divine']}
       }
-
-    console.log('filters after attr', filters)
 
     if ($type.aqua)
       filters[Op.and][1] = {
@@ -183,9 +179,7 @@ router.get('/some', async (req, res, next) => {
         type: {[Op.or]: [...filters[Op.and][1].type[Op.or], 'Zombie']}
       }
 
-    console.log('filters after type', filters)
-
-    if ($category.continuous)
+    if ($spelltrapCategory.continuous)
       filters[Op.and][2][Op.or][0] = {
         category: {
           [Op.or]: [
@@ -194,37 +188,152 @@ router.get('/some', async (req, res, next) => {
           ]
         }
       }
-    if ($category.counter)
+
+    if ($spelltrapCategory.counter)
       filters[Op.and][2][Op.or][0] = {
         category: {
           [Op.or]: [...filters[Op.and][2][Op.or][0].category[Op.or], 'Counter']
         }
       }
-    if ($category.equip)
+
+    if ($monsterCategory.effect)
+      filters[Op.and][2][Op.or][0] = {
+        category: {
+          [Op.or]: [...filters[Op.and][2][Op.or][0].category[Op.or], 'Effect']
+        }
+      }
+    if ($monsterCategory.effect)
+      filters[Op.and][2][Op.or][1] = {
+        class: {
+          [Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Effect']
+        }
+      }
+    if ($monsterCategory.effect)
+      filters[Op.and][2][Op.or][2] = {
+        subclass: {
+          [Op.or]: [...filters[Op.and][2][Op.or][2].subclass[Op.or], 'Effect']
+        }
+      }
+
+    if ($spelltrapCategory.equip)
       filters[Op.and][2][Op.or][0] = {
         category: {
           [Op.or]: [...filters[Op.and][2][Op.or][0].category[Op.or], 'Equip']
         }
       }
-    if ($category.field)
+
+    if ($spelltrapCategory.field)
       filters[Op.and][2][Op.or][0] = {
         category: {
           [Op.or]: [...filters[Op.and][2][Op.or][0].category[Op.or], 'Field']
         }
       }
-    if ($category.fusion)
+
+    if ($monsterCategory.fusion)
       filters[Op.and][2][Op.or][0] = {
         category: {
           [Op.or]: [...filters[Op.and][2][Op.or][0].category[Op.or], 'Fusion']
         }
       }
-    if ($category.link)
+    if ($monsterCategory.fusion)
+      filters[Op.and][2][Op.or][1] = {
+        class: {
+          [Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Fusion']
+        }
+      }
+    if ($monsterCategory.fusion)
+      filters[Op.and][2][Op.or][2] = {
+        subclass: {
+          [Op.or]: [...filters[Op.and][2][Op.or][2].subclass[Op.or], 'Fusion']
+        }
+      }
+
+    if ($monsterCategory.link)
       filters[Op.and][2][Op.or][0] = {
         category: {
           [Op.or]: [...filters[Op.and][2][Op.or][0].category[Op.or], 'Link']
         }
       }
-    if ($category.quickPlay)
+    if ($monsterCategory.link)
+      filters[Op.and][2][Op.or][1] = {
+        class: {
+          [Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Link']
+        }
+      }
+    if ($monsterCategory.link)
+      filters[Op.and][2][Op.or][2] = {
+        subclass: {
+          [Op.or]: [...filters[Op.and][2][Op.or][2].subclass[Op.or], 'Link']
+        }
+      }
+
+    if ($spelltrapCategory.normal && $monsterCategory.normal)
+      filters[Op.and][2][Op.or][0] = {
+        category: {
+          [Op.or]: [...filters[Op.and][2][Op.or][0].category[Op.or], 'Normal']
+        }
+      }
+
+    if ($spelltrapCategory.normal && $monsterCategory.normal)
+      filters[Op.and][2][Op.or][1] = {
+        class: {
+          [Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Normal']
+        }
+      }
+
+    if ($spelltrapCategory.normal && $monsterCategory.normal)
+      filters[Op.and][2][Op.or][2] = {
+        subclass: {
+          [Op.or]: [...filters[Op.and][2][Op.or][2].subclass[Op.or], 'Normal']
+        }
+      }
+
+    if (!$spelltrapCategory.normal && $monsterCategory.normal) {
+      filters[Op.and][2][Op.or].push({
+        [Op.and]: [{card: 'Monster'}, {category: 'Normal'}]
+      })
+      filters[Op.and][2][Op.or].push({
+        [Op.and]: [{card: 'Monster'}, {class: 'Normal'}]
+      })
+      filters[Op.and][2][Op.or].push({
+        [Op.and]: [{card: 'Monster'}, {subclass: 'Normal'}]
+      })
+    }
+
+    if ($spelltrapCategory.normal && !$monsterCategory.normal) {
+      filters[Op.and][2][Op.or].push({
+        [Op.and]: [{category: 'Normal'}, {[Op.not]: {card: 'Monster'}}]
+      })
+      filters[Op.and][2][Op.or].push({
+        [Op.and]: [{class: 'Normal'}, {[Op.not]: {card: 'Monster'}}]
+      })
+      filters[Op.and][2][Op.or].push({
+        [Op.and]: [{subclass: 'Normal'}, {[Op.not]: {card: 'Monster'}}]
+      })
+    }
+
+    if ($monsterCategory.pendulum)
+      filters[Op.and][2][Op.or][0] = {
+        category: {
+          [Op.or]: [...filters[Op.and][2][Op.or][0].category[Op.or], 'Pendulum']
+        }
+      }
+
+    if ($monsterCategory.pendulum)
+      filters[Op.and][2][Op.or][1] = {
+        class: {
+          [Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Pendulum']
+        }
+      }
+
+    if ($monsterCategory.pendulum)
+      filters[Op.and][2][Op.or][2] = {
+        subclass: {
+          [Op.or]: [...filters[Op.and][2][Op.or][2].subclass[Op.or], 'Pendulum']
+        }
+      }
+
+    if ($spelltrapCategory.quickPlay)
       filters[Op.and][2][Op.or][0] = {
         category: {
           [Op.or]: [
@@ -233,205 +342,202 @@ router.get('/some', async (req, res, next) => {
           ]
         }
       }
-    if ($category.synchro)
+
+    if ($spelltrapCategory.ritual && $monsterCategory.ritual)
       filters[Op.and][2][Op.or][0] = {
         category: {
-          [Op.or]: [...filters[Op.and][2][Op.or][0].category[Op.or], 'Synchro']
-        }
-      }
-    if ($category.xyz)
-      filters[Op.and][2][Op.or][0] = {
-        category: {
-          [Op.or]: [...filters[Op.and][2][Op.or][0].category[Op.or], 'Xyz']
+          [Op.or]: [...filters[Op.and][2][Op.or][0].category[Op.or], 'Ritual']
         }
       }
 
-    if ($category.normal && $category.normalMonster)
-      filters[Op.and][2][Op.or][0] = {
-        category: {
-          [Op.or]: [...filters[Op.and][2][Op.or][0].category[Op.or], 'Normal']
-        }
-      }
-    if ($category.normal && $category.normalMonster)
-      filters[Op.and][2][Op.or][1] = {
-        class: {
-          [Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Normal']
-        }
-      }
-
-    if (!$category.normal && $category.normalMonster) {
-      filters[Op.and][2][Op.or].push({
-        [Op.and]: [{card: 'Monster'}, {category: 'Normal'}]
-      })
-      filters[Op.and][2][Op.or].push({
-        [Op.and]: [{card: 'Monster'}, {class: 'Normal'}]
-      })
-    }
-
-    if ($category.normal && !$category.normalMonster) {
-      filters[Op.and][2][Op.or].push({
-        [Op.and]: [{category: 'Normal'}, {[Op.not]: {card: 'Monster'}}]
-      })
-      filters[Op.and][2][Op.or].push({
-        [Op.and]: [{class: 'Normal'}, {[Op.not]: {card: 'Monster'}}]
-      })
-    }
-
-    if ($category.ritual && $category.ritualMonster)
+    if ($spelltrapCategory.normal && $monsterCategory.ritual)
       filters[Op.and][2][Op.or][1] = {
         class: {
           [Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Ritual']
         }
       }
 
-    if (!$category.ritual && $category.ritualMonster) {
+    if ($spelltrapCategory.normal && $monsterCategory.ritual)
+      filters[Op.and][2][Op.or][2] = {
+        subclass: {
+          [Op.or]: [...filters[Op.and][2][Op.or][2].subclass[Op.or], 'Ritual']
+        }
+      }
+
+    if (!$spelltrapCategory.ritual && $monsterCategory.ritual) {
       filters[Op.and][2][Op.or].push({
         [Op.and]: [{card: 'Monster'}, {category: 'Ritual'}]
       })
-    }
-
-    if ($category.ritual && !$category.ritualMonster) {
       filters[Op.and][2][Op.or].push({
-        [Op.and]: [{category: 'Ritual'}, {[Op.not]: {card: 'Monster'}}]
+        [Op.and]: [{card: 'Monster'}, {class: 'Ritual'}]
+      })
+      filters[Op.and][2][Op.or].push({
+        [Op.and]: [{card: 'Monster'}, {subclass: 'Ritual'}]
       })
     }
 
-    if ($category.pendulum)
-      filters[Op.and][2][Op.or][0] = {
-        category: {
-          [Op.or]: [...filters[Op.and][2][Op.or][0].category[Op.or], 'Pendulum']
-        }
-      }
-    if ($category.pendulum)
-      filters[Op.and][2][Op.or][1] = {
-        class: {
-          [Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Pendulum']
-        }
-      }
-
-    if ($category.effect)
-      filters[Op.and][2][Op.or][0] = {
-        category: {
-          [Op.or]: [...filters[Op.and][2][Op.or][0].category[Op.or], 'Effect']
-        }
-      }
-    if ($category.effect)
-      filters[Op.and][2][Op.or][1] = {
-        class: {
-          [Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Effect']
-        }
-      }
-    if ($category.effect)
-      filters[Op.and][2][Op.or][2] = {
-        subclass: {
-          [Op.or]: [...filters[Op.and][2][Op.or][2].subclass[Op.or], 'Effect']
-        }
-      }
-
-    if ($class.gemini)
-      filters[Op.and][2][Op.or][1] = {
-        class: {
-          [Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Gemini']
-        }
-      }
-    if ($class.gemini)
-      filters[Op.and][2][Op.or][2] = {
-        subclass: {
-          [Op.or]: [...filters[Op.and][2][Op.or][2].subclass[Op.or], 'Gemini']
-        }
-      }
-
-    if ($class.toon)
-      filters[Op.and][2][Op.or][1] = {
-        class: {[Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Toon']}
-      }
-    if ($class.toon)
-      filters[Op.and][2][Op.or][2] = {
-        subclass: {
-          [Op.or]: [...filters[Op.and][2][Op.or][2].subclass[Op.or], 'Toon']
-        }
-      }
-
-    if ($class.flip)
-      filters[Op.and][2][Op.or][1] = {
-        class: {[Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Flip']}
-      }
-    if ($class.flip)
-      filters[Op.and][2][Op.or][2] = {
-        subclass: {
-          [Op.or]: [...filters[Op.and][2][Op.or][2].subclass[Op.or], 'Flip']
-        }
-      }
-
-    if ($class.spirit)
-      filters[Op.and][2][Op.or][1] = {
-        class: {
-          [Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Spirit']
-        }
-      }
-    if ($class.spirit)
-      filters[Op.and][2][Op.or][2] = {
-        subclass: {
-          [Op.or]: [...filters[Op.and][2][Op.or][2].subclass[Op.or], 'Spirit']
-        }
-      }
-
-    if ($class.tuner)
-      filters[Op.and][2][Op.or][1] = {
-        class: {
-          [Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Tuner']
-        }
-      }
-    if ($class.tuner)
-      filters[Op.and][2][Op.or][2] = {
-        subclass: {
-          [Op.or]: [...filters[Op.and][2][Op.or][2].subclass[Op.or], 'Tuner']
-        }
-      }
-
-    if ($class.union)
-      filters[Op.and][2][Op.or][1] = {
-        class: {
-          [Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Union']
-        }
-      }
-    if ($class.union)
-      filters[Op.and][2][Op.or][2] = {
-        subclass: {
-          [Op.or]: [...filters[Op.and][2][Op.or][2].subclass[Op.or], 'Union']
-        }
-      }
-
-    console.log('filters after cats', filters)
-
-    console.log(
-      'filters[Op.and][2][Op.or][0].category[Op.or]',
-      filters[Op.and][2][Op.or][0].category[Op.or]
-    )
-    console.log(
-      'filters[Op.and][2][Op.or][1].class[Op.or]',
-      filters[Op.and][2][Op.or][1].class[Op.or]
-    )
-    console.log(
-      'filters[Op.and][2][Op.or][2].subclass[Op.or]',
-      filters[Op.and][2][Op.or][2].subclass[Op.or]
-    )
-    console.log('filters[Op.and][2][Op.or][3]', filters[Op.and][2][Op.or][3])
-    console.log('filters[Op.and][2][Op.or][4]', filters[Op.and][2][Op.or][4])
-    console.log('filters[Op.and][2][Op.or][5]', filters[Op.and][2][Op.or][5])
-    console.log('filters[Op.and][2][Op.or][6]', filters[Op.and][2][Op.or][6])
-
-    if (
-      !filters[Op.and][2][Op.or][0].category[Op.or].length &&
-      !filters[Op.and][2][Op.or][1].class[Op.or].length &&
-      !filters[Op.and][2][Op.or][2].subclass[Op.or].length &&
-      !filters[Op.and][2][Op.or][3] &&
-      !filters[Op.and][2][Op.or][4] &&
-      !filters[Op.and][2][Op.or][5] &&
-      !filters[Op.and][2][Op.or][6]
-    ) {
-      filters[Op.and] = filters[Op.and].slice(0, 2)
+    if ($spelltrapCategory.ritual && !$monsterCategory.ritual) {
+      filters[Op.and][2][Op.or].push({
+        [Op.and]: [{category: 'Ritual'}, {[Op.not]: {card: 'Monster'}}]
+      })
+      filters[Op.and][2][Op.or].push({
+        [Op.and]: [{class: 'Ritual'}, {[Op.not]: {card: 'Monster'}}]
+      })
+      filters[Op.and][2][Op.or].push({
+        [Op.and]: [{subclass: 'Ritual'}, {[Op.not]: {card: 'Monster'}}]
+      })
     }
+
+    if ($monsterCategory.synchro)
+      filters[Op.and][2][Op.or][0] = {
+        category: {
+          [Op.or]: [...filters[Op.and][2][Op.or][0].category[Op.or], 'Synchro']
+        }
+      }
+
+    if ($monsterCategory.synchro)
+      filters[Op.and][2][Op.or][1] = {
+        class: {
+          [Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Synchro']
+        }
+      }
+
+    if ($monsterCategory.synchro)
+      filters[Op.and][2][Op.or][2] = {
+        subclass: {
+          [Op.or]: [...filters[Op.and][2][Op.or][2].subclass[Op.or], 'Synchro']
+        }
+      }
+
+    if ($monsterCategory.xyz)
+      filters[Op.and][2][Op.or][0] = {
+        category: {
+          [Op.or]: [...filters[Op.and][2][Op.or][0].category[Op.or], 'Xyz']
+        }
+      }
+
+    if ($monsterCategory.xyz)
+      filters[Op.and][2][Op.or][1] = {
+        class: {
+          [Op.or]: [...filters[Op.and][2][Op.or][1].class[Op.or], 'Xyz']
+        }
+      }
+
+    if ($monsterCategory.xyz)
+      filters[Op.and][2][Op.or][2] = {
+        subclass: {
+          [Op.or]: [...filters[Op.and][2][Op.or][2].subclass[Op.or], 'Xyz']
+        }
+      }
+
+    if ($class.gemini)
+      filters[Op.and][3][Op.or][1] = {
+        class: {
+          [Op.or]: [...filters[Op.and][3][Op.or][1].class[Op.or], 'Gemini']
+        }
+      }
+    if ($class.gemini)
+      filters[Op.and][3][Op.or][2] = {
+        subclass: {
+          [Op.or]: [...filters[Op.and][3][Op.or][2].subclass[Op.or], 'Gemini']
+        }
+      }
+
+    if ($class.toon)
+      filters[Op.and][3][Op.or][1] = {
+        class: {[Op.or]: [...filters[Op.and][3][Op.or][1].class[Op.or], 'Toon']}
+      }
+    if ($class.toon)
+      filters[Op.and][3][Op.or][2] = {
+        subclass: {
+          [Op.or]: [...filters[Op.and][3][Op.or][2].subclass[Op.or], 'Toon']
+        }
+      }
+
+    if ($class.flip)
+      filters[Op.and][3][Op.or][1] = {
+        class: {[Op.or]: [...filters[Op.and][3][Op.or][1].class[Op.or], 'Flip']}
+      }
+    if ($class.flip)
+      filters[Op.and][3][Op.or][2] = {
+        subclass: {
+          [Op.or]: [...filters[Op.and][3][Op.or][2].subclass[Op.or], 'Flip']
+        }
+      }
+
+    if ($class.spirit)
+      filters[Op.and][3][Op.or][1] = {
+        class: {
+          [Op.or]: [...filters[Op.and][3][Op.or][1].class[Op.or], 'Spirit']
+        }
+      }
+    if ($class.spirit)
+      filters[Op.and][3][Op.or][2] = {
+        subclass: {
+          [Op.or]: [...filters[Op.and][3][Op.or][2].subclass[Op.or], 'Spirit']
+        }
+      }
+
+    if ($class.tuner)
+      filters[Op.and][3][Op.or][1] = {
+        class: {
+          [Op.or]: [...filters[Op.and][3][Op.or][1].class[Op.or], 'Tuner']
+        }
+      }
+    if ($class.tuner)
+      filters[Op.and][3][Op.or][2] = {
+        subclass: {
+          [Op.or]: [...filters[Op.and][3][Op.or][2].subclass[Op.or], 'Tuner']
+        }
+      }
+
+    if ($class.union)
+      filters[Op.and][3][Op.or][1] = {
+        class: {
+          [Op.or]: [...filters[Op.and][3][Op.or][1].class[Op.or], 'Union']
+        }
+      }
+    if ($class.union)
+      filters[Op.and][3][Op.or][2] = {
+        subclass: {
+          [Op.or]: [...filters[Op.and][3][Op.or][2].subclass[Op.or], 'Union']
+        }
+      }
+
+    const OpAndElem2Filtered = filters[Op.and][2][Op.or].filter(function(
+      elem,
+      index
+    ) {
+      if (index < 3 && elem.category) {
+        if (elem.category[Op.or].length) return elem
+      } else if (index < 3 && elem.class) {
+        if (elem.class[Op.or].length) return elem
+      } else if (index < 3 && elem.subclass) {
+        if (elem.subclass[Op.or].length) return elem
+      } else if (index >= 3 && elem.length) return elem
+    })
+
+    const OpAndElem3Filtered = filters[Op.and][3][Op.or].filter(function(
+      elem,
+      index
+    ) {
+      if (index < 3 && elem.category) {
+        if (elem.category[Op.or].length) return elem
+      } else if (index < 3 && elem.class) {
+        if (elem.class[Op.or].length) return elem
+      } else if (index < 3 && elem.subclass) {
+        if (elem.subclass[Op.or].length) return elem
+      } else if (index >= 3 && elem.length) return elem
+    })
+
+    filters[Op.and][2][Op.or] = OpAndElem2Filtered
+    filters[Op.and][3][Op.or] = OpAndElem3Filtered
+
+    const OpAndFiltered = filters[Op.and].filter(function(elem) {
+      if (elem.attribute || elem.type || elem[Op.or].length) return elem
+    })
+
+    filters[Op.and] = OpAndFiltered
 
     if (req.query.card)
       filters[Op.and] = [...filters[Op.and], {card: req.query.card}]
@@ -476,18 +582,6 @@ router.get('/some', async (req, res, next) => {
         }
       ]
     if (date) filters[Op.and] = [...filters[Op.and], {date: {[Op.lte]: date}}]
-
-    console.log('filters', filters)
-
-    console.log('filters[Op.and][0]', filters[Op.and][0])
-
-    console.log('filters[Op.and][1]', filters[Op.and][1])
-
-    console.log('filters[Op.and][2]', filters[Op.and][2])
-
-    console.log('filters[Op.and][3]', filters[Op.and][3])
-
-    console.log('filters[Op.and][4]', filters[Op.and][4])
 
     const cards = await Card.findAll({where: filters})
     res.json(cards)

@@ -159,7 +159,7 @@ class Card extends React.Component {
           <table style={{paddingTop: '0px', verticalAlign: 'top'}}>
             <tr>
               <th
-                colSpan="5"
+                colSpan="4"
                 style={{
                   textAlign: 'left',
                   fontSize: '24px',
@@ -169,6 +169,7 @@ class Card extends React.Component {
                 {this.props.card.name}
               </th>
               <th
+                colSpan="2"
                 style={{
                   fontWeight: 'normal',
                   fontSize: '14px',
@@ -204,7 +205,7 @@ class Card extends React.Component {
                 <td width="120px" />
               )}
               {stats.length > 1 ? (
-                <td width="220px" style={{borderRight: '2px solid #CFDCE5'}}>
+                <td width="300px" style={{borderRight: '2px solid #CFDCE5'}}>
                   <img
                     src={symbol3}
                     margin="0px"

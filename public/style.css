@@ -103,7 +103,7 @@ h1 {
 
 #searchBar {
   font-size: 14pt;
-  width: 45%;
+  width: 65%;
   border: 1px solid black;
   padding: 4px;
   margin: 0px 8px;
@@ -119,15 +119,18 @@ h1 {
 
 .results {
   width: 300px;
-  text-align: center;
+  text-align: left;
   font-size: 20px;
   font-family: arial;
-  padding: 0px;
+  margin: 0px 8px;
+  padding: 4px;
 }
 
 .pagination {
   display: flex;
   min-width: 410px;
+  margin: 0px 8px;
+  padding: 4px;
   align-items: center;
   justify-content: center;
 }
@@ -534,7 +537,7 @@ h1 {
   max-width: 250px;
   border: 1px solid #000000;
   border-radius: 0.5em;
-  margin: 0.8em 0.5em 1.5em 0.5em;
+  margin: 0.8em 0.5em 0.8em 0.5em;
   box-sizing: border-box;
   text-decoration: none;
   font-weight: 500;
@@ -567,12 +570,32 @@ h1 {
   align-items: left;
 }
 
-.resultsWrapper0 {
+.buttonWrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  margin: 0px 51px;
+}
+
+.paginationWrapper {
+  width: 90%;
+  min-width: 764px;
+  padding: 4px 4px 2px 4px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.resultsWrapper0 {
+  width: 90%;
+  min-width: 764px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 4px 4px 2px 4px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .sliderWrapper0 {
@@ -614,10 +637,12 @@ h1 {
 .searchWrapper {
   width: 90%;
   min-width: 764px;
-  max-width: 1080px;
   margin-left: auto;
   margin-right: auto;
-  display: table;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   text-align: center;
   padding: 4px 4px 2px 4px;
   font-size: 15px;

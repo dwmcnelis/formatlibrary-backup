@@ -97,22 +97,24 @@ class CardTable extends React.Component {
           fire: false,
           divine: false
         },
-        category: {
+        monsterCategory: {
+          normal: false,
+          effect: false,
+          fusion: false,
+          ritual: false,
+          synchro: false,
+          xyz: false,
+          pendulum: false,
+          link: false
+        },
+        spelltrapCategory: {
           normal: false,
           continuous: false,
           counter: false,
           equip: false,
           field: false,
           ritual: false,
-          quickPlay: false,
-          normalMonster: false,
-          effect: false,
-          fusion: false,
-          ritualMonster: false,
-          synchro: false,
-          xyz: false,
-          pendulum: false,
-          link: false
+          quickPlay: false
         },
         class: {
           flip: false,
@@ -155,6 +157,7 @@ class CardTable extends React.Component {
     this.applySelector = this.applySelector.bind(this)
     this.setFormat = this.setFormat.bind(this)
     this.search = this.search.bind(this)
+    this.reset = this.reset.bind(this)
     this.changeSearchType = this.changeSearchType.bind(this)
     this.hideAdvancedOptions = this.hideAdvancedOptions.bind(this)
     this.changeCardsPerPage = this.changeCardsPerPage.bind(this)
@@ -162,6 +165,92 @@ class CardTable extends React.Component {
     this.previousPage = this.previousPage.bind(this)
     this.nextPage = this.nextPage.bind(this)
     this.goToPage = this.goToPage.bind(this)
+  }
+
+  reset() {
+    this.setState({
+      page: 1,
+      cardsPerPage: 10,
+      sortBy: null,
+      format: 'All Formats',
+      logo: BLS,
+      event: 'May 2002 - Sept 2020',
+      allFetched: false,
+      advanced: false,
+      queryParams: {
+        name: null,
+        description: null,
+        card: null,
+        attribute: {
+          dark: false,
+          light: false,
+          earth: false,
+          wind: false,
+          water: false,
+          fire: false,
+          divine: false
+        },
+        monsterCategory: {
+          normal: false,
+          effect: false,
+          fusion: false,
+          ritual: false,
+          synchro: false,
+          xyz: false,
+          pendulum: false,
+          link: false
+        },
+        spelltrapCategory: {
+          normal: false,
+          continuous: false,
+          counter: false,
+          equip: false,
+          field: false,
+          ritual: false,
+          quickPlay: false
+        },
+        class: {
+          flip: false,
+          gemini: false,
+          spirit: false,
+          toon: false,
+          tuner: false,
+          union: false
+        },
+        type: {
+          aqua: false,
+          beast: false,
+          beastWarrior: false,
+          cyberse: false,
+          dinosaur: false,
+          divineBeast: false,
+          dragon: false,
+          fairy: false,
+          fiend: false,
+          fish: false,
+          insect: false,
+          machine: false,
+          plant: false,
+          psychic: false,
+          pyro: false,
+          reptile: false,
+          rock: false,
+          seaSerpent: false,
+          spellcaster: false,
+          thunder: false,
+          warrior: false,
+          wingedBeast: false,
+          wyrm: false,
+          zombie: false
+        }
+      }
+    })
+
+    const that = this
+
+    setTimeout(function() {
+      that.search()
+    }, 100)
   }
 
   changeCardsPerPage() {
@@ -563,13 +652,6 @@ class CardTable extends React.Component {
       event = 'YCS Las Vegas - January 2020'
     }
 
-    console.log('day', day)
-    console.log('month', month)
-    console.log('year', year)
-    console.log('format', format)
-    console.log('logo', logo)
-    console.log('event', event)
-
     this.setState({
       day,
       month,
@@ -646,8 +728,6 @@ class CardTable extends React.Component {
   }
 
   async search() {
-    console.log('this.props.sliders', this.props.sliders)
-
     const sliders = {}
 
     sliders.year = this.state.year ? this.state.year : this.props.sliders.year
@@ -655,8 +735,6 @@ class CardTable extends React.Component {
       ? this.state.month
       : this.props.sliders.month
     sliders.day = this.state.day ? this.state.day : this.props.sliders.day
-
-    console.log('SLIDERS', sliders)
 
     try {
       const filters = {...this.state.queryParams, ...sliders}
@@ -765,6 +843,8 @@ class CardTable extends React.Component {
           <img src={this.state.logo} style={{width: '128px'}} />
         </div>
 
+        <br />
+
         <div className="searchWrapper">
           <input
             id="searchBar"
@@ -779,110 +859,112 @@ class CardTable extends React.Component {
             }}
           />
 
-          <select
-            id="searchTypeSelector"
-            className="filter"
-            onChange={() => {
-              this.runSearch()
-            }}
-          >
-            <option selected="selected" value="name">
-              Card Name
-            </option>
-            <option value="description">Card Text</option>
-          </select>
+          <div className="buttonWrapper">
+            <select
+              id="searchTypeSelector"
+              className="filter"
+              onChange={() => {
+                this.runSearch()
+              }}
+            >
+              <option selected="selected" value="name">
+                Card Name
+              </option>
+              <option value="description">Card Text</option>
+            </select>
 
-          <select
-            id="card"
-            className="filter"
-            onChange={() => {
-              this.applySelector('card')
-            }}
-          >
-            <option selected="selected" value={null}>
-              All Cards
-            </option>
-            <option value="Monster">Monsters</option>
-            <option value="Spell">Spells</option>
-            <option value="Trap">Traps</option>
-          </select>
+            <select
+              id="card"
+              className="filter"
+              onChange={() => {
+                this.applySelector('card')
+              }}
+            >
+              <option selected="selected" value={null}>
+                All Cards
+              </option>
+              <option value="Monster">Monsters</option>
+              <option value="Spell">Spells</option>
+              <option value="Trap">Traps</option>
+            </select>
 
-          <select
-            id="format"
-            className="filter"
-            onChange={() => {
-              this.setFormat()
-            }}
-          >
-            <option selected="selected" value={null}>
-              All Formats
-            </option>
-            <option value="Yugi-Kaiba Format">Yugi-Kaiba</option>
-            <option value="Critter Format">Critter</option>
-            <option value="Android Format">Android</option>
-            <option value="Yata Format">Yata</option>
-            <option value="Vampire Format">Vampire</option>
-            <option value="Trad Chaos Format">Trad Chaos</option>
-            <option value="Chaos Warrior Format">Chaos Warrior</option>
-            <option value="Goat Format">Goat</option>
-            <option value="CRV Goat Format">CRV Goat</option>
-            <option value="Reaper Format">Reaper</option>
-            <option value="Chaos Return Format">Chaos Return</option>
-            <option value="Stein Format">Stein</option>
-            <option value="Troop Dup Format">Troop Dup</option>
-            <option value="Perfect Circle Format">Perfect Circle</option>
-            <option value="DAD Return Format">DAD Return</option>
-            <option value="Glad Beast Format">Glad Beast</option>
-            <option value="TeleDAD Format">TeleDAD</option>
-            <option value="Dark Strike Format">Dark Strike</option>
-            <option value="Lightsworn Format">Lightsworn</option>
-            <option value="Edison Format">Edison</option>
-            <option value="Frog Format">Frog</option>
-            <option value="Six Samurai Format">Six Samurai</option>
-            <option value="Providence Format">Providence</option>
-            <option value="Tengu Plant Format">Tengu Plant</option>
-            <option value="Long Beach Format">Long Beach</option>
-            <option value="Dino Rabbit Format">Dino Rabbit</option>
-            <option value="Wind-Up Format">Wind-Up</option>
-            <option value="Meadowlands Format">Meadowlands</option>
-            <option value="Baby Ruler Format">Baby Ruler</option>
-            <option value="Ravine Ruler Format">Ravine Ruler</option>
-            <option value="Fire-Water Format">Fire-Water</option>
-            <option value="HAT Format">HAT</option>
-            <option value="Shaddoll Format">Shaddoll</option>
-            <option value="London Format">London</option>
-            <option value="Burning Abyss Format">Burning Abyss</option>
-            <option value="Charleston Format">Charleston</option>
-            <option value="Nekroz Format">Nekroz</option>
-            <option value="Clown Format">Clown</option>
-            <option value="DracoPal Format">DracoPal</option>
-            <option value="PePe Format">PePe</option>
-            <option value="Monarch Format">Monarch</option>
-            <option value="ABC Format">ABC</option>
-            <option value="Grass Zoo Format">Grass Zoo</option>
-            <option value="Draco Zoo Format">Draco Zoo</option>
-            <option value="Link Zoo Format">Link Zoo</option>
-            <option value="Quik-Fix Format">Quik-Fix</option>
-            <option value="Tough Format">Tough</option>
-            <option value="Magician Format">Magician</option>
-            <option value="Gouki Format">Gouki</option>
-            <option value="Danger Format">Danger</option>
-            <option value="Prank-Kids Format">Prank-Kids</option>
-            <option value="Sky Striker Format">Sky Striker</option>
-            <option value="Thunder Dragon Format">Thunder Dragon</option>
-            <option value="Lunalight Orcust Format">Lunalight Orcust</option>
-            <option value="Striker Orcust Format">Striker Orcust</option>
-          </select>
+            <select
+              id="format"
+              className="filter"
+              onChange={() => {
+                this.setFormat()
+              }}
+            >
+              <option selected="selected" value={null}>
+                All Formats
+              </option>
+              <option value="Yugi-Kaiba Format">Yugi-Kaiba</option>
+              <option value="Critter Format">Critter</option>
+              <option value="Android Format">Android</option>
+              <option value="Yata Format">Yata</option>
+              <option value="Vampire Format">Vampire</option>
+              <option value="Trad Chaos Format">Trad Chaos</option>
+              <option value="Chaos Warrior Format">Chaos Warrior</option>
+              <option value="Goat Format">Goat</option>
+              <option value="CRV Goat Format">CRV Goat</option>
+              <option value="Reaper Format">Reaper</option>
+              <option value="Chaos Return Format">Chaos Return</option>
+              <option value="Stein Format">Stein</option>
+              <option value="Troop Dup Format">Troop Dup</option>
+              <option value="Perfect Circle Format">Perfect Circle</option>
+              <option value="DAD Return Format">DAD Return</option>
+              <option value="Glad Beast Format">Glad Beast</option>
+              <option value="TeleDAD Format">TeleDAD</option>
+              <option value="Dark Strike Format">Dark Strike</option>
+              <option value="Lightsworn Format">Lightsworn</option>
+              <option value="Edison Format">Edison</option>
+              <option value="Frog Format">Frog</option>
+              <option value="Six Samurai Format">Six Samurai</option>
+              <option value="Providence Format">Providence</option>
+              <option value="Tengu Plant Format">Tengu Plant</option>
+              <option value="Long Beach Format">Long Beach</option>
+              <option value="Dino Rabbit Format">Dino Rabbit</option>
+              <option value="Wind-Up Format">Wind-Up</option>
+              <option value="Meadowlands Format">Meadowlands</option>
+              <option value="Baby Ruler Format">Baby Ruler</option>
+              <option value="Ravine Ruler Format">Ravine Ruler</option>
+              <option value="Fire-Water Format">Fire-Water</option>
+              <option value="HAT Format">HAT</option>
+              <option value="Shaddoll Format">Shaddoll</option>
+              <option value="London Format">London</option>
+              <option value="Burning Abyss Format">Burning Abyss</option>
+              <option value="Charleston Format">Charleston</option>
+              <option value="Nekroz Format">Nekroz</option>
+              <option value="Clown Format">Clown</option>
+              <option value="DracoPal Format">DracoPal</option>
+              <option value="PePe Format">PePe</option>
+              <option value="Monarch Format">Monarch</option>
+              <option value="ABC Format">ABC</option>
+              <option value="Grass Zoo Format">Grass Zoo</option>
+              <option value="Draco Zoo Format">Draco Zoo</option>
+              <option value="Link Zoo Format">Link Zoo</option>
+              <option value="Quik-Fix Format">Quik-Fix</option>
+              <option value="Tough Format">Tough</option>
+              <option value="Magician Format">Magician</option>
+              <option value="Gouki Format">Gouki</option>
+              <option value="Danger Format">Danger</option>
+              <option value="Prank-Kids Format">Prank-Kids</option>
+              <option value="Sky Striker Format">Sky Striker</option>
+              <option value="Thunder Dragon Format">Thunder Dragon</option>
+              <option value="Lunalight Orcust Format">Lunalight Orcust</option>
+              <option value="Striker Orcust Format">Striker Orcust</option>
+            </select>
 
-          <a
-            className="searchButton"
-            type="submit"
-            onClick={() => {
-              this.search()
-            }}
-          >
-            Search
-          </a>
+            <a
+              className="searchButton"
+              type="submit"
+              onClick={() => {
+                this.search()
+              }}
+            >
+              Search
+            </a>
+          </div>
         </div>
 
         {!this.state.advanced ? (
@@ -912,13 +994,13 @@ class CardTable extends React.Component {
             <br />
 
             <div className="refinedInnerWrapper">
-              {this.state.queryParams.category.normal ? (
+              {this.state.queryParams.spelltrapCategory.normal ? (
                 <a
                   className="clickedOptionButton"
                   id="normal"
                   type="submit"
                   onClick={() => {
-                    this.removeFilter('category', 'normal')
+                    this.removeFilter('spelltrapCategory', 'normal')
                   }}
                 >
                   Normal
@@ -929,20 +1011,20 @@ class CardTable extends React.Component {
                   id="normal"
                   type="submit"
                   onClick={() => {
-                    this.applyFilter('category', 'normal')
+                    this.applyFilter('spelltrapCategory', 'normal')
                   }}
                 >
                   Normal
                 </a>
               )}
 
-              {this.state.queryParams.category.continuous ? (
+              {this.state.queryParams.spelltrapCategory.continuous ? (
                 <a
                   className="clickedOptionButton"
                   id="continuous"
                   type="submit"
                   onClick={() => {
-                    this.removeFilter('category', 'continuous')
+                    this.removeFilter('spelltrapCategory', 'continuous')
                   }}
                 >
                   Contin.
@@ -953,20 +1035,20 @@ class CardTable extends React.Component {
                   id="continuous"
                   type="submit"
                   onClick={() => {
-                    this.applyFilter('category', 'continuous')
+                    this.applyFilter('spelltrapCategory', 'continuous')
                   }}
                 >
                   Contin.
                 </a>
               )}
 
-              {this.state.queryParams.category.counter ? (
+              {this.state.queryParams.spelltrapCategory.counter ? (
                 <a
                   className="clickedOptionButton"
                   id="counter"
                   type="submit"
                   onClick={() => {
-                    this.removeFilter('category', 'counter')
+                    this.removeFilter('spelltrapCategory', 'counter')
                   }}
                 >
                   Counter
@@ -977,20 +1059,20 @@ class CardTable extends React.Component {
                   id="counter"
                   type="submit"
                   onClick={() => {
-                    this.applyFilter('category', 'counter')
+                    this.applyFilter('spelltrapCategory', 'counter')
                   }}
                 >
                   Counter
                 </a>
               )}
 
-              {this.state.queryParams.category.equip ? (
+              {this.state.queryParams.spelltrapCategory.equip ? (
                 <a
                   className="clickedOptionButton"
                   id="equip"
                   type="submit"
                   onClick={() => {
-                    this.removeFilter('category', 'equip')
+                    this.removeFilter('spelltrapCategory', 'equip')
                   }}
                 >
                   Equip
@@ -1001,20 +1083,20 @@ class CardTable extends React.Component {
                   id="equip"
                   type="submit"
                   onClick={() => {
-                    this.applyFilter('category', 'equip')
+                    this.applyFilter('spelltrapCategory', 'equip')
                   }}
                 >
                   Equip
                 </a>
               )}
 
-              {this.state.queryParams.category.field ? (
+              {this.state.queryParams.spelltrapCategory.field ? (
                 <a
                   className="clickedOptionButton"
                   id="field"
                   type="submit"
                   onClick={() => {
-                    this.removeFilter('category', 'field')
+                    this.removeFilter('spelltrapCategory', 'field')
                   }}
                 >
                   Field
@@ -1025,20 +1107,20 @@ class CardTable extends React.Component {
                   id="field"
                   type="submit"
                   onClick={() => {
-                    this.applyFilter('category', 'field')
+                    this.applyFilter('spelltrapCategory', 'field')
                   }}
                 >
                   Field
                 </a>
               )}
 
-              {this.state.queryParams.category.ritual ? (
+              {this.state.queryParams.spelltrapCategory.ritual ? (
                 <a
                   className="clickedOptionButton"
                   id="ritual"
                   type="submit"
                   onClick={() => {
-                    this.removeFilter('category', 'ritual')
+                    this.removeFilter('spelltrapCategory', 'ritual')
                   }}
                 >
                   Ritual
@@ -1049,20 +1131,20 @@ class CardTable extends React.Component {
                   id="ritual"
                   type="submit"
                   onClick={() => {
-                    this.applyFilter('category', 'ritual')
+                    this.applyFilter('spelltrapCategory', 'ritual')
                   }}
                 >
                   Ritual
                 </a>
               )}
 
-              {this.state.queryParams.category.quickPlay ? (
+              {this.state.queryParams.spelltrapCategory.quickPlay ? (
                 <a
                   className="clickedOptionButton"
                   id="quick-play"
                   type="submit"
                   onClick={() => {
-                    this.removeFilter('category', 'quickPlay')
+                    this.removeFilter('spelltrapCategory', 'quickPlay')
                   }}
                 >
                   Quick-P.
@@ -1073,7 +1155,7 @@ class CardTable extends React.Component {
                   id="quick-play"
                   type="submit"
                   onClick={() => {
-                    this.applyFilter('category', 'quickPlay')
+                    this.applyFilter('spelltrapCategory', 'quickPlay')
                   }}
                 >
                   Quick-P.
@@ -1834,13 +1916,13 @@ class CardTable extends React.Component {
               )}
             </div>
             <div className="refinedInnerWrapper">
-              {this.state.queryParams.category.normalMonster ? (
+              {this.state.queryParams.monsterCategory.normal ? (
                 <a
                   className="clickedMonsterButton"
                   id="normal-monster"
                   type="submit"
                   onClick={() => {
-                    this.removeFilter('category', 'normalMonster')
+                    this.removeFilter('monsterCategory', 'normal')
                   }}
                 >
                   Normal
@@ -1851,20 +1933,20 @@ class CardTable extends React.Component {
                   id="normal-monster"
                   type="submit"
                   onClick={() => {
-                    this.applyFilter('category', 'normalMonster')
+                    this.applyFilter('monsterCategory', 'normal')
                   }}
                 >
                   Normal
                 </a>
               )}
 
-              {this.state.queryParams.category.effect ? (
+              {this.state.queryParams.monsterCategory.effect ? (
                 <a
                   className="clickedMonsterButton"
                   id="effect"
                   type="submit"
                   onClick={() => {
-                    this.removeFilter('category', 'effect')
+                    this.removeFilter('monsterCategory', 'effect')
                   }}
                 >
                   Effect
@@ -1875,20 +1957,20 @@ class CardTable extends React.Component {
                   id="effect"
                   type="submit"
                   onClick={() => {
-                    this.applyFilter('category', 'effect')
+                    this.applyFilter('monsterCategory', 'effect')
                   }}
                 >
                   Effect
                 </a>
               )}
 
-              {this.state.queryParams.category.ritualMonster ? (
+              {this.state.queryParams.monsterCategory.ritual ? (
                 <a
                   className="clickedMonsterButton"
                   id="ritual-monster"
                   type="submit"
                   onClick={() => {
-                    this.removeFilter('category', 'ritualMonster')
+                    this.removeFilter('monsterCategory', 'ritual')
                   }}
                 >
                   Ritual
@@ -1899,20 +1981,20 @@ class CardTable extends React.Component {
                   id="ritual-monster"
                   type="submit"
                   onClick={() => {
-                    this.applyFilter('category', 'ritualMonster')
+                    this.applyFilter('monsterCategory', 'ritual')
                   }}
                 >
                   Ritual
                 </a>
               )}
 
-              {this.state.queryParams.category.pendulum ? (
+              {this.state.queryParams.monsterCategory.pendulum ? (
                 <a
                   className="clickedMonsterButton"
                   id="pendulum"
                   type="submit"
                   onClick={() => {
-                    this.removeFilter('category', 'pendulum')
+                    this.removeFilter('monsterCategory', 'pendulum')
                   }}
                 >
                   Pend.
@@ -1923,7 +2005,7 @@ class CardTable extends React.Component {
                   id="pendulum"
                   type="submit"
                   onClick={() => {
-                    this.applyFilter('category', 'pendulum')
+                    this.applyFilter('monsterCategory', 'pendulum')
                   }}
                 >
                   Pend.
@@ -1932,13 +2014,13 @@ class CardTable extends React.Component {
 
               <br />
 
-              {this.state.queryParams.category.fusion ? (
+              {this.state.queryParams.monsterCategory.fusion ? (
                 <a
                   className="clickedMonsterButton"
                   id="fusion"
                   type="submit"
                   onClick={() => {
-                    this.removeFilter('category', 'fusion')
+                    this.removeFilter('monsterCategory', 'fusion')
                   }}
                 >
                   Fusion
@@ -1949,20 +2031,20 @@ class CardTable extends React.Component {
                   id="fusion"
                   type="submit"
                   onClick={() => {
-                    this.applyFilter('category', 'fusion')
+                    this.applyFilter('monsterCategory', 'fusion')
                   }}
                 >
                   Fusion
                 </a>
               )}
 
-              {this.state.queryParams.category.synchro ? (
+              {this.state.queryParams.monsterCategory.synchro ? (
                 <a
                   className="clickedMonsterButton"
                   id="synchro"
                   type="submit"
                   onClick={() => {
-                    this.removeFilter('category', 'synchro')
+                    this.removeFilter('monsterCategory', 'synchro')
                   }}
                 >
                   Synchro
@@ -1973,20 +2055,20 @@ class CardTable extends React.Component {
                   id="synchro"
                   type="submit"
                   onClick={() => {
-                    this.applyFilter('category', 'synchro')
+                    this.applyFilter('monsterCategory', 'synchro')
                   }}
                 >
                   Synchro
                 </a>
               )}
 
-              {this.state.queryParams.category.xyz ? (
+              {this.state.queryParams.monsterCategory.xyz ? (
                 <a
                   className="clickedMonsterButton"
                   id="xyz"
                   type="submit"
                   onClick={() => {
-                    this.removeFilter('category', 'xyz')
+                    this.removeFilter('monsterCategory', 'xyz')
                   }}
                 >
                   Xyz
@@ -1997,20 +2079,20 @@ class CardTable extends React.Component {
                   id="xyz"
                   type="submit"
                   onClick={() => {
-                    this.applyFilter('category', 'xyz')
+                    this.applyFilter('monsterCategory', 'xyz')
                   }}
                 >
                   Xyz
                 </a>
               )}
 
-              {this.state.queryParams.category.link ? (
+              {this.state.queryParams.monsterCategory.link ? (
                 <a
                   className="clickedMonsterButton"
                   id="link"
                   type="submit"
                   onClick={() => {
-                    this.removeFilter('category', 'link')
+                    this.removeFilter('monsterCategory', 'link')
                   }}
                 >
                   Link
@@ -2021,7 +2103,7 @@ class CardTable extends React.Component {
                   id="link"
                   type="submit"
                   onClick={() => {
-                    this.applyFilter('category', 'link')
+                    this.applyFilter('monsterCategory', 'link')
                   }}
                 >
                   Link
@@ -2243,10 +2325,8 @@ class CardTable extends React.Component {
           </div>
         )}
 
-        <br />
-
-        <div id="resultsWrapper0" className="resultsWrapper0">
-          <div id="results" className="results" style={{width: '215px'}}>
+        <div className="resultsWrapper0">
+          <div className="results" style={{width: '360px'}}>
             Results:{' '}
             {this.state.cardsPerPage * this.state.page -
               this.state.cardsPerPage +
@@ -2260,6 +2340,56 @@ class CardTable extends React.Component {
             {this.state.allFetched ? this.props.cards.length : currentCardCount}
           </div>
 
+          <div className="buttonWrapper">
+            <select
+              id="cardsPerPageSelector"
+              style={{width: '195px'}}
+              onChange={() => {
+                this.changeCardsPerPage()
+              }}
+            >
+              <option selected="selected" value="10">
+                Show 10 Cards / Page
+              </option>
+              <option value="25">Show 25 Cards / Page</option>
+              <option value="50">Show 50 Cards / Page</option>
+              <option value="100">Show 100 Cards / Page</option>
+            </select>
+
+            <select
+              id="sortSelector"
+              style={{width: '190px'}}
+              onChange={() => {
+                this.sortCards()
+              }}
+            >
+              <option selected="selected" value="nameASC">
+                Sort Name: A ⮕ Z
+              </option>
+              <option value="nameDESC">Sort Name: Z ⮕ A</option>
+              <option value="atkASC">Sort ATK: Desc. ⬇</option>
+              <option value="atkDESC">Sort ATK: Asc. ⬆</option>
+              <option value="defASC">Sort DEF: Desc. ⬇</option>
+              <option value="defDESC">Sort DEF: Asc. ⬆</option>
+              <option value="levelASC">Sort Level: Desc. ⬇</option>
+              <option value="levelDESC">Sort Level: Asc. ⬆</option>
+              <option value="dateASC">Sort Date: Old ⮕ New</option>
+              <option value="dateDESC">Sort Date: New ⮕ Old</option>
+            </select>
+
+            <a
+              className="searchButton"
+              type="submit"
+              onClick={() => {
+                this.reset()
+              }}
+            >
+              Reset
+            </a>
+          </div>
+        </div>
+
+        <div className="paginationWrapper">
           <div className="pagination">
             <Pagination
               location="top"
@@ -2270,50 +2400,6 @@ class CardTable extends React.Component {
               page={this.state.page}
               cardsPerPage={this.state.cardsPerPage}
             />
-          </div>
-
-          <div id="vertFlexbox">
-            <div id="results" className="results" style={{width: '215px'}}>
-              {'Display: '}
-              <select
-                id="cardsPerPageSelector"
-                style={{width: '105px'}}
-                onChange={() => {
-                  this.changeCardsPerPage()
-                }}
-              >
-                <option selected="selected" value="10">
-                  10 Cards
-                </option>
-                <option value="25">25 Cards</option>
-                <option value="50">50 Cards</option>
-                <option value="100">100 Cards</option>
-              </select>
-            </div>
-
-            <div className="results" style={{width: '215px'}}>
-              {'Sort By: '}
-              <select
-                id="sortSelector"
-                style={{width: '105px'}}
-                onChange={() => {
-                  this.sortCards()
-                }}
-              >
-                <option selected="selected" value="nameASC">
-                  Name ⬇
-                </option>
-                <option value="nameDESC">Name ⬆</option>
-                <option value="atkASC">ATK ⬇</option>
-                <option value="atkDESC">ATK ⬆</option>
-                <option value="defASC">DEF ⬇</option>
-                <option value="defDESC">DEF ⬆</option>
-                <option value="levelASC">Level ⬇</option>
-                <option value="levelDESC">Level ⬆</option>
-                <option value="dateASC">Date ⬇</option>
-                <option value="dateDESC">Date ⬆</option>
-              </select>
-            </div>
           </div>
         </div>
 
