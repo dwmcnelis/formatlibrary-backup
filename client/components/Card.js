@@ -1,6 +1,7 @@
 /* eslint-disable max-statements */
 
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 import Divine from '../../public/images/divine.png'
 import Light from '../../public/images/light.png'
@@ -15,7 +16,7 @@ import Trap from '../../public/images/trap.png'
 
 import Star from '../../public/images/star.png'
 import Rank from '../../public/images/rank.png'
-import Link from '../../public/images/link.png'
+import LinkSymbol from '../../public/images/link.png'
 
 import Continuous from '../../public/images/continuous.png'
 import QuickPlay from '../../public/images/quick-play.png'
@@ -130,7 +131,7 @@ class Card extends React.Component {
       this.props.card.class === 'Link' ||
       this.props.card.subclass === 'Link'
     ) {
-      symbol2 = Link
+      symbol2 = LinkSymbol
       word = 'Link'
     }
 
@@ -145,6 +146,8 @@ class Card extends React.Component {
       this.props.card.def !== null ? `DEF ${this.props.card.def}` : null
     const rowColor = this.props.index % 2 ? '#F7FAFC' : '#FFFFFF'
 
+    const filePath = `/card-images/${this.props.card.image}`
+
     return (
       <tr
         style={{
@@ -153,95 +156,108 @@ class Card extends React.Component {
         }}
       >
         <td style={{verticalAlign: 'top'}}>
-          <img src={this.props.card.image} alt={this.props.card.name} />
+          <Link to={`/card/${this.props.card.id}`} style={{color: 'black'}}>
+            <img
+              src={filePath}
+              style={{width: '96px'}}
+              alt={this.props.card.name}
+            />
+          </Link>
         </td>
         <td style={{paddingTop: '0px', verticalAlign: 'top'}}>
           <table style={{paddingTop: '0px', verticalAlign: 'top'}}>
-            <tr>
-              <th
-                colSpan="4"
-                style={{
-                  textAlign: 'left',
-                  fontSize: '24px',
-                  borderBottom: '2px solid #CFDCE5'
-                }}
-              >
-                {this.props.card.name}
-              </th>
-              <th
-                colSpan="2"
-                style={{
-                  fontWeight: 'normal',
-                  fontSize: '14px',
-                  textAlign: 'right',
-                  borderBottom: '2px solid #CFDCE5'
-                }}
-              >
-                {this.props.card.date.substring(0, 10)}
-              </th>
-            </tr>
-            <tr>
-              <td width="90px" style={{borderRight: '2px solid #CFDCE5'}}>
-                <img
-                  src={symbol}
-                  height="24px"
-                  style={{verticalAlign: 'middle'}}
-                  alt="attribute/card-type"
-                />{' '}
-                {attribute.toUpperCase()}
-              </td>
-              {symbol2.length ? (
-                <td width="120px" style={{borderRight: '2px solid #CFDCE5'}}>
+            <tbody>
+              <tr>
+                <th
+                  colSpan="4"
+                  style={{
+                    textAlign: 'left',
+                    fontSize: '24px',
+                    borderBottom: '2px solid #CFDCE5'
+                  }}
+                >
+                  <Link
+                    to={`/card/${this.props.card.id}`}
+                    style={{color: 'black'}}
+                  >
+                    {this.props.card.name}
+                  </Link>
+                </th>
+                <th
+                  colSpan="2"
+                  style={{
+                    fontWeight: 'normal',
+                    fontSize: '14px',
+                    textAlign: 'right',
+                    borderBottom: '2px solid #CFDCE5'
+                  }}
+                >
+                  {this.props.card.date.substring(0, 10)}
+                </th>
+              </tr>
+              <tr>
+                <td width="90px" style={{borderRight: '2px solid #CFDCE5'}}>
                   <img
-                    src={symbol2}
-                    margin="0px"
+                    src={symbol}
                     height="24px"
                     style={{verticalAlign: 'middle'}}
-                    alt="level/category"
+                    alt="attribute/card-type"
                   />{' '}
-                  {level}
+                  {attribute.toUpperCase()}
                 </td>
-              ) : (
-                <td width="120px" />
-              )}
-              {stats.length > 1 ? (
-                <td width="300px" style={{borderRight: '2px solid #CFDCE5'}}>
-                  <img
-                    src={symbol3}
-                    margin="0px"
-                    height="24px"
-                    style={{verticalAlign: 'middle'}}
-                    alt="level/category"
-                  />{' '}
-                  {line}
+                {symbol2.length ? (
+                  <td width="120px" style={{borderRight: '2px solid #CFDCE5'}}>
+                    <img
+                      src={symbol2}
+                      margin="0px"
+                      height="24px"
+                      style={{verticalAlign: 'middle'}}
+                      alt="level/category"
+                    />{' '}
+                    {level}
+                  </td>
+                ) : (
+                  <td width="120px" />
+                )}
+                {stats.length > 1 ? (
+                  <td width="300px" style={{borderRight: '2px solid #CFDCE5'}}>
+                    <img
+                      src={symbol3}
+                      margin="0px"
+                      height="24px"
+                      style={{verticalAlign: 'middle'}}
+                      alt="level/category"
+                    />{' '}
+                    {line}
+                  </td>
+                ) : (
+                  <td width="220px" />
+                )}
+                {atk ? (
+                  <td width="100px" style={{borderRight: '2px solid #CFDCE5'}}>
+                    {atk}
+                  </td>
+                ) : (
+                  <td width="100px" />
+                )}
+                {def ? (
+                  <td width="100px" style={{borderRight: '2px solid #CFDCE5'}}>
+                    {def}
+                  </td>
+                ) : (
+                  <td width="100px" />
+                )}
+                <td />
+              </tr>
+              <tr>
+                <td
+                  colSpan="6"
+                  style={{fontSize: '16px', borderTop: '2px solid #CFDCE5'}}
+                >
+                  {this.props.card.description}
                 </td>
-              ) : (
-                <td width="220px" />
-              )}
-              {atk ? (
-                <td width="100px" style={{borderRight: '2px solid #CFDCE5'}}>
-                  {atk}
-                </td>
-              ) : (
-                <td width="100px" />
-              )}
-              {def ? (
-                <td width="100px" style={{borderRight: '2px solid #CFDCE5'}}>
-                  {def}
-                </td>
-              ) : (
-                <td width="100px" />
-              )}
-              <td />
-            </tr>
-            <tr>
-              <td
-                colSpan="6"
-                style={{fontSize: '16px', borderTop: '2px solid #CFDCE5'}}
-              >
-                {this.props.card.description}
-              </td>
-            </tr>
+              </tr>
+            </tbody>
           </table>
         </td>
       </tr>

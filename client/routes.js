@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
-import {Home} from './components'
+import {Home, SingleCard} from './components'
 
 /**
  * COMPONENT
@@ -12,6 +12,7 @@ class Routes extends Component {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/home" component={Home} />
+        <Route path="/card/:id" component={SingleCard} />
       </Switch>
     )
   }

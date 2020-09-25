@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import Logo from '../../public/images/logo.png'
 
 const Navbar = () => (
@@ -7,7 +8,9 @@ const Navbar = () => (
       <img src={Logo} />
     </div>
     <div id="title">
-      <h1>Card Database</h1>
+      <Link to="/">
+        <h1 style={{color: 'white'}}>Card Database</h1>
+      </Link>
     </div>
   </div>
 )

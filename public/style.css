@@ -78,6 +78,17 @@ h1 {
   padding: 10px;
 }
 
+#galleryFlexBox {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  max-width: 1080px;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+
 #slider {
   display: flex;
   align-items: center;
@@ -115,6 +126,11 @@ h1 {
   font-family: arial;
   padding: 0px;
   margin: 0px 0px 50px 0px;
+}
+
+.portraits:hover {
+  box-shadow: -2px 2px 5px 4px #737373;
+  cursor: pointer;
 }
 
 .results {
@@ -285,6 +301,88 @@ h1 {
   color: white;
   font-weight: 600;
   background-color: #6d6f8a;
+}
+
+.single-card-image {
+  float: left;
+  margin: 0px 0px 0px 4%;
+  width: 300px;
+}
+
+.single-card-table {
+  padding: 10px;
+  float: left;
+  margin-left: 30px;
+  max-width: 720px;
+  width: 60%;
+}
+
+.single-card-title {
+  text-align: left;
+  font-size: 30px;
+  width: 650px;
+  border-bottom: 2px solid #9ba9cc;
+}
+
+.single-card-standard-row {
+  align-content: left;
+  vertical-align: middle;
+  font-size: 24px;
+  border-bottom: 2px solid #9ba9cc;
+}
+
+.single-card-bottom-row {
+  align-content: left;
+  vertical-align: middle;
+  font-size: 24px;
+  border-top: 2px solid #9ba9cc;
+  border-bottom: 2px solid #9ba9cc;
+}
+
+.single-card-date-row {
+  text-align: left;
+  vertical-align: bottom;
+  height: 60px;
+  font-size: 18px;
+}
+
+.single-card-cardType {
+  height: 40px;
+}
+
+.single-card-symbol {
+  height: 32px;
+}
+
+.single-card-symbol-td {
+  width: 40px;
+  text-align: center;
+}
+
+.single-card-label-td {
+  width: 140px;
+}
+
+.single-card-label-inner-td {
+  width: 140px;
+  border-right: 2px solid #9ba9cc;
+}
+
+.single-card-large-label-td {
+  width: 300px;
+}
+
+.single-card-description-box {
+  padding: 10px 20px 40px 20px;
+  text-align: justify;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  margin: 0px 0px 30px 0px;
+}
+
+.blank-row {
+  height: 20px !important;
+  border-bottom: 2px solid #9ba9cc !important;
 }
 
 #to-end {
@@ -568,6 +666,14 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: left;
+}
+
+.flexy {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  vertical-align: text-top;
+  align-items: flex-start;
 }
 
 .buttonWrapper {

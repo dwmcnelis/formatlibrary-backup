@@ -4,3 +4,4 @@
  * having to figure out which file they belong to!
  */
 export {default as Home} from './Home'
+export {default as SingleCard} from './SingleCard'

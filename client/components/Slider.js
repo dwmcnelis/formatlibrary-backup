@@ -6,7 +6,6 @@ import {Slider} from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import {withStyles, makeStyles} from '@material-ui/core/styles'
 import {setSliders} from '../store/sliders'
-import {red} from '@material-ui/core/colors'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,6 +28,12 @@ const PrettoSlider = withStyles({
   thumb: {
     height: 20,
     width: 20,
+    '&:after': {
+      top: '1px',
+      right: '1px',
+      left: '1px',
+      bottom: '1px'
+    },
     backgroundColor: '#f5f7fa',
     border: '2px solid currentColor',
     marginTop: -8,
@@ -49,13 +54,7 @@ const PrettoSlider = withStyles({
   valueLabel: {
     height: 200,
     width: 200,
-    left: 'calc(-50%)',
-    '&$disabled': {
-      height: 2000,
-      width: 2000,
-      size: 2000,
-      left: 'calc(-50%)'
-    }
+    left: 'calc(-50%)'
   },
   track: {
     height: 6,
@@ -86,7 +85,7 @@ function valuetext(value) {
 const RangeSlider = props => {
   const classes = useStyles()
 
-  const display = props.defaultValue ? 'on' : 'auto'
+  const display = props.disabled ? 'on' : 'auto'
 
   const points =
     props.type === 'range-slider'
@@ -104,7 +103,7 @@ const RangeSlider = props => {
   }
 
   return (
-    <div id="slider" className={classes.root}>
+    <div id="slider" className={classes.root} name="mySliders">
       <img
         src={props.symbol}
         style={{height: '24px', margin: '0px 12px 0px 0px'}}
@@ -127,7 +126,7 @@ const RangeSlider = props => {
         step={props.step}
         min={props.min}
         max={props.max}
-        disabled={!!props.defaultValue}
+        disabled={props.disabled}
         onChange={handleChange}
         onChangeCommitted={() => handleCommit(props.id, value)}
         valueLabelDisplay={display}

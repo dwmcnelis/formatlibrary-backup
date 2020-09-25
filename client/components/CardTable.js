@@ -3,6 +3,7 @@
 
 import React from 'react'
 import Card from './Card.js'
+import Portrait from './Portrait.js'
 import NavBar from './NavBar.js'
 import PrettoSlider from './Slider.js'
 import Pagination from './Pagination.js'
@@ -12,6 +13,7 @@ import Swords from '../../public/images/swords.png'
 import Shield from '../../public/images/shield.png'
 import Calendar from '../../public/images/calendar.png'
 import {fetchAllCards, fetchSomeCards, fetchFirstXCards} from '../store/cards'
+import {setSliders} from '../store/sliders'
 
 import ABC from '../../public/images/abc.jpg'
 import Altair from '../../public/images/altair.jpg'
@@ -78,16 +80,21 @@ class CardTable extends React.Component {
     this.state = {
       page: 1,
       cardsPerPage: 10,
+      view: 'table',
       sortBy: null,
       format: 'All Formats',
       logo: BLS,
       event: 'May 2002 - Sept 2020',
       allFetched: false,
+      firstXFetched: false,
       advanced: false,
+      day: null,
+      month: null,
+      year: null,
       queryParams: {
         name: null,
         description: null,
-        card: null,
+        card: 'all',
         attribute: {
           dark: false,
           light: false,
@@ -161,6 +168,7 @@ class CardTable extends React.Component {
     this.changeSearchType = this.changeSearchType.bind(this)
     this.hideAdvancedOptions = this.hideAdvancedOptions.bind(this)
     this.changeCardsPerPage = this.changeCardsPerPage.bind(this)
+    this.changeView = this.changeView.bind(this)
     this.sortCards = this.sortCards.bind(this)
     this.previousPage = this.previousPage.bind(this)
     this.nextPage = this.nextPage.bind(this)
@@ -168,19 +176,37 @@ class CardTable extends React.Component {
   }
 
   reset() {
+    const formatSelector = document.getElementById('format')
+    formatSelector.value = 'All Formats'
+
+    const cardSelector = document.getElementById('card')
+    cardSelector.value = 'all'
+
+    const searchTypeSelector = document.getElementById('searchTypeSelector')
+    searchTypeSelector.value = 'name'
+
+    this.props.setSliders({
+      year: 2020,
+      month: 12,
+      day: 31,
+      level: [0, 12],
+      atk: [0, 5000],
+      def: [0, 5000]
+    })
+
     this.setState({
       page: 1,
-      cardsPerPage: 10,
-      sortBy: null,
       format: 'All Formats',
       logo: BLS,
       event: 'May 2002 - Sept 2020',
+      day: null,
+      month: null,
+      year: null,
       allFetched: false,
-      advanced: false,
       queryParams: {
         name: null,
         description: null,
-        card: null,
+        card: 'all',
         attribute: {
           dark: false,
           light: false,
@@ -249,8 +275,14 @@ class CardTable extends React.Component {
     const that = this
 
     setTimeout(function() {
-      that.search()
+      that.search(false)
     }, 100)
+  }
+
+  changeView() {
+    this.setState({
+      view: document.getElementById('viewSwitch').value
+    })
   }
 
   changeCardsPerPage() {
@@ -664,7 +696,7 @@ class CardTable extends React.Component {
     const that = this
 
     setTimeout(function() {
-      that.search()
+      that.search(false)
     }, 100)
   }
 
@@ -681,7 +713,7 @@ class CardTable extends React.Component {
     const that = this
 
     setTimeout(function() {
-      that.search()
+      that.search(false)
     }, 100)
   }
 
@@ -721,30 +753,11 @@ class CardTable extends React.Component {
     })
   }
 
-  componentDidMount() {
-    if (!this.props.cards.length) {
-      this.props.fetchFirstXCards(this.state.cardsPerPage * 10)
+  async componentDidMount() {
+    if (!this.state.firstXFetched) {
+      await this.props.fetchFirstXCards(this.state.cardsPerPage * 10)
+      this.setState({firstXFetched: true})
     }
-  }
-
-  async search() {
-    const sliders = {}
-
-    sliders.year = this.state.year ? this.state.year : this.props.sliders.year
-    sliders.month = this.state.month
-      ? this.state.month
-      : this.props.sliders.month
-    sliders.day = this.state.day ? this.state.day : this.props.sliders.day
-
-    try {
-      const filters = {...this.state.queryParams, ...sliders}
-      await this.props.fetchSomeCards(filters)
-      this.setState({page: 1})
-    } catch (err) {
-      console.log(err)
-    }
-
-    this.hideAdvancedOptions()
   }
 
   async componentDidUpdate() {
@@ -758,9 +771,30 @@ class CardTable extends React.Component {
     }
   }
 
+  async search(hide = true) {
+    const sliders = {}
+
+    sliders.year = this.state.year ? this.state.year : this.props.sliders.year
+    sliders.month = this.state.month
+      ? this.state.month
+      : this.props.sliders.month
+    sliders.day = this.state.day ? this.state.day : this.props.sliders.day
+
+    sliders.level = this.props.sliders.level ? this.props.sliders.level : null
+    sliders.atk = this.props.sliders.atk ? this.props.sliders.atk : null
+    sliders.def = this.props.sliders.def ? this.props.sliders.def : null
+
+    try {
+      const filters = {...this.state.queryParams, ...sliders}
+      await this.props.fetchSomeCards(filters)
+      this.setState({page: 1})
+    } catch (err) {
+      console.log(err)
+    }
+    if (hide) this.hideAdvancedOptions()
+  }
+
   render() {
-    console.log('this.state', this.state)
-    console.log('this.props', this.props)
     const lastIndex = this.state.page * this.state.cardsPerPage
     const firstIndex = lastIndex - this.state.cardsPerPage
 
@@ -835,12 +869,12 @@ class CardTable extends React.Component {
         <br />
 
         <div id="flexbox">
-          <img src={this.state.logo} style={{width: '128px'}} />
+          <img src={this.state.logo} style={{width: '164px'}} />
           <div>
             <h1>{this.state.format}</h1>
             <h2>{this.state.event}</h2>
           </div>
-          <img src={this.state.logo} style={{width: '128px'}} />
+          <img src={this.state.logo} style={{width: '164px'}} />
         </div>
 
         <br />
@@ -862,27 +896,25 @@ class CardTable extends React.Component {
           <div className="buttonWrapper">
             <select
               id="searchTypeSelector"
+              defaultValue="name"
               className="filter"
               onChange={() => {
                 this.runSearch()
               }}
             >
-              <option selected="selected" value="name">
-                Card Name
-              </option>
+              <option value="name">Card Name</option>
               <option value="description">Card Text</option>
             </select>
 
             <select
               id="card"
+              defaultValue="all"
               className="filter"
               onChange={() => {
                 this.applySelector('card')
               }}
             >
-              <option selected="selected" value={null}>
-                All Cards
-              </option>
+              <option value="all">All Cards</option>
               <option value="Monster">Monsters</option>
               <option value="Spell">Spells</option>
               <option value="Trap">Traps</option>
@@ -890,14 +922,13 @@ class CardTable extends React.Component {
 
             <select
               id="format"
+              defaultValue="All Formats"
               className="filter"
               onChange={() => {
                 this.setFormat()
               }}
             >
-              <option selected="selected" value={null}>
-                All Formats
-              </option>
+              <option value="All Formats">All Formats</option>
               <option value="Yugi-Kaiba Format">Yugi-Kaiba</option>
               <option value="Critter Format">Critter</option>
               <option value="Android Format">Android</option>
@@ -2268,6 +2299,7 @@ class CardTable extends React.Component {
                   step={1}
                   min={1}
                   max={12}
+                  defaultValue={this.props.sliders.level}
                 />
                 <PrettoSlider
                   id="atk"
@@ -2277,6 +2309,7 @@ class CardTable extends React.Component {
                   step={50}
                   min={0}
                   max={5000}
+                  defaultValue={this.props.sliders.atk}
                 />
                 <PrettoSlider
                   id="def"
@@ -2286,6 +2319,7 @@ class CardTable extends React.Component {
                   step={50}
                   min={0}
                   max={5000}
+                  defaultValue={this.props.sliders.def}
                 />
               </div>
 
@@ -2298,7 +2332,8 @@ class CardTable extends React.Component {
                   step={1}
                   min={2002}
                   max={2020}
-                  defaultValue={this.state.year}
+                  disabled={this.state.format !== 'All Formats'}
+                  defaultValue={this.state.year || this.props.sliders.year}
                 />
                 <PrettoSlider
                   id="month"
@@ -2308,7 +2343,8 @@ class CardTable extends React.Component {
                   step={1}
                   min={1}
                   max={12}
-                  defaultValue={this.state.month}
+                  disabled={this.state.format !== 'All Formats'}
+                  defaultValue={this.state.month || this.props.sliders.month}
                 />
                 <PrettoSlider
                   id="day"
@@ -2318,39 +2354,53 @@ class CardTable extends React.Component {
                   step={1}
                   min={1}
                   max={31}
-                  defaultValue={this.state.day}
+                  disabled={this.state.format !== 'All Formats'}
+                  defaultValue={this.state.day || this.props.sliders.day}
                 />
               </div>
             </div>
           </div>
         )}
 
-        <div className="resultsWrapper0">
+        <div id="resultsWrapper0" className="resultsWrapper0">
           <div className="results" style={{width: '360px'}}>
             Results:{' '}
-            {this.state.cardsPerPage * this.state.page -
-              this.state.cardsPerPage +
-              1}
-            {'-'}
-            {this.props.cards.length >=
-            this.state.cardsPerPage * this.state.page
-              ? this.state.cardsPerPage * this.state.page
-              : this.props.cards.length}
-            {' of '}
-            {this.state.allFetched ? this.props.cards.length : currentCardCount}
+            {this.state.firstXFetched && this.state.allFetched
+              ? this.props.cards.length
+                ? `${this.state.cardsPerPage * this.state.page -
+                    this.state.cardsPerPage +
+                    1} - ${
+                    this.props.cards.length >=
+                    this.state.cardsPerPage * this.state.page
+                      ? this.state.cardsPerPage * this.state.page
+                      : this.props.cards.length
+                  } of ${this.props.cards.length || currentCardCount}`
+                : '0'
+              : `1 - ${this.state.cardsPerPage} of 9720`}
           </div>
 
           <div className="buttonWrapper">
             <select
+              id="viewSwitch"
+              defaultValue="table"
+              style={{width: '130px'}}
+              onChange={() => {
+                this.changeView()
+              }}
+            >
+              <option value="table">View Table</option>
+              <option value="gallery">View Gallery</option>
+            </select>
+
+            <select
               id="cardsPerPageSelector"
+              defaultValue="10"
               style={{width: '195px'}}
               onChange={() => {
                 this.changeCardsPerPage()
               }}
             >
-              <option selected="selected" value="10">
-                Show 10 Cards / Page
-              </option>
+              <option value="10"> Show 10 Cards / Page</option>
               <option value="25">Show 25 Cards / Page</option>
               <option value="50">Show 50 Cards / Page</option>
               <option value="100">Show 100 Cards / Page</option>
@@ -2358,14 +2408,13 @@ class CardTable extends React.Component {
 
             <select
               id="sortSelector"
+              defaultValue="nameASC"
               style={{width: '190px'}}
               onChange={() => {
                 this.sortCards()
               }}
             >
-              <option selected="selected" value="nameASC">
-                Sort Name: A ⮕ Z
-              </option>
+              <option value="nameASC">Sort Name: A ⮕ Z</option>
               <option value="nameDESC">Sort Name: Z ⮕ A</option>
               <option value="atkASC">Sort ATK: Desc. ⬇</option>
               <option value="atkDESC">Sort ATK: Asc. ⬆</option>
@@ -2403,19 +2452,31 @@ class CardTable extends React.Component {
           </div>
         </div>
 
-        <div id="myTable" className="center">
-          <table id="cards">
-            <tbody>
-              {cardsArray.length ? (
-                cardsArray.map((card, index) => {
-                  return <Card key={card.id} index={index} card={card} />
-                })
-              ) : (
-                <p />
-              )}
-            </tbody>
-          </table>
-        </div>
+        {this.state.view === 'table' ? (
+          <div id="myTable">
+            <table id="cards">
+              <tbody>
+                {cardsArray.length ? (
+                  cardsArray.map((card, index) => {
+                    return <Card key={card.id} index={index} card={card} />
+                  })
+                ) : (
+                  <tr />
+                )}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div id="galleryFlexBox">
+            {cardsArray.length ? (
+              cardsArray.map((card, index) => {
+                return <Portrait key={card.id} index={index} card={card} />
+              })
+            ) : (
+              <div />
+            )}
+          </div>
+        )}
 
         <div className="pagination">
           <Pagination
@@ -2443,7 +2504,8 @@ const mapState = state => {
 const mapDispatch = dispatch => ({
   fetchAllCards: () => dispatch(fetchAllCards()),
   fetchSomeCards: filters => dispatch(fetchSomeCards(filters)),
-  fetchFirstXCards: x => dispatch(fetchFirstXCards(x))
+  fetchFirstXCards: x => dispatch(fetchFirstXCards(x)),
+  setSliders: sliders => dispatch(setSliders(sliders))
 })
 
 export default connect(mapState, mapDispatch)(CardTable)

@@ -539,7 +539,7 @@ router.get('/some', async (req, res, next) => {
 
     filters[Op.and] = OpAndFiltered
 
-    if (req.query.card)
+    if (req.query.card !== 'all')
       filters[Op.and] = [...filters[Op.and], {card: req.query.card}]
     if (req.query.name)
       filters[Op.and] = [
@@ -583,7 +583,10 @@ router.get('/some', async (req, res, next) => {
       ]
     if (date) filters[Op.and] = [...filters[Op.and], {date: {[Op.lte]: date}}]
 
-    const cards = await Card.findAll({where: filters})
+    const cards = await Card.findAll({
+      where: filters,
+      order: [['name', 'ASC']]
+    })
     res.json(cards)
   } catch (err) {
     next(err)
