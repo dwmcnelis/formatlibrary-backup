@@ -1,8 +1,3 @@
 # Format Library
 
-## Start
-
-Running `npm run start-dev` will make great things happen!
-
-If you want to run the server and/or `webpack` separately, you can also
-`npm run start-server` and `npm run build-client`.
+A fast, interactive card search database for Yu-Gi-Oh! and FormatLibrary.com. Provides multiple views to browse and powerful search queries. Integrates all the relevant data and provides the user with great flexibility. This app was built with React, Redux, Express, Postgres, material-ui, and others.
