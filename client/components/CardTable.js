@@ -80,7 +80,7 @@ class CardTable extends React.Component {
     this.state = {
       page: 1,
       cardsPerPage: 10,
-      view: 'table',
+      view: 'spoilers',
       sortBy: null,
       format: 'All Formats',
       logo: BLS,
@@ -862,6 +862,8 @@ class CardTable extends React.Component {
     const cardsArray = this.props.cards.length
       ? this.props.cards.slice(firstIndex, lastIndex)
       : []
+
+    console.log('cardsArray', cardsArray)
 
     return (
       <div>
@@ -2382,13 +2384,13 @@ class CardTable extends React.Component {
           <div className="buttonWrapper">
             <select
               id="viewSwitch"
-              defaultValue="table"
+              defaultValue="spoilers"
               style={{width: '130px'}}
               onChange={() => {
                 this.changeView()
               }}
             >
-              <option value="table">View Table</option>
+              <option value="spoilers">View Spoilers</option>
               <option value="gallery">View Gallery</option>
             </select>
 
@@ -2452,7 +2454,7 @@ class CardTable extends React.Component {
           </div>
         </div>
 
-        {this.state.view === 'table' ? (
+        {this.state.view === 'spoilers' ? (
           <div id="myTable">
             <table id="cards">
               <tbody>

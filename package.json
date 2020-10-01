@@ -18,6 +18,8 @@
     "postinstall": "touch secrets.js",
     "seed": "node script/seed.js",
     "parse": "node script/parse.js",
+    "truncate": "node script/truncate.js",
+    "checkdate": "node script/checkdate.js",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",

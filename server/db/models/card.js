@@ -51,7 +51,7 @@ const Card = db.define('card', {
     allowNull: true
   },
   date: {
-    type: Sequelize.DATE,
+    type: Sequelize.TEXT,
     allowNull: true
   }
 })
