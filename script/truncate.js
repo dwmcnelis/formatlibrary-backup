@@ -4,7 +4,6 @@ const {Card} = require('../server/db/models')
 
 async function truncate() {
   try {
-    console.log('finding All...')
     const cards = await Card.findAll()
     let n = 0
 
@@ -20,7 +19,6 @@ async function truncate() {
 }
 
 async function updateSQL(card) {
-  console.log('updating SQL...')
   try {
     const row = await Card.findOne({
       where: {
@@ -28,7 +26,8 @@ async function updateSQL(card) {
       }
     })
 
-    if (row.date.length > 10) return
+    if (row.date.length === 10)
+      return console.log(`${row.name} already has a properly formatted date.`)
 
     const date = card.date.slice(0, 10)
 
