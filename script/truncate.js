@@ -4,6 +4,7 @@ const {Card} = require('../server/db/models')
 
 async function truncate() {
   try {
+    console.log('finding All...')
     const cards = await Card.findAll()
     let n = 0
 
@@ -19,6 +20,7 @@ async function truncate() {
 }
 
 async function updateSQL(card) {
+  console.log('updating SQL...')
   try {
     const row = await Card.findOne({
       where: {
