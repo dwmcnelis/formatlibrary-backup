@@ -26,8 +26,9 @@ async function updateSQL(card) {
       }
     })
 
-    if (row.date.length === 10)
+    if (row.date.length === 10) {
       return console.log(`${row.name} already has a properly formatted date.`)
+    }
 
     const date = card.date.slice(0, 10)
 
