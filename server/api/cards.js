@@ -19,12 +19,14 @@ router.get('/all', async (req, res, next) => {
 
 router.get('/some', async (req, res, next) => {
   try {
-    let date
-
-    if (req.query.day || req.query.month || req.query.year) {
-      date = `${req.query.year || '2020'}-${req.query.month || '12'}-${req.query
-        .day || '31'}`
-    }
+    const day = req.query.day
+      ? req.query.day.length === 1 ? `0${req.query.day}` : req.query.day
+      : '31'
+    const month = req.query.month
+      ? req.query.month.length === 1 ? `0${req.query.month}` : req.query.month
+      : '12'
+    const year = req.query.year ? req.query.year : '2020'
+    const date = `${year}-${month}-${day}`
 
     const filters = {
       [Op.and]: [

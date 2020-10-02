@@ -863,8 +863,6 @@ class CardTable extends React.Component {
       ? this.props.cards.slice(firstIndex, lastIndex)
       : []
 
-    console.log('cardsArray', cardsArray)
-
     return (
       <div>
         <NavBar />
