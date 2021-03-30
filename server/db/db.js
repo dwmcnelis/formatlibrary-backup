@@ -3,13 +3,17 @@ const pkg = require('../../package.json')
 
 const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
 
-const url = `postgresql://danielmcnelis@localhost/${databaseName}`
+console.log('databaseName:', databaseName)
+
+const url = process.env.DATABASE_URL
+  ? process.env.DATABASE_URL
+  : `postgresql://danielmcnelis@localhost/${databaseName}`
+
+console.log('url:', url)
 
 const db = new Sequelize(url, {
   logging: false
 })
-
-// console.log('db', db)
 
 module.exports = db
 
