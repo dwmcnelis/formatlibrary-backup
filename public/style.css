@@ -385,6 +385,47 @@ h1 {
   border-bottom: 2px solid #9ba9cc !important;
 }
 
+.status-cell {
+  position: relative;
+  min-width: 10px;
+  width: 25px;
+  height: 50px;
+  border: 1px solid black;
+}
+
+.status-cell:hover {
+  border: 3px solid black;
+  border-radius: 6px;
+}
+
+.status-cell p {
+  border-radius: 5px;
+  position: absolute;
+  text-align: center;
+  top: -56px;
+  left: -26px;
+  z-index: 1;
+  width: 60px;
+  border: 1px solid black;
+  padding: 5px;
+  background-color: white;
+  display: none;
+  color: black;
+}
+
+.status-cell:hover p {
+  display: block;
+}
+
+.status-box {
+  padding: 6px 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+
 #to-end {
   background-image: url('./images/toEnd.png');
   background-position: 65%;

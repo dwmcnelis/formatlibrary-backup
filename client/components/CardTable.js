@@ -795,6 +795,8 @@ class CardTable extends React.Component {
   }
 
   render() {
+    console.log('this.props', this.props)
+    // console.log('this.state', this.state)
     const lastIndex = this.state.page * this.state.cardsPerPage
     const firstIndex = lastIndex - this.state.cardsPerPage
 
@@ -2496,7 +2498,7 @@ class CardTable extends React.Component {
 
 const mapState = state => {
   return {
-    cards: state.cards,
+    cards: state.cards.cards,
     sliders: state.sliders
   }
 }

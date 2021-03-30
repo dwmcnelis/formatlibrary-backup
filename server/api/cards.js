@@ -1,7 +1,7 @@
 /* eslint-disable max-statements */
 /* eslint-disable complexity */
 const router = require('express').Router()
-const {Card} = require('../db/models')
+const {Card, Status} = require('../db/models')
 const {Op} = require('sequelize')
 
 module.exports = router
@@ -614,7 +614,19 @@ router.get('/:id', async (req, res, next) => {
         id: req.params.id
       }
     })
-    res.json(card)
+
+    const status = await Status.findOne({
+      where: {
+        cardId: req.params.id
+      }
+    })
+
+    const info = {
+      card: card,
+      status: status || null
+    }
+
+    res.json(info)
   } catch (err) {
     next(err)
   }

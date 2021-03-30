@@ -41,6 +41,7 @@ if (process.env.NODE_ENV !== 'production') require('../secrets')
 // })
 
 const createApp = () => {
+  console.log('creating App...')
   // logging middleware
   app.use(morgan('dev'))
 
@@ -93,7 +94,10 @@ const createApp = () => {
   })
 }
 
+console.log('PORT', PORT)
+
 const startListening = () => {
+  console.log('start Listening...')
   // start listening (and create a 'server' object representing our server)
   const server = app.listen(PORT, () =>
     console.log(`Mixing it up on port ${PORT}`)
