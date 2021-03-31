@@ -17,7 +17,8 @@ const url = process.env.DATABASE_URL
 console.log('url:', url)
 
 const db = new Sequelize(url, {
-  logging: false
+  logging: false,
+  ssl: true
 })
 
 module.exports = db
