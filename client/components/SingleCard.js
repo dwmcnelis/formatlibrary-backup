@@ -326,7 +326,10 @@ class SingleCard extends React.Component {
                         className="status-cell"
                         style={{backgroundColor: '#e8e8e8'}}
                       >
-                        <p>{date}</p>
+                        <p>
+                          {date}
+                          <span>***</span>
+                        </p>
                       </div>
                     )
                   if (elem[1] === 'forbidden')

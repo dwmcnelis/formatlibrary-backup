@@ -491,7 +491,7 @@ class CardTable extends React.Component {
       logo = Trish
       event = 'YCS Providence - June 2011'
     } else if (format === 'Tengu Plant Format') {
-      day = 22
+      day = 1
       month = 10
       year = 2011
       logo = Spore
@@ -623,11 +623,10 @@ class CardTable extends React.Component {
       logo = Missus
       event = 'YCS Toronto - October 2017'
     } else if (format === 'Quik-Fix Format') {
-      day = 25
-      month = 11
+      day = 250
       year = 2017
       logo = QFix
-      event = 'YCS London - November 2017'
+      event = 'YCS London - October 2017'
     } else if (format === 'Tough Format') {
       day = 13
       month = 1

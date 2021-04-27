@@ -16,21 +16,21 @@ const url = process.env.DATABASE_URL
 
 console.log('url:', url)
 
-// const db = new Sequelize(url, {
-//   logging: false,
-//   ssl: true
-// })
-
-const db = new Sequelize(`${process.env.DATABASE_URL}?sslmode=require`, {
-  url: process.env.DATABASE_URL,
-  dialect: 'postgres',
+const db = new Sequelize(url, {
   logging: false,
-  dialectOptions: {
-    ssl: {
-      rejectUnauthorized: false // very important
-    }
-  }
+  ssl: true
 })
+
+// const db = new Sequelize(`${process.env.DATABASE_URL}?sslmode=require`, {
+//   url: process.env.DATABASE_URL,
+//   dialect: 'postgres',
+//   logging: false,
+//   dialectOptions: {
+//     ssl: {
+//       rejectUnauthorized: false // very important
+//     }
+//   }
+// })
 
 module.exports = db
 
