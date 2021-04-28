@@ -623,7 +623,7 @@ class CardTable extends React.Component {
       logo = Missus
       event = 'YCS Toronto - October 2017'
     } else if (format === 'Quik-Fix Format') {
-      day = 250
+      day = 25
       year = 2017
       logo = QFix
       event = 'YCS London - October 2017'
