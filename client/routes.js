@@ -1,20 +1,20 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {Route, Switch} from 'react-router-dom'
-import {Home, SingleCard} from './components'
+import {BanList, FormatMenu, CardTable, SingleDeck, DeckTable, Home, SingleCard} from './components'
 
-/**
- * COMPONENT
- */
-class Routes extends Component {
-  render() {
-    return (
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/home" component={Home} />
-        <Route path="/card/:id" component={SingleCard} />
-      </Switch>
-    )
-  }
+const Routes = () => {
+  return (
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/home/" component={Home} />
+      <Route exact path="/decks/" component={DeckTable} />
+      <Route path="/decks/:id" component={SingleDeck} />
+      <Route exact path="/cards/" component={CardTable} />
+      <Route path="/cards/:id" component={SingleCard} />
+      <Route exact path="/formats/" component={FormatMenu} />
+      <Route path="/formats/:id" component={BanList} />
+    </Switch>
+  )
 }
 
 export default Routes

@@ -1,35 +1,15 @@
 const Sequelize = require('sequelize')
 const pkg = require('../../package.json')
-const {secretUrl} = require('../../secrets')
-
-// console.log('secretUrl:', secretUrl)
-
 const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
-
-console.log('databaseName:', databaseName)
-
-// const url = secretUrl
 
 const url = process.env.DATABASE_URL
   ? process.env.DATABASE_URL
   : `postgresql://danielmcnelis@localhost/${databaseName}`
 
-console.log('url:', url)
 
-// const db = new Sequelize(url, {
-//   logging: false,
-//   ssl: true
-// })
-
-const db = new Sequelize(`${process.env.DATABASE_URL}?sslmode=require`, {
-  url: process.env.DATABASE_URL,
-  dialect: 'postgres',
+const db = new Sequelize(url, {
   logging: false,
-  dialectOptions: {
-    ssl: {
-      rejectUnauthorized: false // very important
-    }
-  }
+  ssl: true
 })
 
 module.exports = db

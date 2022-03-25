@@ -1,6 +1,19 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-image: url('./images/alexandria.png');
+  background-color: black;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.body {
   background-color: white;
+  border-radius: 6px;
+  border-top: 20px solid #2e2215;
+  border-bottom: 20px solid #2e2215;
+  min-height: 70vh;
+  padding: 20px 10px;
+  margin: 0% 3%;
 }
 
 h1,
@@ -41,10 +54,16 @@ table {
   width: 100%;
 }
 
+#deck-table thead {
+  display: table-header-group;
+  border-bottom: 2px solid #6d6f8a;
+}
+
 th,
 td,
 tr {
   padding: 10px;
+  white-space: pre-wrap;
 }
 
 h1 {
@@ -54,14 +73,46 @@ h1 {
   font-weight: bold;
 }
 
+.footer-logo {
+  display: inline-block;
+  background-repeat: no-repeat;
+  min-height: 80px;
+  min-width: 80px;
+  vertical-align: middle;
+  background-size: 76px;
+  background-position: center;
+  background-image: url('./favicon.ico');
+}
+
 .logo {
   color: white;
 }
 
+.disclaimer {
+  padding: 0px 20%;
+  font-size: 12px;
+  text-align: center;
+  font-style: italic;
+  vertical-align: text-bottom;
+}
+
 .nav-bar {
-  padding: 5px 0px;
+  padding: 5px;
   border: 10px solid black;
+  margin: 10px 20px 30px;
   border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  color: #ede6e6;
+  background-color: black;
+}
+
+.footer {
+  padding: 10px 30px;
+  border-radius: 6px;
+  margin: 30px 20px 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -89,6 +140,144 @@ h1 {
   justify-content: center;
 }
 
+#deckGalleryFlexBox {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  max-width: 92%;
+  flex-wrap: wrap;
+  align-items: top;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.format-menu {
+  padding: 0% 5%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.format-title {
+  padding: 5px 0px 0px 0px;
+  font-size: 40px;
+}
+
+.format-date {
+  padding: 0px 0px 5px 0px;
+  font-size: 26px;
+  font-weight: normal;
+}
+
+.banlist-bubble {
+  margin: 0px 10%;
+  padding: 20px 0px;
+  border-radius: 10px;
+}
+
+.banlist-bubble#forbidden {
+  border: 5px solid #b30000;
+  background-color: #ffe6e6;
+}
+
+.banlist-bubble#limited {
+  border: 5px solid #cc7a00;
+  background-color: #fff5e6;
+}
+
+.banlist-bubble#semi-limited {
+  border: 5px solid #ffbf00;
+  background-color: #ffffe6;
+}
+
+.banlist-category {
+  font-size: 24px;
+  font-weight: bold;
+  position: static;
+  padding: 0px 0px 2px 5%;
+}
+
+.banlist-bubble {
+  margin: 0px 10%;
+  padding: 20px 0px;
+  border-radius: 10px;
+}
+
+.banlist-bubble#forbidden {
+  border: 5px solid #b30000;
+  background-color: #ffe6e6;
+}
+
+.banlist-bubble#limited {
+  border: 5px solid #cc7a00;
+  background-color: #fff5e6;
+}
+
+.banlist-bubble#semi-limited {
+  border: 5px solid #ffbf00;
+  background-color: #ffffe6;
+}
+
+.banlist-category {
+  font-size: 24px;
+  font-weight: bold;
+  position: static;
+  padding: 0px 0px 2px 5%;
+}
+
+.banlist-flex-box {
+  padding: 0% 5%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: left;
+  flex-direction: row;
+  justify-content: left;
+}
+
+.deck-bubble {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+}
+
+.deck-bubble#main {
+  width: 760px;
+  border: solid #990099;
+  border-width: 5px 0px;
+  padding: 10px 0px;
+  background-color: #ffe6ff;
+  margin-bottom: 5px;
+}
+
+.deck-bubble#side {
+  width: 760px;
+  border: solid #00a3cc;
+  border-width: 5px 0px;
+  padding: 5px 0px;
+  background-color: #e6faff;
+  margin-bottom: 2px;
+}
+
+.deck-bubble#extra {
+  width: 760px;
+  border: solid #ffbf00;
+  border-width: 5px 0px;
+  padding: 5px 0px;
+  background-color: #ffffe6;
+}
+
+.deck-flex-box {
+  padding: 0px 10px;
+  max-width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: left;
+  flex-direction: row;
+}
+
 #slider {
   display: flex;
   align-items: center;
@@ -106,10 +295,38 @@ h1 {
   align-items: left;
 }
 
-#title {
-  text-align: center;
+#nav-menu {
+  display: flex;
+  padding: 10px 0px;
+  justify-content: right;
+  text-align: left;
   font-family: arial;
-  flex-grow: 3;
+}
+
+.nav-item {
+  color: white;
+  padding: 20px;
+}
+
+.nav-item:hover {
+  background-color: rgb(209, 156, 70);
+  color: black;
+}
+
+#footer-menu {
+  display: flex;
+  padding: 0px;
+  justify-content: center;
+  font-family: arial;
+}
+
+.footer-item {
+  color: white;
+  padding: 0px 20px;
+}
+
+.footer-item:hover {
+  color: rgb(209, 156, 70);
 }
 
 #searchBar {
@@ -128,7 +345,30 @@ h1 {
   margin: 0px 0px 50px 0px;
 }
 
-.portraits:hover {
+.CardImage-box {
+  position: relative;
+}
+
+.status-icon {
+  position: absolute;
+  z-index: 1;
+  width: 24px;
+  top: 2px;
+  left: 2px;
+}
+
+.CardImages, .SmallCardImages {
+  display: block;
+}
+
+.DeckImages {
+  display: block;
+  color: black;
+  padding: 5px 0px;
+  margin: 5px 0px;
+}
+
+.CardImages:hover, .DeckImages:hover {
   box-shadow: -2px 2px 5px 4px #737373;
   cursor: pointer;
 }
@@ -179,8 +419,8 @@ h1 {
   background-color: #6d6f8a;
 }
 
-.optionButton,
-.clickedOptionButton {
+.iconButton,
+.clickedIconButton {
   display: inline-block;
   padding: 6px 6px 6px 30px;
   border: 1px solid #000000;
@@ -199,12 +439,12 @@ h1 {
   vertical-align: middle;
 }
 
-.optionButton {
+.iconButton {
   color: black;
   background-color: #f5f7fa;
 }
 
-.clickedOptionButton {
+.clickedIconButton {
   color: white;
   font-weight: 600;
   background-color: #6d6f8a;
@@ -261,6 +501,48 @@ h1 {
   vertical-align: middle;
 }
 
+.format-link {
+  display: inline-block;
+  padding: 14px 6px 6px 54px;
+  border: 1px solid #000000;
+  margin: 0.15em 0.4em 0.15em 0em;
+  height: 64px;
+  width: 200px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: left;
+  transition: all 0.15s;
+  background-repeat: no-repeat;
+  background-position: 2px;
+  background-size: 64px;
+  vertical-align: middle;
+}
+
+.format-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.format-cell {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.event-cell {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.format-link,
 .typeButton {
   color: black;
   background-color: #f5f7fa;
@@ -339,6 +621,153 @@ h1 {
   border-bottom: 2px solid #9ba9cc;
 }
 
+.myDiv {
+  display:flex;
+  justify-content:center;
+  width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.single-deck-title {
+  padding: 0px 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  transform: translateX(50px);/*D element Width[if needed]*/
+}
+
+.downloadButton {
+  margin-left: auto;
+  padding: 0.36em 0.84em;
+  border: 1px solid #000000;
+  border-radius: 0.5em;
+  margin: 0.1em 0.5em 0.2em 0.5em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: black;
+  text-align: center;
+  transition: all 0.15s;
+}
+
+.downloadButton:hover {
+  cursor: pointer;
+  text-shadow: 0 0 2em rgba(255, 255, 255, 1);
+  color: black;
+  background-color: #ede6e6;
+  border-color: #ede6e6;
+}
+
+.single-deck-table {
+  display: table;
+  width: 760px;
+  margin: 5px 0px 10px;
+  vertical-align: middle;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 2px solid #2e2215;
+  border-bottom: 2px solid #2e2215;
+  border-radius: 6px;
+}
+
+.single-deck-info-1 {
+  border-bottom: 1px solid #2e2215;
+  background-color: #FFFFFF;
+}
+
+.single-deck-info-2 {
+  background-color: #F7FAFC;
+}
+
+.single-deck-cell {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-content: left;
+  align-items: center;
+  font-size: 18px;
+  padding: 2px 6px;
+  height: 28px;
+}
+
+.single-deck-table td {
+  padding: 0px;
+}
+
+.deck-stats-table {
+  display: table;
+  width: 720px;
+  vertical-align: middle;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.deck-stats-table td {
+  padding: 0px 6px;
+}
+
+.deck-stats-cell {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: left;
+  align-items: center;
+  font-size: 18px;
+  padding: 2px 6px;
+  height: 28px;
+}
+
+.likeImg:hover {
+  cursor: pointer;
+}
+
+.odd-search-results-row {
+  display: table-row;
+  color: black;
+  background-color: #FFFFFF;
+  border-bottom: 2px solid #9faac2;
+}
+
+.even-search-results-row {
+  display: table-row;
+  color: black;
+  background-color: #F7FAFC;
+  border-bottom: 2px solid #9faac2;
+}
+
+.odd-search-results-row:hover, .even-search-results-row:hover {
+  cursor: pointer;
+  color: white;
+  background-color: #6d6f8a;
+}
+
+
+.odd-print-row {
+  align-content: left;
+  vertical-align: middle;
+  background-color: #FFFFFF;
+  border-bottom: 2px solid #9ba9cc;
+}
+
+.even-print-row {
+  align-content: left;
+  vertical-align: middle;
+  background-color: #F7FAFC;
+  border-bottom: 2px solid #9ba9cc;
+}
+
+.odd-print-row:hover, .even-print-row:hover {
+  cursor: pointer;
+  color: white;
+  background-color: #6d6f8a;
+}
+
 .single-card-date-row {
   text-align: left;
   vertical-align: bottom;
@@ -394,8 +823,8 @@ h1 {
 }
 
 .status-cell:hover {
-  border: 3px solid black;
-  border-radius: 6px;
+  outline: 3px solid black;
+  z-index: 1;
 }
 
 .status-cell p {
@@ -423,215 +852,341 @@ h1 {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 75%;
+}
+
+.print-box {
+  padding: 6px 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+  font-size: 14px;
 }
 
 #to-end {
-  background-image: url('./images/toEnd.png');
+  background-image: url('./images/emojis/toEnd.png');
   background-position: 65%;
 }
 
 #to-start {
-  background-image: url('./images/toStart.png');
+  background-image: url('./images/emojis/toStart.png');
   background-position: 35%;
 }
 
-#normal-monster {
-  background-image: url('./images/monsterCard.jpg');
+#normal.monsterButton, #normal.clickedMonsterButton {
+  background-image: url('./images/templates/monsterCard.jpg');
 }
 
 #effect {
-  background-image: url('./images/effectCard.png');
+  background-image: url('./images/templates/effectCard.png');
 }
 
 #fusion {
-  background-image: url('./images/fusionCard.jpg');
+  background-image: url('./images/templates/fusionCard.jpg');
 }
 
 #ritual-monster {
-  background-image: url('./images/ritualCard.jpg');
+  background-image: url('./images/templates/ritualCard.jpg');
 }
 
 #synchro {
-  background-image: url('./images/synchroCard.png');
+  background-image: url('./images/templates/synchroCard.png');
 }
 
 #xyz {
-  background-image: url('./images/xyzCard.png');
+  background-image: url('./images/templates/xyzCard.png');
 }
 
 #pendulum {
-  background-image: url('./images/pendulumCard.png');
+  background-image: url('./images/templates/pendulumCard.png');
 }
 
 #flip {
   background-size: 24px;
-  background-image: url('./images/flip.png');
+  background-image: url('./images/symbols/flip.png');
 }
 
 #gemini {
   background-size: 24px;
-  background-image: url('./images/gemini.png');
+  background-image: url('./images/symbols/gemini.png');
 }
 
 #spirit {
   background-size: 22px;
-  background-image: url('./images/spirit.png');
+  background-image: url('./images/symbols/spirit.png');
 }
 
 #toon {
   background-size: 22px;
-  background-image: url('./images/toon.png');
+  background-image: url('./images/symbols/toon.png');
 }
 
 #tuner {
   background-size: 24px;
-  background-image: url('./images/tuner.png');
+  background-image: url('./images/symbols/tuner.png');
 }
 
 #union {
   background-size: 24px;
-  background-image: url('./images/union.png');
+  background-image: url('./images/symbols/union.png');
 }
 
 #link {
-  background-image: url('./images/linkCard.png');
+  background-image: url('./images/templates/linkCard.png');
 }
 
 #dark {
-  background-image: url('./images/dark.png');
+  background-image: url('./images/symbols/dark.png');
 }
 
 #light {
-  background-image: url('./images/light.png');
+  background-image: url('./images/symbols/light.png');
 }
 
 #earth {
-  background-image: url('./images/earth.png');
+  background-image: url('./images/symbols/earth.png');
 }
 
 #wind {
-  background-image: url('./images/wind.png');
+  background-image: url('./images/symbols/wind.png');
 }
 
 #water {
-  background-image: url('./images/water.png');
+  background-image: url('./images/symbols/water.png');
 }
 
 #fire {
-  background-image: url('./images/fire.png');
+  background-image: url('./images/symbols/fire.png');
 }
 
 #divine {
-  background-image: url('./images/divine.png');
+  background-image: url('./images/symbols/divine.png');
 }
 
 #continuous {
-  background-image: url('./images/continuous.png');
+  background-image: url('./images/symbols/continuous.png');
 }
 
 #counter {
-  background-image: url('./images/counter.png');
+  background-image: url('./images/symbols/counter.png');
 }
 
-#normal {
-  background-image: url('./images/normal.png');
+#normal.iconButton, #normal.clickedIconButton {
+  background-image: url('./images/symbols/normal.png');
 }
 
 #equip {
-  background-image: url('./images/equip.png');
+  background-image: url('./images/symbols/equip.png');
 }
 
 #ritual {
-  background-image: url('./images/ritual.png');
+  background-image: url('./images/symbols/ritual.png');
 }
 
 #field {
-  background-image: url('./images/field.png');
+  background-image: url('./images/symbols/field.png');
 }
 
-#quick-play {
-  background-image: url('./images/quick-play.png');
+#quickPlay {
+  background-image: url('./images/symbols/quick-play.png');
 }
 
 #aqua {
-  background-image: url('./images/aqua.png');
+  background-image: url('./images/symbols/aqua.png');
 }
 
 #beast {
-  background-image: url('./images/beast.png');
+  background-image: url('./images/symbols/beast.png');
 }
-#beast-warrior {
-  background-image: url('./images/beast-warrior.png');
+#beast-Warrior {
+  background-image: url('./images/symbols/beast-warrior.png');
 }
 #cyberse {
-  background-image: url('./images/cyberse.png');
+  background-image: url('./images/symbols/cyberse.png');
 }
 #dinosaur {
-  background-image: url('./images/dinosaur.png');
+  background-image: url('./images/symbols/dinosaur.png');
 }
-#divine-beast {
-  background-image: url('./images/divine-beast.png');
+#divine-Beast {
+  background-image: url('./images/symbols/divine-beast.png');
 }
 #dragon {
-  background-image: url('./images/dragon.png');
+  background-image: url('./images/symbols/dragon.png');
 }
 #fairy {
-  background-image: url('./images/fairy.png');
+  background-image: url('./images/symbols/fairy.png');
 }
 #fiend {
-  background-image: url('./images/fiend.png');
+  background-image: url('./images/symbols/fiend.png');
 }
 #fish {
-  background-image: url('./images/fish.png');
+  background-image: url('./images/symbols/fish.png');
 }
 #insect {
-  background-image: url('./images/insect.png');
+  background-image: url('./images/symbols/insect.png');
 }
 #machine {
-  background-image: url('./images/machine.png');
+  background-image: url('./images/symbols/machine.png');
 }
 #plant {
-  background-image: url('./images/plant.png');
+  background-image: url('./images/symbols/plant.png');
 }
 #psychic {
-  background-image: url('./images/psychic.png');
+  background-image: url('./images/symbols/psychic.png');
 }
 #pyro {
-  background-image: url('./images/pyro.png');
+  background-image: url('./images/symbols/pyro.png');
 }
 #reptile {
-  background-image: url('./images/reptile.png');
+  background-image: url('./images/symbols/reptile.png');
 }
 #rock {
-  background-image: url('./images/rock.png');
+  background-image: url('./images/symbols/rock.png');
 }
-#sea-serpent {
-  background-image: url('./images/sea-serpent.png');
+#seaSerpent {
+  background-image: url('./images/symbols/sea-serpent.png');
 }
 #spellcaster {
-  background-image: url('./images/spellcaster.png');
+  background-image: url('./images/symbols/spellcaster.png');
 }
 #thunder {
-  background-image: url('./images/thunder.png');
+  background-image: url('./images/symbols/thunder.png');
 }
 #warrior {
-  background-image: url('./images/warrior.png');
+  background-image: url('./images/symbols/warrior.png');
 }
-#winged-beast {
-  background-image: url('./images/winged-beast.png');
+#wingedBeast {
+  background-image: url('./images/symbols/winged-beast.png');
 }
 #wyrm {
-  background-image: url('./images/wyrm.png');
+  background-image: url('./images/symbols/wyrm.png');
 }
 #zombie {
-  background-image: url('./images/zombie.png');
+  background-image: url('./images/symbols/zombie.png');
+}
+
+.rarity-cell {
+  width: 28px;
+  background-size: 28px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.print-cell {
+  padding: 5px, 15px;
+}
+
+#tenThousandSecretRare {
+  background-image: url('./images/rarities/10000SecretRare.png');
+}
+
+#collectorsRare {
+  background-image: url('./images/rarities/collectorsRare.png');
+}
+
+#common {
+  background-image: url('./images/rarities/common.png');
+}
+
+#dTNormalParallelRare {
+  background-image: url('./images/rarities/dTNormalParallelRare.png');
+}
+
+#dTRareParallelRare {
+  background-image: url('./images/rarities/dTRareParallelRare.png');
+}
+
+#dTSuperParallelRare {
+  background-image: url('./images/rarities/dTSuperParallelRare.png');
+}
+
+#dTUltraParallelRare, #ultraParallelRare {
+  background-image: url('./images/rarities/dTUltraParallelRare.png');
+}
+
+#ghostGoldRare {
+  background-image: url('./images/rarities/ghostGoldRare.png');
+}
+
+#ghostRare {
+  background-image: url('./images/rarities/ghostRare.png');
+}
+
+#goldRare {
+  background-image: url('./images/rarities/goldRare.png');
+}
+
+#goldSecretRare {
+  background-image: url('./images/rarities/goldSecretRare.png');
+}
+
+#mosaicRare {
+  background-image: url('./images/rarities/mosaicRare.png');
+}
+
+#platinumRare {
+  background-image: url('./images/rarities/platinumRare.png');
+}
+
+#platinumSecretRare {
+  background-image: url('./images/rarities/platinumSecretRare.png');
+}
+
+#premiumGoldRare {
+  background-image: url('./images/rarities/premiumGoldRare.png');
+}
+
+#prismaticSecretRare {
+  background-image: url('./images/rarities/prismaticSecretRare.png');
+}
+
+#rare {
+  background-image: url('./images/rarities/rare.png');
+}
+
+#secretRare {
+  background-image: url('./images/rarities/secretRare.png');
+}
+
+#shatterfoilRare {
+  background-image: url('./images/rarities/shatterfoilRare.png');
+}
+
+#shortPrint {
+  background-image: url('./images/rarities/shortPrint.png');
+}
+
+#starfoilRare {
+  background-image: url('./images/rarities/starfoilRare.png');
+}
+
+#starlightRare {
+  background-image: url('./images/rarities/starlightRare.png');
+}
+
+#superRare {
+  background-image: url('./images/rarities/superRare.png');
+}
+
+#superShortPrint {
+  background-image: url('./images/rarities/superShortPrint.png');
+}
+
+#ultimateRare {
+  background-image: url('./images/rarities/ultimateRare.png');
+}
+
+#ultraRare {
+  background-image: url('./images/rarities/ultraRare.png');
 }
 
 .attributeButton:hover,
 .typeButton:hover,
-.optionButton:hover,
-.monsterButton:hover {
+.iconButton:hover,
+.monsterButton:hover,
+.format-link:hover {
   cursor: pointer;
   text-shadow: 0 0 2em rgba(255, 255, 255, 1);
   color: black;
@@ -640,7 +1195,7 @@ h1 {
 
 .clickedAttributeButton:hover,
 .clickedTypeButton:hover,
-.clickedOptionButton:hover,
+.clickedIconButton:hover,
 .clickedMonsterButton:hover {
   cursor: pointer;
 }
@@ -868,6 +1423,7 @@ select option {
 }
 
 #myTable {
+  display: table;
   border-top: 2px;
   border-bottom: 2px;
   border-left: 0px;
@@ -878,6 +1434,21 @@ select option {
   vertical-align: middle;
   margin-left: 4%;
   margin-right: 4%;
+}
+
+#deck-table {
+  display: table;
+  min-width: 90%;
+  border-top: 2px;
+  border-bottom: 2px;
+  border-left: 0px;
+  border-right: 0px;
+  border-style: solid;
+  border-color: #565769;
+  margin-bottom: 5px;
+  vertical-align: middle;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #map {

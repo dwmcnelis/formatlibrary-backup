@@ -2,27 +2,29 @@
 
 import React from 'react'
 
-const Pagination = props => {
+const Pagination = (props = {}) => {
+  const { length = 0, itemsPerPage = 12, location = 'top', page = 1 } = props
+  
   return (
     <div>
-      {props.page !== 1 && props.cards.length ? (
+      {page !== 1 && length ? (
         <a
           className="pageButton"
           id="to-start"
           type="submit"
           onClick={() => {
-            props.goToPage(1, props.location)
+            props.goToPage(1, location)
           }}
         />
       ) : (
         ''
       )}
-      {props.page !== 1 && props.cards.length ? (
+      {page !== 1 && length ? (
         <a
           className="pageButton"
           type="submit"
           onClick={() => {
-            props.previousPage(props.location)
+            props.previousPage(location)
           }}
         >
           ◀
@@ -31,36 +33,36 @@ const Pagination = props => {
         ''
       )}
 
-      {props.cards.length ? (
-        props.page > 4 ? (
-          props.page >
-          Math.ceil(props.cards.length / props.cardsPerPage) - 3 ? (
+      {length ? (
+        page > 4 ? (
+          page >
+          Math.ceil(length / itemsPerPage) - 3 ? (
             <a
               className="pageButton"
               type="submit"
               onClick={() => {
                 props.goToPage(
-                  Math.ceil(props.cards.length / props.cardsPerPage) - 6,
-                  props.location
+                  Math.ceil(length / itemsPerPage) - 6,
+                  location
                 )
               }}
             >
               {' '}
-              {Math.ceil(props.cards.length / props.cardsPerPage) - 6}{' '}
+              {Math.ceil(length / itemsPerPage) - 6}{' '}
             </a>
           ) : (
             <a
               className="pageButton"
               type="submit"
               onClick={() => {
-                props.goToPage(props.page - 3, props.location)
+                props.goToPage(page - 3, location)
               }}
             >
               {' '}
-              {props.page - 3}{' '}
+              {page - 3}{' '}
             </a>
           )
-        ) : props.page === 1 ? (
+        ) : page === 1 ? (
           <a
             className="pageButton"
             type="submit"
@@ -78,7 +80,7 @@ const Pagination = props => {
             className="pageButton"
             type="submit"
             onClick={() => {
-              props.goToPage(1, props.location)
+              props.goToPage(1, location)
             }}
           >
             {' '}
@@ -89,36 +91,36 @@ const Pagination = props => {
         ''
       )}
 
-      {Math.ceil(props.cards.length / props.cardsPerPage) >= 2 ? (
-        props.page > 4 ? (
-          props.page >
-          Math.ceil(props.cards.length / props.cardsPerPage) - 2 ? (
+      {Math.ceil(length / itemsPerPage) >= 2 ? (
+        page > 4 ? (
+          page >
+          Math.ceil(length / itemsPerPage) - 2 ? (
             <a
               className="pageButton"
               type="submit"
               onClick={() => {
                 props.goToPage(
-                  Math.ceil(props.cards.length / props.cardsPerPage) - 5,
-                  props.location
+                  Math.ceil(length / itemsPerPage) - 5,
+                  location
                 )
               }}
             >
               {' '}
-              {Math.ceil(props.cards.length / props.cardsPerPage) - 5}{' '}
+              {Math.ceil(length / itemsPerPage) - 5}{' '}
             </a>
           ) : (
             <a
               className="pageButton"
               type="submit"
               onClick={() => {
-                props.goToPage(props.page - 2, props.location)
+                props.goToPage(page - 2, location)
               }}
             >
               {' '}
-              {props.page - 2}{' '}
+              {page - 2}{' '}
             </a>
           )
-        ) : props.page === 2 ? (
+        ) : page === 2 ? (
           <a
             className="pageButton"
             type="submit"
@@ -136,7 +138,7 @@ const Pagination = props => {
             className="pageButton"
             type="submit"
             onClick={() => {
-              props.goToPage(2, props.location)
+              props.goToPage(2, location)
             }}
           >
             {' '}
@@ -147,36 +149,36 @@ const Pagination = props => {
         ''
       )}
 
-      {Math.ceil(props.cards.length / props.cardsPerPage) >= 3 ? (
-        props.page > 4 ? (
-          props.page >
-          Math.ceil(props.cards.length / props.cardsPerPage) - 2 ? (
+      {Math.ceil(length / itemsPerPage) >= 3 ? (
+        page > 4 ? (
+          page >
+          Math.ceil(length / itemsPerPage) - 2 ? (
             <a
               className="pageButton"
               type="submit"
               onClick={() => {
                 props.goToPage(
-                  Math.ceil(props.cards.length / props.cardsPerPage) - 4,
-                  props.location
+                  Math.ceil(length / itemsPerPage) - 4,
+                  location
                 )
               }}
             >
               {' '}
-              {Math.ceil(props.cards.length / props.cardsPerPage) - 4}{' '}
+              {Math.ceil(length / itemsPerPage) - 4}{' '}
             </a>
           ) : (
             <a
               className="pageButton"
               type="submit"
               onClick={() => {
-                props.goToPage(props.page - 1, props.location)
+                props.goToPage(page - 1, location)
               }}
             >
               {' '}
-              {props.page - 1}{' '}
+              {page - 1}{' '}
             </a>
           )
-        ) : props.page === 3 ? (
+        ) : page === 3 ? (
           <a
             className="pageButton"
             type="submit"
@@ -194,7 +196,7 @@ const Pagination = props => {
             className="pageButton"
             type="submit"
             onClick={() => {
-              props.goToPage(3, props.location)
+              props.goToPage(3, location)
             }}
           >
             {' '}
@@ -205,22 +207,22 @@ const Pagination = props => {
         ''
       )}
 
-      {Math.ceil(props.cards.length / props.cardsPerPage) >= 4 ? (
-        props.page > 4 ? (
-          props.page >
-          Math.ceil(props.cards.length / props.cardsPerPage) - 3 ? (
+      {Math.ceil(length / itemsPerPage) >= 4 ? (
+        page > 4 ? (
+          page >
+          Math.ceil(length / itemsPerPage) - 3 ? (
             <a
               className="pageButton"
               type="submit"
               onClick={() => {
                 props.goToPage(
-                  Math.ceil(props.cards.length / props.cardsPerPage) - 3,
-                  props.location
+                  Math.ceil(length / itemsPerPage) - 3,
+                  location
                 )
               }}
             >
               {' '}
-              {Math.ceil(props.cards.length / props.cardsPerPage) - 3}{' '}
+              {Math.ceil(length / itemsPerPage) - 3}{' '}
             </a>
           ) : (
             <a
@@ -233,10 +235,10 @@ const Pagination = props => {
               }}
             >
               {' '}
-              {props.page}{' '}
+              {page}{' '}
             </a>
           )
-        ) : props.page === 4 ? (
+        ) : page === 4 ? (
           <a
             className="pageButton"
             type="submit"
@@ -254,7 +256,7 @@ const Pagination = props => {
             className="pageButton"
             type="submit"
             onClick={() => {
-              props.goToPage(4, props.location)
+              props.goToPage(4, location)
             }}
           >
             {' '}
@@ -265,12 +267,12 @@ const Pagination = props => {
         ''
       )}
 
-      {Math.ceil(props.cards.length / props.cardsPerPage) >= 5 ? (
-        props.page > 4 ? (
-          props.page >
-          Math.ceil(props.cards.length / props.cardsPerPage) - 3 ? (
-            props.page ===
-            Math.ceil(props.cards.length / props.cardsPerPage) - 2 ? (
+      {Math.ceil(length / itemsPerPage) >= 5 ? (
+        page > 4 ? (
+          page >
+          Math.ceil(length / itemsPerPage) - 3 ? (
+            page ===
+            Math.ceil(length / itemsPerPage) - 2 ? (
               <a
                 className="pageButton"
                 type="submit"
@@ -281,7 +283,7 @@ const Pagination = props => {
                 }}
               >
                 {' '}
-                {Math.ceil(props.cards.length / props.cardsPerPage) - 2}{' '}
+                {Math.ceil(length / itemsPerPage) - 2}{' '}
               </a>
             ) : (
               <a
@@ -289,13 +291,13 @@ const Pagination = props => {
                 type="submit"
                 onClick={() => {
                   props.goToPage(
-                    Math.ceil(props.cards.length / props.cardsPerPage) - 2,
-                    props.location
+                    Math.ceil(length / itemsPerPage) - 2,
+                    location
                   )
                 }}
               >
                 {' '}
-                {Math.ceil(props.cards.length / props.cardsPerPage) - 2}{' '}
+                {Math.ceil(length / itemsPerPage) - 2}{' '}
               </a>
             )
           ) : (
@@ -303,11 +305,11 @@ const Pagination = props => {
               className="pageButton"
               type="submit"
               onClick={() => {
-                props.goToPage(props.page + 1, props.location)
+                props.goToPage(page + 1, location)
               }}
             >
               {' '}
-              {props.page + 1}{' '}
+              {page + 1}{' '}
             </a>
           )
         ) : (
@@ -315,7 +317,7 @@ const Pagination = props => {
             className="pageButton"
             type="submit"
             onClick={() => {
-              props.goToPage(5, props.location)
+              props.goToPage(5, location)
             }}
           >
             {' '}
@@ -326,12 +328,12 @@ const Pagination = props => {
         ''
       )}
 
-      {Math.ceil(props.cards.length / props.cardsPerPage) >= 6 ? (
-        props.page > 4 ? (
-          props.page >
-          Math.ceil(props.cards.length / props.cardsPerPage) - 3 ? (
-            props.page ===
-            Math.ceil(props.cards.length / props.cardsPerPage) - 1 ? (
+      {Math.ceil(length / itemsPerPage) >= 6 ? (
+        page > 4 ? (
+          page >
+          Math.ceil(length / itemsPerPage) - 3 ? (
+            page ===
+            Math.ceil(length / itemsPerPage) - 1 ? (
               <a
                 className="pageButton"
                 type="submit"
@@ -342,7 +344,7 @@ const Pagination = props => {
                 }}
               >
                 {' '}
-                {Math.ceil(props.cards.length / props.cardsPerPage) - 1}{' '}
+                {Math.ceil(length / itemsPerPage) - 1}{' '}
               </a>
             ) : (
               <a
@@ -350,13 +352,13 @@ const Pagination = props => {
                 type="submit"
                 onClick={() => {
                   props.goToPage(
-                    Math.ceil(props.cards.length / props.cardsPerPage) - 1,
-                    props.location
+                    Math.ceil(length / itemsPerPage) - 1,
+                    location
                   )
                 }}
               >
                 {' '}
-                {Math.ceil(props.cards.length / props.cardsPerPage) - 1}{' '}
+                {Math.ceil(length / itemsPerPage) - 1}{' '}
               </a>
             )
           ) : (
@@ -364,11 +366,11 @@ const Pagination = props => {
               className="pageButton"
               type="submit"
               onClick={() => {
-                props.goToPage(props.page + 2, props.location)
+                props.goToPage(page + 2, location)
               }}
             >
               {' '}
-              {props.page + 2}{' '}
+              {page + 2}{' '}
             </a>
           )
         ) : (
@@ -376,7 +378,7 @@ const Pagination = props => {
             className="pageButton"
             type="submit"
             onClick={() => {
-              props.goToPage(6, props.location)
+              props.goToPage(6, location)
             }}
           >
             {' '}
@@ -387,12 +389,12 @@ const Pagination = props => {
         ''
       )}
 
-      {Math.ceil(props.cards.length / props.cardsPerPage) >= 7 ? (
-        props.page > 4 ? (
-          props.page >
-          Math.ceil(props.cards.length / props.cardsPerPage) - 3 ? (
-            props.page ===
-            Math.ceil(props.cards.length / props.cardsPerPage) ? (
+      {Math.ceil(length / itemsPerPage) >= 7 ? (
+        page > 4 ? (
+          page >
+          Math.ceil(length / itemsPerPage) - 3 ? (
+            page ===
+            Math.ceil(length / itemsPerPage) ? (
               <a
                 className="pageButton"
                 type="submit"
@@ -403,7 +405,7 @@ const Pagination = props => {
                 }}
               >
                 {' '}
-                {Math.ceil(props.cards.length / props.cardsPerPage)}{' '}
+                {Math.ceil(length / itemsPerPage)}{' '}
               </a>
             ) : (
               <a
@@ -411,13 +413,13 @@ const Pagination = props => {
                 type="submit"
                 onClick={() => {
                   props.goToPage(
-                    Math.ceil(props.cards.length / props.cardsPerPage),
-                    props.location
+                    Math.ceil(length / itemsPerPage),
+                    location
                   )
                 }}
               >
                 {' '}
-                {Math.ceil(props.cards.length / props.cardsPerPage)}{' '}
+                {Math.ceil(length / itemsPerPage)}{' '}
               </a>
             )
           ) : (
@@ -425,11 +427,11 @@ const Pagination = props => {
               className="pageButton"
               type="submit"
               onClick={() => {
-                props.goToPage(props.page + 3, props.location)
+                props.goToPage(page + 3, location)
               }}
             >
               {' '}
-              {props.page + 3}{' '}
+              {page + 3}{' '}
             </a>
           )
         ) : (
@@ -437,7 +439,7 @@ const Pagination = props => {
             className="pageButton"
             type="submit"
             onClick={() => {
-              props.goToPage(7, props.location)
+              props.goToPage(7, location)
             }}
           >
             {' '}
@@ -448,13 +450,13 @@ const Pagination = props => {
         ''
       )}
 
-      {props.page !== Math.ceil(props.cards.length / props.cardsPerPage) &&
-      props.cards.length ? (
+      {page !== Math.ceil(length / itemsPerPage) &&
+      length ? (
         <a
           className="pageButton"
           type="submit"
           onClick={() => {
-            props.nextPage(props.location)
+            props.nextPage(location)
           }}
         >
           ▶
@@ -463,16 +465,16 @@ const Pagination = props => {
         ''
       )}
 
-      {props.page !== Math.ceil(props.cards.length / props.cardsPerPage) &&
-      props.cards.length ? (
+      {page !== Math.ceil(length / itemsPerPage) &&
+      length ? (
         <a
           className="pageButton"
           id="to-end"
           type="submit"
           onClick={() => {
             props.goToPage(
-              Math.ceil(props.cards.length / props.cardsPerPage),
-              props.location
+              Math.ceil(length / itemsPerPage),
+              location
             )
           }}
         />

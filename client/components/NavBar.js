@@ -2,19 +2,29 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import Logo from '../../public/images/logo.png'
 
-//Navbar
-
-const Navbar = () => (
+//NavBar
+const NavBar = () => (
   <div className="nav-bar">
-    <div id="logo">
-      <img src={Logo} />
-    </div>
-    <div id="title">
-      <Link to="/">
-        <h1 style={{color: 'white'}}>Card Database</h1>
+    <Link to="/">
+      <div id="logo">
+        <img src={Logo} />
+      </div>
+    </Link>
+    <div id="nav-menu">
+      <Link to="/cards/">
+        <h2 className="nav-item">CARDS</h2>
+      </Link>
+      <Link to="/decks/">
+        <h2 className="nav-item">DECKS</h2>
+      </Link>
+      <Link to="/events/">
+        <h2 className="nav-item">EVENTS</h2>
+      </Link>
+      <Link to="/formats/">
+        <h2 className="nav-item">FORMATS</h2>
       </Link>
     </div>
   </div>
 )
 
-export default Navbar
+export default NavBar

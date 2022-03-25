@@ -1,7 +1,6 @@
 'use strict'
 
 const db = require('../server/db')
-const {Card, Status} = require('../server/db/models')
 
 const seed = async () => {
   await db.sync()

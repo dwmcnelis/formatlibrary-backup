@@ -2,28 +2,89 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Card = db.define('card', {
-  image: {
+  name: {
+    type: Sequelize.TEXT,
+    unique: true,
+    allowNull: false
+  },
+  konamiCode: {
     type: Sequelize.TEXT,
     allowNull: true
   },
-  name: {
+  ypdId: {
     type: Sequelize.TEXT,
-    allowNull: false
+    allowNull: true
   },
-  card: {
-    type: Sequelize.TEXT,
+  tcgLegal: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true
+  },
+  ocgLegal: {
+    type: Sequelize.BOOLEAN,
     allowNull: true
   },
   category: {
     type: Sequelize.TEXT,
     allowNull: true
   },
-  class: {
+  icon: {
     type: Sequelize.TEXT,
     allowNull: true
   },
-  subclass: {
-    type: Sequelize.TEXT,
+  normal: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true
+  },
+  effect: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true
+  },
+  fusion: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true
+  },
+  ritual: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true
+  },
+  synchro: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true
+  }, 
+  xyz: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true
+  },
+  pendulum: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true
+  },
+  link: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true
+  },
+  flip: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true
+  },
+  gemini: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true
+  },
+  spirit: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true
+  },
+  toon: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true
+  },
+  tuner: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true
+  },
+  union: {
+    type: Sequelize.BOOLEAN,
     allowNull: true
   },
   attribute: {
@@ -38,22 +99,51 @@ const Card = db.define('card', {
     type: Sequelize.INTEGER,
     allowNull: true
   },
-  atk: {
+  rating: {
     type: Sequelize.INTEGER,
     allowNull: true
   },
-  def: {
+  arrows: {
+    type: Sequelize.TEXT,
+    allowNull: true
+  },
+  scale: {
     type: Sequelize.INTEGER,
+    allowNull: true
+  },
+  atk: {
+    type: Sequelize.TEXT,
+    allowNull: true
+  },
+  def: {
+    type: Sequelize.TEXT,
     allowNull: true
   },
   description: {
     type: Sequelize.TEXT,
     allowNull: true
   },
-  date: {
+  tcgDate: {
     type: Sequelize.TEXT,
+    allowNull: true
+  },
+  ocgDate: {
+    type: Sequelize.TEXT,
+    allowNull: true
+  },
+  color: {
+    type: Sequelize.TEXT,
+    allowNull: true
+  },
+  extraDeck: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true
+  },
+  sortPriority: {
+    type: Sequelize.INTEGER,
     allowNull: true
   }
 })
 
 module.exports = Card
+
