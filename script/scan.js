@@ -1,15 +1,15 @@
 'use strict'
 
-const axios = require('axios')
-const fs = require('fs')
-const { Card, Format, Set, Print } = require('../server/db/models')
-const ygoprodeck = require('../static/ygoprodeck.json')
-const sets = require('../static/sets.json')
-const { Op } = require('sequelize')
-const formats = require('../static/formats.json') 
-const discordformats = require('../static/discordformats.json') 
-const {capitalize} = require('../functions/utility')
-const { tcgPlayerAPI } = require('../secrets') 
+import axios from 'axios'
+import fs from 'fs'
+import { Card, Format, Set, Print } from  '../server/db/models'
+import ygoprodeck from  '../static/ygoprodeck.json'
+import sets from  '../static/sets.json'
+import { Op } from  'sequelize'
+import formats from  '../static/formats.json'
+import discordformats from  '../static/discordformats.json'
+import {capitalize} from '../functions/utility'
+import { tcgPlayerAPI } from  '../secrets'
 
 
 const countDuplicates = async () => {

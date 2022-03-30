@@ -1,6 +1,6 @@
 
 import React from 'react'
-const {camelize, urlize} = require('../../functions/utility')
+import {camelize, urlize} from '../../functions/utility'
 
 const PrintRow = (props) => {
   const { index, print } = props

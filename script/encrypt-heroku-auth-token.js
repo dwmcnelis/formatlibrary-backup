@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
-const {spawn} = require('child_process')
-const fs = require('fs')
+import {spawn} from 'child_process'
+import fs from 'fs'
 
-const axios = require('axios')
-const GitUrlParse = require('git-url-parse')
-const simpleGit = require('simple-git')()
-const YAML = require('yaml')
+import axios from 'axios'
+import GitUrlParse from 'git-url-parse'
+import simpleGit from 'simple-git'
+import YAML from 'yaml'
 
 /* Specific message contents stored as constants */
 
-const keyComments = require('./keyComments.json')
+import keyComments from './keyComments.json'
 
 const idempotenceMessage = `It appears that your token has been encrypted.
 To run this script again, delete the \`before_deploy\` and \`deploy\` keys

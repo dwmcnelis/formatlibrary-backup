@@ -1,7 +1,7 @@
 
 
-const formats = require('../static/formats.json')
-const { capitalize } = require('./utility.js')
+import * as formats from '../static/formats.json'
+import {capitalize} from './utility.js'
 
 const atkASC = (a, b) => {
     return b.atk - a.atk
@@ -147,7 +147,7 @@ const formatDESC = (a, b) => {
     return 0
 }
 
-module.exports = {
+export {
     atkASC,
     atkDESC,
     dateASC,

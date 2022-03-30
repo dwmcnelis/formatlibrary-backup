@@ -2,14 +2,14 @@
 
 const axios = require('axios')
 const fs = require('fs')
-const { Card, Deck, Format, Player, Print, Set, Status, Tournament } = require('../server/db/models')
+const { Card, Deck, DeckType, Format, Player, Print, Set, Status, Tournament } = require('../server/db/models')
 const ygoprodeck = require('../static/ygoprodeck.json')
 const sets = require('../static/sets.json')
 const { Op } = require('sequelize')
-const formats = require('../static/formats.json') 
-const discordformats = require('../static/discordformats.json') 
+const formats = require('../static/formats.json')
+const discordformats = require('../static/discordformats.json')
 const { capitalize, convertArrayToObject } = require('../functions/utility')
-const { challongeAPIKey, tcgPlayerAPI } = require('../secrets') 
+const { challongeAPIKey, tcgPlayerAPI } = require('../secrets')
 const { 
     accum, airbellum, alius, alo, angel, archer, archfiend, arma, artemis, barrel, bazoo, ben_kei, bfadd, bigbang, bigshield, blade, bls,
     boomboxen, brain, bribe, bushi, bwc, caius, canceller, cannon, cardd, cat, celfon, chariot, clown, codarus, coelacanth, coin, collapse, 
@@ -20,12 +20,12 @@ const {
     hugerev, icarus, insect, jdrag, jinzo, kalut, koala, kmdrago, kristya, lacooda, laquari, lastturn, lava, leftarm, leftleg, 
     life, lion, limiter, llab, lonefire, luminous, lv2, mali, manju, manticore, mask, mataza, mazera, meanae, mech, 
     megamorph, meta, mezuki, milus, mimic, miracle, mobius, mof, monk, moray, motr, natures, necrovalley, 
-    needle, nightass, oath, panda, pixie, poison, purity, pyrlight, quickdraw, raiza, rat, reasoning, recharge, redmd, 
+    needle, nightass, oath, panda, pandemonium, pixie, poison, purity, pyrlight, quickdraw, raiza, rat, reasoning, recharge, redmd, 
     rejuv, rekindling, relinq, remoten, reprod, rgadget, rightarm, rightleg, rivalry, rftdd, rml, rota, ryko, salvo, scapegoat, scarabs, sdm, 
     serpent, shallow, silent, sirocco, skull, slump, smackdown, smoke, solemn, solidarity, sorc, soulex, soulrel, 
-    spy, ssunited, stein, storm, strike, susa, swap, swapfrog, taiyou, tdrag, tethys, thanksgiving, thestalos, tiger, 
+    spy, ssunited, stein, storm, stealth, strike, susa, swap, swapfrog, taiyou, tdrag, tethys, thanksgiving, thestalos, tiger, 
     tomato, tooncannon, toonelf, tradein, treeborn, trio, trunade, tsuk, tuningware, turtle, underdog, valhalla, vayu, vrocket, 
-    whirlwind, wicked, wmc, worl, wyvern, xhead, ygadget, zanji, zombyra, zorc
+    whirlwind, wicked, will, wmc, wombat, worl, wyvern, xhead, ygadget, zanji, zombyra, zorc
 } = require('../static/cards.json')
 
 /*eslint-disable*/
@@ -68,7 +68,7 @@ const download = async () => {
 		if (err) console.log(err)
 	})
 
-	console.log(`Successfully imported the latest data from ygoprodeck.com.`)
+	console.log(`Successfully consted the latest data = require(ygoprodeck.com.`)
 }
 
 const images = async () => {
@@ -103,7 +103,7 @@ const images = async () => {
 		console.log(`${d.name} - ${success ? 'success' : 'FAIL'}`)
 	}
 
-	console.log(`Successfully imported high quality images for ${count} missing cards from YGOPRODeck.`)
+	console.log(`Successfully consted high quality images for ${count} missing cards = require(YGOPRODeck.`)
 }
 
 const deleteBetaIds = async () => {
@@ -1450,13 +1450,12 @@ const getDeckType = (raw, format = 'goat') => {
     const ydk = convertArrayToObject(arr)
 
     const deckType = format === 'goat' ? (
-            (ydk[collapse] >= 2 || ydk[insect] >= 2  || ydk[susa] >= 2 || ydk[toonelf] >= 2 || ydk[mazera] >= 2 || ydk[pixie] >= 2 || ydk[ecto] >= 2 || ydk[silent] >= 2 || ydk[skull] >= 2 || ydk[hugerev] >= 2 || ydk[necrovalley] >= 2 || ydk[smackdown] >= 2 || ydk[pyrlight] >= 2 || ydk[clown] >= 2 || ydk[coin] >= 2) ? 'other' :
-            (ydk[cat] >= 2  && (ydk[panda] >= 2 || ydk[milus] >= 2) && !ydk[stein] && (ydk[trunade] >= 2 || ydk[decree] >= 2)) ? 'cat otk' :
+            (ydk[collapse] >= 2 || ydk[insect] >= 2  || ydk[susa] >= 2 || ydk[toonelf] >= 2 || ydk[mazera] >= 2 || ydk[pixie] >= 2 || ydk[ecto] >= 2 || ydk[silent] >= 2 || ydk[skull] >= 2 || ydk[hugerev] >= 2 || ydk[pandemonium] >= 2 || ydk[smackdown] >= 2 || ydk[pyrlight] >= 2 || ydk[clown] >= 2 || ydk[coin] >= 2) ? 'other' :
+            (ydk[cat] >= 2 && ydk[will] >= 2 && (ydk[panda] >= 2 || ydk[milus] >= 2) && (ydk[trunade] >= 2 || ydk[decree] >= 2)) ? 'cat otk' :
             (ydk[cat] >= 2 && ydk[manticore] && ydk[wicked] >= 2) ? 'cat control' :
             (ydk[ben_kei] >= 2 && (ydk[trunade] >= 2 || ydk[decree] >= 2)) ? 'ben kei otk' :
             (ydk[stein] >= 2 && ydk[gate] >= 2) ? 'stein gate turbo' :
             (ydk[stein] >= 2 && (ydk[megamorph] >= 2 || ydk[natures] >= 2 || ydk[thanksgiving] >= 2) &&!ydk[cat] && (ydk[trunade] >= 2 || ydk[decree] >= 2)) ? 'stein otk' :
-            (ydk[cat] >= 2 && ydk[stein] >= 2 && (ydk[trunade] >= 2 || ydk[decree] >= 2)) ? 'cat stein otk' :
             (ydk[cyjar] && ydk[cardd] && ydk[taiyou] >= 2 && ydk[shallow] >= 2 && ydk[reprod] >= 2) ? 'empty jar' :
             (ydk[rml] >= 2 && ydk[oath] >= 2 && ydk[convulsion] >= 2 && ydk[trunade] >= 2) ? 'library ftk' :
             (ydk[exodia] && ydk[leftarm] && ydk[rightarm] && ydk[leftleg] && ydk[rightleg]) ? 'exodia' :
@@ -1484,7 +1483,7 @@ const getDeckType = (raw, format = 'goat') => {
             (ydk[archfiend] >= 2 && ydk[underdog] >= 2) ? 'vanilla beatdown' :
             ((ydk[zombyra] >= 2 || ydk[gorilla] >= 2 || ydk[goblin] >= 2 || ydk[fusi] >= 2 || ydk[sdm] >= 2 || ydk[archfiend] >= 2) && ydk[drain] >= 2) ? 'drain beatdown' :
             ((ydk[dda] >= 2 || ydk[rat] >= 2) && ydk[gigantes] >= 2 && !ydk[lacooda] && !ydk[scapegoat]) ? 'earth beatdown' :
-            ((ydk[llab] == 2 || ydk[gbind] == 2 || ydk[worl] >= 2) && !ydk[lacooda] && !ydk[scarabs] && (ydk[koala] >= 2 || ydk[barrel] >= 2 || ydk[desserts] >= 2 || ydk[wmc] >= 2 || ydk[lava] >= 2 || ydk[fire] >= 2)) ? 'stall burn' :
+            ((ydk[llab] == 2 || ydk[gbind] == 2 || ydk[worl] >= 2) && !ydk[panda] && !ydk[scarabs] && (ydk[wmc] >= 2 || ydk[lava] >= 2 || ydk[stealth] >= 2)) ? 'stall burn' :
             (ydk[tsuk] >= 2 && (ydk[lacooda] >= 2 || ydk[mask] >= 2 || ydk[mimic] >= 2) && ydk[solemn] >= 2 && !ydk[soulex] && !ydk[manju]) ? 'flip control' :
             (ydk[drain] >= 2 && !ydk[lacooda] && !ydk[scarabs] && (ydk[barrel] >= 2 || ydk[desserts] >= 2 || ydk[wmc] >= 2 || ydk[lava] >= 2)) ? 'drain burn' :
             (ydk[spy] >= 2 && ydk[necrovalley] >= 2 && (ydk[gkass] || ydk[gkspear])) ? 'gravekeeper' :
@@ -1495,8 +1494,9 @@ const getDeckType = (raw, format = 'goat') => {
             (ydk[bazoo] >= 2 && ydk[rftdd]) ? 'bazoo return' :
             (ydk[canceller] >= 2 && ydk[solemn] >= 2) ? 'canceller stun' :
             (ydk[tiger] >= 2 && ydk[solemn] >= 2) ? 'tiger stun' :
-            (ydk[meta] &&  ydk[scapegoat] && (ydk[wmc] >= 2 || ydk[lava] >= 2 || ydk[trio] >= 2)) ? 'goat burn' :
-            ((ydk[panda] >= 2 || ydk[mataza] >= 2) && (ydk[koala] >= 2 || ydk[spy] >= 2) && ydk[storm]) ? 'aggro bomb' :
+            (ydk[meta] &&  ydk[scapegoat] && (ydk[wmc] >= 2 || ydk[lava] >= 2 || ydk[trio] >= 2 || ydk[stealth] >= 2)) ? 'goat burn' :
+            (ydk[panda] >= 2 && ydk[rat] >= 2 && ydk[trio] >= 2) ? 'panda burn' :
+            (ydk[mataza] >= 2 && (ydk[koala] >= 2 || ydk[spy] >= 2) && ydk[storm]) ? 'mataza burn' :
             ((!ydk[llab] || ydk[llab] <= 1) && (!ydk[gbind] || ydk[gbind] <= 1) && (!ydk[worl] || ydk[worl] <= 1) && (ydk[koala] >= 2 || ydk[bigshield] >= 2) && (ydk[barrel] >= 2 || ydk[fire] >= 2 || ydk[poison] >= 2)) ? 'speed burn' :
             (ydk[sorc] >= 2 && ydk[tomato] && ydk[angel] && !ydk[scapegoat] && !ydk[meta]) ? 'chaos recruiter' :
             (ydk[sorc] && ydk[rota] && ydk[solemn] >= 2) ? 'chaos warrior' :
@@ -1532,7 +1532,7 @@ const getDeckType = (raw, format = 'goat') => {
             (ydk[dandy] >= 2  && ydk[quickdraw] && ydk[firedog] >= 2 && ydk[rekindling] >= 2) ? 'flamvell quickdraw' :
             (ydk[quickdraw] >= 2 && ydk[tuningware] >= 2 && ydk[duplication] >= 2) ? 'quickdraw machine' :
             (ydk[quickdraw] >= 2 && ydk[gobzomb] && ydk[mezuki]) ? 'quickdraw zombie' :
-            (ydk[gobzomb] >= 2 && ydk[turtle] && ydk[mezuki] && ydk[life] && !ydk[quickdraw]) ? 'quickdraw zombie' :
+            (ydk[gobzomb] >= 2 && ydk[turtle] && ydk[mezuki] && ydk[life] && !ydk[quickdraw]) ? 'zombie' :
             (ydk[gotss] >= 2 && ydk[zanji] >= 2 && ydk[gateway] >= 2 && ydk[ssunited] >= 2) ? 'six samurai' :
             (ydk[cat] && ydk[monk] && ydk[airbellum] >= 2 && ydk[spy] >= 2) ? 'synchro cat' :
             (ydk[sorc] && ydk[dad] && ydk[recharge] >= 2 && !ydk[jdrag]) ? 'chaos lightsworn' :
@@ -1554,142 +1554,215 @@ const getDeckType = (raw, format = 'goat') => {
 
 //GET DECK CATEGORY
 const getDeckCategory = (deckType) => {
-    return (deckType === 'aggro bomb' ||
+    return (
+        deckType.includes('aggro') ||
+        deckType.includes('beat') ||
+        deckType.includes('stun') ||
+        deckType === 'aggro bomb' ||
         deckType === 'bazoo return' ||
         deckType === 'blackwing' ||
-        deckType === 'canceller stun' ||
         deckType === 'chaos recruiter' ||
         deckType === 'chaos return' ||
         deckType === 'chaos warrior' ||
         deckType === 'dark scorpion' ||
-        deckType === 'drain beatdown' ||
-        deckType === 'earth beatdown' ||
-        deckType === 'emissary beatdown' ||
+        deckType === 'flamvell' ||
         deckType === 'gladiator beast' ||
         deckType === 'gearfried' ||
         deckType === 'gravekeeper' ||
-        deckType === 'hero beatdown' ||
-        deckType === 'light beatdown' ||
-        deckType === 'quickdraw plant' ||
+        deckType === 'lightsworn' ||
         deckType === 'machina' ||
+        deckType === 'machina gadget' ||
         deckType === 'machine' ||
+        deckType === 'mataza burn' ||
+        deckType === 'panda burn' ||
         deckType === 'six samurai' ||
         deckType === 'strike ninja' ||
-        deckType === 'tiger stun' ||
-        deckType === 'vanilla beatdown' ||
         deckType === 'warrior' ||
-        deckType === 'zombie') ? 'aggro'
-        : (deckType === 'counter fairy' ||
+        deckType === 'zombie'
+    ) ? 'aggro' : ( 
+        deckType.includes('stall') ||
+        deckType.includes('deckout') ||
+        deckType === 'counter fairy' ||
         deckType === 'drain burn' ||
         deckType === 'final countdown' ||
         deckType === 'goat burn' ||
+        deckType === 'gravekeeper' ||
         deckType === 'pacman' ||
         deckType === 'stall burn' ||
-        deckType === 'stall deckout') ? 'lockdown'
-        : (deckType === 'ben kei otk' ||
-        deckType === 'cat otk' ||
+        deckType === 'stall deckout'
+    ) ? 'lockdown' : (
+        deckType.includes('ftk') ||
+        deckType.includes('otk') ||
         deckType === 'chain burn' ||
         deckType === 'dimension fusion turbo' ||
         deckType === 'dragon turbo' ||
-        deckType === 'economics ftk' ||
         deckType === 'empty jar' ||
         deckType === 'exodia' ||
         deckType === 'fairy turbo' ||
-        deckType === 'fish otk' ||
         deckType === 'fusion gate turbo' ||
         deckType === 'horus turbo' ||
         deckType === 'last turn' ||
-        deckType === 'library ftk' ||
+        deckType === 'morphtronic' ||
         deckType === 'reasoning gate turbo' ||
         deckType === 'speed burn' ||
-        deckType === 'stein cat otk' ||
         deckType === 'stein gate turbo' ||
-        deckType === 'stein otk' ||
-        deckType === 'x-saber') ? 'combo'
-        : (deckType === 'cat control' || 
-        deckType === 'chaos control' ||
+        deckType === 'x-saber' ||
+        deckType === 'zorc'
+    ) ? 'combo' : (
+        deckType.includes('control') || 
         deckType === 'chaos turbo' ||
         deckType === 'diva frog' ||
         deckType === 'diva hero' ||
-        deckType === 'emissary control' ||
-        deckType === 'fairy control' ||
-        deckType === 'flip control' ||
         deckType === 'frog monarch' ||
-        deckType === 'goat control' ||
         deckType === 'heavy slump' ||
-        deckType === 'horus control' ||
         deckType === 'monarch' ||
+        deckType === 'plant' ||
         deckType === 'quickdraw plant' ||
         deckType === 'quickdraw zombie' ||
         deckType === 'relinquished' ||
-        deckType === 'soul control' ||
+        deckType === 'salvo dad' ||
         deckType === 'vayu turbo' ||
-        deckType === 'volcanic quickdraw' ||
-        deckType === 'zorc') ? 'control'
-        : 'other'
+        deckType === 'volcanic quickdraw'
+    ) ? 'control' : 'other'
 }
 
-const createDecks = async (name) => {
+const createDecks = async (name, format, community, useTags = true) => {
     try {
-        const tournament = await Tournament.findOne({ where: { name, state: 'complete' }})
-        if (!tournament) return console.log(`no tournament named: ${name}`)
+        let tournament = await Tournament.findOne({ where: { name, state: 'complete' }})
+        if (!tournament) {
+            console.log(`no tournament named: ${name}`)
+            const {data} = await axios.get(`https://formatlibrary:${challongeAPIKey}@api.challonge.com/v1/tournaments/${name}.json`)
+            if (!data) return console.log(`no tournament with url: challonge.com/${name}`)
+            tournament = await Tournament.create({
+                name,
+                id: data.tournament.id.toString(),
+                url: name,
+                format: format,
+                type: 'double elimination',
+                state: 'complete',
+                guildId: '414551319031054346',
+                worlds: false,
+                rounds: 0,
+                createdAt: `${data.tournament.started_at.slice(0, 10)} ${data.tournament.started_at.slice(11, 26)}`,
+                updatedAt: `${data.tournament.started_at.slice(0, 10)} ${data.tournament.started_at.slice(11, 26)}`
+            })
+            console.log('created tournament')
+        }
+
         const players = await Player.findAll({ where: { tag: {[Op.not]: null } }})
-        const shortenedTags = players.map((p) => p.tag.replace(/[^\ws]/gi, "_").replace(/ /g,''))
+        const shortenedTags = useTags ? players.map((p) => p.tag.replace(/\s/gi, '_').replace(/[^\w\s]/gi, '_')) :
+                                        players.map((p) => p.name.replace(/[^$-_?.!\w\s]/gi, '_'))
         const res = await axios.get(`https://formatlibrary:${challongeAPIKey}@api.challonge.com/v1/tournaments/${tournament.id}.json`)
         if (!res) return console.log(`no tournamentId: ${tournament.id}`)
         const size = res.data.tournament.participants_count
         const createdAt = `${res.data.tournament.started_at.slice(0, 10)} ${res.data.tournament.started_at.slice(11, 26)}`
         const { data } = await axios.get(`https://formatlibrary:${challongeAPIKey}@api.challonge.com/v1/tournaments/${tournament.id}/participants.json`)
-        if (!data) return console.log(`no participants from tournamentId: ${tournament.id}`)
+        if (!data) return console.log(`no participants = require(tournamentId: ${tournament.id}`)
         const participants = data.map((d) => d.participant.name)
+        console.log('participants', participants)
+        console.log('shortenedTags', shortenedTags)
 
         fs.readdir(`./public/decks/${name}/`, async (err, files) => {
             if (err) {
                 console.log(err)
             } else {
                 files.forEach(async (file) => {
-                    const query = file.slice(0, -4)
+                    let query = file.slice(0, -4)
+                    // if (query === 'noahmowdy985') query = 'ChainStrike'
+                    // if (query === 'jinzodude9') query = 'Jinzodude9'
+                    // if (query === 'funky5') query = 'funky'
+                    // if (query === 'TomasBoss15y tjkorol') query = 'TomasBoss15y DB TomasBoss15y'
+                    // if (query === 'TheWayfarer') query = 'Wayfarer'
+                    // if (query === 'Phei') query = 'Fibi'
+                    // if (query === 'Kuru') query = '____'
+                    // if (query === 'I SLASH U 1N 2') query = 'mwnhydropump'
+                    // if (query === 'GualterusdeCastellione') query = 'GdCastell'
+                    // if (query === 'Forever') query = 'DGzForever'
+                    // if (query === 'brahimpoke') query = 'brahimtrish'
+                    // if (query === 'IAMZ1') query = 'Sohaib _DB _ IAMZ1_'
+                    // if (query === 'boymoding xenohospitality') query = 'SQUARE THEORY WAS A GOOD IDEA'
+
+                    // if (query.includes('to0fresh')) query = 'to0fresh_3550'
+                    // if (query === 'Rask_2225') query = 'Berndig_2225'
+                    // if (query === 'Blave_2824') query = 'youngsexymf_0357'
+                    // if (query === '3rdrateduelist_6321') query = '3rdrateduelist202_6321'
+                    // if (query === 'Asphyxiate_____1740') query = 'Asphy_____1740'
+                    // if (query === 'Maru_6853') query = 'Ma_Roo_6853'
+                    // if (query === 'Rask_2225') query = 'Berndig_2225'
+                    // if (query === 'Tt_5322') query = 'SyrupNSprite_5322'
+                    // if (query === 'niceboy_7567') query = 'LudovicoRizzo_7567'
+                    // if (query === 'hirahime_9380') query = 'Hira_3662'
+                    
+                    // if (query === 'IAMZ1_5635') query = 'Sohaib_DB_IAMZ1__5635'
+                    // if (query === 'Randage_8521') query = 'Randage_0001'
+                    // if (query === 'brahimpoke_3361') query = 'brahimtrish_3361'
                     const i = shortenedTags.indexOf(query)
                     if (i === -1) {
-                        console.log(`no index found for file: ${file}, query: ${query}`)
+                        console.log(`no Player found with the Discord tag: ${query}`)
                     } else {
                         const player = players[i]
-                        const j = participants.indexOf(player.name)
+                        let pname = player.name
+                        // if (pname === 'young sexy mf') pname = 'Blave'
+                        // if (pname === 'SQUARE THEORY WAS A GOOD IDEA') pname = 'boymoding xenohospitality'
+                        // if (pname === 'Ludovico Rizzo') pname = 'nice boy'
+                        // if (pname === 'Hira') pname = 'hirahime'
+                        // if (pname === 'SyrupNSprite') pname = 'Tt'
+                        // if (pname === 'Ma-Roo') pname = 'Maru'
+                        // if (pname === 'Asphy 蘇生する') pname = 'Asphyxiate 蘇生する'
+                        // if (pname === '3rdrateduelist202') pname = '3rdrateduelist'
+                        // if (pname === 'Berndig') pname = 'Rask'
+                        // if (pname === 'brahimtrish') pname = 'brahimpoke'
+                        // if (pname === 'to0fresh') pname = `Saad R/to0fresh`
+                        // if (pname === 'Sohaib (DB = IAMZ1)') pname = `IAMZ1`
+                        const j = participants.indexOf(pname)
                         if (j === -1) {
-                            console.log(`no index found for participant: ${player.name}`)
+                            console.log(`no Challonge Participant found for the player: ${pname}`)
                         } else {
-                            const participant = data[j].participant
-                            const placement = parseInt(participant.final_rank, 10)
-                            const raw = fs.readFileSync(`./public/decks/${name}/${file}`, 'utf8')
-                            const deckType = getDeckType(raw, tournament.format)
-                            const deckCategory = getDeckCategory(deckType)
-                            const display = (size < 40 && placement <= 4) ||
-                                            (size >= 40 && placement <= 8) ||
-                                            (size >= 80 && placement <= 16) ||
-                                            (size >= 160 && placement <= 32) ||
-                                            false
-
-                            const community = (tournament.name.startsWith('FLC') || tournament.name.startsWith('YRS') || tournament.name.startsWith('ACS') || tournament.name.startsWith('DDS') || tournament.name.startsWith('KGP')) ? 'Format Library' :
-                                (tournament.name.startsWith('GFC') || tournament.name.startsWith('Goat Format Championship')) ? 'GoatFormat.com' :
-                                null
-
-                            await Deck.create({
-                                name: deckType,
-                                deckType: deckType,
-                                deckCategory: deckCategory,
-                                builder: player.name,
-                                format: tournament.format,
-                                ydk: raw,
-                                placement: placement,
-                                event: tournament.name,
-                                display: display,
-                                playerId: player.id,
-                                community: community,
-                                tournamentId: tournament.id,
-                                createdAt: createdAt
+                            const count = await Deck.count({
+                                where: {
+                                    builder: player.name,
+                                    event: tournament.name
+                                }
                             })
 
-                            console.log('created Deck')
+                            if (!count) {
+                                const participant = data[j].participant
+                                const placement = parseInt(participant.final_rank, 10)
+                                const raw = fs.readFileSync(`./public/decks/${name}/${file}`, 'utf8')
+                                const deckType = getDeckType(raw, tournament.format)
+                                const deckCategory = getDeckCategory(deckType)
+                                const display = (size <= 8 && placement === 1) ||
+                                                (size > 8 && size <= 16 && placement <= 2) ||
+                                                (size > 16 && size <= 24 && placement <= 3) ||
+                                                (size > 24 && size <= 32 && placement <= 4) ||
+                                                (size > 32 && size <= 48 && placement <= 6) ||
+                                                (size > 48 && size <= 64 && placement <= 8) ||
+                                                (size > 64 && size <= 96 && placement <= 12) ||
+                                                (size > 96 && size <= 128 && placement <= 16) ||
+                                                (size > 128 && size <= 224 && placement <= 24) ||
+                                                (size > 224 && placement <= 32) ||
+                                                false
+
+                                await Deck.create({
+                                    name: deckType,
+                                    deckType: deckType,
+                                    deckCategory: deckCategory,
+                                    builder: player.name,
+                                    format: tournament.format,
+                                    ydk: raw,
+                                    placement: placement,
+                                    event: tournament.name,
+                                    display: display,
+                                    playerId: player.id,
+                                    community: community,
+                                    tournamentId: tournament.id,
+                                    createdAt: createdAt
+                                })
+    
+                                console.log('created Deck')
+                            } else {
+                                console.log(`already have ${player.name}'s deck for ${tournament.name}`)
+                            }
                         }
                     }
                 })
@@ -1700,24 +1773,53 @@ const createDecks = async (name) => {
     }
 } 
 
-const addFL = async () => {
-    const decks = await Deck.findAll({
-        where: {
-            event: {[Op.startsWith]: 'RBET'}
-        }
-    })
-
+const makeDeckTypes = async () => {
+    const decks = await Deck.findAll()
+    let x = 0
     for (let i = 0; i < decks.length; i++) {
         const deck = decks[i]
-        deck.community = 'Format Library'
-        await deck.save()
-        if (deck.placement < 16) {
-            deck.display = true
+        const count = await DeckType.count({
+            where: {
+                name: deck.deckType,
+                format: deck.format
+            }
+        })
+
+        if (count) continue
+        await DeckType.create({
+            name: deck.deckType,
+            category: deck.deckCategory,
+            format: deck.format
+        })
+        x++
+    }
+
+    return console.log(`created ${x} deckTypes`)
+}
+
+const updateDeckTypes = async () => {
+    try {
+        const decks = await Deck.findAll()
+        for (let i = 0; i < decks.length; i++) {
+            const deck = decks[i]
+            const updatedDeckType = getDeckType(deck.ydk, deck.format)
+            console.log('updatedDeckType', updatedDeckType)
+            if (updatedDeckType === 'other') continue
+            const updatedDeckCategory = getDeckCategory(updatedDeckType)
+            if (updatedDeckType === deck.deckType && updatedDeckCategory === deck.deckCategory) continue
+            deck.deckType = updatedDeckType
+            deck.deckCategory = updatedDeckCategory
             await deck.save()
+            console.log('updated Deck')
         }
+    } catch (err) {
+        console.log(err)
     }
 }
 
+updateDeckTypes()
+// makeDeckTypes()
+// createDecks('RBET02', 'edison', 'Format Library', true)
 // download()
 // images()
 // print()
@@ -1755,7 +1857,3 @@ const addFL = async () => {
 // purgeExactDuplicates()
 // fixGhosts()
 // addCardDetails()
-addFL()
-//createDecks('FLC22')
-//createDecks('FLC23')
-//createDecks('RBET01')

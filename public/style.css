@@ -59,6 +59,11 @@ table {
   border-bottom: 2px solid #6d6f8a;
 }
 
+#leaderboard-table thead {
+  display: table-header-group;
+  border-bottom: 2px solid #6d6f8a;
+}
+
 th,
 td,
 tr {
@@ -77,11 +82,22 @@ h1 {
   display: inline-block;
   background-repeat: no-repeat;
   min-height: 80px;
-  min-width: 80px;
+  min-width: 96px;
   vertical-align: middle;
   background-size: 76px;
   background-position: center;
   background-image: url('./favicon.ico');
+}
+
+.discord-logo {
+  display: inline-block;
+  background-repeat: no-repeat;
+  min-height: 76px;
+  min-width: 76px;
+  vertical-align: middle;
+  background-size: 68px;
+  background-position: center;
+  background-image: url('./images/discord.png');
 }
 
 .logo {
@@ -121,12 +137,32 @@ h1 {
   background-color: black;
 }
 
-#flexbox {
+.format-icon-flexbox {
   display: flex;
-  align-items: center;
+  align-items: top;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
+  width: 84%;
+  margin-left: auto;
+  margin-right: auto;
   padding: 10px;
+}
+
+.format-icon-large {
+  height: 176px;
+  width: 176px;
+  border: 10px ridge #bf9c60;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.format-text h1, .format-text h2, .format-text p {
+  text-align: left;
+}
+
+.format-desc {
+  width: 700px;
+  font-size: 12pt;
 }
 
 #galleryFlexBox {
@@ -172,52 +208,36 @@ h1 {
 }
 
 .banlist-bubble {
-  margin: 0px 10%;
-  padding: 20px 0px;
-  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
 }
 
 .banlist-bubble#forbidden {
-  border: 5px solid #b30000;
+  width: 760px;
+  border: solid #b30000;
+  border-width: 5px 0px;
   background-color: #ffe6e6;
+  padding: 10px 0px;
+  margin-bottom: 5px;
 }
 
 .banlist-bubble#limited {
-  border: 5px solid #cc7a00;
+  width: 760px;
+  border: solid #cc7a00;
+  border-width: 5px 0px;
   background-color: #fff5e6;
+  padding: 10px 0px;
+  margin-bottom: 5px;
 }
 
 .banlist-bubble#semi-limited {
-  border: 5px solid #ffbf00;
+  width: 760px;
+  border: solid #ffbf00;
+  border-width: 5px 0px;
   background-color: #ffffe6;
-}
-
-.banlist-category {
-  font-size: 24px;
-  font-weight: bold;
-  position: static;
-  padding: 0px 0px 2px 5%;
-}
-
-.banlist-bubble {
-  margin: 0px 10%;
-  padding: 20px 0px;
-  border-radius: 10px;
-}
-
-.banlist-bubble#forbidden {
-  border: 5px solid #b30000;
-  background-color: #ffe6e6;
-}
-
-.banlist-bubble#limited {
-  border: 5px solid #cc7a00;
-  background-color: #fff5e6;
-}
-
-.banlist-bubble#semi-limited {
-  border: 5px solid #ffbf00;
-  background-color: #ffffe6;
+  padding: 10px 0px;
+  margin-bottom: 5px;
 }
 
 .banlist-category {
@@ -228,12 +248,13 @@ h1 {
 }
 
 .banlist-flex-box {
-  padding: 0% 5%;
+  padding: 0px 10px;
+  max-width: 800px;
   display: flex;
   flex-wrap: wrap;
-  align-items: left;
-  flex-direction: row;
+  align-items: center;
   justify-content: left;
+  flex-direction: row;
 }
 
 .deck-bubble {
@@ -276,6 +297,43 @@ h1 {
   align-items: center;
   justify-content: left;
   flex-direction: row;
+}
+
+.popular-decks-flex-box {
+  display: flex;
+  max-width: 1100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.deckThumbnail-flex-box {
+  padding: 3px 6px;
+  margin: 0px 10px 20px;
+  max-height: 120px;
+  max-width: 330px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: left;
+  flex-direction: row;
+  border-top: 4px solid black;
+  border-bottom: 4px solid black;
+  border-radius: 4px;
+  background-image: url('./images/duelingbook.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.deckThumbnail-image {
+  width: 100px;
+  margin: 0px 3px;
+  border: 1px solid white;
 }
 
 #slider {
@@ -326,6 +384,24 @@ h1 {
 }
 
 .footer-item:hover {
+  color: rgb(209, 156, 70);
+}
+
+.discord-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+}
+
+.discord-desc {
+  color: white;
+  padding: 0px;
+  margin: 6px 0px;
+}
+
+.discord-desc:hover {
   color: rgb(209, 156, 70);
 }
 
@@ -521,11 +597,32 @@ h1 {
   vertical-align: middle;
 }
 
+.format-icon {
+  display: inline-block;
+  padding: 14px 6px 6px 54px;
+  height: 64px;
+  width: 64px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-position: 2px;
+  background-size: 64px;
+  vertical-align: middle;
+}
+
 .format-button {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.format-link:hover {
+  cursor: pointer;
+  /* text-shadow: 0 0 2em rgba(255, 255, 255, 1); */
+  color: white;
+  background-color: #41474f;
+  /* font-weight: 800; */
 }
 
 .format-cell {
@@ -535,7 +632,7 @@ h1 {
   align-items: center;
 }
 
-.event-cell {
+.event-cell, .medal-cell {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -627,6 +724,28 @@ h1 {
   width: 760px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.divider {
+  width: 90%;
+  border-top: 1px solid #9ba9cc;
+  margin: 10px auto;
+}
+
+.popular-decks, .leaderboard, .banlist {
+  padding: 20px 0px;
+}
+
+.leaderboard-title-flex-box {
+  padding: 0px 20px;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  width: 640px;
+  justify-content: space-between;
+  align-items: center;
+  vertical-align: middle;
+  text-align: center;
 }
 
 .single-deck-title {
@@ -728,6 +847,7 @@ h1 {
 }
 
 .odd-search-results-row {
+  text-align: center;
   display: table-row;
   color: black;
   background-color: #FFFFFF;
@@ -735,6 +855,7 @@ h1 {
 }
 
 .even-search-results-row {
+  text-align: center;
   display: table-row;
   color: black;
   background-color: #F7FAFC;
@@ -1185,8 +1306,7 @@ h1 {
 .attributeButton:hover,
 .typeButton:hover,
 .iconButton:hover,
-.monsterButton:hover,
-.format-link:hover {
+.monsterButton:hover {
   cursor: pointer;
   text-shadow: 0 0 2em rgba(255, 255, 255, 1);
   color: black;
@@ -1439,6 +1559,22 @@ select option {
 #deck-table {
   display: table;
   min-width: 90%;
+  border-top: 2px;
+  border-bottom: 2px;
+  border-left: 0px;
+  border-right: 0px;
+  border-style: solid;
+  border-color: #565769;
+  margin-bottom: 5px;
+  vertical-align: middle;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+#leaderboard-table {
+  display: table;
+  width: 760px;
   border-top: 2px;
   border-bottom: 2px;
   border-left: 0px;

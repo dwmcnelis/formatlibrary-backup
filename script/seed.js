@@ -1,6 +1,6 @@
 'use strict'
 
-const db = require('../server/db')
+import db from '../server/db'
 
 const seed = async () => {
   await db.sync()

@@ -165,7 +165,7 @@ const DeckTable = (props) => {
   useEffect(() => {
     if (!firstXFetched) {
       const fetchData = async () => {
-        const {data} = await axios.get(`/api/decks/first/10`)
+        const {data} = await axios.get(`/api/decks/first/12`)
         setDecks(data)
         setFirstXFetched(true)
       } 

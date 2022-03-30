@@ -1,11 +1,46 @@
+
 const router = require('express').Router()
-const {Card, Deck, Player} = require('../db/models')
+const {Card, Deck, DeckType, Player} = require('../db/models')
 const {capitalize, ordinalize} = require('../../functions/utility')
 const {Op} = require('sequelize')
-const {Blob} = require('buffer')
-
 
 module.exports = router
+
+/* eslint-disable complexity */
+router.get('/popular/:format', async (req, res, next) => {
+    try {
+        const decks = await Deck.findAll({ 
+            where: {
+                format: req.params.format.toLowerCase(),
+                deckType: {[Op.not]: 'other'} 
+            }
+        })
+
+        if (!decks.length) return false
+        
+        const freqs = decks.reduce((acc, curr) => (acc[curr.deckType] ? acc[curr.deckType]++ : acc[curr.deckType] = 1, acc), {})
+        const arr = Object.entries(freqs).sort((a, b) => b[1] - a[1]).map((e) => e[0]).slice(0, 6)
+
+        const data = []
+
+        for (let i = 0; i < arr.length; i++) {
+            const name = arr[i]
+            const deckType = await DeckType.findOne({
+                where: {
+                    name: name,
+                    format: req.params.format.toLowerCase()
+                }
+            })
+
+            if (!deckType) continue
+            data.push(deckType)
+        }
+
+        res.json(data)
+    } catch (err) {
+        next(err)
+    }
+})
 
 /* eslint-disable complexity */
 router.get('/like/:id', async (req, res, next) => {
@@ -49,11 +84,11 @@ router.get('/download/:id', async (req, res, next) => {
 router.get('/all', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
-            where: { display: true },
-            limit: req.params.x,
-            order: [["createdAt", "DESC"], ["placement", "ASC"]],
+            // where: { display: true },
+            order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
             include: Player
         })
+
         const data = []
         for (let i = 0 ; i < decks.length; i++) {
             const deck = decks[i]
@@ -100,7 +135,7 @@ router.get('/some', async (req, res, next) => {
     try {
       const filters = { 
             createdAt: { [Op.lte]: date },
-            display: true
+            // display: true
       }
 
       if (event) filters.event = { [Op.iLike]: `%${event}%` }
@@ -111,7 +146,7 @@ router.get('/some', async (req, res, next) => {
       
       const decks = await Deck.findAll({
         where: filters,
-        order: [["createdAt", "DESC"], ["placement", "ASC"]]
+        order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]]
       })
 
       const data = []
@@ -157,10 +192,11 @@ router.get('/first/:x', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
             where: { display: true },
+            order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
             limit: req.params.x, 
-            order: [["createdAt", "DESC"], ["placement", "ASC"]],
             include: Player 
         })
+
         const data = []
         for (let i = 0 ; i < decks.length; i++) {
             const deck = decks[i]

@@ -54,7 +54,7 @@ const Home = () => {
                   views={bp.views}
                   rating={bp.rating}
                 />
-        }) : '404 Not Found.'
+        }) : ''
       }
     </div>
   )

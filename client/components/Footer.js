@@ -4,9 +4,12 @@ import {Link} from 'react-router-dom'
 //Footer
 const Footer = () => (
   <div className="footer">
-    <Link to="/">
-      <div className="footer-logo"/>
-    </Link>
+    <a href="https://discord.com/invite/formatlibrary">
+      <div className="discord-link">
+          <div className="discord-logo"/>
+          <p className="discord-desc">Join our Discord!</p>
+      </div>
+    </a>
     <div>
         <div id="footer-menu">
           <Link to="/cards/">
@@ -24,6 +27,9 @@ const Footer = () => (
         </div>
         <p className="disclaimer">Format Libray is a public resource for learning about the Yu-Gi-Oh! Trading Card Game and its history. Trademarked artwork and card text is used for informational purposes under U.S. fair use copyright policy. Not affiliated with 4K Media or Konami Digital Entertainment.</p>
     </div>
+    <Link to="/">
+      <div className="footer-logo"/>
+    </Link>
   </div>
 )
 

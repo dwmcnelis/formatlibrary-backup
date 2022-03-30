@@ -1,6 +1,6 @@
 import React from 'react'
 import {Route, Switch} from 'react-router-dom'
-import {BanList, FormatMenu, CardTable, SingleDeck, DeckTable, Home, SingleCard} from './components'
+import {FormatIntro, FormatMenu, CardTable, SingleDeck, DeckTable, Home, SingleCard} from './components'
 
 const Routes = () => {
   return (
@@ -12,7 +12,7 @@ const Routes = () => {
       <Route exact path="/cards/" component={CardTable} />
       <Route path="/cards/:id" component={SingleCard} />
       <Route exact path="/formats/" component={FormatMenu} />
-      <Route path="/formats/:id" component={BanList} />
+      <Route path="/formats/:id" component={FormatIntro} />
     </Switch>
   )
 }

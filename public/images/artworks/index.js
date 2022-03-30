@@ -55,8 +55,40 @@ import Trooper from './trooper.jpg'
 import Tuning from './tuning.jpg'
 import VLord from './vlord.jpg'
 import Yata from './yata.jpg'
+import Blade from './blade.jpg'
+import Don from './don.jpg'
+import RotA from './rota.jpg'
+import TER from './ter.jpg'
+import Goat from './goat.jpg'
+import AKP from './akp.jpg'
+import Deko from './deko.jpg'
+import Diva from './diva.jpg'
+import Grepher from './grepher.jpg'
+import Zero from './zero.jpg'
+import ArmorMaster from './armormaster.jpg'
+import Kalut from './kalut.jpg'
+import Whirlwind from './whirlwind.jpg'
+import Shura from './shura.jpg'
+import Vayu from './vayu.jpg'
+import Stratos from './stratos.jpg'
 
 export {
+    Diva,
+    Stratos,
+    Grepher,
+    Zero,
+    ArmorMaster,
+    Kalut,
+    Whirlwind,
+    Shura,
+    Vayu,
+    Blade,
+    Don,
+    RotA,
+    TER,
+    Goat,
+    AKP,
+    Deko,
     ABC,
     Altair,
     Bear,

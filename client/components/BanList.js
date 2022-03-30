@@ -1,25 +1,18 @@
 /* eslint-disable max-statements */
 
-import React, { useState, useEffect, useLayoutEffect } from 'react'
-import NavBar from './NavBar'
+import React, { useState, useEffect } from 'react'
 import CardImage from './CardImage'
 import axios from 'axios'
-//import * as artworks from '../../public/images/artworks'
 
-const BanList = (props = {}) => {
+const BanList = (props) => {
   const [banlist, setBanlist] = useState(null)
-  // const [format, setFormat] = useState(null)
-  // const [event, setEvent] = useState(null)
-  // const [logo, setLogo] = useState(null)
-
-  // USE LAYOUT EFFECT
-  useLayoutEffect(() => window.scrollTo(0, 0))
+  const {format} = props
 
   // USE EFFECT SET CARD
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const {data} = await axios.get(`/api/banlists/${props.match.params.id}`)
+        const {data} = await axios.get(`/api/banlists/${format.banlist}`)
         return setBanlist(data)
       } catch (err) {
         console.log(err)
@@ -32,7 +25,7 @@ const BanList = (props = {}) => {
   if (!banlist) return <div />
   const { forbidden, limited, semiLimited } = banlist
 
-/* eslint-disable complexity */
+/* eslint-disable */
 const convertToTitle = (param) => {
     const abbrev = param.slice(0, 3)
     const month = abbrev === 'jan' ? 'January' :
@@ -52,11 +45,11 @@ const convertToTitle = (param) => {
     return `${month} ${year}`
   }
 
-  const date = convertToTitle(props.match.params.id)
+  const date = convertToTitle(format.banlist)
 
   return (
-    <div className="body">
-      <h1 className="banlist-title">{forbidden.length ? 'Forbidden & Limited List' : 'Limited List'}</h1>
+    <div id="banlist" className="banlist">
+      <h2 className="banlist-title">{forbidden.length ? 'Forbidden & Limited List' : 'Limited List'}</h2>
       <h3 className="banlist-date">Effective - {date}</h3>
       <br />
       {
@@ -69,9 +62,9 @@ const convertToTitle = (param) => {
                     forbidden.map((el) => 
                     <
                       CardImage 
-                      width='92px'
-                      padding='1px'
-                      margin='2px'
+                      width='72px' 
+                      padding='1px' 
+                      margin='0px'
                       key={el.card.id} 
                       card={el.card}
                       status="forbidden"
@@ -92,9 +85,9 @@ const convertToTitle = (param) => {
             limited.map((el) => 
             <
               CardImage 
-              width='92px'
-              padding='1px'
-              margin='2px'
+              width='72px' 
+              padding='1px' 
+              margin='0px'
               key={el.card.id} 
               card={el.card}
               status="limited"
@@ -111,9 +104,9 @@ const convertToTitle = (param) => {
             semiLimited.map((el) => 
               <
                 CardImage 
-                width='92px'
-                padding='1px'
-                margin='2px'
+                width='72px' 
+                padding='1px' 
+                margin='0px'
                 key={el.card.id}
                 card={el.card}
                 status="semiLimited"

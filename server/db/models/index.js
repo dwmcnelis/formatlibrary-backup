@@ -2,10 +2,12 @@
 const BlogPost = require('./BlogPost')
 const Card = require('./Card')
 const Deck = require('./Deck')
+const DeckType = require('./DeckType')
 const Format = require('./Format')
 const Player = require('./Player')
 const Print = require('./Print')
 const Set = require('./Set')
+const Stats = require('./Stats')
 const Status = require('./Status')
 const Tournament = require('./Tournament')
 
@@ -18,8 +20,14 @@ Status.belongsTo(Card)
 Card.hasMany(Print)
 Print.belongsTo(Card)
 
+// DeckType.hasMany(Deck)
+// Deck.belongsTo(DeckType)
+
 Player.hasMany(Deck)
 Deck.belongsTo(Player)
+
+Player.hasMany(Stats)
+Stats.belongsTo(Player)
 
 Set.hasMany(Print)
 Print.belongsTo(Set)
@@ -31,10 +39,12 @@ module.exports = {
   BlogPost,
   Card,
   Deck,
+  DeckType,
   Format,
   Player,
   Print,
   Set,
+  Stats,
   Status,
   Tournament
 }

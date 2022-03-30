@@ -157,7 +157,6 @@ const CardTable = (props) => {
 
     try {
       const params = { ...queryParams, ...sliders }
-      console.log('params', params)
       const removeFalseValues = (obj) => {
         const entries = Object.entries(obj)
           .map((e) => {
@@ -440,7 +439,7 @@ const CardTable = (props) => {
   // RENDER
   return (
     <div className="body">
-      <div id="flexbox">
+      <div className="format-icon-flexbox">
         <img src={logo} style={{width: '164px'}} />
         <div>
           <h1>{format}</h1>

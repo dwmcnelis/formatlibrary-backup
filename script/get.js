@@ -1,8 +1,8 @@
 
-const axios = require('axios')
-const { Card, Format, Set, Print } = require('../server/db/models')
-const { Op } = require('sequelize')
-const { tcgPlayerAPI } = require('../secrets') 
+import axios from 'axios'
+import { Card, Format, Set, Print } from  '../server/db/models'
+import { Op } from  'sequelize'
+import { tcgPlayerAPI } from  '../secrets'
 
 const test = async () => {
     const productName = `Number 92: Heart-eartH Dragon`

@@ -24,6 +24,10 @@ const Format = db.define('format', {
     type: Sequelize.STRING,
     allowNull: true
   },
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: true
+  },
   channel: {
     type: Sequelize.STRING,
     allowNull: true
@@ -34,6 +38,11 @@ const Format = db.define('format', {
   },
   role: {
     type: Sequelize.STRING,
+    allowNull: true
+  },
+  popular: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
     allowNull: true
   }
 })

@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-const { capitalize, ordinalize } = require('../../functions/utility')
+import { capitalize, ordinalize } from '../../functions/utility'
 import formats from '../../static/formats.json'
 import * as emojis from '../../public/images/emojis'
 import { FL, GF, EF } from '../../public/images/logos'

@@ -85,8 +85,30 @@ import First from './1st.png'
 import Second from './2nd.png'
 import Third from './3rd.png'
 import Consolation from './consolation.png'
+import god from './god.png'
+import legend from './legend.png'
+import master from './master.png'
+import diamond from './diamond.png'
+import platinum from './platinum.png'
+import gold from './gold.png'
+import silver from './silver.png'
+import bronze from './bronze.png'
+import rock from './rock.png'
+import sad from './sad.png'
+import mad from './mad.png'
 
 export {
+    god,
+    legend,
+    master,
+    diamond,
+    platinum,
+    gold,
+    silver,
+    bronze,
+    rock,
+    sad,
+    mad,
     First,
     Second,
     Third,

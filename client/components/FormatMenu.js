@@ -26,13 +26,23 @@ const FormatMenu = () => {
 /* eslint-disable complexity */
   return (
     <div className="body">
-      <h1 className="format-title">Historic Formats</h1>
+      <h1 className="format-title">Popular Formats</h1>
       <br />
       <div className="format-menu">
           {
-              formats.map((format) => <FormatButton key={format.id} format={format}/>)
+            formats.filter((f) => f.popular).map((format) => <FormatButton key={format.id} format={format}/>)
           }
       </div>
+      <br />
+      <br />
+      <h1 className="format-title">Other Formats</h1>
+      <br />
+      <div className="format-menu">
+          {
+            formats.filter((f) => !f.popular).map((format) => <FormatButton key={format.id} format={format}/>)
+          }
+      </div>
+      <br/>
     </div>
   )
 }
