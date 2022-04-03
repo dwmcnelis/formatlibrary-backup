@@ -22,7 +22,7 @@ const DeckRow = (props) => {
   return (
       <tr style={{textAlign:'center'}} onClick={() => goToDeck()} className={`${evenOrOdd}-search-results-row`}>
         <td>
-          <div className="format-cell">
+          <div className="format-cell-flex-box">
             <img style={{width:'32px'}} src={backgroundImage}/>
             <div>{formatName}</div>
           </div>

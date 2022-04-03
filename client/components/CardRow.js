@@ -66,7 +66,7 @@ const CardRow = (props) => {
   const evenOrOdd = props.index % 2 ? 'even' : 'odd'
   const filePath = `/images/cards/${card.ypdId}.jpg`
   const history = useHistory()
-  const goToCard = () => history.push(`/cards/${card.id}`)
+  const goToCard = () => history.push(`/cards/${card.name}`)
   
   return (
       <tr onClick={() => goToCard()} className={`${evenOrOdd}-search-results-row`}>

@@ -31,6 +31,10 @@ const BlogPost = db.define('blogpost', {
     defaultValue: 0,
     allowNull: false
   },
+  publishDate: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
   playerId: {
       type: Sequelize.STRING,
       allowNull: true

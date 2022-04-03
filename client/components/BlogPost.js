@@ -4,11 +4,9 @@ import parse from 'html-react-parser'
 
 const BlogPost = (props) => {
   return (
-    <div className="blog-post">
-      <h2 className="post-title">{props.title}</h2>
-      <br />
+    <div className="blogpost">
       <div className="post-content">{parse(props.content)}</div>
-      <br />
+      <div className="blog-divider"/>
     </div>
   )
 }

@@ -4,7 +4,8 @@ import React from 'react'
 
 const Pagination = (props = {}) => {
   const { length = 0, itemsPerPage = 12, location = 'top', page = 1 } = props
-  
+  if(length <= itemsPerPage) return <div></div>
+
   return (
     <div>
       {page !== 1 && length ? (

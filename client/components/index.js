@@ -1,8 +1,11 @@
 
 export {default as Home} from './Home'
+export {default as SingleEvent} from './SingleEvent'
+export {default as EventTable} from './EventTable'
 export {default as FormatIntro} from './FormatIntro'
 export {default as FormatMenu} from './FormatMenu'
 export {default as CardTable} from './CardTable'
 export {default as SingleDeck} from './SingleDeck'
 export {default as DeckTable} from './DeckTable'
 export {default as SingleCard} from './SingleCard'
+export {default as SingleBanList} from './SingleBanList'

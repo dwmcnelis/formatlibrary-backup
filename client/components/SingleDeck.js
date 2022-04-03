@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import CardImage from './CardImage'
 import axios from 'axios'
-import {capitalize, ordinalize} from '../../functions/utility'
+import {capitalize, dateToVerbose, ordinalize} from '../../functions/utility'
 import formats from '../../static/formats.json'
 import * as emojis from '../../public/images/emojis'
 import { FL, GF, EF } from '../../public/images/logos'
@@ -77,18 +77,18 @@ const SingleDeck = (props) => {
           <tr className="single-deck-info-1">
             <td>
               <div className="single-deck-cell">
-                <div style={{paddingRight:'7px'}}>Builder: {deck.player ? deck.player.name : deck.builder}</div>
+                <div style={{paddingRight:'7px'}}><b>Builder:</b> {deck.player ? deck.player.name : deck.builder}</div>
               </div>       
             </td>
             <td>
               <div className="single-deck-cell">
-                <div style={{paddingRight:'7px'}}>Category: {capitalize(deck.deckCategory, true)}</div>
+                <div style={{paddingRight:'7px'}}><b>Category:</b> {capitalize(deck.deckCategory, true)}</div>
                 <img style={{width:'28px'}} src={categoryImage}/>
               </div>
             </td>
             <td>
               <div className="single-deck-cell">
-                <div style={{paddingRight:'7px'}}>Event: {deck.event}</div> 
+                <div style={{paddingRight:'7px'}}><b>Event:</b> {deck.event}</div> 
                 <img style={{width:'28px'}} src={communityLogo}/>
               </div>   
             </td>
@@ -96,18 +96,18 @@ const SingleDeck = (props) => {
           <tr className="single-deck-info-2">
             <td>
               <div className="single-deck-cell">
-                <div style={{paddingRight:'7px'}}>Format: {capitalize(deck.format, true)}</div>
+                <div style={{paddingRight:'7px'}}><b>Format:</b> {capitalize(deck.format, true)}</div>
                 <img style={{width:'28px'}} src={formatImage}/>
               </div>       
             </td>
             <td>
               <div className="single-deck-cell">
-                <div style={{paddingRight:'7px'}}>Uploaded: {deck.createdAt.substring(0, 10)}</div>
+                <div style={{paddingRight:'7px'}}><b>Uploaded:</b> {dateToVerbose(deck.createdAt)}</div>
               </div>
             </td>
             <td>
               <div className="single-deck-cell">
-                <div style={{paddingRight:'7px'}}>Place: {ordinalize(deck.placement)}</div> 
+                <div style={{paddingRight:'7px'}}><b>Place:</b> {ordinalize(deck.placement)}</div> 
                 <img style={{width:'28px'}} src={placementImage}/>
               </div>   
             </td>

@@ -99,19 +99,19 @@ router.get('/:id', async (req, res, next) => {
   try {
     const card = await Card.findOne({
       where: {
-        id: req.params.id
+        name: {[Op.iLike]: req.params.id }
       }
-    })
+    }) 
 
     const status = await Status.findOne({
       where: {
-        cardId: req.params.id
+        cardId: card.id
       }
     })
 
     const prints = await Print.findAll({
       where: {
-        cardId: req.params.id
+        cardId: card.id
       },
       include: [Set],
       order: [[Set, 'tcgDate', 'ASC']]

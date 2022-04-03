@@ -8,6 +8,7 @@ router.use('/decks', require('./decks'))
 router.use('/cards', require('./cards'))
 router.use('/formats', require('./formats'))
 router.use('/stats', require('./stats'))
+router.use('/tournaments', require('./tournaments'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')

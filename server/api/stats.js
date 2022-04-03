@@ -9,7 +9,7 @@ router.get('/leaders/:format', async (req, res, next) => {
   try {
     const stats = await Stats.findAll({
       where: {
-        format: req.params.format.replace('-', '_')
+        format: req.params.format.replace(' ', '_').replace('-', '_')
       },
       include: Player,
       limit: 10,

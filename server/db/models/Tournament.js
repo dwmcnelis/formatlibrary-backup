@@ -21,12 +21,38 @@ const Tournament = db.define('tournaments', {
     },
     url: {
         type: Sequelize.STRING,      
-        allowNull: false,
-        unique: true
+        allowNull: true
     },
-    type: {
+    display: {
+        type: Sequelize.BOOLEAN,   
+        defaultValue: false,   
+        allowNull: false
+    },
+    cleanName: {
         type: Sequelize.STRING,   
+        allowNull: true
+    },
+    shortName: {
+        type: Sequelize.STRING,   
+        allowNull: true
+    },
+    winner: {
+        type: Sequelize.STRING,   
+        allowNull: true
+    },
+    size: {
+        type: Sequelize.INTEGER,   
+        defaultValue: 0,   
+        allowNull: false
+    },
+    tournamentType: {
+        type: Sequelize.STRING, 
         defaultValue: 'double elimination',   
+        allowNull: false
+    },
+    series: {
+        type: Sequelize.BOOLEAN,   
+        defaultValue: false,   
         allowNull: false
     },
     worlds: {
@@ -41,18 +67,29 @@ const Tournament = db.define('tournaments', {
     },
     rounds: {
         type: Sequelize.INTEGER,   
-        defaultValue: null,   
         allowNull: true 
+    },
+    community: {
+        type: Sequelize.STRING,   
+        defaultValue: 'Format Library',   
+        allowNull: true
     },
     channelId: {
         type: Sequelize.STRING,   
-        defaultValue: null,       
         allowNull: true
     },
     guildId: {
         type: Sequelize.STRING,      
-        allowNull: false
-    }
+        allowNull: true
+    },
+    startDate: {
+        type: Sequelize.DATE,      
+        allowNull: true
+    },
+    endDate: {
+        type: Sequelize.DATE,      
+        allowNull: true
+    },
 })
 
 module.exports = Tournament

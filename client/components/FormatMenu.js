@@ -26,16 +26,17 @@ const FormatMenu = () => {
 /* eslint-disable complexity */
   return (
     <div className="body">
-      <h1 className="format-title">Popular Formats</h1>
+      <h1>Popular Formats</h1>
       <br />
       <div className="format-menu">
           {
             formats.filter((f) => f.popular).map((format) => <FormatButton key={format.id} format={format}/>)
           }
       </div>
-      <br />
-      <br />
-      <h1 className="format-title">Other Formats</h1>
+      
+      <div className="divider"/>
+
+      <h1>Other Formats</h1>
       <br />
       <div className="format-menu">
           {

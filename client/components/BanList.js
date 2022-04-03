@@ -4,15 +4,18 @@ import React, { useState, useEffect } from 'react'
 import CardImage from './CardImage'
 import axios from 'axios'
 
-const BanList = (props) => {
+const BanList = (props = {}) => {
   const [banlist, setBanlist] = useState(null)
   const {format} = props
+  const BL = format ? format.banlist : props.match.params.id
+  console.log('BL', BL)
+  console.log('banlist', banlist)
 
   // USE EFFECT SET CARD
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const {data} = await axios.get(`/api/banlists/${format.banlist}`)
+        const {data} = await axios.get(`/api/banlists/${BL}`)
         return setBanlist(data)
       } catch (err) {
         console.log(err)
@@ -26,7 +29,7 @@ const BanList = (props) => {
   const { forbidden, limited, semiLimited } = banlist
 
 /* eslint-disable */
-const convertToTitle = (param) => {
+const convertToTitle = (param = '') => {
     const abbrev = param.slice(0, 3)
     const month = abbrev === 'jan' ? 'January' :
     abbrev === 'feb' ? 'February' :
@@ -45,7 +48,7 @@ const convertToTitle = (param) => {
     return `${month} ${year}`
   }
 
-  const date = convertToTitle(format.banlist)
+  const date = convertToTitle(BL)
 
   return (
     <div id="banlist" className="banlist">

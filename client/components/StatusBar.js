@@ -12,7 +12,7 @@ const StatusBox = (props) => {
     '#e8e8e8'
 
     return (
-        <Link to={`/formats/${status[0]}`} key={status[0]}className="status-cell" style={{backgroundColor}}>
+        <Link to={`/banlists/${status[0]}`} key={status[0]}className="status-cell" style={{backgroundColor}}>
            <p>{date}</p>
         </Link>
     )

@@ -16,11 +16,24 @@ const capitalize = (str, eachWord = false) => {
     }
 }
 
-//CONVERT ARRAY TO OBJECT
-const convertArrayToObject = (arr) => {
+//ARRAY TO OBJECT
+const arrayToObject = (arr) => {
     const obj = {}
     arr.forEach(e => obj[e] ? obj[e]++ : obj[e] = 1)
     return obj
+}
+
+//DATE TO VERBOSE
+const dateToVerbose = (date, long = true, ordinal = true, includeYear = true) => {
+    const year = typeof date === 'string' ? date.slice(0, 4) : date.getFullYear()
+    const longMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    const shortMonths = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."]
+    const month = typeof date === 'string' ? parseInt(date.slice(5, 7), 10) - 1 : date.getMonth()
+    const monthStr = long ? longMonths[month] : shortMonths[month]
+    const day = typeof date === 'string' ? parseInt(date.slice(8, 10), 10) : date.getDate()
+    const dayStr = ordinal ? ordinalize(day) : day
+    const verbose = includeYear ? `${monthStr} ${dayStr}, ${year}` :  `${monthStr} ${dayStr}`
+    return verbose
 }
 
 //GENERATE DEFAULT STATUS ARRAY
@@ -111,7 +124,8 @@ const urlize = (str) => str.replace(/[\s]/g, '-').toLowerCase()
 module.exports = {
     camelize,
     capitalize,
-    convertArrayToObject,
+    arrayToObject,
+    dateToVerbose,
     generateDefaultStatus,
     ordinalize,
     urlize

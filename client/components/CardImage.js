@@ -17,7 +17,7 @@ const CardImage = (props = {}) => {
             alt={card.name}
           />
         ) : (
-          <Link to={`/cards/${card.id}`}>
+          <Link to={`/cards/${card.name}`}>
           {
             status ? <img src={emojis[camelize(status)]} className="status-icon"/> : null
           }

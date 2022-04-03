@@ -13,7 +13,7 @@ const FormatButton = (props) => {
   const year = `20${format.banlist.slice(-2)}`
 
   return (
-    <Link to={`/formats/${format.id}`} className="format-link" style={{ backgroundImage:`url(${emojis[format.icon]})`}}>
+    <Link to={`/formats/${format.name}`} className="format-link" style={{ backgroundImage:`url(${emojis[format.icon]})`}}>
       <div className="format-button">
         <div>{format.name}</div>
         <div>{`${month}${period} ${year}`}</div>

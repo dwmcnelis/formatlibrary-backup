@@ -4,7 +4,11 @@ import {Link} from 'react-router-dom'
 //Footer
 const Footer = () => (
   <div className="footer">
-    <a href="https://discord.com/invite/formatlibrary">
+    <a 
+      href="https://discord.com/invite/formatlibrary" 
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <div className="discord-link">
           <div className="discord-logo"/>
           <p className="discord-desc">Join our Discord!</p>

@@ -8,7 +8,7 @@ const sets = require('../static/sets.json')
 const { Op } = require('sequelize')
 const formats = require('../static/formats.json')
 const discordformats = require('../static/discordformats.json')
-const { capitalize, convertArrayToObject } = require('../functions/utility')
+const { capitalize, arrayToObject } = require('../functions/utility')
 const { challongeAPIKey, tcgPlayerAPI } = require('../secrets')
 const { 
     accum, airbellum, alius, alo, angel, archer, archfiend, arma, artemis, barrel, bazoo, ben_kei, bfadd, bigbang, bigshield, blade, bls,
@@ -1447,7 +1447,7 @@ const getDeckType = (raw, format = 'goat') => {
     const main = raw.split('#extra')[0]
     if (!main) return
     const arr = main.split('\n').filter(el => el.charAt(0) !== '#' && el.charAt(0) !== '!' && el !== '').sort()
-    const ydk = convertArrayToObject(arr)
+    const ydk = arrayToObject(arr)
 
     const deckType = format === 'goat' ? (
             (ydk[collapse] >= 2 || ydk[insect] >= 2  || ydk[susa] >= 2 || ydk[toonelf] >= 2 || ydk[mazera] >= 2 || ydk[pixie] >= 2 || ydk[ecto] >= 2 || ydk[silent] >= 2 || ydk[skull] >= 2 || ydk[hugerev] >= 2 || ydk[pandemonium] >= 2 || ydk[smackdown] >= 2 || ydk[pyrlight] >= 2 || ydk[clown] >= 2 || ydk[coin] >= 2) ? 'other' :
@@ -1651,7 +1651,8 @@ const createDecks = async (name, format, community, useTags = true) => {
 
         const players = await Player.findAll({ where: { tag: {[Op.not]: null } }})
         const shortenedTags = useTags ? players.map((p) => p.tag.replace(/\s/gi, '_').replace(/[^\w\s]/gi, '_')) :
-                                        players.map((p) => p.name.replace(/[^$-_?.!\w\s]/gi, '_'))
+                                        players.map((p) => p.name.replace(/[^-?|!.'$\w\s]/gi, '_'))
+
         const res = await axios.get(`https://formatlibrary:${challongeAPIKey}@api.challonge.com/v1/tournaments/${tournament.id}.json`)
         if (!res) return console.log(`no tournamentId: ${tournament.id}`)
         const size = res.data.tournament.participants_count
@@ -1660,51 +1661,81 @@ const createDecks = async (name, format, community, useTags = true) => {
         if (!data) return console.log(`no participants = require(tournamentId: ${tournament.id}`)
         const participants = data.map((d) => d.participant.name)
         console.log('participants', participants)
-        console.log('shortenedTags', shortenedTags)
+        console.log('shortenedTags.slice(0, 20)', shortenedTags.slice(0, 20))
 
         fs.readdir(`./public/decks/${name}/`, async (err, files) => {
             if (err) {
                 console.log(err)
             } else {
+                console.log('files', files)
                 files.forEach(async (file) => {
                     let query = file.slice(0, -4)
-                    // if (query === 'noahmowdy985') query = 'ChainStrike'
-                    // if (query === 'jinzodude9') query = 'Jinzodude9'
-                    // if (query === 'funky5') query = 'funky'
-                    // if (query === 'TomasBoss15y tjkorol') query = 'TomasBoss15y DB TomasBoss15y'
-                    // if (query === 'TheWayfarer') query = 'Wayfarer'
-                    // if (query === 'Phei') query = 'Fibi'
-                    // if (query === 'Kuru') query = '____'
-                    // if (query === 'I SLASH U 1N 2') query = 'mwnhydropump'
-                    // if (query === 'GualterusdeCastellione') query = 'GdCastell'
-                    // if (query === 'Forever') query = 'DGzForever'
-                    // if (query === 'brahimpoke') query = 'brahimtrish'
-                    // if (query === 'IAMZ1') query = 'Sohaib _DB _ IAMZ1_'
-                    // if (query === 'boymoding xenohospitality') query = 'SQUARE THEORY WAS A GOOD IDEA'
+                    if (query === 'noahmowdy985') query = 'ChainStrike'
+                    if (query === 'Ithrowitintomylunch_!') query = 'Ithrowitintomylunch__'
+                    if (query === 'don_t copy') query = `don't copy`
+                    if (query === 'mark_mps') query = 'mark_mps | LRG Sigma'
+                    //if (query === 'funky5') query = 'funky'
+                    // if (query === 'jinzodude9') query = 'Jinzodude'
+                    if (query === 'ARandomKeyForgePlayer_Guari_5854') query = 'Guari_5854'
+                    if (query === 'noahmowdy985') query = 'ChainStrike'
+                    if (query === 'funky5') query = 'funky'
+                    if (query === 'TomasBoss15y tjkorol') query = 'TomasBoss15y DB TomasBoss15y'
+                    if (query === 'TheWayfarer') query = 'Wayfarer'
+                    if (query === 'Phei') query = 'Fibi'
+                    if (query === 'Kuru') query = '____'
+                    if (query === 'I SLASH U 1N 2') query = 'mwnhydropump'
+                    if (query === 'GualterusdeCastellione') query = 'GdCastell'
+                    if (query === 'Forever') query = 'DGzForever'
+                    if (query === 'brahimpoke') query = 'brahimtrish'
+                    if (query === 'IAMZ1') query = 'Sohaib _DB _ IAMZ1_'
+                    if (query === 'boymoding xenohospitality') query = 'SQUARE THEORY WAS A GOOD IDEA'
 
-                    // if (query.includes('to0fresh')) query = 'to0fresh_3550'
+                    if (query.includes('to0fresh')) query = 'to0fresh_3550'
                     // if (query === 'Rask_2225') query = 'Berndig_2225'
-                    // if (query === 'Blave_2824') query = 'youngsexymf_0357'
-                    // if (query === '3rdrateduelist_6321') query = '3rdrateduelist202_6321'
-                    // if (query === 'Asphyxiate_____1740') query = 'Asphy_____1740'
+                    if (query === 'Blave_2824') query = 'Young_Sexy_MF_0357'
+                    if (query === '3rdrateduelist_6321') query = '3rdrateduelist202_6321'
+                    if (query === 'Asphyxiate_____1740') query = 'Asphy_____1740'
                     // if (query === 'Maru_6853') query = 'Ma_Roo_6853'
-                    // if (query === 'Rask_2225') query = 'Berndig_2225'
-                    // if (query === 'Tt_5322') query = 'SyrupNSprite_5322'
-                    // if (query === 'niceboy_7567') query = 'LudovicoRizzo_7567'
-                    // if (query === 'hirahime_9380') query = 'Hira_3662'
-                    
+                    if (query === 'Rask_2225') query = 'Berndig_2225'
+                    if (query === 'Tt_5322') query = 'SyrupNSprite_5322'
+                    // if (query === 'niceboy_7567') query = 'Ludovico_Rizzo_7567'
+                    if (query === 'thesauze_8388') query = 'Thesauze_8388'
+                    if (query === 'hirahime_9380') query = 'Hira_3662'
+                    if (query === 'mark_mps_8026') query = 'mark_mps___LRG_Sigma_8026'
+                    if (query === 'young_sexy_mf_0357') query = 'Young_Sexy_MF_0357'
+                    if (query === 'funky__funkyfunky__9299') query = 'funky_9299'
+                    if (query === 'Jinzo_7671') query = 'JinzoJonzon_7671'
+                    if (query === 'TheLastDance_6481') query = 'TheLastDance_1086'
+                    if (query === 'Sho_Nuff_4743') query = 'Willie_Beamen_4743'
+                    if (query === 'Unfortunately__I_am_from_Bosnia_2437') query = 'Bonkai_2437'
+                    if (query === 'LWRS_5826') query = 'Asgeir_5826'
+                    if (query === 'keininsder_1992') query = 'Keininsder_1992'
+
                     // if (query === 'IAMZ1_5635') query = 'Sohaib_DB_IAMZ1__5635'
-                    // if (query === 'Randage_8521') query = 'Randage_0001'
-                    // if (query === 'brahimpoke_3361') query = 'brahimtrish_3361'
+                    if (query === 'Randage_8521') query = 'Randage_0001'
+                    if (query === 'brahimpoke_3361') query = 'brahimtrish_3361'
                     const i = shortenedTags.indexOf(query)
                     if (i === -1) {
                         console.log(`no Player found with the Discord tag: ${query}`)
                     } else {
                         const player = players[i]
                         let pname = player.name
-                        // if (pname === 'young sexy mf') pname = 'Blave'
+                        // if (pname === 'Keininsder') pname = 'keininsder'
+                        // if (pname === 'Asgeir') pname = 'LWRS'
+                        // if (pname === 'Bonkai') pname = 'Unfortunately, I am from Bosnia'
+                        // if (pname === 'Jinzodude') pname = 'jinzodude9'
+                        // if (pname === 'Willie Beamen') pname = `Sho'Nuff`
+                        // if (pname === 'Guari') pname = 'ARandomKeyForgePlayer/Guari'
+                        // if (pname === 'JinzoJonzon') pname = 'Jinzo'
+                        // if (pname === 'ChainStrike') pname = 'noahmowdy985'
+                        // if (pname === 'Ithrowitintomylunch__') pname = 'Ithrowitintomylunch?!'
+                        // if (pname === 'Sohaib _DB _ IAMZ1_') pname = 'Saad R/to0fresh'
+                        // if (pname === 'mark_mps | LRG Sigma') pname = 'mark_mps'
+                        // if (pname === 'Young Sexy MF') pname = 'young sexy mf'
+                        // if (pname === 'YSMF (aka Bao)') pname = 'youngsexymf'
                         // if (pname === 'SQUARE THEORY WAS A GOOD IDEA') pname = 'boymoding xenohospitality'
                         // if (pname === 'Ludovico Rizzo') pname = 'nice boy'
+                        // if (pname === 'Thesauze') pname = 'thesauze'
                         // if (pname === 'Hira') pname = 'hirahime'
                         // if (pname === 'SyrupNSprite') pname = 'Tt'
                         // if (pname === 'Ma-Roo') pname = 'Maru'
@@ -1714,6 +1745,10 @@ const createDecks = async (name, format, community, useTags = true) => {
                         // if (pname === 'brahimtrish') pname = 'brahimpoke'
                         // if (pname === 'to0fresh') pname = `Saad R/to0fresh`
                         // if (pname === 'Sohaib (DB = IAMZ1)') pname = `IAMZ1`
+                        // if (pname === 'funky') pname = `funky5`
+                        // if (pname === 'funky') pname = 'funky (funkyfunky)'
+                        // if (pname === 'mark_mps___LRG_Sigma') pname = 'mark_mps'
+                        // if (pname === 'Young_Sexy_MF') pname = 'youngsexymf'
                         const j = participants.indexOf(pname)
                         if (j === -1) {
                             console.log(`no Challonge Participant found for the player: ${pname}`)
@@ -1721,7 +1756,7 @@ const createDecks = async (name, format, community, useTags = true) => {
                             const count = await Deck.count({
                                 where: {
                                     builder: player.name,
-                                    event: tournament.name
+                                    event: tournament.shortName || tournament.name
                                 }
                             })
 
@@ -1751,7 +1786,7 @@ const createDecks = async (name, format, community, useTags = true) => {
                                     format: tournament.format,
                                     ydk: raw,
                                     placement: placement,
-                                    event: tournament.name,
+                                    event: tournament.shortName || tournament.name,
                                     display: display,
                                     playerId: player.id,
                                     community: community,
@@ -1810,16 +1845,63 @@ const updateDeckTypes = async () => {
             deck.deckType = updatedDeckType
             deck.deckCategory = updatedDeckCategory
             await deck.save()
-            console.log('updated Deck')
         }
     } catch (err) {
         console.log(err)
     }
 }
 
-updateDeckTypes()
+const updateCommunities = async () => {
+    try {
+        const decks = await Deck.findAll()
+        for (let i = 0; i < decks.length; i++) {
+            const deck = decks[i]
+            if (deck.community === 'Format Librar') deck.community = 'Format Library'
+            await deck.save()
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+const countParticipants = async () => {
+    const tournaments = await Tournament.findAll({ 
+        where: { 
+            display: true, 
+            state: 'complete',
+            winner: null
+        }})
+    
+    for (let i = 0; i < tournaments.length; i++) {
+        try {
+            const tournament = tournaments[i]
+            const {data} = await axios.get(`https://formatlibrary:${challongeAPIKey}@api.challonge.com/v1/tournaments/${tournament.id}.json`)
+            if (!data) continue
+            tournament.size = data.tournament.participants_count || 0
+            tournament.startDate = `${data.tournament.started_at.slice(0, 10)} ${data.tournament.started_at.slice(11, 26)}`
+            tournament.endDate = `${data.tournament.completed_at.slice(0, 10)} ${data.tournament.completed_at.slice(11, 26)}`
+            
+            const winningDeck = await Deck.findOne({
+                where: {
+                    event: tournament.shortName,
+                    placement: 1
+                }
+            })
+
+            if (winningDeck) tournament.winner = winningDeck.builder
+
+            await tournament.save()
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+// updateCommunities()
+// countParticipants()
+// updateDeckTypes()
 // makeDeckTypes()
-// createDecks('RBET02', 'edison', 'Format Library', true)
+createDecks('RBET02', 'edison', 'Format Library', true)
 // download()
 // images()
 // print()

@@ -439,13 +439,13 @@ const CardTable = (props) => {
   // RENDER
   return (
     <div className="body">
-      <div className="format-icon-flexbox">
-        <img src={logo} style={{width: '164px'}} />
+      <div className="card-database-flexbox">
+        <img src={logo} className="format-icon-medium" />
         <div>
-          <h1>{format}</h1>
+          <h1>Card Database</h1>
           <h2>{event}</h2>
         </div>
-        <img src={logo} style={{width: '164px'}} />
+        <img src={logo} className="format-icon-medium" />
       </div>
 
       <br />

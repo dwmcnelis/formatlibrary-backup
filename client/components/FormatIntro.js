@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import BanList from './BanList'
-import DeckThumbnail from './DeckThumbnail'
 import LeaderBoard from './LeaderBoard'
 import PopularDecks from './PopularDecks'
+import RecentEvents from './RecentEvents'
 import axios from 'axios'
 import * as artworks from '../../public/images/artworks'
 
@@ -36,7 +36,7 @@ const FormatIntro = (props = {}) => {
           <h1>{format.name} Format</h1>
           <h2>{format.event}</h2>
           {
-            format.description ? <p className="format-desc">{format.description}</p> : ''
+            format.description ? <p className="format-desc">{format.description}</p> : <br/>
           }
           <li>
             <a href="#popular-decks">Popular Decks</a>

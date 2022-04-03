@@ -20,7 +20,6 @@ router.get('/popular/:format', async (req, res, next) => {
         
         const freqs = decks.reduce((acc, curr) => (acc[curr.deckType] ? acc[curr.deckType]++ : acc[curr.deckType] = 1, acc), {})
         const arr = Object.entries(freqs).sort((a, b) => b[1] - a[1]).map((e) => e[0]).slice(0, 6)
-
         const data = []
 
         for (let i = 0; i < arr.length; i++) {
@@ -84,7 +83,7 @@ router.get('/download/:id', async (req, res, next) => {
 router.get('/all', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
-            // where: { display: true },
+            where: { display: true },
             order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
             include: Player
         })
@@ -146,6 +145,7 @@ router.get('/some', async (req, res, next) => {
       
       const decks = await Deck.findAll({
         where: filters,
+        display: true,
         order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]]
       })
 

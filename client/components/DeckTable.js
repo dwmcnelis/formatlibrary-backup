@@ -201,7 +201,11 @@ const DeckTable = (props) => {
   // RENDER
   return (
     <div className="body">
-      <h1>Deck Database</h1>
+      <div className="event-database-flexbox">
+        <img style={{ height:'80px'}} src={'/images/emojis/deckbox.png'}/>
+        <h1>Deck Database</h1>
+        <img style={{ height:'80px'}} src={'/images/emojis/deckbox.png'}/>
+      </div>
       <br />
 
       <div className="searchWrapper">

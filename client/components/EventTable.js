@@ -5,15 +5,17 @@
 
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import EventRow from './EventRow.js'
+import EventImage from './EventImage.js'
 import Pagination from './Pagination.js'
 import * as sortFunctions from '../../functions/sort'
 import formats from '../../static/formats.json'
+
 import axios from 'axios'
 
 const EventTable = (props) => {
   const [page, setPage] = useState(1)
   const [events, setEvents] = useState([])
-  const [eventsPerPage, setEventsPerPage] = useState(12)
+  const [eventsPerPage, setEventsPerPage] = useState(10)
   const [view, setView] = useState('table')
   const [sortBy, setSortBy] = useState(null)
   const [format, setFormat] = useState(null)
@@ -84,7 +86,7 @@ const EventTable = (props) => {
         format
       }
 
-      const { data } = await axios.get(`/api/events/some`, { params: params })
+      const { data } = await axios.get(`/api/tournaments/some`, { params: params })
       setEvents(data)
       setPage(1)
     } catch (err) {
@@ -161,7 +163,7 @@ const EventTable = (props) => {
   useEffect(() => {
     if (!firstXFetched) {
       const fetchData = async () => {
-        const {data} = await axios.get(`/api/events/first/12`)
+        const {data} = await axios.get(`/api/tournaments/first/10`)
         setEvents(data)
         setFirstXFetched(true)
       } 
@@ -174,7 +176,7 @@ const EventTable = (props) => {
   useEffect(() => {
     if (!allFetched) {
       const fetchData = async () => {
-        const {data} = await axios.get(`/api/events/all`)
+        const {data} = await axios.get(`/api/tournaments/all`)
         setEvents(data)
         setAllFetched(true)
       } 
@@ -197,7 +199,12 @@ const EventTable = (props) => {
   // RENDER
   return (
     <div className="body">
-      <h1>Event Database</h1>
+      <div className="event-database-flexbox">
+        <img style={{ height:'80px'}} src={'/images/emojis/event.png'}/>
+        <h1>Event Database</h1>
+        <img style={{ height:'80px'}} src={'/images/emojis/event.png'}/>
+      </div>
+      
       <br />
 
       <div className="searchWrapper">
@@ -219,22 +226,20 @@ const EventTable = (props) => {
             className="filter"
             onChange={() => runQuery()}
           >
-            <option value="eventType">Event Type</option>
-            <option value="builder">Builder</option>
-            <option value="event">Event</option>
+            <option value="name">Event Name</option>
+            <option value="winner">Winning Player</option>
           </select>
 
           <select
-            id="category"
-            defaultValue="All Categories"
+            id="community"
+            defaultValue="All Communities"
             className="filter"
-            onChange={() => setQueryParams({ ...queryParams, category: document.getElementById('category').value })}
+            onChange={(e) => setQueryParams({ ...queryParams, community: e.target.value })}
           >
-            <option value="All Categories">All Categories</option>
-            <option value="Aggro">Aggro</option>
-            <option value="Combo">Combo</option>
-            <option value="Control">Control</option>
-            <option value="Lockdown">Lockdown</option>
+            <option value="All Communities">All Communities</option>
+            <option value="Format Library">Format Library</option>
+            <option value="GoatFormat.com">GoatFormat.com</option>
+            <option value="EdisonFormat.com">EdisonFormat.com</option>
           </select>
 
           <select
@@ -287,14 +292,14 @@ const EventTable = (props) => {
 
           <select
             id="eventsPerPageSelector"
-            defaultValue="12"
+            defaultValue="10"
             style={{width: '195px'}}
             onChange={() => changeEventsPerPage()}
           >
-            <option value="12">Show 12 Events / Page</option>
-            <option value="24">Show 24 Events / Page</option>
-            <option value="48">Show 48 Events / Page</option>
-            <option value="90">Show 90 Events / Page</option>
+            <option value="10">Show 10 Events / Page</option>
+            <option value="25">Show 25 Events / Page</option>
+            <option value="50">Show 50 Events / Page</option>
+            <option value="100">Show 100 Events / Page</option>
           </select>
 
           <select
@@ -303,20 +308,14 @@ const EventTable = (props) => {
             style={{width: '230px'}}
             onChange={() => sortEvents()}
           >
-            <option value="uploadedDESC">Sort Uploaded: New ⮕ Old</option>
-            <option value="uploadedASC">Sort Uploaded: Old ⮕ New</option>
-            <option value="placeASC">Sort Place: High ⮕ Low </option>
-            <option value="placeDESC">Sort Place: Low ⮕ High </option>
-            <option value="builderASC">Sort Builder: A ⮕ Z</option>
-            <option value="builderDESC">Sort Builder: Z ⮕ A</option>
+            <option value="startDateDESC">Sort Date: New ⮕ Old</option>
+            <option value="startDateASC">Sort Date: Old ⮕ New</option>
             <option value="eventASC">Sort Event: A ⮕ Z</option>
             <option value="eventDESC">Sort Event: Z ⮕ A</option>
+            <option value="sizeASC">Sort Size: Large ⮕ Small </option>
+            <option value="sizeDESC">Sort Size: Small ⮕ Large </option>
             <option value="formatASC">Sort Format: New ⮕ Old</option>
             <option value="formatDESC">Sort Format: Old ⮕ New</option>
-            <option value="typeASC">Sort Event Type: A ⮕ Z</option>
-            <option value="typeDESC">Sort Event Type: Z ⮕ A</option>
-            <option value="categoryASC">Sort Event Category: A ⮕ Z</option>
-            <option value="categoryDESC">Sort Event Category: Z ⮕ A</option>
           </select>
 
           <a
@@ -349,12 +348,11 @@ const EventTable = (props) => {
             <thead>
               <tr>
                 <th>Format</th>
-                <th>Event Type</th>
-                <th>Event Category</th>
-                <th>Builder</th>
-                <th>Place</th>
-                <th>Event</th>
-                <th>Uploaded</th>
+                <th>Event Name</th>
+                <th>Winning Player</th>
+                <th>Community</th>
+                <th>Size</th>
+                <th>Date</th>
               </tr>
             </thead>
             <tbody>

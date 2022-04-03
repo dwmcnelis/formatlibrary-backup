@@ -5,9 +5,11 @@ import {camelize, urlize} from '../../functions/utility'
 const PrintRow = (props) => {
   const { index, print } = props
   const evenOrOdd = index % 2 ? 'even' : 'odd'
-  const tcgPlayerUrl = print.tcgPlayerUrl || `https://store.tcgplayer.com/yugioh/${urlize(print.setName)}/${urlize(print.cardName)}`
+  const tcgPlayerUrl = print.tcgPlayerUrl + '?utm_campaign=affiliate&utm_medium=FormatLibrary&utm_source=FormatLibrary' || 
+    `https://store.tcgplayer.com/yugioh/${urlize(print.setName)}/${urlize(print.cardName)}?utm_campaign=affiliate&utm_medium=FormatLibrary&utm_source=FormatLibrary`
   const openNewTab = () => window.open(tcgPlayerUrl, "_blank")
   const id = print.rarity === '10000 Secret Rare' ? 'tenThousandSecretRare' : camelize(print.rarity)
+  
 
   return (
     <tr onClick={() => openNewTab()} className={`${evenOrOdd}-print-row`}>
