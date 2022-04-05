@@ -1,37 +1,32 @@
-/* eslint-disable max-statements */
-/* eslint-disable no-eval */
 /* eslint-disable complexity */
 /* eslint-disable max-statements */
 
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import EventRow from './EventRow.js'
-import EventImage from './EventImage.js'
+// import EventImage from './EventImage.js'
 import Pagination from './Pagination.js'
 import * as sortFunctions from '../../functions/sort'
 import formats from '../../static/formats.json'
-
 import axios from 'axios'
 
 const EventTable = (props) => {
   const [page, setPage] = useState(1)
   const [events, setEvents] = useState([])
+  const [filteredEvents, setFilteredEvents] = useState([])
   const [eventsPerPage, setEventsPerPage] = useState(10)
   const [view, setView] = useState('table')
   const [sortBy, setSortBy] = useState(null)
   const [format, setFormat] = useState(null)
   const [allFetched, setAllFetched] = useState(false)
   const [firstXFetched, setFirstXFetched] = useState(false)
-  const [advanced, setAdvanced] = useState(false)
-  const [day, setDay] = useState(null)
-  const [month, setMonth] = useState(null)
-  const [year, setYear] = useState(null)
-  const [logo, setLogo] = useState(null)
+  // const [advanced, setAdvanced] = useState(false)
+  // const [day, setDay] = useState(null)
+  // const [month, setMonth] = useState(null)
+  // const [year, setYear] = useState(null)
 
   const [queryParams, setQueryParams] = useState({
-    eventType: null,
-    builder: null,
-    event: null,
-    eventCategory: null
+    name: null,
+    winner: null
   })
 
   // USE LAYOUT EFFECT
@@ -79,92 +74,69 @@ const EventTable = (props) => {
   }
 
   // SEARCH
-  const search = async (hide = true) => {
-    try {
-      const params = {
-        ...queryParams,
-        format
+  const search = () => {
+    let data = [...events]
+    const params = Object.keys(queryParams) 
+
+    for (let i = 0; i < params.length; i++) {
+      const param = params[i]
+      const query = queryParams[param]
+
+      if (query) {
+        if (param === 'name') {
+          data = data.filter(
+            (d) => d.name.toLowerCase().includes(query.toLowerCase()) || 
+              d.cleanName.toLowerCase().includes(query.toLowerCase()) || 
+              d.shortName.toLowerCase().includes(query.toLowerCase())
+          )
+        } else {
+          data = data.filter((d) => d[param].toLowerCase().includes(query.toLowerCase()))
+        }
       }
 
-      const { data } = await axios.get(`/api/tournaments/some`, { params: params })
-      setEvents(data)
-      setPage(1)
-    } catch (err) {
-      console.log(err)
+      if (format) {
+        data = data.filter((d) => d.format.toLowerCase().includes(format.toLowerCase()))
+      }
     }
-
-    if (hide) setAdvanced(false)
+    
+    setFilteredEvents(data)
+    setPage(1)
   }
 
   // RESET
   const reset = () => {
-    document.getElementById('format').value = ''
+    document.getElementById('format').value = null
     document.getElementById('searchBar').value = null
     setPage(1)
     setFormat(null)
-    setAllFetched(false)
+    setFilteredEvents(events)
     setQueryParams({
-      name: null
-    })
-  }
-
-  // APPLY FILTER
-  const applyFilter = (type, id) => {
-    setQueryParams(() => {
-      if (type) {
-        return {
-          ...queryParams,
-          [type]: {...queryParams[type], [id]: true}
-        }
-      } else {
-        return {
-          ...queryParams,
-          [id]: true
-        }
-      }
-    })
-  }
-
-  // REMOVE FILTER
-  const removeFilter = (type, id) => {
-    setQueryParams(() => {
-      if (type) {
-        return {
-          ...queryParams,
-          [type]: {...queryParams[type], [id]: false}
-        }
-      } else {
-        return {
-          ...queryParams,
-          [id]: false
-        }
-      }
+      name: null,
+      winner: null
     })
   }
 
   // RUN QUERY
   const runQuery = () => {
     const id = document.getElementById('searchTypeSelector').value
-    const otherIds = id === 'eventType' ? ['builder', 'event'] : 
-        id === 'builder' ? ['eventType', 'event'] :
-        ['eventType', 'builder']
+    const otherIds = id === 'name' ? ['winner'] : ['name']
 
     setQueryParams(() => {
       return {
         ...queryParams,
         [id]: document.getElementById('searchBar').value,
-        [otherIds[0]]: null,
-        [otherIds[1]]: null
+        [otherIds[0]]: null
       }
     })
   }
 
-  // USE EFFECT firstXFetched
+  // USE EFFECT FETCH FIRST X
   useEffect(() => {
-    if (!firstXFetched) {
+    if (!firstXFetched && !allFetched) {
       const fetchData = async () => {
         const {data} = await axios.get(`/api/tournaments/first/10`)
         setEvents(data)
+        setFilteredEvents(data)
         setFirstXFetched(true)
       } 
 
@@ -172,28 +144,28 @@ const EventTable = (props) => {
     }
   }, [])
 
-  // USE EFFECT allFetched
+  // USE EFFECT FETCH ALL
   useEffect(() => {
-    if (!allFetched) {
+    if (firstXFetched && !allFetched) {
       const fetchData = async () => {
         const {data} = await axios.get(`/api/tournaments/all`)
         setEvents(data)
+        setFilteredEvents(data)
         setAllFetched(true)
       } 
 
       fetchData()
     }
-  }, [])
+  }, [firstXFetched])
 
-  // USE EFFECT search
+  // USE EFFECT SEARCH
   useEffect(() => {
     search(false)
-  }, [format, day, month, year, queryParams])
+  }, [format, queryParams])
 
   const lastIndex = page * eventsPerPage
   const firstIndex = lastIndex - eventsPerPage
-  if (events.length) events.sort(sortFunctions[sortBy] || undefined)
-  const eventsArray = events.length ? events.slice(firstIndex, lastIndex) : []
+  if (filteredEvents.length) filteredEvents.sort(sortFunctions[sortBy] || undefined)
   const formatKeys = Object.keys(formats)
 
   // RENDER
@@ -214,8 +186,8 @@ const EventTable = (props) => {
           type="text"
           placeholder="🔍"
           onChange={() => runQuery()}
-          onKeyDown={() => {
-            if (event.keyCode === 13) search()
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') search()
           }}
         />
 
@@ -268,19 +240,19 @@ const EventTable = (props) => {
         <div className="results" style={{width: '360px'}}>
           Results:{' '}
           {firstXFetched && allFetched
-            ? events.length
+            ? filteredEvents.length
               ? `${eventsPerPage * page - eventsPerPage + 1} - ${
-                  events.length >=
+                  filteredEvents.length >=
                   eventsPerPage * page
                     ? eventsPerPage * page
-                    : events.length
-                } of ${events.length}`
+                    : filteredEvents.length
+                } of ${filteredEvents.length}`
               : '0'
             : ''}
         </div>
 
         <div className="buttonWrapper">
-          <select
+          {/* <select
             id="viewSwitch"
             defaultValue="table"
             style={{width: '130px'}}
@@ -288,7 +260,7 @@ const EventTable = (props) => {
           >
             <option value="table">View Table</option>
             <option value="gallery">View Gallery</option>
-          </select>
+          </select> */}
 
           <select
             id="eventsPerPageSelector"
@@ -304,14 +276,14 @@ const EventTable = (props) => {
 
           <select
             id="sortSelector"
-            defaultValue="nameASC"
+            defaultValue="startDateDESC"
             style={{width: '230px'}}
             onChange={() => sortEvents()}
           >
             <option value="startDateDESC">Sort Date: New ⮕ Old</option>
             <option value="startDateASC">Sort Date: Old ⮕ New</option>
-            <option value="eventASC">Sort Event: A ⮕ Z</option>
-            <option value="eventDESC">Sort Event: Z ⮕ A</option>
+            <option value="nameASC">Sort Event: A ⮕ Z</option>
+            <option value="nameDESC">Sort Event: Z ⮕ A</option>
             <option value="sizeASC">Sort Size: Large ⮕ Small </option>
             <option value="sizeDESC">Sort Size: Small ⮕ Large </option>
             <option value="formatASC">Sort Format: New ⮕ Old</option>
@@ -356,8 +328,8 @@ const EventTable = (props) => {
               </tr>
             </thead>
             <tbody>
-              {eventsArray.length ? (
-                eventsArray.map((event, index) => {
+              {filteredEvents.length ? (
+                filteredEvents.slice(firstIndex, lastIndex).map((event, index) => {
                   return <EventRow key={event.id} index={index} event={event} />
                 })
               ) : (
@@ -368,8 +340,8 @@ const EventTable = (props) => {
         </div>
       ) : (
         <div id="eventGalleryFlexBox">
-          {eventsArray.length ? (
-            eventsArray.map((event, index) => {
+          {/* {filteredEvents.length ? (
+            filiteredEvents.slice(firstIndex, lastIndex).map((event, index) => {
               return <
                         EventImage 
                         key={event.id} 
@@ -382,7 +354,7 @@ const EventTable = (props) => {
             })
           ) : (
             <div />
-          )}
+          )} */}
         </div>
       )}
 

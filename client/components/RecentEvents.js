@@ -26,7 +26,7 @@ const RecentEvents = (props) => {
             <div className="divider"/>
             <div id="recent-events" className="recent-events">
                 <h2>Recent Events:</h2>
-                <div className="recent-events-flex-box">
+                <div className="recent-events-flexbox">
                 {
                     recentEvents.map((event) => <div/>)
                 }

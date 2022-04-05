@@ -22,8 +22,8 @@ const DeckRow = (props) => {
   return (
       <tr style={{textAlign:'center'}} onClick={() => goToDeck()} className={`${evenOrOdd}-search-results-row`}>
         <td>
-          <div className="format-cell-flex-box">
-            <img style={{width:'32px'}} src={backgroundImage}/>
+          <div className="format-cell-flexbox">
+            <img src={backgroundImage}/>
             <div>{formatName}</div>
           </div>
         </td>
@@ -32,8 +32,8 @@ const DeckRow = (props) => {
         <td>{deck.builder || '?'}</td>
         <td>{ordinalize(deck.placement) || 'N/A'}</td>
         <td>
-          <div className="event-cell">
-            <img style={{width:'32px'}} src={communityLogo}/>
+          <div className="community-cell-flexbox">
+            <img src={communityLogo}/>
             <div>{deck.event || '-'}</div>
           </div>
         </td>

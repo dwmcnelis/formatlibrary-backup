@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useLayoutEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import CardImage from './CardImage'
 import axios from 'axios'
 import {capitalize, dateToVerbose, ordinalize} from '../../functions/utility'
@@ -9,6 +10,10 @@ import { FL, GF, EF } from '../../public/images/logos'
 
 const SingleDeck = (props) => {
     const [deck, setDeck] = useState({})
+    const history = useHistory()
+    const goToEvent = () => history.push(`/events/${deck.event}`)
+    const goToFormat = () => history.push(`/formats/${deck.format}`)
+    const goToPlayer = () => history.push(`/players/${deck.player.tag.slice(0, -5)}${deck.player.tag.slice(-4)}`)
 
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])
@@ -77,7 +82,13 @@ const SingleDeck = (props) => {
           <tr className="single-deck-info-1">
             <td>
               <div className="single-deck-cell">
-                <div style={{paddingRight:'7px'}}><b>Builder:</b> {deck.player ? deck.player.name : deck.builder}</div>
+                {
+                  deck.player && deck.player.tag ? (
+                    <div onClick={() => goToPlayer()} className="single-deck-builder-link" style={{paddingRight:'7px'}}><b>Builder:</b> {deck.player.name}</div>
+                  ) : (
+                    <div style={{paddingRight:'7px'}}><b>Builder:</b> {deck.builder}</div>
+                  )
+                }
               </div>       
             </td>
             <td>
@@ -87,16 +98,16 @@ const SingleDeck = (props) => {
               </div>
             </td>
             <td>
-              <div className="single-deck-cell">
-                <div style={{paddingRight:'7px'}}><b>Event:</b> {deck.event}</div> 
+              <div onClick={() => goToEvent()} className="single-deck-cell">
+                <div className="single-deck-event-link" style={{paddingRight:'7px'}}><b>Event:</b> {deck.event}</div> 
                 <img style={{width:'28px'}} src={communityLogo}/>
               </div>   
             </td>
           </tr>
           <tr className="single-deck-info-2">
             <td>
-              <div className="single-deck-cell">
-                <div style={{paddingRight:'7px'}}><b>Format:</b> {capitalize(deck.format, true)}</div>
+              <div onClick={() => goToFormat()} className="single-deck-cell">
+                <div className="single-deck-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {capitalize(deck.format, true)}</div>
                 <img style={{width:'28px'}} src={formatImage}/>
               </div>       
             </td>
@@ -115,7 +126,7 @@ const SingleDeck = (props) => {
         </tbody>
       </table>
       <div id="main" className="deck-bubble">
-          <div id="main" className="deck-flex-box">
+          <div id="main" className="deck-flexbox">
           {
             deck.main.map((card, index) => <CardImage width='72px' padding='1px' margin='0px' key={`${deck.id}-${index}-${card.id}`} card={card}/>)
           }
@@ -124,7 +135,7 @@ const SingleDeck = (props) => {
       {
         deck.side.length ? (
           <div id="side" className="deck-bubble">
-            <div id="side" className="deck-flex-box">
+            <div id="side" className="deck-flexbox">
               {
                 deck.side.map((card, index) => <CardImage width='48px' padding='0.5px' margin='0px' key={`${deck.id}-${index}-${card.id}`} card={card}/>)
               }
@@ -135,7 +146,7 @@ const SingleDeck = (props) => {
       {
         deck.extra.length ? (
           <div id="extra" className="deck-bubble">
-            <div id="extra" className="deck-flex-box">
+            <div id="extra" className="deck-flexbox">
               {
                 deck.extra.map((card, index) => <CardImage width='48px' padding='0.5px' margin='0px' key={`${deck.id}-${index}-${card.id}`} card={card}/>)
               }

@@ -8,8 +8,6 @@ const BanList = (props = {}) => {
   const [banlist, setBanlist] = useState(null)
   const {format} = props
   const BL = format ? format.banlist : props.match.params.id
-  console.log('BL', BL)
-  console.log('banlist', banlist)
 
   // USE EFFECT SET CARD
   useEffect(() => {
@@ -60,7 +58,7 @@ const convertToTitle = (param = '') => {
           <div>
             <div id="forbidden" className="banlist-bubble">
               <div id="forbidden" className="banlist-category">Forbidden:</div>
-                <div id="forbidden" className="banlist-flex-box">
+                <div id="forbidden" className="banlist-flexbox">
                   {
                     forbidden.map((el) => 
                     <
@@ -83,7 +81,7 @@ const convertToTitle = (param = '') => {
       
       <div id="limited" className="banlist-bubble">
         <div id="limited" className="banlist-category">Limited:</div>
-          <div id="limited" className="banlist-flex-box">
+          <div id="limited" className="banlist-flexbox">
           {
             limited.map((el) => 
             <
@@ -102,7 +100,7 @@ const convertToTitle = (param = '') => {
       <br />
       <div id="semi-limited" className="banlist-bubble">
         <div id="semi-limited" className="banlist-category">Semi-Limited:</div>
-          <div id="semi-limited" className="banlist-flex-box">
+          <div id="semi-limited" className="banlist-flexbox">
           {
             semiLimited.map((el) => 
               <

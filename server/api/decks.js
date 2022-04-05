@@ -42,6 +42,58 @@ router.get('/popular/:format', async (req, res, next) => {
 })
 
 /* eslint-disable complexity */
+router.get('/frequent/:id', async (req, res, next) => {
+    try {
+        const decks = await Deck.findAll({ 
+            where: {
+                playerId: req.params.id,
+                deckType: {[Op.not]: 'other'}
+            }
+        })
+
+        if (!decks.length) return false
+        
+        const freqs = decks.reduce((acc, curr) => (acc[curr.deckType] ? acc[curr.deckType]++ : acc[curr.deckType] = 1, acc), {})
+        const arr = Object.entries(freqs).sort((a, b) => b[1] - a[1]).map((e) => e[0]).slice(0, 6)
+        const data = []
+
+        for (let i = 0; i < arr.length; i++) {
+            const name = arr[i]
+            const deckType = await DeckType.findOne({
+                where: {
+                    name: name
+                }
+            })
+
+            if (!deckType) continue
+            data.push(deckType)
+        }
+
+        res.json(data)
+    } catch (err) {
+        next(err)
+    }
+})
+
+/* eslint-disable complexity */
+router.get('/player/:id', async (req, res, next) => {
+    try {
+        const decks = await Deck.findAll({ 
+            where: {
+                playerId: req.params.id,
+                display: true
+            },
+            order: [["placement", "ASC"], ["createdAt", "ASC"]],
+            limit: 10
+        })
+
+        return res.json(decks)
+    } catch (err) {
+        next(err)
+    }
+})
+
+/* eslint-disable complexity */
 router.get('/like/:id', async (req, res, next) => {
     try {
         const deck = await Deck.findOne({ 
@@ -84,108 +136,14 @@ router.get('/all', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
             where: { display: true },
-            order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
-            include: Player
+            order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]]
         })
 
-        const data = []
-        for (let i = 0 ; i < decks.length; i++) {
-            const deck = decks[i]
-            const { id, builder, deckType, deckCategory, format, ydk, event, placement, community, downloads, views, rating, createdAt, playerId, tournamentId, player } = deck
-            const main = []
-            const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split('\n').filter((e) => e.length)
-    
-            for (let i = 0; i < mainKonamiCodes.length; i++) {
-                let konamiCode = mainKonamiCodes[i]
-                while (konamiCode.length < 8) konamiCode = '0' + konamiCode
-                const card = await Card.findOne({ where: { konamiCode }})
-                if (!card) continue
-                main.push(card)
-            }
-
-            main.sort((a, b) => {
-                if (a.sortPriority > b.sortPriority) {
-                    return 1
-                } else if (b.sortPriority > a.sortPriority) {
-                    return -1
-                } else if (a.name > b.name) {
-                    return 1
-                } else if (b.name > a.name) {
-                    return -1
-                } else {
-                    return false
-                }
-            })
-            data.push({ id, builder, deckType, deckCategory, builder, format, ydk, event, placement, community, downloads, views, rating, createdAt, playerId, tournamentId, player, main })
-        }
-
-        res.json(data)
+        res.json(decks)
     } catch (err) {
         next(err)
     }
 })
-
-router.get('/some', async (req, res, next) => {
-    const { event, builder, format, deckType, deckCategory, day, month, year } = req.query
-    const now = new Date()
-    const FY = now.getFullYear()
-    const date = `${year || FY}-${month < 10 ? `0${month}` : month || 12}-${day < 10 ? `0${day}` : day || 31}`
-
-    try {
-      const filters = { 
-            createdAt: { [Op.lte]: date },
-            // display: true
-      }
-
-      if (event) filters.event = { [Op.iLike]: `%${event}%` }
-      if (builder) filters.builder = { [Op.iLike]: `%${builder}%` }
-      if (format) filters.format = { [Op.iLike]: `%${format}%` }
-      if (deckType) filters.deckType = { [Op.iLike]: `%${deckType}%` }
-      if (deckCategory) filters.deckCategory = { [Op.iLike]: `%${deckCategory}%` }
-      
-      const decks = await Deck.findAll({
-        where: filters,
-        display: true,
-        order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]]
-      })
-
-      const data = []
-      for (let i = 0 ; i < decks.length; i++) {
-          const deck = decks[i]
-          const { id, builder, deckType, deckCategory, format, ydk, event, community, placement, downloads, views, rating, createdAt, playerId, tournamentId, player } = deck
-          const main = []
-          const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split('\n').filter((e) => e.length)
-  
-          for (let i = 0; i < mainKonamiCodes.length; i++) {
-              let konamiCode = mainKonamiCodes[i]
-              while (konamiCode.length < 8) konamiCode = '0' + konamiCode
-              const card = await Card.findOne({ where: { konamiCode }})
-              if (!card) continue
-              main.push(card)
-          }
-
-          main.sort((a, b) => {
-              if (a.sortPriority > b.sortPriority) {
-                  return 1
-              } else if (b.sortPriority > a.sortPriority) {
-                  return -1
-              } else if (a.name > b.name) {
-                  return 1
-              } else if (b.name > a.name) {
-                  return -1
-              } else {
-                  return false
-              }
-          })
-
-          data.push({ id, builder, deckType, deckCategory, builder, format, ydk, event, community, placement, downloads, views, rating, createdAt, playerId, tournamentId, player, main })
-      }
-
-      res.json(data)
-    } catch (err) {
-      next(err)
-    }
-  })
 
 /* eslint-disable complexity */
 router.get('/first/:x', async (req, res, next) => {

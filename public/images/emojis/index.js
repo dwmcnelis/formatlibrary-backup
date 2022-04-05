@@ -57,7 +57,7 @@ import Sorc from './sorc.png'
 import Spore from './spore.png'
 import Stein from './stein.png'
 import Subs from './subs.png'
-import TDrag from './tdrag.png'
+import Colossus from './colossus.png'
 import TGU from './tgu.png'
 import Tidal from './tidal.png'
 import TKing from './tking.png'
@@ -171,7 +171,7 @@ export {
     Spore,
     Stein,
     Subs,
-    TDrag,
+    Colossus,
     TGU,
     Tidal,
     TKing,

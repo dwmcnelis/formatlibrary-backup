@@ -11,36 +11,10 @@ router.get('/all', async (req, res, next) => {
     const tournaments = await Tournament.findAll({
       where: {
         display: true
-      }
-    })
-    res.json(tournaments)
-  } catch (err) {
-    next(err)
-  }
-})
-
-
-router.get('/some', async (req, res, next) => {
-  const { event, format, day, month, year } = req.query
-  const now = new Date()
-  const FY = now.getFullYear()
-  const date = `${year || FY}-${month < 10 ? `0${month}` : month || 12}-${day < 10 ? `0${day}` : day || 31}`
-
-  try {
-    const filters = { 
-          createdAt: { [Op.lte]: date },
-          display: true
-    }
-
-    if (event) filters.name = { [Op.iLike]: `%${event}%` }
-    if (format) filters.format = { [Op.iLike]: `%${format}%` }
-    
-    const tournaments = await Tournament.findAll({
-      where: filters,
-      display: true,
+      },
       order: [["startDate", "DESC"], ["size", "DESC"]]
     })
-
+    
     res.json(tournaments)
   } catch (err) {
     next(err)
@@ -67,6 +41,12 @@ router.get('/:id', async (req, res, next) => {
     const tournament = await Tournament.findOne({
       where: {
         shortName: req.params.id
+      }
+    })
+
+    const winner = await Player.findOne({
+      where: {
+        id: tournament.winnerId
       }
     })
 
@@ -155,6 +135,7 @@ router.get('/:id', async (req, res, next) => {
 
     const data = {
       event: tournament,
+      winner: winner,
       topDecks: topDecks,
       metagame: {
         deckTypes,

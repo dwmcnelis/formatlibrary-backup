@@ -70,7 +70,8 @@ const composeCongratsPost = async () => {
 
         const rows = Math.ceil(main.length / 10)
         const card_width = 72
-        const canvas = Canvas.createCanvas(card_width * 10 + 9, 102 * rows + rows - 1)
+        const card_height = 105
+        const canvas = Canvas.createCanvas(card_width * 10 + 9, card_height * rows + rows - 1)
         const context = canvas.getContext('2d')
 
         for (let i = 0; i < main.length; i++) {
@@ -78,7 +79,7 @@ const composeCongratsPost = async () => {
             const row = Math.floor(i / 10)
             const col = i % 10
             const image = await Canvas.loadImage(`./public/images/cards/${card.ypdId}.jpg`) 
-            context.drawImage(image, (card_width + 1) * col, row * 103, card_width, 102)
+            context.drawImage(image, (card_width + 1) * col, row * (card_height + 1), card_width, card_height)
         }
 
         const message = tournament.series ? `Enter the next <i>${tournament.cleanName.replace(/[0-9]/g, '').trim()}</i> to see if you can knock out the reigning champ!` :
@@ -105,7 +106,7 @@ const composeCongratsPost = async () => {
                     `${tournament.winner} won <a className="blogpost-event-link" href="/events/${tournament.shortName}">${tournament.cleanName}</a> on ${publishDate} with a ${popularDecks.includes(deck.deckType) ? 'popular' : 'rogue'} deck, ${capitalize(deck.deckType, true)}!` +
                 `</p>` +
                 `<a className="blogpost-deck-link" href="/decks/${deck.id}">` +
-                    `<img className="blogpost-deck" src="/images/decks/${deck.id}.png"/>` +
+                    `<img className="blogpost-deck" src="/images/decks/previews/${deck.id}.png"/>` +
                 `</a>` +
                 `<p className="blogpost-paragraph">${message}</p>`+
             `</div>`
@@ -121,10 +122,67 @@ const composeCongratsPost = async () => {
         })
 
         const buffer = canvas.toBuffer('image/png')
-        fs.writeFileSync(`./public/images/decks/${deck.id}.png`, buffer)
+        fs.writeFileSync(`./public/images/decks/previews/${deck.id}.png`, buffer)
 
         console.log('created congrats blogpost')
     }
 }
 
+const composeThumbnails = async () => {
+    const decks = await Deck.findAll({
+        where: {
+            event: {[Op.not]: null }
+        }
+    })
+
+    if (!decks.length) return console.log('no decks found')
+
+    for (let i = 0; i < decks.length; i++) {
+        const deck = decks[i]
+        const main = []
+        const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split('\n').filter((e) => e.length)
+
+        for (let i = 0; i < mainKonamiCodes.length; i++) {
+            let konamiCode = mainKonamiCodes[i]
+            while (konamiCode.length < 8) konamiCode = '0' + konamiCode
+            const card = await Card.findOne({ where: { konamiCode }})
+            if (!card) continue
+            main.push(card)
+        }
+
+        main.sort((a, b) => {
+            if (a.sortPriority > b.sortPriority) {
+                return 1
+            } else if (b.sortPriority > a.sortPriority) {
+                return -1
+            } else if (a.name > b.name) {
+                return 1
+            } else if (b.name > a.name) {
+                return -1
+            } else {
+                return false
+            }
+        })
+        
+        const rows = Math.ceil(main.length / 10)
+        const card_width = 36
+        const card_height = 52.5
+        const canvas = Canvas.createCanvas(card_width * 10, 52.5 * rows)
+        const context = canvas.getContext('2d')
+
+        for (let i = 0; i < main.length; i++) {
+            const card = main[i]
+            const row = Math.floor(i / 10)
+            const col = i % 10
+            const image = await Canvas.loadImage(`./public/images/cards/${card.ypdId}.jpg`) 
+            context.drawImage(image, card_width * col, row * card_height, card_width, card_height)
+        }
+
+        const buffer = canvas.toBuffer('image/png')
+        fs.writeFileSync(`./public/images/decks/previews/${deck.id}.png`, buffer)
+        console.log('saved deck thumbnail')
+    }
+}
+
 composeCongratsPost()
+// composeThumbnails()

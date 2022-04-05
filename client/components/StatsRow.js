@@ -1,5 +1,6 @@
 
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { ordinalize } from '../../functions/utility'
 import {god, legend, master, diamond, platinum, gold, silver, bronze, rock, sad, mad} from '../../public/images/emojis'
 
@@ -41,9 +42,11 @@ const StatsRow = (props) => {
     const {elo, wins, losses, player} = stats
     if (!player) return <tr/>
     const evenOrOdd = props.index % 2 ? 'even' : 'odd'
-  
+    const history = useHistory()
+    const goToPlayer = () => history.push(`/players/${player.tag.slice(0, -5)}${player.tag.slice(-4)}`)
+
     return (
-        <tr className={`${evenOrOdd}-search-results-row`}>
+        <tr onClick={() => goToPlayer()} className={`${evenOrOdd}-search-results-row`}>
             <td>{ordinalize(index + 1)}</td>
             <td>{player.name}</td>
             <td>{Math.round(100 * elo)/100}</td>

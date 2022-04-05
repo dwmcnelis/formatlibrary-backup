@@ -22,6 +22,22 @@ router.get('/leaders/:format', async (req, res, next) => {
   }
 })
 
+router.get('/:playerId', async (req, res, next) => {
+  try {
+    const stats = await Stats.findAll({
+      where: {
+        playerId: req.params.playerId
+      },
+      order: [['elo', 'DESC']],
+      limit: 10
+    })
+
+    res.json(stats)
+  } catch (err) {
+    next(err)
+  }
+})
+
 
 /* eslint-disable complexity */
 router.get('/', async (req, res, next) => {

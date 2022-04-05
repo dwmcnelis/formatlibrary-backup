@@ -5,7 +5,6 @@ import LeaderBoard from './LeaderBoard'
 import PopularDecks from './PopularDecks'
 import RecentEvents from './RecentEvents'
 import axios from 'axios'
-import * as artworks from '../../public/images/artworks'
 
 const FormatIntro = (props = {}) => {
   const [format, setFormat] = useState(null)
@@ -51,7 +50,7 @@ const FormatIntro = (props = {}) => {
             <a href="#banlist">Ban List</a>
           </li>
         </div>
-        <img className="format-icon-large" src={artworks[format.icon]} />
+        <img className="format-icon-large" src={`/images/artworks/${format.icon}.jpg`} />
       </div>
 
       <PopularDecks format={format}/>

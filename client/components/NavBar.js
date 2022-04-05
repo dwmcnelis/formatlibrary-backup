@@ -1,13 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import Logo from '../../public/images/logo.png'
 
 //NavBar
 const NavBar = () => (
   <div className="nav-bar">
     <Link to="/">
       <div id="logo">
-        <img src={Logo} />
+        <img src={'/favicon.ico'} />
+        <h1>Format Library</h1>
       </div>
     </Link>
     <div id="nav-menu">

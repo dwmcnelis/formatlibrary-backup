@@ -22,16 +22,16 @@ const EventRow = (props) => {
   return (
       <tr onClick={() => goToEvent()} className={`${evenOrOdd}-search-results-row`}>
         <td>
-          <div className="format-cell-flex-box">
-            <img className="format-cell-img" src={backgroundImage}/>
+          <div className="format-cell-flexbox">
+            <img src={backgroundImage}/>
             <div>{formatName}</div>
           </div>
         </td>
         <td>{event.cleanName}</td>
         <td>{event.winner || 'N/A'}</td>
         <td>
-          <div className="community-cell-flex-box">
-            <img className="community-cell-img" src={communityLogo}/>
+          <div className="community-cell-flexbox">
+            <img src={communityLogo}/>
             <div>{event.community}</div>
           </div>
         </td>

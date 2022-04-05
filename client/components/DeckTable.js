@@ -1,5 +1,4 @@
-/* eslint-disable max-statements */
-/* eslint-disable no-eval */
+
 /* eslint-disable complexity */
 /* eslint-disable max-statements */
 
@@ -14,17 +13,17 @@ import axios from 'axios'
 const DeckTable = (props) => {
   const [page, setPage] = useState(1)
   const [decks, setDecks] = useState([])
+  const [filteredDecks, setFilteredDecks] = useState([])
   const [decksPerPage, setDecksPerPage] = useState(12)
   const [view, setView] = useState('table')
   const [sortBy, setSortBy] = useState(null)
   const [format, setFormat] = useState(null)
   const [allFetched, setAllFetched] = useState(false)
   const [firstXFetched, setFirstXFetched] = useState(false)
-  const [advanced, setAdvanced] = useState(false)
-  const [day, setDay] = useState(null)
-  const [month, setMonth] = useState(null)
-  const [year, setYear] = useState(null)
-  const [logo, setLogo] = useState(null)
+  // const [advanced, setAdvanced] = useState(false)
+  // const [day, setDay] = useState(null)
+  // const [month, setMonth] = useState(null)
+  // const [year, setYear] = useState(null)
 
   const [queryParams, setQueryParams] = useState({
     deckType: null,
@@ -78,30 +77,34 @@ const DeckTable = (props) => {
   }
 
   // SEARCH
-  const search = async (hide = true) => {
-    try {
-      const params = {
-        ...queryParams,
-        format
+  const search = () => {
+    let data = [...decks]
+    const params = Object.keys(queryParams) 
+
+    for (let i = 0; i < params.length; i++) {
+      const param = params[i]
+      const query = queryParams[param]
+
+      if (query) {
+        data = data.filter((d) => d[param].toLowerCase().includes(query.toLowerCase()))
       }
 
-      const { data } = await axios.get(`/api/decks/some`, { params: params })
-      setDecks(data)
-      setPage(1)
-    } catch (err) {
-      console.log(err)
+      if (format) {
+        data = data.filter((d) => d.format.toLowerCase().includes(format.toLowerCase()))
+      }
     }
-
-    if (hide) setAdvanced(false)
+    
+    setFilteredDecks(data)
+    setPage(1)
   }
 
   // RESET
   const reset = () => {
-    document.getElementById('format').value = ''
+    document.getElementById('format').value = null
     document.getElementById('searchBar').value = null
     setPage(1)
     setFormat(null)
-    setAllFetched(false)
+    setFilteredDecks(decks)
     setQueryParams({
       name: null,
       builder: null,
@@ -161,41 +164,42 @@ const DeckTable = (props) => {
     })
   }
 
-  // USE EFFECT firstXFetched
+  // USE EFFECT FETCH FIRST X
   useEffect(() => {
-    if (!firstXFetched) {
+    if (!firstXFetched && !allFetched) {
       const fetchData = async () => {
         const {data} = await axios.get(`/api/decks/first/12`)
         setDecks(data)
+        setFilteredDecks(data)
         setFirstXFetched(true)
-      } 
+      }
 
       fetchData()
     }
   }, [])
 
-  // USE EFFECT allFetched
+  // USE EFFECT FETCH ALL
   useEffect(() => {
-    if (!allFetched) {
+    if (firstXFetched && !allFetched) {
       const fetchData = async () => {
         const {data} = await axios.get(`/api/decks/all`)
         setDecks(data)
+        setFilteredDecks(data)
         setAllFetched(true)
       } 
 
       fetchData()
     }
-  }, [])
+  }, [firstXFetched])
 
-  // USE EFFECT search
+  // USE EFFECT SEARCH
   useEffect(() => {
     search(false)
-  }, [format, day, month, year, queryParams])
+  }, [format, queryParams])
 
   const lastIndex = page * decksPerPage
   const firstIndex = lastIndex - decksPerPage
-  if (decks.length) decks.sort(sortFunctions[sortBy] || undefined)
-  const decksArray = decks.length ? decks.slice(firstIndex, lastIndex) : []
+  if (filteredDecks.length) filteredDecks.sort(sortFunctions[sortBy] || undefined)
   const formatKeys = Object.keys(formats)
 
   // RENDER
@@ -215,8 +219,8 @@ const DeckTable = (props) => {
           type="text"
           placeholder="🔍"
           onChange={() => runQuery()}
-          onKeyDown={() => {
-            if (event.keyCode === 13) search()
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') search()
           }}
         />
 
@@ -233,10 +237,10 @@ const DeckTable = (props) => {
           </select>
 
           <select
-            id="category"
+            id="deckCategory"
             defaultValue="All Categories"
             className="filter"
-            onChange={() => setQueryParams({ ...queryParams, category: document.getElementById('category').value })}
+            onChange={(e) => setQueryParams({ ...queryParams, deckCategory: e.target.value })}
           >
             <option value="All Categories">All Categories</option>
             <option value="Aggro">Aggro</option>
@@ -271,13 +275,13 @@ const DeckTable = (props) => {
         <div className="results" style={{width: '360px'}}>
           Results:{' '}
           {firstXFetched && allFetched
-            ? decks.length
+            ? filteredDecks.length
               ? `${decksPerPage * page - decksPerPage + 1} - ${
-                  decks.length >=
+                filteredDecks.length >=
                   decksPerPage * page
                     ? decksPerPage * page
-                    : decks.length
-                } of ${decks.length}`
+                    : filteredDecks.length
+                } of ${filteredDecks.length}`
               : '0'
             : ''}
         </div>
@@ -366,8 +370,8 @@ const DeckTable = (props) => {
               </tr>
             </thead>
             <tbody>
-              {decksArray.length ? (
-                decksArray.map((deck, index) => {
+              {filteredDecks.length ? (
+                filteredDecks.slice(firstIndex, lastIndex).map((deck, index) => {
                   return <DeckRow key={deck.id} index={index} deck={deck} />
                 })
               ) : (
@@ -378,8 +382,8 @@ const DeckTable = (props) => {
         </div>
       ) : (
         <div id="deckGalleryFlexBox">
-          {decksArray.length ? (
-            decksArray.map((deck, index) => {
+          {filteredDecks.length ? (
+            filteredDecks.slice(firstIndex, lastIndex).map((deck, index) => {
               return <
                         DeckImage 
                         key={deck.id} 

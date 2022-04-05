@@ -40,6 +40,10 @@ const Tournament = db.define('tournaments', {
         type: Sequelize.STRING,   
         allowNull: true
     },
+    winnerId: {
+        type: Sequelize.STRING,   
+        allowNull: true
+    },
     size: {
         type: Sequelize.INTEGER,   
         defaultValue: 0,   

@@ -3,13 +3,8 @@
 import * as formats from '../static/formats.json'
 import {capitalize} from './utility.js'
 
-const atkASC = (a, b) => {
-    return b.atk - a.atk
-}
-
-const atkDESC = (a, b) => {
-    return a.atk - b.atk
-}
+const atkASC = (a, b) => b.atk - a.atk
+const atkDESC = (a, b) => a.atk - b.atk
 
 const dateASC = (a, b) => {
     if (a.tcgDate < b.tcgDate) return -1
@@ -23,21 +18,11 @@ const dateDESC = (a, b) => {
     return 0
 }
 
-const defASC = (a, b) => {
-    return b.def - a.def
-}
+const defASC = (a, b) => b.def - a.def
+const defDESC = (a, b) => a.def - b.def
 
-const defDESC = (a, b) => {
-    return a.def - b.def
-}
-
-const levelASC = (a, b) => {
-    return b.level - a.level
-}
-
-const levelDESC = (a, b) => {
-    return a.level - b.level
-}
+const levelASC = (a, b) => b.level - a.level
+const levelDESC = (a, b) => a.level - b.level
 
 const nameASC = (a, b) => {
     if (a.name < b.name) return -1
@@ -58,18 +43,13 @@ const uploadedASC = (a, b) => {
 }
 
 const uploadedDESC = (a, b) => {
-    if (a.tcgDate < b.tcgDate) return 1
-    if (a.tcgDate > b.tcgDate) return -1
+    if (a.createdAt < b.createdAt) return 1
+    if (a.createdAt > b.createdAt) return -1
     return 0
 }
 
-const placeASC = (a, b) => {
-    return parseInt(a.placement, 10) - parseInt(b.placement, 10)
-}
-
-const placeDESC = (a, b) => {
-    return parseInt(b.placement, 10) - parseInt(a.placement, 10)
-}
+const placeASC = (a, b) => parseInt(a.placement, 10) - parseInt(b.placement, 10)
+const placeDESC = (a, b) => parseInt(b.placement, 10) - parseInt(a.placement, 10)
 
 const builderASC = (a, b) => {
     const builderA = a.builder.toLowerCase()
@@ -147,7 +127,26 @@ const formatDESC = (a, b) => {
     return 0
 }
 
+const startDateASC = (a, b) => {
+    if (a.startDate < b.startDate) return -1
+    if (a.startDate > b.startDate) return 1
+    return 0
+}
+
+const startDateDESC = (a, b) => {
+    if (a.startDate < b.startDate) return 1
+    if (a.startDate > b.startDate) return -1
+    return 0
+}
+
+const sizeASC = (a, b) => parseInt(b.size, 10) - parseInt(a.size, 10)
+const sizeDESC = (a, b) => parseInt(a.size, 10) - parseInt(b.size, 10)
+
 export {
+    startDateASC,
+    startDateDESC,
+    sizeASC,
+    sizeDESC,
     atkASC,
     atkDESC,
     dateASC,

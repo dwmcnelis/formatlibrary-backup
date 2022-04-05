@@ -10,7 +10,8 @@ import {
   SingleEvent, 
   FormatMenu,
   FormatIntro,
-  SingleBanList
+  SingleBanList,
+  PlayerProfile
 } from './components'
 
 const Routes = () => {
@@ -27,6 +28,7 @@ const Routes = () => {
       <Route exact path="/formats/" component={FormatMenu} />
       <Route path="/formats/:id" component={FormatIntro} />
       <Route path="/banlists/:id" component={SingleBanList} />
+      <Route path="/players/:id" component={PlayerProfile} />
     </Switch>
   )
 }

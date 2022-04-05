@@ -26,7 +26,7 @@ const LeaderBoard = (props) => {
 
   return (
     <div id="leaderboard" className="leaderboard">
-      <div className="leaderboard-title-flex-box">
+      <div className="leaderboard-title-flexbox">
         <img style={{ width:'64px'}} src={emojis[props.format.icon]}/>
         <h2 className="leaderboard-title">{capitalize(props.format.name, true)} Leaderboard:</h2>
         <img style={{ width:'64px'}} src={emojis[props.format.icon]}/>

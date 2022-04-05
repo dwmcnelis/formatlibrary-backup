@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useLayoutEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import DeckImage from './DeckImage'
 import {capitalize, dateToVerbose, ordinalize} from '../../functions/utility'
@@ -14,6 +15,7 @@ ChartJS.register(ArcElement, CategoryScale, LinearScale,  BarElement, Title, Too
 
 const SingleEvent = (props) => {
   const [event, setEvent] = useState({})
+  const [winner, setWinner] = useState({})
   const [topDecks, setTopDecks] = useState([])
   const [metagame, setMetagame] = useState({
     deckTypes: [],
@@ -21,6 +23,10 @@ const SingleEvent = (props) => {
     topMainDeckCards: [],
     topSideDeckCards: []
   })
+
+  const history = useHistory()
+  const goToFormat = () => history.push(`/formats/${event.format}`)
+  const goToPlayer = () => history.push(`/players/${winner.tag.slice(0, -5)}${winner.tag.slice(-4)}`)
 
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])
@@ -31,6 +37,7 @@ const SingleEvent = (props) => {
       try {
         const {data} = await axios.get(`/api/tournaments/${props.match.params.id}`)
         setEvent(data.event)
+        setWinner(data.winner)
         setTopDecks(data.topDecks)
         setMetagame(data.metagame)
       } catch (err) {
@@ -122,13 +129,13 @@ const SingleEvent = (props) => {
               <tr className="single-event-info-1">
                 <td>
                   <div className="single-event-cell">
-                    <div style={{paddingRight:'7px'}}><b>Format:</b> {capitalize(event.format, true)}</div>
+                    <div onClick={() => goToFormat()} className="single-event-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {capitalize(event.format, true)}</div>
                     <img style={{width:'32px'}} src={formatEmoji}/>
                   </div>     
                 </td>
                 <td>
                   <div className="single-event-cell">
-                    <div style={{paddingRight:'7px'}}><b>Winner:</b> {event.winner}</div>
+                    <div onClick={() => goToPlayer()} className="single-event-winner-link" style={{paddingRight:'7px'}}><b>Winner:</b> {event.winner}</div>
                     <img style={{width:'32px'}} src={emojis.First}/>
                   </div>  
                 </td>
@@ -175,7 +182,7 @@ const SingleEvent = (props) => {
       <div className="divider"/>
 
       <div id="bracket">
-        <div className="leaderboard-title-flex-box">
+        <div className="leaderboard-title-flexbox">
           <img style={{ width:'64px'}} src={communityLogo}/>
           <h2 className="leaderboard-title">{event.shortName} Top 8 Bracket:</h2>
           <img style={{ width:'64px'}} src={'/images/logos/Challonge.png'}/>
@@ -193,7 +200,7 @@ const SingleEvent = (props) => {
       <div className="divider"/>
 
       <div id="top-decks">
-        <div className="leaderboard-title-flex-box">
+        <div className="leaderboard-title-flexbox">
           <img style={{ width:'64px'}} src={communityLogo}/>
           <h2 className="leaderboard-title">{event.shortName} {topDecks.length > 1 ? `Top ${topDecks.length} Decks` : 'Winning Deck'}:</h2>
           <img style={{ height:'64px'}} src={'/images/emojis/deckbox.png'}/>
@@ -219,7 +226,7 @@ const SingleEvent = (props) => {
       <div className="divider"/>
 
       <div id="metagame-stats">
-        <div className="leaderboard-title-flex-box">
+        <div className="leaderboard-title-flexbox">
           <img style={{ width:'64px'}} src={communityLogo}/>
           <h2 className="leaderboard-title">{event.shortName} Metagame Stats:</h2>
           <img style={{ height:'64px'}} src={'/images/emojis/microscope.png'}/>

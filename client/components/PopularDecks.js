@@ -27,7 +27,7 @@ const PopularDecks = (props) => {
             <div className="divider"/>
             <div id="popular-decks" className="popular-decks">
                 <h2>Popular Decks:</h2>
-                <div className="popular-decks-flex-box">
+                <div className="popular-decks-flexbox">
                 {
                     popularDecks.map((deck) => <DeckThumbnail deck={deck} key={deck.id}/>)
                 }
