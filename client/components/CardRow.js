@@ -55,7 +55,7 @@ const CardRow = (props) => {
   const symbol2 = card.link ? arrows[card.arrows] :
     card.xyz ? Rank :
     category === 'Monster' ? Star :
-    symbols[card.icon]
+    symbols[card.icon.replace('-', '')]
 
   const line2 = card.link ? `Link ${rating}` :
   card.xyz ? `Rank ${level}` :

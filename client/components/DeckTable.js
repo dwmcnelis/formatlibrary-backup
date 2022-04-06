@@ -20,10 +20,6 @@ const DeckTable = (props) => {
   const [format, setFormat] = useState(null)
   const [allFetched, setAllFetched] = useState(false)
   const [firstXFetched, setFirstXFetched] = useState(false)
-  // const [advanced, setAdvanced] = useState(false)
-  // const [day, setDay] = useState(null)
-  // const [month, setMonth] = useState(null)
-  // const [year, setYear] = useState(null)
 
   const [queryParams, setQueryParams] = useState({
     deckType: null,

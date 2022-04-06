@@ -41,14 +41,29 @@ const StatsRow = (props) => {
     const {index, stats} = props
     const {elo, wins, losses, player} = stats
     if (!player) return <tr/>
+    const tag = player.tag || ''
     const evenOrOdd = props.index % 2 ? 'even' : 'odd'
+    const displayName = player.name.length <= 24 ? player.name : player.name.slice(0, 24).split(' ').slice(0, -1).join(' ')
     const history = useHistory()
     const goToPlayer = () => history.push(`/players/${player.tag.slice(0, -5)}${player.tag.slice(-4)}`)
-
+    
     return (
         <tr onClick={() => goToPlayer()} className={`${evenOrOdd}-search-results-row`}>
             <td>{ordinalize(index + 1)}</td>
-            <td>{player.name}</td>
+            <td>
+                <div className="player-cell">
+                    <img 
+                        className="player-cell-pfp"
+                        src={`/images/pfps/${tag.slice(0, -5)}${tag.slice(-4)}.png`}
+                        onError={(e) => {
+                                e.target.onerror = null
+                                e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"
+                            }
+                        }
+                    />
+                    <div>{displayName}</div>
+                </div>
+            </td>
             <td>{Math.round(100 * elo)/100}</td>
             <td>
                 <div className="medal-cell">

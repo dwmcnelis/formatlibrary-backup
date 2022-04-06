@@ -2,10 +2,11 @@
 
 import React, { useState, useEffect } from 'react'
 import CardImage from './CardImage'
+import NotFound from './NotFound'
 import axios from 'axios'
 
 const BanList = (props = {}) => {
-  const [banlist, setBanlist] = useState(null)
+  const [banlist, setBanlist] = useState({})
   const {format} = props
   const BL = format ? format.banlist : props.match.params.id
 
@@ -17,13 +18,15 @@ const BanList = (props = {}) => {
         return setBanlist(data)
       } catch (err) {
         console.log(err)
+        setBanlist(null)
       }
     }
 
     fetchData()
   }, [])
 
-  if (!banlist) return <div />
+  if (banlist === null) return <NotFound/>
+  if (!banlist.limited) return <div />
   const { forbidden, limited, semiLimited } = banlist
 
 /* eslint-disable */
@@ -50,7 +53,7 @@ const convertToTitle = (param = '') => {
 
   return (
     <div id="banlist" className="banlist">
-      <h2 className="banlist-title">{forbidden.length ? 'Forbidden & Limited List' : 'Limited List'}</h2>
+      <h2 className="subheading">{forbidden.length ? 'Forbidden & Limited List' : 'Limited List'}</h2>
       <h3 className="banlist-date">Effective - {date}</h3>
       <br />
       {

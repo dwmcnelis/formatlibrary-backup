@@ -136,7 +136,8 @@ router.get('/all', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
             where: { display: true },
-            order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]]
+            order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
+            include: Player
         })
 
         res.json(decks)
@@ -155,39 +156,7 @@ router.get('/first/:x', async (req, res, next) => {
             include: Player 
         })
 
-        const data = []
-        for (let i = 0 ; i < decks.length; i++) {
-            const deck = decks[i]
-            const { id, builder, deckType, deckCategory, format, ydk, event, community, placement, downloads, views, rating, createdAt, playerId, tournamentId, player } = deck
-            const main = []
-            const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split('\n').filter((e) => e.length)
-    
-            for (let i = 0; i < mainKonamiCodes.length; i++) {
-                let konamiCode = mainKonamiCodes[i]
-                while (konamiCode.length < 8) konamiCode = '0' + konamiCode
-                const card = await Card.findOne({ where: { konamiCode }})
-                if (!card) continue
-                main.push(card)
-            }
-
-            main.sort((a, b) => {
-                if (a.sortPriority > b.sortPriority) {
-                    return 1
-                } else if (b.sortPriority > a.sortPriority) {
-                    return -1
-                } else if (a.name > b.name) {
-                    return 1
-                } else if (b.name > a.name) {
-                    return -1
-                } else {
-                    return false
-                }
-            })
-
-            data.push({ id, builder, deckType, deckCategory, builder, format, ydk, event, community, placement, downloads, views, rating, createdAt, playerId, tournamentId, player, main })
-        }
-
-        res.json(data)
+        res.json(decks)
     } catch (err) {
         next(err)
     }
@@ -203,7 +172,6 @@ router.get('/:id', async (req, res, next) => {
             }, 
             include: Player
         })
-        if (!deck) return {}
 
         const main = []
         const extra = []

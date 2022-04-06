@@ -6,10 +6,7 @@ import axios from 'axios'
 import Badge from './Badge'
 import Placement from './Placement'
 import DeckThumbnail from './DeckThumbnail'
-import {capitalize, dateToVerbose, ordinalize} from '../../functions/utility'
-import formats from '../../static/formats.json'
-import * as emojis from '../../public/images/emojis'
-import { FL, GF, EF } from '../../public/images/logos'
+import NotFound from './NotFound'
 
 const PlayerProfile = (props = {}) => {
     const [player, setPlayer] = useState({})
@@ -28,6 +25,7 @@ const PlayerProfile = (props = {}) => {
                 setPlayer(data)
             } catch (err) {
                 console.log(err)
+                setPlayer(null)
             }
         }
 
@@ -77,10 +75,8 @@ const PlayerProfile = (props = {}) => {
         fetchData()
     }, [player])
 
+    if (player === null) return <NotFound/>
     if (!player.id) return <div />
-    console.log(player)
-    console.log(stats)
-    console.log(decks)
 
     return (
         <div className="body">
@@ -89,7 +85,7 @@ const PlayerProfile = (props = {}) => {
                     <div className="player-profile-title">{player.tag.slice(0, -5)}</div>
                     <img 
                         className="player-pfp" 
-                        src={`https://cdn.discordapp.com/avatars/${player.id}/${player.avatar}.webp`} 
+                        src={`/images/pfps/${player.tag.slice(0, -5)}${player.tag.slice(-4)}.png`} 
                         onError={(e) => {
                                 e.target.onerror = null
                                 e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"

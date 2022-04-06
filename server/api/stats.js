@@ -5,14 +5,14 @@ const {Player, Stats} = require('../db/models')
 module.exports = router
 
 /* eslint-disable complexity */
-router.get('/leaders/:format', async (req, res, next) => {
+router.get('/leaders/:limit/:format', async (req, res, next) => {
   try {
     const stats = await Stats.findAll({
       where: {
         format: req.params.format.replace(' ', '_').replace('-', '_')
       },
       include: Player,
-      limit: 10,
+      limit: parseInt(req.params.limit),
       order: [['elo', 'DESC']]
     })
 

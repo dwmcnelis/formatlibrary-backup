@@ -1,31 +1,44 @@
 
 const router = require('express').Router()
 const {Op} = require('sequelize')
-const {Format} = require('../db/models')
+const {Format, Deck, Stats, Tournament} = require('../db/models')
 
 module.exports = router
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:name', async (req, res, next) => {
   try {
     const format = await Format.findOne({
       where: {
-        name: { [Op.iLike]: req.params.id }
+        name: { [Op.iLike]: req.params.name.replace(' ', '_').replace('-', '_') }
       }
     })
 
-    if (format) return res.json(format)
-  } catch (err) {
-    next(err)
-  }
-
-  try {
-    const format = await Format.findOne({
+    const deckCount = await Deck.count({
       where: {
-        id: req.params.id
+        format: format.name.replace(' ', '_').replace('-', '_').toLowerCase()
       }
     })
 
-    if (format) return res.json(format)
+    const eventCount = await Tournament.count({
+      where: {
+        format: format.name.replace(' ', '_').replace('-', '_').toLowerCase()
+      }
+    })
+
+    const statsCount = await Stats.count({
+      where: {
+        format: format.name.replace(' ', '_').replace('-', '_').toLowerCase()
+      }
+    })
+
+    const data = {
+      format,
+      deckCount,
+      eventCount,
+      statsCount
+    }
+
+    res.json(data)
   } catch (err) {
     next(err)
   }

@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import CardImage from './CardImage'
+import NotFound from './NotFound'
 import axios from 'axios'
 import {capitalize, dateToVerbose, ordinalize} from '../../functions/utility'
 import formats from '../../static/formats.json'
@@ -26,12 +27,14 @@ const SingleDeck = (props) => {
         setDeck(data)
       } catch (err) {
         console.log(err)
+        setDeck(null)
       }
     }
 
     uploadDeck()
   }, [])
 
+  if (deck === null) return <NotFound/>
   if (!deck.id) return <div />
   const formatName = capitalize(deck.format, true) || '?'
   const formatImage = emojis[formats[formatName].logo] || ''
@@ -50,6 +53,8 @@ const SingleDeck = (props) => {
     deck.placement === 2 ? emojis.Second :
     deck.placement === 3 ? emojis.Third :
     emojis.Consolation
+  
+  const tag = deck.player && deck.player.tag ? deck.player.tag : ''
 
   const addLike = async () => {
     const res = await axios.get(`/api/decks/like/${props.match.params.id}`)
@@ -84,7 +89,19 @@ const SingleDeck = (props) => {
               <div className="single-deck-cell">
                 {
                   deck.player && deck.player.tag ? (
-                    <div onClick={() => goToPlayer()} className="single-deck-builder-link" style={{paddingRight:'7px'}}><b>Builder:</b> {deck.player.name}</div>
+                    <div onClick={() => goToPlayer()} className="single-deck-builder-link">
+                      <b>Builder: </b>
+                      <p>{deck.player.name}</p>
+                      <img 
+                        className="single-deck-builder-cell-pfp"
+                        src={`/images/pfps/${tag.slice(0, -5)}${tag.slice(-4)}.png`}
+                        onError={(e) => {
+                                e.target.onerror = null
+                                e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"
+                            }
+                        }
+                      />
+                    </div>
                   ) : (
                     <div style={{paddingRight:'7px'}}><b>Builder:</b> {deck.builder}</div>
                   )

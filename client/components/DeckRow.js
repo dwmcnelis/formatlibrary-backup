@@ -18,6 +18,8 @@ const DeckRow = (props) => {
       deck.community === 'GoatFormat.com' ? GF :
       deck.community === 'EdisonFormat.com' ? EF :
       ''
+
+  const tag = deck.player && deck.player.tag ? deck.player.tag : ''
   
   return (
       <tr style={{textAlign:'center'}} onClick={() => goToDeck()} className={`${evenOrOdd}-search-results-row`}>
@@ -29,7 +31,20 @@ const DeckRow = (props) => {
         </td>
         <td>{capitalize(deck.deckType, true) || '?'}</td>
         <td>{capitalize(deck.deckCategory, true) || '?'}</td>
-        <td>{deck.builder || '?'}</td>
+        <td>
+          <div className="player-cell">
+            <img 
+                className="player-cell-pfp"
+                src={`/images/pfps/${tag.slice(0, -5)}${tag.slice(-4)}.png`}
+                onError={(e) => {
+                        e.target.onerror = null
+                        e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"
+                    }
+                }
+            />
+            <div>{deck.builder || '?'}</div>
+          </div>
+        </td>
         <td>{ordinalize(deck.placement) || 'N/A'}</td>
         <td>
           <div className="community-cell-flexbox">

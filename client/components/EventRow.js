@@ -18,6 +18,8 @@ const EventRow = (props) => {
       event.community === 'GoatFormat.com' ? GF :
       event.community === 'EdisonFormat.com' ? EF :
       ''
+      
+  const tag = event.player && event.player.tag ? event.player.tag : ''
   
   return (
       <tr onClick={() => goToEvent()} className={`${evenOrOdd}-search-results-row`}>
@@ -28,7 +30,20 @@ const EventRow = (props) => {
           </div>
         </td>
         <td>{event.cleanName}</td>
-        <td>{event.winner || 'N/A'}</td>
+        <td>
+          <div className="player-cell">
+            <img 
+                className="player-cell-pfp"
+                src={`/images/pfps/${tag.slice(0, -5)}${tag.slice(-4)}.png`}
+                onError={(e) => {
+                        e.target.onerror = null
+                        e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"
+                    }
+                }
+            />
+            <div>{event.winner || 'N/A'}</div>
+          </div>
+        </td>
         <td>
           <div className="community-cell-flexbox">
             <img src={communityLogo}/>

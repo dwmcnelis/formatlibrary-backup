@@ -94,8 +94,6 @@ const createApp = () => {
   })
 }
 
-console.log('PORT', PORT)
-
 const startListening = () => {
   console.log('start Listening...')
   // start listening (and create a 'server' object representing our server)

@@ -29,8 +29,8 @@ Deck.belongsTo(Player)
 Player.hasMany(Stats)
 Stats.belongsTo(Player)
 
-// Player.hasMany(Tournament)
-// Tournament.belongsTo(Player)
+Player.hasMany(Tournament)
+Tournament.belongsTo(Player)
 
 Set.hasMany(Print)
 Print.belongsTo(Set)

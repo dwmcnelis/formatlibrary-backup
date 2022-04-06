@@ -1,10 +1,11 @@
 /* eslint-disable max-statements */
 
 import React, { useState, useEffect, useLayoutEffect } from 'react'
-import NavBar from './NavBar'
+import NotFound from './NotFound'
 import PrintRow from './PrintRow'
 import StatusBox from './StatusBar'
 import axios from 'axios'
+import { dateToVerbose } from '../../functions/utility'
 
   // eslint-disable-next-line complexity
 const SingleCard = (props = {}) => {
@@ -25,12 +26,14 @@ const SingleCard = (props = {}) => {
         setPrints(data.prints)
       } catch (err) {
         console.log(err)
+        setCard(null)
       }
     } 
 
     fetchData()
   }, [])
 
+  if (card === null) return <NotFound/>
   if (!card.id) return <div />
   const statusArr = Object.entries(status)
   const slicedStatusArr = statusArr.slice(2, 60)
@@ -61,14 +64,13 @@ const SingleCard = (props = {}) => {
     null
 
   const symbol = card.category === 'Monster' ? null :
-    card.continuous ? `/images/symbols/continuous.png` :
-    card.field ? `/images/symbols/field.png` : 
-    card.ritual ? `/images/symbols/ritual.png` : 
-    card.quick_play ? `/images/symbols/quick-play.png` : 
-    card.normal ? `/images/symbols/normal.png` : 
-    card.field ? `/images/symbols/field.png` : 
-    card.equip ? `/images/symbols/equip.png` :  
-    card.counter ? `/images/symbols/counter.png` : 
+    card.icon === 'Continuous' ? `/images/symbols/continuous.png` :
+    card.icon === 'Field' ? `/images/symbols/field.png` : 
+    card.icon === 'Ritual' ? `/images/symbols/ritual.png` : 
+    card.icon === 'Quick-Play' ? `/images/symbols/quick-play.png` : 
+    card.icon === 'Normal' ? `/images/symbols/normal.png` : 
+    card.icon === 'Equip' ? `/images/symbols/equip.png` :  
+    card.icon === 'Counter' ? `/images/symbols/counter.png` : 
     null
 
     const imagePath = `/images/cards/${card.ypdId}.jpg`
@@ -162,7 +164,7 @@ const SingleCard = (props = {}) => {
                     </tr>
                     <tr className="single-card-date-row">
                       <td colSpan="5">
-                        Release Date - {card.tcgDate.slice(0, 10)}
+                        Release Date: {dateToVerbose(card.tcgDate, false, false)}
                       </td>
                     </tr>
                   </tbody>
@@ -205,7 +207,7 @@ const SingleCard = (props = {}) => {
                     </tr>
                     <tr className="single-card-date-row">
                       <td colSpan="5">
-                        Release Date - {card.tcgDate.slice(0, 10)}
+                        Release Date: {dateToVerbose(card.tcgDate, false, false)}
                       </td>
                     </tr>
                   </tbody>
@@ -213,23 +215,23 @@ const SingleCard = (props = {}) => {
               </table>
             </div>
             <br />
-            <span style={{padding: '10px', position: 'relative', left: '2.5%'}}>
-              Status History:
-            </span>
-            <div className="status-box">
-              {slicedStatusArr.map((elem) => <StatusBox key={elem[0]} status={elem}/>)}
+            <div className="status-flexbox">
+              <div>Status History:</div>
+              <div className="status-box">
+                {slicedStatusArr.map((elem) => <StatusBox key={elem[0]} status={elem}/>)}
+              </div>
+            </div>
+            <div className="prints-flexbox">
+              <div>Prints:</div>
+              <div className="print-box">
+                <table>
+                  <tbody>
+                    {prints.map((print, index) => <PrintRow key={print.id} index={index} print={print}/>)}
+                  </tbody>
+                </table>
+              </div>
             </div>
             <br />
-            <span style={{padding: '10px', position: 'relative', left: '2.5%'}}>
-              Prints:
-            </span>
-            <div className="print-box">
-              <table>
-                <tbody>
-                  {prints.map((print, index) => <PrintRow key={print.id} index={index} print={print}/>)}
-                </tbody>
-              </table>
-            </div>
             <br />
             <br />
             <br />

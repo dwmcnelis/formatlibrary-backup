@@ -40,7 +40,7 @@ const Tournament = db.define('tournaments', {
         type: Sequelize.STRING,   
         allowNull: true
     },
-    winnerId: {
+    playerId: {
         type: Sequelize.STRING,   
         allowNull: true
     },

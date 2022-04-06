@@ -12,12 +12,49 @@ router.get('/all', async (req, res, next) => {
       where: {
         display: true
       },
+      include: Player,
       order: [["startDate", "DESC"], ["size", "DESC"]]
     })
     
     res.json(tournaments)
   } catch (err) {
     next(err)
+  }
+})
+
+
+/* eslint-disable complexity */
+router.get('/recent/:format', async (req, res, next) => {
+  try {
+      const tournaments = await Tournament.findAll({ 
+          where: { 
+            display: true,
+            format: req.params.format.toLowerCase()
+          },
+          include: Player,
+          order: [["startDate", "DESC"], ["size", "DESC"]],
+          limit: 6
+      })
+
+      const winners = []
+
+      for (let i = 0; i < tournaments.length; i++) {
+        const tournament = tournaments[i]
+        const winner = await Player.findOne({ where: {
+          id: tournament.playerId
+        }})
+
+        winners.push(winner)
+      }
+
+      const data = {
+        tournaments,
+        winners
+      }
+
+      res.json(data)
+  } catch (err) {
+      next(err)
   }
 })
 
@@ -41,16 +78,11 @@ router.get('/:id', async (req, res, next) => {
     const tournament = await Tournament.findOne({
       where: {
         shortName: req.params.id
-      }
+      },
+      include: Player
     })
 
-    const winner = await Player.findOne({
-      where: {
-        id: tournament.winnerId
-      }
-    })
-
-    const rawTopDecks = await Deck.findAll({
+    const topDecks = await Deck.findAll({
       where: {
         display: true,
         tournamentId: tournament.id
@@ -58,38 +90,6 @@ router.get('/:id', async (req, res, next) => {
       order: [["placement", "ASC"], ["builder", "ASC"]],
       include: Player
     })
-
-    const topDecks = []
-    for (let i = 0 ; i < rawTopDecks.length; i++) {
-        const deck = rawTopDecks[i]
-        const { id, builder, deckType, deckCategory, format, ydk, event, placement, community, downloads, views, rating, createdAt, playerId, tournamentId, player } = deck
-        const main = []
-        const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split('\n').filter((e) => e.length)
-
-        for (let i = 0; i < mainKonamiCodes.length; i++) {
-            let konamiCode = mainKonamiCodes[i]
-            while (konamiCode.length < 8) konamiCode = '0' + konamiCode
-            const card = await Card.findOne({ where: { konamiCode }})
-            if (!card) continue
-            main.push(card)
-        }
-
-        main.sort((a, b) => {
-            if (a.sortPriority > b.sortPriority) {
-                return 1
-            } else if (b.sortPriority > a.sortPriority) {
-                return -1
-            } else if (a.name > b.name) {
-                return 1
-            } else if (b.name > a.name) {
-                return -1
-            } else {
-                return false
-            }
-        })
-
-        topDecks.push({ id, builder, deckType, deckCategory, builder, format, ydk, event, placement, community, downloads, views, rating, createdAt, playerId, tournamentId, player, main })
-    }
 
     const allDecks = await Deck.findAll({
       where: {
@@ -135,7 +135,7 @@ router.get('/:id', async (req, res, next) => {
 
     const data = {
       event: tournament,
-      winner: winner,
+      winner: tournament.player,
       topDecks: topDecks,
       metagame: {
         deckTypes,

@@ -9,6 +9,26 @@ const { Op } = require('sequelize')
 const { capitalize, arrayToObject, dateToVerbose } = require('../functions/utility')
 const formats = require('../static/formats.json')
 
+const drawBlankDeck = async () => {
+    const rows = 4
+    const card_width = 72
+    const card_height = 105
+    const canvas = Canvas.createCanvas(card_width * 10 + 9, card_height * rows + rows - 1)
+    const context = canvas.getContext('2d')
+
+    for (let i = 0; i < 40; i++) {
+        const row = Math.floor(i / 10)
+        const col = i % 10
+        const image = await Canvas.loadImage(`./public/images/back.png`) 
+        context.drawImage(image, (card_width + 1) * col, row * (card_height + 1), card_width, card_height)
+    }
+
+    const buffer = canvas.toBuffer('image/png')
+    fs.writeFileSync(`./public/images/blankDeck.png`, buffer)
+
+    console.log('created blank deck')
+}
+
 const composeCongratsPost = async () => {
     const tournaments = await Tournament.findAll({ 
         where: { display: true },
@@ -27,7 +47,20 @@ const composeCongratsPost = async () => {
         })
     
         if (!deck) return console.log('no deck found')
+
+        const winner = await Player.findOne({
+            where: {
+                id: tournament.playerId
+            }
+        })
     
+        if (!winner) return console.log('no winner found')
+
+        const communityLogo = tournament.community === 'Format Library' ? "/images/logos/FL.png" :
+            tournament.community === 'GoatFormat.com' ? "/images/logos/GF.png" :
+            tournament.community === 'EdisonFormat.com' ? "/images/logos/EF.png" :
+            ""
+
         const main = []
         const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split('\n').filter((e) => e.length)
 
@@ -105,10 +138,18 @@ const composeCongratsPost = async () => {
                 `<p className="blogpost-paragraph">` +
                     `${tournament.winner} won <a className="blogpost-event-link" href="/events/${tournament.shortName}">${tournament.cleanName}</a> on ${publishDate} with a ${popularDecks.includes(deck.deckType) ? 'popular' : 'rogue'} deck, ${capitalize(deck.deckType, true)}!` +
                 `</p>` +
-                `<a className="blogpost-deck-link" href="/decks/${deck.id}">` +
-                    `<img className="blogpost-deck" src="/images/decks/previews/${deck.id}.png"/>` +
-                `</a>` +
-                `<p className="blogpost-paragraph">${message}</p>`+
+                `<div className="blogpost-images-flexbox">` +
+                    `<div className="blogpost-pfp-community-flexbox">` +
+                        `<img className="blogpost-pfp" src="/images/pfps/${winner.tag.slice(0, -5)}${winner.tag.slice(-4)}.png" />` +
+                        `<img className="blogpost-community"  src=${communityLogo} />` +
+                    `</div>` +
+                    `<div className="blogpost-deck-box">` + 
+                        `<a className="blogpost-deck-link" href="/decks/${deck.id}">` +
+                            `<img className="blogpost-deck" src="/images/decks/previews/${deck.id}.png" />` +
+                        `</a>` +
+                    `</div>` +
+                `</div>` +
+                `<p className="blogpost-paragraph">${message}</p>` +
             `</div>`
     
         await BlogPost.create({
@@ -184,5 +225,32 @@ const composeThumbnails = async () => {
     }
 }
 
-composeCongratsPost()
+const savePfps = async () => {
+    const players = await Player.findAll({
+        where: {
+            tag: {[Op.not]: null},
+            avatar: {[Op.not]: null}
+        }
+    })
+
+    for (let i = 0; i < players.length; i++) {
+        const player = players[i]
+        const canvas = Canvas.createCanvas(128, 128)
+        const context = canvas.getContext('2d')
+        try {
+            const image = await Canvas.loadImage(`https://cdn.discordapp.com/avatars/${player.id}/${player.avatar}.png`) 
+            context.drawImage(image, 0, 0, 128, 128)
+            const buffer = canvas.toBuffer('image/png')
+            fs.writeFileSync(`./public/images/pfps/${player.tag.slice(0, -5)}${player.tag.slice(-4)}.png`, buffer)
+            console.log('saved player pfp')
+        } catch (err) {
+            console.log(`cannot load pfp for ${player.name}`)
+            continue
+        }
+    }
+}
+
+// savePfps()
+// composeCongratsPost()
 // composeThumbnails()
+// drawBlankDeck()

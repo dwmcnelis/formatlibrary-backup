@@ -1,13 +1,17 @@
 
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import BanList from './BanList'
-import LeaderBoard from './LeaderBoard'
+import MiniBoard from './MiniBoard'
+import NotFound from './NotFound'
 import PopularDecks from './PopularDecks'
 import RecentEvents from './RecentEvents'
 import axios from 'axios'
 
 const FormatIntro = (props = {}) => {
-  const [format, setFormat] = useState(null)
+  const [format, setFormat] = useState({})
+  const [deckCount, setDeckCount] = useState(0)
+  const [eventCount, setEventCount] = useState(0)
+  const [statsCount, setStatsCount] = useState(0)
 
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0))
@@ -17,16 +21,21 @@ const FormatIntro = (props = {}) => {
     const fetchData = async () => {
       try {
         const {data} = await axios.get(`/api/formats/${props.match.params.id}`)
-        setFormat(data)
+        setFormat(data.format)
+        setDeckCount(data.deckCount)
+        setEventCount(data.eventCount)
+        setStatsCount(data.statsCount)
       } catch (err) {
         console.log(err)
+        setFormat(null)
       }
     }
 
     fetchData()
   }, [])
 
-  if (!format) return <div />
+  if (format === null) return <NotFound/>
+  if (!format.id) return <div />
 
   return (
     <div className="body">
@@ -37,15 +46,27 @@ const FormatIntro = (props = {}) => {
           {
             format.description ? <p className="format-desc">{format.description}</p> : <br/>
           }
-          <li>
-            <a href="#popular-decks">Popular Decks</a>
-          </li>
-          <li>
-            <a href="#recent-events">Recent Events</a>
-          </li>
-          <li>
-            <a href="#leaderboard">Leaderboard</a>
-          </li>
+          {
+            deckCount ? (
+              <li>
+                <a href="#popular-decks">Popular Decks</a>
+              </li>
+            ) : ''
+          }
+          {
+            eventCount ? (
+              <li>
+                <a href="#recent-events">Recent Events</a>
+              </li>
+            ) : ''
+          }
+          {
+            statsCount ? (
+              <li>
+                <a href="#leaderboard">Leaderboard</a>
+              </li>
+            ) : ''
+          }
           <li>
             <a href="#banlist">Ban List</a>
           </li>
@@ -54,10 +75,9 @@ const FormatIntro = (props = {}) => {
       </div>
 
       <PopularDecks format={format}/>
-
-      <div className="divider"/>
-      <LeaderBoard format={format}/>
-
+      <RecentEvents format={format}/>
+      <MiniBoard limit={10} format={format}/>
+            
       <div className="divider"/>
       <BanList format={format}/>
     </div>

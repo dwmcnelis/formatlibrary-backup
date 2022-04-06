@@ -8,6 +8,7 @@ import formats from '../../static/formats.json'
 import * as emojis from '../../public/images/emojis'
 import * as artworks from '../../public/images/artworks'
 import { FL, GF, EF } from '../../public/images/logos'
+import NotFound from './NotFound'
 
 import { Chart as ChartJS, ArcElement, CategoryScale, BarElement, Title, LinearScale, Tooltip, Legend } from 'chart.js'
 import { Bar, Doughnut } from 'react-chartjs-2'
@@ -42,13 +43,17 @@ const SingleEvent = (props) => {
         setMetagame(data.metagame)
       } catch (err) {
         console.log(err)
+        setEvent(null)
       }
     }
 
     uploadEvent()
   }, [])
 
+  if (event === null) return <NotFound/>
   if (!event.cleanName || !topDecks.length || !metagame.deckTypes.length) return <div></div>
+  const tag = event.player && event.player.tag ? event.player.tag : ''
+
   const formatName = capitalize(event.format, true) || '?'
   const formatEmoji = emojis[formats[formatName].logo] || ''
   const formatArtwork = artworks[formats[formatName].logo] || ''
@@ -135,9 +140,20 @@ const SingleEvent = (props) => {
                 </td>
                 <td>
                   <div className="single-event-cell">
-                    <div onClick={() => goToPlayer()} className="single-event-winner-link" style={{paddingRight:'7px'}}><b>Winner:</b> {event.winner}</div>
-                    <img style={{width:'32px'}} src={emojis.First}/>
-                  </div>  
+                      <div onClick={() => goToPlayer()} className="single-event-winner-link">
+                        <b>Winner: </b>{event.winner}
+                        <img 
+                          className="single-event-winner-cell-pfp"
+                          src={`/images/pfps/${tag.slice(0, -5)}${tag.slice(-4)}.png`}
+                          onError={(e) => {
+                                  e.target.onerror = null
+                                  e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"
+                              }
+                          }
+                        />
+                      </div>
+                      <img style={{width:'32px'}} src={emojis.First}/>
+                  </div>
                 </td>
                 <td>   
                   <div className="single-event-cell">
@@ -184,10 +200,19 @@ const SingleEvent = (props) => {
       <div id="bracket">
         <div className="leaderboard-title-flexbox">
           <img style={{ width:'64px'}} src={communityLogo}/>
-          <h2 className="leaderboard-title">{event.shortName} Top 8 Bracket:</h2>
+          <h2 className="subheading">{event.shortName} Bracket:</h2>
           <img style={{ width:'64px'}} src={'/images/logos/Challonge.png'}/>
         </div>
-        <img className="bracket" src={`/brackets/${event.shortName}.png`}/>
+        <img 
+          style={{width:'800px'}}
+          className="bracket" 
+          src={`/brackets/${event.shortName}.png`}
+          onError={(e) => {
+            e.target.onerror = null
+            e.target.style.width = "300px"
+            e.target.src="/images/artworks/dig.jpg"
+          }}
+        />
         <a 
           className="bracket-link"
           href={`https://challonge.com/${event.url}`} 
@@ -202,7 +227,7 @@ const SingleEvent = (props) => {
       <div id="top-decks">
         <div className="leaderboard-title-flexbox">
           <img style={{ width:'64px'}} src={communityLogo}/>
-          <h2 className="leaderboard-title">{event.shortName} {topDecks.length > 1 ? `Top ${topDecks.length} Decks` : 'Winning Deck'}:</h2>
+          <h2 className="subheading">{event.shortName} {topDecks.length > 1 ? `Top ${topDecks.length} Decks` : 'Winning Deck'}:</h2>
           <img style={{ height:'64px'}} src={'/images/emojis/deckbox.png'}/>
         </div>
         <div id="deckGalleryFlexBox">
@@ -228,7 +253,7 @@ const SingleEvent = (props) => {
       <div id="metagame-stats">
         <div className="leaderboard-title-flexbox">
           <img style={{ width:'64px'}} src={communityLogo}/>
-          <h2 className="leaderboard-title">{event.shortName} Metagame Stats:</h2>
+          <h2 className="subheading">{event.shortName} Metagame Stats:</h2>
           <img style={{ height:'64px'}} src={'/images/emojis/microscope.png'}/>
         </div>
 
