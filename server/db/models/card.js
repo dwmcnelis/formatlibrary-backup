@@ -3,7 +3,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 console.log('!!db', !!db)
 
-const Card = db.define('card', {
+const Card = db.define('cards', {
   name: {
     type: Sequelize.TEXT,
     unique: true,

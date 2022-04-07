@@ -2,7 +2,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Set = db.define('set', {
+const Set = db.define('sets', {
   setName: {
     type: Sequelize.STRING,
     allowNull: false

@@ -2,7 +2,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Print = db.define('print', {
+const Print = db.define('prints', {
   cardName: {
     type: Sequelize.STRING,
     allowNull: false

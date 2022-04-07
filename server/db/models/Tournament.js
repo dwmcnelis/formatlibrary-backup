@@ -49,7 +49,7 @@ const Tournament = db.define('tournaments', {
         defaultValue: 0,   
         allowNull: false
     },
-    tournamentType: {
+    type: {
         type: Sequelize.STRING, 
         defaultValue: 'double elimination',   
         allowNull: false

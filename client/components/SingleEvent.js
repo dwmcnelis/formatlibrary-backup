@@ -175,7 +175,7 @@ const SingleEvent = (props) => {
                 </td>
                 <td>   
                   <div className="single-event-cell">
-                    <div style={{paddingRight:'7px'}}><b>Structure:</b> {capitalize(event.tournamentType, true)}</div> 
+                    <div style={{paddingRight:'7px'}}><b>Structure:</b> {capitalize(event.type, true)}</div> 
                   </div>
                 </td>
               </tr>

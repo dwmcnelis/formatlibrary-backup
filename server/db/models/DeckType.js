@@ -2,7 +2,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const DeckType = db.define('deckType', {
+const DeckType = db.define('deckTypes', {
   name: {
     type: Sequelize.STRING,
     allowNull: false
