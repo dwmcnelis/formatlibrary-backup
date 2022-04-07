@@ -66,7 +66,7 @@ const CardRow = (props) => {
   const evenOrOdd = props.index % 2 ? 'even' : 'odd'
   const filePath = `/images/cards/${card.ypdId}.jpg`
   const history = useHistory()
-  const goToCard = () => history.push(`/cards/${card.name}`)
+  const goToCard = () => history.push(`/cards/${card.name.replaceAll('/', '%2F')}`)
   
   return (
       <tr onClick={() => goToCard()} className={`${evenOrOdd}-search-results-row`}>
@@ -170,6 +170,7 @@ const CardRow = (props) => {
                     </td>
                     <td
                       colSpan="5"
+                      className="cardrow-description"
                       style={{fontSize: '16px', borderTop: '2px solid #CFDCE5'}}
                     >
                       {card.description.slice(21, card.description.indexOf('----'))}
@@ -182,6 +183,7 @@ const CardRow = (props) => {
                   <tr>
                     <td
                       colSpan="6"
+                      className="cardrow-description"
                       style={{fontSize: '16px', borderTop: '2px solid #CFDCE5'}}
                     >
                       {card.description.slice(card.description.indexOf('[ Monster Effect ]') + 20)}
@@ -191,6 +193,7 @@ const CardRow = (props) => {
                   <tr>
                     <td
                       colSpan="6"
+                      className="cardrow-description"
                       style={{fontSize: '16px', borderTop: '2px solid #CFDCE5'}}
                     >
                       {card.description}

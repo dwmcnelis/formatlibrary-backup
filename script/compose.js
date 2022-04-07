@@ -8,6 +8,7 @@ const { BlogPost, Card, Deck, DeckType, Format, Player, Print, Set, Stats, Statu
 const { Op } = require('sequelize')
 const { capitalize, arrayToObject, dateToVerbose } = require('../functions/utility')
 const formats = require('../static/formats.json')
+const playerJSON = require('../static/players.json')
 
 const drawBlankDeck = async () => {
     const rows = 4
@@ -226,31 +227,45 @@ const composeThumbnails = async () => {
 }
 
 const savePfps = async () => {
-    const players = await Player.findAll({
-        where: {
-            tag: {[Op.not]: null},
-            avatar: {[Op.not]: null}
-        }
-    })
+    for (let i = 0; i < playerJSON.length; i++) {
+        const p = playerJSON[i]
+        if (!p.avatar || !p.avatar.length) continue
 
-    for (let i = 0; i < players.length; i++) {
-        const player = players[i]
-        const canvas = Canvas.createCanvas(128, 128)
-        const context = canvas.getContext('2d')
-        try {
-            const image = await Canvas.loadImage(`https://cdn.discordapp.com/avatars/${player.id}/${player.avatar}.png`) 
-            context.drawImage(image, 0, 0, 128, 128)
-            const buffer = canvas.toBuffer('image/png')
-            fs.writeFileSync(`./public/images/pfps/${player.tag.slice(0, -5)}${player.tag.slice(-4)}.png`, buffer)
-            console.log('saved player pfp')
-        } catch (err) {
-            console.log(`cannot load pfp for ${player.name}`)
+        const count = await Player.count({
+            where: {
+                id: p.id,
+                avatar: p.avatar
+            }
+        })
+
+        if (count && fs.existsSync(`./public/images/pfps/${p.tag.slice(0, -5)}${p.tag.slice(-4)}.png`)) {
             continue
+        } else {
+            try {
+                const player = await Player.findOne({
+                    where: {
+                        id: p.id
+                    }
+                })
+
+                const canvas = Canvas.createCanvas(128, 128)
+                const context = canvas.getContext('2d')
+                const image = await Canvas.loadImage(`https://cdn.discordapp.com/avatars/${p.id}/${p.avatar}.png`) 
+                context.drawImage(image, 0, 0, 128, 128)
+                const buffer = canvas.toBuffer('image/png')
+                fs.writeFileSync(`./public/images/pfps/${player.tag.slice(0, -5)}${player.tag.slice(-4)}.png`, buffer)
+                console.log(`saved player pfp for ${player.tag}`)
+                player.avatar = p.avatar
+                await player.save()
+            } catch (err) {
+                console.log(`cannot load pfp for ${p.name}`)
+                continue
+            }
         }
     }
 }
 
-// savePfps()
+savePfps()
 // composeCongratsPost()
 // composeThumbnails()
 // drawBlankDeck()

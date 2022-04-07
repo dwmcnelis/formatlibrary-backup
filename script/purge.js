@@ -3,11 +3,9 @@
 import axios from 'axios'
 import fs from 'fs'
 import { Card, Format, Set, Print } from  '../server/db/models'
-import ygoprodeck from  '../static/ygoprodeck.json'
 import sets from  '../static/sets.json'
 import { Op } from  'sequelize'
 import formats from  '../static/formats.json'
-import discordformats from  '../static/discordformats.json'
 import {capitalize} from '../functions/utility'
 import { tcgPlayerAPI } from  '../secrets'
 

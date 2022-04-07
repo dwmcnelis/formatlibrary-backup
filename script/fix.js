@@ -7,7 +7,6 @@ const ygoprodeck = require('../static/ygoprodeck.json')
 const sets = require('../static/sets.json')
 const { Op } = require('sequelize')
 const formats = require('../static/formats.json')
-const discordformats = require('../static/discordformats.json')
 const { capitalize, arrayToObject } = require('../functions/utility')
 const { challongeAPIKey, tcgPlayerAPI } = require('../secrets')
 const { 
@@ -891,29 +890,29 @@ const modifyRarities = async () => {
     return console.log(`\n- encountered ${a} valid rarities\n- updated ${b} prints with modified rarities\n- encountered ${c} invalid rarities`)
 }
 
-const seedFormats = async () => {
-    let c = 0
-    const keys = Object.keys(discordformats)
-    for (let i = 0; i < keys.length; i++) {
-        const key = keys[i]
-        const format = discordformats[key]
-        try {
-            await Format.create({
-                name: format.name,
-                date: format.date,
-                banlist: format.list,
-                channel: format.channel,
-                emoji: format.emoji,
-                role: format.role
-            })
-            c++
-        } catch (err) {
-            console.log(err)
-        }
-    }
+// const seedFormats = async () => {
+//     let c = 0
+//     const keys = Object.keys(discordformats)
+//     for (let i = 0; i < keys.length; i++) {
+//         const key = keys[i]
+//         const format = discordformats[key]
+//         try {
+//             await Format.create({
+//                 name: format.name,
+//                 date: format.date,
+//                 banlist: format.list,
+//                 channel: format.channel,
+//                 emoji: format.emoji,
+//                 role: format.role
+//             })
+//             c++
+//         } catch (err) {
+//             console.log(err)
+//         }
+//     }
 
-    return console.log(`created ${c} Formats`)
-}
+//     return console.log(`created ${c} Formats`)
+// }
 
 const addIconsAndEvents = async () => {
     let c = 0

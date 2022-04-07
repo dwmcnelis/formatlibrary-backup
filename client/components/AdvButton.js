@@ -3,9 +3,8 @@ import { camelize, capitalize } from '../../functions/utility'
 
 //ADVANCED SEARCH BUTTONS
 const AdvButton = (props) => {
-  const { id, display, buttonClass, queryParams, removeFilter, applyFilter } = props
+  const { id, display, buttonClass, clicked, removeFilter, applyFilter } = props
   const filterType = buttonClass === 'monster' ? null : buttonClass
-  const clicked = buttonClass === 'monster' ? queryParams[id] : queryParams[buttonClass][id]
    
   return (
     clicked ? (
@@ -13,7 +12,7 @@ const AdvButton = (props) => {
         className={"clicked" + capitalize(buttonClass) + "Button"}
         id={camelize(id)}
         type="submit"
-        onClick={() => removeFilter(filterType, id)}
+        onClick={() => removeFilter(buttonClass, id)}
       >
         {display}
       </a>
@@ -22,7 +21,7 @@ const AdvButton = (props) => {
         className={buttonClass + "Button"}
         id={camelize(id)}
         type="submit"
-        onClick={() => applyFilter(filterType, id)}
+        onClick={() => applyFilter(buttonClass, id)}
       >
         {display}
       </a>

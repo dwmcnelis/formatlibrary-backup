@@ -1,4 +1,3 @@
-/* eslint-disable no-eval */
 /* eslint-disable complexity */
 /* eslint-disable max-statements */
 
@@ -8,40 +7,209 @@ import CardRow from './CardRow.js'
 import CardImage from './CardImage.js'
 import PrettoSlider from './Slider.js'
 import Pagination from './Pagination.js'
-import { connect } from 'react-redux'
-import formats from '../../static/formats.json'
 import { Star } from '../../public/images/symbols'
 import * as sortFunctions from '../../functions/sort'
 import { Calendar, Shield, Swords } from '../../public/images/emojis'
-import { fetchAllCards, fetchSomeCards, fetchFirstXCards } from '../store/cards'
-import { setSliders } from '../store/sliders'
-import * as artworks from '../../public/images/artworks'
+import axios from 'axios'
+import { capitalize } from '../../functions/utility'
 
-const CardTable = (props) => {
+const CardTable = () => {
   const now = new Date()
-  const FY = now.getFullYear()
-  const months = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"]
-  const M = months[now.getMonth()]
-  const D = now.getDate()
+  const year = now.getFullYear()
   const [page, setPage] = useState(1)
+  const [cards, setCards] = useState([])
+  const [filteredCards, setFilteredCards] = useState([])
   const [cardsPerPage, setCardsPerPage] = useState(10)
   const [view, setView] = useState('spoilers')
   const [sortBy, setSortBy] = useState(null)
-  const [format, setFormat] = useState('All Formats')
-  const [logo, setLogo] = useState(artworks.BLS)
-  const [event, setEvent] = useState(`May 2002 - ${M} ${FY}`)
-  const [allFetched, setAllFetched] = useState(false)
+  const [formats, setFormats] = useState([])
+  const [format, setFormat] = useState({})
   const [firstXFetched, setFirstXFetched] = useState(false)
+  const [allFetched, setAllFetched] = useState(false)
   const [advanced, setAdvanced] = useState(false)
-  const [day, setDay] = useState(null)
-  const [month, setMonth] = useState(null)
-  const [year, setYear] = useState(null)
+  const [cutoff, setCutoff] = useState(`${year}-12-31`)
+
+  const [dateSliders, setDateSliders] = useState({
+    year: year,
+    month: 12,
+    day: 31
+  })
+
+  const [statsSliders, setStatsSliders] = useState({
+    level: [0, 12],
+    atk: [0, 5000],
+    def: [0, 5000]
+  })
+
   const [queryParams, setQueryParams] = useState({
     name: null,
     description: null,
-    category: null,
-    tcgLegal: true,
-    icon: {
+    category: null
+  })
+
+  const [iconParams, setIconParams] = useState({
+    continuous: false,
+    counter: false,
+    equip: false,
+    field: false,
+    normal: false,
+    ritual: false,
+    'quick-play': false
+  })
+
+  const [attributeParams, setAttributeParams] = useState({
+    dark: false,
+    light: false,
+    earth: false,
+    wind: false,
+    water: false,
+    fire: false,
+    divine: false
+  })
+
+  const [typeParams, setTypeParams] = useState({
+    aqua: false,
+    beast: false,
+    'beast-warrior': false,
+    cyberse: false,
+    dinosaur: false,
+    'divine-beast': false,
+    dragon: false,
+    fairy: false,
+    fiend: false,
+    fish: false,
+    insect: false,
+    machine: false,
+    plant: false,
+    psychic: false,
+    pyro: false,
+    reptile: false,
+    rock: false,
+    'sea serpent': false,
+    spellcaster: false,
+    thunder: false,
+    warrior: false,
+    'winged beast': false,
+    wyrm: false,
+    zombie: false
+  })
+
+  const [groupParams, setGroupParams] = useState({
+    effect: false,
+    flip: false,
+    fusion: false,
+    gemini: false,
+    link: false,
+    normal: false,
+    pendulum: false,
+    ritual: false,
+    spirit: false,
+    synchro: false,
+    toon: false,
+    tuner: false,
+    union: false,
+    xyz: false
+  })
+
+  // USE LAYOUT EFFECT
+  useLayoutEffect(() => window.scrollTo(0, 0), [])
+  
+  // CHANGE CARDS PER PAGE
+  const changeCardsPerPage = (e) => {
+    setCardsPerPage(Number(e.target.value))
+    setPage(1)
+  }
+
+  // SORT CARDS
+  const sortCards = (e) => {
+    setSortBy(e.target.value)
+    setPage(1)
+  }
+
+  // GO TO PAGE
+  const goToPage = (num, location) => {
+    setPage(num)
+    if (location === 'bottom') window.scrollTo(0, document.getElementById('resultsWrapper0').offsetTop - 10)
+  }
+
+  // PREVIOUS PAGE
+  const previousPage = (location) => {
+    if (page <= 1) return
+    setPage(page - 1)
+    if (location === 'bottom') window.scrollTo(0, document.getElementById('resultsWrapper0').offsetTop - 10)
+  }
+
+  // NEXT PAGE
+  const nextPage = (location) => {
+    if (page >= Math.ceil(filteredCards.length / cardsPerPage)) return
+    setPage(page + 1)
+    if (location === 'bottom') window.scrollTo(0, document.getElementById('resultsWrapper0').offsetTop - 10)
+  }
+
+
+  // SEARCH
+  const search = () => {
+    let data = [...cards]
+    
+    Object.entries(queryParams).filter((e) => !!e[1]).forEach((e) => {
+      data = data.filter((d) => d[e[0]] && d[e[0]].toLowerCase().includes(e[1].toLowerCase()))
+    })
+
+    Object.entries(groupParams).filter((e) => !!e[1]).forEach((e) => {
+      if (e[0] === 'normal') {
+        data = data.filter((d) => d.color === 'yellow')
+      } else if (e[0] === 'effect') {
+        data = data.filter((d) => d.color === 'orange')
+      } else {
+        data = data.filter((d) => !!d[e[0]])
+      }
+    })
+
+    const icons = Object.entries(iconParams).filter((e) => !!e[1]).map((e) => e[0])
+    if (icons.length) data = data.filter((d) => d.icon && icons.includes(d.icon.toLowerCase()))
+
+    const attributes = Object.entries(attributeParams).filter((e) => !!e[1]).map((e) => e[0])
+    if (attributes.length) data = data.filter((d) => d.attribute && attributes.includes(d.attribute.toLowerCase()))
+
+    const types = Object.entries(typeParams).filter((e) => !!e[1]).map((e) => e[0])
+    if (types.length) data = data.filter((d) => d.type && types.includes(d.type.toLowerCase()))
+  
+    data = data.filter((d) => d.tcgDate <= cutoff)
+
+    setFilteredCards(data)
+    setPage(1)
+    // if (advanced) setAdvanced(false)
+  }
+
+  // RESET
+  const reset = () => {
+    document.getElementById('format').value = ''
+    document.getElementById('category').value = 'All Cards'
+    document.getElementById('searchTypeSelector').value = 'name'
+    setDateSliders({
+      year: year,
+      month: 12,
+      day: 31
+    })
+    
+    setStatsSliders({
+      level: [0, 12],
+      atk: [0, 5000],
+      def: [0, 5000]
+    })
+
+    setPage(1)
+    setFormat({})
+    setSortBy(null)
+    setFilteredCards([...cards])
+    
+    setQueryParams({
+      name: null,
+      description: null,
+      category: null
+    })
+  
+    setIconParams({
       continuous: false,
       counter: false,
       equip: false,
@@ -49,8 +217,9 @@ const CardTable = (props) => {
       normal: false,
       ritual: false,
       'quick-play': false
-    },
-    attribute: {
+    })
+  
+    setAttributeParams({
       dark: false,
       light: false,
       earth: false,
@@ -58,7 +227,9 @@ const CardTable = (props) => {
       water: false,
       fire: false,
       divine: false
-    },type: {
+    })
+  
+    setTypeParams({
       aqua: false,
       beast: false,
       'beast-warrior': false,
@@ -83,187 +254,16 @@ const CardTable = (props) => {
       'winged beast': false,
       wyrm: false,
       zombie: false
-    },
-    effect: false,
-    flip: false,
-    fusion: false,
-    gemini: false,
-    link: false,
-    normal: false,
-    pendulum: false,
-    ritual: false,
-    spirit: false,
-    synchro: false,
-    toon: false,
-    tuner: false,
-    union: false,
-    xyz: false
-  })
-
-  // USE LAYOUT EFFECT
-  useLayoutEffect(() => window.scrollTo(0, 0), [])
-  
-  // CHANGE CARDS PER PAGE
-  const changeCardsPerPage = () => {
-    setCardsPerPage(Number(document.getElementById('cardsPerPageSelector').value))
-    setPage(1)
-  }
-
-  // SORT CARDS
-  const sortCards = () => {
-    setSortBy(document.getElementById('sortSelector').value)
-    setPage(1)
-  }
-
-  // GO TO PAGE
-  const goToPage = (num, location) => {
-    setPage(num)
-    if (location === 'bottom') {
-      const tableTop = document.getElementById('resultsWrapper0').offsetTop - 10
-      window.scrollTo(0, tableTop)
-    }
-  }
-
-  // PREVIOUS PAGE
-  const previousPage = (location) => {
-    if (page <= 1) return
-    setPage(page - 1)
-    if (location === 'bottom') {
-      const tableTop = document.getElementById('resultsWrapper0').offsetTop - 10
-      window.scrollTo(0, tableTop)
-    }
-  }
-
-  // NEXT PAGE
-  const nextPage = (location) => {
-    if (page >= Math.ceil(props.cards.length / cardsPerPage)) return
-    setPage(page + 1)
-    if (location === 'bottom') {
-      const tableTop = document.getElementById('resultsWrapper0').offsetTop - 10
-      window.scrollTo(0, tableTop)
-    }
-  }
-
-  // SEARCH
-  const search = async (hide = true) => {
-    const sliders = {
-      year: year || props.sliders.year,
-      month: month || props.sliders.month,
-      day: day || props.sliders.day,
-      level: props.sliders.level || null,
-      atk: props.sliders.atk || null,
-      def: props.sliders.def || null
-    }
-
-    try {
-      const params = { ...queryParams, ...sliders }
-      const removeFalseValues = (obj) => {
-        const entries = Object.entries(obj)
-          .map((e) => {
-            if (typeof e[1] === 'object' && !Array.isArray(e[1]) && e[1] !== null) {
-              const filteredValues = removeFalseValues(e[1])
-              if(filteredValues) {
-                return [e[0], filteredValues]
-              } else {
-                return null
-              }
-            } else if (e[1]) {
-                return e
-            } else {
-                return null
-            }
-          }).filter((e) => e !== null && e !== false && e !== undefined)
-
-          if (entries.length) {
-            return Object.fromEntries(entries)
-          } else {
-            return false
-          }
-      }
-
-      const filters = removeFalseValues(params)
-      console.log('filters', filters)
-      await props.fetchSomeCards(filters)
-      setPage(1)
-    } catch (err) {
-      console.log(err)
-    }
-
-    if (hide) setAdvanced(false)
-  }
-
-  // RESET
-  const reset = () => {
-    document.getElementById('format').value = ''
-    document.getElementById('category').value = 'All Cards'
-    document.getElementById('searchTypeSelector').value = 'name'
-    props.setSliders({
-      year: FY,
-      month: 12,
-      day: 31,
-      level: [0, 12],
-      atk: [0, 5000],
-      def: [0, 5000]
     })
-
-    setPage(1)
-    setFormat('All Formats')
-    setLogo(artworks.BLS)
-    setEvent(`May 2002 - ${M} ${FY}`)
-    setDay(null)
-    setMonth(null)
-    setYear(null)
-    setAllFetched(false)
-    setQueryParams({
-      name: null,
-      description: null,
-      category: null,
-      attribute: {
-        dark: false,
-        light: false,
-        earth: false,
-        wind: false,
-        water: false,
-        fire: false,
-        divine: false
-      },type: {
-        aqua: false,
-        beast: false,
-        beastWarrior: false,
-        cyberse: false,
-        dinosaur: false,
-        divineBeast: false,
-        dragon: false,
-        fairy: false,
-        fiend: false,
-        fish: false,
-        insect: false,
-        machine: false,
-        plant: false,
-        psychic: false,
-        pyro: false,
-        reptile: false,
-        rock: false,
-        seaSerpent: false,
-        spellcaster: false,
-        thunder: false,
-        warrior: false,
-        wingedBeast: false,
-        wyrm: false,
-        zombie: false
-      },
-      continuous: false,
-      counter: false,
+  
+    setGroupParams({
       effect: false,
-      equip: false,
-      field: false,
       flip: false,
       fusion: false,
       gemini: false,
       link: false,
       normal: false,
       pendulum: false,
-      quickPlay: false,
       ritual: false,
       spirit: false,
       synchro: false,
@@ -275,49 +275,39 @@ const CardTable = (props) => {
   }
 
   // UPDATE FORMAT
-  const updateFormat = (e) => {
-    const nextFormatName = e.target.value || 'All Formats'
-    const nextFormat = formats[nextFormatName] || 'All Formats'
-    setFormat(nextFormatName)
-    setDay(nextFormat.day || D)
-    setMonth(nextFormat.month || M)
-    setYear(nextFormat.year || FY)
-    setLogo(artworks[nextFormat.logo] || artworks.BLS)
-    setEvent(nextFormat.event || `May 2002 - ${M} ${FY}`)
+  const updateFormat = async (e) => {
+    if (e.target.value.length) {
+      const {data} = await axios.get(`/api/formats/${e.target.value}`) 
+      setFormat(data.format)
+    } else {
+      setFormat({})
+    }
   }
 
   // APPLY FILTER
-  const applyFilter = (type, id) => {
-    setQueryParams(() => {
-      if (type) {
-        return {
-          ...queryParams,
-          [type]: {...queryParams[type], [id]: true}
-        }
-      } else {
-        return {
-          ...queryParams,
-          [id]: true
-        }
-      }
-    })
+  const applyFilter = (buttonClass, id) => {
+    if (buttonClass === 'icon') {
+      setIconParams({ ...iconParams, [id]: true })
+    } else if (buttonClass === 'attribute') {
+      setAttributeParams({ ...attributeParams, [id]: true })
+    } else if (buttonClass === 'type') {
+      setTypeParams({ ...typeParams, [id]: true })
+    } else if (buttonClass === 'group') {
+      setGroupParams({ ...groupParams, [id]: true })
+    }
   }
 
   // REMOVE FILTER
-  const removeFilter = (type, id) => {
-    setQueryParams(() => {
-      if (type) {
-        return {
-          ...queryParams,
-          [type]: {...queryParams[type], [id]: false}
-        }
-      } else {
-        return {
-          ...queryParams,
-          [id]: false
-        }
-      }
-    })
+  const removeFilter = (buttonClass, id) => {
+    if (buttonClass === 'icon') {
+      setIconParams({ ...iconParams, [id]: false })
+    } else if (buttonClass === 'attribute') {
+      setAttributeParams({ ...attributeParams, [id]: false })
+    } else if (buttonClass === 'type') {
+      setTypeParams({ ...typeParams, [id]: false })
+    } else if (buttonClass === 'group') {
+      setGroupParams({ ...groupParams, [id]: false })
+    }
   }
 
   // RUN QUERY
@@ -333,45 +323,59 @@ const CardTable = (props) => {
     })
   }
 
-  // USE EFFECT firstXFetched
+  // USE EFFECT FETCH FIRST X
   useEffect(() => {
-    if (!firstXFetched) {
+    if (!firstXFetched && !allFetched) {
       const fetchData = async () => {
-        await props.fetchFirstXCards(100)
+        const {data} = await axios.get(`/api/cards/first/100`)
+        setCards(data)
+        setFilteredCards(data)
         setFirstXFetched(true)
+      }
+
+      const fetchData2 = async () => {
+        const {data} = await axios.get(`/api/formats`)
+        setFormats(data)
+      }
+
+      fetchData()
+      fetchData2()
+    }
+  }, [])
+
+  // USE EFFECT FETCH ALL
+  useEffect(() => {
+    if (firstXFetched && !allFetched) {
+      const fetchData = async () => {
+        const {data} = await axios.get(`/api/cards/all`)
+        setCards(data)
+        setFilteredCards([...data])
+        setAllFetched(true)
       } 
 
       fetchData()
     }
-  }, [])
+  }, [firstXFetched])
 
-  // USE EFFECT allFetched
+  // USE EFFECT SET CUTOFF IF FORMAT CHANGES
   useEffect(() => {
-    if (!allFetched) {
-      const fetchData = async () => {
-        try {
-          await props.fetchAllCards()
-          setAllFetched(true)
-        } catch (err) {
-          console.log(err)
-        }
-      }
+    setCutoff(format.date || `${year}-12-31`)
+  }, [format])
 
-      fetchData()
-    }
-  }, [])
+  // USE EFFECT SET CUTOFF IF DATE SLIDERS CHANGE
+  useEffect(() => {
+    setCutoff(`${dateSliders.year}-${dateSliders.month}-${dateSliders.day}`)
+  }, [dateSliders])
 
-  // USE EFFECT searchx
+  // USE EFFECT SEARCH IF RELEVANT STATES CHANGE
   useEffect(() => {
     search(false)
-  }, [format, day, month, year, queryParams])
+  }, [format, cutoff, statsSliders, queryParams, groupParams, iconParams, attributeParams, typeParams])
 
-  const cards = props.cards
   const lastIndex = page * cardsPerPage
   const firstIndex = lastIndex - cardsPerPage
-  if (cards.length) cards.sort(sortFunctions[sortBy] || undefined)
-  const cardsArray = cards.length ? cards.slice(firstIndex, lastIndex) : []
-  const formatKeys = Object.keys(formats)
+  if (filteredCards.length) filteredCards.sort(sortFunctions[sortBy])
+
   const advancedButtons = {
     icon: [
       ['normal', 'Normal'], 
@@ -417,7 +421,7 @@ const CardTable = (props) => {
       ['wyrm', 'Wyrm'], 
       ['zombie', 'Zombie']
     ],
-    monster: [
+    group: [
       ['normal', 'Normal'], 
       ['effect', 'Effect'], 
       ['ritual', 'Ritual'], 
@@ -434,18 +438,19 @@ const CardTable = (props) => {
       ['union', 'Union']
     ]
   }
+
   const advancedButtonKeys = Object.keys(advancedButtons)
 
   // RENDER
   return (
     <div className="body">
       <div className="card-database-flexbox">
-        <img src={logo} className="format-icon-medium" />
+        <img src={`/images/artworks/${format.icon ? format.icon.toLowerCase() : 'bls'}.jpg`} className="format-icon-medium" />
         <div>
           <h1>Card Database</h1>
-          <h2>{event}</h2>
+          <h2>{format.event || 'May 2002 - Present'}</h2>
         </div>
-        <img src={logo} className="format-icon-medium" />
+        <img src={`/images/artworks/${format.icon ? format.icon.toLowerCase() : 'bls'}.jpg`} className="format-icon-medium" />
       </div>
 
       <br />
@@ -457,8 +462,8 @@ const CardTable = (props) => {
           type="text"
           placeholder="🔍"
           onChange={() => runQuery()}
-          onKeyDown={() => {
-            if (event.keyCode === 13) search()
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') search()
           }}
         />
 
@@ -475,11 +480,11 @@ const CardTable = (props) => {
 
           <select
             id="category"
-            defaultValue="All Cards"
+            defaultValue=""
             className="filter"
             onChange={() => setQueryParams({ ...queryParams, category: document.getElementById('category').value })}
           >
-            <option value="All Cards">All Cards</option>
+            <option value="">All Cards</option>
             <option value="Monster">Monsters</option>
             <option value="Spell">Spells</option>
             <option value="Trap">Traps</option>
@@ -487,13 +492,13 @@ const CardTable = (props) => {
 
           <select
             id="format"
-            defaultValue="All Formats"
+            defaultValue=""
             className="filter"
             onChange={(e) => updateFormat(e)}
           >
             <option key="All Formats" value="">All Formats</option>
             {
-              formatKeys.map((f) => <option key={f} value={f}>{f}</option>)
+              formats.map((f) => <option key={f.name} value={f.name}>{capitalize(f.name, true)}</option>)
             }
           </select>
 
@@ -531,17 +536,24 @@ const CardTable = (props) => {
             advancedButtonKeys.map((buttonClass) => (
               <div key={buttonClass} className="refinedInnerWrapper">
                 {
-                  advancedButtons[buttonClass].map((el) => (
+                  
+                  advancedButtons[buttonClass].map((el) => {
+                    const params = buttonClass === 'icon' ? iconParams : 
+                      buttonClass === 'attribute' ? attributeParams : 
+                      buttonClass === 'type' ? typeParams : 
+                      groupParams
+
+                    return (
                       <AdvButton 
                         key={el[0]} 
                         id={el[0]} 
                         display={el[1]}
                         buttonClass={buttonClass} 
-                        queryParams={queryParams} 
+                        clicked={params[el[0]]}
                         removeFilter={removeFilter} 
                         applyFilter={applyFilter}
                       />
-                    )
+                    )}
                   )
                 }
               </div>
@@ -559,7 +571,7 @@ const CardTable = (props) => {
                 step={1}
                 min={1}
                 max={12}
-                defaultValue={props.sliders.level}
+                defaultValue={statsSliders.level}
               />
               <PrettoSlider
                 id="atk"
@@ -569,7 +581,7 @@ const CardTable = (props) => {
                 step={50}
                 min={0}
                 max={5000}
-                defaultValue={props.sliders.atk}
+                defaultValue={statsSliders.atk}
               />
               <PrettoSlider
                 id="def"
@@ -579,7 +591,7 @@ const CardTable = (props) => {
                 step={50}
                 min={0}
                 max={5000}
-                defaultValue={props.sliders.def}
+                defaultValue={statsSliders.def}
               />
             </div>
 
@@ -591,9 +603,9 @@ const CardTable = (props) => {
                 label="Year"
                 step={1}
                 min={2002}
-                max={2020}
-                disabled={format !== 'All Formats'}
-                defaultValue={year || props.sliders.year}
+                max={2022}
+                disabled={!!format.id}
+                defaultValue={dateSliders.year}
               />
               <PrettoSlider
                 id="month"
@@ -603,8 +615,8 @@ const CardTable = (props) => {
                 step={1}
                 min={1}
                 max={12}
-                disabled={format !== 'All Formats'}
-                defaultValue={month || props.sliders.month}
+                disabled={!!format.id}
+                defaultValue={dateSliders.month}
               />
               <PrettoSlider
                 id="day"
@@ -614,8 +626,8 @@ const CardTable = (props) => {
                 step={1}
                 min={1}
                 max={31}
-                disabled={format !== 'All Formats'}
-                defaultValue={day || props.sliders.day}
+                disabled={!!format.id}
+                defaultValue={dateSliders.day}
               />
             </div>
           </div>
@@ -626,13 +638,13 @@ const CardTable = (props) => {
         <div className="results" style={{width: '360px'}}>
           Results:{' '}
           {firstXFetched && allFetched
-            ? cards.length
+            ? filteredCards.length
               ? `${cardsPerPage * page - cardsPerPage + 1} - ${
-                  cards.length >=
+                filteredCards.length >=
                   cardsPerPage * page
                     ? cardsPerPage * page
-                    : cards.length
-                } of ${cards.length}`
+                    : filteredCards.length
+                } of ${filteredCards.length}`
               : '0'
             : ''}
         </div>
@@ -652,7 +664,7 @@ const CardTable = (props) => {
             id="cardsPerPageSelector"
             defaultValue="10"
             style={{width: '195px'}}
-            onChange={() => changeCardsPerPage()}
+            onChange={(e) => changeCardsPerPage(e)}
           >
             <option value="10"> Show 10 Cards / Page</option>
             <option value="25">Show 25 Cards / Page</option>
@@ -664,7 +676,7 @@ const CardTable = (props) => {
             id="sortSelector"
             defaultValue="nameASC"
             style={{width: '190px'}}
-            onChange={() => sortCards()}
+            onChange={(e) => sortCards(e)}
           >
             <option value="nameASC">Sort Name: A ⮕ Z</option>
             <option value="nameDESC">Sort Name: Z ⮕ A</option>
@@ -695,7 +707,7 @@ const CardTable = (props) => {
             nextPage={nextPage}
             previousPage={previousPage}
             goToPage={goToPage}
-            length={cards.length}
+            length={filteredCards.length}
             page={page}
             itemsPerPage={cardsPerPage}
           />
@@ -703,11 +715,11 @@ const CardTable = (props) => {
       </div>
 
       {view === 'spoilers' ? (
-        <div id="myTable">
+        <div id="card-table">
           <table id="cards">
             <tbody>
-              {cardsArray.length ? (
-                cardsArray.map((card, index) => {
+              {filteredCards.length ? (
+                filteredCards.slice(firstIndex, lastIndex).map((card, index) => {
                   return <CardRow key={card.id} index={index} card={card} />
                 })
               ) : (
@@ -718,8 +730,8 @@ const CardTable = (props) => {
         </div>
       ) : (
         <div id="galleryFlexBox">
-          {cardsArray.length ? (
-            cardsArray.map((card, index) => {
+          {filteredCards.length ? (
+            filteredCards.slice(firstIndex, lastIndex).map((card, index) => {
               return <
                         CardImage 
                         key={card.id} 
@@ -742,7 +754,7 @@ const CardTable = (props) => {
           nextPage={nextPage}
           previousPage={previousPage}
           goToPage={goToPage}
-          length={cards.length}
+          length={filteredCards.length}
           page={page}
           itemsPerPage={cardsPerPage}
         />
@@ -751,19 +763,5 @@ const CardTable = (props) => {
   )
 }
 
-const mapState = (props) => {
-  return {
-    cards: props.cards.cards,
-    sliders: props.sliders
-  }
-}
-
-const mapDispatch = dispatch => ({
-  fetchAllCards: () => dispatch(fetchAllCards()),
-  fetchSomeCards: filters => dispatch(fetchSomeCards(filters)),
-  fetchFirstXCards: x => dispatch(fetchFirstXCards(x)),
-  setSliders: sliders => dispatch(setSliders(sliders))
-})
-
-export default connect(mapState, mapDispatch)(CardTable)
+export default CardTable
 

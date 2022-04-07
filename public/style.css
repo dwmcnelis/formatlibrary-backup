@@ -1,23 +1,12 @@
 
 @font-face {
-  font-family: 'Amaranth';
-  src: url('./fonts/Amaranth/Amaranth-Regular.ttf');
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto/Roboto-Regular.ttf');
 }
 
 @font-face {
-  font-family: 'Amaranth-Bold';
-  src: url('./fonts/Amaranth/Amaranth-Bold.ttf');
-}
-
-
-@font-face {
-  font-family: 'Alamari';
-  src: url('./fonts/Almarai/Almarai-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'Alamari-Bold';
-  src: url('./fonts/Almarai/Almarai-Bold.ttf');
+  font-family: 'Roboto-Bold';
+  src: url('./fonts/Roboto/Roboto-Bold.ttf');
 }
 
 body {
@@ -45,7 +34,7 @@ h4,
 h5,
 h6,
 hr {
-  font-family: 'Alamari-Bold';
+  font-family: 'Roboto-Bold';
   text-align: center;
   margin: 0px;
 }
@@ -300,7 +289,7 @@ h1 {
 .banlist-category {
   font-size: 24px;
   font-weight: bold;
-  font-family: 'Alamari-Bold';
+  font-family: 'Roboto-Bold';
   position: static;
   padding: 0px 0px 2px 20px;
 }
@@ -477,7 +466,7 @@ h1 {
 }
 
 #logo h1 {
-  font-family: 'Alamari';
+  font-family: 'Roboto-Bold';
   color: #4ebf71;
   padding: 0px 10px 0px 20px;
   text-align: left;
@@ -823,8 +812,8 @@ h1 {
   background-color: #6d6f8a;
 }
 
-.monsterButton,
-.clickedMonsterButton {
+.groupButton,
+.clickedGroupButton {
   display: inline-block;
   padding: 6px 6px 6px 6px;
   border: 1px solid #000000;
@@ -843,12 +832,12 @@ h1 {
   vertical-align: middle;
 }
 
-.monsterButton {
+.groupButton {
   color: black;
   background-color: #f5f7fa;
 }
 
-.clickedMonsterButton {
+.clickedGroupButton {
   color: white;
   font-weight: 600;
   background-color: #6d6f8a;
@@ -954,7 +943,6 @@ h1 {
   align-items: center;
   justify-content: center;
   align-content: center;
-  /* border: 1px solid blue; */
 }
 
 .player-pfp {
@@ -969,24 +957,15 @@ h1 {
   font-size: 30px;
   font-weight: bold;
   text-align: center;
-  /* border: 1px solid red; */
   padding: 3px ;
 }
 
-.player-profile-table {
-  /* text-align: center; */
-  /* border: 1px solid brown; */
-}
 
 .player-profile-info td {
-  /* text-align: center; */
-  /* border: 1px solid purple; */
   padding: 0px;
 }
 
 .player-profile-cell {
-  /* text-align: center; */
-  /* border: 1px solid green; */
   padding: 4px 1px;
 }
 
@@ -1094,7 +1073,7 @@ h1 {
   color: #2e2215;
   text-align: left;
   font-size: 32pt;
-  font-family:'Alamari';
+  font-family:'Roboto-Bold';
   font-weight: bold;
 }
 
@@ -1241,7 +1220,7 @@ h1 {
 
 .single-event-title {
   padding: 20px 0px;
-  font-family: 'Alamari-Bold';
+  font-family: 'Roboto';
   font-weight: bold;
   font-size: 50px;
 }
@@ -1562,7 +1541,7 @@ h1 {
   background-position: 35%;
 }
 
-#normal.monsterButton, #normal.clickedMonsterButton {
+#normal.groupButton, #normal.clickedGroupButton {
   background-image: url('./images/templates/monsterCard.jpg');
 }
 
@@ -1574,7 +1553,7 @@ h1 {
   background-image: url('./images/templates/fusionCard.jpg');
 }
 
-#ritual-monster {
+#ritual {
   background-image: url('./images/templates/ritualCard.jpg');
 }
 
@@ -1668,7 +1647,7 @@ h1 {
   background-image: url('./images/symbols/equip.png');
 }
 
-#ritual {
+#ritual.iconButton, #ritual.clickedIconButton {
   background-image: url('./images/symbols/ritual.png');
 }
 
@@ -1676,7 +1655,7 @@ h1 {
   background-image: url('./images/symbols/field.png');
 }
 
-#quickPlay {
+#quick-Play {
   background-image: url('./images/symbols/quick-play.png');
 }
 
@@ -1872,7 +1851,7 @@ h1 {
 .attributeButton:hover,
 .typeButton:hover,
 .iconButton:hover,
-.monsterButton:hover {
+.groupButton:hover {
   cursor: pointer;
   text-shadow: 0 0 2em rgba(255, 255, 255, 1);
   color: black;
@@ -1882,7 +1861,7 @@ h1 {
 .clickedAttributeButton:hover,
 .clickedTypeButton:hover,
 .clickedIconButton:hover,
-.clickedMonsterButton:hover {
+.clickedGroupButton:hover {
   cursor: pointer;
 }
 
@@ -2101,7 +2080,7 @@ select option {
   font-weight: normal;
 }
 
-#myTable {
+#card-table {
   display: table;
   border-top: 2px;
   border-bottom: 2px;
@@ -2111,13 +2090,18 @@ select option {
   border-color: #565769;
   margin-bottom: 5px;
   vertical-align: middle;
-  margin-left: 4%;
-  margin-right: 4%;
+  width: 88%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cardrow-description {
+  text-align: left;
 }
 
 #deck-table {
   display: table;
-  min-width: 90%;
+  width: 88%;
   border-top: 2px;
   border-bottom: 2px;
   border-left: 0px;
@@ -2132,7 +2116,7 @@ select option {
 
 #event-table {
   display: table;
-  min-width: 90%;
+  width: 88%;
   border-top: 2px;
   border-bottom: 2px;
   border-left: 0px;
@@ -2144,8 +2128,6 @@ select option {
   margin-left: auto;
   margin-right: auto;
 }
-
-
 
 #miniboard-table {
   width: 760px;

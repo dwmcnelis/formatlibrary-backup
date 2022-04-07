@@ -10,6 +10,7 @@
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
     "deploy": "script/deploy",
+    "deploy-aws": "npm run build-client & npm start",
     "get": "node script/get.js",
     "fix": "node script/fix.js",
     "compose": "node script/compose.js",

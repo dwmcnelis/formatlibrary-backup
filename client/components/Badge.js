@@ -1,9 +1,6 @@
 
 import React from 'react'
-import {capitalize, dateToVerbose, ordinalize} from '../../functions/utility'
-import formats from '../../static/formats.json'
-import * as emojis from '../../public/images/emojis'
-import { FL, GF, EF } from '../../public/images/logos'
+import {capitalize} from '../../functions/utility'
 import {god, legend, master, diamond, platinum, gold, silver, bronze, rock, sad, mad} from '../../public/images/emojis'
 
 /*eslint-disable*/

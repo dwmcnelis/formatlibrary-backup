@@ -31,9 +31,7 @@ const LeaderBoard = (props) => {
     if (!format.name) return
     const fetchData = async () => {
       try {
-        console.log('format', format)
         const {data} = await axios.get(`/api/stats/leaders/1000/${format.name.toLowerCase()}`)
-        console.log('data', data)
         setLeaderboard(data)
       } catch (err) {
         console.log(err)
