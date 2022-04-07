@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
-// const pkg = require('../../package.json')
 const { pgPassword } = require('../../secrets.js')
+//const pkg = require('../../package.json')
 // const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
 
 // const url = process.env.DATABASE_URL
@@ -11,6 +11,8 @@ const { pgPassword } = require('../../secrets.js')
 //   logging: false,
 //   ssl: true
 // })
+
+console.log('pgPassword', pgPassword)
 
 const db = new Sequelize(
   'formatlibrary',
@@ -25,7 +27,6 @@ const db = new Sequelize(
 )
 
 console.log('db.js !!db', !!db)
-console.log('db.js db', db)
 
 module.exports = db
 
