@@ -100,8 +100,8 @@ const createApp = () => {
 	})
 
 	// load key/cert
-	const privateKey = '/etc/letsencrypt/live/www.formatlibrary.com/privkey.pem' //fs.readFileSync('certs/formatlibrary.key.pem', 'utf8')
-	const certificate = '/etc/letsencrypt/live/www.formatlibrary.com/fullchain.pem' //fs.readFileSync('certs/formatlibrary.cert.pem', 'utf8')
+	const privateKey = 'certs/privkey.pem' //'/etc/letsencrypt/live/www.formatlibrary.com/privkey.pem' //fs.readFileSync('certs/formatlibrary.key.pem', 'utf8')
+	const certificate = 'certs/fullchain.pem' //'/etc/letsencrypt/live/www.formatlibrary.com/fullchain.pem' //fs.readFileSync('certs/formatlibrary.cert.pem', 'utf8')
 	const credentials = { key: privateKey, cert: certificate }
 
 	// Wrap(proxy) express with http server
