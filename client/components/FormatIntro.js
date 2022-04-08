@@ -71,7 +71,7 @@ const FormatIntro = (props = {}) => {
             <a href="#banlist">Ban List</a>
           </li>
         </div>
-        <img className="format-icon-large" src={`/images/artworks/${format.icon}.jpg`} />
+        <img className="format-icon-large" src={`/images/artworks/${format.icon.toLowerCase()}.jpg`} />
       </div>
 
       <PopularDecks format={format}/>
