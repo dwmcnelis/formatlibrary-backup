@@ -56,7 +56,7 @@ const SingleEvent = (props) => {
 
   const formatName = capitalize(event.format, true) || '?'
   const formatEmoji = emojis[formats[formatName].logo] || ''
-  const formatArtwork = artworks[formats[formatName].logo] || ''
+  const formatArtwork = artworks[formats[formatName].logo.toLowerCase()] || ''
   const communityLogo = event.community === 'Format Library' ? FL :
       event.community === 'GoatFormat.com' ? GF :
       event.community === 'EdisonFormat.com' ? EF :
