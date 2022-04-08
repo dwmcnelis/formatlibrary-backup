@@ -1,28 +1,28 @@
 const Sequelize = require('sequelize')
 const { pgPassword } = require('../../secrets.js')
-const pkg = require('../../package.json')
-const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
+// const pkg = require('../../package.json')
+// const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
 
-const url = process.env.DATABASE_URL
-  ? process.env.DATABASE_URL
-  : `postgresql://danielmcnelis@localhost/${databaseName}`
+// const url = process.env.DATABASE_URL
+//   ? process.env.DATABASE_URL
+//   : `postgresql://danielmcnelis@localhost/${databaseName}`
 
-const db = new Sequelize(url, {
-  logging: false,
-  ssl: true
-})
+// const db = new Sequelize(url, {
+//   logging: false,
+//   ssl: true
+// })
 
-// const db = new Sequelize(
-//   'formatlibrary',
-//   'ubuntu',
-//   pgPassword,
-//   { 
-//     host: 'localhost',
-//     port: 5432,
-//     dialect: 'postgres',
-//     logging: false
-//   }
-// )
+const db = new Sequelize(
+  'formatlibrary',
+  'ubuntu',
+  pgPassword,
+  { 
+    host: 'localhost',
+    port: 5432,
+    dialect: 'postgres',
+    logging: false
+  }
+)
 
 module.exports = db
 
