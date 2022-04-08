@@ -1,4 +1,7 @@
 
+const fs = require('fs')
+const http = require('http')
+const https = require('https')
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
@@ -8,15 +11,17 @@ const session = require('express-session')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
 const api = require('./api')
-const sessionStore = new SequelizeStore({db})
+const sessionStore = new SequelizeStore({ db })
 const PORT = process.env.PORT || 8080
 const app = express()
 module.exports = app
+let httpServer
+let httpsServer
 
 // This is a global Mocha hook, used for resource cleanup.
 // Otherwise, Mocha v4+ never quits after tests.
 if (process.env.NODE_ENV === 'test') {
-  after('close the session store', () => sessionStore.stopExpiringSessions())
+	after('close the session store', () => sessionStore.stopExpiringSessions())
 }
 
 /**
@@ -42,81 +47,97 @@ if (process.env.NODE_ENV !== 'production') require('../secrets')
 // })
 
 const createApp = () => {
-  console.log('creating App...')
-  // logging middleware
-  app.use(morgan('dev'))
+	console.log('creating App...')
+	// logging middleware
+	app.use(morgan('dev'))
 
-  // body parsing middleware
-  app.use(express.json())
-  app.use(express.urlencoded({extended: true}))
+	// body parsing middleware
+	app.use(express.json())
+	app.use(express.urlencoded({ extended: true }))
 
-  // compression middleware
-  app.use(compression())
+	// compression middleware
+	app.use(compression())
 
-  // // session middleware with passport
-  // app.use(
-  //   session({
-  //     secret: process.env.SESSION_SECRET || 'my best friend is Cody',
-  //     store: sessionStore,
-  //     resave: false,
-  //     saveUninitialized: false
-  //   })
-  // )
-  // app.use(passport.initialize())
-  // app.use(passport.session())
+	// // session middleware with passport
+	// app.use(
+	//   session({
+	//     secret: process.env.SESSION_SECRET || 'my best friend is Cody',
+	//     store: sessionStore,
+	//     resave: false,
+	//     saveUninitialized: false
+	//   })
+	// )
+	// app.use(passport.initialize())
+	// app.use(passport.session())
 
-  // api routes
-  app.use('/api', api)
+	// api routes
+	app.use('/api', api)
 
-  // static file-serving middleware
-  app.use(express.static(path.join(__dirname, '..', 'public')))
+	// static file-serving middleware
+	app.use(express.static(path.join(__dirname, '..', 'public')))
 
-  // any remaining requests with an extension (.js, .css, etc.) send 404
-  app.use((req, res, next) => {
-    if (path.extname(req.path).length) {
-      const err = new Error('Not found')
-      err.status = 404
-      next(err)
-    } else {
-      next()
-    }
-  })
+	// any remaining requests with an extension (.js, .css, etc.) send 404
+	app.use((req, res, next) => {
+		if (path.extname(req.path).length) {
+			const err = new Error('Not found')
+			err.status = 404
+			next(err)
+		} else {
+			next()
+		}
+	})
 
-  // sends index.html
-  app.use('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public/index.html'))
-  })
+	// sends index.html
+	app.use('*', (req, res) => {
+		res.sendFile(path.join(__dirname, '..', 'public/index.html'))
+	})
 
-  // error handling endware
-  app.use((err, req, res, next) => {
-    console.error(err)
-    console.error(err.stack)
-    res.status(err.status || 500).send(err.message || 'Internal server error.')
-  })
+	// error handling endware
+	app.use((err, req, res, next) => {
+		console.error(err)
+		console.error(err.stack)
+		res.status(err.status || 500).send(err.message || 'Internal server error.')
+	})
+
+	// load key/cert
+	const privateKey = fs.readFileSync('certs/formatlibrary.key.pem', 'utf8')
+	const certificate = fs.readFileSync('certs/formatlibrary.cert.pem', 'utf8')
+	const credentials = { key: privateKey, cert: certificate }
+
+	// Wrap(proxy) express with http server
+	httpServer = http.createServer(app)
+
+	// Wrap(proxy) http server with https server
+	httpsServer = https.createServer(credentials, app)
+
 }
 
+
 const startListening = () => {
-  console.log('start Listening...')
-  // start listening (and create a 'server' object representing our server)
-  const server = app.listen(PORT, () =>
-    console.log(`Mixing it up on port ${PORT}`)
-  )
+	console.log('start Listening...')
+	// start listening (and create a 'server' object representing our server)
+	// const server = app.listen(PORT, () =>
+	// 	console.log(`Mixing it up on port ${PORT}`)
+	// )
+	const server = httpsServer.listen(PORT, () =>
+		console.log(`Mixing it up on port ${PORT}`)
+	)
 }
 
 const syncDb = () => db.sync()
 
 async function bootApp() {
-  await sessionStore.sync()
-  await syncDb()
-  await createApp()
-  await startListening()
+	await sessionStore.sync()
+	await syncDb()
+	await createApp()
+	await startListening()
 }
 // This evaluates as true when this file is run directly from the command line,
 // i.e. when we say 'node server/index.js' (or 'nodemon server/index.js', or 'nodemon server', etc)
 // It will evaluate false when this module is required by another module - for example,
 // if we wanted to require our app in a test spec
 if (require.main === module) {
-  bootApp()
+	bootApp()
 } else {
-  createApp()
+	createApp()
 }
