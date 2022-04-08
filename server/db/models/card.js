@@ -1,7 +1,6 @@
 
 const Sequelize = require('sequelize')
 const db = require('../db')
-console.log('card.js !!db', !!db)
 
 const Card = db.define('cards', {
   name: {

@@ -1,8 +1,6 @@
 
 const BlogPost = require('./BlogPost')
-console.log('!!BlogPost', !!BlogPost)
 const Card = require('./Card')
-console.log('!!Card', !!Card)
 const Deck = require('./Deck')
 const DeckType = require('./DeckType')
 const Format = require('./Format')

@@ -1,7 +1,6 @@
 
 const Sequelize = require('sequelize')
 const db = require('../db')
-console.log('blogpost.js !!db', !!db)
 
 const BlogPost = db.define('blogposts', {
   title: {
