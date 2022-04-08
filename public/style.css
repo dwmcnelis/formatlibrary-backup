@@ -31,6 +31,10 @@ body {
   margin: 0% 3%;
 }
 
+.app {
+  padding-bottom: 10px
+}
+
 h1,
 h2,
 h3,
@@ -2228,17 +2232,28 @@ body {
 }
 
 
+@media only screen and (max-width: 800px) {
+  body {
+    background: none;
+    max-width: 100%;
+  }
 
-@media only screen and (max-width: 400px) {
   .body {
     padding: 0px;
     margin: 0px;
+    max-width: 100%;
+  }
+
+  .app {
+    padding: 0px;
+    max-width: 100%;
   }
 
   .blog {
     border: 0px;
     padding: 0px;
     margin: 0px;
+    max-width: 100%;
   }
 
   #logo {
@@ -2264,19 +2279,70 @@ body {
     display: none;
   }
 
+  .footer {
+    height: auto;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 0px;
+    justify-content: center;
+  }
+
+  .footer-item {
+    font-size: 10pt;
+    text-align: center;
+    padding: 0px 5px;
+  }
+
+  .footer-logo, .discord-link {
+    display: none;
+  }
+
+  .disclaimer {
+    display: none;
+  }
+
+  .blogpost {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .blogpost-title-flexbox {
+    padding: 10px;
+    margin: 0px auto;
+    max-width: 85%;
+    justify-content: space-around;
+    align-items: center;
+    overflow: none;
+  }
+
+  .blogpost-date {
+    display: none;
+  }
+
+  .blogpost-paragraph {
+    padding: 10px;
+    font-size: 12pt;
+  }
+
   .blogpost-title {
     padding: 0px;
-    /* margin: 0px; */
+    margin: 0px;
+    max-width: 60vh;
     text-align: left;
     font-size: 20pt;
     font-family:'Roboto-Bold';
     font-weight: bold;
   }
 
-  /* .blogpost-title-flexbox {
-    padding: 0px;
-    margin: 0px;
-  } */
+  .blogpost-title h1 {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+  }
+
+  .blogpost-format-icon {
+    max-width: 18vw;
+    height: auto;
+  }
 
   .blogpost-event-icon {
     display: none;
@@ -2284,5 +2350,45 @@ body {
 
   .blogpost-title-emojis {
     min-width: 0px;
+  }
+
+  .blogpost-deck-box, .blogpost-images-flexbox {
+    display: block;
+    width: 100%;
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: none;
+  }
+
+  .blogpost-pfp, .blogpost-community {
+    display: none;
+  }
+  
+  .blogpost-deck-link {
+    max-width: 98%;
+    padding: 0px;
+    border: 0px;
+    height: auto;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .blogpost-deck-link img {
+    max-width: 100%;
+    padding: 0px;
+    border: 0px;
+    max-height: auto;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .blogpost-deck {
+    max-width: 100%;
+    padding: 0px;
+    border: 0px;
+    max-height: auto;
+    margin-right: auto;
+    margin-left: auto;
   }
 }
