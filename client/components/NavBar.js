@@ -6,7 +6,7 @@ const NavBar = () => (
   <div className="nav-bar">
     <Link to="/">
       <div id="logo">
-        <img src={'/favicon.ico'} />
+        <img src={'/images/logos/FL.png'} />
         <h1>Format Library</h1>
       </div>
     </Link>
