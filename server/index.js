@@ -12,7 +12,8 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
 const api = require('./api')
 const sessionStore = new SequelizeStore({ db })
-const PORT = process.env.PORT || 443
+const onAWS = fs.existsSync('certs/privkey.pem')
+const PORT = onAWS ? 443 : 8080
 const app = express()
 module.exports = app
 let httpServer
@@ -100,9 +101,10 @@ const createApp = () => {
 	})
 
 	// load key/cert
-	const privateKey = fs.readFileSync('certs/privkey.pem', 'utf8')
-	const certificate = fs.readFileSync('certs/fullchain.pem', 'utf8')
+	const privateKey = fs.existsSync('certs/privkey.pem') ? fs.readFileSync('certs/privkey.pem', 'utf8') : ''
+	const certificate = fs.existsSync('certs/privkey.pem') ? fs.readFileSync('certs/fullchain.pem', 'utf8') : ''
 	const credentials = { key: privateKey, cert: certificate }
+	console.log('credentials', credentials)
 
 	// Wrap(proxy) express with http server
 	httpServer = http.createServer(app)
@@ -119,9 +121,15 @@ const startListening = () => {
 	// const server = app.listen(PORT, () =>
 	// 	console.log(`Mixing it up on port ${PORT}`)
 	// )
-	const server = httpsServer.listen(PORT, () =>
-		console.log(`Mixing it up on port ${PORT}`)
-	)
+	if (onAWS) {
+		const server = httpsServer.listen(PORT, () =>
+			console.log(`Mixing it up on port ${PORT}`)
+		)
+	} else {
+		const server = httpServer.listen(PORT, () =>
+			console.log(`Testing things out on port ${PORT}`)
+		)
+	}
 }
 
 const syncDb = () => db.sync()
