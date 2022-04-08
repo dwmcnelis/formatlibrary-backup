@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "aws": "pm2 start webpack & authbind --deep pm2 start server",
+    "aws": "npm build-client & authbind --deep pm2 start server",
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
     "deploy": "script/deploy",
