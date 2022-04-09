@@ -8,7 +8,7 @@ const sets = require('../static/sets.json')
 const { Op } = require('sequelize')
 const formats = require('../static/formats.json')
 const { capitalize, arrayToObject } = require('../functions/utility')
-const { challongeAPIKey, tcgPlayerAPI } = require('../secrets')
+const { goatformatChallongeAPIKey, formatLibraryChallongeAPIKey, tcgPlayerAPI } = require('../secrets')
 const { 
     accum, airbellum, alius, alo, angel, archer, archfiend, arma, artemis, barrel, bazoo, ben_kei, bfadd, bigbang, bigshield, blade, bls,
     boomboxen, brain, bribe, bushi, bwc, caius, canceller, cannon, cardd, cat, celfon, chariot, clown, codarus, coelacanth, coin, collapse, 
@@ -1626,11 +1626,15 @@ const getDeckCategory = (deckType) => {
 }
 
 const createDecks = async (name, format, community, useTags = true) => {
+    const apiKey = community = 'Format Library' ? formatLibraryChallongeAPIKey : goatformatChallongeAPIKey
+    const communityUrl = community = 'Format Library' ? 'formatlibrary' : 'goatformat'
+    console.log('communityUrl', communityUrl)
+
     try {
         let tournament = await Tournament.findOne({ where: { name, state: 'complete' }})
         if (!tournament) {
             console.log(`no tournament named: ${name}`)
-            const {data} = await axios.get(`https://formatlibrary:${challongeAPIKey}@api.challonge.com/v1/tournaments/${name}.json`)
+            const {data} = await axios.get(`https://${communityUrl}:${apiKey}@api.challonge.com/v1/tournaments/${name}.json`)
             if (!data) return console.log(`no tournament with url: challonge.com/${name}`)
             tournament = await Tournament.create({
                 name,
