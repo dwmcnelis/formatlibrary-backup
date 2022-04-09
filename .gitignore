@@ -2,6 +2,7 @@ certs
 node_modules
 public/bundle.js
 public/bundle.js.map
+public/decks
 secrets.js
 .DS_Store
 npm-debug.log
