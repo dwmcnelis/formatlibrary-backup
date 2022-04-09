@@ -265,7 +265,39 @@ const savePfps = async () => {
     }
 }
 
-savePfps()
+const purgePfps = async () => {
+    fs.readdir(`./public/images/pfps/`, async (err, files) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log('files', files)
+            files.forEach(async (file) => {
+                const query = `${file.slice(0, -8)}#${file.slice(-8, -4)}`
+                // console.log(`file`, file)
+                // console.log(`query`, query)
+                const player = await Player.findOne({ where: { tag: query }})
+                if (!player) {
+                    return console.log('could not find player')
+                }
+
+                const stats = await Stats.count({ where: { playerId: player.id }})
+                if (!stats) {
+                    try {
+                        fs.unlinkSync(`./public/images/pfps/${file}`)
+                        console.log(`removed pfp for ${player.name}`)
+                    } catch(err) {
+                        console.error(err)
+                    }
+                }
+            })
+        }
+    })
+}
+
+
+purgePfps()
+// savePfps()
 // composeCongratsPost()
 // composeThumbnails()
 // drawBlankDeck()
+
