@@ -3,13 +3,12 @@ const { pgPassword } = require('../../secrets.js')
 const pkg = require('../../package.json')
 const fs = require('fs')
 const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
-const onAWS = true || fs.existsSync('../certs/privkey.pem')
+const onAWS = fs.existsSync('../certs/privkey.pem')
 const url = process.env.DATABASE_URL
   ? process.env.DATABASE_URL
   : `postgresql://danielmcnelis@localhost/${databaseName}`
 
 let db 
-console.log('onAWS', onAWS)
 
 if (onAWS) {
   db = new Sequelize(
@@ -29,8 +28,6 @@ if (onAWS) {
     ssl: true
   })
 }
-
-console.log('!!db', !!db)
 
 module.exports = db
 

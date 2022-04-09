@@ -71,7 +71,7 @@ const SingleDeck = (props) => {
 
   return (
     <div className="body">
-      <div className="myDiv">
+      <div className="single-deck-title-flexbox">
         <div className="single-deck-title">{capitalize(deck.deckType, true)}</div>
         <a
           className="downloadButton"
@@ -130,7 +130,7 @@ const SingleDeck = (props) => {
             </td>
             <td>
               <div className="single-deck-cell">
-                <div style={{paddingRight:'7px'}}><b>Uploaded:</b> {dateToVerbose(deck.createdAt)}</div>
+                <div><b>Uploaded:</b> {dateToVerbose(deck.createdAt)}</div>
               </div>
             </td>
             <td>
@@ -176,13 +176,13 @@ const SingleDeck = (props) => {
           <tr>
             <td>
               <div className="deck-stats-cell">
-                <div style={{paddingRight:'7px'}}>Likes: {deck.rating}</div>
+                <div style={{paddingRight:'7px'}}><p className="deck-stats-label">Likes: </p>{deck.rating}</div>
                 <img className="likeImg" onClick={() => addLike()} style={{width:'28px'}} src={emojis.Heart}/>
               </div>   
             </td>
             <td>
               <div className="deck-stats-cell">
-                <div style={{paddingRight:'7px'}}>Downloads: {deck.downloads}</div> 
+                <div style={{paddingRight:'7px'}}><p className="deck-stats-label">Downloads: </p>{deck.downloads}</div> 
                 <a
                   href={`/api/decks/download/${props.match.params.id}`} 
                   download={`${deck.builder}-${deck.deckType}.ydk`}
@@ -194,7 +194,7 @@ const SingleDeck = (props) => {
             </td>
             <td>
               <div className="deck-stats-cell">
-                <div style={{paddingRight:'7px'}}>Views: {deck.views}</div> 
+                <div style={{paddingRight:'7px'}}><p className="deck-stats-label">Views: </p>{deck.views}</div> 
                 <img style={{width:'28px'}} src={emojis.Eye}/>
               </div>   
             </td>
