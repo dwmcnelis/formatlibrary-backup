@@ -23,6 +23,15 @@ const arrayToObject = (arr) => {
     return obj
 }
 
+//DATE TO SIMPLE
+const dateToSimple = (date) => {
+    const year = typeof date === 'string' ? date.slice(0, 4) : date.getFullYear()
+    const month = typeof date === 'string' ? parseInt(date.slice(5, 7), 10) : date.getMonth() + 1
+    const day = typeof date === 'string' ? parseInt(date.slice(8, 10), 10) : date.getDate()
+    const simple = `${month}/${day}/${year}`
+    return simple
+}
+
 //DATE TO VERBOSE
 const dateToVerbose = (date, long = true, ordinal = true, includeYear = true) => {
     const year = typeof date === 'string' ? date.slice(0, 4) : date.getFullYear()
@@ -125,6 +134,7 @@ module.exports = {
     camelize,
     capitalize,
     arrayToObject,
+    dateToSimple,
     dateToVerbose,
     generateDefaultStatus,
     ordinalize,

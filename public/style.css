@@ -2417,7 +2417,7 @@ body {
     width: 100%;
   }
 
-  .single-deck-cell b {
+  .single-deck-cell b, #category-td, #uploaded-td {
     display: none;
   }
 
@@ -2426,6 +2426,8 @@ body {
     align-items: center;
     justify-content: center;
   }
+
+
 
   .deck-bubble {
     max-width: 100%;

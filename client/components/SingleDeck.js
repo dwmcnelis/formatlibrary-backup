@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import CardImage from './CardImage'
 import NotFound from './NotFound'
 import axios from 'axios'
-import {capitalize, dateToVerbose, ordinalize} from '../../functions/utility'
+import {capitalize, dateToSimple, dateToVerbose, ordinalize} from '../../functions/utility'
 import formats from '../../static/formats.json'
 import * as emojis from '../../public/images/emojis'
 import { FL, GF, EF } from '../../public/images/logos'
@@ -108,7 +108,7 @@ const SingleDeck = (props) => {
                 }
               </div>       
             </td>
-            <td>
+            <td id="category-td">
               <div className="single-deck-cell">
                 <div style={{paddingRight:'7px'}}><b>Category:</b> {capitalize(deck.deckCategory, true)}</div>
                 <img style={{width:'28px'}} src={categoryImage}/>
@@ -128,7 +128,7 @@ const SingleDeck = (props) => {
                 <img style={{width:'28px'}} src={formatImage}/>
               </div>       
             </td>
-            <td>
+            <td id="uploaded-td">
               <div className="single-deck-cell">
                 <div><b>Uploaded:</b> {dateToVerbose(deck.createdAt)}</div>
               </div>
@@ -176,13 +176,13 @@ const SingleDeck = (props) => {
           <tr>
             <td>
               <div className="deck-stats-cell">
-                <div style={{paddingRight:'7px'}}><p className="deck-stats-label">Likes: </p>{deck.rating}</div>
+                <div style={{paddingRight:'7px'}}><b className="deck-stats-label">Likes: </b>{deck.rating}</div>
                 <img className="likeImg" onClick={() => addLike()} style={{width:'28px'}} src={emojis.Heart}/>
               </div>   
             </td>
             <td>
               <div className="deck-stats-cell">
-                <div style={{paddingRight:'7px'}}><p className="deck-stats-label">Downloads: </p>{deck.downloads}</div> 
+                <div style={{paddingRight:'7px'}}><b className="deck-stats-label">Downloads: </b>{deck.downloads}</div> 
                 <a
                   href={`/api/decks/download/${props.match.params.id}`} 
                   download={`${deck.builder}-${deck.deckType}.ydk`}
@@ -194,7 +194,7 @@ const SingleDeck = (props) => {
             </td>
             <td>
               <div className="deck-stats-cell">
-                <div style={{paddingRight:'7px'}}><p className="deck-stats-label">Views: </p>{deck.views}</div> 
+                <div style={{paddingRight:'7px'}}><b className="deck-stats-label">Views: </b>{deck.views}</div> 
                 <img style={{width:'28px'}} src={emojis.Eye}/>
               </div>   
             </td>
