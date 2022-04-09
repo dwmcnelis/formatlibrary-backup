@@ -30,9 +30,12 @@ const drawBlankDeck = async () => {
     console.log('created blank deck')
 }
 
-const composeCongratsPost = async () => {
-    const tournaments = await Tournament.findAll({ 
-        where: { display: true },
+const composeCongratsPost = async (shortName) => {
+    const tournaments = await Tournament.findOne({ 
+        where: { 
+            shortName: shortName,
+            display: true
+        },
         order: [["startDate", "ASC"]]
     })
 
@@ -294,8 +297,8 @@ const purgePfps = async () => {
     })
 }
 
-
-purgePfps()
+composeCongratsPost('PWCQ14')
+// purgePfps()
 // savePfps()
 // composeCongratsPost()
 // composeThumbnails()

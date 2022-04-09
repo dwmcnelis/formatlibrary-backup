@@ -1900,7 +1900,7 @@ const countParticipants = async () => {
 // countParticipants()
 // updateDeckTypes()
 // makeDeckTypes()
-createDecks('RBET02', 'edison', 'Format Library', true)
+createDecks('PWCQ14', 'goat', 'Goat Format', true)
 // download()
 // images()
 // print()
