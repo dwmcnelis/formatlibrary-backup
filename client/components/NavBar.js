@@ -1,6 +1,12 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
+const toggle = () => {
+  const menu = document.getElementById("hamburger-menu")
+  menu.classList.toggle("open")
+  menu.classList.toggle("closed")
+}
+
 //NavBar
 const NavBar = () => (
   <div className="nav-bar">
@@ -25,6 +31,22 @@ const NavBar = () => (
       </Link>
       <Link to="/formats/">
         <h2 className="nav-item">FORMATS</h2>
+      </Link>
+    </div>
+    <div id="hamburger-menu" className="closed" onClick={() => toggle()}>
+      <div id="hamburger-button" className="closed-b">≡</div>
+      <div id="hamburger-button" className="open-b">⌄</div>
+      <Link to="/cards/">
+        <h3 className="hamburger-item">Cards</h3>
+      </Link>
+      <Link to="/decks/">
+        <h3 className="hamburger-item">Decks</h3>
+      </Link>
+      <Link to="/events/">
+        <h3 className="hamburger-item">Events</h3>
+      </Link>
+      <Link to="/formats/">
+        <h3 className="hamburger-item">Formats</h3>
       </Link>
     </div>
   </div>
