@@ -31,7 +31,7 @@ const drawBlankDeck = async () => {
 }
 
 const composeCongratsPost = async (shortName) => {
-    const tournaments = await Tournament.findOne({ 
+    const tournament = await Tournament.findOne({ 
         where: { 
             shortName: shortName,
             display: true
@@ -39,8 +39,6 @@ const composeCongratsPost = async (shortName) => {
         order: [["startDate", "ASC"]]
     })
 
-    for (let i = 0; i < tournaments.length; i++) {
-        const tournament = tournaments[i]
         if (!tournament || !tournament.winner) return console.log('no tournament found')
 
         const deck = await Deck.findOne({
@@ -170,13 +168,13 @@ const composeCongratsPost = async (shortName) => {
         fs.writeFileSync(`./public/images/decks/previews/${deck.id}.png`, buffer)
 
         console.log('created congrats blogpost')
-    }
+    
 }
 
-const composeThumbnails = async () => {
+const composeThumbnails = async (event) => {
     const decks = await Deck.findAll({
         where: {
-            event: {[Op.not]: null }
+            event: event
         }
     })
 
@@ -297,10 +295,10 @@ const purgePfps = async () => {
     })
 }
 
-composeCongratsPost('PWCQ14')
+// composeCongratsPost('PWCQ14')
 // purgePfps()
 // savePfps()
 // composeCongratsPost()
-// composeThumbnails()
+composeThumbnails('PWCQ14')
 // drawBlankDeck()
 

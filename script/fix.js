@@ -1723,6 +1723,7 @@ const createDecks = async (name, format, community, useTags = true) => {
                     } else {
                         const player = players[i]
                         let pname = player.name
+                        if (pname === 'Labounty') pname = 'keininsder'
                         // if (pname === 'Keininsder') pname = 'keininsder'
                         // if (pname === 'Asgeir') pname = 'LWRS'
                         // if (pname === 'Bonkai') pname = 'Unfortunately, I am from Bosnia'
