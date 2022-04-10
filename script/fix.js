@@ -1656,11 +1656,11 @@ const createDecks = async (name, format, community, useTags = true) => {
         const shortenedTags = useTags ? players.map((p) => p.tag.replace(/\s/gi, '_').replace(/[^\w\s]/gi, '_')) :
                                         players.map((p) => p.name.replace(/[^-?|!.'$\w\s]/gi, '_'))
 
-        const res = await axios.get(`https://formatlibrary:${challongeAPIKey}@api.challonge.com/v1/tournaments/${tournament.id}.json`)
+        const res = await axios.get(`https://${communityUrl}:${apiKey}@api.challonge.com/v1/tournaments/${tournament.id}.json`)
         if (!res) return console.log(`no tournamentId: ${tournament.id}`)
         const size = res.data.tournament.participants_count
         const createdAt = `${res.data.tournament.started_at.slice(0, 10)} ${res.data.tournament.started_at.slice(11, 26)}`
-        const { data } = await axios.get(`https://formatlibrary:${challongeAPIKey}@api.challonge.com/v1/tournaments/${tournament.id}/participants.json`)
+        const { data } = await axios.get(`https://${communityUrl}:${apiKey}@api.challonge.com/v1/tournaments/${tournament.id}/participants.json`)
         if (!data) return console.log(`no participants = require(tournamentId: ${tournament.id}`)
         const participants = data.map((d) => d.participant.name)
         console.log('participants', participants)
