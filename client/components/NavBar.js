@@ -36,6 +36,9 @@ const NavBar = () => (
     <div id="hamburger-menu" className="closed" onClick={() => toggle()}>
       <div id="hamburger-button" className="closed-b">≡</div>
       <div id="hamburger-button" className="open-b">⌄</div>
+      <Link to="/">
+        <h2 id="home-button" className="nav-item">HOME</h2>
+      </Link>
       <Link to="/cards/">
         <h3 className="hamburger-item">Cards</h3>
       </Link>
