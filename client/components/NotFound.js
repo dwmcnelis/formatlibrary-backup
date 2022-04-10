@@ -10,8 +10,9 @@ const NotFound = () => {
         <div className="not-found-flexbox">
             <h1>404</h1>
             <div className="not-found-inner-flexbox">
-              <p>Page not found.</p>
-              <img id="thinking" src="/images/emojis/Thinking.png"/>
+              <img id="thinking" src="/images/emojis/thinking.png"/>
+              <p>Page not found</p>
+              <img id="thinking" src="/images/emojis/thinking.png"/>
             </div>
             <img id="dig" src="/images/artworks/dig.jpg"/>
         </div>

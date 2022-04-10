@@ -85,7 +85,7 @@ const SingleDeck = (props) => {
       <table className="single-deck-table">
         <tbody>
           <tr className="single-deck-info-1">
-            <td>
+            <td id="single-deck-builder-td">
               <div className="single-deck-cell">
                 {
                   deck.player && deck.player.tag ? (
@@ -108,36 +108,43 @@ const SingleDeck = (props) => {
                 }
               </div>       
             </td>
-            <td id="category-td">
-              <div className="single-deck-cell">
-                <div style={{paddingRight:'7px'}}><b>Category:</b> {capitalize(deck.deckCategory, true)}</div>
-                <img style={{width:'28px'}} src={categoryImage}/>
-              </div>
-            </td>
-            <td>
-              <div onClick={() => goToEvent()} className="single-deck-cell">
-                <div className="single-deck-event-link" style={{paddingRight:'7px'}}><b>Event:</b> {deck.event}</div> 
-                <img style={{width:'28px'}} src={communityLogo}/>
-              </div>   
-            </td>
-          </tr>
-          <tr className="single-deck-info-2">
             <td>
               <div onClick={() => goToFormat()} className="single-deck-cell">
                 <div className="single-deck-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {capitalize(deck.format, true)}</div>
                 <img style={{width:'28px'}} src={formatImage}/>
               </div>       
             </td>
-            <td id="uploaded-td">
+            <td>
               <div className="single-deck-cell">
-                <div><b>Uploaded:</b> {dateToVerbose(deck.createdAt)}</div>
+                <div style={{paddingRight:'7px'}}><b>Category:</b> {capitalize(deck.deckCategory, true)}</div>
+                <img style={{width:'28px'}} src={categoryImage}/>
               </div>
             </td>
+          </tr>
+          <tr className="single-deck-info-2">
+            <td>
+              <div onClick={() => goToEvent()} className="single-deck-cell">
+                <div className="single-deck-event-link" style={{paddingRight:'7px'}}><b>Event:</b> {deck.event}</div> 
+                <img style={{width:'28px'}} src={communityLogo}/>
+              </div>   
+            </td>
+            {/* <td className="mobile-only">
+              <div onClick={() => goToEvent()} className="single-deck-cell">
+                <div className="single-deck-event-link" style={{paddingRight:'7px'}}><b>Event:</b> {deck.event}</div> 
+                <img style={{width:'28px'}} src={communityLogo}/>
+              </div>   
+            </td> */}
             <td>
               <div className="single-deck-cell">
                 <div style={{paddingRight:'7px'}}><b>Place:</b> {ordinalize(deck.placement)}</div> 
                 <img style={{width:'28px'}} src={placementImage}/>
               </div>   
+            </td>
+            <td>
+              <div className="single-deck-cell">
+                <div className="desktop-only"><b>Uploaded:</b> {dateToVerbose(deck.createdAt, false, false)}</div>
+                <div className="mobile-only"><b>Uploaded:</b> {dateToSimple(deck.createdAt)}</div>
+              </div>
             </td>
           </tr>
         </tbody>

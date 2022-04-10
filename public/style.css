@@ -35,6 +35,10 @@ body {
   padding-bottom: 10px
 }
 
+.mobile-only {
+  display: none;
+}
+
 h1,
 h2,
 h3,
@@ -127,7 +131,7 @@ h1 {
   color: #4ebf71;
   padding: 0px 10px 0px 20px;
   text-align: left;
-  min-width: 250px;
+  min-width: 275px;
 }
 
 /* NAVBAR */
@@ -156,7 +160,7 @@ h1 {
 /* NAVBAR */
 .nav-item {
   color: #f7f7f7;
-  padding: 0px 1.35vw;
+  padding: 20px 1.35vw;
 }
 
 /* NAVBAR */
@@ -2226,8 +2230,9 @@ body {
 
 @media only screen and (max-width: 1000px) {
   #logo h1 {
-    padding-right: 0px;
-    padding-left: 15px;
+    font-size: 24pt;
+    padding: 10px;
+    min-width: 260px;
   }
 
   .nav-item {
@@ -2267,16 +2272,63 @@ body {
     justify-content: space-around;
   }
 
-  #logo h1 {
-    font-size: 24pt;
-    padding: 10px;
-    min-width: 0px;
-  }
-
   #logo img {
     width: 50px;
     height: auto;
   }
+
+  #logo h1 {
+    min-width: 100px;
+  }
+
+
+  .nav-bar {
+    margin: 0px;
+    padding: 0px;
+    border-radius: 0px;
+    justify-content: space-evenly;
+    min-height: 60px;
+    border: 5px solid black;
+    flex-wrap: wrap;
+  }
+
+  #nav-menu {
+    width: 100%;
+    justify-content: space-evenly;
+    text-align: center;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: contents;
+  }
+
+  body {
+    background: none;
+    max-width: 100%;
+  }
+
+  .body {
+    padding: 0px;
+    margin: 0px;
+    max-width: 100%;
+    border: none;
+  }
+
+  .app {
+    padding: 0px;
+    max-width: 100%;
+  }
+
+  .blog {
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+  }
+
 
   .blog-divider {
     margin: 10px auto;
@@ -2294,12 +2346,15 @@ body {
 
   #nav-menu {
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 6px 0px 0px;
   }
 
   .nav-item {
     font-size: 14pt;
     font-weight: normal;
+    padding: 10px;
   }
 
   .footer {
@@ -2307,7 +2362,6 @@ body {
     margin: 0px;
     padding: 0px;
     border-radius: 0px;
-    justify-content: center;
   }
 
   .footer-item {
@@ -2316,13 +2370,10 @@ body {
     padding: 0px 5px;
   }
 
-  .footer-logo, .discord-link {
-    display: none;
+  .footer-menu {
+    justify-content: space-evenly;
   }
 
-  .disclaimer {
-    display: none;
-  }
 
   /* BLOG */
 
@@ -2389,18 +2440,23 @@ body {
   }
   
   .blogpost-deck-link {
-    max-width: 98%;
-    padding: 0px;
-    border: 0px;
+    max-width: 99%;
     height: auto;
     margin-right: auto;
     margin-left: auto;
+  }
+
+  .blogpost-deck-link img:hover, .blogpost-deck-link img:active{
+    padding: 0px;
+    border: 0px;
+    border-radius: 0px;
   }
 
   .blogpost-deck-link img {
     max-width: 100%;
     padding: 0px;
     border: 0px;
+    border-radius: 0px;
     max-height: auto;
     margin-right: auto;
     margin-left: auto;
@@ -2413,6 +2469,35 @@ body {
     margin-right: auto;
     margin-left: auto;
   }
+
+  .footer {
+    min-height: 100px
+  }
+
+  .disclaimer {
+    display: none;
+  }
+
+  .discord-desc {
+    display: none;
+  }
+
+  .footer-logo, .discord-logo {
+    width: 50px;
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  
+  .footer {
+    min-height: 50px
+  }
+
+  .footer-logo, .discord-link {
+    display: none;
+  }
+
 
   .downloadButton {
     display: none;
@@ -2433,7 +2518,7 @@ body {
     width: 100%;
   }
 
-  .single-deck-cell b, #category-td, #uploaded-td {
+  .single-deck-cell b {
     display: none;
   }
 
@@ -2442,6 +2527,12 @@ body {
     align-items: center;
     justify-content: center;
   }
+
+  /* #single-deck-builder-td {
+    width: 33%;
+    padding-left: 33%;
+    padding-right: 33%;
+  } */
 
   .deck-bubble {
     max-width: 100%;
@@ -2464,5 +2555,4 @@ body {
   .deck-stats-label {
     display: none;
   }
-
 }
