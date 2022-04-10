@@ -112,7 +112,22 @@ h1 {
 }
 
 #logo {
-  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#logo img {
+  width: 7.5vw;
+}
+
+#logo h1 {
+  font-size: 3.75vw;
+  font-family: 'Roboto-Bold';
+  color: #4ebf71;
+  padding: 0px 10px 0px 20px;
+  text-align: left;
+  min-width: 250px;
 }
 
 /* NAVBAR */
@@ -121,29 +136,27 @@ h1 {
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  flex-wrap: wrap;
   background-color: black;
   color: #ede6e6;
   border: 10px solid black;
   border-radius: 6px;
   padding: 5px;
-  margin: 10px 20px 30px;
+  margin: 0.5% 0.87% 1.25%;
 }
 
 /* NAVBAR */
 #nav-menu {
   display: flex;
-  flex-wrap: wrap;
-  padding: 10px 0px;
+  flex-wrap: nowrap;
   justify-content: right;
   text-align: left;
+  padding: 10px 0px;
 }
 
 /* NAVBAR */
 .nav-item {
   color: #f7f7f7;
-  font-weight: bolder;
-  padding: 20px;
+  padding: 0px 1.35vw;
 }
 
 /* NAVBAR */
@@ -511,24 +524,6 @@ h1 {
   border: 0.1em solid #000000;
   margin: 0.1em 0.5em 0.2em 0.5em;
 }
-
-#logo {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-#logo img {
-  width: 100px;
-}
-
-#logo h1 {
-  font-family: 'Roboto-Bold';
-  color: #4ebf71;
-  padding: 0px 10px 0px 20px;
-  text-align: left;
-}
-
 
 .discord-link {
   display: flex;
@@ -2229,6 +2224,20 @@ body {
   padding: 0;
 }
 
+@media only screen and (max-width: 1000px) {
+  #logo h1 {
+    padding-right: 0px;
+    padding-left: 15px;
+  }
+
+  .nav-item {
+    font-size: 16pt;
+  }
+
+  #home-button {
+    display: none;
+  }
+}
 
 @media only screen and (max-width: 800px) {
   body {
@@ -2260,7 +2269,8 @@ body {
 
   #logo h1 {
     font-size: 24pt;
-    padding: 10px
+    padding: 10px;
+    min-width: 0px;
   }
 
   #logo img {
@@ -2277,13 +2287,19 @@ body {
     padding: 0px;
     border-radius: 0px;
     justify-content: center;
-    height: 60px;
+    min-height: 60px;
     border: 5px solid black;
-    overflow: none;
+    flex-wrap: wrap;
+  }
+
+  #nav-menu {
+    width: 100%;
+    justify-content: space-between;
   }
 
   .nav-item {
-    display: none;
+    font-size: 14pt;
+    font-weight: normal;
   }
 
   .footer {
@@ -2427,8 +2443,6 @@ body {
     justify-content: center;
   }
 
-
-
   .deck-bubble {
     max-width: 100%;
     border-radius: 0px;
@@ -2443,8 +2457,8 @@ body {
   }
 
   .deck-stats-table {
-    max-width: 100%;
-    margin: 2px;
+    width: 98%;
+    margin: 2px 0px;
   }
 
   .deck-stats-label {
@@ -2452,15 +2466,3 @@ body {
   }
 
 }
-
-/* 
-
-.deck-flexbox {
-  padding: 0px 10px;
-  max-width: 800px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: left;
-  flex-direction: row;
-} */
