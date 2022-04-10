@@ -172,11 +172,14 @@ const composeCongratsPost = async (shortName) => {
 }
 
 const composeThumbnails = async (event) => {
-    const decks = await Deck.findAll({
+    const deck = await Deck.findOne({
         where: {
-            event: event
+            event: event,
+            placement: 1
         }
     })
+
+    const decks = [deck]
 
     if (!decks.length) return console.log('no decks found')
 
@@ -208,9 +211,9 @@ const composeThumbnails = async (event) => {
         })
         
         const rows = Math.ceil(main.length / 10)
-        const card_width = 36
-        const card_height = 52.5
-        const canvas = Canvas.createCanvas(card_width * 10, 52.5 * rows)
+        const card_width = 72
+        const card_height = 105
+        const canvas = Canvas.createCanvas(card_width * 10 + 9, card_height * rows + 3)
         const context = canvas.getContext('2d')
 
         for (let i = 0; i < main.length; i++) {
@@ -218,7 +221,7 @@ const composeThumbnails = async (event) => {
             const row = Math.floor(i / 10)
             const col = i % 10
             const image = await Canvas.loadImage(`./public/images/cards/${card.ypdId}.jpg`) 
-            context.drawImage(image, card_width * col, row * card_height, card_width, card_height)
+            context.drawImage(image, (card_width + 1) * col, row * (card_height + 1), card_width, card_height)
         }
 
         const buffer = canvas.toBuffer('image/png')
