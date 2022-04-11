@@ -201,7 +201,7 @@ const SingleEvent = (props) => {
       <div id="bracket">
         <div className="subcategory-title-flexbox">
           <img style={{ width:'64px'}} src={communityLogo}/>
-          <h2 className="subheading">{event.shortName} Bracket:</h2>
+          <h2 className="subheading"><b>{event.shortName}</b> Bracket:</h2>
           <img style={{ width:'64px'}} src={'/images/logos/Challonge.png'}/>
         </div>
         <img 
@@ -228,7 +228,7 @@ const SingleEvent = (props) => {
       <div id="top-decks">
         <div className="subcategory-title-flexbox">
           <img style={{ width:'64px'}} src={communityLogo}/>
-          <h2 className="subheading">{event.shortName} {topDecks.length > 1 ? `Top ${topDecks.length} Decks` : 'Winning Deck'}:</h2>
+          <h2 className="subheading"><b>{event.shortName}</b> {topDecks.length > 1 ? `Top ${topDecks.length} Decks` : 'Winning Deck'}:</h2>
           <img style={{ height:'64px'}} src={'/images/emojis/deckbox.png'}/>
         </div>
         <div id="deckGalleryFlexBox">
@@ -254,7 +254,7 @@ const SingleEvent = (props) => {
       <div id="metagame-stats">
         <div className="subcategory-title-flexbox">
           <img style={{ width:'64px'}} src={communityLogo}/>
-          <h2 className="subheading">{event.shortName} Metagame Stats:</h2>
+          <h2 className="subheading"><b>{event.shortName}</b> Metagame Stats:</h2>
           <img style={{ height:'64px'}} src={'/images/emojis/microscope.png'}/>
         </div>
 

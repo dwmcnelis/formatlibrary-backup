@@ -2424,7 +2424,7 @@ body {
     min-width: 0px;
   }
 
-  .blogpost-deck-box, .blogpost-images-flexbox {
+  .blogpost-deck-box, .blogpost-images-flexbox, .deck-flexbox img {
     display: block;
     width: 98vw;
     padding: 0px;
@@ -2590,7 +2590,7 @@ body {
   .single-deck-title, .single-event-title {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 22pt;
+    font-size: 20pt;
     max-width: 100%;
     padding: 0px;
     margin-right: auto;
@@ -2606,7 +2606,7 @@ body {
     display: none;
   }
 
-  .single-deck-cell {
+  .single-deck-cell, .single-event-cell {
     font-size: 12pt;
     padding: 2px;
     align-items: center;
@@ -2691,8 +2691,18 @@ body {
 
   .subheading {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 22pt;
+    font-size: 20pt;
   }
+
+  .subheading b {
+    display: none;
+  }
+
+  .deck-flexbox {
+    padding: 10px 0px;
+    margin: 5px 0px;
+  }
+
 }
 
 
