@@ -2236,7 +2236,7 @@ body {
   #logo h1 {
     font-size: 24pt;
     padding: 10px 0px 10px 10px;
-    min-width: 260px;
+    min-width: 250px;
   }
 
   .nav-item {
@@ -2282,6 +2282,7 @@ body {
   }
 
   #logo h1 {
+    font-size: 22pt;
     min-width: 100px;
   }
 
@@ -2378,9 +2379,9 @@ body {
   }
 
   .blogpost-title-flexbox {
-    padding: 10px ;
+    padding: 10px 20px;
     margin: 0px auto;
-    width: 90%;
+    max-width: 90%;
     align-items: center;
   }
 
@@ -2483,6 +2484,10 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
+  #logo h1 {
+    font-size: 20pt;
+  }
+
   #nav-menu {
     display: none;
   }
@@ -2611,7 +2616,7 @@ body {
 
 @media only screen and (max-width: 370px) {
   #logo h1 {
-    font-size: 20pt;
+    font-size: 18pt;
   }
 
   #logo img {

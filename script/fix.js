@@ -1628,7 +1628,6 @@ const getDeckCategory = (deckType) => {
 const createDecks = async (name, format, community, useTags = true) => {
     const apiKey = community = 'Format Library' ? formatLibraryChallongeAPIKey : goatformatChallongeAPIKey
     const communityUrl = community = 'Format Library' ? 'formatlibrary' : 'goatformat'
-    console.log('communityUrl', communityUrl)
 
     try {
         let tournament = await Tournament.findOne({ where: { name, state: 'complete' }})
@@ -1905,7 +1904,7 @@ const countParticipants = async () => {
 // countParticipants()
 // updateDeckTypes()
 // makeDeckTypes()
-createDecks('PWCQ14', 'goat', 'Goat Format', true)
+createDecks('KGP04', 'meadowlands', 'Format Library', true)
 // download()
 // images()
 // print()
