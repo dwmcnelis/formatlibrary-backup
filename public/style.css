@@ -2636,7 +2636,7 @@ body {
   
   .deck-stats-table {
     width: 98%;
-    margin: 2px 0px;
+    margin: 2px auto;
   }
 
   .deck-stats-label, .format-icon-large {
@@ -2644,8 +2644,8 @@ body {
   }
 
   .single-event-table {
-    max-width: 100%;
-    margin: 0px;
+    width: 98%;
+    margin: 2px auto;
   }
 
   .bracket {
