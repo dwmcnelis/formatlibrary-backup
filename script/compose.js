@@ -171,7 +171,7 @@ const composeCongratsPost = async (shortName) => {
     
 }
 
-const composeThumbnails = async (event) => {
+const composePreview = async (event) => {
     const deck = await Deck.findOne({
         where: {
             event: event,
@@ -179,7 +179,58 @@ const composeThumbnails = async (event) => {
         }
     })
 
-    const decks = [deck]
+    if (!deck) return console.log('no decks found')
+
+    const main = []
+    const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split('\n').filter((e) => e.length)
+
+    for (let i = 0; i < mainKonamiCodes.length; i++) {
+        let konamiCode = mainKonamiCodes[i]
+        while (konamiCode.length < 8) konamiCode = '0' + konamiCode
+        const card = await Card.findOne({ where: { konamiCode }})
+        if (!card) continue
+        main.push(card)
+    }
+
+    main.sort((a, b) => {
+        if (a.sortPriority > b.sortPriority) {
+            return 1
+        } else if (b.sortPriority > a.sortPriority) {
+            return -1
+        } else if (a.name > b.name) {
+            return 1
+        } else if (b.name > a.name) {
+            return -1
+        } else {
+            return false
+        }
+    })
+    
+    const rows = Math.ceil(main.length / 10)
+    const card_width = 72
+    const card_height = 105
+    const canvas = Canvas.createCanvas(card_width * 10 + 9, card_height * rows + 3)
+    const context = canvas.getContext('2d')
+
+    for (let i = 0; i < main.length; i++) {
+        const card = main[i]
+        const row = Math.floor(i / 10)
+        const col = i % 10
+        const image = await Canvas.loadImage(`./public/images/cards/${card.ypdId}.jpg`) 
+        context.drawImage(image, (card_width + 1) * col, row * (card_height + 1), card_width, card_height)
+    }
+
+    const buffer = canvas.toBuffer('image/png')
+    fs.writeFileSync(`./public/images/decks/previews/${deck.id}.png`, buffer)
+    console.log('saved deck preview')
+}
+
+const composeThumbnails = async (event) => {
+    const decks = await Deck.findAll({
+        where: {
+            event: event
+        }
+    })
 
     if (!decks.length) return console.log('no decks found')
 
@@ -211,9 +262,9 @@ const composeThumbnails = async (event) => {
         })
         
         const rows = Math.ceil(main.length / 10)
-        const card_width = 72
-        const card_height = 105
-        const canvas = Canvas.createCanvas(card_width * 10 + 9, card_height * rows + 3)
+        const card_width = 36
+        const card_height = 52.5
+        const canvas = Canvas.createCanvas(card_width * 10, card_height * rows)
         const context = canvas.getContext('2d')
 
         for (let i = 0; i < main.length; i++) {
@@ -221,7 +272,7 @@ const composeThumbnails = async (event) => {
             const row = Math.floor(i / 10)
             const col = i % 10
             const image = await Canvas.loadImage(`./public/images/cards/${card.ypdId}.jpg`) 
-            context.drawImage(image, (card_width + 1) * col, row * (card_height + 1), card_width, card_height)
+            context.drawImage(image, (card_width) * col, row * (card_height), card_width, card_height)
         }
 
         const buffer = canvas.toBuffer('image/png')
@@ -301,6 +352,7 @@ const purgePfps = async () => {
 // purgePfps()
 // savePfps()
 // drawBlankDeck()
-composeCongratsPost('KGP4')
-composeThumbnails('KGP4')
+// composeThumbnails('KGP04')
+// composePreview('KGP04')
+composeCongratsPost('KGP04')
 
