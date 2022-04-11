@@ -203,7 +203,7 @@ const SingleEvent = (props) => {
           <img style={{ width:'64px'}} src={communityLogo}/>
           <h2 className="subheading"><b>{event.shortName}</b> Bracket:</h2>
           <img style={{ width:'64px'}} src={'/images/logos/Challonge.png'}/>
-        </div>
+        </div> 
         <img 
           style={{width:'800px'}}
           className="bracket" 
