@@ -149,6 +149,19 @@ const SingleEvent = (props) => {
                       <img style={{width:'32px'}} src={emojis.First}/>
                   </div>
                 </td>
+                <td className="desktop-only">
+                  <div className="single-event-cell">
+                    <div style={{paddingRight:'7px'}}><b>Community:</b> {event.community}</div> 
+                    <img style={{width:'32px'}} src={communityLogo}/>
+                  </div>   
+                </td>
+                <td>   
+                  <div className="single-event-cell">
+                    <div style={{paddingRight:'7px'}}><b>Players:</b> {event.size} 👤</div> 
+                  </div>
+                </td>
+              </tr>
+              <tr className="single-event-info-2">
                 <td>
                   <div className="single-event-cell">
                     <div onClick={() => goToFormat()} className="single-event-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {capitalize(event.format, true)}</div>
@@ -157,21 +170,8 @@ const SingleEvent = (props) => {
                 </td>
                 <td className="desktop-only">
                   <div className="single-event-cell">
-                    <div style={{paddingRight:'7px'}}><b>Community:</b> {event.community}</div> 
-                    <img style={{width:'32px'}} src={communityLogo}/>
-                  </div>   
-                </td>
-              </tr>
-              <tr className="single-event-info-2">
-                <td className="desktop-only">
-                  <div className="single-event-cell">
                     <div style={{paddingRight:'7px'}}><b>Winning Deck:</b> {capitalize(topDecks[0].deckType, true)}</div> 
                   </div>   
-                </td>
-                <td>   
-                  <div className="single-event-cell">
-                    <div style={{paddingRight:'7px'}}><b>Players:</b> {event.size} 👤</div> 
-                  </div>
                 </td>
                 <td>
                   <div className="single-event-cell">
