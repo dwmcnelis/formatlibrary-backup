@@ -276,7 +276,7 @@ const composeThumbnails = async (event) => {
         }
 
         const buffer = canvas.toBuffer('image/png')
-        fs.writeFileSync(`./public/images/decks/previews/${deck.id}.png`, buffer)
+        fs.writeFileSync(`./public/images/decks/thumbnails/${deck.id}.png`, buffer)
         console.log('saved deck thumbnail')
     }
 }
@@ -352,7 +352,7 @@ const purgePfps = async () => {
 // purgePfps()
 // savePfps()
 // drawBlankDeck()
-// composeThumbnails('KGP04')
+composeThumbnails('KGP04')
 // composePreview('KGP04')
-composeCongratsPost('KGP04')
+// composeCongratsPost('KGP04')
 
