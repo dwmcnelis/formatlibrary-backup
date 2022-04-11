@@ -3,7 +3,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import DeckImage from './DeckImage'
-import {capitalize, dateToVerbose, ordinalize} from '../../functions/utility'
+import {capitalize, dateToSimple, dateToVerbose, ordinalize} from '../../functions/utility'
 import formats from '../../static/formats.json'
 import * as emojis from '../../public/images/emojis'
 import * as artworks from '../../public/images/artworks'
@@ -56,10 +56,10 @@ const SingleEvent = (props) => {
 
   const formatName = capitalize(event.format, true) || '?'
   const formatEmoji = emojis[formats[formatName].logo] || ''
-  const formatArtwork = artworks[formats[formatName].logo.toLowerCase()] || artworks.Sheep || ''
-  const communityLogo = event.community === 'Format Library' ? FL :
-      event.community === 'GoatFormat.com' ? GF :
-      event.community === 'EdisonFormat.com' ? EF :
+  const formatArtwork = `/images/artworks/${formats[formatName].logo.toLowerCase()}.jpg` || ''
+  const communityLogo = event.community === 'Format Library' ? `/images/logos/FL.png` :
+      event.community === 'GoatFormat.com' ? `/images/logos/GF.png` :
+      event.community === 'EdisonFormat.com' ? `/images/logos/EF.png` :
       ''
 
   const colors = [
@@ -134,12 +134,6 @@ const SingleEvent = (props) => {
               <tr className="single-event-info-1">
                 <td>
                   <div className="single-event-cell">
-                    <div onClick={() => goToFormat()} className="single-event-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {capitalize(event.format, true)}</div>
-                    <img style={{width:'32px'}} src={formatEmoji}/>
-                  </div>     
-                </td>
-                <td>
-                  <div className="single-event-cell">
                       <div onClick={() => goToPlayer()} className="single-event-winner-link">
                         <b>Winner: </b>{event.winner}
                         <img 
@@ -155,27 +149,34 @@ const SingleEvent = (props) => {
                       <img style={{width:'32px'}} src={emojis.First}/>
                   </div>
                 </td>
-                <td>   
-                  <div className="single-event-cell">
-                    <div style={{paddingRight:'7px'}}><b>Players:</b> {event.size} 👤</div> 
-                  </div>
-                </td>
-              </tr>
-              <tr className="single-event-info-2">
                 <td>
+                  <div className="single-event-cell">
+                    <div onClick={() => goToFormat()} className="single-event-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {capitalize(event.format, true)}</div>
+                    <img style={{width:'32px'}} src={formatEmoji}/>
+                  </div>     
+                </td>
+                <td className="desktop-only">
                   <div className="single-event-cell">
                     <div style={{paddingRight:'7px'}}><b>Community:</b> {event.community}</div> 
                     <img style={{width:'32px'}} src={communityLogo}/>
                   </div>   
                 </td>
-                <td>
+              </tr>
+              <tr className="single-event-info-2">
+                <td className="desktop-only">
                   <div className="single-event-cell">
-                    <div style={{paddingRight:'7px'}}><b>Date:</b> {dateToVerbose(event.startDate)}</div> 
-                  </div>
+                    <div style={{paddingRight:'7px'}}><b>Winning Deck:</b> {capitalize(topDecks[0].deckType, true)}</div> 
+                  </div>   
                 </td>
                 <td>   
                   <div className="single-event-cell">
-                    <div style={{paddingRight:'7px'}}><b>Structure:</b> {capitalize(event.type, true)}</div> 
+                    <div style={{paddingRight:'7px'}}><b>Players:</b> {event.size} 👤</div> 
+                  </div>
+                </td>
+                <td>
+                  <div className="single-event-cell">
+                    <div className="desktop-only"><b>Date:</b> {dateToVerbose(event.startDate, false, false)}</div>
+                    <div id="single-event-uploaded-mobile" className="mobile-only"><b>Date:</b> {dateToSimple(event.startDate)}</div>
                   </div>
                 </td>
               </tr>
@@ -198,7 +199,7 @@ const SingleEvent = (props) => {
       <div className="divider"/>
 
       <div id="bracket">
-        <div className="leaderboard-title-flexbox">
+        <div className="subcategory-title-flexbox">
           <img style={{ width:'64px'}} src={communityLogo}/>
           <h2 className="subheading">{event.shortName} Bracket:</h2>
           <img style={{ width:'64px'}} src={'/images/logos/Challonge.png'}/>
@@ -225,7 +226,7 @@ const SingleEvent = (props) => {
       <div className="divider"/>
 
       <div id="top-decks">
-        <div className="leaderboard-title-flexbox">
+        <div className="subcategory-title-flexbox">
           <img style={{ width:'64px'}} src={communityLogo}/>
           <h2 className="subheading">{event.shortName} {topDecks.length > 1 ? `Top ${topDecks.length} Decks` : 'Winning Deck'}:</h2>
           <img style={{ height:'64px'}} src={'/images/emojis/deckbox.png'}/>
@@ -251,27 +252,29 @@ const SingleEvent = (props) => {
       <div className="divider"/>
 
       <div id="metagame-stats">
-        <div className="leaderboard-title-flexbox">
+        <div className="subcategory-title-flexbox">
           <img style={{ width:'64px'}} src={communityLogo}/>
           <h2 className="subheading">{event.shortName} Metagame Stats:</h2>
           <img style={{ height:'64px'}} src={'/images/emojis/microscope.png'}/>
         </div>
 
         <div className="chart-flexbox">
-          <div>
+          <div className="doughnut-container">
             <h2>Deck Type Representation</h2>
             <br/>
             <Doughnut 
+              className="doughnut"
               height="500px"
               width="500px"
               data={deckTypeData}
               options={options}
             />
           </div>
-          <div>
+          <div className="doughnut-container">
             <h2>Deck Category Representation</h2>
             <br/>
             <Doughnut 
+              className="doughnut"
               height={parseInt(500 - (20 * Math.ceil(metagame.deckTypes.length / 4)))}
               width="500px"
               data={deckCategoryData}
@@ -281,20 +284,22 @@ const SingleEvent = (props) => {
         </div>
 
         <div className="chart-flexbox">
-          <div>
+          <div className="bargraph-container">
             <h2>Top Main Deck Cards</h2>
             <br/>
             <Bar 
+              className="bargraph"
               height="400px"
               width="500px"
               data={topMainDeckCardsData}
               options={options}
             />
           </div>
-          <div>
+          <div className="bargraph-container">
             <h2>Top Side Deck Cards</h2>
             <br/>
             <Bar 
+              className="bargraph"
               height="400px"
               width="500px"
               data={topSideDeckCardsData}

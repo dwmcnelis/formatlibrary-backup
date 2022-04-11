@@ -1026,11 +1026,11 @@ h1 {
 }
 
 
-.leaderboard-title-flexbox {
+.subcategory-title-flexbox {
   width: 800px;
 }
 
-.miniboard-title-flexbox, .leaderboard-title-flexbox {
+.miniboard-title-flexbox, .subcategory-title-flexbox {
   padding: 0px 20px;
   margin-right: auto;
   margin-left: auto;
@@ -1046,11 +1046,12 @@ h1 {
   color: #4ebf71;
 }
 
-.miniboard-title-flexbox img, .leaderboard-title-flexbox img {
+.miniboard-title-flexbox img, .subcategory-title-flexbox img {
   -webkit-filter: drop-shadow(1px 0px 0 rgb(83, 74, 74))
                   drop-shadow(-1px 0px 0 rgb(83, 74, 74));
   filter: drop-shadow(1px 0px 0 rgb(83, 74, 74)) 
           drop-shadow(-1px 0px 0 rgb(83, 74, 74));
+          padding: 4px;
 }
 
 .miniboard-title {
@@ -2248,6 +2249,8 @@ body {
   }
 }
 
+
+/* TABLETS AND SMALL LAPTOPS */
 @media only screen and (max-width: 800px) {
   body {
     background: none;
@@ -2481,8 +2484,24 @@ body {
     width: 50px;
     height: auto;
   }
+
+  .chart-flexbox {
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0px;
+  }
+
+  .doughnut-container, .bargraph-container {
+    margin: 20px auto;
+  }
+
+  .doughnut, .bargraph {
+    max-width: 90vw;
+    max-height: 90vw;
+  }
 }
 
+/* MEDIUM AND LARGE CELL PHONES */
 @media only screen and (max-width: 600px) {
   #logo h1 {
     font-size: 20pt;
@@ -2558,19 +2577,24 @@ body {
     display: none;
   }
 
-
   .downloadButton {
     display: none;
   }
 
-  .single-deck-title-flexbox {
+  .single-deck-title-flexbox, .event-title-flexbox {
     margin: 5px 0px;
-    width: 96vw;
+    padding: 0px;
+    width: 100%;
   }
 
-  .single-deck-title {
+  .single-deck-title, .single-event-title {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 22pt;
     max-width: 100%;
+    padding: 0px;
+    margin-right: auto;
+    margin-left: auto;
     transform: none;
   }
 
@@ -2584,6 +2608,13 @@ body {
 
   .single-deck-cell {
     font-size: 12pt;
+    padding: 2px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .single-deck-format-link, .single-deck-category, .single-event-format-link {
+    display: flex;
     align-items: center;
     justify-content: center;
   }
@@ -2608,22 +2639,78 @@ body {
     margin: 2px 0px;
   }
 
-  .deck-stats-label {
+  .deck-stats-label, .format-icon-large {
     display: none;
+  }
+
+  .single-event-table {
+    max-width: 100%;
+    margin: 0px;
+  }
+
+  .bracket {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .event-info-container {
+    width: 100%;
+    padding: 5px 2px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .subcategory-title-flexbox {
+    width: 94%;
+    padding: 0px;
+  }
+
+  .subcategory-title-flexbox img {
+    max-width: 50px;
+    height: auto;
+  }
+
+  .single-event-cell b {
+    display: none;
+  }
+
+  .single-event-cell {
+    font-size: 12pt;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #bracket {
+    margin: 0px;
+  }
+
+  .event-info-container li {
+    margin: 0px 16px;
+  }
+
+  .subheading {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22pt;
   }
 }
 
 
-@media only screen and (max-width: 370px) {
+/* SMALL CELL PHONES */
+@media only screen and (max-width: 375px) {
   #logo h1 {
-    font-size: 18pt;
+    font-size: 17pt;
   }
 
   #logo img {
     width: 45px;
   }
   
+  .single-deck-category, .single-deck-category-emoji, #single-deck-uploaded-mobile {
+    display: none;
+  }
+
   .nav-bar {
-    padding: 5px 0px 5px 8px;
+    padding: 5px 0px 5px 5px;
   }
 }

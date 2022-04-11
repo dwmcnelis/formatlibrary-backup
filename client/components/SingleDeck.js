@@ -116,8 +116,8 @@ const SingleDeck = (props) => {
             </td>
             <td>
               <div className="single-deck-cell">
-                <div style={{paddingRight:'7px'}}><b>Category:</b> {capitalize(deck.deckCategory, true)}</div>
-                <img style={{width:'28px'}} src={categoryImage}/>
+                <div className="single-deck-category" style={{paddingRight:'7px'}}><b>Category:</b> {capitalize(deck.deckCategory, true)}</div>
+                <img className="single-deck-category-emoji" style={{width:'28px'}} src={categoryImage}/>
               </div>
             </td>
           </tr>
@@ -128,12 +128,6 @@ const SingleDeck = (props) => {
                 <img style={{width:'28px'}} src={communityLogo}/>
               </div>   
             </td>
-            {/* <td className="mobile-only">
-              <div onClick={() => goToEvent()} className="single-deck-cell">
-                <div className="single-deck-event-link" style={{paddingRight:'7px'}}><b>Event:</b> {deck.event}</div> 
-                <img style={{width:'28px'}} src={communityLogo}/>
-              </div>   
-            </td> */}
             <td>
               <div className="single-deck-cell">
                 <div style={{paddingRight:'7px'}}><b>Place:</b> {ordinalize(deck.placement)}</div> 
@@ -143,7 +137,7 @@ const SingleDeck = (props) => {
             <td>
               <div className="single-deck-cell">
                 <div className="desktop-only"><b>Uploaded:</b> {dateToVerbose(deck.createdAt, false, false)}</div>
-                <div className="mobile-only"><b>Uploaded:</b> {dateToSimple(deck.createdAt)}</div>
+                <div id="single-deck-uploaded-mobile" className="mobile-only"><b>Uploaded:</b> {dateToSimple(deck.createdAt)}</div>
               </div>
             </td>
           </tr>
