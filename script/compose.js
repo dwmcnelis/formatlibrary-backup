@@ -301,6 +301,6 @@ const purgePfps = async () => {
 // purgePfps()
 // savePfps()
 // drawBlankDeck()
-// composeCongratsPost('KGP4')
-// composeThumbnails('KGP4')
+composeCongratsPost('KGP4')
+composeThumbnails('KGP4')
 

@@ -1904,7 +1904,7 @@ const countParticipants = async () => {
 // countParticipants()
 // updateDeckTypes()
 // makeDeckTypes()
-createDecks('KGP04', 'meadowlands', 'Format Library', true)
+createDecks('KGP4_MDWLNDS', 'meadowlands', 'Format Library', true)
 // download()
 // images()
 // print()
