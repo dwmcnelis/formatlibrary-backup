@@ -919,10 +919,6 @@ h1 {
   padding: 20px 0px 0px 10px;
 }
 
-.print-box table td {
-  padding: 5px;
-}
-
 #bracket, #top-decks {
   padding: 10px 0px;
 }
@@ -1866,8 +1862,8 @@ h1 {
   background-position: center;
 }
 
-.print-cell {
-  padding: 5px, 15px;
+.print-cell-2, .print-cell-3, .print-cell-4, .print-cell-5 {
+  padding: 10px, 15px;
 }
 
 #tenThousandSecretRare {
@@ -2748,6 +2744,7 @@ body {
     border-radius: 3px;
     margin: 7px 0px 7px 20px;
   }
+
   .print-box {
     width: 100%;
     max-width: 100%;
@@ -2760,21 +2757,26 @@ body {
     font-size: 11pt;
   }
 
+  .print-box table td {
+    padding: 8px 5px;
+  }
+
   .print-box table tr th:nth-child(2), .print-box table tr td:nth-child(2),
   .print-box table tr th:nth-child(3), .print-box table tr td:nth-child(3) {
     display: none;
   }
 
   .print-box table tr th:nth-child(1), .print-box table tr td:nth-child(1) {
-    width: 10%;
+    width: 8%;
   }
 
   .print-box table tr th:nth-child(4), .print-box table tr td:nth-child(4) {
-    width: 68%;
+    width: 67%;
   }
 
   .print-box table tr th:nth-child(5), .print-box table tr td:nth-child(5) {
-    width: 22%;
+    width: 25%;
+    text-align: center;
   }
 }
 
@@ -2978,13 +2980,19 @@ body {
     margin: 5px 0px;
   }
 
-  #leaderboard-table.medal-title, 
+  .medal-title, 
   #leaderboard-table tr th:nth-child(5), 
   #leaderboard-table tr td:nth-child(5), 
   #leaderboard-table tr th:nth-child(6), 
   #leaderboard-table tr td:nth-child(6), 
   #leaderboard-table tr th:nth-child(7), 
-  #leaderboard-table tr td:nth-child(7) {
+  #leaderboard-table tr td:nth-child(7),
+  #miniboard-table tr th:nth-child(5), 
+  #miniboard-table tr td:nth-child(5), 
+  #miniboard-table tr th:nth-child(6), 
+  #miniboard-table tr td:nth-child(6), 
+  #miniboard-table tr th:nth-child(7), 
+  #miniboard-table tr td:nth-child(7) {
     display:none;
   }
 
@@ -3092,8 +3100,8 @@ body {
 
   .status-flexbox {
     overflow: auto;
-    margin: 6px 0px;
-    padding: 0px;
+    margin: 15px 0px;
+    padding: 0px 5px;
     width: 100%;
     align-items: flex-start;
   }
@@ -3139,7 +3147,7 @@ body {
     padding: 5px 0px 5px 5px;
   }
 
-  .leaderboard-title, .miniboard-title, .subheading, .format-text h1 {
+  .leaderboard-title, .miniboard-title, .subheading, .format-text h1, .single-card-title {
     font-size: 18pt;
   }
 
