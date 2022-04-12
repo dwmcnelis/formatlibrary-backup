@@ -881,7 +881,7 @@ h1 {
 
 .single-card-image {
   float: left;
-  margin: 0px 0px 0px 4%;
+  margin: 10px 0px 0px 4%;
   width: 300px;
 }
 
@@ -913,6 +913,14 @@ h1 {
   font-size: 24px;
   border-top: 2px solid #9ba9cc;
   border-bottom: 2px solid #9ba9cc;
+}
+
+.single-card-description-label {
+  padding: 20px 0px 0px 10px;
+}
+
+.print-box table td {
+  padding: 5px;
 }
 
 #bracket, #top-decks {
@@ -2642,75 +2650,90 @@ body {
     border-radius: 0px;
   }
 
-
-  #leaderboard-table, #miniboard-table {
+  #leaderboard-table, 
+  #miniboard-table {
     width: 99vw;
     max-width: 99vw;
     table-layout: fixed;
     font-size: 11pt;
   }
 
-  #leaderboard-table tr, #miniboard-table tr {
+  #leaderboard-table tr, 
+  #miniboard-table tr {
     width: 99vw;
     max-width: 99vw;
   }
 
-  #leaderboard-table td, #miniboard-table td {
+  #leaderboard-table td, 
+  #miniboard-table td {
     padding: 2px;
   }
 
-  #leaderboard-table th, #miniboard-table th {
+  #leaderboard-table th, 
+  #miniboard-table th {
     height: 25px;
     padding: 0px 5px;
     font-size: 12pt;
   }
 
-  #leaderboard-table .player-cell, #miniboard-table .player-cell {
+  #leaderboard-table.player-cell, 
+  #miniboard-table.player-cell {
     padding: 0px;
   }
 
-  #leaderboard-table .player-cell-pfp, #miniboard-table .player-cell-pfp {
+  #leaderboard-table.player-cell-pfp, 
+  #miniboard-table.player-cell-pfp {
     margin: 0px 8px;
   }
 
-  #leaderboard-table tr th:nth-child(1), tr td:nth-child(1),
-  #miniboard-table tr th:nth-child(1), tr td:nth-child(1) {
+  #leaderboard-table tr th:nth-child(1), 
+  #leaderboard-table tr td:nth-child(1),
+  #miniboard-table tr th:nth-child(1), 
+  #miniboard-table tr td:nth-child(1) {
     width: 40px;
   }
 
-  #leaderboard-table tr th:nth-child(3), tr td:nth-child(3),
-  #miniboard-table tr th:nth-child(3), tr td:nth-child(3) {
+  #leaderboard-table tr th:nth-child(3), 
+  #leaderboard-table tr td:nth-child(3),
+  #miniboard-table tr th:nth-child(3), 
+  #miniboard-table tr td:nth-child(3) {
     width: 60px;
   }
 
-  #leaderboard-table tr th:nth-child(4), tr td:nth-child(4),
-  #miniboard-table tr th:nth-child(4), tr td:nth-child(4) {
+  #leaderboard-table tr th:nth-child(4), 
+  #leaderboard-table tr td:nth-child(4),
+  #miniboard-table tr th:nth-child(4), 
+  #miniboard-table tr td:nth-child(4) {
     width: 50px;
   }
 
-  #miniboard-table 
-    tr th:nth-child(5), tr td:nth-child(5),
-    tr th:nth-child(6), tr td:nth-child(6),
-    tr th:nth-child(7), tr td:nth-child(7) {
+  #miniboard-table tr th:nth-child(5), 
+  #miniboard-table tr td:nth-child(5),
+  #miniboard-table tr th:nth-child(6), 
+  #miniboard-table tr td:nth-child(6),
+  #miniboard-table tr th:nth-child(7), 
+  #miniboard-table  tr td:nth-child(7) {
     width: 50px;
   }
 
-  #leaderboard-table 
-    tr th:nth-child(5), tr td:nth-child(5),
-    tr th:nth-child(6), tr td:nth-child(6),
-    tr th:nth-child(7), tr td:nth-child(7) {
+  #leaderboard-table tr th:nth-child(5), 
+  #leaderboard-table tr td:nth-child(5),
+  #leaderboard-table tr th:nth-child(6), 
+  #leaderboard-table tr td:nth-child(6),
+  #leaderboard-table tr th:nth-child(7), 
+  #leaderboard-table tr td:nth-child(7) {
     width: 50px;
   }
 
-  #leaderboard-table 
-    .medal-title, 
-    tr th:nth-child(7), tr td:nth-child(7) {
+  #leaderboard-table.medal-title, 
+  #leaderboard-table tr th:nth-child(7), 
+  #leaderboard-table tr td:nth-child(7) {
     display:none;
   }
 
-  #miniboard-table 
-    .medal-title, 
-    tr th:nth-child(7), tr td:nth-child(7) {
+  #miniboard-table.medal-title, 
+  #miniboard-table tr th:nth-child(7), 
+  #miniboard-table tr td:nth-child(7) {
     display:none;
   }
 
@@ -2724,6 +2747,34 @@ body {
     border: 7px ridge #bf9c60;
     border-radius: 3px;
     margin: 7px 0px 7px 20px;
+  }
+  .print-box {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .print-box table {
+    width: 99vw;
+    max-width: 99vw;
+    table-layout: fixed;
+    font-size: 11pt;
+  }
+
+  .print-box table tr th:nth-child(2), .print-box table tr td:nth-child(2),
+  .print-box table tr th:nth-child(3), .print-box table tr td:nth-child(3) {
+    display: none;
+  }
+
+  .print-box table tr th:nth-child(1), .print-box table tr td:nth-child(1) {
+    width: 10%;
+  }
+
+  .print-box table tr th:nth-child(4), .print-box table tr td:nth-child(4) {
+    width: 68%;
+  }
+
+  .print-box table tr th:nth-child(5), .print-box table tr td:nth-child(5) {
+    width: 22%;
   }
 }
 
@@ -2927,11 +2978,13 @@ body {
     margin: 5px 0px;
   }
 
-  #leaderboard-table 
-    .medal-title,
-    tr th:nth-child(5), tr td:nth-child(5), 
-    tr th:nth-child(6), tr td:nth-child(6), 
-    tr th:nth-child(7), tr td:nth-child(7) {
+  #leaderboard-table.medal-title, 
+  #leaderboard-table tr th:nth-child(5), 
+  #leaderboard-table tr td:nth-child(5), 
+  #leaderboard-table tr th:nth-child(6), 
+  #leaderboard-table tr td:nth-child(6), 
+  #leaderboard-table tr th:nth-child(7), 
+  #leaderboard-table tr td:nth-child(7) {
     display:none;
   }
 
@@ -2969,17 +3022,113 @@ body {
     border-radius: 2px;
     margin: 0px 0px 0px 10px;
   }
+
+  .flexy {
+    flex-direction: column;
+  }
+
+  .single-card-image {
+    padding: 0px;
+    margin: 10px auto;
+    max-width: 100%;
+  }
+
+  .single-card-table {
+    width: 100%;
+    max-width: 100%;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .single-card-title {
+    font-size: 20pt;
+  }
+
+  .single-card-standard-row, .single-card-label-inner-td, .single-card-label-td {
+    font-size: 15pt;
+  }
+
+  .single-card-table th {
+    padding: 6px 10px;
+    vertical-align: middle;
+  }
+
+  .single-card-table td {
+    padding: 5px;
+    vertical-align: middle;
+  }
+
+
+  .single-card-table td.single-card-description-box {
+    border-radius: 0px;
+    padding: 5px 10px;
+  }
+
+  .single-card-table td.single-card-description-label {
+    padding: 5px 10px;
+  }
+
+  .blank-row {
+    display: none;
+  }
+
+  .single-card-date-row {
+    height: 40px;
+  }
+
+  .print-box {
+    padding: 0px;
+  }
+
+  .prints-flexbox {
+    width: 98%;
+    padding: 0px;
+    margin: 0px auto;
+  }
+
+  .single-card-description {
+    padding: 5px 0px 0px 10px;
+  }
+
+  .status-flexbox {
+    overflow: auto;
+    margin: 6px 0px;
+    padding: 0px;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .status-cell {
+    width: 18px;
+  }
+
+  .single-card-table span {
+    display: none;
+  }
+
+  #atk-td, #def-td {
+    text-align: center;
+  }
 }
 
 
 /* SMALL CELL PHONES */
 @media only screen and (max-width: 375px) {
   #logo h1 {
-    font-size: 17pt;
+    font-size: 18pt;
+    padding: 10px 0px 10px 5px;
   }
 
   #logo img {
     width: 45px;
+  }
+
+  #hamburger-button {
+    font-size: 22pt;
+  }
+
+  .hamburger-item {
+    font-size: 14pt;
   }
   
   .single-deck-category, .single-deck-category-emoji, #single-deck-uploaded-mobile {
@@ -2987,10 +3136,10 @@ body {
   }
 
   .nav-bar {
-    padding: 5px 0px 5px 10px;
+    padding: 5px 0px 5px 5px;
   }
 
-  .leaderboard-title, .miniboard-title {
+  .leaderboard-title, .miniboard-title, .subheading, .format-text h1 {
     font-size: 18pt;
   }
 

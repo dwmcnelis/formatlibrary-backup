@@ -14,16 +14,16 @@ const PrintRow = (props) => {
   return (
     <tr onClick={() => openNewTab()} className={`${evenOrOdd}-print-row`}>
         <td className="rarity-cell" id={id}/>
-        <td className="print-cell" style={{width:"180px"}}>
+        <td className="print-cell-2">
             {print.rarity}
         </td>
-        <td className="print-cell" style={{width:"100px"}}>
+        <td className="print-cell-3">
             {print.cardCode}
         </td>
-        <td className="print-cell" style={{width:"500px"}}>
+        <td className="print-cell-4">
             {print.setName}
         </td>
-        <td className="print-cell" style={{width:"100px"}}>
+        <td className="print-cell-5">
             {print.set.tcgDate}
         </td>
     </tr>

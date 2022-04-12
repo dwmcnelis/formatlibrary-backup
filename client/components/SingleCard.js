@@ -5,7 +5,7 @@ import NotFound from './NotFound'
 import PrintRow from './PrintRow'
 import StatusBox from './StatusBar'
 import axios from 'axios'
-import { dateToVerbose } from '../../functions/utility'
+import { dateToSimple, dateToVerbose } from '../../functions/utility'
 
   // eslint-disable-next-line complexity
 const SingleCard = (props = {}) => {
@@ -94,7 +94,6 @@ const SingleCard = (props = {}) => {
       <div className="body">
         {card.id ? (
           <div>
-            <br />
             <div className="flexy">
               <img className="single-card-image" src={imagePath} />
               <table className="single-card-table">
@@ -136,7 +135,7 @@ const SingleCard = (props = {}) => {
                         fontStyle: 'italic'
                       }}
                     >
-                      <td colSpan="5" style={{padding: '20px 0px 0px 10px'}}>
+                      <td className="single-card-description-label" colSpan="5">
                         Description:
                       </td>
                     </tr>
@@ -151,16 +150,16 @@ const SingleCard = (props = {}) => {
                       </td>
                     </tr>
                     <tr className="single-card-bottom-row">
-                      <td className="single-card-symbol-td">
+                      <td id="star-td" className="single-card-symbol-td">
                         <img src={starType} className="single-card-symbol" />
                       </td>
-                      <td colSpan="2" className="single-card-label-inner-td">
+                      <td id="level-td" colSpan="2" className="single-card-label-inner-td">
                         {starWord} {card.level || card.rating}
                       </td>
-                      <td className="single-card-label-inner-td">
-                        ATK: {card.atk}
+                      <td id="atk-td" className="single-card-label-inner-td">
+                        <span>ATK: </span>{card.atk}
                       </td>
-                      <td className="single-card-label-td">DEF: {card.def}</td>
+                      <td id="def-td" className="single-card-label-td"><span>DEF: </span>{card.def}</td>
                     </tr>
                     <tr className="single-card-date-row">
                       <td colSpan="5">
@@ -214,7 +213,6 @@ const SingleCard = (props = {}) => {
                 )}
               </table>
             </div>
-            <br />
             <div className="status-flexbox">
               <div>Status History:</div>
               <div className="status-box">
@@ -231,13 +229,6 @@ const SingleCard = (props = {}) => {
                 </table>
               </div>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
           </div>
         ) : (
           ''
