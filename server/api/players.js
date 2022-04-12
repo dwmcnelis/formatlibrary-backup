@@ -9,7 +9,8 @@ router.get('/:id', async (req, res, next) => {
   try {
     const player = await Player.findOne({
       where: {
-        tag: req.params.id.slice(0, -4) + '#' +  req.params.id.slice(-4)
+        tag: req.params.id.slice(0, -4) + '#' +  req.params.id.slice(-4),
+        blacklisted: false
       }
     })
 
@@ -19,14 +20,17 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-
 /* eslint-disable complexity */
-router.get('/', async (req, res, next) => {
-  try {
-    const players = await Player.findAll()
-    res.json(players)
-  } catch (err) {
-    next(err)
-  }
-})
+// router.get('/', async (req, res, next) => {
+//   try {
+//     const players = await Player.findAll({
+//       where: {
+//         blacklisted: false
+//       }
+//     })
+//     res.json(players)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 

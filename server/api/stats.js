@@ -7,14 +7,14 @@ module.exports = router
 /* eslint-disable complexity */
 router.get('/leaders/:limit/:format', async (req, res, next) => {
   try {
-    const stats = await Stats.findAll({
+    const stats = [...await Stats.findAll({
       where: {
         format: req.params.format.replace(' ', '_').replace('-', '_')
       },
       include: Player,
       limit: parseInt(req.params.limit),
       order: [['elo', 'DESC']]
-    })
+    })].filter((s) => ((s.wins + s.losses) >= 10) && !s.player.blacklisted)
 
     res.json(stats)
   } catch (err) {
@@ -24,13 +24,13 @@ router.get('/leaders/:limit/:format', async (req, res, next) => {
 
 router.get('/:playerId', async (req, res, next) => {
   try {
-    const stats = await Stats.findAll({
+    const stats = [...await Stats.findAll({
       where: {
         playerId: req.params.playerId
       },
       order: [['elo', 'DESC']],
       limit: 10
-    })
+    })].filter((s) => (s.wins + s.losses) >= 10)
 
     res.json(stats)
   } catch (err) {
@@ -40,12 +40,12 @@ router.get('/:playerId', async (req, res, next) => {
 
 
 /* eslint-disable complexity */
-router.get('/', async (req, res, next) => {
-  try {
-    const stats = await Stats.findAll()
-    res.json(stats)
-  } catch (err) {
-    next(err)
-  }
-})
+// router.get('/', async (req, res, next) => {
+//   try {
+//     const stats = await Stats.findAll()
+//     res.json(stats)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 

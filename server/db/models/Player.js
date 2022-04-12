@@ -27,6 +27,11 @@ const Player = db.define('players', {
     avatar: {
         type: Sequelize.STRING,
         allowNull: true
+    },
+    blacklisted: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+        allowNull: true
     }
 })
 
