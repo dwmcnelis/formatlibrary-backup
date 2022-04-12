@@ -246,8 +246,8 @@ h1 {
   display: flex;
   align-items: top;
   flex-direction: row;
-  justify-content: space-around;
-  width: 84%;
+  justify-content: space-between;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
@@ -269,7 +269,7 @@ h1 {
   width: 176px;
   border: 10px ridge #bf9c60;
   border-radius: 5px;
-  margin: 10px;
+  margin: 10px 0px 10px 30px;
 }
 
 .format-icon-medium {
@@ -280,9 +280,13 @@ h1 {
   margin: 6px;
 }
 
+.format-text {
+  width: 70%;
+}
 
 .format-text h1, .format-text h2, .format-text p {
   text-align: left;
+  width: 100%;
 }
 
 .event-info-container {
@@ -290,10 +294,12 @@ h1 {
 }
 
 .format-desc {
-  width: 700px;
+  width: 90%;
   font-size: 12pt;
   line-height: 16pt;
   text-align: justify;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 #galleryFlexBox {
@@ -1025,6 +1031,7 @@ h1 {
 
 .miniboard-title-flexbox {
   width: 640px;
+  padding-bottom: 10px;
 }
 
 
@@ -2247,7 +2254,6 @@ select option {
 #leaderboard-table {
   width: 900px;
   max-width: 98vw;
-  table-layout: fixed;
 }
 
 #leaderboard-table, #miniboard-table {
@@ -2318,6 +2324,15 @@ body {
     max-width: 100%;
   }
 
+  li {
+    display: none;
+  }
+
+  .divider {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
   .body {
     padding: 0px;
     margin: 0px;
@@ -2349,7 +2364,6 @@ body {
     font-size: 22pt;
     min-width: 100px;
   }
-
 
   .nav-bar {
     margin: 0px;
@@ -2397,7 +2411,6 @@ body {
     padding: 0px;
     margin: 0px;
   }
-
 
   .blog-divider {
     margin: 10px auto;
@@ -2564,45 +2577,121 @@ body {
     font-size: 22pt;
   }
 
-  #leaderboard-table {
+  .miniboard-title-flexbox img {
+    width: 50px;
+    max-width: 50px;
+    height: auto;
+  }
+
+  .miniboard {
+    padding: 4px 0px;
+  }
+
+  .eventThumbnail-flexbox {
+    width: 80%;
+    margin: 0px auto 10px;
+    justify-content: center;
+  }
+
+  .eventThumbnail-image {
+    width: 30%;
+  }
+
+  .eventThumbnail-player-pfp {
+    width: 30%;
+  }
+
+  .popular-decks-flexbox {
+    margin: 6px 0px 0px;
+  }
+
+  .deckThumbnail-flexbox {
+    width: 80%;
+    margin: 0px auto 10px;
+    justify-content: center;
+  }
+
+  .deckThumbnail-image {
+    width: 30%;
+  }
+
+  .recent-events-flexbox {
+    margin: 6px 0px 0px;
+  }
+
+  #popular-decks {
+    padding: 4px 0px;
+  }
+
+  #banlist {
+    margin: 10px 0px;
+    padding: 0px;
+  }
+
+  .banlist-flexbox {
+    padding: 0px;
+    justify-content: center;
+  }
+
+  #forbidden, #limited, #semi-limited {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #forbidden.banlist-bubble, #limited.banlist-bubble, #semi-limited.banlist-bubble {
+    border-radius: 0px;
+  }
+
+
+  #leaderboard-table, #miniboard-table {
     width: 99vw;
     max-width: 99vw;
     table-layout: fixed;
     font-size: 11pt;
   }
 
-  #leaderboard-table tr {
+  #leaderboard-table tr, #miniboard-table tr {
     width: 99vw;
     max-width: 99vw;
   }
 
-  #leaderboard-table td {
+  #leaderboard-table td, #miniboard-table td {
     padding: 2px;
   }
 
-  #leaderboard-table th {
+  #leaderboard-table th, #miniboard-table th {
     height: 25px;
     padding: 0px 5px;
     font-size: 12pt;
   }
 
-  #leaderboard-table .player-cell {
+  #leaderboard-table .player-cell, #miniboard-table .player-cell {
     padding: 0px;
   }
 
-  #leaderboard-table .player-cell-pfp {
+  #leaderboard-table .player-cell-pfp, #miniboard-table .player-cell-pfp {
     margin: 0px 8px;
   }
 
-  #leaderboard-table tr th:nth-child(1), tr td:nth-child(1) {
+  #leaderboard-table tr th:nth-child(1), tr td:nth-child(1),
+  #miniboard-table tr th:nth-child(1), tr td:nth-child(1) {
     width: 40px;
   }
 
-  #leaderboard-table tr th:nth-child(3), tr td:nth-child(3) {
+  #leaderboard-table tr th:nth-child(3), tr td:nth-child(3),
+  #miniboard-table tr th:nth-child(3), tr td:nth-child(3) {
     width: 60px;
   }
 
-  #leaderboard-table tr th:nth-child(4), tr td:nth-child(4) {
+  #leaderboard-table tr th:nth-child(4), tr td:nth-child(4),
+  #miniboard-table tr th:nth-child(4), tr td:nth-child(4) {
+    width: 50px;
+  }
+
+  #miniboard-table 
+    tr th:nth-child(5), tr td:nth-child(5),
+    tr th:nth-child(6), tr td:nth-child(6),
+    tr th:nth-child(7), tr td:nth-child(7) {
     width: 50px;
   }
 
@@ -2619,8 +2708,22 @@ body {
     display:none;
   }
 
+  #miniboard-table 
+    .medal-title, 
+    tr th:nth-child(7), tr td:nth-child(7) {
+    display:none;
+  }
+
   .leaderboard-cell-2 {
     overflow: hidden;
+  }
+
+  .format-icon-large {
+    height: 140px;
+    width: 140px;
+    border: 7px ridge #bf9c60;
+    border-radius: 3px;
+    margin: 7px 0px 7px 20px;
   }
 }
 
@@ -2723,6 +2826,7 @@ body {
 
   .single-deck-table {
     width: 100%;
+    margin: 5px 0px;
   }
 
   .single-deck-cell b {
@@ -2742,15 +2846,15 @@ body {
     justify-content: center;
   }
 
-  .deck-bubble {
+  #main.deck-bubble, #side.deck-bubble, #extra.deck-bubble {
     max-width: 100%;
     border-radius: 0px;
-    padding: 2px 0px;
+    padding: 4px 0px;
   }
 
-  .deck-flexbox {
+  #main.deck-flexbox, #side.deck-flexbox, #extra.deck-flexbox {
     max-width: 100%;
-    padding: 0px 1px;
+    padding: 0px;
     justify-content: center;
     overflow: hidden;
     margin-left: auto;
@@ -2762,7 +2866,7 @@ body {
     margin: 2px auto;
   }
 
-  .deck-stats-label, .format-icon-large {
+  .deck-stats-label {
     display: none;
   }
 
@@ -2809,10 +2913,6 @@ body {
     margin: 0px;
   }
 
-  .event-info-container li {
-    margin: 0px 16px;
-  }
-
   .subheading {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20pt;
@@ -2833,6 +2933,40 @@ body {
     tr th:nth-child(6), tr td:nth-child(6), 
     tr th:nth-child(7), tr td:nth-child(7) {
     display:none;
+  }
+
+  .format-icon-flexbox {
+    width: 94vw;
+    max-width: 94vw;
+    margin: 0px 8px;
+    padding: 4px 0px;
+  }
+
+  .format-text h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20pt;
+    padding: 2px 4px;
+  }
+
+  .format-text h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    padding: 2px 4px;
+  }
+
+  .format-desc {
+    width: 90%;
+    font-size: 12pt;
+    padding: 4px;
+    margin: 0px 8px;
+  }
+
+  .format-icon-large {
+    height: 80px;
+    width: 80px;
+    border: 4px ridge #bf9c60;
+    border-radius: 2px;
+    margin: 0px 0px 0px 10px;
   }
 }
 
@@ -2855,7 +2989,7 @@ body {
     padding: 5px 0px 5px 10px;
   }
 
-  .leaderboard-title {
+  .leaderboard-title, .miniboard-title {
     font-size: 18pt;
   }
 

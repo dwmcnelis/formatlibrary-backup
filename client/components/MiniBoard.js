@@ -36,7 +36,6 @@ const MiniBoard = (props) => {
           <h2 className="subheading">{capitalize(props.format.name, true)} Leaderboard</h2>
           <img style={{ width:'64px'}} src={emojis[props.format.icon]}/>
         </div>
-        <br />
         <table id="miniboard-table">
           <thead>
             <tr>

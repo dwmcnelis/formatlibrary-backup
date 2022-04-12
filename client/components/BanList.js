@@ -55,7 +55,6 @@ const convertToTitle = (param = '') => {
     <div id="banlist" className="banlist">
       <h2 className="subheading">{forbidden.length ? 'Forbidden & Limited List' : 'Limited List'}</h2>
       <h3 className="banlist-date">Effective - {date}</h3>
-      <br />
       {
         forbidden.length ? (
           <div>
@@ -77,7 +76,6 @@ const convertToTitle = (param = '') => {
                   }
                 </div>
             </div>
-            <br />
           </div>
         ) : ''
       }
@@ -100,7 +98,6 @@ const convertToTitle = (param = '') => {
           }
           </div>
       </div>
-      <br />
       <div id="semi-limited" className="banlist-bubble">
         <div id="semi-limited" className="banlist-category">Semi-Limited:</div>
           <div id="semi-limited" className="banlist-flexbox">
@@ -119,7 +116,6 @@ const convertToTitle = (param = '') => {
           }
         </div>
       </div>
-      <br />
     </div>
   )
 }

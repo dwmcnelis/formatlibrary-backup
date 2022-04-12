@@ -44,7 +44,7 @@ const FormatIntro = (props = {}) => {
           <h1>{format.name} Format</h1>
           <h2>{format.event}</h2>
           {
-            format.description ? <p className="format-desc">{format.description}</p> : <br/>
+            format.description ? <p className="desktop-only">{format.description}</p> : <br/>
           }
           {
             deckCount ? (
@@ -73,11 +73,16 @@ const FormatIntro = (props = {}) => {
         </div>
         <img className="format-icon-large" src={`/images/artworks/${format.icon.toLowerCase()}.jpg`} />
       </div>
-
+      {
+        format.description ? (
+          <div className="mobile-only">
+            <p className="format-desc">{format.description}</p>
+          </div>
+        ) : ''
+      }
       <PopularDecks format={format}/>
       <RecentEvents format={format}/>
       <MiniBoard limit={10} format={format}/>
-            
       <div className="divider"/>
       <BanList format={format}/>
     </div>
