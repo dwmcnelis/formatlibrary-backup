@@ -3,6 +3,7 @@
 /* eslint-disable max-statements */
 
 import React, { useState, useEffect, useLayoutEffect } from 'react'
+import { Link } from 'react-router-dom'
 import DeckImage from './DeckImage.js'
 import DeckRow from './DeckRow.js'
 import Pagination from './Pagination.js'
@@ -368,7 +369,7 @@ const DeckTable = (props) => {
             <tbody>
               {filteredDecks.length ? (
                 filteredDecks.slice(firstIndex, lastIndex).map((deck, index) => {
-                  return <DeckRow key={deck.id} index={index} deck={deck} />
+                  return <DeckRow key={deck.id} index={index} deck={deck}/>
                 })
               ) : (
                 <tr />
