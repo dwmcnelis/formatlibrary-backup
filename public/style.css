@@ -2758,7 +2758,7 @@ body {
   }
 
   .print-box table td {
-    padding: 8px 5px;
+    padding: 6px;
   }
 
   .print-box table tr th:nth-child(2), .print-box table tr td:nth-child(2),
@@ -2771,11 +2771,11 @@ body {
   }
 
   .print-box table tr th:nth-child(4), .print-box table tr td:nth-child(4) {
-    width: 67%;
+    width: 70%;
   }
 
   .print-box table tr th:nth-child(5), .print-box table tr td:nth-child(5) {
-    width: 25%;
+    width: 23%;
     text-align: center;
   }
 }
@@ -3101,7 +3101,7 @@ body {
   .status-flexbox {
     overflow: auto;
     margin: 25px 0px 15px;
-    padding: 0px 5px;
+    padding: 0px 0px 0px 5px;
     width: 100%;
     align-items: flex-start;
   }

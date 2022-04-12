@@ -1,6 +1,7 @@
 
 import React from 'react'
 import {camelize, urlize} from '../../functions/utility'
+import { dateToSimple } from '../../functions/utility'
 
 const PrintRow = (props) => {
   const { index, print } = props
@@ -24,7 +25,12 @@ const PrintRow = (props) => {
             {print.setName}
         </td>
         <td className="print-cell-5">
+          <div className="desktop-only">
             {print.set.tcgDate}
+          </div>
+          <div className="mobile-only">
+            {dateToSimple(print.set.tcgDate)}
+          </div>
         </td>
     </tr>
   )
