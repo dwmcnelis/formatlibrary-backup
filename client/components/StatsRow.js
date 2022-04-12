@@ -49,8 +49,8 @@ const StatsRow = (props) => {
     
     return (
         <tr onClick={() => goToPlayer()} className={`${evenOrOdd}-search-results-row`}>
-            <td>{ordinalize(index + 1)}</td>
-            <td>
+            <td className="leaderboard-cell-1">{ordinalize(index + 1)}</td>
+            <td className="leaderboard-cell-2">
                 <div className="player-cell">
                     <img 
                         className="player-cell-pfp"
@@ -64,16 +64,16 @@ const StatsRow = (props) => {
                     <div>{displayName}</div>
                 </div>
             </td>
-            <td>{Math.round(100 * elo)/100}</td>
-            <td>
+            <td className="leaderboard-cell-3">{Math.round(100 * elo)/100}</td>
+            <td className="leaderboard-cell-4">
                 <div className="medal-cell">
-                    <div>{getTitle(elo)}</div>
+                    <div className="medal-title">{getTitle(elo)}</div>
                     <img width="32px" src={getMedal(elo)}/>
                 </div>
             </td>
-            <td>{wins}</td>
-            <td>{losses}</td>
-            <td>{(Math.round(1000 * wins / (wins + losses))/10).toFixed(1)}%</td>
+            <td className="leaderboard-cell-5">{wins}</td>
+            <td className="leaderboard-cell-6">{losses}</td>
+            <td className="leaderboard-cell-7">{(Math.round(1000 * wins / (wins + losses))/10).toFixed(1)}%</td>
         </tr>
     )
 }

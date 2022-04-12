@@ -1041,6 +1041,7 @@ h1 {
   align-items: center;
   vertical-align: middle;
   text-align: center;
+  max-width: 90%;
 }
 
 .miniboard-title-flexbox:hover {
@@ -2245,6 +2246,8 @@ select option {
 
 #leaderboard-table {
   width: 900px;
+  max-width: 98vw;
+  table-layout: fixed;
 }
 
 #leaderboard-table, #miniboard-table {
@@ -2350,7 +2353,6 @@ body {
 
   .nav-bar {
     margin: 0px;
-    padding: 0px;
     border: 0px;
     border-radius: 0px;
     padding: 5px 0px 5px 15px;
@@ -2557,6 +2559,67 @@ body {
     max-width: 90vw;
     max-height: 90vw;
   }
+
+  .leaderboard-title {
+    font-size: 22pt;
+  }
+
+  #leaderboard-table {
+    max-width: 99vw;
+    table-layout: fixed;
+    font-size: 11pt;
+  }
+
+  #leaderboard-table tr {
+    max-width: 99vw;
+  }
+
+  #leaderboard-table td {
+    padding: 2px;
+  }
+
+  #leaderboard-table th {
+    height: 25px;
+    padding: 0px 5px;
+    font-size: 12pt;
+  }
+
+  #leaderboard-table .player-cell {
+    padding: 0px;
+  }
+
+  #leaderboard-table .player-cell-pfp {
+    margin: 0px 8px;
+  }
+
+  #leaderboard-table tr th:nth-child(1), tr td:nth-child(1) {
+    width: 40px;
+  }
+
+  #leaderboard-table tr th:nth-child(3), tr td:nth-child(3) {
+    width: 60px;
+  }
+
+  #leaderboard-table tr th:nth-child(4), tr td:nth-child(4) {
+    width: 50px;
+  }
+
+  #leaderboard-table 
+    tr th:nth-child(5), tr td:nth-child(5),
+    tr th:nth-child(6), tr td:nth-child(6),
+    tr th:nth-child(7), tr td:nth-child(7) {
+    width: 50px;
+  }
+
+  #leaderboard-table 
+    .medal-title, 
+    tr th:nth-child(7), tr td:nth-child(7) {
+    display:none;
+  }
+
+  .leaderboard-cell-2 {
+    overflow: hidden;
+  }
 }
 
 /* MEDIUM AND LARGE CELL PHONES */
@@ -2720,8 +2783,9 @@ body {
   }
 
   .subcategory-title-flexbox {
-    width: 94%;
-    padding: 0px;
+    width: 100%;
+    justify-content: space-evenly;
+    padding: 4px 0px;
   }
 
   .subcategory-title-flexbox img {
@@ -2761,6 +2825,13 @@ body {
     margin: 5px 0px;
   }
 
+  #leaderboard-table 
+    .medal-title,
+    tr th:nth-child(5), tr td:nth-child(5), 
+    tr th:nth-child(6), tr td:nth-child(6), 
+    tr th:nth-child(7), tr td:nth-child(7) {
+    display:none;
+  }
 }
 
 
@@ -2779,6 +2850,15 @@ body {
   }
 
   .nav-bar {
-    padding: 5px 0px 5px 5px;
+    padding: 5px 0px 5px 10px;
+  }
+
+  .leaderboard-title {
+    font-size: 18pt;
+  }
+
+  .subcategory-title-flexbox img {
+    max-width: 45px;
+    height: auto;
   }
 }

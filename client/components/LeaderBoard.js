@@ -51,7 +51,6 @@ const LeaderBoard = (props) => {
           <h1 className="leaderboard-title">{capitalize(format.name, true)} Leaderboard</h1>
           <img style={{ width:'64px'}} src={emojis[format.icon]}/>
         </div>
-        <br />
         <table id="leaderboard-table">
           <thead>
             <tr>
