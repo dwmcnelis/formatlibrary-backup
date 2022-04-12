@@ -3100,7 +3100,7 @@ body {
 
   .status-flexbox {
     overflow: auto;
-    margin: 15px 0px;
+    margin: 25px 0px 15px;
     padding: 0px 5px;
     width: 100%;
     align-items: flex-start;
@@ -3137,6 +3137,7 @@ body {
 
   .hamburger-item {
     font-size: 14pt;
+    border: 2px solid black;
   }
   
   .single-deck-category, .single-deck-category-emoji, #single-deck-uploaded-mobile {
