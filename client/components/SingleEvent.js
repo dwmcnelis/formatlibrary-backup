@@ -193,7 +193,7 @@ const SingleEvent = (props) => {
             <a href="#metagame-stats">Metagame Stats</a>
           </li>
         </div>
-        <img className="format-icon-large" src={formatArtwork} />
+        <img className="desktop-only" id="format-icon-large" src={formatArtwork} />
       </div>
 
       <div className="divider"/>

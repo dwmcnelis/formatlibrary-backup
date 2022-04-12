@@ -264,7 +264,7 @@ h1 {
   padding: 0px 10px;
 }
 
-.format-icon-large {
+#format-icon-large {
   height: 176px;
   width: 176px;
   border: 10px ridge #bf9c60;
@@ -2718,7 +2718,7 @@ body {
     overflow: hidden;
   }
 
-  .format-icon-large {
+  #format-icon-large {
     height: 140px;
     width: 140px;
     border: 7px ridge #bf9c60;
@@ -2823,7 +2823,7 @@ body {
     margin-left: auto;
     transform: none;
   }
-
+  
   .single-deck-table {
     width: 100%;
     margin: 5px 0px;
@@ -2957,11 +2957,12 @@ body {
   .format-desc {
     width: 90%;
     font-size: 12pt;
+    line-height: normal;
     padding: 4px;
     margin: 0px 8px;
   }
 
-  .format-icon-large {
+  #format-icon-large {
     height: 80px;
     width: 80px;
     border: 4px ridge #bf9c60;
