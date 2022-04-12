@@ -2565,12 +2565,14 @@ body {
   }
 
   #leaderboard-table {
+    width: 99vw;
     max-width: 99vw;
     table-layout: fixed;
     font-size: 11pt;
   }
 
   #leaderboard-table tr {
+    width: 99vw;
     max-width: 99vw;
   }
 
