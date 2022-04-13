@@ -38,26 +38,26 @@ const Home = () => {
   }, [])
 
   return (
-    <div className="blog">
-      {
-        blogPosts.length ? 
-        blogPosts.map((bp) => {
-          return (
-              <BlogPost 
-                    key={bp.title} 
-                    id={bp.id} 
-                    title={bp.title} 
-                    content={bp.content}
-                    images={bp.images}
-                    components={bp.components}
-                    author={bp.author}
-                    format={bp.format}
-                    views={bp.views}
-                    rating={bp.rating}
-              />)
-        }) : ''
-      }
-    </div>
+      <div className="blog">
+        {
+          blogPosts.length ? 
+          blogPosts.map((bp) => {
+            return (
+                <BlogPost 
+                      key={bp.title} 
+                      id={bp.id} 
+                      title={bp.title} 
+                      content={bp.content}
+                      images={bp.images}
+                      components={bp.components}
+                      author={bp.author}
+                      format={bp.format}
+                      views={bp.views}
+                      rating={bp.rating}
+                />)
+          }) : ''
+        }
+      </div>
   )
 }
 

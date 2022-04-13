@@ -17,11 +17,11 @@ router.get('/leaders/:limit/:format', async (req, res, next) => {
         }
       },
       include: Player,
-      limit: parseInt(req.params.limit),
+      limit: parseInt(req.params.limit) + 10,
       order: [['elo', 'DESC']]
     })].filter((s) => !s.player.blacklisted)
 
-    res.json(stats)
+    res.json(stats.slice(0, parseInt(req.params.limit)))
   } catch (err) {
     next(err)
   }
