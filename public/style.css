@@ -2369,6 +2369,7 @@ body {
     display: none;
   }
 
+
   .post-content {
     width: 100%;
     min-width: 100%;
@@ -2547,13 +2548,25 @@ body {
     min-width: 0px;
   }
 
+  .blogpost-deck-link img {
+    min-width: 99vw;
+    width: 99vw;
+  }
+
   .blogpost-deck-box, .blogpost-images-flexbox, .deck-flexbox img {
     display: block;
+    min-width: 98vw;
     width: 98vw;
+    max-width: 98vw;
+    height: auto;
     padding: 0px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 1%;
+    margin-right: 1%;
     overflow: none;
+  }
+
+  .blogpost-deck-box {
+    margin: 0px 1%;
   }
 
   .blogpost-pfp, .blogpost-community {
@@ -2561,6 +2574,8 @@ body {
   }
   
   .blogpost-deck-link {
+    width: 99%;
+    min-width: 99%;
     max-width: 99%;
     height: auto;
     margin-right: auto;
@@ -2574,6 +2589,8 @@ body {
   }
 
   .blogpost-deck-link img {
+    width: 100%;
+    min-width: 100%;
     max-width: 100%;
     padding: 0px;
     border: 0px;

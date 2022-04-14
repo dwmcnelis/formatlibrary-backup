@@ -352,8 +352,7 @@ const purgePfps = async () => {
 // purgePfps()
 // savePfps()
 // drawBlankDeck()
-composeThumbnails('KGP04')
-// composePreview('PWCQ14')
-// composePreview('KGP04')
-// composeCongratsPost('KGP04')
+// composeThumbnails('OB15')
+// composePreview('OB15')
+composeCongratsPost('OB15')
 
