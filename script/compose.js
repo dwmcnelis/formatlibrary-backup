@@ -64,7 +64,7 @@ const composeCongratsPost = async (shortName) => {
             ""
 
         const main = []
-        const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split('\n').filter((e) => e.length)
+        const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split(' ').filter((e) => e.length)
 
         for (let i = 0; i < mainKonamiCodes.length; i++) {
             let konamiCode = mainKonamiCodes[i]
@@ -106,7 +106,7 @@ const composeCongratsPost = async (shortName) => {
         const rows = Math.ceil(main.length / 10)
         const card_width = 72
         const card_height = 105
-        const canvas = Canvas.createCanvas(card_width * 10 + 9, card_height * rows + rows - 1)
+        const canvas = Canvas.createCanvas((card_width * 10) + 9, (card_height * rows) + rows - 1)
         const context = canvas.getContext('2d')
 
         for (let i = 0; i < main.length; i++) {
@@ -182,7 +182,7 @@ const composePreview = async (event) => {
     if (!deck) return console.log('no decks found')
 
     const main = []
-    const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split('\n').filter((e) => e.length)
+    const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split(' ').filter((e) => e.length)
 
     for (let i = 0; i < mainKonamiCodes.length; i++) {
         let konamiCode = mainKonamiCodes[i]
@@ -237,7 +237,7 @@ const composeThumbnails = async (event) => {
     for (let i = 0; i < decks.length; i++) {
         const deck = decks[i]
         const main = []
-        const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split('\n').filter((e) => e.length)
+        const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split(' ').filter((e) => e.length)
 
         for (let i = 0; i < mainKonamiCodes.length; i++) {
             let konamiCode = mainKonamiCodes[i]
@@ -272,9 +272,9 @@ const composeThumbnails = async (event) => {
             const row = Math.floor(i / 10)
             const col = i % 10
             const image = await Canvas.loadImage(`./public/images/cards/${card.ypdId}.jpg`) 
-            context.drawImage(image, (card_width) * col, row * (card_height), card_width, card_height)
+            context.drawImage(image, card_width * col, row * card_height, card_width, card_height)
         }
-
+        
         const buffer = canvas.toBuffer('image/png')
         fs.writeFileSync(`./public/images/decks/thumbnails/${deck.id}.png`, buffer)
         console.log('saved deck thumbnail')
@@ -352,7 +352,7 @@ const purgePfps = async () => {
 // purgePfps()
 // savePfps()
 // drawBlankDeck()
-composeThumbnails('GFC17')
+// composeThumbnails('GFC17')
 // composePreview('GFC17')
-// composeCongratsPost('GFC17')
+composeCongratsPost('GFC17')
 
