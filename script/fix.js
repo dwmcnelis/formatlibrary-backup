@@ -1904,7 +1904,7 @@ const countParticipants = async () => {
 // countParticipants()
 // updateDeckTypes()
 // makeDeckTypes()
-createDecks('Obelisk_15', 'goat', 'GoatFormat.com', true)
+createDecks('GoatFormatChampionship17', 'goat', 'GoatFormat.com', true)
 // download()
 // images()
 // print()
