@@ -1672,11 +1672,6 @@ const createDecks = async (name, format, community, useTags = true) => {
                 console.log('files', files)
                 files.forEach(async (file) => {
                     let query = file.slice(0, -4)
-                    if (query === 'eff04') query = 'liliku'
-                    if (query === 'Jean') query = 'FrenchAlpha'
-                    if (query === 'selim') query = `selim (db = Xov'ze)`
-                    if (query === 'Snatch Steal 92') query = 'WarJOKELeague'
-                    if (query === 'kingatem') query = 'Mutsuga'
                     // if (query === 'noahmowdy985') query = 'ChainStrike'
                     // if (query === 'Ithrowitintomylunch_!') query = 'Ithrowitintomylunch__'
                     // if (query === 'don_t copy') query = `don't copy`
@@ -1697,6 +1692,12 @@ const createDecks = async (name, format, community, useTags = true) => {
                     // if (query === 'IAMZ1') query = 'Sohaib _DB _ IAMZ1_'
                     // if (query === 'boymoding xenohospitality') query = 'SQUARE THEORY WAS A GOOD IDEA'
 
+                    if (query === 'eff04_2216') query = 'liliku_2216'
+                    if (query === 'Jean_8621') query = 'FrenchAlpha_8621'
+                    if (query === 'selim_3492') query = `selim (db = Xov'ze)_3492`
+                    if (query === 'Snatch_Steal_92_7414') query = 'WarJOKELeague_7414'
+                    if (query === 'KingAtem_7165') query = 'Mutsuga_7165'
+                    if (query === 'nicodutto_8612') query = 'nicodutto(DB=Nico2324)_8612'
                     // if (query.includes('to0fresh')) query = 'to0fresh_3550'
                     // if (query === 'Rask_2225') query = 'Berndig_2225'
                     // if (query === 'Blave_2824') query = 'Young_Sexy_MF_0357'
@@ -1727,11 +1728,12 @@ const createDecks = async (name, format, community, useTags = true) => {
                     } else {
                         const player = players[i]
                         let pname = player.name
-                        if (pname === 'liliku') pname = 'eff04'
-                        if (pname === 'FrenchAlpha') pname = 'Jean'
-                        if (pname === `selim (db = Xov'ze)`) pname = 'selim'
-                        if (pname === 'WarJOKELeague') pname = 'Snatch Steal 92'
-                        if (pname === 'mark_mps') pname = 'mark_mps | LRG Sigma'
+                        if (pname.includes('liliku')) pname = 'eff04'
+                        if (pname.includes('FrenchAlpha')) pname = 'Jean'
+                        if (pname.includes(`selim (db = Xov'ze)`)) pname = 'selim'
+                        if (pname.includes('WarJOKELeague')) pname = 'Snatch Steal 92'
+                        if (pname.includes('mark_mps')) pname = 'mark_mps | LRG Sigma'
+                        if (pname.includes('nicodutto(DB=Nico2324)')) pname = 'nicodutto'
                         // if (pname === 'Keininsder') pname = 'keininsder'
                         // if (pname === 'Asgeir') pname = 'LWRS'
                         // if (pname === 'Bonkai') pname = 'Unfortunately, I am from Bosnia'
