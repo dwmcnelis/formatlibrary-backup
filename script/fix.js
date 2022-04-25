@@ -1694,7 +1694,7 @@ const createDecks = async (name, format, community, useTags = true) => {
 
                     if (query === 'eff04_2216') query = 'liliku_2216'
                     if (query === 'Jean_8621') query = 'FrenchAlpha_8621'
-                    if (query === 'selim_3492') query = `selim__db___Xov'ze__3492`
+                    if (query === 'selim_3492') query = `selim__db___Xov_ze__3492`
                     if (query === 'Snatch_Steal_92_7414') query = 'WarJOKELeague_7414'
                     if (query === 'KingAtem_7165') query = 'Mutsuga_7165'
                     if (query === 'nicodutto_8612') query = 'nicodutto_DB_Nico2324__8612'
