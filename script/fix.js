@@ -1742,7 +1742,7 @@ const createDecks = async (name, format, community, useTags = true) => {
                         // if (pname === 'ChainStrike') pname = 'noahmowdy985'
                         // if (pname === 'Ithrowitintomylunch__') pname = 'Ithrowitintomylunch?!'
                         // if (pname === 'Sohaib _DB _ IAMZ1_') pname = 'Saad R/to0fresh'
-                        if (pname === 'mark_mps | LRG Sigma') pname = 'mark_mps'
+                        // if (pname === 'mark_mps | LRG Sigma') pname = 'mark_mps'
                         // if (pname === 'Young Sexy MF') pname = 'young sexy mf'
                         // if (pname === 'YSMF (aka Bao)') pname = 'youngsexymf'
                         // if (pname === 'SQUARE THEORY WAS A GOOD IDEA') pname = 'boymoding xenohospitality'
