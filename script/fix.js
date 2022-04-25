@@ -1870,7 +1870,8 @@ const updateCommunities = async () => {
         const decks = await Deck.findAll()
         for (let i = 0; i < decks.length; i++) {
             const deck = decks[i]
-            if (deck.community === 'Format Librar') deck.community = 'Format Library'
+            if (deck.event.includes('GFC')) deck.community = 'GoatFormat.com'
+            if (deck.event.includes('FLC')) deck.community = 'Format Library'
             await deck.save()
         }
     } catch (err) {
@@ -1911,11 +1912,11 @@ const countParticipants = async () => {
     }
 }
 
-// updateCommunities()
+updateCommunities()
 // countParticipants()
 // updateDeckTypes()
 // makeDeckTypes()
-createDecks('GoatFormatChampionship17', 'goat', 'GoatFormat.com', true)
+// createDecks('GoatFormatChampionship17', 'goat', 'GoatFormat.com', true)
 // download()
 // images()
 // print()
