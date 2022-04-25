@@ -1672,11 +1672,16 @@ const createDecks = async (name, format, community, useTags = true) => {
                 console.log('files', files)
                 files.forEach(async (file) => {
                     let query = file.slice(0, -4)
+                    if (query === 'eff04') query = 'liliku'
+                    if (query === 'Jean') query = 'FrenchAlpha'
+                    if (query === 'selim') query = `selim (db = Xov'ze)`
+                    if (query === 'Snatch Steal 92') query = 'WarJOKELeague'
+                    if (query === 'kingatem') query = 'Mutsuga'
                     // if (query === 'noahmowdy985') query = 'ChainStrike'
                     // if (query === 'Ithrowitintomylunch_!') query = 'Ithrowitintomylunch__'
                     // if (query === 'don_t copy') query = `don't copy`
                     // if (query === 'mark_mps') query = 'mark_mps | LRG Sigma'
-                    //if (query === 'funky5') query = 'funky'
+                    // if (query === 'funky5') query = 'funky'
                     // if (query === 'jinzodude9') query = 'Jinzodude'
                     // if (query === 'ARandomKeyForgePlayer_Guari_5854') query = 'Guari_5854'
                     // if (query === 'noahmowdy985') query = 'ChainStrike'
@@ -1722,6 +1727,11 @@ const createDecks = async (name, format, community, useTags = true) => {
                     } else {
                         const player = players[i]
                         let pname = player.name
+                        if (pname === 'liliku') pname = 'eff04'
+                        if (pname === 'FrenchAlpha') pname = 'Jean'
+                        if (pname === `selim (db = Xov'ze)`) pname = 'selim'
+                        if (pname === 'WarJOKELeague') pname = 'Snatch Steal 92'
+                        if (pname === 'mark_mps') pname = 'mark_mps | LRG Sigma'
                         // if (pname === 'Keininsder') pname = 'keininsder'
                         // if (pname === 'Asgeir') pname = 'LWRS'
                         // if (pname === 'Bonkai') pname = 'Unfortunately, I am from Bosnia'
@@ -1732,7 +1742,7 @@ const createDecks = async (name, format, community, useTags = true) => {
                         // if (pname === 'ChainStrike') pname = 'noahmowdy985'
                         // if (pname === 'Ithrowitintomylunch__') pname = 'Ithrowitintomylunch?!'
                         // if (pname === 'Sohaib _DB _ IAMZ1_') pname = 'Saad R/to0fresh'
-                        // if (pname === 'mark_mps | LRG Sigma') pname = 'mark_mps'
+                        if (pname === 'mark_mps | LRG Sigma') pname = 'mark_mps'
                         // if (pname === 'Young Sexy MF') pname = 'young sexy mf'
                         // if (pname === 'YSMF (aka Bao)') pname = 'youngsexymf'
                         // if (pname === 'SQUARE THEORY WAS A GOOD IDEA') pname = 'boymoding xenohospitality'
