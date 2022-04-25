@@ -2369,7 +2369,6 @@ body {
     display: none;
   }
 
-
   .post-content {
     width: 100%;
     min-width: 100%;
@@ -2553,7 +2552,7 @@ body {
     width: 99vw;
   }
 
-  .blogpost-deck-box, .blogpost-images-flexbox, .deck-flexbox img {
+  .blogpost-deck-box, .blogpost-images-flexbox, .deck-flexbox {
     display: block;
     min-width: 98vw;
     width: 98vw;
