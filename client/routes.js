@@ -20,13 +20,21 @@ const Routes = () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/home/" component={Home} />
+      <Route path="/home/" component={Home} />
+      <Route path="/great-library" component={CardTable} />
+      <Route path="/cards-by-format" component={CardTable} />
+      <Route path="/cards-by-year" component={CardTable} />
+      <Route path="/goat-card-pool" component={CardTable} />
       <Route exact path="/cards/" component={CardTable} />
       <Route path="/cards/:id" component={SingleCard} />
+      <Route path="/goat-deck-gallery/" component={DeckTable} />
       <Route exact path="/decks/" component={DeckTable} />
       <Route path="/decks/:id" component={SingleDeck} />
       <Route exact path="/events/" component={EventTable} />
       <Route path="/events/:id" component={SingleEvent} />
+      <Route path="/ban-lists" component={FormatMenu} />
+      <Route path="/goat-intro" component={FormatMenu} />
+      <Route path="/goat-history" component={FormatMenu} />
       <Route exact path="/formats/" component={FormatMenu} />
       <Route path="/formats/:id" component={FormatIntro} />
       <Route path="/leaderboards/:id" component={LeaderBoard} />
