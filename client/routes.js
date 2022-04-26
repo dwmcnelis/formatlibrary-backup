@@ -27,7 +27,7 @@ const Routes = () => {
       <Route path="/goat-card-pool" component={CardTable} />
       <Route exact path="/cards/" component={CardTable} />
       <Route path="/cards/:id" component={SingleCard} />
-      <Route path="/goat-deck-gallery/" component={DeckTable} />
+      <Route path="/goat-deck-gallery" component={DeckTable} />
       <Route exact path="/decks/" component={DeckTable} />
       <Route path="/decks/:id" component={SingleDeck} />
       <Route exact path="/events/" component={EventTable} />
