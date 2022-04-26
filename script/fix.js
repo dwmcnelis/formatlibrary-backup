@@ -1912,7 +1912,26 @@ const countParticipants = async () => {
     }
 }
 
-updateCommunities()
+const fixFusions = async () => {
+    const cards = await Card.findAll({
+        where: {
+            fusion: true
+        }
+    })
+    let b = 0
+
+    for (let i = 0; i < cards.length; i++) {
+        const c = cards[i]
+        c.normal = false
+        await c.save()
+        b++
+    }
+
+    return console.log(`fixed ${b} fusion monsters`)
+}
+
+fixFusions()
+// updateCommunities()
 // countParticipants()
 // updateDeckTypes()
 // makeDeckTypes()
