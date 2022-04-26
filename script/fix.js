@@ -1915,9 +1915,14 @@ const countParticipants = async () => {
 const fixFusions = async () => {
     const cards = await Card.findAll({
         where: {
-            fusion: true
+            [Op.or]: {
+                xyz: true,
+                synchro: true,
+                link: true
+            }
         }
     })
+    
     let b = 0
 
     for (let i = 0; i < cards.length; i++) {
@@ -1927,7 +1932,7 @@ const fixFusions = async () => {
         b++
     }
 
-    return console.log(`fixed ${b} fusion monsters`)
+    return console.log(`fixed ${b} xyz/synchro/link monsters`)
 }
 
 fixFusions()
