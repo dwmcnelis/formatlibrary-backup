@@ -96,6 +96,7 @@ router.get('/first/:x', async (req, res, next) => {
 })
 
 router.get('/:id', async (req, res, next) => {
+  console.log('req.params', req.params)
   try {
     const card = await Card.findOne({
       where: {
