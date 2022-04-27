@@ -139,7 +139,7 @@ router.get('/all', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
             where: { display: true },
-            attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
+            attributes: { exclude: ['display', 'updatedAt'] },
             order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
             include: [{ model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }],
         })
@@ -155,7 +155,7 @@ router.get('/first/:x', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
             where: { display: true },
-            attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
+            attributes: { exclude: ['display', 'updatedAt'] },
             order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
             limit: req.params.x, 
             include: [{ model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }],
@@ -175,7 +175,7 @@ router.get('/:id', async (req, res, next) => {
                 id: req.params.id,
                 display: true
             }, 
-            attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
+            attributes: { exclude: ['display', 'updatedAt'] },
             include: [{ model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }],
         })
 
