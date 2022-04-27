@@ -25,7 +25,7 @@ router.get('/', async (req, res, next) => {
   try {
     const players = await Player.findAll({
       attributes: ['id', 'name', 'tag', 'duelingBook'],
-      order: [['id', 'ASC']]
+      order: [['name', 'ASC']]
     })
 
     res.json(players)
