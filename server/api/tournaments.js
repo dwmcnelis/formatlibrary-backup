@@ -110,9 +110,9 @@ router.get('/:id', async (req, res, next) => {
 
     for (let i = 0; i < allDecks.length; i++) {
       const ydk = allDecks[i].ydk
-      const main = ydk.split('#extra')[0].split(' ').filter(el => el.charAt(0) !== '#' && el.charAt(0) !== '!' && el !== '')
+      const main = ydk.split('#extra')[0].split('\n').filter(el => el.charAt(0) !== '#' && el.charAt(0) !== '!' && el !== '')
       mainDeckCards.push(...main)
-      const side = ydk.split('!side')[1].split(' ').filter(el => el.charAt(0) !== '#' && el.charAt(0) !== '!' && el !== '')
+      const side = ydk.split('!side')[1].split('\n').filter(el => el.charAt(0) !== '#' && el.charAt(0) !== '!' && el !== '')
       sideDeckCards.push(...side)
     }
 

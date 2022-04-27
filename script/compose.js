@@ -64,7 +64,7 @@ const composeCongratsPost = async (shortName) => {
             ""
 
         const main = []
-        const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split(' ').filter((e) => e.length)
+        const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split('\n').filter((e) => e.length)
 
         for (let i = 0; i < mainKonamiCodes.length; i++) {
             let konamiCode = mainKonamiCodes[i]
@@ -182,7 +182,7 @@ const composePreview = async (event) => {
     if (!deck) return console.log('no decks found')
 
     const main = []
-    const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split(' ').filter((e) => e.length)
+    const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split('\n').filter((e) => e.length)
 
     for (let i = 0; i < mainKonamiCodes.length; i++) {
         let konamiCode = mainKonamiCodes[i]
@@ -237,7 +237,7 @@ const composeThumbnails = async (event) => {
     for (let i = 0; i < decks.length; i++) {
         const deck = decks[i]
         const main = []
-        const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split(' ').filter((e) => e.length)
+        const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split('\n').filter((e) => e.length)
 
         for (let i = 0; i < mainKonamiCodes.length; i++) {
             let konamiCode = mainKonamiCodes[i]

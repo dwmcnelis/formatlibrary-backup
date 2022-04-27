@@ -182,9 +182,9 @@ router.get('/:id', async (req, res, next) => {
         const main = []
         const extra = []
         const side = []
-        const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split(' ').filter((e) => e.length)
-        const extraKonamiCodes = deck.ydk.split('#extra')[1].split('!side')[0].split(' ').filter((e) => e.length)
-        const sideKonamiCodes = deck.ydk.split('!side')[1].split(' ').filter((e) => e.length)
+        const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split('\n').filter((e) => e.length)
+        const extraKonamiCodes = deck.ydk.split('#extra')[1].split('!side')[0].split('\n').filter((e) => e.length)
+        const sideKonamiCodes = deck.ydk.split('!side')[1].split('\n').filter((e) => e.length)
 
         for (let i = 0; i < mainKonamiCodes.length; i++) {
             let konamiCode = mainKonamiCodes[i]
