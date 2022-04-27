@@ -11,7 +11,8 @@ router.get('/:id', async (req, res, next) => {
       where: {
         tag: req.params.id.slice(0, -4) + '#' +  req.params.id.slice(-4),
         blacklisted: false
-      }
+      },
+      attributes: ['id', 'name', 'tag', 'duelingBook', 'avatar']
     })
 
     res.json(player)
@@ -24,7 +25,7 @@ router.get('/:id', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
   try {
     const players = await Player.findAll({
-      attributes: ['id', 'name', 'tag', 'duelingBook'],
+      attributes: ['id', 'name', 'tag', 'duelingBook', 'avatar'],
       order: [['name', 'ASC']]
     })
 
