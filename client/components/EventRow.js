@@ -48,7 +48,7 @@ const EventRow = (props) => {
                       }
                   }
               />
-              <div>{event.winner || 'N/A'}</div>
+              <div>{event.player.winner || 'N/A'}</div>
             </div>
           </Link>
         </td>

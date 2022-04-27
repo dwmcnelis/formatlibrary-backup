@@ -12,7 +12,7 @@ router.get('/:id', async (req, res, next) => {
         tag: req.params.id.slice(0, -4) + '#' +  req.params.id.slice(-4),
         blacklisted: false
       },
-      attributes: ['id', 'name', 'tag', 'duelingBook', 'avatar']
+      attributes: { exclude: ['blacklisted', 'password', 'createdAt', 'updatedAt'] }
     })
 
     res.json(player)
@@ -25,7 +25,7 @@ router.get('/:id', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
   try {
     const players = await Player.findAll({
-      attributes: ['id', 'name', 'tag', 'duelingBook', 'avatar'],
+      attributes: { exclude: ['blacklisted', 'password', 'createdAt', 'updatedAt'] },
       order: [['name', 'ASC']]
     })
 

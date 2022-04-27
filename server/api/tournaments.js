@@ -12,7 +12,8 @@ router.get('/all', async (req, res, next) => {
       where: {
         display: true
       },
-      include: Player,
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      include: { model: Player, attributes: { exclude: ['password', 'blacklisted', 'createdAt', 'updatedAt'] } },
       order: [["startDate", "DESC"], ["size", "DESC"]]
     })
     
@@ -31,7 +32,8 @@ router.get('/recent/:format', async (req, res, next) => {
             display: true,
             format: req.params.format.toLowerCase()
           },
-          include: Player,
+          include: { model: Player, attributes: { exclude: ['password', 'blacklisted', 'createdAt', 'updatedAt'] } },
+          attributes: { exclude: ['createdAt', 'updatedAt'] },
           order: [["startDate", "DESC"], ["size", "DESC"]],
           limit: 6
       })
@@ -63,6 +65,8 @@ router.get('/first/:x', async (req, res, next) => {
     try {
         const tournaments = await Tournament.findAll({ 
             where: { display: true },
+            attributes: { exclude: ['createdAt', 'updatedAt'] },
+            include: { model: Player, attributes: { exclude: ['password', 'blacklisted', 'createdAt', 'updatedAt'] } },
             order: [["startDate", "DESC"], ["size", "DESC"]],
             limit: req.params.x
         })
@@ -79,7 +83,8 @@ router.get('/:id', async (req, res, next) => {
       where: {
         shortName: req.params.id
       },
-      include: Player
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      include: { model: Player, attributes: { exclude: ['password', 'blacklisted', 'createdAt', 'updatedAt'] } },
     })
 
     const topDecks = await Deck.findAll({
@@ -87,8 +92,8 @@ router.get('/:id', async (req, res, next) => {
         display: true,
         tournamentId: tournament.id
       },
-      order: [["placement", "ASC"], ["builder", "ASC"]],
-      include: Player
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      order: [["placement", "ASC"], ["builder", "ASC"]]
     })
 
     const allDecks = await Deck.findAll({
@@ -105,9 +110,9 @@ router.get('/:id', async (req, res, next) => {
 
     for (let i = 0; i < allDecks.length; i++) {
       const ydk = allDecks[i].ydk
-      const main = ydk.split('#extra')[0].split('\n').filter(el => el.charAt(0) !== '#' && el.charAt(0) !== '!' && el !== '')
+      const main = ydk.split('#extra')[0].split(' ').filter(el => el.charAt(0) !== '#' && el.charAt(0) !== '!' && el !== '')
       mainDeckCards.push(...main)
-      const side = ydk.split('!side')[1].split('\n').filter(el => el.charAt(0) !== '#' && el.charAt(0) !== '!' && el !== '')
+      const side = ydk.split('!side')[1].split(' ').filter(el => el.charAt(0) !== '#' && el.charAt(0) !== '!' && el !== '')
       sideDeckCards.push(...side)
     }
 
@@ -118,8 +123,12 @@ router.get('/:id', async (req, res, next) => {
     for (let i = 0; i < topMainDeckFrequencies.length; i++) {
         const e = topMainDeckFrequencies[i]
         const konamiCode = e[0]
-        const card = await Card.findOne({ where: { konamiCode }})
-        topMainDeckCards.push([card.dataValues, e[1]])
+        try {
+          const card = await Card.findOne({ where: { konamiCode }})
+          topMainDeckCards.push([card.dataValues, e[1]])
+        } catch (err) {
+          console.log(err)
+        }
     }
 
     const sideDeckCardFrequencies = arrayToObject(sideDeckCards)
@@ -129,8 +138,12 @@ router.get('/:id', async (req, res, next) => {
     for (let i = 0; i < topSideDeckFrequencies.length; i++) {
       const e = topSideDeckFrequencies[i]
       const konamiCode = e[0]
-      const card = await Card.findOne({ where: { konamiCode }})
-      topSideDeckCards.push([card.dataValues, e[1]])
+      try {
+        const card = await Card.findOne({ where: { konamiCode }})
+        topSideDeckCards.push([card.dataValues, e[1]])
+      } catch (err) {
+        console.log(err)
+      }
   }
 
     const data = {

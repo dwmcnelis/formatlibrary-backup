@@ -28,7 +28,8 @@ router.get('/popular/:format', async (req, res, next) => {
                 where: {
                     name: name,
                     format: req.params.format.toLowerCase()
-                }
+                },
+                attributes: { exclude: ['createdAt', 'updatedAt'] }
             })
 
             if (!deckType) continue
@@ -62,7 +63,8 @@ router.get('/frequent/:id', async (req, res, next) => {
             const deckType = await DeckType.findOne({
                 where: {
                     name: name
-                }
+                },
+                attributes: { exclude: ['createdAt', 'updatedAt'] }
             })
 
             if (!deckType) continue
@@ -83,6 +85,7 @@ router.get('/player/:id', async (req, res, next) => {
                 playerId: req.params.id,
                 display: true
             },
+            attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
             order: [["placement", "ASC"], ["createdAt", "ASC"]],
             limit: 10
         })
@@ -136,8 +139,9 @@ router.get('/all', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
             where: { display: true },
+            attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
             order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
-            include: Player
+            include: [{ model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }],
         })
 
         res.json(decks)
@@ -151,9 +155,10 @@ router.get('/first/:x', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
             where: { display: true },
+            attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
             order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
             limit: req.params.x, 
-            include: Player 
+            include: [{ model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }],
         })
 
         res.json(decks)
@@ -170,15 +175,16 @@ router.get('/:id', async (req, res, next) => {
                 id: req.params.id,
                 display: true
             }, 
-            include: Player
+            attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
+            include: [{ model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }],
         })
 
         const main = []
         const extra = []
         const side = []
-        const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split('\n').filter((e) => e.length)
-        const extraKonamiCodes = deck.ydk.split('#extra')[1].split('!side')[0].split('\n').filter((e) => e.length)
-        const sideKonamiCodes = deck.ydk.split('!side')[1].split('\n').filter((e) => e.length)
+        const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split(' ').filter((e) => e.length)
+        const extraKonamiCodes = deck.ydk.split('#extra')[1].split('!side')[0].split(' ').filter((e) => e.length)
+        const sideKonamiCodes = deck.ydk.split('!side')[1].split(' ').filter((e) => e.length)
 
         for (let i = 0; i < mainKonamiCodes.length; i++) {
             let konamiCode = mainKonamiCodes[i]

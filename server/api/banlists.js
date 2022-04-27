@@ -12,7 +12,8 @@ router.get('/:date', async (req, res, next) => {
       where: {
         [date]: 'forbidden'
       },
-      include: [Card],
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      include: [{ model: Card, attributes: { exclude: ['createdAt', 'updatedAt'] } }],
       order: [[Card, 'sortPriority', 'ASC'], ['name', 'ASC']]
     })
 
@@ -20,7 +21,8 @@ router.get('/:date', async (req, res, next) => {
         where: {
           [date]: 'limited'
         },
-        include: [Card],
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
+        include: [{ model: Card, attributes: { exclude: ['createdAt', 'updatedAt'] } }],
         order: [[Card, 'sortPriority', 'ASC'], ['name', 'ASC']]
       })
 
@@ -28,7 +30,8 @@ router.get('/:date', async (req, res, next) => {
     where: {
         [date]: 'semi-limited'
     },
-    include: [Card],
+    attributes: { exclude: ['createdAt', 'updatedAt'] },
+    include: [{ model: Card, attributes: { exclude: ['createdAt', 'updatedAt'] } }],
     order: [[Card, 'sortPriority', 'ASC'], ['name', 'ASC']]
     })
 

@@ -38,7 +38,7 @@ const SingleEvent = (props) => {
       try {
         const {data} = await axios.get(`/api/tournaments/${props.match.params.id}`)
         setEvent(data.event)
-        setWinner(data.winner)
+        setWinner(data.event.player)
         setTopDecks(data.topDecks)
         setMetagame(data.metagame)
       } catch (err) {

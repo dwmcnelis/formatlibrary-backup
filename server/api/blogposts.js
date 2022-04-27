@@ -12,6 +12,7 @@ router.get('/all', async (req, res, next) => {
         where: {
             title: {[Op.not]: null}
         },
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
         order: [['createdAt', 'DESC']]
     })
 
@@ -27,6 +28,7 @@ router.get('/first/:x', async (req, res, next) => {
         where: {
             title: {[Op.not]: null}
         },
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
         limit: req.params.x,
         order: [['createdAt', 'DESC']]
         })

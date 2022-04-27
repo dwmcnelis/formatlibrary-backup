@@ -14,6 +14,7 @@ router.get('/all', async (req, res, next) => {
         tcgLegal: true,
         tcgDate: { [Op.not]: null }
       },
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
       order: [['name', 'ASC']]
     })
     res.json(cards)
@@ -68,6 +69,7 @@ router.get('/some', async (req, res, next) => {
 
     const cards = await Card.findAll({
       where: filters,
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
       order: [['name', 'ASC']]
     })
 
@@ -86,6 +88,7 @@ router.get('/first/:x', async (req, res, next) => {
           [Op.not]: null
         }
       },
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
       limit: req.params.x,
       order: [['name', 'ASC']]
     })
@@ -96,24 +99,26 @@ router.get('/first/:x', async (req, res, next) => {
 })
 
 router.get('/:id', async (req, res, next) => {
-  console.log('req.params', req.params)
   try {
     const card = await Card.findOne({
       where: {
         name: {[Op.iLike]: req.params.id }
-      }
+      },
+      attributes: { exclude: ['createdAt', 'updatedAt'] }
     }) 
 
     const status = await Status.findOne({
       where: {
         cardId: card.id
-      }
+      },
+      attributes: { exclude: ['createdAt', 'updatedAt'] }
     })
 
     const prints = await Print.findAll({
       where: {
         cardId: card.id
       },
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
       include: [Set],
       order: [[Set, 'tcgDate', 'ASC']]
     })
