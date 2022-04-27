@@ -21,16 +21,16 @@ router.get('/:id', async (req, res, next) => {
 })
 
 /* eslint-disable complexity */
-// router.get('/', async (req, res, next) => {
-//   try {
-//     const players = await Player.findAll({
-//       where: {
-//         blacklisted: false
-//       }
-//     })
-//     res.json(players)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+router.get('/', async (req, res, next) => {
+  try {
+    const players = await Player.findAll({
+      attributes: ['id', 'name', 'tag', 'duelingBook'],
+      order: [['id', 'ASC']]
+    })
+
+    res.json(players)
+  } catch (err) {
+    next(err)
+  }
+})
 
