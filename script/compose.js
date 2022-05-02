@@ -100,8 +100,8 @@ const composeCongratsPost = async (shortName) => {
         const freqs = decks.reduce((acc, curr) => (acc[curr.deckType] ? acc[curr.deckType]++ : acc[curr.deckType] = 1, acc), {})
         const popularDecks = Object.entries(freqs).sort((a, b) => b[1] - a[1]).map((e) => e[0]).slice(0, 6)
         const title = `Congrats to ${tournament.winner} on winning ${tournament.shortName}!`
-        const blogTitleDate = dateToVerbose(tournament.createdAt, false, false, true)
-        const publishDate = dateToVerbose(tournament.createdAt, true, true, false)
+        const blogTitleDate = dateToVerbose(tournament.endDate, false, false, true)
+        const publishDate = dateToVerbose(tournament.endDate, true, true, false)
 
         const rows = Math.ceil(main.length / 10)
         const card_width = 72
@@ -352,7 +352,7 @@ const purgePfps = async () => {
 // purgePfps()
 // savePfps()
 // drawBlankDeck()
-// composeThumbnails('PP02')
-// composePreview('PP02')
-composeCongratsPost('PP02')
+composeThumbnails('PP02')
+composePreview('PP02')
+// composeCongratsPost('PP02')
 
