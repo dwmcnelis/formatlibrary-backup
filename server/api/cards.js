@@ -3,7 +3,6 @@
 const router = require('express').Router()
 const {Card, Print, Set, Status} = require('../db/models')
 const {Op} = require('sequelize')
-const {arrayToObject} = require('../../functions/utility')
 
 module.exports = router
 
@@ -115,7 +114,7 @@ router.get('/:id', async (req, res, next) => {
     }).map((s) => [s.banlist, s.restriction]) || []
 
     console.log('statuses', statuses)
-    console.log('arrayToObject(statuses)', arrayToObject(statuses))
+    console.log('Object.fromEntries(statuses)', Object.fromEntries(statuses))
     
     const prints = await Print.findAll({
       where: {
@@ -128,7 +127,7 @@ router.get('/:id', async (req, res, next) => {
 
     const info = {
       card: card,
-      statuses: arrayToObject(statuses),
+      statuses: Object.fromEntries(statuses),
       prints: prints || []
     }
 
