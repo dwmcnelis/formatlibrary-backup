@@ -10,7 +10,7 @@ router.get('/leaders/:limit/:format', async (req, res, next) => {
   try {
     const stats = await Stats.findAll({
       where: {
-        format: req.params.format.replace(' ', '_').replace('-', '_'),
+        format: {[Op.iLike]: req.params.format.replace(' ', '_').replace('-', '_')},
         [Op.or]: {
           wins: {[Op.gte]: 5},
           losses: {[Op.gte]: 5},

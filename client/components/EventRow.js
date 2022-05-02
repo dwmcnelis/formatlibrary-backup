@@ -20,7 +20,7 @@ const EventRow = (props) => {
   const tag = event.player && event.player.tag ? event.player.tag : ''
   
   return (
-      <tr onClick={() => goToEvent()} className={`${evenOrOdd}-search-results-row`}>
+      <tr className={`${evenOrOdd}-search-results-row`}>
         <td className="no-padding">
           <Link className="black-text" to={`/events/${event.shortName}`}>
             <div className="format-cell-flexbox">

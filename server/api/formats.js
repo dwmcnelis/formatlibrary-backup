@@ -16,19 +16,19 @@ router.get('/:name', async (req, res, next) => {
 
     const deckCount = await Deck.count({
       where: {
-        format: format.name.replace(' ', '_').replace('-', '_').toLowerCase()
+        format: {[Op.iLike]: format.name.replace(' ', '_').replace('-', '_') }
       }
     })
 
     const eventCount = await Tournament.count({
       where: {
-        format: format.name.replace(' ', '_').replace('-', '_').toLowerCase()
+        format: {[Op.iLike]: format.name.replace(' ', '_').replace('-', '_') }
       }
     })
 
     const statsCount = await Stats.count({
       where: {
-        format: format.name.replace(' ', '_').replace('-', '_').toLowerCase()
+        format: {[Op.iLike]: format.name.replace(' ', '_').replace('-', '_') }
       }
     })
 

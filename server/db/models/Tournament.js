@@ -16,7 +16,7 @@ const Tournament = db.define('tournaments', {
     },
     format: {
         type: Sequelize.STRING,  
-        defaultValue: 'goat',  
+        defaultValue: 'Goat',  
         allowNull: false
     },
     url: {
@@ -76,6 +76,16 @@ const Tournament = db.define('tournaments', {
     community: {
         type: Sequelize.STRING,   
         defaultValue: 'Format Library',   
+        allowNull: true
+    },
+    emoji: {
+        type: Sequelize.STRING,   
+        defaultValue: 'legend',
+        allowNull: true
+    },
+    formatEmoji: {
+        type: Sequelize.STRING,   
+        defaultValue: '<:bluesheep:646866933605466131>',
         allowNull: true
     },
     channelId: {

@@ -90,7 +90,7 @@ const composeCongratsPost = async (shortName) => {
 
         const decks = await Deck.findAll({ 
             where: {
-                format: tournament.format.toLowerCase(),
+                format: {[Op.iLike]: tournament.format },
                 createdAt: {[Op.lte]: tournament.startDate }
             }
         })
@@ -159,7 +159,7 @@ const composeCongratsPost = async (shortName) => {
             content: content,
             publishDate: publishDate,
             author: 'RetroBot',
-            format: tournament.format,
+            format: {[Op.iLike]: tournament.format},
             playerId: deck.playerId,
             createdAt: tournament.startDate
         })

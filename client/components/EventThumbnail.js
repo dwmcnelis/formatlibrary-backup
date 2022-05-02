@@ -1,6 +1,5 @@
 
 import React from 'react'
-import { useHistory } from 'react-router-dom'
 import {capitalize} from '../../functions/utility'
 import formats from '../../static/formats.json'
 import * as emojis from '../../public/images/emojis'
@@ -16,11 +15,9 @@ const EventThumbnail = (props = {}) => {
 
     const formatName = capitalize(event.format, true) || '?'
     const backgroundImage = emojis[formats[formatName].logo] || ''
-    const history = useHistory()
-    const goToEvent = () => history.push(`/events/${event.shortName}`)
 
   return (
-    <div className="eventThumbnail" onClick={() => goToEvent()}>
+    <div className="eventThumbnail">
         <h3>{capitalize(event.shortName, true)}</h3>
         <div className="eventThumbnail-flexbox">
             <img 

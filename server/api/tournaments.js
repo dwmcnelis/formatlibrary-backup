@@ -30,7 +30,7 @@ router.get('/recent/:format', async (req, res, next) => {
       const tournaments = await Tournament.findAll({ 
           where: { 
             display: true,
-            format: req.params.format.toLowerCase()
+            format: {[Op.iLike]: req.params.format }
           },
           include: { model: Player, attributes: { exclude: ['password', 'blacklisted', 'createdAt', 'updatedAt'] } },
           attributes: { exclude: ['createdAt', 'updatedAt'] },

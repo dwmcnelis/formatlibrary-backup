@@ -11,7 +11,7 @@ router.get('/popular/:format', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
             where: {
-                format: req.params.format.toLowerCase(),
+                format: {[Op.iLike]: req.params.format },
                 deckType: {[Op.not]: 'other'} 
             }
         })
@@ -27,7 +27,7 @@ router.get('/popular/:format', async (req, res, next) => {
             const deckType = await DeckType.findOne({
                 where: {
                     name: name,
-                    format: req.params.format.toLowerCase()
+                    format: {[Op.iLike]: req.params.format }
                 },
                 attributes: { exclude: ['createdAt', 'updatedAt'] }
             })
