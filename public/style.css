@@ -231,8 +231,9 @@ h1 {
 }
 
 .retrobot-screenshot {
-  max-height: 250px;
+  max-height: 200px;
   width: auto;
+  max-width: 98vw;
 }
 
 /* FOOTER */
