@@ -224,6 +224,17 @@ h1 {
   background-color: black;
 }
 
+#retrobot-flexbox {
+  display: flex;
+  padding: 1px;
+  justify-content: center;
+}
+
+.retrobot-screenshot {
+  max-height: 200px;
+  width: auto;
+}
+
 /* FOOTER */
 #footer-menu {
   display: flex;
