@@ -159,7 +159,7 @@ const composeCongratsPost = async (shortName) => {
             content: content,
             publishDate: publishDate,
             author: 'RetroBot',
-            format: {[Op.iLike]: tournament.format},
+            format: tournament.format,
             playerId: deck.playerId,
             createdAt: tournament.startDate
         })
@@ -352,7 +352,7 @@ const purgePfps = async () => {
 // purgePfps()
 // savePfps()
 // drawBlankDeck()
-// composeThumbnails('GFC17')
-// composePreview('GFC17')
-composeCongratsPost('GFC17')
+// composeThumbnails('PP02')
+// composePreview('PP02')
+composeCongratsPost('PP02')
 

@@ -1692,6 +1692,7 @@ const createDecks = async (name, format, community, useTags = true) => {
                     // if (query === 'IAMZ1') query = 'Sohaib _DB _ IAMZ1_'
                     // if (query === 'boymoding xenohospitality') query = 'SQUARE THEORY WAS A GOOD IDEA'
 
+                    if (query === 'Mark_Field_YataYata_3295') query = 'YataYata_3295'
                     if (query === 'eff04_2216') query = 'liliku_2216'
                     if (query === 'Jean_8621') query = 'FrenchAlpha_8621'
                     if (query === 'selim_3492') query = `selim__db___Xov_ze__3492`
@@ -1734,6 +1735,7 @@ const createDecks = async (name, format, community, useTags = true) => {
                         if (pname.includes('WarJOKELeague')) pname = 'Snatch Steal 92'
                         if (pname.includes('mark_mps')) pname = 'mark_mps | LRG Sigma'
                         if (pname.includes('nicodutto')) pname = 'nicodutto'
+                        if (pname.includes('YataYata')) pname = 'Mark Field/YataYata'
                         // if (pname === 'Keininsder') pname = 'keininsder'
                         // if (pname === 'Asgeir') pname = 'LWRS'
                         // if (pname === 'Bonkai') pname = 'Unfortunately, I am from Bosnia'
@@ -1935,12 +1937,12 @@ const fixFusions = async () => {
     return console.log(`fixed ${b} xyz/synchro/link monsters`)
 }
 
-fixFusions()
+// fixFusions()
 // updateCommunities()
 // countParticipants()
 // updateDeckTypes()
 // makeDeckTypes()
-// createDecks('GoatFormatChampionship17', 'goat', 'GoatFormat.com', true)
+createDecks('PatreonPlayOff2', 'Goat', 'GoatFormat.com', true)
 // download()
 // images()
 // print()
