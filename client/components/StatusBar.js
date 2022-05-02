@@ -4,7 +4,7 @@ import { capitalize } from '../../functions/utility'
 
 //STATUS BOX
 const StatusBox = (props) => {
-  const { date, status } = props
+  const { banlist, status } = props
   const backgroundColor = status === 'forbidden' ? 'red' :
     status === 'limited' ? 'orange' :
     status === 'semi-limited' ? 'yellow' :
@@ -12,8 +12,8 @@ const StatusBox = (props) => {
     '#e8e8e8'
 
     return (
-        <Link to={`/banlists/${date}`} key={date} className="status-cell" style={{backgroundColor}}>
-           <p>{`${capitalize(date.slice(0, 3))} '${date.slice(-2)}`}</p>
+        <Link to={`/banlists/${banlist}`} key={banlist} className="status-cell" style={{backgroundColor}}>
+           <p>{`${capitalize(banlist.slice(0, 3))} '${banlist.slice(-2)}`}</p>
         </Link>
     )
 } 

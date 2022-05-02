@@ -286,10 +286,10 @@ const SingleCard = (props = {}) => {
                   console.log('b', b)
                   console.log('banlist', banlist)
                   console.log('date', date)
-                  const status = statuses.banlist || card.date < date ? 'unlimited' : null
+                  const status = statuses[banlist] || card.date < date ? 'unlimited' : null
                   console.log('status', status)
-                  console.log('statuses.banlist', statuses.banlist)
-                  return <StatusBox key={banlist} date={date} status={status}/>
+                  console.log('statuses[banlist]', statuses[banlist])
+                  return <StatusBox key={banlist} status={status}/>
                 })}
               </div>
             </div>
