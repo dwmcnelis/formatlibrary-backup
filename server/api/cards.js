@@ -3,7 +3,7 @@
 const router = require('express').Router()
 const {Card, Print, Set, Status} = require('../db/models')
 const {Op} = require('sequelize')
-const {generateDefaultStatus} = require('../../functions/utility')
+const {arrayToObject} = require('../../functions/utility')
 
 module.exports = router
 
@@ -107,13 +107,15 @@ router.get('/:id', async (req, res, next) => {
       attributes: { exclude: ['createdAt', 'updatedAt'] }
     }) 
 
-    const status = await Status.findOne({
+    const statuses = await Status.findAll({
       where: {
         cardId: card.id
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] }
-    })
+    }).map((s) => [s.banlist, s.restriction]) || []
 
+
+    
     const prints = await Print.findAll({
       where: {
         cardId: card.id
@@ -125,7 +127,7 @@ router.get('/:id', async (req, res, next) => {
 
     const info = {
       card: card,
-      status: status || generateDefaultStatus(card),
+      statuses: arrayToObject(statuses),
       prints: prints || []
     }
 

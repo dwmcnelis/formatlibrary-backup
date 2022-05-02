@@ -10,7 +10,8 @@ router.get('/:date', async (req, res, next) => {
     const date = req.params.date
     const forbidden = await Status.findAll({
       where: {
-        [date]: 'forbidden'
+        banlist: date,
+        restriction: 'forbidden'
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       include: [{ model: Card, attributes: { exclude: ['createdAt', 'updatedAt'] } }],
@@ -19,7 +20,8 @@ router.get('/:date', async (req, res, next) => {
 
     const limited = await Status.findAll({
         where: {
-          [date]: 'limited'
+          banlist: date,
+          restriction: 'limited'
         },
         attributes: { exclude: ['createdAt', 'updatedAt'] },
         include: [{ model: Card, attributes: { exclude: ['createdAt', 'updatedAt'] } }],
@@ -28,7 +30,8 @@ router.get('/:date', async (req, res, next) => {
 
     const semiLimited = await Status.findAll({
     where: {
-        [date]: 'semi-limited'
+      banlist: date,
+      restriction: 'semi-limited'
     },
     attributes: { exclude: ['createdAt', 'updatedAt'] },
     include: [{ model: Card, attributes: { exclude: ['createdAt', 'updatedAt'] } }],

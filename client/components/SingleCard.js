@@ -7,10 +7,75 @@ import StatusBox from './StatusBar'
 import axios from 'axios'
 import { dateToSimple, dateToVerbose } from '../../functions/utility'
 
+const banlists = [
+  ['may02', '2002-05-01'],
+  ['jul02', '2002-07-01'],
+  ['oct02', '2002-10-01'],
+  ['dec02', '2002-12-01'],
+  ['apr03', '2003-04-01'],
+  ['may03', '2003-05-01'],
+  ['jul03', '2003-07-01'],
+  ['aug03', '2003-08-01'],
+  ['nov03', '2003-11-01'],
+  ['feb04', '2004-02-01'],
+  ['apr04', '2004-04-01'],
+  ['oct04', '2004-10-01'],
+  ['apr05', '2005-04-01'],
+  ['oct05', '2005-10-01'],
+  ['apr06', '2006-04-01'],
+  ['sep06', '2006-09-01'],
+  ['mar07', '2007-03-01'],
+  ['jun07', '2007-06-01'],
+  ['sep07', '2007-09-01'],
+  ['mar08', '2008-03-01'],
+  ['may08', '2008-05-01'],
+  ['sep08', '2008-09-01'],
+  ['mar09', '2009-03-01'],
+  ['sep09', '2009-09-01'],
+  ['mar10', '2010-03-01'],
+  ['sep10', '2010-09-01'],
+  ['mar11', '2011-03-01'],
+  ['sep11', '2011-09-01'],
+  ['mar12', '2012-03-01'],
+  ['sep12', '2012-09-01'],
+  ['mar13', '2013-03-01'],
+  ['sep13', '2013-09-01'],
+  ['oct13', '2013-10-01'],
+  ['jan14', '2014-01-01'],
+  ['apr14', '2014-04-01'],
+  ['jul14', '2014-07-01'],
+  ['oct14', '2014-10-01'],
+  ['jan15', '2015-01-01'],
+  ['apr15', '2015-04-01'],
+  ['jul15', '2015-07-01'],
+  ['nov15', '2015-11-01'],
+  ['feb16', '2016-02-01'],
+  ['apr16', '2016-04-01'],
+  ['aug16', '2016-08-01'],
+  ['mar17', '2017-03-01'],
+  ['jun17', '2017-06-01'],
+  ['sep17', '2017-09-01'],
+  ['nov17', '2017-11-01'],
+  ['feb18', '2018-02-01'],
+  ['may18', '2018-05-01'],
+  ['sep18', '2018-09-01'],
+  ['dec18', '2018-12-01'],
+  ['jan19', '2019-01-01'],
+  ['apr19', '2019-04-01'],
+  ['jul19', '2019-07-01'],
+  ['oct19', '2019-10-01'],
+  ['jan20', '2020-01-01'],
+  ['apr20', '2020-04-01'],
+  ['jun20', '2020-06-01'],
+  ['sep20', '2020-09-01'],
+  ['dec20', '2020-12-01'],
+  ['mar21', '2021-03-01']
+]
+
   // eslint-disable-next-line complexity
 const SingleCard = (props = {}) => {
   const [card, setCard] = useState({})
-  const [status, setStatus] = useState([])
+  const [statuses, setStatuses] = useState({})
   const [prints, setPrints] = useState([])
 
   // USE LAYOUT EFFECT
@@ -22,7 +87,7 @@ const SingleCard = (props = {}) => {
       try {
         const {data} = await axios.get(`/api/cards/${props.match.params.id}`)
         setCard(data.card)
-        setStatus(data.status)
+        setStatuses(data.statuses)
         setPrints(data.prints)
       } catch (err) {
         console.log(err)
@@ -35,8 +100,6 @@ const SingleCard = (props = {}) => {
 
   if (card === null) return <NotFound/>
   if (!card.id) return <div />
-  const statusArr = Object.entries(status)
-  const slicedStatusArr = statusArr.slice(2, 60)
 
   const template = card.category === 'Spell' ? `/images/templates/spellCard.png` :
     card.category === 'Trap' ? `/images/templates/trapCard.jpeg` :
@@ -216,7 +279,12 @@ const SingleCard = (props = {}) => {
             <div className="status-flexbox">
               <div>Status History:</div>
               <div className="status-box">
-                {slicedStatusArr.map((elem) => <StatusBox key={elem[0]} status={elem}/>)}
+                {banlists.map((b) => {
+                  const banlist = b[0]
+                  const date = b[1]
+                  const status = statuses.banlist || card.date < date ? 'unlimited' : null
+                  return <StatusBox key={banlist} status={status}/>
+                })}
               </div>
             </div>
             <div className="prints-flexbox">
