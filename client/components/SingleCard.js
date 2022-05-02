@@ -77,6 +77,7 @@ const SingleCard = (props = {}) => {
   const [card, setCard] = useState({})
   const [statuses, setStatuses] = useState({})
   const [prints, setPrints] = useState([])
+  console.log('statuses', statuses)
 
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0))
@@ -282,8 +283,13 @@ const SingleCard = (props = {}) => {
                 {banlists.map((b) => {
                   const banlist = b[0]
                   const date = b[1]
+                  console.log('b', b)
+                  console.log('banlist', banlist)
+                  console.log('date', date)
                   const status = statuses.banlist || card.date < date ? 'unlimited' : null
-                  return <StatusBox key={banlist} status={status}/>
+                  console.log('status', status)
+                  console.log('status.banlist', status.banlist)
+                  return <StatusBox key={banlist} date={date} status={status}/>
                 })}
               </div>
             </div>

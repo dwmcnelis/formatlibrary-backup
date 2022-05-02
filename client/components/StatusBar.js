@@ -1,19 +1,19 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import { capitalize } from '../../functions/utility'
 
 //STATUS BOX
 const StatusBox = (props) => {
-  const { status } = props
-  const date = `${status[0].slice(0, 1).toUpperCase()}${status[0].slice(1, 3)} '${status[0].slice(3)}`
-  const backgroundColor = status[1] === 'forbidden' ? 'red' :
-    status[1] === 'limited' ? 'orange' :
-    status[1] === 'semi-limited' ? 'yellow' :
-    status[1] === 'unlimited' ? 'green' :
+  const { date, status } = props
+  const backgroundColor = status === 'forbidden' ? 'red' :
+    status === 'limited' ? 'orange' :
+    status === 'semi-limited' ? 'yellow' :
+    status === 'unlimited' ? 'green' :
     '#e8e8e8'
 
     return (
-        <Link to={`/banlists/${status[0]}`} key={status[0]}className="status-cell" style={{backgroundColor}}>
-           <p>{date}</p>
+        <Link to={`/banlists/${date}`} key={date} className="status-cell" style={{backgroundColor}}>
+           <p>{`${capitalize(date.slice(0, 3))} '${date.slice(-2)}`}</p>
         </Link>
     )
 } 
