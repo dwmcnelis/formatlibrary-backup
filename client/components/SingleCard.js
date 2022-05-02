@@ -283,13 +283,8 @@ const SingleCard = (props = {}) => {
                 {banlists.map((b) => {
                   const banlist = b[0]
                   const date = b[1]
-                  console.log('b', b)
-                  console.log('banlist', banlist)
-                  console.log('date', date)
                   const status = statuses[banlist] || card.date < date ? 'unlimited' : null
-                  console.log('status', status)
-                  console.log('statuses[banlist]', statuses[banlist])
-                  return <StatusBox key={banlist} status={status}/>
+                  return <StatusBox key={banlist} banlist={banlist} status={status}/>
                 })}
               </div>
             </div>
