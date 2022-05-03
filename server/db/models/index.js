@@ -7,6 +7,7 @@ const Format = require('./Format')
 const Player = require('./Player')
 const Print = require('./Print')
 const Set = require('./Set')
+const Server = require('./Server')
 const Stats = require('./Stats')
 const Status = require('./Status')
 const Tournament = require('./Tournament')
@@ -32,6 +33,9 @@ Stats.belongsTo(Player)
 Player.hasMany(Tournament)
 Tournament.belongsTo(Player)
 
+Stats.belongsTo(Server)
+Server.hasMany(Stats)
+
 Set.hasMany(Print)
 Print.belongsTo(Set)
 
@@ -46,6 +50,7 @@ module.exports = {
   Format,
   Player,
   Print,
+  Server,
   Set,
   Stats,
   Status,

@@ -28,7 +28,8 @@ router.get('/:name', async (req, res, next) => {
 
     const statsCount = await Stats.count({
       where: {
-        format: {[Op.iLike]: format.name.replace(' ', '_').replace('-', '_') }
+        format: {[Op.iLike]: format.name.replace(' ', '_').replace('-', '_') },
+        serverId: '414551319031054346'
       }
     })
 

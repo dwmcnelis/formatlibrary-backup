@@ -335,7 +335,7 @@ const purgePfps = async () => {
                     return console.log('could not find player')
                 }
 
-                const stats = await Stats.count({ where: { playerId: player.id }})
+                const stats = await Stats.count({ where: { playerId: player.id, serverId: '414551319031054346' }})
                 if (!stats) {
                     try {
                         fs.unlinkSync(`./public/images/pfps/${file}`)

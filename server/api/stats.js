@@ -15,6 +15,7 @@ router.get('/leaders/:limit/:format', async (req, res, next) => {
           wins: {[Op.gte]: 5},
           losses: {[Op.gte]: 5},
         },
+        serverId: '414551319031054346',
         '$player.blacklisted$': false
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] },
@@ -37,7 +38,8 @@ router.get('/:playerId', async (req, res, next) => {
         [Op.or]: {
           wins: {[Op.gte]: 5},
           losses: {[Op.gte]: 5},
-        }
+        },
+        serverId: '414551319031054346'
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       order: [['elo', 'DESC']],

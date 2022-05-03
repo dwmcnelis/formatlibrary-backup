@@ -5,7 +5,6 @@ import { capitalize } from '../../functions/utility'
 //STATUS BOX
 const StatusBox = (props) => {
   const { banlist, status } = props
-  console.log('{banlist, status} = props', banlist, status)
   if (!banlist) return <p></p>
   const backgroundColor = status === 'forbidden' ? 'red' :
     status === 'limited' ? 'orange' :

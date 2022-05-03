@@ -283,8 +283,7 @@ const SingleCard = (props = {}) => {
                 {banlists.map((b) => {
                   const banlist = b[0]
                   const date = b[1]
-                  const status = statuses[banlist] ? statuses[banlist] : card.date < date ? 'unlimited' : null
-                  console.log('statuses[banlist]', statuses[banlist], 'banlist', banlist, 'status', status)
+                  const status = statuses[banlist] ? statuses[banlist] : card.tcgDate < date ? 'unlimited' : null
                   return <StatusBox key={banlist} banlist={banlist} status={status}/>
                 })}
               </div>
