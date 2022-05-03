@@ -11,10 +11,7 @@ router.get('/leaders/:limit/:format', async (req, res, next) => {
     const stats = await Stats.findAll({
       where: {
         format: {[Op.iLike]: req.params.format.replace(' ', '_').replace('-', '_')},
-        [Op.or]: {
-          wins: {[Op.gte]: 5},
-          losses: {[Op.gte]: 5},
-        },
+        games: {[Op.gte]: 3},
         serverId: '414551319031054346',
         '$player.blacklisted$': false
       },
@@ -35,10 +32,7 @@ router.get('/:playerId', async (req, res, next) => {
     const stats = await Stats.findAll({
       where: {
         playerId: req.params.playerId,
-        [Op.or]: {
-          wins: {[Op.gte]: 5},
-          losses: {[Op.gte]: 5},
-        },
+        games: {[Op.gte]: 3},
         serverId: '414551319031054346'
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] },
