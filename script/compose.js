@@ -287,7 +287,7 @@ const savePfps = async () => {
         const player = players[i]
         const count = await Stats.count({
             where: {
-                playerId: p.id,
+                playerId: player.id,
                 games: {[Op.gte]: 3 }
             }
         })
