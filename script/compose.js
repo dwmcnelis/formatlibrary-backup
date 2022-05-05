@@ -297,9 +297,13 @@ const savePfps = async () => {
         try {
             const canvas = Canvas.createCanvas(128, 128)
             const context = canvas.getContext('2d')
+            console.log('player.id', player.id)
+            console.log('player.avatar', player.avatar)
             const image = await Canvas.loadImage(`https://cdn.discordapp.com/avatars/${player.id}/${player.avatar}.png`) 
+            console.log('!!image', !!image)
             context.drawImage(image, 0, 0, 128, 128)
             const buffer = canvas.toBuffer('image/png')
+            console.log('!!buffer', !!buffer)
             fs.writeFileSync(`./public/images/pfps/${player.tag.slice(0, -5)}${player.tag.slice(-4)}.png`, buffer)
             console.log(`saved player pfp for ${player.tag}`)
         } catch (err) {
