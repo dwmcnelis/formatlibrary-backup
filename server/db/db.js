@@ -4,6 +4,7 @@ const pkg = require('../../package.json')
 const fs = require('fs')
 const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
 const onAWS = fs.existsSync('~/code/formatlibrary/certs/privkey.pem')
+console.log('!!onAWS', !!onAWS)
 const url = process.env.DATABASE_URL
   ? process.env.DATABASE_URL
   : `postgresql://danielmcnelis@localhost/${databaseName}`
