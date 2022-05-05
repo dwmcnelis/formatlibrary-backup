@@ -302,10 +302,8 @@ const savePfps = async () => {
             const buffer = canvas.toBuffer('image/png')
             fs.writeFileSync(`./public/images/pfps/${player.tag.slice(0, -5)}${player.tag.slice(-4)}.png`, buffer)
             console.log(`saved player pfp for ${player.tag}`)
-            player.avatar = p.avatar
-            await player.save()
         } catch (err) {
-            console.log(`cannot load pfp for ${p.name}`)
+            console.log(`cannot load pfp for ${player.name}`)
             continue
         }
     }
