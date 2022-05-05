@@ -3,6 +3,7 @@ node_modules
 public/bundle.js
 public/bundle.js.map
 public/decks
+public/images/pfps
 secrets.js
 .DS_Store
 npm-debug.log

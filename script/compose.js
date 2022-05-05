@@ -282,40 +282,31 @@ const composeThumbnails = async (event) => {
 }
 
 const savePfps = async () => {
-    for (let i = 0; i < playerJSON.length; i++) {
-        const p = playerJSON[i]
-        if (!p.avatar || !p.avatar.length) continue
-
-        const count = await Player.count({
+    const players = await Player.findAll({ avatar: {[Op.not]: null} })
+    for (let i = 0; i < players.length; i++) {
+        const player = players[i]
+        const count = await Stats.count({
             where: {
-                id: p.id,
-                avatar: p.avatar
+                playerId: p.id,
+                games: {[Op.gte]: 3 }
             }
         })
 
-        if (count && fs.existsSync(`./public/images/pfps/${p.tag.slice(0, -5)}${p.tag.slice(-4)}.png`)) {
-            continue
-        } else {
-            try {
-                const player = await Player.findOne({
-                    where: {
-                        id: p.id
-                    }
-                })
+        if (!count) continue
 
-                const canvas = Canvas.createCanvas(128, 128)
-                const context = canvas.getContext('2d')
-                const image = await Canvas.loadImage(`https://cdn.discordapp.com/avatars/${p.id}/${p.avatar}.png`) 
-                context.drawImage(image, 0, 0, 128, 128)
-                const buffer = canvas.toBuffer('image/png')
-                fs.writeFileSync(`./public/images/pfps/${player.tag.slice(0, -5)}${player.tag.slice(-4)}.png`, buffer)
-                console.log(`saved player pfp for ${player.tag}`)
-                player.avatar = p.avatar
-                await player.save()
-            } catch (err) {
-                console.log(`cannot load pfp for ${p.name}`)
-                continue
-            }
+        try {
+            const canvas = Canvas.createCanvas(128, 128)
+            const context = canvas.getContext('2d')
+            const image = await Canvas.loadImage(`https://cdn.discordapp.com/avatars/${p.id}/${p.avatar}.png`) 
+            context.drawImage(image, 0, 0, 128, 128)
+            const buffer = canvas.toBuffer('image/png')
+            fs.writeFileSync(`./public/images/pfps/${player.tag.slice(0, -5)}${player.tag.slice(-4)}.png`, buffer)
+            console.log(`saved player pfp for ${player.tag}`)
+            player.avatar = p.avatar
+            await player.save()
+        } catch (err) {
+            console.log(`cannot load pfp for ${p.name}`)
+            continue
         }
     }
 }
@@ -350,9 +341,9 @@ const purgePfps = async () => {
 }
 
 // purgePfps()
-// savePfps()
+savePfps()
 // drawBlankDeck()
-composeThumbnails('PP02')
-composePreview('PP02')
+// composeThumbnails('PP02')
+// composePreview('PP02')
 // composeCongratsPost('PP02')
 
