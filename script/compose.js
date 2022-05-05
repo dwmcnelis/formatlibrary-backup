@@ -282,7 +282,7 @@ const composeThumbnails = async (event) => {
 }
 
 const savePfps = async () => {
-    const players = await Player.findAll({ avatar: {[Op.not]: null} })
+    const players = await Player.findAll({ where: { avatar: {[Op.not]: null} } })
     for (let i = 0; i < players.length; i++) {
         const player = players[i]
         const count = await Stats.count({
