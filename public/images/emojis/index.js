@@ -23,6 +23,7 @@ import DDWL from './ddwl.png'
 import Drake from './drake.png'
 import Drident from './drident.png'
 import Galatea from './galatea.png'
+import GGX from './ggx.png'
 import Graff from './graff.png'
 import Jackalope from './jackalope.png'
 import Jinn from './jinn.png'
@@ -137,6 +138,7 @@ export {
     Drake,
     Drident,
     Galatea,
+    GGX,
     Graff,
     Jackalope,
     Jinn,
