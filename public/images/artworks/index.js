@@ -15,6 +15,7 @@ import DSF from './dsf.jpg'
 import ETele from './etele.jpg'
 import Falco from './falco.jpg'
 import Gala from './gala.jpg'
+import GGX from './ggx.jpg'
 import Graff from './graff.jpg'
 import Jackalope from './jackalope.jpg'
 import Jinn from './jinn.jpg'
@@ -105,6 +106,7 @@ export {
     ETele,
     Falco,
     Gala,
+    GGX,
     Graff,
     Jackalope,
     Jinn,
