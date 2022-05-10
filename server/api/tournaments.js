@@ -125,6 +125,7 @@ router.get('/:id', async (req, res, next) => {
         const konamiCode = e[0]
         try {
           const card = await Card.findOne({ where: { konamiCode }})
+          if (!card) continue
           topMainDeckCards.push([card.dataValues, e[1]])
         } catch (err) {
           console.log(err)
@@ -140,6 +141,7 @@ router.get('/:id', async (req, res, next) => {
       const konamiCode = e[0]
       try {
         const card = await Card.findOne({ where: { konamiCode }})
+        if (!card) continue
         topSideDeckCards.push([card.dataValues, e[1]])
       } catch (err) {
         console.log(err)

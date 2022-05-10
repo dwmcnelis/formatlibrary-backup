@@ -1937,12 +1937,83 @@ const fixFusions = async () => {
     return console.log(`fixed ${b} xyz/synchro/link monsters`)
 }
 
+const fixDuelTerminal = async () => {
+    let b = 0
+    let e = 0
+    const sets = await Set.findAll({ 
+        where: {
+            name: {[Op.substring]: 'Duel Terminal'}
+        }
+    })
+
+    for (let i = 0; i < sets.length; i++) {
+        const set = sets[i]
+        const dtPrints = await Print.findAll({ 
+            where: {
+                setId: set.id
+            },
+            include: Card
+        })
+
+        for (let j = 0; j < dtPrints.length; j++) {
+            try {
+                const dtP = dtPrints[j]
+                const card = dtP.card
+                const cardId = dtP.cardId
+                console.log(`checking prints of ${card.name} (${dtP.cardCode})`)
+                const cardPrints = await Print.findAll({
+                    where: {
+                        cardId: cardId
+                    },
+                    include: Set,
+                    order: [[Set, 'tcgDate', 'ASC']]
+                }) || []
+    
+                if (cardPrints.length < 2) {
+                    console.log('uhh only 1 print and its DT???')
+                    continue
+                }
+    
+                if (cardPrints[0].id === dtP.id) {
+                    const secondPrint = cardPrints[1]
+                    const tcgDate = secondPrint.set.tcgDate
+                    console.log(`changing the tcgDate of ${card.name} (1st print: ${dtP.cardCode}, 2nd print: ${secondPrint.cardCode}) from ${card.tcgDate} to ${tcgDate}`)
+                    card.tcgDate = tcgDate
+                    await card.save()
+                    b++
+                } else {
+                    console.log(`No Change: 1st print of ${card.name} == ${cardPrints[0].cardCode}`)
+                }
+            } catch (err) {
+                console.log(err)
+                e++
+            }
+        }
+    }
+
+    return console.log(`fixed dates for ${b} cards, encountered ${e} errors`)
+}
+
+fixDuelTerminal()
+// 152	Duel Terminal - Preview Wave 1	DTP1	2008-08-04	20	2022-03-08 23:31:02.605+00	2022-03-08 23:31:02.605+00
+// 153	Duel Terminal - Preview Wave 2	DTP1	2009-06-20	18	2022-03-08 23:31:02.605+00	2022-03-08 23:31:02.605+00
+// 154	Duel Terminal 1	DT01	2010-01-29	100	2022-03-08 23:31:02.606+00	2022-03-08 23:31:02.606+00
+// 155	Duel Terminal 2	DT02	2010-05-25	100	2022-03-08 23:31:02.606+00	2022-03-08 23:31:02.606+00
+// 156	Duel Terminal 3	DT03	2010-09-25	100	2022-03-08 23:31:02.607+00	2022-03-08 23:31:02.607+00
+// 157	Duel Terminal 4	DT04	2011-01-25	99	2022-03-08 23:31:02.608+00	2022-03-08 23:31:02.608+00
+// 158	Duel Terminal 5a	DT05	2011-05-29	50	2022-03-08 23:31:02.609+00	2022-03-08 23:31:02.609+00
+// 159	Duel Terminal 5b	DT05	2011-09-29	50	2022-03-08 23:31:02.609+00	2022-03-08 23:31:02.609+00
+// 160	Duel Terminal 6a	DT06	2012-02-03	50	2022-03-08 23:31:02.61+00	2022-03-08 23:31:02.61+00
+// 161	Duel Terminal 6b	DT06	2012-05-25	50	2022-03-08 23:31:02.611+00	2022-03-08 23:31:02.611+00
+// 162	Duel Terminal 7a	DT07	2012-09-28	51	2022-03-08 23:31:02.611+00	2022-03-08 23:31:02.611+00
+// 163	Duel Terminal 7b	DT07	2013-02-01	49	2022-03-08 23:31:02.612+00	2022-03-08 23:31:02.612+00
+
 // fixFusions()
 // updateCommunities()
 // countParticipants()
 // updateDeckTypes()
 // makeDeckTypes()
-createDecks('PatreonPlayOff2', 'Goat', 'GoatFormat.com', true)
+// createDecks('PatreonPlayOff2', 'Goat', 'GoatFormat.com', true)
 // download()
 // images()
 // print()
