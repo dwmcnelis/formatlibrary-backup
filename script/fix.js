@@ -1942,7 +1942,7 @@ const fixDuelTerminal = async () => {
     let e = 0
     const sets = await Set.findAll({ 
         where: {
-            name: {[Op.substring]: 'Duel Terminal'}
+            setName: {[Op.substring]: 'Duel Terminal'}
         }
     })
 
