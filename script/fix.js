@@ -1994,118 +1994,169 @@ const fixDuelTerminal = async () => {
     return console.log(`fixed dates for ${b} cards, encountered ${e} errors`)
 }
 
+const fixDP06andDP07 = async () => {
+    let b = 0
+    let e = 0
+    const sets = await Set.findAll({ 
+        where: {
+            id: {[Op.or]: ['199', '200']}
+        }
+    })
+
+    for (let i = 0; i < sets.length; i++) {
+        const set = sets[i]
+        const dpPrints = await Print.findAll({ 
+            where: {
+                setId: set.id
+            },
+            include: Card
+        })
+
+        for (let j = 0; j < dpPrints.length; j++) {
+            try {
+                const dpP = dpPrints[j]
+                const card = dpP.card
+                const cardId = dpP.cardId
+                console.log(`checking prints of ${card.name} (${dpP.cardCode})`)
+                const cardPrints = await Print.findAll({
+                    where: {
+                        cardId: cardId
+                    },
+                    include: Set,
+                    order: [[Set, 'tcgDate', 'ASC']]
+                }) || []
+    
+                if (cardPrints[0].id === dpP.id) {
+                    const tcgDate = '2008-02-01'
+                    console.log(`changing the tcgDate of ${card.name} (1st print: ${dpP.cardCode}) from ${card.tcgDate} to ${tcgDate}`)
+                    card.tcgDate = tcgDate
+                    await card.save()
+                    b++
+                } else {
+                    console.log(`No Change: 1st print of ${card.name} == ${cardPrints[0].cardCode}`)
+                }
+            } catch (err) {
+                console.log(err)
+                e++
+            }
+        }
+    }
+
+    return console.log(`fixed dates for ${b} cards, encountered ${e} errors`)
+}
+
 
 const fixCardText = async () => {
     let b = 0
     const darks = await Card.findAll({
         where: {
-            description: {[Op.substring]: {[Op.or]: [' Dark', 'Dark ']}}
+            description: {[Op.or]: [{[Op.substring]: ' Dark'}, {[Op.substring]: 'Dark '}]}
         }
     })
     
     for (let i = 0; i < darks.length; i++) {
         const card = darks[i]
         card.description = card.description.replaceAll('Dark ', 'DARK ').replaceAll(' Dark', ' DARK')
-        await card.save()
-        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        // await card.save()
+        console.log(`DARK: changed description of ${card.name} to ${card.description}`)
         b++
     }
 
     const lights = await Card.findAll({
         where: {
-            description: {[Op.substring]: {[Op.or]: [' Light', 'Light ']}}
+            description: {[Op.or]: [{[Op.substring]: ' Light'}, {[Op.substring]: 'Light '}]}
         }
     })
     
     for (let i = 0; i < lights.length; i++) {
         const card = lights[i]
         card.description = card.description.replaceAll('Light ', 'LIGHT ').replaceAll(' Light', ' LIGHT')
-        await card.save()
-        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        // await card.save()
+        console.log(`LIGHT: changed description of ${card.name} to ${card.description}`)
         b++
     }
 
     const earths = await Card.findAll({
         where: {
-            description: {[Op.substring]: {[Op.or]: [' Earth', 'Earth ']}}
+            description: {[Op.or]: [{[Op.substring]: ' Earth'}, {[Op.substring]: 'Earth '}]}
         }
     })
     
     for (let i = 0; i < earths.length; i++) {
         const card = earths[i]
         card.description = card.description.replaceAll('Earth ', 'EARTH ').replaceAll(' Earth', ' EARTH')
-        await card.save()
-        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        // await card.save()
+        console.log(`EARTH: changed description of ${card.name} to ${card.description}`)
         b++
     }
 
     const waters = await Card.findAll({
         where: {
-            description: {[Op.substring]: {[Op.or]: [' Water', 'Water ']}}
+            description: {[Op.or]: [{[Op.substring]: ' Water'}, {[Op.substring]: 'Water '}]}
         }
     })
     
     for (let i = 0; i < waters.length; i++) {
         const card = waters[i]
         card.description = card.description.replaceAll('Water ', 'WATER ').replaceAll(' Water', ' WATER')
-        await card.save()
-        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        // await card.save()
+        console.log(`WATER: changed description of ${card.name} to ${card.description}`)
         b++
     }
 
     const winds = await Card.findAll({
         where: {
-            description: {[Op.substring]: {[Op.or]: [' Wind', 'Wind ']}}
+            description: {[Op.or]: [{[Op.substring]: ' Wind'}, {[Op.substring]: 'Wind '}]}
         }
     })
     
     for (let i = 0; i < winds.length; i++) {
         const card = winds[i]
         card.description = card.description.replaceAll('Wind ', 'WIND ').replaceAll(' Wind', ' WIND')
-        await card.save()
-        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        // await card.save()
+        console.log(`WIND: changed description of ${card.name} to ${card.description}`)
         b++
     }
 
     const fires = await Card.findAll({
         where: {
-            description: {[Op.substring]: {[Op.or]: [' Fire', 'Fire ']}}
+            description: {[Op.or]: [{[Op.substring]: ' Fire'}, {[Op.substring]: 'Fire '}]}
         }
     })
     
     for (let i = 0; i < fires.length; i++) {
         const card = fires[i]
         card.description = card.description.replaceAll('Fire ', 'FIRE ').replaceAll(' Fire', ' FIRE')
-        await card.save()
-        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        // await card.save()
+        console.log(`FIRE: changed description of ${card.name} to ${card.description}`)
         b++
     }
 
     const atks = await Card.findAll({
         where: {
-            description: {[Op.substring]: {[Op.or]: [' Atk', 'Atk ']}}
+            description: {[Op.or]: [{[Op.substring]: ' Atk'}, {[Op.substring]: 'Atk '}]}
         }
     })
     
     for (let i = 0; i < atks.length; i++) {
         const card = atks[i]
         card.description = card.description.replaceAll('Atk ', 'ATK ').replaceAll(' Atk', ' ATK')
-        await card.save()
-        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        // await card.save()
+        console.log(`ATK: changed description of ${card.name} to ${card.description}`)
         b++
     }
 
     const defs = await Card.findAll({
         where: {
-            description: {[Op.substring]: {[Op.or]: [' Def', 'Def ']}}
+            description: {[Op.or]: [{[Op.substring]: ' Def'}, {[Op.substring]: 'Def '}]}
         }
     })
     
     for (let i = 0; i < defs.length; i++) {
         const card = defs[i]
         card.description = card.description.replaceAll('Def ', 'DEF ').replaceAll(' Def', ' DEF')
-        await card.save()
-        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        // await card.save()
+        console.log(`DEF: changed description of ${card.name} to ${card.description}`)
         b++
     }
 
@@ -2118,8 +2169,8 @@ const fixCardText = async () => {
     for (let i = 0; i < graveyards.length; i++) {
         const card = graveyards[i]
         card.description = card.description.replaceAll('Graveyard', 'GY')
-        await card.save()
-        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        // await card.save()
+        console.log(`GY: changed description of ${card.name} to ${card.description}`)
         b++
     }
 
@@ -2128,6 +2179,7 @@ const fixCardText = async () => {
 
 fixCardText()
 // fixDuelTerminal()
+fixDP06andDP07()
 // 152	Duel Terminal - Preview Wave 1	DTP1	2008-08-04	20	2022-03-08 23:31:02.605+00	2022-03-08 23:31:02.605+00
 // 153	Duel Terminal - Preview Wave 2	DTP1	2009-06-20	18	2022-03-08 23:31:02.605+00	2022-03-08 23:31:02.605+00
 // 154	Duel Terminal 1	DT01	2010-01-29	100	2022-03-08 23:31:02.606+00	2022-03-08 23:31:02.606+00
