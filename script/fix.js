@@ -1994,7 +1994,139 @@ const fixDuelTerminal = async () => {
     return console.log(`fixed dates for ${b} cards, encountered ${e} errors`)
 }
 
-fixDuelTerminal()
+
+const fixCardText = async () => {
+    let b = 0
+    const darks = await Card.findAll({
+        where: {
+            description: {[Op.substring]: {[Op.or]: [' Dark', 'Dark ']}}
+        }
+    })
+    
+    for (let i = 0; i < darks.length; i++) {
+        const card = darks[i]
+        card.description = card.description.replaceAll('Dark ', 'DARK ').replaceAll(' Dark', ' DARK')
+        await card.save()
+        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        b++
+    }
+
+    const lights = await Card.findAll({
+        where: {
+            description: {[Op.substring]: {[Op.or]: [' Light', 'Light ']}}
+        }
+    })
+    
+    for (let i = 0; i < lights.length; i++) {
+        const card = lights[i]
+        card.description = card.description.replaceAll('Light ', 'LIGHT ').replaceAll(' Light', ' LIGHT')
+        await card.save()
+        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        b++
+    }
+
+    const earths = await Card.findAll({
+        where: {
+            description: {[Op.substring]: {[Op.or]: [' Earth', 'Earth ']}}
+        }
+    })
+    
+    for (let i = 0; i < earths.length; i++) {
+        const card = earths[i]
+        card.description = card.description.replaceAll('Earth ', 'EARTH ').replaceAll(' Earth', ' EARTH')
+        await card.save()
+        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        b++
+    }
+
+    const waters = await Card.findAll({
+        where: {
+            description: {[Op.substring]: {[Op.or]: [' Water', 'Water ']}}
+        }
+    })
+    
+    for (let i = 0; i < waters.length; i++) {
+        const card = waters[i]
+        card.description = card.description.replaceAll('Water ', 'WATER ').replaceAll(' Water', ' WATER')
+        await card.save()
+        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        b++
+    }
+
+    const winds = await Card.findAll({
+        where: {
+            description: {[Op.substring]: {[Op.or]: [' Wind', 'Wind ']}}
+        }
+    })
+    
+    for (let i = 0; i < winds.length; i++) {
+        const card = winds[i]
+        card.description = card.description.replaceAll('Wind ', 'WIND ').replaceAll(' Wind', ' WIND')
+        await card.save()
+        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        b++
+    }
+
+    const fires = await Card.findAll({
+        where: {
+            description: {[Op.substring]: {[Op.or]: [' Fire', 'Fire ']}}
+        }
+    })
+    
+    for (let i = 0; i < fires.length; i++) {
+        const card = fires[i]
+        card.description = card.description.replaceAll('Fire ', 'FIRE ').replaceAll(' Fire', ' FIRE')
+        await card.save()
+        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        b++
+    }
+
+    const atks = await Card.findAll({
+        where: {
+            description: {[Op.substring]: {[Op.or]: [' Atk', 'Atk ']}}
+        }
+    })
+    
+    for (let i = 0; i < atks.length; i++) {
+        const card = atks[i]
+        card.description = card.description.replaceAll('Atk ', 'ATK ').replaceAll(' Atk', ' ATK')
+        await card.save()
+        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        b++
+    }
+
+    const defs = await Card.findAll({
+        where: {
+            description: {[Op.substring]: {[Op.or]: [' Def', 'Def ']}}
+        }
+    })
+    
+    for (let i = 0; i < defs.length; i++) {
+        const card = defs[i]
+        card.description = card.description.replaceAll('Def ', 'DEF ').replaceAll(' Def', ' DEF')
+        await card.save()
+        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        b++
+    }
+
+    const graveyards = await Card.findAll({
+        where: {
+            description: {[Op.substring]: 'Graveyard'}
+        }
+    })
+    
+    for (let i = 0; i < graveyards.length; i++) {
+        const card = graveyards[i]
+        card.description = card.description.replaceAll('Graveyard', 'GY')
+        await card.save()
+        console.log(`changed description of ${card.name} to ${card.desctription}`)
+        b++
+    }
+
+    return console.log(`fixed descriptions for ${b} cards`)
+}
+
+// fixDuelTerminal()
 // 152	Duel Terminal - Preview Wave 1	DTP1	2008-08-04	20	2022-03-08 23:31:02.605+00	2022-03-08 23:31:02.605+00
 // 153	Duel Terminal - Preview Wave 2	DTP1	2009-06-20	18	2022-03-08 23:31:02.605+00	2022-03-08 23:31:02.605+00
 // 154	Duel Terminal 1	DT01	2010-01-29	100	2022-03-08 23:31:02.606+00	2022-03-08 23:31:02.606+00

@@ -260,7 +260,10 @@ const SingleCard = (props = {}) => {
                     </tr>
                     <tr style={{alignContent: 'left', fontSize: '18px'}}>
                       <td colSpan="5" className="single-card-description-box">
-                        {card.description}
+                        {!card.pendulum ? 
+                          card.description :
+                          `${card.description.slice(20, card.description.indexOf('----'))}\n\n${card.description.slice(card.description.indexOf('[ Monster Effect ]') + 19)}`
+                        }
                       </td>
                     </tr>
                     <tr className="blank-row">

@@ -180,7 +180,7 @@ const CardRow = (props) => {
                         className="cardrow-description"
                         style={{fontSize: '16px', borderTop: '2px solid #CFDCE5'}}
                       >
-                        {card.description.slice(21, card.description.indexOf('----'))}
+                        {card.description.slice(20, card.description.indexOf('----'))}
                       </td>
                     </tr>
                   ) : (
@@ -193,7 +193,7 @@ const CardRow = (props) => {
                         className="cardrow-description"
                         style={{padding: '10px 20px 20px 10px', fontSize: '16px', borderTop: '2px solid #CFDCE5'}}
                       >
-                        {card.description.slice(card.description.indexOf('[ Monster Effect ]') + 20)}
+                        {card.description.slice(card.description.indexOf('[ Monster Effect ]') + 19)}
                       </td>
                     </tr>
                   ) : (
