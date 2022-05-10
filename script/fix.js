@@ -2126,6 +2126,7 @@ const fixCardText = async () => {
     return console.log(`fixed descriptions for ${b} cards`)
 }
 
+fixCardText()
 // fixDuelTerminal()
 // 152	Duel Terminal - Preview Wave 1	DTP1	2008-08-04	20	2022-03-08 23:31:02.605+00	2022-03-08 23:31:02.605+00
 // 153	Duel Terminal - Preview Wave 2	DTP1	2009-06-20	18	2022-03-08 23:31:02.605+00	2022-03-08 23:31:02.605+00
