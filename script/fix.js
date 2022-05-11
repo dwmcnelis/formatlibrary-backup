@@ -2046,153 +2046,38 @@ const fixDP06andDP07 = async () => {
 }
 
 
-const fixCardText = async () => {
+const fixCardText = async (query, replacement) => {
     let b = 0
-    const darks = await Card.findAll({
+    const cards = await Card.findAll({
         where: {
-            description: {[Op.or]: [{[Op.substring]: ' Dark'}, {[Op.substring]: 'Dark '}]}
+            description: {[Op.substring]: query }
         }
     })
     
-    for (let i = 0; i < darks.length; i++) {
-        const card = darks[i]
-        card.description = card.description.replaceAll('Dark ', 'DARK ').replaceAll(' Dark', ' DARK')
-        // await card.save()
-        console.log(`DARK: changed description of ${card.name} to ${card.description}`)
-        b++
-    }
-
-    const lights = await Card.findAll({
-        where: {
-            description: {[Op.or]: [{[Op.substring]: ' Light'}, {[Op.substring]: 'Light '}]}
-        }
-    })
-    
-    for (let i = 0; i < lights.length; i++) {
-        const card = lights[i]
-        card.description = card.description.replaceAll('Light ', 'LIGHT ').replaceAll(' Light', ' LIGHT')
-        // await card.save()
-        console.log(`LIGHT: changed description of ${card.name} to ${card.description}`)
-        b++
-    }
-
-    const earths = await Card.findAll({
-        where: {
-            description: {[Op.or]: [{[Op.substring]: ' Earth'}, {[Op.substring]: 'Earth '}]}
-        }
-    })
-    
-    for (let i = 0; i < earths.length; i++) {
-        const card = earths[i]
-        card.description = card.description.replaceAll('Earth ', 'EARTH ').replaceAll(' Earth', ' EARTH')
-        // await card.save()
-        console.log(`EARTH: changed description of ${card.name} to ${card.description}`)
-        b++
-    }
-
-    const waters = await Card.findAll({
-        where: {
-            description: {[Op.or]: [{[Op.substring]: ' Water'}, {[Op.substring]: 'Water '}]}
-        }
-    })
-    
-    for (let i = 0; i < waters.length; i++) {
-        const card = waters[i]
-        card.description = card.description.replaceAll('Water ', 'WATER ').replaceAll(' Water', ' WATER')
-        // await card.save()
-        console.log(`WATER: changed description of ${card.name} to ${card.description}`)
-        b++
-    }
-
-    const winds = await Card.findAll({
-        where: {
-            description: {[Op.or]: [{[Op.substring]: ' Wind'}, {[Op.substring]: 'Wind '}]}
-        }
-    })
-    
-    for (let i = 0; i < winds.length; i++) {
-        const card = winds[i]
-        card.description = card.description.replaceAll('Wind ', 'WIND ').replaceAll(' Wind', ' WIND')
-        // await card.save()
-        console.log(`WIND: changed description of ${card.name} to ${card.description}`)
-        b++
-    }
-
-    const fires = await Card.findAll({
-        where: {
-            description: {[Op.or]: [{[Op.substring]: ' Fire'}, {[Op.substring]: 'Fire '}]}
-        }
-    })
-    
-    for (let i = 0; i < fires.length; i++) {
-        const card = fires[i]
-        card.description = card.description.replaceAll('Fire ', 'FIRE ').replaceAll(' Fire', ' FIRE')
-        // await card.save()
-        console.log(`FIRE: changed description of ${card.name} to ${card.description}`)
-        b++
-    }
-
-    const atks = await Card.findAll({
-        where: {
-            description: {[Op.or]: [{[Op.substring]: ' Atk'}, {[Op.substring]: 'Atk '}]}
-        }
-    })
-    
-    for (let i = 0; i < atks.length; i++) {
-        const card = atks[i]
-        card.description = card.description.replaceAll('Atk ', 'ATK ').replaceAll(' Atk', ' ATK')
-        // await card.save()
-        console.log(`ATK: changed description of ${card.name} to ${card.description}`)
-        b++
-    }
-
-    const defs = await Card.findAll({
-        where: {
-            description: {[Op.or]: [{[Op.substring]: ' Def'}, {[Op.substring]: 'Def '}]}
-        }
-    })
-    
-    for (let i = 0; i < defs.length; i++) {
-        const card = defs[i]
-        card.description = card.description.replaceAll('Def ', 'DEF ').replaceAll(' Def', ' DEF')
-        // await card.save()
-        console.log(`DEF: changed description of ${card.name} to ${card.description}`)
-        b++
-    }
-
-    const graveyards = await Card.findAll({
-        where: {
-            description: {[Op.substring]: 'Graveyard'}
-        }
-    })
-    
-    for (let i = 0; i < graveyards.length; i++) {
-        const card = graveyards[i]
-        card.description = card.description.replaceAll('Graveyard', 'GY')
-        // await card.save()
-        console.log(`GY: changed description of ${card.name} to ${card.description}`)
+    for (let i = 0; i < cards.length; i++) {
+        const card = cards[i]
+        card.description = card.description.replaceAll(query, replacement)
+        await card.save()
+        console.log(`Changed description of ${card.name} replacing ${query} with ${replacement}`)
         b++
     }
 
     return console.log(`fixed descriptions for ${b} cards`)
 }
 
-fixCardText()
-// fixDuelTerminal()
-fixDP06andDP07()
-// 152	Duel Terminal - Preview Wave 1	DTP1	2008-08-04	20	2022-03-08 23:31:02.605+00	2022-03-08 23:31:02.605+00
-// 153	Duel Terminal - Preview Wave 2	DTP1	2009-06-20	18	2022-03-08 23:31:02.605+00	2022-03-08 23:31:02.605+00
-// 154	Duel Terminal 1	DT01	2010-01-29	100	2022-03-08 23:31:02.606+00	2022-03-08 23:31:02.606+00
-// 155	Duel Terminal 2	DT02	2010-05-25	100	2022-03-08 23:31:02.606+00	2022-03-08 23:31:02.606+00
-// 156	Duel Terminal 3	DT03	2010-09-25	100	2022-03-08 23:31:02.607+00	2022-03-08 23:31:02.607+00
-// 157	Duel Terminal 4	DT04	2011-01-25	99	2022-03-08 23:31:02.608+00	2022-03-08 23:31:02.608+00
-// 158	Duel Terminal 5a	DT05	2011-05-29	50	2022-03-08 23:31:02.609+00	2022-03-08 23:31:02.609+00
-// 159	Duel Terminal 5b	DT05	2011-09-29	50	2022-03-08 23:31:02.609+00	2022-03-08 23:31:02.609+00
-// 160	Duel Terminal 6a	DT06	2012-02-03	50	2022-03-08 23:31:02.61+00	2022-03-08 23:31:02.61+00
-// 161	Duel Terminal 6b	DT06	2012-05-25	50	2022-03-08 23:31:02.611+00	2022-03-08 23:31:02.611+00
-// 162	Duel Terminal 7a	DT07	2012-09-28	51	2022-03-08 23:31:02.611+00	2022-03-08 23:31:02.611+00
-// 163	Duel Terminal 7b	DT07	2013-02-01	49	2022-03-08 23:31:02.612+00	2022-03-08 23:31:02.612+00
+fixCardText('Dark monster', 'DARK monster')
+fixCardText('Light monster', 'LIGHT monster')
+fixCardText('Earth monster', 'EARTH monster')
+fixCardText('Water monster', 'WATER monster')
+fixCardText('Wind monster', 'WIND monster')
+fixCardText('Fire monster', 'FIRE monster')
+fixCardText(' atk ', ' ATK ')
+fixCardText(' def ', ' DEF ')
+fixCardText('a A-counter', 'an A-counter')
+fixCardText('(This card is always treated as an "Archfiend" card.) ', '(This card is always treated as an "Archfiend" card.)\n')
 
+// fixDuelTerminal()
+// fixDP06andDP07()
 // fixFusions()
 // updateCommunities()
 // countParticipants()
