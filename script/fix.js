@@ -2074,7 +2074,7 @@ fixCardText('Fire monster', 'FIRE monster')
 fixCardText(' atk ', ' ATK ')
 fixCardText(' def ', ' DEF ')
 fixCardText('a A-counter', 'an A-counter')
-fixCardText('(This card is always treated as an "Archfiend" card.) ', '(This card is always treated as an "Archfiend" card.)\n')
+fixCardText('(This card is always treated as an "Archfiend" card.)', '(This card is always treated as an "Archfiend" card.)\n')
 
 // fixDuelTerminal()
 // fixDP06andDP07()
