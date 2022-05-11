@@ -2066,6 +2066,7 @@ const fixCardText = async (query, replacement) => {
 }
 
 const fixNormals = async () => {
+    let b = 0
     const cards = await Card.findAll({
         where: {
             [Op.and]: [
