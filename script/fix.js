@@ -2050,13 +2050,13 @@ const fixCardText = async () => {
     let b = 0
     const cards = await Card.findAll({
         where: {
-            description: {[Op.substring]: '. ●' }
+            description: {[Op.substring]: '; ●' }
         }
     })
     
     for (let i = 0; i < cards.length; i++) {
         const card = cards[i]
-        card.description = card.description.replaceAll('. ●', '.\n ●')
+        card.description = card.description.replaceAll('; ●', ';\n ●')
         await card.save()
         console.log(`Changed description of ${card.name} replacing ${'. ●'} with ${'.\n ●'}`)
         b++
