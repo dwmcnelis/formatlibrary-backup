@@ -207,7 +207,15 @@ const SingleCard = (props = {}) => {
                       <td colSpan="5" className="single-card-description-box">
                         {!card.pendulum ? 
                           card.description :
-                          `${card.description.slice(20, card.description.indexOf('----'))}\n\n${card.description.slice(card.description.indexOf('[ Monster Effect ]') + 19)}`
+                          `${
+                            card.description.includes('[ Pendulum Effect ]') ?
+                            card.description.slice(20, card.description.indexOf('----')) :
+                            ''
+                          }\n\n${
+                            card.description.includes('[ Monster Effect ]') ? 
+                            card.description.slice(card.description.indexOf('[ Monster Effect ]') + 19) :
+                            card.description.slice(card.description.indexOf('[ Flavor Text ]') + 16)
+                          }`
                         }
                       </td>
                     </tr>

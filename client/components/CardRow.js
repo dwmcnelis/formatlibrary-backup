@@ -12,6 +12,7 @@ import { B_BL, B_L, B, BL_B, BR_B_BL, BR_BL, L_B_R, L, R_B, R_BL_L, R_BL, R_BR_B
   R_L, T_B_BL_L, T_B, T_BL, T_BR_B, T_BR_BL, T_L, T_R_B_L, T_R_B, T_R_BR_B, T_R_L, 
   T_R, T_TR_BR, T, TL } from '../../public/images/arrows'
 
+
 const symbols = {
   Aqua, Beast, BeastWarrior, Continuous, Counter, Cyberse, DARK, Dinosaur, 
   DIVINE, DivineBeast, Dragon, EARTH, Equip, Fairy, Field, Fiend, FIRE, Fish, 
@@ -180,7 +181,11 @@ const CardRow = (props) => {
                         className="cardrow-description"
                         style={{fontSize: '16px', borderTop: '2px solid #CFDCE5'}}
                       >
-                        {card.description.slice(20, card.description.indexOf('----'))}
+                        {
+                          card.description.includes('[ Pendulum Effect ]') ? 
+                          card.description.slice(20, card.description.indexOf('----')) :
+                          ''
+                        }
                       </td>
                     </tr>
                   ) : (
@@ -193,7 +198,11 @@ const CardRow = (props) => {
                         className="cardrow-description"
                         style={{padding: '10px 20px 20px 10px', fontSize: '16px', borderTop: '2px solid #CFDCE5'}}
                       >
-                        {card.description.slice(card.description.indexOf('[ Monster Effect ]') + 19)}
+                        {
+                          card.description.includes('[ Monster Effect ]') ? 
+                          card.description.slice(card.description.indexOf('[ Monster Effect ]') + 19) :
+                          card.description.slice(card.description.indexOf('[ Flavor Text ]') + 16)
+                        }
                       </td>
                     </tr>
                   ) : (
