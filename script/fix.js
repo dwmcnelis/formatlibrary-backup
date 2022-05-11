@@ -2046,19 +2046,19 @@ const fixDP06andDP07 = async () => {
 }
 
 
-const fixCardText = async (query, replacement) => {
+const fixCardText = async () => {
     let b = 0
     const cards = await Card.findAll({
         where: {
-            description: {[Op.substring]: query }
+            description: {[Op.substring]: '. ●' }
         }
     })
     
     for (let i = 0; i < cards.length; i++) {
         const card = cards[i]
-        card.description = card.description.replaceAll(query, replacement)
+        card.description = card.description.replaceAll('. ●', '.\n ●')
         await card.save()
-        console.log(`Changed description of ${card.name} replacing ${query} with ${replacement}`)
+        console.log(`Changed description of ${card.name} replacing ${'. ●'} with ${'.\n ●'}`)
         b++
     }
 
@@ -2093,7 +2093,8 @@ const fixNormals = async () => {
     return console.log(`fixed ${b} non-effect monsters`)
 }
 
-fixNormals()
+fixCardText()
+// fixNormals()
 // fixCardText('Dark monster', 'DARK monster')
 // fixCardText('Light monster', 'LIGHT monster')
 // fixCardText('Earth monster', 'EARTH monster')
