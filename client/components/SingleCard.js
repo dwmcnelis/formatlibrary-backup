@@ -217,7 +217,7 @@ const SingleCard = (props = {}) => {
                             <i>{card.description.slice(card.description.indexOf('[ Flavor Text ]') + 16)}</i> :
                             card.description
                           }` :
-                          card.normal ? <i>${card.description}</i> :
+                          card.normal ? <i>{card.description}</i> :
                           card.description
                         }
                       </td>
