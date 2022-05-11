@@ -202,7 +202,9 @@ const CardRow = (props) => {
                         {
                           card.description.includes('[ Monster Effect ]') ? 
                           card.description.slice(card.description.indexOf('[ Monster Effect ]') + 19) :
-                          card.description.slice(card.description.indexOf('[ Flavor Text ]') + 16)
+                          card.description.includes('[ Flavor Text ]') ?
+                          card.description.slice(card.description.indexOf('[ Flavor Text ]') + 16) :
+                          card.description
                         }
                       </td>
                     </tr>
