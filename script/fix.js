@@ -2065,16 +2065,39 @@ const fixCardText = async (query, replacement) => {
     return console.log(`fixed descriptions for ${b} cards`)
 }
 
-fixCardText('Dark monster', 'DARK monster')
-fixCardText('Light monster', 'LIGHT monster')
-fixCardText('Earth monster', 'EARTH monster')
-fixCardText('Water monster', 'WATER monster')
-fixCardText('Wind monster', 'WIND monster')
-fixCardText('Fire monster', 'FIRE monster')
-fixCardText(' atk ', ' ATK ')
-fixCardText(' def ', ' DEF ')
-fixCardText('a A-counter', 'an A-counter')
-fixCardText('(This card is always treated as an "Archfiend" card.)', '(This card is always treated as an "Archfiend" card.)\n')
+const fixXyzs = async () => {
+    const cards = await Card.findAll({
+        where: {
+            xyz: true
+        }
+    })
+
+    for (let i = 0; i < cards.length; i++) {
+        const card = cards[i]
+        card.description = card.description.replace('Level 8 monsters ', 'Level 8 monsters\n')
+            .replace('Level 7 monsters ', 'Level 7 monsters\n')
+            .replace('Level 6 monsters ', 'Level 6 monsters\n')
+            .replace('Level 5 monsters ', 'Level 5 monsters\n')
+            .replace('Level 4 monsters ', 'Level 4 monsters\n')
+            .replace('Level 3 monsters ', 'Level 3 monsters\n')
+            .replace('Level 2 monsters ', 'Level 2 monsters\n')
+            .replace('Level 1 monsters ', 'Level 1 monsters\n')
+
+        await card.save()
+    }
+}
+
+fixXyzs()
+// fixCardText('Dark monster', 'DARK monster')
+// fixCardText('Light monster', 'LIGHT monster')
+// fixCardText('Earth monster', 'EARTH monster')
+// fixCardText('Water monster', 'WATER monster')
+// fixCardText('Wind monster', 'WIND monster')
+// fixCardText('Fire monster', 'FIRE monster')
+// fixCardText(' atk ', ' ATK ')
+// fixCardText(' def ', ' DEF ')
+// fixCardText('a A-counter', 'an A-counter')
+// fixCardText('(This card is always treated as an "Archfiend" card.)', '(This card is always treated as an "Archfiend" card.)\n')
 
 
 // fixDuelTerminal()
