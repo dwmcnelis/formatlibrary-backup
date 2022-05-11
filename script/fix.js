@@ -2065,29 +2065,34 @@ const fixCardText = async (query, replacement) => {
     return console.log(`fixed descriptions for ${b} cards`)
 }
 
-const fixXyzs = async () => {
+const fixNormals = async () => {
     const cards = await Card.findAll({
         where: {
-            xyz: true
+            [Op.and]: [
+                {normal: true},
+                {[Op.or]: [
+                    {fusion: true},
+                    {ritual: true},
+                    {synchro: true},
+                    {xyz: true},
+                    {link: true}
+                ]}
+            ]
         }
     })
 
     for (let i = 0; i < cards.length; i++) {
         const card = cards[i]
-        card.description = card.description.replace('Level 8 monsters ', 'Level 8 monsters\n')
-            .replace('Level 7 monsters ', 'Level 7 monsters\n')
-            .replace('Level 6 monsters ', 'Level 6 monsters\n')
-            .replace('Level 5 monsters ', 'Level 5 monsters\n')
-            .replace('Level 4 monsters ', 'Level 4 monsters\n')
-            .replace('Level 3 monsters ', 'Level 3 monsters\n')
-            .replace('Level 2 monsters ', 'Level 2 monsters\n')
-            .replace('Level 1 monsters ', 'Level 1 monsters\n')
-
+        card.normal = false
         await card.save()
+        console.log(`${card.name} is no longer normal`)
+        b++
     }
+
+    return console.log(`fixed ${b} non-effect monsters`)
 }
 
-fixXyzs()
+fixNormals()
 // fixCardText('Dark monster', 'DARK monster')
 // fixCardText('Light monster', 'LIGHT monster')
 // fixCardText('Earth monster', 'EARTH monster')
