@@ -56,14 +56,15 @@ const CardRow = (props) => {
   const symbol2 = card.link ? arrows[card.arrows] :
     card.xyz ? Rank :
     category === 'Monster' ? Star :
-    symbols[card.icon.replace('-', '')]
+    card.icon ? symbols[card.icon.replace('-', '')] :
+    ''
 
   const line2 = card.link ? `Link ${rating}` :
   card.xyz ? `Rank ${level}` :
   category === 'Monster' ? `Level ${level}` :
   card.icon
 
-  const symbol3 = category === 'Monster' ? symbols[card.type.replace(/[\s-]/g, '')] : null
+  const symbol3 = category === 'Monster' && card.type ? symbols[card.type.replace(/[\s-]/g, '')] : null
   const evenOrOdd = props.index % 2 ? 'even' : 'odd'
   const filePath = `/images/cards/${card.ypdId}.jpg`
   // const history = useHistory()

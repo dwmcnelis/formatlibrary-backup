@@ -209,9 +209,9 @@ const SingleCard = (props = {}) => {
                           card.description :
                           `${
                             card.description.includes('[ Pendulum Effect ]') ?
-                            card.description.slice(20, card.description.indexOf('----')) :
+                            card.description.slice(20, card.description.indexOf('----')) + '\n\n' :
                             ''
-                          }\n\n${
+                          }${
                             card.description.includes('[ Monster Effect ]') ? 
                             card.description.slice(card.description.indexOf('[ Monster Effect ]') + 19) :
                             card.description.slice(card.description.indexOf('[ Flavor Text ]') + 16)
