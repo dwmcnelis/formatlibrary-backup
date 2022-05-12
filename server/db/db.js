@@ -10,7 +10,7 @@ const url = process.env.DATABASE_URL
 
 let db 
 
-if (!onAWS) {
+if (onAWS) {
   db = new Sequelize(
     'formatlibrary',
     'ubuntu',
