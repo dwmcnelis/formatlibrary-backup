@@ -43,10 +43,10 @@ const SingleDeck = (props) => {
       deck.community === 'EdisonFormat.com' ? EF :
       ''
 
-  const categoryImage = deck.deckCategory === 'aggro' ? emojis.Helmet :
-    deck.deckCategory === 'combo' ? emojis.Controller :
-    deck.deckCategory === 'control' ? emojis.Orb :
-    deck.deckCategory === 'lockdown' ? emojis.Lock :
+  const categoryImage = deck.deckCategory.toLowerCase() === 'aggro' ? emojis.Helmet :
+    deck.deckCategory.toLowerCase() === 'combo' ? emojis.Controller :
+    deck.deckCategory.toLowerCase() === 'control' ? emojis.Orb :
+    deck.deckCategory.toLowerCase() === 'lockdown' ? emojis.Lock :
     emojis.Thinking
 
   const placementImage = deck.placement === 1 ? emojis.First :
