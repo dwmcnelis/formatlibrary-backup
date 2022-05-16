@@ -45,26 +45,26 @@ Results can be displayed as either:<br/>
 
 # Single Card Details
 
-Single Card webpages are seemlessly linked throughout the website from:<br>
+Single Card pages are seemlessly linked throughout the website from:<br>
 • The Card Database<br>
 • Single Decks<br>
 • Ban Lists
 
 ![Single-Card-Details](/public/screenshots/Single-Card-Details.jpg)
 
-Single Card webpages display:<br>
+Single Card pages display:<br>
 • A full-size, high quality rendering of the card.<br>
 • All information displayed on the actual card.<br>
 • A status summary bar that links to Ban Lists.<br>
-• A list of prints with links to a 3rd party retailer.<br>
+• A list of prints with links to a 3rd party retailer.
 
 # Deck Database
 
 Format Libary sports a unique and highly informative Deck Database.<br/>
 The following search options are available:<br/>
 • **String matches** in Deck Type, Builder's Name, or Event Name<br/>
-• **Format of the Event** (All / Goat / Edison / HAT / etc.)<br/>
-• **Deck Categories** (All Decks / Aggro / Combo / Control / Lockdown)<br/>
+• **Event Format** (All / Goat / Edison / HAT / etc.)<br/>
+• **Deck Categories** (All / Aggro / Combo / Control / Lockdown)<br/>
 
 Results can be displayed as either:<br/>
 (1) A Table with important facts, player profile pictures, and community logos.
@@ -76,12 +76,25 @@ Results can be displayed as either:<br/>
 ![Deck-Database-Results-Gallery](/public/screenshots/Deck-Database-Results-Gallery.jpg)
 
 • Results can be sorted (Builder / Event / Format / Placement / Upload Date / etc.).<br/>
-• Results are paginated and the quantity displayed can be changed.
+• Results are paginated and the quantity displayed can be changed.<br/>
 • Results link to Single Deck details.
 
 # Single Deck Details
 
+Single Deck pages are seemlessly linked throughout the website from:<br>
+• The Deck Database<br>
+• Single Events<br>
+• Blogposts
+
 ![Single-Deck-Details](/public/screenshots/Single-Deck-Details.jpg)
+
+Single Deck pages display:<br>
+• Key information: Builder, Deck Category, Deck Name, Event, Upload Date.<br>
+• All the cards found in the deck, as individual clickable links.<br>
+• A link to the Builder's Player Profile.<br>
+• A link to the Event's Event Summary page.<br>
+• Indicators of the deck's impact: Likes / Downloads / Views.<br>
+• A button to download the deck as a .YDK file (used on online Yu-Gi-Oh! platforms).
 
 # Event Database
 
