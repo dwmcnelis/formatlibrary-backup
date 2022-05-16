@@ -11,59 +11,59 @@ This app was built with React and Material-UI (front-end framework), Express and
 Main website: https://formatlibrary.com<br/>
 Discord community server: https://discord.com/invite/formatlibrary
 
-![Home](/public/screenshots/Home.png)
+![Home](/public/screenshots/Home.jpg)
 
 # Card Database
 
-![Card-Database-Search](/public/screenshots/Home.png)
+![Card-Database-Search](/public/screenshots/Home.jpg)
 
-![Card-Database-Results-Table](/public/screenshots/Card-Database-Results-Table.png)
+![Card-Database-Results-Table](/public/screenshots/Card-Database-Results-Table.jpg)
 
-![Card-Database-Results-Gallery](/public/screenshots/Card-Database-Results-Gallery.png)
+![Card-Database-Results-Gallery](/public/screenshots/Card-Database-Results-Gallery.jpg)
 
 # Single Card Details
 
-![Single-Card-Details](/public/screenshots/Single-Card-Details.png)
+![Single-Card-Details](/public/screenshots/Single-Card-Details.jpg)
 
 # Deck Database
 
-![Deck-Database-Results-Table](/public/screenshots/Deck-Database-Results-Table.png)
+![Deck-Database-Results-Table](/public/screenshots/Deck-Database-Results-Table.jpg)
 
-![Deck-Database-Results-Gallery](/public/screenshots/Deck-Database-Results-Gallery.png)
+![Deck-Database-Results-Gallery](/public/screenshots/Deck-Database-Results-Gallery.jpg)
 
 # Single Deck Details
 
-![Single-Deck-Details](/public/screenshots/Single-Deck-Details.png)
+![Single-Deck-Details](/public/screenshots/Single-Deck-Details.jpg)
 
 # Event Database
 
-![Event-Database-Results-Table](/public/screenshots/Event-Database-Results-Table.png)
+![Event-Database-Results-Table](/public/screenshots/Event-Database-Results-Table.jpg)
 
 # Single Event Details
 
-![Single-Event-Details-1](/public/screenshots/Single-Event-Details-1.png)
+![Single-Event-Details-1](/public/screenshots/Single-Event-Details-1.jpg)
 
-![Single-Event-Details-2](/public/screenshots/Single-Event-Details-2.png)
+![Single-Event-Details-2](/public/screenshots/Single-Event-Details-2.jpg)
 
-![Single-Event-Details-3](/public/screenshots/Single-Event-Details-3.png)
+![Single-Event-Details-3](/public/screenshots/Single-Event-Details-3.jpg)
 
 # Format Menu
 
-![Format-Menu](/public/screenshots/Format-Menu.png)
+![Format-Menu](/public/screenshots/Format-Menu.jpg)
 
 # Format Overviews
 
-![Format-Overview-1](/public/screenshots/Format-Overview-1.png)
+![Format-Overview-1](/public/screenshots/Format-Overview-1.jpg)
 
-![Format-Overview-2](/public/screenshots/Format-Overview-2.png)
+![Format-Overview-2](/public/screenshots/Format-Overview-2.jpg)
 # Ban Lists
 
-![Ban-List](/public/screenshots/Ban-List.png)
+![Ban-List](/public/screenshots/Ban-List.jpg)
 
 # Leaderboards
 
-![Leaderboard](/public/screenshots/Leaderboard.png)
+![Leaderboard](/public/screenshots/Leaderboard.jpg)
 
 # Player Profiles
 
-![Player-Profile](/public/screenshots/Player-Profile.png)
+![Player-Profile](/public/screenshots/Player-Profile.jpg)
