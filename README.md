@@ -12,3 +12,58 @@ Main website: https://formatlibrary.com<br/>
 Discord community server: https://discord.com/invite/formatlibrary
 
 ![Home](/public/screenshots/Home.png)
+
+# Card Database
+
+![Card-Database-Search](/public/screenshots/Home.png)
+
+![Card-Database-Results-Table](/public/screenshots/Card-Database-Results-Table.png)
+
+![Card-Database-Results-Gallery](/public/screenshots/Card-Database-Results-Gallery.png)
+
+# Single Card Details
+
+![Single-Card-Details](/public/screenshots/Single-Card-Details.png)
+
+# Deck Database
+
+![Deck-Database-Results-Table](/public/screenshots/Deck-Database-Results-Table.png)
+
+![Deck-Database-Results-Gallery](/public/screenshots/Deck-Database-Results-Gallery.png)
+
+# Single Deck Details
+
+![Single-Deck-Details](/public/screenshots/Single-Deck-Details.png)
+
+# Event Database
+
+![Event-Database-Results-Table](/public/screenshots/Event-Database-Results-Table.png)
+
+# Single Event Details
+
+![Single-Event-Details-1](/public/screenshots/Single-Event-Details-1.png)
+
+![Single-Event-Details-2](/public/screenshots/Single-Event-Details-2.png)
+
+![Single-Event-Details-3](/public/screenshots/Single-Event-Details-3.png)
+
+# Format Menu
+
+![Format-Menu](/public/screenshots/Format-Menu.png)
+
+# Format Overviews
+
+![Format-Overview-1](/public/screenshots/Format-Overview-1.png)
+
+![Format-Overview-2](/public/screenshots/Format-Overview-2.png)
+# Ban Lists
+
+![Ban-List](/public/screenshots/Ban-List.png)
+
+# Leaderboards
+
+![Leaderboard](/public/screenshots/Leaderboard.png)
+
+# Player Profiles
+
+![Player-Profile](/public/screenshots/Player-Profile.png)
