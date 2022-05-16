@@ -37,7 +37,7 @@ Discord community server: https://discord.com/invite/formatlibrary
 
 # Event Database
 
-![Event-Database-Table](/public/screenshots/Event-Database-Results-Table.jpg)
+![Event-Database-Table](/public/screenshots/Event-Database-Table.jpg)
 
 # Single Event Details
 
