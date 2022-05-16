@@ -100,13 +100,13 @@ Single Deck pages display:<br>
 
 ![Event-Database-Table](/public/screenshots/Event-Database-Table.jpg)
 
-# Single Event Details
+# Event Summaries
 
-![Single-Event-Details-1](/public/screenshots/Single-Event-Details-1.jpg)
+![Event-Summary-1](/public/screenshots/Event-Summary-1.jpg)
 
-![Single-Event-Details-2](/public/screenshots/Single-Event-Details-2.jpg)
+![Event-Summary-2](/public/screenshots/Event-Summary-2.jpg)
 
-![Single-Event-Details-3](/public/screenshots/Single-Event-Details-3.jpg)
+![Event-Summary-3](/public/screenshots/Event-Summary-3.jpg)
 
 # Format Menu
 
