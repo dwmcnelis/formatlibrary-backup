@@ -15,9 +15,28 @@ Discord community server: https://discord.com/invite/formatlibrary
 
 # Card Database
 
+Format Libary sports an up to date, user-friendly card database. The following search options are available, replete with icons for visual aide:
+• String matches in Card Name or Card Text<br/>
+• Historic Availability by Format (eras)<br/>
+• All Cards / Monsters / Spells / Traps<br/>
+• Spell / Trap Categories (Continuous / Counter / Equip / Field / Normal / Quick-Play / Ritual)<br/>
+• Monster Attributes (DARK / DIVINE / EARTH / FIRE / LIGHT / WATER / WIND)<br/>
+• Monster Types (Aqua / Beast / Beast-Warrior / Cyberse / Dinosaur / Dragon / etc. )<br/>
+• Monster Categories (Normal / Effect / Ritual / Pendulum / Fusion / Synchro / Xyz / Link)<br/>
+• Monster Sub-categories (Flip / Gemini / Spirit / Toon / Tuner / Union)<br/>
+• Monster Level (1-12), ATK (0-5000), and DEF (0-5000)<br/>
+• Historic Availability by Release Date (Day / Month / Year)<br/>
+
 ![Card-Database-Search](/public/screenshots/Card-Database-Search.jpg)
 
+Results can be displayed as either:<br/>
+(1) an easy-to-read table ("spoilers"), highlighting important facts about cards, icons, and thumbnail-sized card images
+
 ![Card-Database-Results-Table](/public/screenshots/Card-Database-Results-Table.jpg)
+
+Or (2) a gallery of full-size card images:<br/>
+• Results can be sorted by a variety of criteria (Alphabetical / Release Date / ATK / DEF / Level).<br/>
+• Results are paginated and the number of results can vary (10 / 25 / 50 / 100).
 
 ![Card-Database-Results-Gallery](/public/screenshots/Card-Database-Results-Gallery.jpg)
 
