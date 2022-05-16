@@ -15,7 +15,7 @@ Discord community server: https://discord.com/invite/formatlibrary
 
 # Card Database
 
-Format Libary sports an up to date, user-friendly card database.<br/>
+Format Libary sports a continuously updated, user-friendly card database.<br/>
 The following search options are available, replete with icons for visual aide:<br/>
 • **String matches** in Card Name or Card Text<br/>
 • **Historic Availability by Format** (All / Goat / Edison / HAT / etc.)<br/>
@@ -41,10 +41,22 @@ Results can be displayed as either:<br/>
 
 • Results can be sorted by various criteria (Alphabetical / Date / ATK / DEF / Level).<br/>
 • Results are paginated and the quantity displayed can be changed (10 / 25 / 50 / 100).
+• Results link to Single Card details.
 
 # Single Card Details
 
+Single Card webpages are seemlessly linked throughout the website from:<br>
+• The Card Database<br>
+• Single Decks<br>
+• Ban Lists
+
 ![Single-Card-Details](/public/screenshots/Single-Card-Details.jpg)
+
+Single Card webpages display:<br>
+• A full-size, high quality rendering of the card.<br>
+• All information displayed on the actual card.<br>
+• A status summary bar that links to Ban Lists.<br>
+• A list of prints with links to a 3rd party retailer.<br>
 
 # Deck Database
 
