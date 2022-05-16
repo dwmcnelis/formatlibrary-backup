@@ -15,8 +15,8 @@ Discord community server: https://discord.com/invite/formatlibrary
 
 # Card Database
 
-Format Libary sports a continuously updated, user-friendly card database.<br/>
-The following search options are available, replete with icons for visual aide:<br/>
+Format Libary maintains a continuously updated, user-friendly Card Database.<br/>
+The following search options are available:<br/>
 • **String matches** in Card Name or Card Text<br/>
 • **Historic Availability by Format** (All / Goat / Edison / HAT / etc.)<br/>
 • **Card Categories** (All Cards / Monsters / Spells / Traps)<br/>
@@ -31,7 +31,7 @@ The following search options are available, replete with icons for visual aide:<
 ![Card-Database-Search](/public/screenshots/Card-Database-Search.jpg)
 
 Results can be displayed as either:<br/>
-(1) An easy-to-read Table ("Spoilers") with important facts, icons, and small card images.
+(1) Easy-to-read Spoilers (Table) with important facts, icons, and small card images.
 
 ![Card-Database-Results-Table](/public/screenshots/Card-Database-Results-Table.jpg)
 
@@ -39,8 +39,8 @@ Results can be displayed as either:<br/>
 
 ![Card-Database-Results-Gallery](/public/screenshots/Card-Database-Results-Gallery.jpg)
 
-• Results can be sorted by various criteria (Alphabetical / Date / ATK / DEF / Level).<br/>
-• Results are paginated and the quantity displayed can be changed (10 / 25 / 50 / 100).
+• Results can be sorted (Card Name / Release Date / ATK / DEF / Level).<br/>
+• Results are paginated and the quantity displayed can be changed.
 • Results link to Single Card details.
 
 # Single Card Details
@@ -60,9 +60,24 @@ Single Card webpages display:<br>
 
 # Deck Database
 
+Format Libary sports a unique and highly informative Deck Database.<br/>
+The following search options are available:<br/>
+• **String matches** in Deck Type, Builder's Name, or Event Name<br/>
+• **Format of the Event** (All / Goat / Edison / HAT / etc.)<br/>
+• **Deck Categories** (All Decks / Aggro / Combo / Control / Lockdown)<br/>
+
+Results can be displayed as either:<br/>
+(1) A Table with important facts, player profile pictures, and community logos.
+
 ![Deck-Database-Results-Table](/public/screenshots/Deck-Database-Results-Table.jpg)
 
+(2) A Gallery of Node Canvas generated deck thumbnails.
+
 ![Deck-Database-Results-Gallery](/public/screenshots/Deck-Database-Results-Gallery.jpg)
+
+• Results can be sorted (Builder / Event / Format / Placement / Upload Date / etc.).<br/>
+• Results are paginated and the quantity displayed can be changed.
+• Results link to Single Deck details.
 
 # Single Deck Details
 
