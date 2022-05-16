@@ -15,7 +15,8 @@ Discord community server: https://discord.com/invite/formatlibrary
 
 # Card Database
 
-Format Libary sports an up to date, user-friendly card database. The following search options are available, replete with icons for visual aide:<br/>
+Format Libary sports an up to date, user-friendly card database.<br/>
+The following search options are available, replete with icons for visual aide:<br/>
 • **String matches** in Card Name or Card Text<br/>
 • **Historic Availability by Format** (All / Goat / Edison / HAT / etc.)<br/>
 • **Card Categories** (All Cards / Monsters / Spells / Traps)<br/>
@@ -30,15 +31,16 @@ Format Libary sports an up to date, user-friendly card database. The following s
 ![Card-Database-Search](/public/screenshots/Card-Database-Search.jpg)
 
 Results can be displayed as either:<br/>
-(1) an easy-to-read table ("spoilers"), highlighting important facts about cards, icons, and thumbnail-sized card images
+(1) An easy-to-read Table ("Spoilers") with important facts, icons, and small card images.
 
 ![Card-Database-Results-Table](/public/screenshots/Card-Database-Results-Table.jpg)
 
-Or (2) a gallery of full-size card images:<br/>
-• Results can be sorted by a variety of criteria (Alphabetical / Release Date / ATK / DEF / Level).<br/>
-• Results are paginated and the number of results can vary (10 / 25 / 50 / 100).
+(2) A Gallery of full-size card images.
 
 ![Card-Database-Results-Gallery](/public/screenshots/Card-Database-Results-Gallery.jpg)
+
+• Results can be sorted by various criteria (Alphabetical / Date / ATK / DEF / Level).<br/>
+• Results are paginated and the quantity displayed can be changed (10 / 25 / 50 / 100).
 
 # Single Card Details
 
