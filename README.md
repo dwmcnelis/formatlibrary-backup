@@ -15,7 +15,7 @@ Discord community server: https://discord.com/invite/formatlibrary
 
 # Card Database
 
-![Card-Database-Search](/public/screenshots/Home.jpg)
+![Card-Database-Search](/public/screenshots/Card-Database-Search.jpg)
 
 ![Card-Database-Results-Table](/public/screenshots/Card-Database-Results-Table.jpg)
 
@@ -37,7 +37,7 @@ Discord community server: https://discord.com/invite/formatlibrary
 
 # Event Database
 
-![Event-Database-Results-Table](/public/screenshots/Event-Database-Results-Table.jpg)
+![Event-Database-Table](/public/screenshots/Event-Database-Results-Table.jpg)
 
 # Single Event Details
 
