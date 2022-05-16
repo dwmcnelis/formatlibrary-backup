@@ -31,11 +31,11 @@ The following search options are available:<br/>
 ![Card-Database-Search](/public/screenshots/Card-Database-Search.jpg)
 
 Results can be displayed as either:<br/>
-(1) Easy-to-read Spoilers (Table) with important facts, icons, and small card images.
+**(1) Easy-to-read Spoilers (Table) with important facts, icons, and small card images.**
 
 ![Card-Database-Results-Table](/public/screenshots/Card-Database-Results-Table.jpg)
 
-(2) A Gallery of full-size card images.
+**(2) A Gallery of full-size card images.**
 
 ![Card-Database-Results-Gallery](/public/screenshots/Card-Database-Results-Gallery.jpg)
 
@@ -67,11 +67,11 @@ The following search options are available:<br/>
 • **Deck Categories** (All / Aggro / Combo / Control / Lockdown)<br/>
 
 Results can be displayed as either:<br/>
-(1) A Table with important facts, player profile pictures, and community logos.
+**(1) A Table with important facts, player profile pictures, and community logos.**
 
 ![Deck-Database-Results-Table](/public/screenshots/Deck-Database-Results-Table.jpg)
 
-(2) A Gallery of Node Canvas generated deck thumbnails.
+**(2) A Gallery of Node Canvas generated deck thumbnails.**
 
 ![Deck-Database-Results-Gallery](/public/screenshots/Deck-Database-Results-Gallery.jpg)
 
@@ -89,12 +89,12 @@ Single Deck pages are seemlessly linked throughout the website from:<br>
 ![Single-Deck-Details](/public/screenshots/Single-Deck-Details.jpg)
 
 Single Deck pages display:<br>
-• Key information: Builder, Deck Category, Deck Name, Event, Upload Date.<br>
-• All the cards found in the deck, as individual clickable links.<br>
+• Key information: Builder, Deck Category, Deck Name, Event, Placement, Upload Date.<br>
 • A link to the Builder's Player Profile.<br>
 • A link to the Event's Event Summary page.<br>
+• All the cards found in the deck, linking to their Single Card pages.<br>
 • Indicators of the deck's impact: Likes / Downloads / Views.<br>
-• A button to download the deck as a .YDK file (used on online Yu-Gi-Oh! platforms).
+• A button to download the deck as a .YDK file (used by online Yu-Gi-Oh! platforms).
 
 # Event Database
 
