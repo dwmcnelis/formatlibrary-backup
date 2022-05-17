@@ -173,7 +173,7 @@ router.get('/:id', async (req, res, next) => {
         const deck = await Deck.findOne({ 
             where: {
                 id: req.params.id,
-                display: true
+                // display: true
             }, 
             attributes: { exclude: ['display', 'updatedAt'] },
             include: [{ model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }],
