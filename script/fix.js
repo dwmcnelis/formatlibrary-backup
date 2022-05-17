@@ -2102,7 +2102,10 @@ const fixDeckCreatedAt = async () => {
             const deck = decks[i]
             const endDate = deck.tournament.endDate
             deck.createdAt = endDate
-            await deck.save()
+            await deck.save({
+                silent: true,
+                fields: ['createdAt']
+            })
             console.log(endDate === deck.createdAt)
             b++
         } catch (err) {
