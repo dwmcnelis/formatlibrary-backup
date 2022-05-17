@@ -60,7 +60,7 @@ Single Card pages display:<br>
 
 # Deck Database
 
-Format Libary sports a unique and highly informative Deck Database.<br/>
+Format Libary features a unique and highly informative Deck Database.<br/>
 The following search options are available:<br/>
 • **String matches** in Deck Type, Builder's Name, or Event Name<br/>
 • **Event Format** (All / Goat / Edison / HAT / etc.)<br/>
@@ -79,28 +79,46 @@ Results can be displayed as either:<br/>
 • Results are paginated and the quantity displayed can be changed.<br/>
 • Results link to Single Deck details.
 
-# Single Deck Details
+# Deck Profiles
 
-Single Deck pages are seemlessly linked throughout the website from:<br>
+Deck Profile pages are seemlessly linked throughout the website from:<br>
 • The Deck Database<br>
-• Single Events<br>
+• Event Summaries<br>
 • Blogposts
 
-![Single-Deck-Details](/public/screenshots/Single-Deck-Details.jpg)
+![Deck-Profiles](/public/screenshots/Deck-Profiles.jpg)
 
-Single Deck pages display:<br>
+Deck Profile pages display:<br>
 • Key information: Builder, Deck Category, Deck Name, Event, Placement, Upload Date.<br>
 • A link to the Builder's Player Profile.<br>
-• A link to the Event's Event Summary page.<br>
-• All the cards found in the deck, linking to their Single Card pages.<br>
-• Indicators of the deck's impact: Likes / Downloads / Views.<br>
-• A button to download the deck as a .YDK file (used by online Yu-Gi-Oh! platforms).
+• A link to the Event Summary page.<br>
+• All the cards found in the deck, linking to Single Card pages.<br>
+• Indicators of the deck's impact: Likes, Downloads, Views.<br>
+• A button to download deck as a .YDK file (used by online Yu-Gi-Oh! platforms).
 
 # Event Database
 
+Format Libary features a unique and highly informative Event Database.<br/>
+The following search options are available:<br/>
+• **String matches** in Event's Name or Winning Player's Name<br/>
+• **Event Format** (All / Goat / Edison / HAT / etc.)<br/>
+• **Host Community** (Format Library / EdisonFormat.com / GoatFormat.com)<br/>
+
+Results are displayed as a table:<br/>
+
 ![Event-Database-Table](/public/screenshots/Event-Database-Table.jpg)
 
+• Results can be sorted (Date / Format / Name / Size / Winner).<br/>
+• Results are paginated and the quantity displayed can be changed.<br/>
+• Results link to Event Summaries.
+
 # Event Summaries
+
+Event Summaries are seemlessly linked throughout the website from:<br>
+• The Event Database<br>
+• Deck Profiles<br>
+• Format Overviews<br>
+• Blogposts
 
 ![Event-Summary-1](/public/screenshots/Event-Summary-1.jpg)
 
@@ -108,23 +126,65 @@ Single Deck pages display:<br>
 
 ![Event-Summary-3](/public/screenshots/Event-Summary-3.jpg)
 
+Event Summaries display:<br>
+• Key information about the event: Community, Date, Format, Size, Winner, Winning Deck.<br>
+• A link to the Winner's Player Profile.<br>
+• A link to the Winning Deck's Deck Profile.<br>
+• A link to the tournament Format's Format Overview.<br>
+• A screenshot of and a link to the externally hosted bracket.<br>
+• Thumbnails of the top performing deck lists with Deck Profile links.<br>
+• Graphical summaries of overall deck representation and card frequencies.
+
 # Format Menu
+
+Format Libary features a menu to browse various formats.<br/>
 
 ![Format-Menu](/public/screenshots/Format-Menu.jpg)
 
 # Format Overviews
 
+Format Overviews are seemlessly linked throughout the website from:<br>
+• Format Menu<br>
+• Event Summaries<br>
+• Deck Profiles<br>
+• Format Overviews<br>
+• Blogposts
+
 ![Format-Overview-1](/public/screenshots/Format-Overview-1.jpg)
 
 ![Format-Overview-2](/public/screenshots/Format-Overview-2.jpg)
-# Ban Lists
 
-![Ban-List](/public/screenshots/Ban-List.jpg)
+Format Overviews display:<br>
+• A brief description of the format.<br>
+• Thumbnails representing Popular Decks, based on tournament entry frequency.<br>
+• Thumbnails of Recent Events, with links to Event Summaries.<br>
+• The Top 10 Players according to the format's Leaderboard (via RetroBot) .<br>
+• An array of cards representing the format's Ban List.
 
 # Leaderboards
 
+Leaderboards can be opened as their own pages, expanding from 10 to up to 1000 players:
+
 ![Leaderboard](/public/screenshots/Leaderboard.jpg)
+
+# Ban Lists
+
+Ban Lists can be opened as their own pages, primarily for the purpose of being linked:
+
+![Ban-List](/public/screenshots/Ban-List.jpg)
 
 # Player Profiles
 
+Player Profiles are seemlessly linked throughout the website from:<br>
+• Deck Profiles<br>
+• Event Summaries<br>
+• Leaderboards
+
 ![Player-Profile](/public/screenshots/Player-Profile.jpg)
+
+Player Profiles display:<br>
+• The player's current Discord profile picture.<br>
+• The player's real name (pending their consent).<br>
+• The player's DuelingBook username (a popular online Yu-Gi-Oh! platform).<br>
+• The player's medals, representing their Elo Rating, in various formats (via RetroBot).<br>
+• Thumbnails representing their Favorite Decks, based on tournament entry frequency.
