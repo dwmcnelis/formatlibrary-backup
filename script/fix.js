@@ -2098,12 +2098,16 @@ const fixDeckCreatedAt = async () => {
     const decks = await Deck.findAll({ include: Tournament })
 
     for (let i = 0; i < decks.length; i++) {
-        const d = decks[i]
-        const endDate = d.tournament.endDate
-        console.log('endDate', endDate)
-        d.createdAt = endDate
-        await d.save()
-        b++
+        try {
+            const deck = decks[i]
+            const endDate = deck.tournament.endDate
+            deck.createdAt = endDate
+            await deck.save()
+            console.log(endDate === deck.createdAt)
+            b++
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return console.log(`fixed ${b} decks`)
