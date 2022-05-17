@@ -2093,7 +2093,23 @@ const fixNormals = async () => {
     return console.log(`fixed ${b} non-effect monsters`)
 }
 
-fixCardText()
+const fixDeckCreatedAt = async () => {
+    let b = 0
+    const decks = await Deck.findAll({ include: Tournament })
+
+    for (let i = 0; i < decks.length; i++) {
+        const d = decks[i]
+        d.createdAt = d.tournament.endDate
+        await d.save()
+        b++
+    }
+
+    return console.log(`fixed ${b} decks`)
+}
+
+fixDeckCreatedAt()
+
+// fixCardText()
 // fixNormals()
 // fixCardText('Dark monster', 'DARK monster')
 // fixCardText('Light monster', 'LIGHT monster')
