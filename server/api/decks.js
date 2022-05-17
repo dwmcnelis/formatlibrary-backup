@@ -172,7 +172,7 @@ router.get('/:id', async (req, res, next) => {
     try {
         const deck = await Deck.findOne({ 
             where: {
-                id: req.params.id,
+                id: req.params.id
                 // display: true
             }, 
             attributes: { exclude: ['display', 'updatedAt'] },
