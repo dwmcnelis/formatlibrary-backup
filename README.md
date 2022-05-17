@@ -40,7 +40,7 @@ Results can be displayed as either:<br/>
 ![Card-Database-Results-Gallery](/public/screenshots/Card-Database-Results-Gallery.jpg)
 
 • Results can be sorted by Card Name, Release Date, ATK, DEF, or Level.<br/>
-• Results are paginated and the quantity displayed can be changed.
+• Results are paginated and the quantity displayed can be changed.<br/>
 • Results link to Single Card details.
 
 # Single Card Details
@@ -86,7 +86,7 @@ Deck Profile pages are seemlessly linked throughout the website from:<br>
 • Event Summaries<br>
 • Blogposts
 
-![Deck-Profiles](/public/screenshots/Deck-Profiles.jpg)
+![Deck-Profile](/public/screenshots/Deck-Profile.jpg)
 
 Deck Profile pages display:<br>
 • Key information: Builder, Deck Category, Deck Name, Event, Placement, Upload Date.<br>
@@ -144,7 +144,7 @@ Format Libary features a menu to browse various formats.<br/>
 # Format Overviews
 
 Format Overviews are seemlessly linked throughout the website from:<br>
-• Format Menu<br>
+• The Format Menu<br>
 • Event Summaries<br>
 • Deck Profiles<br>
 • Format Overviews<br>
@@ -158,18 +158,18 @@ Format Overviews display:<br>
 • A brief description of the format.<br>
 • Thumbnails representing Popular Decks, based on tournament entry frequency.<br>
 • Thumbnails of Recent Events, with links to Event Summaries.<br>
-• The Top 10 Players according to the format's Leaderboard (via RetroBot) .<br>
+• Top 10 Players from the format's live-updating Leaderboard (via RetroBot).<br>
 • An array of cards representing the format's Ban List.
 
 # Leaderboards
 
-Leaderboards can be opened as their own pages, expanding from 10 to up to 1000 players:
+Leaderboards from Format Overviews can be opened as their own pages, expanding from 10 to up to 1000 players:
 
 ![Leaderboard](/public/screenshots/Leaderboard.jpg)
 
 # Ban Lists
 
-Ban Lists can be opened as their own pages, primarily for the purpose of being linked:
+Ban Lists from Format Overviews can be opened as their own pages, primarily for the purpose of external linking:
 
 ![Ban-List](/public/screenshots/Ban-List.jpg)
 
@@ -184,7 +184,7 @@ Player Profiles are seemlessly linked throughout the website from:<br>
 
 Player Profiles display:<br>
 • The player's current Discord profile picture.<br>
-• The player's real name (pending their consent).<br>
+• The player's real name (pending consent).<br>
 • The player's DuelingBook username (a popular online Yu-Gi-Oh! platform).<br>
 • The player's medals, representing their Elo Rating, in various formats (via RetroBot).<br>
 • Thumbnails representing their Favorite Decks, based on tournament entry frequency.
