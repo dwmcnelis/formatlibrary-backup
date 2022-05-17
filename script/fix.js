@@ -2099,7 +2099,9 @@ const fixDeckCreatedAt = async () => {
 
     for (let i = 0; i < decks.length; i++) {
         const d = decks[i]
-        d.createdAt = d.tournament.endDate
+        const endDate = d.tournament.endDate
+        console.log('endDate', endDate)
+        d.createdAt = endDate
         await d.save()
         b++
     }
