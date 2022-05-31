@@ -28,6 +28,11 @@ const Player = db.define('players', {
         type: Sequelize.STRING,
         allowNull: true
     },
+    admin: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+        allowNull: true
+    },
     blacklisted: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,

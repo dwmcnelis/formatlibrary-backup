@@ -1508,7 +1508,7 @@ const getDeckType = (raw, format = 'goat') => {
             (ydk[kalut] >= 2 && ydk[whirlwind] >= 2 && ydk[icarus] >= 2) ? 'blackwing' :
             (ydk[accum] >= 2 && ydk[cstrike] >= 2 && ydk[detonation] >= 2) ? 'chain burn' :
             (ydk[diva] >= 2 && ydk[mali] >= 2 && ydk[miracle] >= 2) ? 'diva hero' :
-            (ydk[alius] >= 2 && ydk[gspark] >= 2) ? 'hero beatdown' :
+            (ydk[alius] >= 2 && ydk[gspark] >= 2) ? 'hero beat' :
             (ydk[redmd] >= 2 && ydk[wyvern] && ydk[kmdrago] && !ydk[consonance] && !ydk[rejuv]) ? 'dragon beatdown' :
             (ydk[redmd] >= 2 && ydk[consonance] >= 2 && ydk[tradein] >= 2 && !ydk[exodia]) ? 'dragon turbo' :
             (ydk[boomboxen] >= 2 && ydk[celfon] >= 2 && ydk[remoten] >= 2) ? 'morphtronic' :
@@ -1521,17 +1521,20 @@ const getDeckType = (raw, format = 'goat') => {
             (ydk[firedog] >= 2 && ydk[spy] >= 2 && ydk[rekindling] >= 2) ? 'flamvell' :
             (ydk[swapfrog] >= 2 && ydk[caius] >= 2 && (ydk[raiza] || ydk[mobius] || ydk[thestalos]) && !ydk[diva]) ? 'frog monarch' :
             (ydk[swapfrog] >= 2 && ydk[caius] >= 2 && ydk[diva] >= 2 && ydk[archer]) ? 'diva frog' :
-            (ydk[ggadget] >= 2 && ydk[rgadget] >= 2 && ydk[ygadget] >= 2 && !ydk[gearframe]) ? 'gadget' :
-            (ydk[ggadget] >= 2 && ydk[rgadget] >= 2 && ydk[ygadget] >= 2 && ydk[gearframe] >= 2) ? 'machina gadget' :
-            (ydk[gearframe] >= 2 && ydk[fortress] >= 2 && !ydk[ggadget]) ? 'machina' :
+            (ydk[ggadget] >= 2 && !ydk[gearframe]) ? 'gadget' :
+            (ydk[ggadget] >= 2 && ydk[gearframe] >= 2 && ydk[fortress] >= 2) ? 'machina gadget' :
+            (ydk[aggolem] >= 2 && ydk[gearframe] >= 2 && ydk[fortress] >= 2) ? 'ancient gear machina' :
+            (ydk[gearframe] >= 2 && ydk[fortress] >= 2 && !ydk[aggolem] && !ydk[ggadget]) ? 'machina' :
             (ydk[laquari] >= 2 && ydk[chariot] >= 2) ? 'gladiator beast' :
             (ydk[jdrag] >= 2 && ydk[recharge] >= 2) ? 'lightsworn' :
             (ydk[lonefire] >= 2 && ydk[dandy] >= 2 && ydk[quickdraw] && ydk[debris] && !ydk[jdrag] && !ydk[gobzomb] && !ydk[rekindling] && !ydk[duplication]) ? 'quickdraw plant' :
+            (ydk[lonefire] >= 2 && ydk[dandy] >= 2 && ydk[airbellum] && ydk[debris] && !ydk[jdrag] && !ydk[gobzomb] && !ydk[rekindling] && !ydk[duplication]) ? 'saber plant' :
             (ydk[vrocket] >= 2 && ydk[dandy] >= 2 && ydk[quickdraw]) ? 'volcanic quickdraw' :
             (ydk[dandy] >= 2  && ydk[quickdraw] && ydk[firedog] >= 2 && ydk[rekindling] >= 2) ? 'flamvell quickdraw' :
             (ydk[quickdraw] >= 2 && ydk[tuningware] >= 2 && ydk[duplication] >= 2) ? 'quickdraw machine' :
-            (ydk[quickdraw] >= 2 && ydk[gobzomb] && ydk[mezuki]) ? 'quickdraw zombie' :
-            (ydk[gobzomb] >= 2 && ydk[turtle] && ydk[mezuki] && ydk[life] && !ydk[quickdraw]) ? 'zombie' :
+            (ydk[quickdraw] >= 2 && ydk[gobzomb] >= 2 && ydk[mezuki]) ? 'quickdraw zombie' :
+            (ydk[diva] >= 2 && ydk[gobzomb] >= 2 && ydk[mezuki]) ? 'diva zombie' :
+            (ydk[gobzomb] >= 2 && ydk[turtle] && ydk[mezuki] && !ydk[quickdraw] && !ydk[diva]) ? 'zombie' :
             (ydk[gotss] >= 2 && ydk[zanji] >= 2 && ydk[gateway] >= 2 && ydk[ssunited] >= 2) ? 'six samurai' :
             (ydk[cat] && ydk[monk] && ydk[airbellum] >= 2 && ydk[spy] >= 2) ? 'synchro cat' :
             (ydk[sorc] && ydk[dad] && ydk[recharge] >= 2 && !ydk[jdrag]) ? 'chaos lightsworn' :
@@ -2155,7 +2158,7 @@ fixDeckCreatedAt()
 // fixFusions()
 // updateCommunities()
 // countParticipants()
-// updateDeckTypes()
+updateDeckTypes()
 // makeDeckTypes()
 // createDecks('PatreonPlayOff2', 'Goat', 'GoatFormat.com', true)
 // download()
