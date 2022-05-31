@@ -2116,8 +2116,27 @@ const fixDeckCreatedAt = async () => {
     return console.log(`fixed ${b} decks`)
 }
 
-fixDeckCreatedAt()
+const fixYDKs = async () => {
+    let b = 0
+    const decks = await Deck.findAll({
+        where: {
+            event: {[Op.not]: 'RBET03'}
+        }
+    })
 
+    for (let i = 0; i < decks.length; i++) {
+        const deck = decks[i]
+        const ydk = deck.ydk.replaceAll(' ', '\n')
+        deck.ydk = ydk
+        await deck.save()
+        b++
+    }
+
+    return console.log(`fixed ${b} deck YDKs`)
+}
+
+fixYDKs()
+// fixDeckCreatedAt()
 // fixCardText()
 // fixNormals()
 // fixCardText('Dark monster', 'DARK monster')
@@ -2130,8 +2149,6 @@ fixDeckCreatedAt()
 // fixCardText(' def ', ' DEF ')
 // fixCardText('a A-counter', 'an A-counter')
 // fixCardText('(This card is always treated as an "Archfiend" card.)', '(This card is always treated as an "Archfiend" card.)\n')
-
-
 // fixDuelTerminal()
 // fixDP06andDP07()
 // fixFusions()
