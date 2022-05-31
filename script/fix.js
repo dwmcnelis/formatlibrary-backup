@@ -2140,7 +2140,7 @@ const fixYDKs = async () => {
 }
 
 // fixYDKs()
-fixDeckCreatedAt()
+// fixDeckCreatedAt()
 // fixCardText()
 // fixNormals()
 // fixCardText('Dark monster', 'DARK monster')
