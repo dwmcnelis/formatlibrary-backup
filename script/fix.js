@@ -2101,7 +2101,8 @@ const fixDeckCreatedAt = async () => {
         try {
             const deck = decks[i]
             const endDate = deck.tournament.endDate
-            deck.set('createdAt', endDate, {raw: true})
+            deck.changed('createdAt', true);
+            deck.set('createdAt', endDate, {raw: true});
             await deck.save({
                 silent: true,
                 fields: ['createdAt']
