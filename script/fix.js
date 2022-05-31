@@ -2135,8 +2135,8 @@ const fixYDKs = async () => {
     return console.log(`fixed ${b} deck YDKs`)
 }
 
-fixYDKs()
-// fixDeckCreatedAt()
+// fixYDKs()
+fixDeckCreatedAt()
 // fixCardText()
 // fixNormals()
 // fixCardText('Dark monster', 'DARK monster')
