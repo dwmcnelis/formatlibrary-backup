@@ -23,7 +23,14 @@ const SingleDeck = (props) => {
   useEffect(() => {
     const uploadDeck = async () => {
       try {
-        const {data} = await axios.get(`/api/decks/${props.match.params.id}`)
+        const {data} = await axios.get({
+          urL: `/api/decks/${props.match.params.id}`,
+          headers: {
+            username: localStorage.getItem('username'),
+            password: localStorage.getItem('password')
+          }
+        })
+
         setDeck(data)
       } catch (err) {
         console.log(err)

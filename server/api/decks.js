@@ -98,10 +98,18 @@ router.get('/frequent/:id', async (req, res, next) => {
 /* eslint-disable complexity */
 router.get('/player/:id', async (req, res, next) => {
     try {
+        const isAdmin = await Player.cound({
+            where: {
+                username: req.headers.get('username'),
+                password: req.headers.get('password'),
+                admin: true
+            }
+        })
+
         const decks = await Deck.findAll({ 
             where: {
                 playerId: req.params.id,
-                display: true
+                display: isAdmin ? {[Op.any]: [true, false]} : true
             },
             attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
             order: [["placement", "ASC"], ["createdAt", "ASC"]],
@@ -155,8 +163,16 @@ router.get('/download/:id', async (req, res, next) => {
 
 router.get('/all', async (req, res, next) => {
     try {
+        const isAdmin = await Player.cound({
+            where: {
+                username: req.headers.get('username'),
+                password: req.headers.get('password'),
+                admin: true
+            }
+        })
+
         const decks = await Deck.findAll({ 
-            where: { display: true },
+            where: { display: isAdmin ? {[Op.any]: [true, false]} : true },
             attributes: { exclude: ['display', 'updatedAt'] },
             order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
             include: [{ model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }],
@@ -188,10 +204,18 @@ router.get('/first/:x', async (req, res, next) => {
 /* eslint-disable complexity */
 router.get('/:id', async (req, res, next) => {
     try {
+        const isAdmin = await Player.cound({
+            where: {
+                username: req.headers.get('username'),
+                password: req.headers.get('password'),
+                admin: true
+            }
+        })
+
         const deck = await Deck.findOne({ 
             where: {
-                id: req.params.id
-                // display: true
+                id: req.params.id,
+                display: isAdmin ? {[Op.any]: [true, false]} : true
             }, 
             attributes: { exclude: ['display', 'updatedAt'] },
             include: [{ model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }],
