@@ -100,8 +100,8 @@ router.get('/player/:id', async (req, res, next) => {
     try {
         const isAdmin = await Player.cound({
             where: {
-                username: req.headers.get('username'),
-                password: req.headers.get('password'),
+                username: req.header.username,
+                password: req.header.password,
                 admin: true
             }
         })
@@ -165,8 +165,8 @@ router.get('/all', async (req, res, next) => {
     try {
         const isAdmin = await Player.cound({
             where: {
-                username: req.headers.get('username'),
-                password: req.headers.get('password'),
+                username: req.header.username,
+                password: req.header.password,
                 admin: true
             }
         })
@@ -206,8 +206,8 @@ router.get('/:id', async (req, res, next) => {
     try {
         const isAdmin = await Player.cound({
             where: {
-                username: req.headers.get('username'),
-                password: req.headers.get('password'),
+                username: req.headers.username,
+                password: req.headers.password,
                 admin: true
             }
         })
