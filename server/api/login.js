@@ -16,8 +16,7 @@ router.get('/:username/:password', async (req, res, next) => {
     })
 
     if (!player) return false
-    localStorage.setItem('name',JSON.stringify({ username: player.name, isAdmin: player.admin }));
-    return 'logged in'
+    return { username: player.name, isAdmin: player.admin }
   } catch (err) {
     next(err)
   }

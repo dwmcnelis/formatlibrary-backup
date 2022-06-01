@@ -11,6 +11,7 @@ import {
   FormatMenu,
   FormatIntro,
   LeaderBoard,
+  Login,
   SingleBanList,
   PlayerProfile,
   NotFound
@@ -40,6 +41,7 @@ const Routes = () => {
       <Route path="/leaderboards/:id" component={LeaderBoard} />
       <Route path="/banlists/:id" component={SingleBanList} />
       <Route path="/players/:id" component={PlayerProfile} />
+      <Route path="/login" component={Login} />
       <Route exact path="/may-2002---yugi-kaiba"><Redirect to="/formats/Yugi-Kaiba"/></Route>
       <Route exact path="/jul-2002---critter"><Redirect to="/formats/Critter"/></Route>
       <Route exact path="/apr-2003---android"><Redirect to="/formats/Android"/></Route>
