@@ -70,7 +70,7 @@ router.get('/frequent/:id', async (req, res, next) => {
 
         for (let i = 0; i < arr.length; i++) {
             const elem = arr[i]
-            const name = elem.slice(elem.indexOf('_'))
+            const name = elem.slice(elem.indexOf('_') + 1)
             console.log('name', name)
             const format = elem.slice(0, elem.indexOf('_'))
             console.log('format', format)
