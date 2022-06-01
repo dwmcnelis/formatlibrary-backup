@@ -30,6 +30,11 @@ router.get('/popular/:format', async (req, res, next) => {
                     format: {[Op.iLike]: req.params.format }
                 },
                 attributes: { exclude: ['createdAt', 'updatedAt'] }
+            }) || await DeckType.findOne({
+                where: {
+                    name: name
+                },
+                attributes: { exclude: ['createdAt', 'updatedAt'] }
             })
 
             if (!deckType) {
@@ -52,21 +57,30 @@ router.get('/frequent/:id', async (req, res, next) => {
         const decks = await Deck.findAll({ 
             where: {
                 playerId: req.params.id,
-                deckType: {[Op.not]: 'other'}
+                deckType: {[Op.not]: 'Other'}
             }
         })
 
         if (!decks.length) return false
+
         
-        const freqs = decks.reduce((acc, curr) => (acc[curr.deckType] ? acc[curr.deckType]++ : acc[curr.deckType] = 1, acc), {})
+        const freqs = decks.reduce((acc, curr) => (acc[`${curr.format}_${curr.deckType}`] ? acc[`${curr.format}_${curr.deckType}`]++ : acc[`${curr.format}_${curr.deckType}`] = 1, acc), {})
         const arr = Object.entries(freqs).sort((a, b) => b[1] - a[1]).map((e) => e[0]).slice(0, 6)
         const data = []
 
         for (let i = 0; i < arr.length; i++) {
-            const name = arr[i]
+            const elem = arr[i]
+            const name = elem.slice(elem.indexOf('_'))
+            const format = elem.slice(0, elem.indexOf('_'))
             const deckType = await DeckType.findOne({
                 where: {
-                    name: name
+                    name: {[Op.iLike]: name},
+                    format: {[Op.iLike]: format}
+                },
+                attributes: { exclude: ['createdAt', 'updatedAt'] }
+            }) || await DeckType.findOne({
+                where: {
+                    name: {[Op.iLike]: name}
                 },
                 attributes: { exclude: ['createdAt', 'updatedAt'] }
             })
