@@ -98,7 +98,7 @@ router.get('/frequent/:id', async (req, res, next) => {
 /* eslint-disable complexity */
 router.get('/player/:id', async (req, res, next) => {
     try {
-        const isAdmin = await Player.cound({
+        const isAdmin = await Player.count({
             where: {
                 username: req.header.username,
                 password: req.header.password,
@@ -204,7 +204,7 @@ router.get('/first/:x', async (req, res, next) => {
 /* eslint-disable complexity */
 router.get('/:id', async (req, res, next) => {
     try {
-        const isAdmin = await Player.cound({
+        const isAdmin = await Player.count({
             where: {
                 username: req.headers.username,
                 password: req.headers.password,
