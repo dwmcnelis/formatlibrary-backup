@@ -16,7 +16,9 @@ router.get('/:username/:password', async (req, res, next) => {
     })
 
     if (!player) return false
-    return { username: player.name, isAdmin: player.admin }
+    const data = { username: player.name, isAdmin: player.admin }
+    console.log('data', data)
+    res.json(data)
   } catch (err) {
     next(err)
   }
