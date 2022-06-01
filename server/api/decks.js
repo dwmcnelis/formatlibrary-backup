@@ -100,7 +100,7 @@ router.get('/player/:id', async (req, res, next) => {
     try {
         const isAdmin = await Player.count({
             where: {
-                username: req.headers.username,
+                name: req.headers.username,
                 password: req.headers.password,
                 admin: true
             }
@@ -165,7 +165,7 @@ router.get('/all', async (req, res, next) => {
     try {
         const isAdmin = await Player.count({
             where: {
-                username: req.headers.username,
+                name: req.headers.username,
                 password: req.headers.password,
                 admin: true
             }
@@ -206,7 +206,7 @@ router.get('/:id', async (req, res, next) => {
     try {
         const isAdmin = await Player.count({
             where: {
-                username: req.headers.username,
+                name: req.headers.username,
                 password: req.headers.password,
                 admin: true
             }
