@@ -10,7 +10,7 @@ const Login = () => {
   useLayoutEffect(() => window.scrollTo(0, 0))
 
   const login = async () => {
-    const data = await axios.get(`/api/login${username}/${password}`)
+    const data = await axios.get(`/api/login/${username}/${password}`)
     console.log('data', data)
     localStorage.setItem('username', data.username)
     localStorage.setItem('isAdmin', data.isAdmin)
@@ -18,7 +18,7 @@ const Login = () => {
   }
 
   return (
-      <div className="login">
+      <div className="body">
             <p>Username:</p>
             <input
                 id="username"
