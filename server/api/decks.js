@@ -12,7 +12,7 @@ router.get('/popular/:format', async (req, res, next) => {
         const decks = await Deck.findAll({ 
             where: {
                 format: {[Op.iLike]: req.params.format },
-                deckType: {[Op.not]: 'other'} 
+                deckType: {[Op.not]: 'Other'} 
             }
         })
 
@@ -36,7 +36,7 @@ router.get('/popular/:format', async (req, res, next) => {
                 console.log(`Unable to find ${req.params.format} Format DeckType: ${name}`)
                 continue
             }
-            
+
             data.push(deckType)
         }
 
