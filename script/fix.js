@@ -1893,6 +1893,11 @@ const updateDeckTypes = async () => {
         const decks = await Deck.findAll()
         for (let i = 0; i < decks.length; i++) {
             const deck = decks[i]
+            if (deck.deckType === 'other') {
+                deck.deckType = 'Other'
+                deck.name = 'Other'
+                await deck.save()
+            }
             const updatedDeckType = getDeckType(deck.ydk, deck.format)
             console.log('updatedDeckType', updatedDeckType)
             if (updatedDeckType === 'Other') continue
