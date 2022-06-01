@@ -163,7 +163,7 @@ router.get('/download/:id', async (req, res, next) => {
 
 router.get('/all', async (req, res, next) => {
     try {
-        const isAdmin = await Player.cound({
+        const isAdmin = await Player.count({
             where: {
                 username: req.header.username,
                 password: req.header.password,
