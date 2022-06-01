@@ -179,8 +179,7 @@ const DeckTable = (props) => {
   useEffect(() => {
     if (firstXFetched && !allFetched) {
       const fetchData = async () => {
-        const {data} = await axios.get({
-          urL: `/api/decks/all`,
+        const {data} = await axios.get(`/api/decks/all`, {
           headers: {
             username: localStorage.getItem('username'),
             password: localStorage.getItem('password')
