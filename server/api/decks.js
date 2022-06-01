@@ -32,7 +32,11 @@ router.get('/popular/:format', async (req, res, next) => {
                 attributes: { exclude: ['createdAt', 'updatedAt'] }
             })
 
-            if (!deckType) continue
+            if (!deckType) {
+                console.log(`Unable to find ${req.params.format} Format DeckType: ${name}`)
+                continue
+            }
+            
             data.push(deckType)
         }
 
