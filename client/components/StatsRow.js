@@ -40,6 +40,7 @@ const getTitle = (elo) => {
 const StatsRow = (props) => {
     const {index, stats} = props
     const {elo, wins, losses, player} = stats
+    console.log('player', player)
     if (!player) return <tr/>
     const evenOrOdd = props.index % 2 ? 'even' : 'odd'
     const displayName = player.name.length <= 24 ? player.name : player.name.slice(0, 24).split(' ').slice(0, -1).join(' ')
