@@ -24,7 +24,7 @@ const {
     serpent, shallow, sirocco, slate, slump, smoke, solemn, solidarity, sorc, soulex, soulrel, 
     spy, ssunited, stein, storm, stealth, strike, swapfrog, taiyou, tdrag, tethys, thanksgiving, thestalos, tiger, 
     tomato, tooncannon, tradein, treeborn, trio, trunade, tsuk, tuningware, turtle, underdog, valhalla, vayu, vrocket, 
-    whirlwind, wicked, will, wmc, worl, zanji, zombyra, zorc
+    whirlwind, wicked, will, wmc, worl, yata, zaloog, zanji, zombyra, zorc
 } = require('../static/cards.json')
 
 /*eslint-disable*/
@@ -1452,7 +1452,7 @@ const getDeckType = (raw, format = 'goat') => {
         (ydk[scientist] && ydk[catapult] && ydk[will] >= 2) ? 'Scientist FTK' :
         (ydk[queen] && ydk[archfiend]) ? 'Archfiend' :
         (ydk[necrofear] && (ydk[germ] || ydk[slate])) ? 'Fiend' :
-        (ydk[yata] && (ydk[don] || ydk[reaper])) ? 'Hand Control' :
+        (ydk[yata] && (ydk[zaloog] || ydk[reaper])) ? 'Hand Control' :
         ((format == 'yata' || format == 'vampire') && ydk[ddwl] && ydk[rota] && (ydk[spy] || ydk[tomato])) ? 'Warrior Control' :
         (ydk[cat] >= 2 && ydk[wicked] >= 2) ? 'Cat Control' :
         (ydk[ben_kei] >= 2 && (ydk[trunade] >= 2 || ydk[decree] >= 2)) ? 'Ben Kei OTK' :
