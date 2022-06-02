@@ -12,7 +12,7 @@ const { goatformatChallongeAPIKey, formatLibraryChallongeAPIKey, tcgPlayerAPI } 
 const { 
     accum, aggolem, airbellum, alius, alo, andal, angel, archfiend, arma, artemis, barrel, batteries, bazoo, bear, ben_kei, bfadd, bigbang, bigshield, blade,
     bls, boomboxen, brain, bubbleman, bushi, bwc, caius, canceller, cannon, cardd, castor, cat, catapult, celfon, chariot, codarus, coelacanth, 
-    consonance, convulsion, countdown, cstrike, cyjar, dad, dda, ddwl, debris, decree, desserts, difu, diva, dmoc, dragonfly, drain, 
+    consonance, convulsion, countdown, cstrike, cyjar, dad, dda, ddwl, debris, decree, desserts, difu, dfissure, diva, dmoc, dragonfly, drain, 
     drastic, driver, duplication, economics, emissary, emmersblade, exodia, factory, fate, faultroll, fert, fire, firedog, fishborg, 
     fortress, freed, fulhelm, fusi, fusiongate, garden, gate, gateway, gbind, gearframe, gearfried, germ, ggadget, gigantes, 
     gkass, gkspear, goblin, gobzomb, gorilla, gotss, gozen, granmarg, grepher, gspark, hblast, hornet, horus6, horus8, 
@@ -22,7 +22,7 @@ const {
     needle, nightass, oath, panda, piper, pollux, poison, priestess, purity, queen, quickdraw, rabbit, raiza, rat, reaper, reasoning, recharge, redmd, 
     rejuv, rekindling, relinq, remoten, rightarm, rightleg, rivalry, rftdd, rml, rota, sabersaurus, salvo, scapegoat, scarabs, scientist, sdm, 
     seahorse, secrets, serpent, shallow, shark, sirocco, slate, slump, smoke, solemn, solidarity, sorc, soulex, soulrel, 
-    sphere, spy, ssunited, stealth, stein, storm, street, strike, swapfrog, taiyou, tdrag, tethys, thanksgiving, thestalos, tiger, 
+    sphere, spy, ssunited, stealth, stein, storm, street, strike, swapfrog, taiyou, tdrag, tethys, thanksgiving, thestalos, thunderbird, tiger, 
     tomato, tooncannon, tradein, treeborn, trio, trunade, tsuk, tuningware, turtle, underdog, valhalla, vayu, vrocket, 
     whirlwind, wicked, will, wmc, worl, wur, yata, zaloog, zanji, zombyra, zorc
 } = require('../static/cards.json')
