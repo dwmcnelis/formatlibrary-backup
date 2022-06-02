@@ -51,7 +51,7 @@ const StatsRow = (props) => {
             <td className="leaderboard-cell-1">{ordinalize(index + 1)}</td>
             <td className="leaderboard-cell-2">
                 <div className="player-cell">
-                    <img 
+                    <img
                         className="player-cell-pfp"
                         src={`/images/pfps/${player.id}.png`}
                         onError={(e) => {
