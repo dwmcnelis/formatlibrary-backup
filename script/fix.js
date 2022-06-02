@@ -10,7 +10,7 @@ const formats = require('../static/formats.json')
 const { capitalize, arrayToObject } = require('../functions/utility')
 const { goatformatChallongeAPIKey, formatLibraryChallongeAPIKey, tcgPlayerAPI } = require('../secrets')
 const { 
-    accum, aggolem, airbellum, alius, alo, andal, angel, archfiend, arma, artemis, barrel, batteries, bazoo, bear, ben_kei, bfadd, bigbang, bigshield, blade,
+    accum, aggolem, airbellum, alius, alo, andal, angel, archfiend, arma, artemis, barrel, batteries, bazoo, bear, ben_kei, bfadd, bigbang, bigshield, blackgarden, blade,
     bls, boomboxen, brain, bubbleman, bushi, bwc, caius, canceller, cannon, cardd, castor, cat, catapult, celfon, chariot, codarus, coelacanth, 
     consonance, convulsion, countdown, cstrike, cyjar, dad, dda, ddwl, debris, decree, desserts, difu, dfissure, diva, dmoc, dragonfly, drain, 
     drastic, driver, duplication, economics, emissary, emmersblade, exodia, factory, fate, faultroll, fert, fire, firedog, fishborg, 
