@@ -7,7 +7,7 @@ import {First, Second, Third, Consolation} from '../../public/images/emojis'
 //PLACEMENT
 const Placement = (props) => {
   const { deck } = props
-  if (!deck || !deck.display) return
+  if (!deck || !deck.display) return <div/>
   
   const placementImage = deck.placement === 1 ? First :
     deck.placement === 2 ? Second :
