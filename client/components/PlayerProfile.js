@@ -83,7 +83,7 @@ const PlayerProfile = (props = {}) => {
             <div className="player-profile-flexbox">
                 <div className="player-info">
                     <div className="player-profile-title">{player.tag.slice(0, -5)}</div>
-                    <img 
+                    <img
                         className="player-pfp" 
                         src={`/images/pfps/${player.id}.png`} 
                         onError={(e) => {
