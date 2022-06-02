@@ -102,7 +102,7 @@ router.get('/player/:id', async (req, res, next) => {
             where: {
                 playerId: req.params.id
             },
-            attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
+            attributes: { exclude: ['createdAt', 'updatedAt'] },
             order: [["placement", "ASC"], ["createdAt", "ASC"]],
             limit: 10
         })

@@ -122,7 +122,7 @@ const PlayerProfile = (props = {}) => {
                                     </div>       
                                 </td>
                             </tr>
-                        </tbody>
+                        </tbody>f
                     </table>
                 </div>
                 <div className="player-awards">
