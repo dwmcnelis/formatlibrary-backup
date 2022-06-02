@@ -98,7 +98,7 @@ const SingleDeck = (props) => {
                       <p>{deck.player.name}</p>
                       <img 
                         className="single-deck-builder-cell-pfp"
-                        src={`/images/pfps/${deck.player.id}.png`}
+                        src={`/images/pfps/${deck.playerId}.png`}
                         onError={(e) => {
                                 e.target.onerror = null
                                 e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"

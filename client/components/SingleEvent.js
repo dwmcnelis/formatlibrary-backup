@@ -137,7 +137,7 @@ const SingleEvent = (props) => {
                         <b>Winner: </b>{event.winner}
                         <img 
                           className="single-event-winner-cell-pfp"
-                          src={`/images/pfps/${event.player.id}.png`}
+                          src={`/images/pfps/${event.playerId}.png`}
                           onError={(e) => {
                                   e.target.onerror = null
                                   e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"

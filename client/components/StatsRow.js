@@ -54,7 +54,7 @@ const StatsRow = (props) => {
                 <div className="player-cell">
                     <img
                         className="player-cell-pfp"
-                        src={`/images/pfps/${player.id}.png`}
+                        src={`/images/pfps/${stats.playerId}.png`}
                         onError={(e) => {
                                 e.target.onerror = null
                                 e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"
