@@ -99,7 +99,7 @@ const PlayerProfile = (props = {}) => {
                                     <div className="player-profile-cell">
                                         <div><b>Name:</b> {player.realName || 'N/A'}</div>
                                     </div>       
-                                </td>
+                                </td>f
                             </tr>
                             <tr className="player-profile-info">
                                 <td>
