@@ -10,7 +10,7 @@ const formats = require('../static/formats.json')
 const { capitalize, arrayToObject } = require('../functions/utility')
 const { goatformatChallongeAPIKey, formatLibraryChallongeAPIKey, tcgPlayerAPI } = require('../secrets')
 const { 
-    accum, aggolem, airbellum, alius, alo, andal, angel, archfiend, arma, artemis, barrel, batteries, bazoo, bear, ben_kei, bfadd, bigbang, bigshield, blackgarden, blade,
+    accum, aggolem, airbellum, alius, alo, andal, angel, archfiend, arma, artemis, barrel, batteries, bazoo, bear, ben_kei, bfadd, bigbang, bigshield, blackgfarden, blade,
     bls, boomboxen, brain, bubbleman, bushi, bwc, caius, canceller, cannon, cardd, castor, cat, catapult, celfon, chariot, codarus, coelacanth, 
     consonance, convulsion, countdown, cstrike, cyjar, dad, dda, ddwl, debris, decree, desserts, difu, dfissure, diva, dmoc, dragonfly, drain, 
     drastic, driver, duplication, economics, emissary, emmersblade, exodia, factory, fate, faultroll, fert, fire, firedog, fishborg, 
@@ -21,7 +21,7 @@ const {
     megamorph, meta, mezuki, mimic, miracle, mjar, mobius, mof, monk, moray, motr, natures, necromancer, necrofear, necrovalley, 
     needle, nightass, oath, panda, piper, pollux, poison, priestess, purity, queen, quickdraw, rabbit, raiza, rat, reaper, reasoning, recharge, redmd, 
     rejuv, rekindling, relinq, remoten, rightarm, rightleg, rivalry, rftdd, rml, rota, sabersaurus, salvo, scapegoat, scarabs, scientist, sdm, 
-    seahorse, secrets, serpent, shallow, shark, sirocco, slate, slump, smoke, solemn, solidarity, sorc, soulex, soulrel, 
+    seahorse, secrets, serpent, shallow, shark, sheratan, sirocco, slate, slump, smoke, solemn, solidarity, sorc, soulex, soulrel, 
     sphere, spy, ssunited, stealth, stein, storm, street, strike, swapfrog, taiyou, tdrag, tethys, thanksgiving, thestalos, thunderbird, tiger, 
     tomato, tooncannon, tradein, treeborn, trio, trunade, tsuk, tuningware, turtle, underdog, valhalla, vayu, vrocket, 
     whirlwind, wicked, will, wmc, worl, wur, yata, zaloog, zanji, zombyra, zorc
