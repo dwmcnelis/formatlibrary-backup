@@ -4,6 +4,7 @@ import {capitalize} from '../../functions/utility'
 import formats from '../../static/formats.json'
 import * as emojis from '../../public/images/emojis'
 import { FL, GF, EF } from '../../public/images/logos'
+import { Link } from 'react-router-dom'
 
 const EventThumbnail = (props = {}) => {
     const {event, winner} = props
@@ -17,7 +18,8 @@ const EventThumbnail = (props = {}) => {
     const backgroundImage = emojis[formats[formatName].logo] || ''
 
   return (
-    <div className="eventThumbnail">
+    <div className="eventThumbnail">  
+      <Link to={`/events/${event.id}`}>
         <h3>{capitalize(event.shortName, true)}</h3>
         <div className="eventThumbnail-flexbox">
             <img 
@@ -38,6 +40,7 @@ const EventThumbnail = (props = {}) => {
               src={communityLogo} 
             />
         </div>
+      </Link>
     </div>
   )
 }
