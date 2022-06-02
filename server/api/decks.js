@@ -98,18 +98,9 @@ router.get('/frequent/:id', async (req, res, next) => {
 /* eslint-disable complexity */
 router.get('/player/:id', async (req, res, next) => {
     try {
-        const isAdmin = await Player.count({
-            where: {
-                name: req.headers.username,
-                password: req.headers.password,
-                admin: true
-            }
-        })
-
         const decks = await Deck.findAll({ 
             where: {
-                playerId: req.params.id,
-                display: isAdmin ? {[Op.any]: [true, false]} : true
+                playerId: req.params.id
             },
             attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
             order: [["placement", "ASC"], ["createdAt", "ASC"]],
