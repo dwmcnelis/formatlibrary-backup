@@ -19,8 +19,6 @@ const DeckRow = (props) => {
       deck.community === 'GoatFormat.com' ? GF :
       deck.community === 'EdisonFormat.com' ? EF :
       ''
-
-  const tag = deck.player && deck.player.tag ? deck.player.tag : ''
   
   return (
         <tr className={`${evenOrOdd}-search-results-row`}>
@@ -51,7 +49,7 @@ const DeckRow = (props) => {
               <div className="player-cell">
                 <img 
                     className="player-cell-pfp"
-                    src={`/images/pfps/${tag.slice(0, -5)}${tag.slice(-4)}.png`}
+                    src={`/images/pfps/${deck.player.id}.png`}
                     onError={(e) => {
                             e.target.onerror = null
                             e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"

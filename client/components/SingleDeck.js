@@ -60,8 +60,6 @@ const SingleDeck = (props) => {
     deck.placement === 3 ? emojis.Third :
     emojis.Consolation
   
-  const tag = deck.player && deck.player.tag ? deck.player.tag : ''
-
   const addLike = async () => {
     const res = await axios.get(`/api/decks/like/${props.match.params.id}`)
     if (res.status === 200) {
@@ -100,7 +98,7 @@ const SingleDeck = (props) => {
                       <p>{deck.player.name}</p>
                       <img 
                         className="single-deck-builder-cell-pfp"
-                        src={`/images/pfps/${tag.slice(0, -5)}${tag.slice(-4)}.png`}
+                        src={`/images/pfps/${deck.player.id}.png`}
                         onError={(e) => {
                                 e.target.onerror = null
                                 e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"

@@ -85,7 +85,7 @@ const PlayerProfile = (props = {}) => {
                     <div className="player-profile-title">{player.tag.slice(0, -5)}</div>
                     <img 
                         className="player-pfp" 
-                        src={`/images/pfps/${player.tag.slice(0, -5)}${player.tag.slice(-4)}.png`} 
+                        src={`/images/pfps/${player.id}.png`} 
                         onError={(e) => {
                                 e.target.onerror = null
                                 e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"

@@ -52,7 +52,6 @@ const SingleEvent = (props) => {
 
   if (event === null) return <NotFound/>
   if (!event.cleanName || !topDecks.length || !metagame.deckTypes.length) return <div></div>
-  const tag = event.player && event.player.tag ? event.player.tag : ''
 
   const formatName = capitalize(event.format, true) || '?'
   const formatEmoji = emojis[formats[formatName].logo] || ''
@@ -138,7 +137,7 @@ const SingleEvent = (props) => {
                         <b>Winner: </b>{event.winner}
                         <img 
                           className="single-event-winner-cell-pfp"
-                          src={`/images/pfps/${tag.slice(0, -5)}${tag.slice(-4)}.png`}
+                          src={`/images/pfps/${event.player.id}.png`}
                           onError={(e) => {
                                   e.target.onerror = null
                                   e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"

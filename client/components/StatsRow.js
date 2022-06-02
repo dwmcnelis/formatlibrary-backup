@@ -41,7 +41,6 @@ const StatsRow = (props) => {
     const {index, stats} = props
     const {elo, wins, losses, player} = stats
     if (!player) return <tr/>
-    const tag = player.tag || ''
     const evenOrOdd = props.index % 2 ? 'even' : 'odd'
     const displayName = player.name.length <= 24 ? player.name : player.name.slice(0, 24).split(' ').slice(0, -1).join(' ')
     const history = useHistory()
@@ -54,7 +53,7 @@ const StatsRow = (props) => {
                 <div className="player-cell">
                     <img 
                         className="player-cell-pfp"
-                        src={`/images/pfps/${tag.slice(0, -5)}${tag.slice(-4)}.png`}
+                        src={`/images/pfps/${player.id}.png`}
                         onError={(e) => {
                                 e.target.onerror = null
                                 e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"

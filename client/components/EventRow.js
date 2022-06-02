@@ -16,9 +16,7 @@ const EventRow = (props) => {
   const communityLogo = event.community === 'Format Library' ? FL :
       event.community === 'GoatFormat.com' ? GF :
       event.community === 'EdisonFormat.com' ? EF :
-      ''
-      
-  const tag = event.player && event.player.tag ? event.player.tag : ''
+      ''      
   
   return (
       <tr className={`${evenOrOdd}-search-results-row`}>
@@ -42,7 +40,7 @@ const EventRow = (props) => {
             <div className="player-cell">
               <img 
                   className="player-cell-pfp"
-                  src={`/images/pfps/${tag.slice(0, -5)}${tag.slice(-4)}.png`}
+                  src={`/images/pfps/${event.player.id}.png`}
                   onError={(e) => {
                           e.target.onerror = null
                           e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"
