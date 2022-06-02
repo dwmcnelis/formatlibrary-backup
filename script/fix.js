@@ -1792,17 +1792,16 @@ const makeDeckTypes = async () => {
 
 const updateDeckTypes = async () => {
     try {
-        const decks = await Deck.findAll()
+        const decks = await Deck.findAll({
+            where: {
+                deckType: {[Op.iLike]: 'other'}
+            }
+        })
         for (let i = 0; i < decks.length; i++) {
             const deck = decks[i]
-            if (deck.deckType === 'other') {
-                deck.deckType = 'Other'
-                deck.name = 'Other'
-                await deck.save()
-            }
             const updatedDeckType = getDeckType(deck.ydk, deck.format)
-            console.log('updatedDeckType', updatedDeckType)
             if (updatedDeckType === 'Other') continue
+            console.log('updatedDeckType', updatedDeckType)
             const updatedDeckCategory = await getDeckCategory(updatedDeckType)
             if (updatedDeckType === deck.deckType && updatedDeckCategory === deck.deckCategory) continue
             deck.name = updatedDeckType
