@@ -10,21 +10,21 @@ const formats = require('../static/formats.json')
 const { capitalize, arrayToObject } = require('../functions/utility')
 const { goatformatChallongeAPIKey, formatLibraryChallongeAPIKey, tcgPlayerAPI } = require('../secrets')
 const { 
-    accum, aggolem, airbellum, alius, alo, angel, archfiend, arma, artemis, barrel, bazoo, ben_kei, bfadd, bigbang, bigshield, blade,
-    boomboxen, brain, bushi, bwc, caius, canceller, cannon, cardd, cat, catapult, celfon, chariot, codarus, coelacanth, 
-    consonance, convulsion, countdown, cstrike, cyjar, dad, dda, ddwl, debris, decree, desserts, difu, diva, dmoc, drain, 
-    drastic, driver, duplication, economics, emissary, emmersblade, exodia, faultroll, fert, fire, firedog, fishborg, 
+    accum, aggolem, airbellum, alius, alo, andal, angel, archfiend, arma, artemis, barrel, batteries, bazoo, bear, ben_kei, bfadd, bigbang, bigshield, blade,
+    bls, boomboxen, brain, bubbleman, bushi, bwc, caius, canceller, cannon, cardd, castor, cat, catapult, celfon, chariot, codarus, coelacanth, 
+    consonance, convulsion, countdown, cstrike, cyjar, dad, dda, ddwl, debris, decree, desserts, difu, diva, dmoc, dragonfly, drain, 
+    drastic, driver, duplication, economics, emissary, emmersblade, exodia, factory, fate, faultroll, fert, fire, firedog, fishborg, 
     fortress, freed, fulhelm, fusi, fusiongate, garden, gate, gateway, gbind, gearframe, gearfried, germ, ggadget, gigantes, 
-    gkass, gkspear, goblin, gobzomb, gorilla, gotss, gozen, granmarg, grepher, gspark, hblast, horus6, horus8, 
-    icarus, jdrag, kalut, koala, kmdrago, kristya, lacooda, laquari, lastturn, lava, leftarm, leftleg, 
-    life, limiter, llab, lonefire, luminous, lv2, mali, manju, mask, mataza, meanae, 
-    megamorph, meta, mezuki, mimic, miracle, mjar, mobius, mof, monk, moray, motr, natures, necrofear, necrovalley, 
-    needle, nightass, oath, panda, poison, purity, queen, quickdraw, raiza, rat, reaper, reasoning, recharge, redmd, 
-    rejuv, rekindling, relinq, remoten, rightarm, rightleg, rivalry, rftdd, rml, rota, salvo, scapegoat, scarabs, scientist, sdm, 
-    serpent, shallow, sirocco, slate, slump, smoke, solemn, solidarity, sorc, soulex, soulrel, 
-    spy, ssunited, stein, storm, stealth, strike, swapfrog, taiyou, tdrag, tethys, thanksgiving, thestalos, tiger, 
+    gkass, gkspear, goblin, gobzomb, gorilla, gotss, gozen, granmarg, grepher, gspark, hblast, hornet, horus6, horus8, 
+    icarus, infarchfiend, infestation, isword, jdrag, kabaz, kalut, kinka, koala, kmdrago, kristya, lacooda, laquari, lastturn, lava, leftarm, leftleg, 
+    life, limiter, linde, llab, lonefire, luminous, lv2, mali, mandragora, manju, mask, mataza, meanae, 
+    megamorph, meta, mezuki, mimic, miracle, mjar, mobius, mof, monk, moray, motr, natures, necromancer, necrofear, necrovalley, 
+    needle, nightass, oath, panda, piper, pollux, poison, priestess, purity, queen, quickdraw, rabbit, raiza, rat, reaper, reasoning, recharge, redmd, 
+    rejuv, rekindling, relinq, remoten, rightarm, rightleg, rivalry, rftdd, rml, rota, sabersaurus, salvo, scapegoat, scarabs, scientist, sdm, 
+    seahorse, secrets, serpent, shallow, shark, sirocco, slate, slump, smoke, solemn, solidarity, sorc, soulex, soulrel, 
+    sphere, spy, ssunited, stealth, stein, storm, street, strike, swapfrog, taiyou, tdrag, tethys, thanksgiving, thestalos, tiger, 
     tomato, tooncannon, tradein, treeborn, trio, trunade, tsuk, tuningware, turtle, underdog, valhalla, vayu, vrocket, 
-    whirlwind, wicked, will, wmc, worl, yata, zaloog, zanji, zombyra, zorc
+    whirlwind, wicked, will, wmc, worl, wur, yata, zaloog, zanji, zombyra, zorc
 } = require('../static/cards.json')
 
 /*eslint-disable*/
@@ -1449,6 +1449,23 @@ const getDeckType = (raw, format = 'Goat') => {
     const ydk = arrayToObject(arr)
 
     const deckType = 
+        (ydk[bubbleman] >= 2 && ydk[miracle] && !ydk[kabaz]) ? 'Bubble Beat' :
+        (ydk[bubbleman] >= 2 && ydk[miracle] && ydk[kabaz] >= 2) ? 'Dino Hero' :
+        (ydk[kinka] >= 2 && ydk[piper] >= 2 && (ydk[bls] || ydk[sorc])) ? 'Piper Chaos' :
+        (ydk[hornet] && ydk[dragonfly] && ydk[isword]) ? 'Inzektor' :
+        (ydk[pollux] >= 2 && ydk[sheratan] >= 2) ? 'Constellar' :
+        (ydk[wur] >= 2 && ydk[thunderbird] >= 2 && (ydk[dfissure] || ydk[blackgarden])) ? 'Chain Beat' :
+        (ydk[secrets] && ydk[fate] && ydk[priestess]) ? 'Spellbook' :
+        (ydk[shark] >= 2 && ydk[factory] >= 2) ? 'Wind-Up' :
+        (ydk[necromancer] && ydk[infarchfiend] && ydk[street]) ? 'Infernity' :
+        (ydk[linde] >= 2 && ydk[sphere] >= 2) ? 'Mermail' :
+        (ydk[castor] >= 2 && ydk[mandragora] >= 2 && ydk[infestation] >= 2) ? 'Evilswarm' :
+        (ydk[rabbit] >= 2 && ydk[bear] >= 2 && !ydk[andal] && !ydk[sabersaurus] && !ydk[kabaz] >= 2) ? 'Fire Fist' :
+        (ydk[rabbit] >= 2 && ydk[bear] >= 2 && ydk[andal] >= 2 && (ydk[sabersaurus] >= 2 || ydk[kabaz] >= 2)) ? 'Gladiator Dino Fist' :
+        (ydk[rabbit] >= 2 && ydk[bear] >= 2 && !ydk[andal] && (ydk[sabersaurus] >= 2 || ydk[kabaz] >= 2)) ? 'Dino Fist' :
+        (ydk[rabbit] >= 2 & ydk[bear] >= 2 && ydk[andal] >= 2 && !ydk[sabersaurus] && !ydk[kabaz]) ? 'Gladiator Fist' :
+        (ydk[rabbit] >= 2 && !ydk[bear] && ydk[sabersaurus] >= 2 && ydk[kabaz] >= 2) ? 'Dino Rabbit' :
+        (ydk[seahorse] >= 2 && ydk[batteries] >= 2) ? 'Thunder' :
         (ydk[scientist] && ydk[catapult] && ydk[will] >= 2) ? 'Scientist FTK' :
         (ydk[queen] && ydk[archfiend]) ? 'Archfiend' :
         (ydk[necrofear] && (ydk[germ] || ydk[slate])) ? 'Fiend' :
