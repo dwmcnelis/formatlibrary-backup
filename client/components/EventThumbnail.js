@@ -18,27 +18,29 @@ const EventThumbnail = (props = {}) => {
     const backgroundImage = emojis[formats[formatName].logo] || ''
 
   return (
-    <div className="eventThumbnail">  
-      <Link to={`/events/${event.id}`}>
-        <h3>{capitalize(event.shortName, true)}</h3>
-        <div className="eventThumbnail-flexbox">
-            <img 
-              className="eventThumbnail-image" 
-              src={backgroundImage}
-            />
-            <img 
-              className="eventThumbnail-player-pfp" 
-              src={`https://cdn.discordapp.com/avatars/${winner.id}/${winner.avatar}.webp`} 
-              onError={(e) => {
-                      e.target.onerror = null
-                      e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"
-                  }
-              }
-            />
-            <img 
-              className="eventThumbnail-image" 
-              src={communityLogo} 
-            />
+    <div>
+      <Link to={`/events/${event.shortName}`}>
+        <div className="eventThumbnail">  
+          <h3>{capitalize(event.shortName, true)}</h3>
+          <div className="eventThumbnail-flexbox">
+              <img 
+                className="eventThumbnail-image" 
+                src={backgroundImage}
+              />
+              <img 
+                className="eventThumbnail-player-pfp" 
+                src={`https://cdn.discordapp.com/avatars/${winner.id}/${winner.avatar}.webp`} 
+                onError={(e) => {
+                        e.target.onerror = null
+                        e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"
+                    }
+                }
+              />
+              <img 
+                className="eventThumbnail-image" 
+                src={communityLogo} 
+              />
+          </div>
         </div>
       </Link>
     </div>
