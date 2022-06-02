@@ -19,7 +19,7 @@ const {
     icarus, jdrag, kalut, koala, kmdrago, kristya, lacooda, laquari, lastturn, lava, leftarm, leftleg, 
     life, limiter, llab, lonefire, luminous, lv2, mali, manju, mask, mataza, meanae, 
     megamorph, meta, mezuki, mimic, miracle, mjar, mobius, mof, monk, moray, motr, natures, necrofear, necrovalley, 
-    needle, nightass, oath, panda, poison, purity, queen, quickdraw, raiza, rat, reasoning, recharge, redmd, 
+    needle, nightass, oath, panda, poison, purity, queen, quickdraw, raiza, rat, reaper, reasoning, recharge, redmd, 
     rejuv, rekindling, relinq, remoten, rightarm, rightleg, rivalry, rftdd, rml, rota, salvo, scapegoat, scarabs, scientist, sdm, 
     serpent, shallow, sirocco, slate, slump, smoke, solemn, solidarity, sorc, soulex, soulrel, 
     spy, ssunited, stein, storm, stealth, strike, swapfrog, taiyou, tdrag, tethys, thanksgiving, thestalos, tiger, 
