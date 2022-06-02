@@ -1453,7 +1453,7 @@ const getDeckType = (raw, format = 'Goat') => {
         (ydk[queen] && ydk[archfiend]) ? 'Archfiend' :
         (ydk[necrofear] && (ydk[germ] || ydk[slate])) ? 'Fiend' :
         (ydk[yata] && (ydk[zaloog] || ydk[reaper])) ? 'Hand Control' :
-        ((format == 'Yata' || format == 'Vampire') && ydk[ddwl] && ydk[rota] && (ydk[spy] || ydk[tomato])) ? 'Warrior Control' :
+        (ydk[ddwl] >= 2 && ydk[rota] && (ydk[spy] || ydk[tomato])) ? 'Warrior Control' :
         (ydk[cat] >= 2 && ydk[wicked] >= 2) ? 'Cat Control' :
         (ydk[ben_kei] >= 2 && (ydk[trunade] >= 2 || ydk[decree] >= 2)) ? 'Ben Kei OTK' :
         (ydk[stein] >= 2 && ydk[gate] >= 2) ? 'Stein Gate Turbo' :
