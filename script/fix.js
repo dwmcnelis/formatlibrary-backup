@@ -11,19 +11,19 @@ const { capitalize, arrayToObject } = require('../functions/utility')
 const { goatformatChallongeAPIKey, formatLibraryChallongeAPIKey, tcgPlayerAPI } = require('../secrets')
 const { 
     accum, aggolem, airbellum, alius, alo, angel, archfiend, arma, artemis, barrel, bazoo, ben_kei, bfadd, bigbang, bigshield, blade,
-    boomboxen, brain, bushi, bwc, caius, canceller, cannon, cardd, cat, celfon, chariot, clown, codarus, coelacanth, coin, collapse, 
-    consonance, convulsion, countdown, cstrike, cyjar, dad, dda, ddwl, debris, decree, desserts, detonation, difu, diva, dmoc, drain, 
-    drastic, driver, duplication, economics, ecto, emissary, emmersblade, exodia, faultroll, fert, fire, firedog, fishborg, 
-    fortress, freed, fulhelm, fusi, fusiongate, garden, gate, gateway, gbind, gearframe, gearfried, ggadget, gigantes, 
+    boomboxen, brain, bushi, bwc, caius, canceller, cannon, cardd, cat, catapult, celfon, chariot, codarus, coelacanth, 
+    consonance, convulsion, countdown, cstrike, cyjar, dad, dda, ddwl, debris, decree, desserts, difu, diva, dmoc, drain, 
+    drastic, driver, duplication, economics, emissary, emmersblade, exodia, faultroll, fert, fire, firedog, fishborg, 
+    fortress, freed, fulhelm, fusi, fusiongate, garden, gate, gateway, gbind, gearframe, gearfried, germ, ggadget, gigantes, 
     gkass, gkspear, goblin, gobzomb, gorilla, gotss, gozen, granmarg, grepher, gspark, hblast, horus6, horus8, 
-    hugerev, icarus, insect, jdrag, kalut, koala, kmdrago, kristya, lacooda, laquari, lastturn, lava, leftarm, leftleg, 
-    life, limiter, llab, lonefire, luminous, lv2, mali, manju, mask, mataza, mazera, meanae, 
-    megamorph, meta, mezuki, mimic, miracle, mjar, mobius, mof, monk, moray, motr, natures, necrovalley, 
-    needle, nightass, oath, panda, pandemonium, pixie, poison, purity, pyrlight, quickdraw, raiza, rat, reasoning, recharge, redmd, 
-    rejuv, rekindling, relinq, remoten, rightarm, rightleg, rivalry, rftdd, rml, rota, salvo, scapegoat, scarabs, sdm, 
-    serpent, shallow, silent, sirocco, skull, slump, smackdown, smoke, solemn, solidarity, sorc, soulex, soulrel, 
-    spy, ssunited, stein, storm, stealth, strike, susa, swapfrog, taiyou, tdrag, tethys, thanksgiving, thestalos, tiger, 
-    tomato, tooncannon, toonelf, tradein, treeborn, trio, trunade, tsuk, tuningware, turtle, underdog, valhalla, vayu, vrocket, 
+    icarus, jdrag, kalut, koala, kmdrago, kristya, lacooda, laquari, lastturn, lava, leftarm, leftleg, 
+    life, limiter, llab, lonefire, luminous, lv2, mali, manju, mask, mataza, meanae, 
+    megamorph, meta, mezuki, mimic, miracle, mjar, mobius, mof, monk, moray, motr, natures, necrofear, necrovalley, 
+    needle, nightass, oath, panda, poison, purity, queen, quickdraw, raiza, rat, reasoning, recharge, redmd, 
+    rejuv, rekindling, relinq, remoten, rightarm, rightleg, rivalry, rftdd, rml, rota, salvo, scapegoat, scarabs, scientist, sdm, 
+    serpent, shallow, sirocco, slate, slump, smoke, solemn, solidarity, sorc, soulex, soulrel, 
+    spy, ssunited, stein, storm, stealth, strike, swapfrog, taiyou, tdrag, tethys, thanksgiving, thestalos, tiger, 
+    tomato, tooncannon, tradein, treeborn, trio, trunade, tsuk, tuningware, turtle, underdog, valhalla, vayu, vrocket, 
     whirlwind, wicked, will, wmc, worl, zanji, zombyra, zorc
 } = require('../static/cards.json')
 
@@ -1448,207 +1448,109 @@ const getDeckType = (raw, format = 'goat') => {
     const arr = main.split('\n').filter(el => el.charAt(0) !== '#' && el.charAt(0) !== '!' && el !== '').sort()
     const ydk = arrayToObject(arr)
 
-    const deckType = format.toLowerCase() === 'goat' ? (
-            (ydk[collapse] >= 2 || ydk[insect] >= 2  || ydk[susa] >= 2 || ydk[toonelf] >= 2 || ydk[mazera] >= 2 || ydk[pixie] >= 2 || ydk[ecto] >= 2 || ydk[silent] >= 2 || ydk[skull] >= 2 || ydk[hugerev] >= 2 || ydk[pandemonium] >= 2 || ydk[smackdown] >= 2 || ydk[pyrlight] >= 2 || ydk[clown] >= 2 || ydk[coin] >= 2) ? 'Other' :
-            (ydk[cat] >= 2 && ydk[will] >= 2 && (ydk[trunade] >= 2 || ydk[decree] >= 2)) ? 'Cat OTK' :
-            (ydk[cat] >= 2 && ydk[wicked] >= 2) ? 'Cat Control' :
-            (ydk[ben_kei] >= 2 && (ydk[trunade] >= 2 || ydk[decree] >= 2)) ? 'Ben Kei OTK' :
-            (ydk[stein] >= 2 && ydk[gate] >= 2) ? 'Stein Gate Turbo' :
-            (ydk[stein] >= 2  && !ydk[cat] && (ydk[megamorph] || ydk[natures] || ydk[thanksgiving]) && (ydk[trunade] >= 2 || ydk[decree] >= 2)) ? 'Stein OTK' :
-            (ydk[cyjar] && ydk[cardd] && ydk[taiyou] && ydk[shallow]) ? 'Empty Jar' :
-            (ydk[rml] >= 2 && ydk[oath] >= 2 && ydk[convulsion] >= 2 && ydk[trunade] >= 2) ? 'Library FTK' :
-            (ydk[exodia] && ydk[leftarm] && ydk[rightarm] && ydk[leftleg] && ydk[rightleg]) ? 'Exodia' :
-            (!ydk[meta] && !ydk[scapegoat] && (ydk[turtle] >= 2 || ydk[life] >= 2 || (ydk[turtle] && ydk[life]))) ? 'Zombie' :
-            (ydk[horus6] && ydk[meta] && ydk[scapegoat]) ? 'Horus Control' :
-            (ydk[horus8] && ydk[horus6] && !ydk[scapegoat]) ? 'Horus Turbo' :
-            (ydk[relinq] >= 2) ? 'Relinquished' :
-            (ydk[zorc] >= 2) ? 'Zorc' :
-            (ydk[lastturn] == 2) ? 'Last Turn' :
-            (ydk[countdown] >= 2) ? 'Final Countdown' :
-            (ydk[slump] >= 2) ? 'Heavy Slump' :
-            (ydk[emissary] >= 2 && ydk[meta] >= 2) ? 'Emissary Control' :
-            (ydk[emissary] >= 2 && (!ydk[meta] || ydk[meta] <= 1)) ? 'Emissary Beat' :
-            (ydk[needle] >= 2 && (ydk[llab] || ydk[gbind] || ydk[worl])) ? 'Stall Deckout' :
-            (ydk[meanae] >= 2) ? 'Dark Scorpion' :
-            (ydk[strike] >= 2) ? 'Strike Ninja' :
-            (ydk[dmoc] && ydk[economics] && (ydk[driver] || ydk[cannon] || ydk[tooncannon])) ? 'Economics FTK' :
-            (ydk[fusiongate] >= 2) ? 'Fusion Gate Turbo' :
-            (ydk[reasoning] && ydk[gate] && !ydk[economics]) ? 'Reasoning Gate Turbo' :
-            ((ydk[bazoo] >= 2 || ydk[sorc] >= 2 || ydk[freed] >= 2 || ydk[strike] >= 2 || ydk[purity] >= 2 || ydk[soulrel] >= 2) && ydk[difu] >= 2) ? 'Dimension Fusion Turbo' :
-            (ydk[limiter] >= 2) ? 'Machine' :
-            ((ydk[freed] >= 2 || ydk[purity]) && ydk[rftdd] && !ydk[manju]) ? 'Light Return' :
-            ((ydk[freed] >= 2 || ydk[luminous] || ydk[purity] >= 2) && !ydk[rftdd] && !ydk[manju]) ? 'Light Beat' :    
-            (ydk[gearfried] >= 2 && (ydk[smoke] >= 2 || ydk[bwc] >= 2)) ? 'Gearfried' :
-            (ydk[archfiend] >= 2 && (ydk[underdog] || ydk[drain])) ? 'Vanilla Beat' :
-            ((ydk[zombyra] >= 2 || ydk[gorilla] >= 2 || ydk[goblin] >= 2 || ydk[fusi] >= 2 || ydk[sdm] >= 2) && ydk[drain] >= 2) ? 'Drain Beat' :
-            ((ydk[dda] >= 2 || ydk[rat] >= 2) && ydk[gigantes] && !ydk[lacooda] && !ydk[scapegoat]) ? 'Earth Beat' :
-            (ydk[panda] && ydk[rat] && ydk[trio]) ? 'Panda Burn' :
-            (!ydk[panda] && !ydk[scarabs] && (ydk[llab] || ydk[gbind] || ydk[worl]) && (ydk[wmc] >= 2 || ydk[lava] >= 2 || ydk[stealth] >= 2)) ? 'Stall Burn' :
-            (ydk[tsuk] >= 2 && (ydk[lacooda] >= 2 || ydk[mask] >= 2 || ydk[mimic] >= 2) && ydk[solemn] >= 2 && !ydk[scapegoat] && !ydk[meta] && !ydk[soulex] && !ydk[manju]) ? 'Flip Control' :
-            (ydk[drain] >= 2 && !ydk[lacooda] && !ydk[scarabs] && (ydk[barrel] || ydk[desserts] || ydk[wmc] || ydk[lava])) ? 'Drain Burn' :
-            (ydk[spy] && ydk[necrovalley] && (ydk[gkass] || ydk[gkspear])) ? 'Gravekeeper' :
-            (ydk[lacooda] && ydk[scarabs] && (ydk[gbind] || ydk[llab] || ydk[worl])) ? 'PACMAN' :
-            (ydk[scapegoat] && ydk[meta] && ydk[soulex] >= 2) ? 'Soul Control' :
-            ((ydk[thestalos] >= 2 || ydk[mobius] >= 2 || ydk[granmarg] >= 2) && (ydk[brain] >= 2 || ydk[soulex] >= 2 || (ydk[brain] && ydk[soulex]))) ? 'Monarch' :
-            (ydk[sorc] && ydk[rftdd] && (!ydk[angel] || !ydk[tomato]) && !ydk[serpent] && (!ydk[nightass] || ydk[nightass] <= 1)) ? 'Chaos Return' :
-            (ydk[bazoo] >= 2 && ydk[rftdd]) ? 'Bazoo Return' :
-            (ydk[canceller] >= 2 && ydk[solemn] >= 2) ? 'Canceller Stun' :
-            (ydk[tiger] >= 2 && ydk[solemn] >= 2) ? 'Tiger Stun' :
-            (ydk[scapegoat] && ydk[meta] && (ydk[wmc] >= 2 || ydk[lava] >= 2 || ydk[trio] >= 2 || ydk[stealth] >= 2)) ? 'Goat Burn' :
-            (ydk[mataza] >= 2 && (ydk[koala] >= 2 || ydk[spy] >= 2) && ydk[storm]) ? 'Mataza Burn' :
-            ((!ydk[llab] || ydk[llab] <= 1) && (!ydk[gbind] || ydk[gbind] <= 1) && (!ydk[worl] || ydk[worl] <= 1) && (ydk[koala] >= 2 || ydk[bigshield] >= 2) && (ydk[barrel] >= 2 || ydk[fire] >= 2 || ydk[poison] >= 2)) ? 'Speed Burn' :
-            (ydk[sorc] && ydk[tomato] && ydk[angel] && !ydk[scapegoat] && !ydk[meta]) ? 'Chaos Recruiter' :
-            (ydk[sorc] && ydk[rota] && ydk[solemn] >= 2) ? 'Chaos Warrior' :
-            (!ydk[sorc] && ydk[rota] && (ydk[blade] || ydk[ddwl] || ydk[lv2]) && ydk[solemn] >= 2 && !ydk[llab] && !ydk[gbind] && !ydk[worl] && !ydk[freed]) ? 'Warrior' :
-            (ydk[sorc] && ydk[tdrag] == 3 && ydk[mof] && !ydk[scapegoat]) ? 'Chaos Turbo' :
-            (ydk[sorc] && ydk[scapegoat] && ydk[meta]) ? 'Chaos Control' :
-            (!ydk[sorc] && ydk[scapegoat] && ydk[meta] && (!ydk[bigbang] || ydk[bigbang] <= 1)) ? 'Goat Control' :
-            'Other'
-        ) : format.toLowerCase() === 'edison' ? (
-            (ydk[kalut] && ydk[whirlwind] && ydk[icarus]) ? 'Blackwing' :
-            (ydk[accum] && ydk[cstrike] && ydk[detonation]) ? 'Chain Burn' :
-            (ydk[diva] && ydk[mali] && ydk[miracle]) ? 'Diva Hero' :
-            (ydk[alius] && (ydk[gspark] || ydk[hblast])) ? 'Hero Beat' :
-            (ydk[redmd] && ydk[kmdrago] && !ydk[consonance] && !ydk[rejuv]) ? 'Dragon Beat' :
-            (ydk[redmd] && ydk[consonance] && ydk[tradein] && !ydk[exodia]) ? 'Dragon Turbo' :
-            (ydk[boomboxen] && ydk[celfon] && ydk[remoten]) ? 'Morphtronic' :
-            (ydk[consonance] && ydk[rejuv] && ydk[exodia]) ? 'Exodia FTK' :
-            (ydk[artemis] && ydk[drastic]) ? 'Counter Fairy' :
-            (ydk[kristya] && ydk[ddwl] && ydk[angel]) ? 'Fairy Control' :
-            (ydk[kristya] && ydk[tethys] && ydk[valhalla]) ? 'Fairy Turbo' :
-            (ydk[kristya] && !ydk[tethys] && ydk[rivalry] && ydk[gozen]) ? 'Fairy Stun' :
-            (ydk[coelacanth] && ydk[fishborg] && ydk[moray]) ? 'Fish OTK' :
-            (ydk[firedog] && ydk[spy] && ydk[rekindling]) ? 'Flamvell' :
-            (ydk[swapfrog] && ydk[miracle]) ? 'Hero Frog' :
-            (ydk[swapfrog] && ydk[diva] && !ydk[miracle]) ? 'Diva Frog' :
-            (ydk[swapfrog] && ydk[caius] && (ydk[raiza] || ydk[mobius] || ydk[thestalos]) && !ydk[diva]) ? 'Frog Monarch' :
-            (ydk[ggadget] && !ydk[gearframe]) ? 'Gadget' :
-            (ydk[ggadget] && ydk[gearframe] && ydk[fortress]) ? 'Machina Gadget' :
-            (ydk[aggolem] && ydk[gearframe] && ydk[fortress]) ? 'Ancient Gear Machina' :
-            (ydk[gearframe] && ydk[fortress] && !ydk[aggolem] && !ydk[ggadget]) ? 'Machina' :
-            (ydk[laquari] && ydk[chariot]) ? 'Gladiator Beast' :
-            (ydk[jdrag] && ydk[recharge]) ? 'Lightsworn' :
-            (ydk[lonefire] && ydk[quickdraw] && ydk[debris] && !ydk[airbellum] && !ydk[jdrag] && !ydk[gobzomb] && !ydk[rekindling] && !ydk[duplication]) ? 'Quickdraw Plant' :
-            (ydk[lonefire] && ydk[airbellum] && ydk[debris]) ? 'Saber Plant' :
-            (ydk[vrocket] && ydk[quickdraw]) ? 'Volcanic Quickdraw' :
-            (ydk[quickdraw] && ydk[firedog] && ydk[rekindling]) ? 'Flamvell Quickdraw' :
-            (ydk[quickdraw] && ydk[tuningware] && ydk[duplication]) ? 'Quickdraw Machine' :
-            (ydk[quickdraw] && ydk[gobzomb] && ydk[mezuki]) ? 'Quickdraw Zombie' :
-            (ydk[diva] && ydk[gobzomb] && ydk[mezuki]) ? 'Diva Zombie' :
-            (!ydk[quickdraw] && !ydk[diva] && ydk[gobzomb] && ydk[mezuki]) ? 'Zombie' :
-            (ydk[gotss] && ydk[zanji] && ydk[gateway] && ydk[ssunited]) ? 'Six Samurai' :
-            (ydk[cat] && ydk[monk] && ydk[airbellum] && ydk[spy]) ? 'Synchro Cat' :
-            (ydk[sorc] && ydk[dad] && ydk[recharge]) ? 'Chaos Lightsworn' :
-            (ydk[caius] && ydk[treeborn] && ydk[recharge]) ? 'Lightsworn Monarch' :
-            (ydk[vayu] >= 2 && ydk[sirocco] && (ydk[arma] || ydk[grepher]) && ydk[bfadd]) ? 'Vayu Turbo' :
-            (ydk[vrocket] && ydk[garden] && !ydk[caius] && !ydk[quickdraw]) ? 'Volcanic Garden' : 
-            (ydk[vrocket] && ydk[caius] && !ydk[garden] && !ydk[quickdraw]) ? 'Volcanic Monarch' : 
-            (ydk[emmersblade] && ydk[faultroll] && ydk[fulhelm]) ? 'X-Saber' : 
-            (ydk[necrovalley] && ydk[spy] && ydk[wmc]) ? 'Gravekeeper Burn' : 
-            (ydk[salvo] && ydk[dad]) ? 'Salvo DAD' : 
-            (ydk[lonefire] && (ydk[fert] || ydk[motr]) && !ydk[quickdraw]) ? 'Plant' : 
-            (ydk[codarus] && ydk[alo]) ? 'Codarus' :
-            (ydk[bushi] && ydk[rota] && ydk[solidarity]) ? 'Bushi' : 
-            'Other' 
-        ) : (
-            (ydk[cat] >= 2 && ydk[wicked] >= 2) ? 'Cat Control' :
-            (ydk[ben_kei] >= 2 && (ydk[trunade] >= 2 || ydk[decree] >= 2)) ? 'Ben Kei OTK' :
-            (ydk[stein] >= 2 && ydk[gate] >= 2) ? 'Stein Gate Turbo' :
-            (ydk[stein] >= 2 && !ydk[cat] && (ydk[megamorph] || ydk[natures] || ydk[thanksgiving]) && (ydk[trunade] >= 2 || ydk[decree] >= 2)) ? 'Stein OTK' :
-            ((ydk[cyjar] || ydk[mjar]) && ydk[cardd] && ydk[taiyou] && ydk[shallow]) ? 'Empty Jar' :
-            (ydk[rml] >= 2 && ydk[oath] >= 2 && ydk[convulsion] >= 2 && ydk[trunade] >= 2) ? 'Library FTK' :
-            (ydk[exodia] && ydk[leftarm] && ydk[rightarm] && ydk[leftleg] && ydk[rightleg]) ? 'Exodia' :
-            (!ydk[meta] && !ydk[scapegoat] && (ydk[turtle] >= 2 || ydk[life] >= 2 || (ydk[turtle] && ydk[life]))) ? 'Zombie' :
-            (ydk[horus6] && ydk[meta] && ydk[scapegoat]) ? 'Horus Control' :
-            (ydk[horus8] && ydk[horus6] && !ydk[scapegoat]) ? 'Horus Turbo' :
-            (ydk[relinq] >= 2) ? 'Relinquished' :
-            (ydk[zorc] >= 2) ? 'Zorc' :
-            (ydk[lastturn] == 2) ? 'Last Turn' :
-            (ydk[countdown] >= 2) ? 'Final Countdown' :
-            (ydk[slump] >= 2) ? 'Heavy Slump' :
-            (ydk[emissary] >= 2 && ydk[meta] >= 2) ? 'Emissary Control' :
-            (ydk[emissary] >= 2 && (!ydk[meta] || ydk[meta] <= 1)) ? 'Emissary Beat' :
-            (ydk[needle] >= 2 && (ydk[llab] || ydk[gbind] || ydk[worl])) ? 'Stall Deckout' :
-            (ydk[meanae] >= 2) ? 'Dark Scorpion' :
-            (ydk[strike] >= 2) ? 'Strike Ninja' :
-            (ydk[dmoc] && ydk[economics] && (ydk[driver] || ydk[cannon] || ydk[tooncannon])) ? 'Economics FTK' :
-            (ydk[fusiongate] >= 2) ? 'Fusion Gate Turbo' :
-            (ydk[reasoning] && ydk[gate] && !ydk[economics]) ? 'Reasoning Gate Turbo' :
-            ((ydk[bazoo] >= 2 || ydk[sorc] >= 2 || ydk[freed] >= 2 || ydk[strike] >= 2 || ydk[purity] >= 2 || ydk[soulrel] >= 2) && ydk[difu] >= 2) ? 'Dimension Fusion Turbo' :
-            (ydk[limiter]) ? 'Machine' :
-            ((ydk[freed] >= 2 || ydk[purity]) && ydk[rftdd] && !ydk[manju]) ? 'Light Return' :
-            ((ydk[freed] >= 2 || ydk[luminous] || ydk[purity] >= 2) && !ydk[rftdd] && !ydk[manju]) ? 'Light Beat' :    
-            (ydk[gearfried] >= 2 && (ydk[smoke] >= 2 || ydk[bwc] >= 2)) ? 'Gearfried' :
-            (ydk[archfiend] >= 2 && (ydk[underdog] || ydk[drain])) ? 'Vanilla Beat' :
-            ((ydk[zombyra] >= 2 || ydk[gorilla] >= 2 || ydk[goblin] >= 2 || ydk[fusi] >= 2 || ydk[sdm] >= 2) && ydk[drain] >= 2) ? 'Drain Beat' :
-            ((ydk[dda] >= 2 || ydk[rat] >= 2) && ydk[gigantes] && !ydk[lacooda] && !ydk[scapegoat]) ? 'Earth Beat' :
-            (ydk[panda] && ydk[rat] && ydk[trio]) ? 'Panda Burn' :
-            (!ydk[panda] && !ydk[scarabs] && (ydk[llab] || ydk[gbind] || ydk[worl]) && (ydk[wmc] >= 2 || ydk[lava] >= 2 || ydk[stealth] >= 2)) ? 'Stall Burn' :
-            (ydk[tsuk] >= 2 && (ydk[lacooda] >= 2 || ydk[mask] >= 2 || ydk[mimic] >= 2) && ydk[solemn] >= 2 && !ydk[scapegoat] && !ydk[meta] && !ydk[soulex] && !ydk[manju]) ? 'Flip Control' :
-            (ydk[drain] >= 2 && !ydk[lacooda] && !ydk[scarabs] && (ydk[barrel] || ydk[desserts] || ydk[wmc] || ydk[lava])) ? 'Drain Burn' :
-            (ydk[spy] && ydk[necrovalley] && (ydk[gkass] || ydk[gkspear])) ? 'Gravekeeper' :
-            (ydk[lacooda] && ydk[scarabs] && (ydk[gbind] || ydk[llab] || ydk[worl])) ? 'PACMAN' :
-            (ydk[scapegoat] && ydk[meta] && ydk[soulex] >= 2) ? 'Soul Control' :
-            ((ydk[thestalos] >= 2 || ydk[mobius] >= 2 || ydk[granmarg] >= 2) && (ydk[brain] >= 2 || ydk[soulex] >= 2 || (ydk[brain] && ydk[soulex]))) ? 'Monarch' :
-            (ydk[sorc] && ydk[rftdd] && (!ydk[angel] || !ydk[tomato]) && !ydk[serpent] && (!ydk[nightass] || ydk[nightass] <= 1)) ? 'Chaos Return' :
-            (ydk[bazoo] >= 2 && ydk[rftdd]) ? 'Bazoo Return' :
-            (ydk[canceller] >= 2 && ydk[solemn] >= 2) ? 'Canceller Stun' :
-            (ydk[tiger] >= 2 && ydk[solemn] >= 2) ? 'Tiger Stun' :
-            (ydk[scapegoat] && ydk[meta] && (ydk[wmc] >= 2 || ydk[lava] >= 2 || ydk[trio] >= 2 || ydk[stealth] >= 2)) ? 'Goat Burn' :
-            (ydk[mataza] >= 2 && (ydk[koala] >= 2 || ydk[spy] >= 2) && ydk[storm]) ? 'Mataza Burn' :
-            ((!ydk[llab] || ydk[llab] <= 1) && (!ydk[gbind] || ydk[gbind] <= 1) && (!ydk[worl] || ydk[worl] <= 1) && (ydk[koala] >= 2 || ydk[bigshield] >= 2) && (ydk[barrel] >= 2 || ydk[fire] >= 2 || ydk[poison] >= 2)) ? 'Speed Burn' :
-            (ydk[sorc] && ydk[tomato] && ydk[angel] && !ydk[scapegoat] && !ydk[meta]) ? 'Chaos Recruiter' :
-            (ydk[sorc] && ydk[rota] && ydk[solemn] >= 2) ? 'Chaos Warrior' :
-            (!ydk[sorc] && ydk[rota] && (ydk[blade] || ydk[ddwl] || ydk[lv2]) && ydk[solemn] >= 2 && !ydk[llab] && !ydk[gbind] && !ydk[worl] && !ydk[freed]) ? 'Warrior' :
-            (ydk[sorc] && ydk[tdrag] == 3 && ydk[mof] && !ydk[scapegoat]) ? 'Chaos Turbo' :
-            (ydk[sorc] && ydk[scapegoat] && ydk[meta]) ? 'Chaos Control' :
-            (!ydk[sorc] && ydk[scapegoat] && ydk[meta] && (!ydk[bigbang] || ydk[bigbang] <= 1)) ? 'Goat Control' :
-            (ydk[kalut] && ydk[whirlwind] && ydk[icarus]) ? 'Blackwing' :
-            (ydk[accum] && ydk[cstrike]) ? 'Chain Burn' :
-            (ydk[diva] && ydk[mali] && ydk[miracle]) ? 'Diva Hero' :
-            (ydk[alius] && (ydk[gspark] || ydk[hblast])) ? 'Hero Beat' :
-            (ydk[redmd] && ydk[kmdrago] && !ydk[consonance] && !ydk[rejuv]) ? 'Dragon Beat' :
-            (ydk[redmd] && ydk[consonance] && ydk[tradein] && !ydk[exodia]) ? 'Dragon Turbo' :
-            (ydk[boomboxen] && ydk[celfon] && ydk[remoten]) ? 'Morphtronic' :
-            (ydk[consonance] && ydk[rejuv] && ydk[exodia]) ? 'Exodia FTK' :
-            (ydk[artemis] && ydk[drastic]) ? 'Counter Fairy' :
-            (ydk[kristya] && ydk[ddwl] && ydk[angel]) ? 'Fairy Control' :
-            (ydk[kristya] && ydk[tethys] && ydk[valhalla]) ? 'Fairy Turbo' :
-            (ydk[kristya] && !ydk[tethys] && ydk[rivalry] && ydk[gozen]) ? 'Fairy Stun' :
-            (ydk[coelacanth] && ydk[fishborg] && ydk[moray]) ? 'Fish OTK' :
-            (ydk[firedog] && ydk[spy] && ydk[rekindling]) ? 'Flamvell' :
-            (ydk[swapfrog] && ydk[miracle]) ? 'Hero Frog' :
-            (ydk[swapfrog] && ydk[diva] && !ydk[miracle]) ? 'Diva Frog' :
-            (ydk[swapfrog] && ydk[caius] && (ydk[raiza] || ydk[mobius] || ydk[thestalos]) && !ydk[diva]) ? 'Frog Monarch' :
-            (ydk[ggadget] && !ydk[gearframe]) ? 'Gadget' :
-            (ydk[ggadget] && ydk[gearframe] && ydk[fortress]) ? 'Machina Gadget' :
-            (ydk[aggolem] && ydk[gearframe] && ydk[fortress]) ? 'Ancient Gear Machina' :
-            (ydk[gearframe] && ydk[fortress] && !ydk[aggolem] && !ydk[ggadget]) ? 'Machina' :
-            (ydk[laquari] && ydk[chariot]) ? 'Gladiator Beast' :
-            (ydk[jdrag] && ydk[recharge]) ? 'Lightsworn' :
-            (ydk[lonefire] && ydk[quickdraw] && ydk[debris] && !ydk[airbellum] && !ydk[jdrag] && !ydk[gobzomb] && !ydk[rekindling] && !ydk[duplication]) ? 'Quickdraw Plant' :
-            (ydk[lonefire] && ydk[airbellum] && ydk[debris]) ? 'Saber Plant' :
-            (ydk[vrocket] && ydk[quickdraw]) ? 'Volcanic Quickdraw' :
-            (ydk[quickdraw] && ydk[firedog] && ydk[rekindling]) ? 'Flamvell Quickdraw' :
-            (ydk[quickdraw] && ydk[tuningware] && ydk[duplication]) ? 'Quickdraw Machine' :
-            (ydk[quickdraw] && ydk[gobzomb] && ydk[mezuki]) ? 'Quickdraw Zombie' :
-            (ydk[diva] && ydk[gobzomb] && ydk[mezuki]) ? 'Diva Zombie' :
-            (!ydk[quickdraw] && !ydk[diva] && ydk[gobzomb] && ydk[mezuki]) ? 'Zombie' :
-            (ydk[gotss] && ydk[zanji] && ydk[gateway] && ydk[ssunited]) ? 'Six Samurai' :
-            (ydk[cat] && ydk[monk] && ydk[airbellum] && ydk[spy]) ? 'Synchro Cat' :
-            (ydk[sorc] && ydk[dad] && ydk[recharge]) ? 'Chaos Lightsworn' :
-            (ydk[caius] && ydk[treeborn] && ydk[recharge]) ? 'Lightsworn Monarch' :
-            (ydk[vayu] >= 2 && ydk[sirocco] && (ydk[arma] || ydk[grepher]) && ydk[bfadd]) ? 'Vayu Turbo' :
-            (ydk[vrocket] && ydk[garden] && !ydk[caius] && !ydk[quickdraw]) ? 'Volcanic Garden' : 
-            (ydk[vrocket] && ydk[caius] && !ydk[garden] && !ydk[quickdraw]) ? 'Volcanic Monarch' : 
-            (ydk[emmersblade] && ydk[faultroll] && ydk[fulhelm]) ? 'X-Saber' : 
-            (ydk[necrovalley] && ydk[spy] && ydk[wmc]) ? 'Gravekeeper Burn' : 
-            (ydk[salvo] && ydk[dad]) ? 'Salvo DAD' : 
-            (ydk[lonefire] && (ydk[fert] || ydk[motr]) && !ydk[quickdraw]) ? 'Plant' : 
-            (ydk[codarus] && ydk[alo]) ? 'Codarus' :
-            (ydk[bushi] && ydk[rota] && ydk[solidarity]) ? 'Bushi' : 
-            'Other'
-        )
+    const deckType = 
+        (ydk[scientist] && ydk[catapult] && ydk[will] >= 2) ? 'Scientist FTK' :
+        (ydk[queen] && ydk[archfiend]) ? 'Archfiend' :
+        (ydk[necrofear] && (ydk[germ] || ydk[slate])) ? 'Fiend' :
+        (ydk[yata] && (ydk[don] || ydk[reaper])) ? 'Hand Control' :
+        ((format == 'yata' || format == 'vampire') && ydk[ddwl] && ydk[rota] && (ydk[spy] || ydk[tomato])) ? 'Warrior Control' :
+        (ydk[cat] >= 2 && ydk[wicked] >= 2) ? 'Cat Control' :
+        (ydk[ben_kei] >= 2 && (ydk[trunade] >= 2 || ydk[decree] >= 2)) ? 'Ben Kei OTK' :
+        (ydk[stein] >= 2 && ydk[gate] >= 2) ? 'Stein Gate Turbo' :
+        (ydk[stein] >= 2 && !ydk[cat] && (ydk[megamorph] || ydk[natures] || ydk[thanksgiving]) && (ydk[trunade] >= 2 || ydk[decree] >= 2)) ? 'Stein OTK' :
+        ((ydk[cyjar] || ydk[mjar]) && ydk[cardd] && ydk[taiyou] && ydk[shallow]) ? 'Empty Jar' :
+        (ydk[rml] >= 2 && ydk[oath] >= 2 && ydk[convulsion] >= 2 && ydk[trunade] >= 2) ? 'Library FTK' :
+        (ydk[exodia] && ydk[leftarm] && ydk[rightarm] && ydk[leftleg] && ydk[rightleg]) ? 'Exodia' :
+        (!ydk[meta] && !ydk[scapegoat] && (ydk[turtle] >= 2 || ydk[life] >= 2 || (ydk[turtle] && ydk[life]))) ? 'Zombie' :
+        (ydk[horus6] && ydk[meta] && ydk[scapegoat]) ? 'Horus Control' :
+        (ydk[horus8] && ydk[horus6] && !ydk[scapegoat]) ? 'Horus Turbo' :
+        (ydk[relinq] >= 2) ? 'Relinquished' :
+        (ydk[zorc] >= 2) ? 'Zorc' :
+        (ydk[lastturn] == 2) ? 'Last Turn' :
+        (ydk[countdown] >= 2) ? 'Final Countdown' :
+        (ydk[slump] >= 2) ? 'Heavy Slump' :
+        (ydk[emissary] >= 2 && ydk[meta] >= 2) ? 'Emissary Control' :
+        (ydk[emissary] >= 2 && (!ydk[meta] || ydk[meta] <= 1)) ? 'Emissary Beat' :
+        (ydk[needle] >= 2 && (ydk[llab] || ydk[gbind] || ydk[worl])) ? 'Stall Deckout' :
+        (ydk[meanae] >= 2) ? 'Dark Scorpion' :
+        (ydk[strike] >= 2) ? 'Strike Ninja' :
+        (ydk[dmoc] && ydk[economics] && (ydk[driver] || ydk[cannon] || ydk[tooncannon])) ? 'Economics FTK' :
+        (ydk[fusiongate] >= 2) ? 'Fusion Gate Turbo' :
+        (ydk[reasoning] && ydk[gate] && !ydk[economics]) ? 'Reasoning Gate Turbo' :
+        ((ydk[bazoo] >= 2 || ydk[sorc] >= 2 || ydk[freed] >= 2 || ydk[strike] >= 2 || ydk[purity] >= 2 || ydk[soulrel] >= 2) && ydk[difu] >= 2) ? 'Dimension Fusion Turbo' :
+        (ydk[limiter]) ? 'Machine' :
+        ((ydk[freed] >= 2 || ydk[purity]) && ydk[rftdd] && !ydk[manju]) ? 'Light Return' :
+        ((ydk[freed] >= 2 || ydk[luminous] || ydk[purity] >= 2) && !ydk[rftdd] && !ydk[manju]) ? 'Light Beat' :    
+        (ydk[gearfried] >= 2 && (ydk[smoke] >= 2 || ydk[bwc] >= 2)) ? 'Gearfried' :
+        (ydk[archfiend] >= 2 && (ydk[underdog] || ydk[drain])) ? 'Vanilla Beat' :
+        ((ydk[zombyra] >= 2 || ydk[gorilla] >= 2 || ydk[goblin] >= 2 || ydk[fusi] >= 2 || ydk[sdm] >= 2) && ydk[drain] >= 2) ? 'Drain Beat' :
+        ((ydk[dda] >= 2 || ydk[rat] >= 2) && ydk[gigantes] && !ydk[lacooda] && !ydk[scapegoat]) ? 'Earth Beat' :
+        (ydk[panda] && ydk[rat] && ydk[trio]) ? 'Panda Burn' :
+        (!ydk[panda] && !ydk[scarabs] && (ydk[llab] || ydk[gbind] || ydk[worl]) && (ydk[wmc] >= 2 || ydk[lava] >= 2 || ydk[stealth] >= 2)) ? 'Stall Burn' :
+        (ydk[tsuk] >= 2 && (ydk[lacooda] >= 2 || ydk[mask] >= 2 || ydk[mimic] >= 2) && ydk[solemn] >= 2 && !ydk[scapegoat] && !ydk[meta] && !ydk[soulex] && !ydk[manju]) ? 'Flip Control' :
+        (ydk[drain] >= 2 && !ydk[lacooda] && !ydk[scarabs] && (ydk[barrel] || ydk[desserts] || ydk[wmc] || ydk[lava])) ? 'Drain Burn' :
+        (ydk[spy] && ydk[necrovalley] && (ydk[gkass] || ydk[gkspear])) ? 'Gravekeeper' :
+        (ydk[lacooda] && ydk[scarabs] && (ydk[gbind] || ydk[llab] || ydk[worl])) ? 'PACMAN' :
+        (ydk[scapegoat] && ydk[meta] && ydk[soulex] >= 2) ? 'Soul Control' :
+        ((ydk[thestalos] >= 2 || ydk[mobius] >= 2 || ydk[granmarg] >= 2) && (ydk[brain] >= 2 || ydk[soulex] >= 2 || (ydk[brain] && ydk[soulex]))) ? 'Monarch' :
+        (ydk[sorc] && ydk[rftdd] && (!ydk[angel] || !ydk[tomato]) && !ydk[serpent] && (!ydk[nightass] || ydk[nightass] <= 1)) ? 'Chaos Return' :
+        (ydk[bazoo] >= 2 && ydk[rftdd]) ? 'Bazoo Return' :
+        (ydk[canceller] >= 2 && ydk[solemn] >= 2) ? 'Canceller Stun' :
+        (ydk[tiger] >= 2 && ydk[solemn] >= 2) ? 'Tiger Stun' :
+        (ydk[scapegoat] && ydk[meta] && (ydk[wmc] >= 2 || ydk[lava] >= 2 || ydk[trio] >= 2 || ydk[stealth] >= 2)) ? 'Goat Burn' :
+        (ydk[mataza] >= 2 && (ydk[koala] >= 2 || ydk[spy] >= 2) && ydk[storm]) ? 'Mataza Burn' :
+        ((!ydk[llab] || ydk[llab] <= 1) && (!ydk[gbind] || ydk[gbind] <= 1) && (!ydk[worl] || ydk[worl] <= 1) && (ydk[koala] >= 2 || ydk[bigshield] >= 2) && (ydk[barrel] >= 2 || ydk[fire] >= 2 || ydk[poison] >= 2)) ? 'Speed Burn' :
+        (ydk[sorc] && ydk[tomato] && ydk[angel] && !ydk[scapegoat] && !ydk[meta]) ? 'Chaos Recruiter' :
+        (ydk[sorc] && ydk[rota] && ydk[solemn] >= 2) ? 'Chaos Warrior' :
+        (!ydk[sorc] && ydk[rota] && (ydk[blade] || ydk[ddwl] || ydk[lv2]) && ydk[solemn] >= 2 && !ydk[llab] && !ydk[gbind] && !ydk[worl] && !ydk[freed]) ? 'Warrior' :
+        (ydk[sorc] && ydk[tdrag] == 3 && ydk[mof] && !ydk[scapegoat]) ? 'Chaos Turbo' :
+        (ydk[sorc] && ydk[scapegoat] && ydk[meta]) ? 'Chaos Control' :
+        (!ydk[sorc] && ydk[scapegoat] && ydk[meta] && (!ydk[bigbang] || ydk[bigbang] <= 1)) ? 'Goat Control' :
+        (ydk[kalut] && ydk[whirlwind] && ydk[icarus]) ? 'Blackwing' :
+        (ydk[accum] && ydk[cstrike]) ? 'Chain Burn' :
+        (ydk[diva] && ydk[mali] && ydk[miracle]) ? 'Diva Hero' :
+        (ydk[alius] && (ydk[gspark] || ydk[hblast])) ? 'Hero Beat' :
+        (ydk[redmd] && ydk[kmdrago] && !ydk[consonance] && !ydk[rejuv]) ? 'Dragon Beat' :
+        (ydk[redmd] && ydk[consonance] && ydk[tradein] && !ydk[exodia]) ? 'Dragon Turbo' :
+        (ydk[boomboxen] && ydk[celfon] && ydk[remoten]) ? 'Morphtronic' :
+        (ydk[consonance] && ydk[rejuv] && ydk[exodia]) ? 'Exodia FTK' :
+        (ydk[artemis] && ydk[drastic]) ? 'Counter Fairy' :
+        (ydk[kristya] && ydk[ddwl] && ydk[angel]) ? 'Fairy Control' :
+        (ydk[kristya] && ydk[tethys] && ydk[valhalla]) ? 'Fairy Turbo' :
+        (ydk[kristya] && !ydk[tethys] && ydk[rivalry] && ydk[gozen]) ? 'Fairy Stun' :
+        (ydk[coelacanth] && ydk[fishborg] && ydk[moray]) ? 'Fish OTK' :
+        (ydk[firedog] && ydk[spy] && ydk[rekindling]) ? 'Flamvell' :
+        (ydk[swapfrog] && ydk[miracle]) ? 'Hero Frog' :
+        (ydk[swapfrog] && ydk[diva] && !ydk[miracle]) ? 'Diva Frog' :
+        (ydk[swapfrog] && ydk[caius] && (ydk[raiza] || ydk[mobius] || ydk[thestalos]) && !ydk[diva]) ? 'Frog Monarch' :
+        (ydk[ggadget] && !ydk[gearframe]) ? 'Gadget' :
+        (ydk[ggadget] && ydk[gearframe] && ydk[fortress]) ? 'Machina Gadget' :
+        (ydk[aggolem] && ydk[gearframe] && ydk[fortress]) ? 'Ancient Gear Machina' :
+        (ydk[gearframe] && ydk[fortress] && !ydk[aggolem] && !ydk[ggadget]) ? 'Machina' :
+        (ydk[laquari] && ydk[chariot]) ? 'Gladiator Beast' :
+        (ydk[jdrag] && ydk[recharge]) ? 'Lightsworn' :
+        (ydk[lonefire] && ydk[quickdraw] && ydk[debris] && !ydk[airbellum] && !ydk[jdrag] && !ydk[gobzomb] && !ydk[rekindling] && !ydk[duplication]) ? 'Quickdraw Plant' :
+        (ydk[lonefire] && ydk[airbellum] && ydk[debris]) ? 'Saber Plant' :
+        (ydk[vrocket] && ydk[quickdraw]) ? 'Volcanic Quickdraw' :
+        (ydk[quickdraw] && ydk[firedog] && ydk[rekindling]) ? 'Flamvell Quickdraw' :
+        (ydk[quickdraw] && ydk[tuningware] && ydk[duplication]) ? 'Quickdraw Machine' :
+        (ydk[quickdraw] && ydk[gobzomb] && ydk[mezuki]) ? 'Quickdraw Zombie' :
+        (ydk[diva] && ydk[gobzomb] && ydk[mezuki]) ? 'Diva Zombie' :
+        (!ydk[quickdraw] && !ydk[diva] && ydk[gobzomb] && ydk[mezuki]) ? 'Zombie' :
+        (ydk[gotss] && ydk[zanji] && ydk[gateway] && ydk[ssunited]) ? 'Six Samurai' :
+        (ydk[cat] && ydk[monk] && ydk[airbellum] && ydk[spy]) ? 'Synchro Cat' :
+        (ydk[sorc] && ydk[dad] && ydk[recharge]) ? 'Chaos Lightsworn' :
+        (ydk[caius] && ydk[treeborn] && ydk[recharge]) ? 'Lightsworn Monarch' :
+        (ydk[vayu] >= 2 && ydk[sirocco] && (ydk[arma] || ydk[grepher]) && ydk[bfadd]) ? 'Vayu Turbo' :
+        (ydk[vrocket] && ydk[garden] && !ydk[caius] && !ydk[quickdraw]) ? 'Volcanic Garden' : 
+        (ydk[vrocket] && ydk[caius] && !ydk[garden] && !ydk[quickdraw]) ? 'Volcanic Monarch' : 
+        (ydk[emmersblade] && ydk[faultroll] && ydk[fulhelm]) ? 'X-Saber' : 
+        (ydk[necrovalley] && ydk[spy] && ydk[wmc]) ? 'Gravekeeper Burn' : 
+        (ydk[salvo] && ydk[dad]) ? 'Salvo DAD' : 
+        (ydk[lonefire] && (ydk[fert] || ydk[motr]) && !ydk[quickdraw]) ? 'Plant' : 
+        (ydk[codarus] && ydk[alo]) ? 'Codarus' :
+        (ydk[bushi] && ydk[rota] && ydk[solidarity]) ? 'Bushi' : 
+        'Other'
 
     return deckType
 }
