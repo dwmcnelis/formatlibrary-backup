@@ -22,11 +22,17 @@ const Routes = () => {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/home/" component={Home} />
+      <Route path="/great-library.html" component={CardTable} />
       <Route path="/great-library" component={CardTable} />
+      <Route path="/cards-by-format.html" component={CardTable} />
       <Route path="/cards-by-format" component={CardTable} />
+      <Route path="/cards-by-year.html" component={CardTable} />
       <Route path="/cards-by-year" component={CardTable} />
+      <Route path="/goat-pool.html" component={CardTable} />
+      <Route path="/goat-pool" component={CardTable} />
+      <Route path="/goat-card-pool.html" component={CardTable} />
       <Route path="/goat-card-pool" component={CardTable} />
-      <Route exact path="/cards/" component={CardTable} />
+      <Route path="/cards/" component={CardTable} />
       <Route path="/cards/:id" component={SingleCard} />
       <Route path="/goat-deck-gallery" component={DeckTable} />
       <Route exact path="/decks/" component={DeckTable} />
@@ -34,8 +40,12 @@ const Routes = () => {
       <Route exact path="/events/" component={EventTable} />
       <Route path="/events/:id" component={SingleEvent} />
       <Route path="/ban-lists" component={FormatMenu} />
-      <Route path="/goat-intro" component={FormatMenu} />
-      <Route path="/goat-history" component={FormatMenu} />
+      <Route path="/goat-intro.html" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
+      <Route path="/goat-intro" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
+      <Route path="/goat-history.html" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
+      <Route path="/goat-history" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
+      <Route path="/goat-rulings.html" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
+      <Route path="/goat-rulings" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
       <Route exact path="/formats/" component={FormatMenu} />
       <Route path="/formats/:id" component={FormatIntro} />
       <Route path="/leaderboards/:id" component={LeaderBoard} />
@@ -65,6 +75,11 @@ const Routes = () => {
       <Route exact path="/july-2014---hat"><Redirect to="/formats/HAT"/></Route>
       <Route exact path="/july-2015---djinn-lock"><Redirect to="/formats/Nekroz"/></Route>
       <Route exact path="/aug-2015---newgioh"><Redirect to="/formats/"/></Route>
+      <Route exact path="/flc1"><Redirect to="/events/FLC1"/></Route>
+      <Route exact path="/flc2"><Redirect to="/events/FLC2"/></Route>
+      <Route exact path="/flc3"><Redirect to="/events/FLC3"/></Route>
+      <Route exact path="/flc4"><Redirect to="/events/FLC4"/></Route>
+      <Route exact path="/flc5"><Redirect to="/events/FLC5"/></Route>
       <Route component={NotFound} />
     </Switch>
   )
