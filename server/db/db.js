@@ -3,7 +3,7 @@ const { pgPassword } = require('../../secrets.js')
 const pkg = require('../../package.json')
 // const fs = require('fs')
 const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
-const onAWS = true
+const onAWS = false
 const url = process.env.DATABASE_URL
   ? process.env.DATABASE_URL
   : `postgresql://danielmcnelis@localhost/${databaseName}`
