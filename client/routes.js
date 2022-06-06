@@ -21,37 +21,37 @@ const Routes = () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/home/" component={Home} />
-      <Route path="/great-library.html" component={CardTable} />
-      <Route path="/great-library" component={CardTable} />
-      <Route path="/cards-by-format.html" component={CardTable} />
-      <Route path="/cards-by-format" component={CardTable} />
-      <Route path="/cards-by-year.html" component={CardTable} />
-      <Route path="/cards-by-year" component={CardTable} />
-      <Route path="/goat-pool.html" component={CardTable} />
-      <Route path="/goat-pool" component={CardTable} />
-      <Route path="/goat-card-pool.html" component={CardTable} />
-      <Route path="/goat-card-pool" component={CardTable} />
-      <Route path="/cards/" component={CardTable} />
+      <Route exact path="/home/" component={Home} />
+      <Route exact path="/great-library.html" component={CardTable} />
+      <Route exact path="/great-library" component={CardTable} />
+      <Route exact path="/cards-by-format.html" component={CardTable} />
+      <Route exact path="/cards-by-format" component={CardTable} />
+      <Route exact path="/cards-by-year.html" component={CardTable} />
+      <Route exact path="/cards-by-year" component={CardTable} />
+      <Route exact path="/goat-pool.html" component={CardTable} />
+      <Route exact path="/goat-pool" component={CardTable} />
+      <Route exact path="/goat-card-pool.html" component={CardTable} />
+      <Route exact path="/goat-card-pool" component={CardTable} />
+      <Route exact path="/cards/" component={CardTable} />
       <Route path="/cards/:id" component={SingleCard} />
-      <Route path="/goat-deck-gallery" component={DeckTable} />
+      <Route exact path="/goat-deck-gallery" component={DeckTable} />
       <Route exact path="/decks/" component={DeckTable} />
       <Route path="/decks/:id" component={SingleDeck} />
       <Route exact path="/events/" component={EventTable} />
       <Route path="/events/:id" component={SingleEvent} />
-      <Route path="/ban-lists" component={FormatMenu} />
-      <Route path="/goat-intro.html" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
-      <Route path="/goat-intro" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
-      <Route path="/goat-history.html" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
-      <Route path="/goat-history" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
-      <Route path="/goat-rulings.html" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
-      <Route path="/goat-rulings" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
+      <Route exact path="/ban-lists" component={FormatMenu} />
+      <Route exact path="/goat-intro.html" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
+      <Route exact path="/goat-intro" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
+      <Route exact path="/goat-history.html" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
+      <Route exact path="/goat-history" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
+      <Route exact path="/goat-rulings.html" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
+      <Route exact path="/goat-rulings" component={FormatMenu}><Redirect to="/formats/Goat"/></Route>
       <Route exact path="/formats/" component={FormatMenu} />
       <Route path="/formats/:id" component={FormatIntro} />
       <Route path="/leaderboards/:id" component={LeaderBoard} />
       <Route path="/banlists/:id" component={SingleBanList} />
       <Route path="/players/:id" component={PlayerProfile} />
-      <Route path="/login" component={Login} />
+      <Route exact path="/login" component={Login} />
       <Route exact path="/may-2002---yugi-kaiba"><Redirect to="/formats/Yugi-Kaiba"/></Route>
       <Route exact path="/jul-2002---critter"><Redirect to="/formats/Critter"/></Route>
       <Route exact path="/apr-2003---android"><Redirect to="/formats/Android"/></Route>
