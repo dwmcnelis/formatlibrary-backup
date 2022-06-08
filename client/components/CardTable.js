@@ -171,9 +171,9 @@ const CardTable = () => {
     const types = Object.entries(typeParams).filter((e) => !!e[1]).map((e) => e[0])
     if (types.length) data = data.filter((d) => d.type && types.includes(d.type.toLowerCase()))
 
-    data = data.filter((d) => d.category !== 'Monster' || d.level === '?' || (d.rating >= sliders.level[0] && d.rating <= sliders.level[1]) || (d.level >= sliders.level[0] && d.level <= sliders.level[1]))
-    data = data.filter((d) => d.category !== 'Monster' || d.atk === '?' || (d.atk >= sliders.atk[0] && d.atk <= sliders.atk[1]))
-    data = data.filter((d) => d.category !== 'Monster' || d.link || d.def === '?' || (d.def >= sliders.def[0] && d.def <= sliders.def[1]))
+    if (sliders.level[0] !== 0 || sliders.level[1] !== 12) data = data.filter((d) => d.level === '?' || (d.rating >= sliders.level[0] && d.rating <= sliders.level[1]) || (d.level >= sliders.level[0] && d.level <= sliders.level[1]))
+    if (sliders.atk[0] !== 0 || sliders.atk[1] !== 5000) data = data.filter((d) => d.atk === '?' || (d.atk >= sliders.atk[0] && d.atk <= sliders.atk[1]))
+    if (sliders.def[0] !== 0 || sliders.def[1] !== 5000) data = data.filter((d) => d.link || d.def === '?' || (d.def >= sliders.def[0] && d.def <= sliders.def[1]))
     data = data.filter((d) => d.tcgDate <= cutoff)
 
     setFilteredCards(data)
@@ -360,6 +360,7 @@ const CardTable = () => {
 
   // USE EFFECT SET CUTOFF IF DATE SLIDERS CHANGE
   useEffect(() => {
+    if (format) return
     const month = sliders.month >= 10 ? sliders.month : `0${sliders.month}`
     const day = sliders.day >= 10 ? sliders.day : `0${sliders.day}`
     setCutoff(`${sliders.year}-${month}-${day}`)
