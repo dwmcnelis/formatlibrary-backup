@@ -577,6 +577,7 @@ const CardTable = () => {
                 max={12}
                 sliders = {sliders}
                 setSliders = {setSliders}
+                defaultValue = {sliders.level}
               />
               <PrettoSlider
                 id="atk"
@@ -588,6 +589,7 @@ const CardTable = () => {
                 max={5000}
                 sliders = {sliders}
                 setSliders = {setSliders}
+                defaultValue = {sliders.atk}
               />
               <PrettoSlider
                 id="def"
@@ -599,6 +601,7 @@ const CardTable = () => {
                 max={5000}
                 sliders = {sliders}
                 setSliders = {setSliders}
+                defaultValue = {sliders.def}
               />
             </div>
 
@@ -614,6 +617,7 @@ const CardTable = () => {
                 disabled={!!format.id}
                 sliders = {sliders}
                 setSliders = {setSliders}
+                defaultValue = {sliders.year}
               />
               <PrettoSlider
                 id="month"
@@ -626,6 +630,7 @@ const CardTable = () => {
                 disabled={!!format.id}
                 sliders = {sliders}
                 setSliders = {setSliders}
+                defaultValue = {sliders.month}
               />
               <PrettoSlider
                 id="day"
@@ -638,6 +643,7 @@ const CardTable = () => {
                 disabled={!!format.id}
                 sliders = {sliders}
                 setSliders = {setSliders}
+                defaultValue = {sliders.day}
               />
             </div>
           </div>
