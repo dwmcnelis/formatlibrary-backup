@@ -29,13 +29,10 @@ const CardTable = () => {
   const [advanced, setAdvanced] = useState(false)
   const [cutoff, setCutoff] = useState(`${year}-12-31`)
 
-  const [dateSliders, setDateSliders] = useState({
+  const [sliders, setSliders] = useState({
     year: year,
     month: 12,
-    day: 31
-  })
-
-  const [statsSliders, setStatsSliders] = useState({
+    day: 31,
     level: [0, 12],
     atk: [0, 5000],
     def: [0, 5000]
@@ -173,12 +170,14 @@ const CardTable = () => {
 
     const types = Object.entries(typeParams).filter((e) => !!e[1]).map((e) => e[0])
     if (types.length) data = data.filter((d) => d.type && types.includes(d.type.toLowerCase()))
-  
+
+    data = data.filter((d) => d.category !== 'Monster' || d.level === '?' || (d.rating >= sliders.level[0] && d.rating <= sliders.level[1]) || (d.level >= sliders.level[0] && d.level <= sliders.level[1]))
+    data = data.filter((d) => d.category !== 'Monster' || d.atk === '?' || (d.atk >= sliders.atk[0] && d.atk <= sliders.atk[1]))
+    data = data.filter((d) => d.category !== 'Monster' || d.link || d.def === '?' || (d.def >= sliders.def[0] && d.def <= sliders.def[1]))
     data = data.filter((d) => d.tcgDate <= cutoff)
 
     setFilteredCards(data)
     setPage(1)
-    // if (advanced) setAdvanced(false)
   }
 
   // RESET
@@ -186,18 +185,15 @@ const CardTable = () => {
     document.getElementById('format').value = ''
     document.getElementById('category').value = 'All Cards'
     document.getElementById('searchTypeSelector').value = 'name'
-    setDateSliders({
+    setSliders({
       year: year,
       month: 12,
-      day: 31
-    })
-    
-    setStatsSliders({
+      day: 31,
       level: [0, 12],
       atk: [0, 5000],
       def: [0, 5000]
     })
-
+    
     setPage(1)
     setFormat({})
     setSortBy(null)
@@ -364,13 +360,15 @@ const CardTable = () => {
 
   // USE EFFECT SET CUTOFF IF DATE SLIDERS CHANGE
   useEffect(() => {
-    setCutoff(`${dateSliders.year}-${dateSliders.month}-${dateSliders.day}`)
-  }, [dateSliders])
+    const month = sliders.month >= 10 ? sliders.month : `0${sliders.month}`
+    const day = sliders.day >= 10 ? sliders.day : `0${sliders.day}`
+    setCutoff(`${sliders.year}-${month}-${day}`)
+  }, [sliders])
 
   // USE EFFECT SEARCH IF RELEVANT STATES CHANGE
   useEffect(() => {
     search(false)
-  }, [format, cutoff, statsSliders, queryParams, groupParams, iconParams, attributeParams, typeParams])
+  }, [format, cutoff, sliders, queryParams, groupParams, iconParams, attributeParams, typeParams])
 
   const lastIndex = page * cardsPerPage
   const firstIndex = lastIndex - cardsPerPage
@@ -505,7 +503,12 @@ const CardTable = () => {
           <a
             className="searchButton"
             type="submit"
-            onClick={() => search()}
+            onClick={() => {
+                search()
+                if (advanced) setAdvanced(false)
+              }
+            }
+            
           >
             Search
           </a>
@@ -571,7 +574,8 @@ const CardTable = () => {
                 step={1}
                 min={1}
                 max={12}
-                defaultValue={statsSliders.level}
+                sliders = {sliders}
+                setSliders = {setSliders}
               />
               <PrettoSlider
                 id="atk"
@@ -581,7 +585,8 @@ const CardTable = () => {
                 step={50}
                 min={0}
                 max={5000}
-                defaultValue={statsSliders.atk}
+                sliders = {sliders}
+                setSliders = {setSliders}
               />
               <PrettoSlider
                 id="def"
@@ -591,7 +596,8 @@ const CardTable = () => {
                 step={50}
                 min={0}
                 max={5000}
-                defaultValue={statsSliders.def}
+                sliders = {sliders}
+                setSliders = {setSliders}
               />
             </div>
 
@@ -605,7 +611,8 @@ const CardTable = () => {
                 min={2002}
                 max={2022}
                 disabled={!!format.id}
-                defaultValue={dateSliders.year}
+                sliders = {sliders}
+                setSliders = {setSliders}
               />
               <PrettoSlider
                 id="month"
@@ -616,7 +623,8 @@ const CardTable = () => {
                 min={1}
                 max={12}
                 disabled={!!format.id}
-                defaultValue={dateSliders.month}
+                sliders = {sliders}
+                setSliders = {setSliders}
               />
               <PrettoSlider
                 id="day"
@@ -627,7 +635,8 @@ const CardTable = () => {
                 min={1}
                 max={31}
                 disabled={!!format.id}
-                defaultValue={dateSliders.day}
+                sliders = {sliders}
+                setSliders = {setSliders}
               />
             </div>
           </div>
@@ -764,4 +773,3 @@ const CardTable = () => {
 }
 
 export default CardTable
-

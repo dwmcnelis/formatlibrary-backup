@@ -1,11 +1,9 @@
 /* eslint-disable max-statements */
 
-import React from 'react'
-import {connect} from 'react-redux'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 import {Slider} from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import {withStyles, makeStyles} from '@material-ui/core/styles'
-import {setSliders} from '../store/sliders'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -82,9 +80,9 @@ function valuetext(value) {
   return `${value}`
 }
 
-const RangeSlider = props => {
+const RangeSlider = (props) => {
   const classes = useStyles()
-
+  const [sliders, setSliders] = useState([])
   const display = props.disabled ? 'on' : 'auto'
 
   const points =
@@ -95,11 +93,13 @@ const RangeSlider = props => {
   const [value, setValue] = React.useState(points)
 
   const handleCommit = (sliderId, newValue) => {
-    props.dispatch(setSliders({[sliderId]: newValue}))
+    setSliders({[sliderId]: newValue})
+    props.setSliders({ ...props.sliders, [sliderId]: newValue })
   }
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
+    props.setSliders({ ...props.sliders, [props.id]: newValue })
   }
 
   return (
@@ -137,10 +137,4 @@ const RangeSlider = props => {
   )
 }
 
-const mapDispatch = dispatch => ({
-  setSliders: sliders => {
-    return dispatch(setSliders(sliders))
-  }
-})
-
-export default connect(mapDispatch)(RangeSlider)
+export default RangeSlider
