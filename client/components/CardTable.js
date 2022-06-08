@@ -33,7 +33,7 @@ const CardTable = () => {
     year: year,
     month: 12,
     day: 31,
-    level: [0, 12],
+    level: [1, 12],
     atk: [0, 5000],
     def: [0, 5000]
   })
@@ -171,7 +171,7 @@ const CardTable = () => {
     const types = Object.entries(typeParams).filter((e) => !!e[1]).map((e) => e[0])
     if (types.length) data = data.filter((d) => d.type && types.includes(d.type.toLowerCase()))
 
-    if (sliders.level[0] !== 0 || sliders.level[1] !== 12) data = data.filter((d) => d.level === '?' || (d.rating >= sliders.level[0] && d.rating <= sliders.level[1]) || (d.level >= sliders.level[0] && d.level <= sliders.level[1]))
+    if (sliders.level[0] !== 1 || sliders.level[1] !== 12) data = data.filter((d) => d.level === '?' || (d.rating >= sliders.level[0] && d.rating <= sliders.level[1]) || (d.level >= sliders.level[0] && d.level <= sliders.level[1]))
     if (sliders.atk[0] !== 0 || sliders.atk[1] !== 5000) data = data.filter((d) => d.atk === '?' || (d.atk >= sliders.atk[0] && d.atk <= sliders.atk[1]))
     if (sliders.def[0] !== 0 || sliders.def[1] !== 5000) data = data.filter((d) => d.link || d.def === '?' || (d.def >= sliders.def[0] && d.def <= sliders.def[1]))
     data = data.filter((d) => d.tcgDate <= cutoff)
@@ -189,7 +189,7 @@ const CardTable = () => {
       year: year,
       month: 12,
       day: 31,
-      level: [0, 12],
+      level: [1, 12],
       atk: [0, 5000],
       def: [0, 5000]
     })
