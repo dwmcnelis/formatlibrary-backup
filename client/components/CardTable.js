@@ -275,6 +275,7 @@ const CardTable = () => {
     if (e.target.value.length) {
       const {data} = await axios.get(`/api/formats/${e.target.value}`) 
       setFormat(data.format)
+
     } else {
       setFormat({})
     }
@@ -355,7 +356,11 @@ const CardTable = () => {
 
   // USE EFFECT SET CUTOFF IF FORMAT CHANGES
   useEffect(() => {
+    const year = format.date ? parseInt(format.date.slice(0, 4)) : year
+    const month = format.date ? parseInt(format.date.slice(6, 7)) : year
+    const day = format.date ? parseInt(format.date.slice(-2)) : year
     setCutoff(format.date || `${year}-12-31`)
+    setSliders({ ...sliders, year, month, day })
   }, [format])
 
   // USE EFFECT SET CUTOFF IF DATE SLIDERS CHANGE
