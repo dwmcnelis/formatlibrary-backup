@@ -10,12 +10,10 @@ const Login = () => {
   useLayoutEffect(() => window.scrollTo(0, 0))
 
   const login = async () => {
-    const {data} = await axios.get(`/api/login/${username}/${password}`)
-    console.log('data', data)
+    const {data} = await axios.get(`/auth/login/${username}/${password}`)
     localStorage.setItem('username', data.username)
     localStorage.setItem('password', data.password)
     localStorage.setItem('isAdmin', data.isAdmin)
-    console.log('localStorage -> logged in')
   }
 
   return (

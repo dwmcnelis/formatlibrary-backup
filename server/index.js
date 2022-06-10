@@ -11,6 +11,7 @@ const session = require('express-session')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
 const api = require('./api')
+const auth = require('./auth')
 const sessionStore = new SequelizeStore({ db })
 const onAWS = fs.existsSync('certs/privkey.pem')
 const PORT = onAWS ? 443 : 8080
@@ -73,6 +74,9 @@ const createApp = () => {
 
 	// api routes
 	app.use('/api', api)
+
+	// auth routes
+	app.use('/auth', auth)
 
 	// static file-serving middleware
 	app.use(express.static(path.join(__dirname, '..', 'public')))

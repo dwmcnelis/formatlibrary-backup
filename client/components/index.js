@@ -1,5 +1,6 @@
 
 export {default as Home} from './Home'
+export {default as AdminPortal} from './AdminPortal'
 export {default as SingleEvent} from './SingleEvent'
 export {default as EventTable} from './EventTable'
 export {default as FormatIntro} from './FormatIntro'

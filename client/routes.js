@@ -2,6 +2,7 @@ import React from 'react'
 import {Redirect, Route, Switch} from 'react-router-dom'
 import {
   Home, 
+  AdminPortal,
   SingleCard, 
   CardTable,  
   SingleDeck, 
@@ -51,6 +52,7 @@ const Routes = () => {
       <Route path="/leaderboards/:id" component={LeaderBoard} />
       <Route path="/banlists/:id" component={SingleBanList} />
       <Route path="/players/:id" component={PlayerProfile} />
+      <Route exact path="/admin-portal" component={AdminPortal} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/may-2002---yugi-kaiba"><Redirect to="/formats/Yugi-Kaiba"/></Route>
       <Route exact path="/jul-2002---critter"><Redirect to="/formats/Critter"/></Route>

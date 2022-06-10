@@ -6,7 +6,7 @@ const NotFound = () => {
   useLayoutEffect(() => window.scrollTo(0, 0))
 
   return (
-    <div className="blog">
+    <div className="body">
         <div className="not-found-flexbox">
             <h1>404</h1>
             <div className="not-found-inner-flexbox">
