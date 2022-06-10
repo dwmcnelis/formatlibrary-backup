@@ -19,6 +19,8 @@ const AdminPortal = () => {
             }
         })
 
+        console.log('data', data)
+
         setIsAdmin(data.isAdmin)
       }
 

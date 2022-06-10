@@ -5,6 +5,7 @@ const {Player} = require('../db/models')
 module.exports = router
 
 router.get('/:username/:password', async (req, res, next) => {
+    console.log('req.params', req.params)
   try {
     const player = await Player.findOne({
         where: {
