@@ -776,7 +776,7 @@ h1 {
   vertical-align: middle;
 }
 
-.format-link {
+.format-link, .admin-link {
   display: inline-block;
   padding: 14px 6px 6px 54px;
   border: 1px solid #000000;
@@ -869,6 +869,7 @@ h1 {
 }
 
 .format-link,
+.admin-link,
 .typeButton {
   color: black;
   background-color: #f5f7fa;
