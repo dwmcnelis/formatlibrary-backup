@@ -5,6 +5,7 @@ const {Player} = require('../db/models')
 module.exports = router
 
 router.get('/:username/:password', async (req, res, next) => {
+    console.log('ROUTE HIT')
   try {
     const player = await Player.findOne({
         where: {
@@ -13,6 +14,7 @@ router.get('/:username/:password', async (req, res, next) => {
         }
     })
 
+    console.log('!!player', !!player)
     if (!player) return false
     const data = { isAdmin: player.admin }
     res.json(data)

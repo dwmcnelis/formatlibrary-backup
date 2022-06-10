@@ -17,6 +17,8 @@ const AdminPortal = () => {
         console.log('useEffect()')
         const checkIfAdmin = async () => {
             console.log('checkIfAdmin()')
+            console.log('username:', localStorage.getItem('username'))
+            console.log('password:', localStorage.getItem('password'))
             const {data} = await axios.get(`/auth/admin`, {
                 headers: {
                     username: localStorage.getItem('username'),
