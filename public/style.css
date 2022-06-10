@@ -337,7 +337,7 @@ h1 {
   justify-content: center;
 }
 
-.format-menu {
+.format-menu, .admin-menu {
   padding: 0% 5%;
   display: flex;
   flex-wrap: wrap;
@@ -809,7 +809,7 @@ h1 {
   vertical-align: middle;
 }
 
-.format-button {
+.format-button, .admin-button {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
