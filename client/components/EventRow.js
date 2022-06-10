@@ -9,7 +9,6 @@ import { FL, GF, EF } from '../../public/images/logos'
 /*eslint-disable*/
 const EventRow = (props) => {
   const {event} = props
-  console.log('event', event)
   const evenOrOdd = props.index % 2 ? 'even' : 'odd'
   const formatName = capitalize(event.format, true) || '?'
   const backgroundImage = emojis[formats[formatName].logo] || ''

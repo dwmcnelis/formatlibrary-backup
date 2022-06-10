@@ -67,8 +67,6 @@ const CardRow = (props) => {
   const symbol3 = category === 'Monster' && card.type ? symbols[card.type.replace(/[\s-]/g, '')] : null
   const evenOrOdd = props.index % 2 ? 'even' : 'odd'
   const filePath = `/images/cards/${card.ypdId}.jpg`
-  // const history = useHistory()
-  // const goToCard = () => history.push(``)
   
   return (
       <tr className={`${evenOrOdd}-search-results-row`}>
@@ -150,14 +148,14 @@ const CardRow = (props) => {
                   ) : (
                     <td height="25px" width="220px" />
                   )}
-                  {atk ? (
+                  {atk !== null ? (
                     <td height="25px" width="100px" style={{borderRight: '2px solid #CFDCE5'}}>
                       {'ATK: ' + atk}
                     </td>
                   ) : (
                     <td height="25px" width="100px" />
                   )}
-                  {def ? (
+                  {def !== null ? (
                     <td height="25px" width="100px" style={{borderRight: '2px solid #CFDCE5'}}>
                       {'DEF: ' + def}
                     </td>
