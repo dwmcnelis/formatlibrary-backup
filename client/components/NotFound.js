@@ -8,12 +8,7 @@ const NotFound = () => {
   return (
     <div className="body">
         <div className="not-found-flexbox">
-            <h1>404</h1>
-            <div className="not-found-inner-flexbox">
-              <img id="thinking" src="/images/emojis/thinking.png"/>
-              <p>Page not found</p>
-              <img id="thinking" src="/images/emojis/thinking.png"/>
-            </div>
+            <h1>404 - Not Found</h1>
             <img id="dig" src="/images/artworks/dig.jpg"/>
         </div>
     </div>

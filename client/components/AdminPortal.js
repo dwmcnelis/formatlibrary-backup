@@ -2,6 +2,7 @@
 /* eslint-disable max-statements */
 
 import React, { useState, useEffect, useLayoutEffect } from 'react'
+import { Link } from 'react-router-dom'
 import NotFound from './NotFound'
 import axios from 'axios'
 
@@ -16,9 +17,6 @@ const AdminPortal = () => {
     useEffect(() => {
         console.log('useEffect()')
         const checkIfAdmin = async () => {
-            console.log('checkIfAdmin()')
-            console.log('username:', localStorage.getItem('username'))
-            console.log('password:', localStorage.getItem('password'))
             const {data} = await axios.get(`/auth/admin`, {
                 headers: {
                     username: localStorage.getItem('username'),
@@ -26,7 +24,6 @@ const AdminPortal = () => {
                 }
             })
             
-            console.log('data', data)
             setIsAdmin(data.isAdmin)
         } 
 
