@@ -4,13 +4,13 @@ const {Player} = require('../db/models')
 
 module.exports = router
 
-router.get('/:username/:password', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     console.log('ROUTE HIT')
   try {
     const player = await Player.findOne({
         where: {
-            name: req.params.username,
-            password: req.params.password
+            name: req.headers.username,
+            password: req.headers.password,
         }
     })
 
