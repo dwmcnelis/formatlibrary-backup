@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+/* eslint-disable max-statements */
 
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import NotFound from './NotFound'
@@ -10,22 +12,24 @@ const AdminPortal = () => {
     // USE LAYOUT EFFECT
     useLayoutEffect(() => window.scrollTo(0, 0))
 
+    // USE EFFECT
     useEffect(() => {
-      const checkIfAdmin = async () => {
-        const {data} = await axios.get(`/auth/admin`, {
-            headers: {
-                username: localStorage.getItem('username'),
-                password: localStorage.getItem('password')
-            }
-        })
+        console.log('useEffect()')
+        const checkIfAdmin = async () => {
+            console.log('checkIfAdmin()')
+            const {data} = await axios.get(`/auth/admin`, {
+                headers: {
+                    username: localStorage.getItem('username'),
+                    password: localStorage.getItem('password')
+                }
+            })
+            
+            console.log('data', data)
+            setIsAdmin(data.isAdmin)
+        } 
 
-        console.log('data', data)
-
-        setIsAdmin(data.isAdmin)
-      }
-
-      checkIfAdmin()
-    })
+        checkIfAdmin()
+    }, [])
 
     if (isAdmin) {
         return (
