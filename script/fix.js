@@ -8,7 +8,7 @@ const sets = require('../static/sets.json')
 const { Op } = require('sequelize')
 const formats = require('../static/formats.json')
 const { capitalize, arrayToObject } = require('../functions/utility')
-const { goatformatChallongeAPIKey, formatLibraryChallongeAPIKey, tcgPlayerAPI } = require('../secrets')
+const { challongeAPIKeys, tcgPlayerAPI } = require('../secrets')
 const { 
     accum, aggolem, airbellum, alius, alo, andal, angel, archfiend, arma, artemis, barrel, batteries, bazoo, bear, ben_kei, bfadd, bigbang, bigshield, blackgarden, blade,
     bls, boomboxen, brain, bubbleman, bushi, bwc, caius, canceller, cannon, cardd, castor, cat, catapult, celfon, chariot, codarus, coelacanth, 
@@ -1585,7 +1585,7 @@ const getDeckCategory = async (name) => {
 }
 
 const createDecks = async (name, format, community, useTags = true) => {
-    const apiKey = community = 'Format Library' ? formatLibraryChallongeAPIKey : goatformatChallongeAPIKey
+    const apiKey = challongeAPIKeys[community]
     const communityUrl = community = 'Format Library' ? 'formatlibrary' : 'goatformat'
 
     try {
