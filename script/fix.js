@@ -2,7 +2,7 @@
 
 const axios = require('axios')
 const fs = require('fs')
-const { Card, Deck, DeckType, Format, Player, Print, Set, Status, Tournament } = require('../server/db/models')
+const { Card, Deck, DeckType, Format, Player, Print, Set, Stats, Status, Tournament } = require('../server/db/models')
 const ygoprodeck = require('../static/ygoprodeck.json')
 const sets = require('../static/sets.json')
 const { Op } = require('sequelize')
@@ -2100,6 +2100,18 @@ const fixYDKs = async () => {
     return console.log(`fixed ${b} deck YDKs`)
 }
 
+const fixGames = async () => {
+    const stats = await Stats.findAll()
+    for (let i = 0; i < stats.length; i++) {
+        const s = stats[i]
+        s.games = s.wins + s.losses
+        await s.save()
+    }
+
+    return console.log('fixed stats')
+}
+
+fixGames()
 // fixYDKs()
 // fixDeckCreatedAt()
 // fixCardText()
@@ -2119,7 +2131,7 @@ const fixYDKs = async () => {
 // fixFusions()
 // updateCommunities()
 // countParticipants()
-updateDeckTypes()
+// updateDeckTypes()
 // makeDeckTypes()
 // createDecks('PatreonPlayOff2', 'Goat', 'GoatFormat.com', true)
 // download()

@@ -7,7 +7,6 @@ import StatusBox from './StatusBar'
 import axios from 'axios'
 import { dateToSimple, dateToVerbose } from '../../functions/utility'
 
-
 const banlists = [
   ['may02', '2002-05-01'],
   ['jul02', '2002-07-01'],
@@ -78,7 +77,6 @@ const SingleCard = (props = {}) => {
   const [card, setCard] = useState({})
   const [statuses, setStatuses] = useState({})
   const [prints, setPrints] = useState([])
-  console.log('statuses', statuses)
 
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0))

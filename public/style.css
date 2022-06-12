@@ -776,7 +776,7 @@ h1 {
   vertical-align: middle;
 }
 
-.format-link, .admin-link {
+.format-link {
   display: inline-block;
   padding: 14px 6px 6px 54px;
   border: 1px solid #000000;
@@ -796,6 +796,55 @@ h1 {
   vertical-align: middle;
 }
 
+.admin-portal {
+  display: flex;
+  padding: 10px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+.admin-portal input {
+  margin-left: 5px;
+  line-height: 1.3;
+  font-size: 15px;
+}
+
+.admin-portal label {
+  margin-bottom: 12px;
+  line-height: 1.3;
+  font-size: 15px;
+}
+
+.admin-button, .clicked-admin-button {
+  display: flex;
+  padding: 10px;
+  border: 1px solid #000000;
+  margin: 0.2em;
+  height: 48px;
+  width: 164px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  transition: all 0.15s;
+}
+
+.clicked-admin-button {
+  color: white;
+  font-weight: 600;
+  background-color: #41474f;
+}
+
 .format-icon {
   display: inline-block;
   padding: 14px 6px 6px 54px;
@@ -809,14 +858,14 @@ h1 {
   vertical-align: middle;
 }
 
-.format-button, .admin-button {
+.format-button {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.format-link:hover {
+.format-link:hover, .admin-button:hover {
   cursor: pointer;
   color: white;
   background-color: #41474f;

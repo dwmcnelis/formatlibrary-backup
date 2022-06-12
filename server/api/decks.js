@@ -7,6 +7,19 @@ const {Op} = require('sequelize')
 module.exports = router
 
 /* eslint-disable complexity */
+router.get('/types', async (req, res, next) => {
+    try {
+        const deckTypes = await DeckType.findAll({
+            attributes: { exclude: ['createdAt', 'updatedAt'] },
+            order: [["name", "ASC"]]
+        })
+    
+        res.json(deckTypes)
+    } catch (err) {
+        next(err)
+    }
+})
+
 router.get('/popular/:format', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
@@ -296,6 +309,29 @@ router.get('/:id', async (req, res, next) => {
         }
 
         res.json(data)
+    } catch (err) {
+        next(err)
+    }
+})
+
+router.post('/create', async (req, res, next) => {
+    try {
+        const deck = await Deck.create({
+            builder: req.body.builder,
+            name: req.body.name,
+            deckType: req.body.deckType,
+            deckCategory: req.body.deckCategory,
+            format: req.body.format,
+            ydk: req.body.ydk,
+            event: req.body.event,
+            placement: req.body.placement,
+            community: req.body.community,
+            display: req.body.display,
+            playerId: req.body.playerId,
+            tournamentId: req.body.tournamentId
+        })
+
+        res.json(deck)
     } catch (err) {
         next(err)
     }

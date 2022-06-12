@@ -3,6 +3,8 @@ const router = require('express').Router()
 const {Card, Deck, DeckType, Player, Tournament} = require('../db/models')
 const {Op} = require('sequelize')
 const {arrayToObject, capitalize} = require('../../functions/utility')
+const { challongeAPIKeys } = require('../../secrets')
+const axios = require('axios')
 
 module.exports = router
 
@@ -23,6 +25,32 @@ router.get('/all', async (req, res, next) => {
   }
 })
 
+router.get('/challonge/:name', async (req, res, next) => {
+  try {
+    const {data} = await axios.get(`https://api.challonge.com/v1/tournaments/${req.params.name}.json?api_key=${challongeAPIKeys[req.headers.community]}`)
+    res.json(data.tournament)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/community/:community', async (req, res, next) => {
+  try {
+    const tournaments = await Tournament.findAll({
+      where: {
+        community: {[Op.iLike]: req.params.community },
+        cleanName: {[Op.not]: null }
+      },
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      include: { model: Player, attributes: { exclude: ['password', 'blacklisted', 'createdAt', 'updatedAt'] } },
+      order: [["cleanName", "ASC"]]
+    })
+    
+    res.json(tournaments)
+  } catch (err) {
+    next(err)
+  }
+})
 
 /* eslint-disable complexity */
 router.get('/recent/:format', async (req, res, next) => {
@@ -166,3 +194,28 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+router.post('/create', async (req, res, next) => {
+  try {
+    const tournament = await Tournament.create({
+      id: req.body.id,
+      community: req.body.community,
+      url: req.body.url,
+      name: req.body.name,
+      cleanName: req.body.cleanName,
+      shortName: req.body.shortName,
+      format: req.body.format,
+      size: req.body.size,
+      series: req.body.series,
+      type: req.body.type,
+      winner: req.body.winner,
+      playerId: req.body.playerId,
+      startDate: req.body.startDate,
+      display: true,
+      state: 'complete'
+    })
+
+    res.json(tournament)
+  } catch (err) {
+    next(err)
+  }
+})

@@ -112,9 +112,6 @@ router.get('/:id', async (req, res, next) => {
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] }
     }).map((s) => [s.banlist, s.restriction]) || []
-
-    console.log('statuses', statuses)
-    console.log('Object.fromEntries(statuses)', Object.fromEntries(statuses))
     
     const prints = await Print.findAll({
       where: {
