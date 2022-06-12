@@ -35,6 +35,7 @@ const AdminPortal = () => {
     const deckButtonClass = view === 'decks' ? 'clicked-admin-button' : 'admin-button'
 
     const reset = async () => {
+        console.log('reset')
         setFormat(null)
         setCommunity(null)
         setEvent(null)
