@@ -1963,8 +1963,8 @@ const fixDecks2 = async () => {
     return console.log(`fixed ${b} deck decktypeIds`)
 }
 
-await fixDecks()
-await fixDecks2()
+fixDecks()
+fixDecks2()
 // fixGames()
 // fixYDKs()
 // fixDeckCreatedAt()
