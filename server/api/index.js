@@ -1,5 +1,6 @@
 
 const router = require('express').Router()
+
 module.exports = router
 
 router.use('/banlists', require('./banlists'))
