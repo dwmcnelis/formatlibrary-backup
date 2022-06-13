@@ -19,6 +19,9 @@ BlogPost.belongsTo(Player)
 Stats.belongsTo(Player)
 Player.hasMany(Stats)
 
+Tournament.belongsTo(Server)
+Server.hasMany(Tournament)
+
 Tournament.belongsTo(Event)
 Event.hasOne(Tournament)
 
