@@ -68,16 +68,16 @@ const builderDESC = (a, b) => {
 }
 
 const eventASC = (a, b) => {
-    const eventA = a.event.toLowerCase()
-    const eventB = b.event.toLowerCase()
+    const eventA = a.eventName.toLowerCase()
+    const eventB = b.eventName.toLowerCase()
     if (eventA < eventB) return -1
     if (eventA > eventB) return 1
     return 0
 }
 
 const eventDESC = (a, b) => {
-    const eventA = a.event.toLowerCase()
-    const eventB = b.event.toLowerCase()
+    const eventA = a.eventName.toLowerCase()
+    const eventB = b.eventName.toLowerCase()
     if (eventA < eventB) return 1
     if (eventA > eventB) return -1
     return 0

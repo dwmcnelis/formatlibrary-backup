@@ -25,7 +25,7 @@ const DeckTable = (props) => {
   const [queryParams, setQueryParams] = useState({
     deckType: null,
     builder: null,
-    event: null,
+    eventName: null,
     deckCategory: null
   })
 
