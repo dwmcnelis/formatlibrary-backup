@@ -318,16 +318,18 @@ router.post('/create', async (req, res, next) => {
     try {
         const deck = await Deck.create({
             builder: req.body.builder,
+            playerId: req.body.playerId,
             type: req.body.type,
+            deckTypeId: req.body.deckTypeId,
             category: req.body.category,
             format: req.body.format,
             ydk: req.body.ydk,
-            event: req.body.event,
+            eventName: req.body.eventName,
+            eventId: req.body.eventId,
+            eventDate: req.body.eventDate,
             placement: req.body.placement,
             community: req.body.community,
             display: req.body.display,
-            playerId: req.body.playerId,
-            eventId: req.body.eventId
         })
 
         res.json(deck)

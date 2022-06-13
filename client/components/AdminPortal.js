@@ -12,6 +12,7 @@ const AdminPortal = () => {
     const [deckTypes, setDeckTypes] = useState([])
     const [deckType, setDeckType] = useState(null)
     const [display, setDisplay] = useState(true)
+    const [endDate, setEndDate] = useState(null)
     const [event, setEvent] = useState(null)
     const [events, setEvents] = useState([])
     const [formats, setFormats] = useState([])
@@ -41,6 +42,7 @@ const AdminPortal = () => {
         setCommunity(null)
         setDeckType(null)
         setDisplay(true)
+        setEndDate(null)
         setEvent(null)
         setEvents([])
         setFormat(null)
@@ -82,17 +84,18 @@ const AdminPortal = () => {
         try {
             const { data } = await axios.post('/api/decks/create', {
                 builder: player.name,
+                playerId: player.id,
                 type: deckType.name,
+                deckTypeId: deckType.id,
                 category: deckType.category,
                 format: event.format,
                 ydk: ydk,
-                event: event.abbreviation,
+                eventName: event.abbreviation,
                 eventId: event.id,
+                eventDate: event.startDate,
                 placement: placement,
                 community: community,
-                display: display,
-                playerId: player.id,
-                eventId: event.id
+                display: display
             })
 
             alert(`Success! New Event: https://formatlibrary.com/decks/${data.id}`)
@@ -144,8 +147,6 @@ const AdminPortal = () => {
         let name = url.slice(url.indexOf('challonge.com/') + 14)
         if (url.includes('formatlibrary.challonge')) name = 'formatlibrary-' + name
         setUrl(name)
-        console.log('url', url)
-        console.log('name', name)
 
         try {
             const {data} = await axios.get(`/api/tournaments/challonge/${name}`, {
@@ -154,8 +155,8 @@ const AdminPortal = () => {
                 }
             })
             
-            console.log('data', data)
             setChallongeName(data.name)
+            setEndDate(data.completed_at)
             setTournamentId(data.id.toString())
         } catch (err) {
             console.log(err)

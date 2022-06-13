@@ -192,20 +192,22 @@ router.get('/:id', async (req, res, next) => {
 })
 
 router.post('/create', async (req, res, next) => {
-  console.log('req.body.id', req.body.id)
   try {
-    await Tournament.create({
-      id: req.body.id,
-      name: req.body.challongeName,
-      url: req.body.url,
-      format: req.body.format,
-      community: req.body.community,
-      emoji: req.body.emoji,
-      type: req.body.type,
-      channelId: req.body.channelId,
-      serverId: req.body.serverId,
-      state: 'complete'
-    })
+    if (req.body.id) {
+      await Tournament.create({
+        id: req.body.id,
+        name: req.body.challongeName,
+        url: req.body.url,
+        format: req.body.format,
+        community: req.body.community,
+        emoji: req.body.emoji,
+        type: req.body.type,
+        channelId: req.body.channelId,
+        serverId: req.body.serverId,
+        state: 'complete',
+        startDate: req.body.startDate
+      })
+    }
 
     const event = await Event.create({
       name: req.body.fullName,
