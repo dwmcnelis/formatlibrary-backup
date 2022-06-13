@@ -1973,16 +1973,16 @@ const fixDeckThumbs = async () => {
             await thumb.save()
         }
 
-        const leftCard = await Card.findOne({ where: { name: thumb.leftCard }})
+        const leftCard = await Card.findOne({ where: { name: thumb.leftCard }}) 
         const centerCard = await Card.findOne({ where: { name: thumb.centerCard }})
         const rightCard = await Card.findOne({ where: { name: thumb.rightCard }})
 
-        thumb.leftCardYpdId = leftCard.ypdId
-        thumb.centerCardYpdId = centerCard.ypdId
-        thumb.rightCardYpdId = rightCard.ypdId
+        if (leftCard) thumb.leftCardYpdId = leftCard.ypdId
+        if (centerCard) thumb.centerCardYpdId = centerCard.ypdId
+        if (rightCard) thumb.rightCardYpdId = rightCard.ypdId
         await thumb.save()
         
-        if (!fs.existsSync(`/public/images/artworks/${leftCard.ypdId}.jpg`)) {
+        if (leftCard && !fs.existsSync(`/public/images/artworks/${leftCard.ypdId}.jpg`)) {
             try {
                 const {data} = await axios({
                     method: 'GET',
@@ -1997,7 +1997,7 @@ const fixDeckThumbs = async () => {
             }
         }
 
-        if (!fs.existsSync(`/public/images/artworks/${centerCard.ypdId}.jpg`)) {
+        if (centerCard && !fs.existsSync(`/public/images/artworks/${centerCard.ypdId}.jpg`)) {
             try {
                 const {data} = await axios({
                     method: 'GET',
@@ -2012,7 +2012,7 @@ const fixDeckThumbs = async () => {
             }
         }
 
-        if (!fs.existsSync(`/public/images/artworks/${rightCard.ypdId}.jpg`)) {
+        if (rightCard && !fs.existsSync(`/public/images/artworks/${rightCard.ypdId}.jpg`)) {
             try {
                 const {data} = await axios({
                     method: 'GET',
