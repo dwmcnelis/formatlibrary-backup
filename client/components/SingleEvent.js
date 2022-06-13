@@ -95,7 +95,10 @@ const SingleEvent = (props) => {
   }
 
   const topMainDeckCardsData = {
-    labels: metagame.topMainDeckCards.map((e) => e[0].name.length <= 30 ? e[0].name : e[0].name.slice(0, 30).split(' ').slice(0, -1).join(' ')),
+    labels: metagame.topMainDeckCards.map((e) => {
+      console.log('e[0]', e[0])
+      return e[0].name.length <= 30 ? e[0].name : e[0].name.slice(0, 30).split(' ').slice(0, -1).join(' ')
+    }),
     datasets: [
       {
         label: 'Main Deck Count',
