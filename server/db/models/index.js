@@ -22,6 +22,9 @@ Player.hasMany(Stats)
 Tournament.belongsTo(Server)
 Server.hasMany(Tournament)
 
+Event.hasOne(Player)
+Player.belongsTo(Event)
+
 Tournament.belongsTo(Event)
 Event.hasOne(Tournament)
 
