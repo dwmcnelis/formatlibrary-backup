@@ -1969,7 +1969,10 @@ const fixDeckThumbs = async () => {
     for (let i = 0; i < thumbs.length; i++) {
         const thumb = thumbs[i]
         const dt = await DeckType.findOne({ where: { name: thumb.name }})
-        if (!dt) console.log(`no deckType found for ${thumb.name}`)
+        if (!dt) {
+            console.log(`no deckType found for ${thumb.name}`)
+            continue
+        }
         thumb.deckTypeId = dt.id
         await thumb.save()
         b++
