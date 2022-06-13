@@ -2054,7 +2054,23 @@ const fixDeckThumbs = async () => {
     return console.log(`fixed ${b} deck thumbs`)
 } 
 
+const checkMissingThumbs = async () => {
+    let b = 0
+    const types = await DeckType.findAll()
+    for (let i = 0; i < types.length; i++) {
+        const t = types[i]
+        const count = await DeckThumb.count({ where: { name: t.name }})
+        if (!count) {
+            console.log(`MISSING THUMBNAIL for ${t.name}`)
+            b++
+        }
+    }
+
+    return console.log(`missing ${b} thumbnails`)
+}
+
 fixDeckThumbs()
+checkMissingThumbs()
 // fixDecks()
 // fixDecks2()
 // fixGames()
