@@ -1914,15 +1914,14 @@ const fixGames = async () => {
 const fixDecks = async () => {
     let b = 0
     const decks = await Deck.findAll({ 
-        where: { eventId: {[Op.not]: null }, 
-        include: Event 
-    }})
-    console.log('decks/length', decks.length)
+        where: { eventId: {[Op.not]: null }}, 
+        include: [Event] 
+    })
+    
     for (let i = 0; i < decks.length; i++) {
         try {
             const deck = decks[i]
-            console.log('deck', deck)
-            deck.eventDate = deck.event.startDate
+            deck.eventDate = deck.event.startDate            
             await deck.save()
             b++
         } catch (err) {
@@ -1930,10 +1929,42 @@ const fixDecks = async () => {
         }
     }
 
-    return console.log(`fixed ${b} decks`)
+    return console.log(`fixed ${b} deck eventDates`)
 }
 
-fixDecks()
+
+const fixDecks2 = async () => {
+    let b = 0
+    const decks = await Deck.findAll()
+    
+    for (let i = 0; i < decks.length; i++) {
+        try {
+            const deck = decks[i]
+            const deckType = await DeckType.findOne({
+                where: {
+                    name: deck.type,
+                    format: deck.format
+                }
+            })          
+            
+            if (!deckType) {
+                console.log(`no ${deck.type} decktype for ${format} format`)
+                continue
+            }
+
+            deck.deckTypeId = deckType.id
+            await deck.save()
+            b++
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    return console.log(`fixed ${b} deck decktypeIds`)
+}
+
+await fixDecks()
+await fixDecks2()
 // fixGames()
 // fixYDKs()
 // fixDeckCreatedAt()
