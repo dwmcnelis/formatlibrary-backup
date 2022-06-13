@@ -52,6 +52,19 @@ const AdminPortal = () => {
         setTournamentId(null)
         setUrl(null)
         setYDK(null)  
+
+        document.getElementById('builder').value = ''
+        document.getElementById('deckType').value = ''
+        document.getElementById('display').value = true
+        document.getElementById('community').value = ''
+        document.getElementById('event').value = ''
+        document.getElementById('format').value = ''
+        document.getElementById('placement').value = ''
+        document.getElementById('series').value = true
+        document.getElementById('startDate').value = "mm/dd/yyyy"
+        document.getElementById('type').value = ''
+        document.getElementById('winner').value = ''
+        document.getElementById('ydk').files = []
     }
 
     const createDeck = async () => {
@@ -229,7 +242,10 @@ const AdminPortal = () => {
                                 <select
                                     id="builder"
                                     className="login"
-                                    onChange={(e) => getPlayer(e.target.value)}
+                                    onChange={(e) => {
+                                        e.preventDefault()
+                                        getPlayer(e.target.value)
+                                    }}
                                 >
                                 {
                                     players.map((e) => <option value={e.name}>{e.name}</option>)
@@ -240,7 +256,10 @@ const AdminPortal = () => {
                                 <select
                                     id="deck-type"
                                     className="login"
-                                    onChange={(e) => getDeckType(e.target.value)}
+                                    onChange={(e) => {
+                                        e.preventDefault()
+                                        getDeckType(e.target.value)}
+                                    }
                                 >
                                 <option value={null}></option>
                                 {
