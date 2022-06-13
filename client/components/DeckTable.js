@@ -239,7 +239,7 @@ const DeckTable = (props) => {
           >
             <option value="deckType">Deck Type</option>
             <option value="builder">Builder</option>
-            <option value="event">Event</option>
+            <option value="eventName">Event</option>
           </select>
 
           <select
