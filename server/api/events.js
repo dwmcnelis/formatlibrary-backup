@@ -206,10 +206,8 @@ router.post('/create', async (req, res, next) => {
       winner: req.body.winner,
       playerId: req.body.playerId,
       community: req.body.community,
-      logo: req.body.logo,
       emoji: req.body.emoji,
-      startDate: req.body.startDate,
-      endDate: req.body.endDate
+      startDate: req.body.startDate
     })
 
     await Tournament.create({
@@ -218,7 +216,6 @@ router.post('/create', async (req, res, next) => {
       url: req.body.url,
       format: req.body.format,
       community: req.body.community,
-      logo: req.body.logo,
       emoji: req.body.emoji,
       type: req.body.type,
       channelId: req.body.channelId,

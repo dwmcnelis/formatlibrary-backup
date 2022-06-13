@@ -103,7 +103,7 @@ const AdminPortal = () => {
                 url: url,
                 referenceUrl: referenceUrl,
                 fullName: fullName,
-                name: challongeName,
+                challongeName: challongeName,
                 abbreviation: abbreviation,
                 format: format,
                 size: size,
