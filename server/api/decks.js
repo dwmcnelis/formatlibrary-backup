@@ -25,7 +25,7 @@ router.get('/popular/:format', async (req, res, next) => {
         const decks = await Deck.findAll({ 
             where: {
                 format: {[Op.iLike]: req.params.format },
-                deckType: {[Op.not]: 'Other'} 
+                type: {[Op.not]: 'Other'} 
             }
         })
 
@@ -70,7 +70,7 @@ router.get('/frequent/:id', async (req, res, next) => {
         const decks = await Deck.findAll({ 
             where: {
                 playerId: req.params.id,
-                deckType: {[Op.not]: 'Other'}
+                type: {[Op.not]: 'Other'}
             }
         })
 

@@ -1612,7 +1612,7 @@ const updateDeckTypes = async () => {
     try {
         const decks = await Deck.findAll({
             where: {
-                deckType: {[Op.iLike]: 'other'}
+                type: {[Op.iLike]: 'other'}
             }
         })
         for (let i = 0; i < decks.length; i++) {
