@@ -13,7 +13,7 @@ router.get('/all', async (req, res, next) => {
             title: {[Op.not]: null}
         },
         attributes: { exclude: ['createdAt', 'updatedAt'] },
-        order: [['createdAt', 'DESC']]
+        order: [['eventDate', 'DESC']]
     })
 
     res.json(blogposts)
@@ -30,7 +30,7 @@ router.get('/first/:x', async (req, res, next) => {
         },
         attributes: { exclude: ['createdAt', 'updatedAt'] },
         limit: req.params.x,
-        order: [['createdAt', 'DESC']]
+        order: [['eventDate', 'DESC']]
         })
         res.json(blogposts)
     } catch (err) {
