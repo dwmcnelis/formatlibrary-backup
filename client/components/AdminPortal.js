@@ -60,7 +60,6 @@ const AdminPortal = () => {
         setYDK(null)  
 
         document.getElementById('builder').value = ''
-        document.getElementById('builder-select').value = null
         document.getElementById('deckType').value = null
         document.getElementById('display').value = true
         document.getElementById('community').value = null
@@ -70,7 +69,6 @@ const AdminPortal = () => {
         document.getElementById('startDate').value = "mm/dd/yyyy"
         document.getElementById('type').value = null
         document.getElementById('winner').value = ''
-        document.getElementById('winner-select').value = null
         document.getElementById('ydk').files = []
     }
 
