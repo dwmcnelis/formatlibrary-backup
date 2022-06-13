@@ -88,6 +88,7 @@ router.get('/frequent/:id', async (req, res, next) => {
         const freqs = decks.reduce((acc, curr) => (acc[`${curr.format}_${curr.type}`] ? acc[`${curr.format}_${curr.type}`]++ : acc[`${curr.format}_${curr.type}`] = 1, acc), {})
         const arr = Object.entries(freqs).sort((a, b) => b[1] - a[1]).map((e) => e[0])
         const data = []
+        const types = []
 
         for (let i = 0; i < arr.length; i++) {
             const elem = arr[i]
@@ -100,7 +101,7 @@ router.get('/frequent/:id', async (req, res, next) => {
                 attributes: { exclude: ['createdAt', 'updatedAt'] }
             })
 
-            if (!deckType || data.includes(deckType)) continue
+            if (!deckType || types.includes(deckType.id)) continue
 
             const deckThumb = await DeckThumb.findOne({
                 where: {
@@ -117,6 +118,7 @@ router.get('/frequent/:id', async (req, res, next) => {
             })
 
             if (!deckThumb) continue
+            types.push(deckType.id)
             data.push({...deckType.dataValues, ...deckThumb.dataValues})
         }
 
