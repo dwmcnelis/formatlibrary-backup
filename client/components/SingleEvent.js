@@ -25,11 +25,6 @@ const SingleEvent = (props) => {
     topSideDeckCards: []
   })
 
-  console.log('event', event)
-  console.log('winner', winner)
-  console.log('topDecks', topDecks)
-  console.log('metagame', metagame)
-
   const history = useHistory()
   const goToFormat = () => history.push(`/formats/${event.format}`)
   const goToPlayer = () => history.push(`/players/${winner.tag.slice(0, -5)}${winner.tag.slice(-4)}`)
@@ -95,7 +90,7 @@ const SingleEvent = (props) => {
   }
 
   const topMainDeckCardsData = {
-    // labels: metagame.topMainDeckCards.map((e) => e[0].name.length <= 30 ? e[0].name : e[0].name.slice(0, 30).split(' ').slice(0, -1).join(' ')),
+    labels: metagame.topMainDeckCards.map((e) => e[0].name.length <= 30 ? e[0].name : e[0].name.slice(0, 30).split(' ').slice(0, -1).join(' ')),
     datasets: [
       {
         label: 'Main Deck Count',
@@ -106,7 +101,7 @@ const SingleEvent = (props) => {
   }
 
   const topSideDeckCardsData = {
-    // labels: metagame.topSideDeckCards.map((e) => e[0].name),
+    labels: metagame.topSideDeckCards.map((e) => e[0].name),
     datasets: [
       {
         label: 'Side Deck Count',

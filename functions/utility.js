@@ -7,7 +7,7 @@ const camelize = (str) => str.replace(/['"]/g, "").replace(/(?:^\w|[A-Z]|\b\w|\s
 })
 
 //CAPITALIZE
-const capitalize = (str, eachWord = false) => {
+const capitalize = (str = '', eachWord = false) => {
     if (eachWord) {
         const splt = str.split(' ').map((s) => capitalize(s))
         return splt.join(' ')

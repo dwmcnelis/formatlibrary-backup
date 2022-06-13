@@ -1441,8 +1441,8 @@ const addCardDetails = async () => {
 
 
 //GET DECK TYPE
-const getDeckType = (raw, format = 'Goat') => {
-    if (!raw) return
+const getDeckType = (raw = '', format = 'Goat') => {
+    if (!raw.length) return
     const main = raw.split('#extra')[0]
     if (!main) return
     const arr = main.split('\n').filter(el => el.charAt(0) !== '#' && el.charAt(0) !== '!' && el !== '').sort()
