@@ -16,6 +16,7 @@ const RecentEvents = (props) => {
                 setWinners(data.winners)
             } catch (err) {
                 console.log(err)
+                
             }
         }
 
