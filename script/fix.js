@@ -1948,7 +1948,7 @@ const fixDecks2 = async () => {
             })          
             
             if (!deckType) {
-                console.log(`no ${deck.type} decktype for ${format} format`)
+                console.log(`no ${deck.type} decktype for ${deck.format} format`)
                 continue
             }
 
