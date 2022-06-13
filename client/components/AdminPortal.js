@@ -36,7 +36,43 @@ const AdminPortal = () => {
     const eventButtonClass = view === 'events' ? 'clicked-admin-button' : 'admin-button'
     const deckButtonClass = view === 'decks' ? 'clicked-admin-button' : 'admin-button'
 
-    const reset = async () => {
+    const resetCreateEvent = async () => {
+        setAbbreviation(null)
+        setChallongeName(null)
+        setCommunity(null)
+        setDeckType(null)
+        setDisplay(true)
+        setEndDate(null)
+        setEvent(null)
+        setEvents([])
+        setFormat(null)
+        setFullName(null)
+        setIsSeries(true)
+        setPlacement(1)
+        setPlayer(null) 
+        setPlayers([])          
+        setReferenceUrl(null)
+        setStartDate(null)
+        setSize(null)
+        setTournamentType(true)
+        setTournamentId(null)
+        setUrl(null)
+        setYDK(null)  
+
+        document.getElementById('community').value = null
+        document.getElementById('format').value = null
+        document.getElementById('url').value = ''
+        document.getElementById('fullName').value = ''
+        document.getElementById('abbreviation').value = ''
+        document.getElementById('size').value = ''
+        document.getElementById('format').value = null
+        document.getElementById('series').value = true
+        document.getElementById('startDate').value = "mm/dd/yyyy"
+        document.getElementById('type').value = null
+        document.getElementById('winner').value = ''
+    }
+
+    const resetCreateDeck = async () => {
         setAbbreviation(null)
         setChallongeName(null)
         setCommunity(null)
@@ -64,11 +100,6 @@ const AdminPortal = () => {
         document.getElementById('display').value = true
         document.getElementById('community').value = null
         document.getElementById('event').value = null
-        document.getElementById('format').value = null
-        document.getElementById('series').value = true
-        document.getElementById('startDate').value = "mm/dd/yyyy"
-        document.getElementById('type').value = null
-        document.getElementById('winner').value = ''
         document.getElementById('ydk').files = []
     }
 
@@ -97,7 +128,7 @@ const AdminPortal = () => {
             })
 
             alert(`Success! New Event: https://formatlibrary.com/decks/${data.id}`)
-            return reset()
+            return resetCreateDeck()
         } catch (err) {
             console.log(err)
         }
@@ -134,7 +165,7 @@ const AdminPortal = () => {
             })
 
             alert(`Success! New Event: https://formatlibrary.com/events/${data.abbreviation}`)
-            return reset()
+            return resetCreateEvent()
         } catch (err) {
             console.log(err)
         }
@@ -438,9 +469,9 @@ const AdminPortal = () => {
                             </label>
                             <label>Start Date:
                                 <input
-                                    id="start-date"
+                                    id="startDate"
                                     className="login"
-                                    type="startDate"
+                                    type="date"
                                     onChange={(e) => setStartDate(e.target.value)}
                                 />
                             </label>
