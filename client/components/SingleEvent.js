@@ -51,7 +51,7 @@ const SingleEvent = (props) => {
   }, [])
 
   if (event === null) return <NotFound/>
-  if (!event.name || !topDecks.length || !metagame.deckTypes.length) return <div></div>
+  if (!event.name) return <div></div>
 
   const formatName = capitalize(event.format, true) || '?'
   const formatEmoji = emojis[formats[formatName].logo] || ''
@@ -185,12 +185,20 @@ const SingleEvent = (props) => {
           <li>
             <a href="#bracket">Bracket</a>
           </li>
-          <li>
-            <a href="#top-decks">Top Decks</a>
-          </li>
-          <li>
-            <a href="#metagame-stats">Metagame Stats</a>
-          </li>
+          {
+            topDecks.length ? (
+              <li>
+                <a href="#top-decks">Top Decks</a>
+              </li>
+            ) : ''
+          }
+          {
+            metagame.deckTypes.length ? (
+              <li>
+              <a href="#metagame-stats">Metagame Stats</a>
+              </li>
+            ) : ''
+          }
         </div>
         <img className="desktop-only" id="format-icon-large" src={formatArtwork} />
       </div>
@@ -221,94 +229,96 @@ const SingleEvent = (props) => {
           Click Here for Full Bracket
         </a>
       </div>
-
       <div className="divider"/>
-
-      <div id="top-decks">
-        <div className="subcategory-title-flexbox">
-          <img style={{ width:'64px'}} src={communityLogo}/>
-          <h2 className="subheading"><b>{event.abbreviation}</b> {topDecks.length > 1 ? `Top ${topDecks.length} Decks` : 'Winning Deck'}:</h2>
-          <img style={{ height:'64px'}} src={'/images/emojis/deckbox.png'}/>
-        </div>
-        <div id="deckGalleryFlexBox">
-          {
-            topDecks.map((deck, index) => {
-              return <
-                        DeckImage 
-                        key={deck.id} 
-                        index={index} 
-                        deck={deck}
-                        width="360px"
-                        margin="10px 5px"
-                        padding="5px"
-                        coverage={true}
-                      />
-            })
-          }
-        </div>
-      </div>
-
-      <div className="divider"/>
-
-      <div id="metagame-stats">
-        <div className="subcategory-title-flexbox">
-          <img style={{ width:'64px'}} src={communityLogo}/>
-          <h2 className="subheading"><b>{event.abbreviation}</b> Metagame Stats:</h2>
-          <img style={{ height:'64px'}} src={'/images/emojis/microscope.png'}/>
-        </div>
-
-        <div className="chart-flexbox">
-          <div className="doughnut-container">
-            <h2>Deck Type Representation</h2>
-            <br/>
-            <Doughnut 
-              className="doughnut"
-              height="500px"
-              width="500px"
-              data={deckTypeData}
-              options={options}
-            />
+      {
+        topDecks.length ? (
+          <div id="top-decks">
+            <div className="subcategory-title-flexbox">
+              <img style={{ width:'64px'}} src={communityLogo}/>
+              <h2 className="subheading"><b>{event.abbreviation}</b> {topDecks.length > 1 ? `Top ${topDecks.length} Decks` : 'Winning Deck'}:</h2>
+              <img style={{ height:'64px'}} src={'/images/emojis/deckbox.png'}/>
+            </div>
+            <div id="deckGalleryFlexBox">
+            {
+              topDecks.map((deck, index) => {
+                return <
+                          DeckImage 
+                          key={deck.id} 
+                          index={index} 
+                          deck={deck}
+                          width="360px"
+                          margin="10px 5px"
+                          padding="5px"
+                          coverage={true}
+                        />
+              })
+            }
+            </div>
           </div>
-          <div className="doughnut-container">
-            <h2>Deck Category Representation</h2>
-            <br/>
-            <Doughnut 
-              className="doughnut"
-              height={parseInt(500 - (20 * Math.ceil(metagame.deckTypes.length / 4)))}
-              width="500px"
-              data={deckCategoryData}
-              options={options}
-            />
-          </div>
-        </div>
+        ) : ''
+      }
+      <div className="divider"/>  
+      {
+        metagame.deckTypes.length ? (
+          <div id="metagame-stats">
+            <div className="subcategory-title-flexbox">
+              <img style={{ width:'64px'}} src={communityLogo}/>
+              <h2 className="subheading"><b>{event.abbreviation}</b> Metagame Stats:</h2>
+              <img style={{ height:'64px'}} src={'/images/emojis/microscope.png'}/>
+            </div>
 
-        <div className="chart-flexbox">
-          <div className="bargraph-container">
-            <h2>Top Main Deck Cards</h2>
-            <br/>
-            <Bar 
-              className="bargraph"
-              height="400px"
-              width="500px"
-              data={topMainDeckCardsData}
-              options={options}
-            />
-          </div>
-          <div className="bargraph-container">
-            <h2>Top Side Deck Cards</h2>
-            <br/>
-            <Bar 
-              className="bargraph"
-              height="400px"
-              width="500px"
-              data={topSideDeckCardsData}
-              options={options}
-            />
-          </div>
-        </div>
+            <div className="chart-flexbox">
+              <div className="doughnut-container">
+                <h2>Deck Type Representation</h2>
+                <br/>
+                <Doughnut 
+                  className="doughnut"
+                  height="500px"
+                  width="500px"
+                  data={deckTypeData}
+                  options={options}
+                />
+              </div>
+              <div className="doughnut-container">
+                <h2>Deck Category Representation</h2>
+                <br/>
+                <Doughnut 
+                  className="doughnut"
+                  height={parseInt(500 - (20 * Math.ceil(metagame.deckTypes.length / 4)))}
+                  width="500px"
+                  data={deckCategoryData}
+                  options={options}
+                />
+              </div>
+            </div>
 
-      </div>
-
+            <div className="chart-flexbox">
+              <div className="bargraph-container">
+                <h2>Top Main Deck Cards</h2>
+                <br/>
+                <Bar 
+                  className="bargraph"
+                  height="400px"
+                  width="500px"
+                  data={topMainDeckCardsData}
+                  options={options}
+                />
+              </div>
+              <div className="bargraph-container">
+                <h2>Top Side Deck Cards</h2>
+                <br/>
+                <Bar 
+                  className="bargraph"
+                  height="400px"
+                  width="500px"
+                  data={topSideDeckCardsData}
+                  options={options}
+                />
+              </div>
+            </div>
+          </div>
+        ) : ''
+      }
     </div>
   )
 }

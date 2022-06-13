@@ -105,8 +105,6 @@ router.get('/:id', async (req, res, next) => {
       include: { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] } },
     })
 
-    console.log('event.id', event.id)
-
     const topDecks = await Deck.findAll({
       where: {
         display: true,
@@ -119,8 +117,6 @@ router.get('/:id', async (req, res, next) => {
       order: [["placement", "ASC"], ["builder", "ASC"]]
     })
 
-    console.log('topDecks.length', topDecks.length)
-
     const allDecks = await Deck.findAll({
       where: {
         [Op.or]: {
@@ -130,56 +126,52 @@ router.get('/:id', async (req, res, next) => {
       }
     })
 
-    console.log('allDecks.length', allDecks.length)
-
-    const deckTypes = Object.entries(arrayToObject(allDecks.map((d) => capitalize(d.type, true)))).sort((a, b) => b[1] - a[1])
-    const deckCategories = Object.entries(arrayToObject(allDecks.map((d) => capitalize(d.category, true)))).sort((a, b) => b[1] - a[1])
-
+    const deckTypes = allDecks.length >= (event.size / 2) ? Object.entries(arrayToObject(allDecks.map((d) => capitalize(d.type, true)))).sort((a, b) => b[1] - a[1]) : []
+    const deckCategories = allDecks.length >= (event.size / 2) ? Object.entries(arrayToObject(allDecks.map((d) => capitalize(d.category, true)))).sort((a, b) => b[1] - a[1]) : []
     const mainDeckCards = []
     const sideDeckCards = []
 
-    for (let i = 0; i < allDecks.length; i++) {
-      const ydk = allDecks[i].ydk
-      const main = ydk.split('#extra')[0].split('\n').filter(el => el.charAt(0) !== '#' && el.charAt(0) !== '!' && el !== '')
-      mainDeckCards.push(...main)
-      const side = ydk.split('!side')[1].split('\n').filter(el => el.charAt(0) !== '#' && el.charAt(0) !== '!' && el !== '')
-      sideDeckCards.push(...side)
-    }
-
-    const mainDeckCardFrequencies = arrayToObject(mainDeckCards)
-    const topMainDeckFrequencies = Object.entries(mainDeckCardFrequencies).sort((a, b) => b[1] - a[1]).slice(0, 10)
-    const topMainDeckCards = []
-
-    for (let i = 0; i < topMainDeckFrequencies.length; i++) {
-        const e = topMainDeckFrequencies[i]
+    if (allDecks.length >= (event.size / 2)) {
+      for (let i = 0; i < allDecks.length; i++) {
+        const ydk = allDecks[i].ydk
+        const main = ydk.split('#extra')[0].split('\n').filter(el => el.charAt(0) !== '#' && el.charAt(0) !== '!' && el !== '')
+        mainDeckCards.push(...main)
+        const side = ydk.split('!side')[1].split('\n').filter(el => el.charAt(0) !== '#' && el.charAt(0) !== '!' && el !== '')
+        sideDeckCards.push(...side)
+      }
+  
+      const mainDeckCardFrequencies = arrayToObject(mainDeckCards)
+      const topMainDeckFrequencies = Object.entries(mainDeckCardFrequencies).sort((a, b) => b[1] - a[1]).slice(0, 10)
+      const topMainDeckCards = []
+  
+      for (let i = 0; i < topMainDeckFrequencies.length; i++) {
+          const e = topMainDeckFrequencies[i]
+          const konamiCode = e[0]
+          try {
+            const card = await Card.findOne({ where: { konamiCode }})
+            if (!card) continue
+            topMainDeckCards.push([card.dataValues, e[1]])
+          } catch (err) {
+            console.log(err)
+          }
+      }
+  
+      const sideDeckCardFrequencies = arrayToObject(sideDeckCards)
+      const topSideDeckFrequencies = Object.entries(sideDeckCardFrequencies).sort((a, b) => b[1] - a[1]).slice(0, 10)
+      const topSideDeckCards = []
+  
+      for (let i = 0; i < topSideDeckFrequencies.length; i++) {
+        const e = topSideDeckFrequencies[i]
         const konamiCode = e[0]
         try {
           const card = await Card.findOne({ where: { konamiCode }})
           if (!card) continue
-          topMainDeckCards.push([card.dataValues, e[1]])
+          topSideDeckCards.push([card.dataValues, e[1]])
         } catch (err) {
           console.log(err)
         }
-    }
-
-    const sideDeckCardFrequencies = arrayToObject(sideDeckCards)
-    const topSideDeckFrequencies = Object.entries(sideDeckCardFrequencies).sort((a, b) => b[1] - a[1]).slice(0, 10)
-    const topSideDeckCards = []
-
-    for (let i = 0; i < topSideDeckFrequencies.length; i++) {
-      const e = topSideDeckFrequencies[i]
-      const konamiCode = e[0]
-      try {
-        const card = await Card.findOne({ where: { konamiCode }})
-        if (!card) continue
-        topSideDeckCards.push([card.dataValues, e[1]])
-      } catch (err) {
-        console.log(err)
       }
-  }
-
-  console.log('topMainDeckCards.length', topMainDeckCards.length)
-  console.log('topSideDeckCards.length', topSideDeckCards.length)
+    }
 
     const data = {
       event: event,
