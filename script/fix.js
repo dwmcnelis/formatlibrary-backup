@@ -1982,7 +1982,7 @@ const fixDeckThumbs = async () => {
         if (rightCard) thumb.rightCardYpdId = rightCard.ypdId
         await thumb.save()
         
-        if (leftCard && !fs.existsSync(`../public/images/artworks/${leftCard.ypdId}.jpg`)) {
+        if (leftCard && !fs.existsSync(`./public/images/artworks/${leftCard.ypdId}.jpg`)) {
             try {
                 const {data} = await axios({
                     method: 'GET',
@@ -1990,14 +1990,14 @@ const fixDeckThumbs = async () => {
                     responseType: 'stream'
                 })
     
-                data.pipe(fs.createWriteStream(`../public/images/artworks/${leftCard.ypdId}.jpg`))
-                console.log(`saved ${leftCard.name} artwork to ${`../public/images/artworks/${leftCard.ypdId}.jpg`}`)
+                data.pipe(fs.createWriteStream(`./public/images/artworks/${leftCard.ypdId}.jpg`))
+                console.log(`saved ${leftCard.name} artwork to ${`./public/images/artworks/${leftCard.ypdId}.jpg`}`)
             } catch (err) {
                 console.log(err)
             }
         }
 
-        if (centerCard && !fs.existsSync(`../public/images/artworks/${centerCard.ypdId}.jpg`)) {
+        if (centerCard && !fs.existsSync(`./public/images/artworks/${centerCard.ypdId}.jpg`)) {
             try {
                 const {data} = await axios({
                     method: 'GET',
@@ -2005,14 +2005,14 @@ const fixDeckThumbs = async () => {
                     responseType: 'stream'
                 })
     
-                data.pipe(fs.createWriteStream(`../public/images/artworks/${centerCard.ypdId}.jpg`))
-                console.log(`saved ${centerCard.name} artwork to ${`../public/images/artworks/${centerCard.ypdId}.jpg`}`)
+                data.pipe(fs.createWriteStream(`./public/images/artworks/${centerCard.ypdId}.jpg`))
+                console.log(`saved ${centerCard.name} artwork to ${`./public/images/artworks/${centerCard.ypdId}.jpg`}`)
             } catch (err) {
                 console.log(err)
             }
         }
 
-        if (rightCard && !fs.existsSync(`../public/images/artworks/${rightCard.ypdId}.jpg`)) {
+        if (rightCard && !fs.existsSync(`./public/images/artworks/${rightCard.ypdId}.jpg`)) {
             try {
                 const {data} = await axios({
                     method: 'GET',
@@ -2020,8 +2020,8 @@ const fixDeckThumbs = async () => {
                     responseType: 'stream'
                 })
     
-                data.pipe(fs.createWriteStream(`../public/images/artworks/${rightCard.ypdId}.jpg`))
-                console.log(`saved ${rightCard.name} artwork to ${`../public/images/artworks/${rightCard.ypdId}.jpg`}`)
+                data.pipe(fs.createWriteStream(`./public/images/artworks/${rightCard.ypdId}.jpg`))
+                console.log(`saved ${rightCard.name} artwork to ${`./public/images/artworks/${rightCard.ypdId}.jpg`}`)
             } catch (err) {
                 console.log(err)
             }
