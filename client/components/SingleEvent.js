@@ -215,7 +215,7 @@ const SingleEvent = (props) => {
         />
         <a 
           className="bracket-link"
-          href={`https://challonge.com/${event.url}`} 
+          href={event.referenceUrl} 
           target="_blank"
         >
           Click Here for Full Bracket
