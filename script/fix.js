@@ -1967,65 +1967,68 @@ const fixDeckThumbs = async () => {
     const thumbs = await DeckThumb.findAll()
     for (let i = 0; i < thumbs.length; i++) {
         const thumb = thumbs[i]
-        const count = await DeckThumb.count({ where: { name: thumb.name }})
-        if (count === 1) {
-            thumb.primary = true
-            await thumb.save()
-        }
-
-        const leftCard = await Card.findOne({ where: { name: thumb.leftCard }}) 
-        const centerCard = await Card.findOne({ where: { name: thumb.centerCard }})
-        const rightCard = await Card.findOne({ where: { name: thumb.rightCard }})
-
-        if (leftCard) thumb.leftCardYpdId = leftCard.ypdId
-        if (centerCard) thumb.centerCardYpdId = centerCard.ypdId
-        if (rightCard) thumb.rightCardYpdId = rightCard.ypdId
+        const format = await Format.findOne({ where: { name: thumb.format }})
+        thumb.formatId = format.id
         await thumb.save()
+        // const count = await DeckThumb.count({ where: { name: thumb.name }})
+        // if (count === 1) {
+        //     thumb.primary = true
+        //     await thumb.save()
+        // }
+
+        // const leftCard = await Card.findOne({ where: { name: thumb.leftCard }}) 
+        // const centerCard = await Card.findOne({ where: { name: thumb.centerCard }})
+        // const rightCard = await Card.findOne({ where: { name: thumb.rightCard }})
+
+        // if (leftCard) thumb.leftCardYpdId = leftCard.ypdId
+        // if (centerCard) thumb.centerCardYpdId = centerCard.ypdId
+        // if (rightCard) thumb.rightCardYpdId = rightCard.ypdId
+        // await thumb.save()
         
-        if (leftCard && !fs.existsSync(`./public/images/artworks/${leftCard.ypdId}.jpg`)) {
-            try {
-                const {data} = await axios({
-                    method: 'GET',
-                    url: `https://storage.googleapis.com/ygoprodeck.com/pics_artgame/${leftCard.ypdId}.jpg`,
-                    responseType: 'stream'
-                })
+        // if (leftCard && !fs.existsSync(`./public/images/artworks/${leftCard.ypdId}.jpg`)) {
+        //     try {
+        //         const {data} = await axios({
+        //             method: 'GET',
+        //             url: `https://storage.googleapis.com/ygoprodeck.com/pics_artgame/${leftCard.ypdId}.jpg`,
+        //             responseType: 'stream'
+        //         })
     
-                data.pipe(fs.createWriteStream(`./public/images/artworks/${leftCard.ypdId}.jpg`))
-                console.log(`saved ${leftCard.name} artwork to ${`./public/images/artworks/${leftCard.ypdId}.jpg`}`)
-            } catch (err) {
-                console.log(err)
-            }
-        }
+        //         data.pipe(fs.createWriteStream(`./public/images/artworks/${leftCard.ypdId}.jpg`))
+        //         console.log(`saved ${leftCard.name} artwork to ${`./public/images/artworks/${leftCard.ypdId}.jpg`}`)
+        //     } catch (err) {
+        //         console.log(err)
+        //     }
+        // }
 
-        if (centerCard && !fs.existsSync(`./public/images/artworks/${centerCard.ypdId}.jpg`)) {
-            try {
-                const {data} = await axios({
-                    method: 'GET',
-                    url: `https://storage.googleapis.com/ygoprodeck.com/pics_artgame/${centerCard.ypdId}.jpg`,
-                    responseType: 'stream'
-                })
+        // if (centerCard && !fs.existsSync(`./public/images/artworks/${centerCard.ypdId}.jpg`)) {
+        //     try {
+        //         const {data} = await axios({
+        //             method: 'GET',
+        //             url: `https://storage.googleapis.com/ygoprodeck.com/pics_artgame/${centerCard.ypdId}.jpg`,
+        //             responseType: 'stream'
+        //         })
     
-                data.pipe(fs.createWriteStream(`./public/images/artworks/${centerCard.ypdId}.jpg`))
-                console.log(`saved ${centerCard.name} artwork to ${`./public/images/artworks/${centerCard.ypdId}.jpg`}`)
-            } catch (err) {
-                console.log(err)
-            }
-        }
+        //         data.pipe(fs.createWriteStream(`./public/images/artworks/${centerCard.ypdId}.jpg`))
+        //         console.log(`saved ${centerCard.name} artwork to ${`./public/images/artworks/${centerCard.ypdId}.jpg`}`)
+        //     } catch (err) {
+        //         console.log(err)
+        //     }
+        // }
 
-        if (rightCard && !fs.existsSync(`./public/images/artworks/${rightCard.ypdId}.jpg`)) {
-            try {
-                const {data} = await axios({
-                    method: 'GET',
-                    url: `https://storage.googleapis.com/ygoprodeck.com/pics_artgame/${rightCard.ypdId}.jpg`,
-                    responseType: 'stream'
-                })
+        // if (rightCard && !fs.existsSync(`./public/images/artworks/${rightCard.ypdId}.jpg`)) {
+        //     try {
+        //         const {data} = await axios({
+        //             method: 'GET',
+        //             url: `https://storage.googleapis.com/ygoprodeck.com/pics_artgame/${rightCard.ypdId}.jpg`,
+        //             responseType: 'stream'
+        //         })
     
-                data.pipe(fs.createWriteStream(`./public/images/artworks/${rightCard.ypdId}.jpg`))
-                console.log(`saved ${rightCard.name} artwork to ${`./public/images/artworks/${rightCard.ypdId}.jpg`}`)
-            } catch (err) {
-                console.log(err)
-            }
-        }
+        //         data.pipe(fs.createWriteStream(`./public/images/artworks/${rightCard.ypdId}.jpg`))
+        //         console.log(`saved ${rightCard.name} artwork to ${`./public/images/artworks/${rightCard.ypdId}.jpg`}`)
+        //     } catch (err) {
+        //         console.log(err)
+        //     }
+        // }
     }
 } 
 
