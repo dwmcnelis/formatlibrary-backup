@@ -1,6 +1,6 @@
 
 const router = require('express').Router()
-const {Card, Deck, DeckType, Player} = require('../db/models')
+const {Card, Deck, DeckThumb, DeckType, Player} = require('../db/models')
 const {capitalize, ordinalize} = require('../../functions/utility')
 const {Op} = require('sequelize')
 
@@ -50,12 +50,20 @@ router.get('/popular/:format', async (req, res, next) => {
                 attributes: { exclude: ['createdAt', 'updatedAt'] }
             })
 
-            if (!deckType) {
+            const deckThumb = await DeckThumb.findOne({
+                where: {
+                    deckTypeId: deckType.id,
+                    format: {[Op.iLike]: req.params.format }
+                },
+                attributes: { exclude: ['id', 'name', 'createdAt', 'updatedAt'] }
+            })
+
+            if (!deckType || !deckThumb) {
                 console.log(`Unable to find ${req.params.format} Format DeckType: ${name}`)
                 continue
             }
 
-            data.push(deckType)
+            data.push({...deckType.dataValues, ...deckThumb.dataValues})
         }
 
         res.json(data)
@@ -98,8 +106,16 @@ router.get('/frequent/:id', async (req, res, next) => {
                 attributes: { exclude: ['createdAt', 'updatedAt'] }
             })
 
-            if (!deckType) continue
-            data.push(deckType)
+            const deckThumb = await DeckThumb.findOne({
+                where: {
+                    deckTypeId: deckType.id,
+                    primary: true
+                },
+                attributes: { exclude: ['id', 'name', 'createdAt', 'updatedAt'] }
+            })
+
+            if (!deckType || !deckThumb) continue
+            data.push({...deckType.dataValues, ...deckThumb.dataValues})
         }
 
         res.json(data)

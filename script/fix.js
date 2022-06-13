@@ -2,7 +2,7 @@
 
 const axios = require('axios')
 const fs = require('fs')
-const { Card, Deck, DeckType, Event, Format, Player, Print, Set, Stats, Status, Tournament } = require('../server/db/models')
+const { Card, Deck, DeckThumb, DeckType, Event, Format, Player, Print, Set, Stats, Status, Tournament } = require('../server/db/models')
 const ygoprodeck = require('../static/ygoprodeck.json')
 const sets = require('../static/sets.json')
 const { Op } = require('sequelize')
@@ -1963,8 +1963,74 @@ const fixDecks2 = async () => {
     return console.log(`fixed ${b} deck decktypeIds`)
 }
 
-fixDecks()
-fixDecks2()
+const fixDeckThumbs = async () => {
+    const thumbs = await DeckThumb.findAll()
+    for (let i = 0; i < thumbs.length; i++) {
+        const thumb = thumbs[i]
+        const count = await DeckThumb.count({ where: { name: thumb.name }})
+        if (count === 1) {
+            thumb.primary = true
+            await thumb.save()
+        }
+
+        const leftCard = await Card.findOne({ where: { name: thumb.leftCard }})
+        const centerCard = await Card.findOne({ where: { name: thumb.centerCard }})
+        const rightCard = await Card.findOne({ where: { name: thumb.rightCard }})
+
+        thumb.leftCardYpdId = leftCard.ypdId
+        thumb.centerCardYpdId = centerCard.ypdId
+        thumb.rightCardYpdId = rightCard.ypdId
+        await thumb.save()
+        
+        if (!fs.existsSync(`/public/images/artworks/${leftCard.ypdId}.jpg`)) {
+            try {
+                const {data} = await axios({
+                    method: 'GET',
+                    url: `https://storage.googleapis.com/ygoprodeck.com/pics_artgame/${leftCard.ypdId}.jpg`,
+                    responseType: 'stream'
+                })
+    
+                data.pipe(fs.createWriteStream(`/public/images/artworks/${leftCard.ypdId}.jpg`))
+                console.log(`saved ${leftCard.name} artwork to ${`/public/images/artworks/${leftCard.ypdId}.jpg`}`)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+        if (!fs.existsSync(`/public/images/artworks/${centerCard.ypdId}.jpg`)) {
+            try {
+                const {data} = await axios({
+                    method: 'GET',
+                    url: `https://storage.googleapis.com/ygoprodeck.com/pics_artgame/${centerCard.ypdId}.jpg`,
+                    responseType: 'stream'
+                })
+    
+                data.pipe(fs.createWriteStream(`/public/images/artworks/${centerCard.ypdId}.jpg`))
+                console.log(`saved ${centerCard.name} artwork to ${`/public/images/artworks/${centerCard.ypdId}.jpg`}`)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+        if (!fs.existsSync(`/public/images/artworks/${rightCard.ypdId}.jpg`)) {
+            try {
+                const {data} = await axios({
+                    method: 'GET',
+                    url: `https://storage.googleapis.com/ygoprodeck.com/pics_artgame/${rightCard.ypdId}.jpg`,
+                    responseType: 'stream'
+                })
+    
+                data.pipe(fs.createWriteStream(`/public/images/artworks/${rightCard.ypdId}.jpg`))
+                console.log(`saved ${rightCard.name} artwork to ${`/public/images/artworks/${rightCard.ypdId}.jpg`}`)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+} 
+
+fixDeckThumbs()
+// fixDecks()
+// fixDecks2()
 // fixGames()
 // fixYDKs()
 // fixDeckCreatedAt()
