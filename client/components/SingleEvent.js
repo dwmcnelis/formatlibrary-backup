@@ -25,6 +25,11 @@ const SingleEvent = (props) => {
     topSideDeckCards: []
   })
 
+  console.log('event', event)
+  console.log('winner', winner)
+  console.log('topDecks', topDecks)
+  console.log('metagame', metagame)
+
   const history = useHistory()
   const goToFormat = () => history.push(`/formats/${event.format}`)
   const goToPlayer = () => history.push(`/players/${winner.tag.slice(0, -5)}${winner.tag.slice(-4)}`)
