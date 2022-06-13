@@ -10,7 +10,7 @@ const DeckImage = (props = {}) => {
   const displayName = fullName.length <= 17 ? fullName : fullName.slice(0, 17).split(' ').slice(0, -1).join(' ')
   const placement = ordinalize(deck.placement)
   const title = coverage ? `${deckType} - ${displayName} - ${placement}` :
-    `${deckType} - ${displayName} - ${deck.event}`
+    `${deckType} - ${displayName} - ${deck.eventName}`
 
   return (
     <div className="DeckImage-box">

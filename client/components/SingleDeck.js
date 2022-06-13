@@ -12,7 +12,7 @@ import { FL, GF, EF } from '../../public/images/logos'
 const SingleDeck = (props) => {
     const [deck, setDeck] = useState({})
     const history = useHistory()
-    const goToEvent = () => history.push(`/events/${deck.event}`)
+    const goToEvent = () => history.push(`/events/${deck.eventName}`)
     const goToFormat = () => history.push(`/formats/${deck.format}`)
     const goToPlayer = () => history.push(`/players/${deck.player.tag.slice(0, -5)}${deck.player.tag.slice(-4)}`)
 
@@ -128,7 +128,7 @@ const SingleDeck = (props) => {
           <tr className="single-deck-info-2">
             <td>
               <div onClick={() => goToEvent()} className="single-deck-cell">
-                <div className="single-deck-event-link" style={{paddingRight:'7px'}}><b>Event:</b> {deck.event}</div> 
+                <div className="single-deck-event-link" style={{paddingRight:'7px'}}><b>Event:</b> {deck.eventName}</div> 
                 <img style={{width:'28px'}} src={communityLogo}/>
               </div>   
             </td>

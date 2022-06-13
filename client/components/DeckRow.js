@@ -71,7 +71,7 @@ const DeckRow = (props) => {
             <Link className="black-text" to={`/decks/${deck.id}`}>
               <div className="community-cell-flexbox">
                 <img src={communityLogo}/>
-                <div>{deck.event || '-'}</div>
+                <div>{deck.eventName || '-'}</div>
               </div>
             </Link>
           </td>

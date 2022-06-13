@@ -17,7 +17,7 @@ const Placement = (props) => {
   return (
     <div className="badge">
         <img src={placementImage}/>
-        <div className="badge-label">{deck.event}</div>
+        <div className="badge-label">{deck.eventName}</div>
     </div>
   )
 }
