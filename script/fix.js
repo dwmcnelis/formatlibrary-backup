@@ -2026,6 +2026,7 @@ const fixDeckThumbs = async () => {
                 console.log(err)
             }
         }
+    }
 } 
 
 fixDeckThumbs()
