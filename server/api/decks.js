@@ -116,7 +116,7 @@ router.get('/player/:id', async (req, res, next) => {
                 playerId: req.params.id
             },
             attributes: { exclude: ['ydk', 'createdAt', 'updatedAt'] },
-            order: [["placement", "ASC"], ["createdAt", "ASC"]],
+            order: [["placement", "ASC"], ["eventDate", "DESC"]],
             limit: 10
         })
 
@@ -177,8 +177,8 @@ router.get('/all', async (req, res, next) => {
 
         const decks = await Deck.findAll({ 
             where: { display: isAdmin ? {[Op.any]: [true, false]} : true },
-            attributes: { exclude: ['display', 'updatedAt'] },
-            order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
+            attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
+            order: [["eventDate", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
             include: [{ model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }],
         })
 
@@ -193,8 +193,8 @@ router.get('/first/:x', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
             where: { display: true },
-            attributes: { exclude: ['display', 'updatedAt'] },
-            order: [["createdAt", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
+            attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
+            order: [["eventDate", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
             limit: req.params.x, 
             include: [{ model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }],
         })
@@ -221,7 +221,7 @@ router.get('/:id', async (req, res, next) => {
                 id: req.params.id,
                 display: isAdmin ? {[Op.any]: [true, false]} : true
             }, 
-            attributes: { exclude: ['display', 'updatedAt'] },
+            attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
             include: [{ model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }],
         })
 

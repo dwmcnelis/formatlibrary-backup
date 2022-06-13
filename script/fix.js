@@ -1871,7 +1871,7 @@ const fixDeckCreatedAt = async () => {
                 silent: true,
                 fields: ['createdAt']
             })
-            console.log(endDate === deck.createdAt)
+            console.log(endDate === deck.eventDate)
             b++
         } catch (err) {
             console.log(err)

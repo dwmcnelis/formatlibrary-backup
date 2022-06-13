@@ -140,8 +140,8 @@ const SingleDeck = (props) => {
             </td>
             <td>
               <div className="single-deck-cell">
-                <div className="desktop-only"><b>Uploaded:</b> {dateToVerbose(deck.createdAt, false, false)}</div>
-                <div id="single-deck-uploaded-mobile" className="mobile-only"><b>Uploaded:</b> {dateToSimple(deck.createdAt)}</div>
+                <div className="desktop-only"><b>Uploaded:</b> {dateToVerbose(deck.eventDate, false, false)}</div>
+                <div id="single-deck-uploaded-mobile" className="mobile-only"><b>Uploaded:</b> {dateToSimple(deck.eventDate)}</div>
               </div>
             </td>
           </tr>

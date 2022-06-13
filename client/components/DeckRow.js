@@ -78,7 +78,7 @@ const DeckRow = (props) => {
           <td className="no-padding">
             <Link className="black-text" to={`/decks/${deck.id}`}>
               <div className="date-cell">
-                {deck.createdAt.substring(0, 10)}
+                {deck.eventDate.substring(0, 10)}
               </div>
             </Link>
           </td>
