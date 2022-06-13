@@ -25,6 +25,8 @@ const SingleEvent = (props) => {
     topSideDeckCards: []
   })
 
+  console.log('metagame', metagame)
+
   const history = useHistory()
   const goToFormat = () => history.push(`/formats/${event.format}`)
   const goToPlayer = () => history.push(`/players/${winner.tag.slice(0, -5)}${winner.tag.slice(-4)}`)
@@ -67,7 +69,7 @@ const SingleEvent = (props) => {
       '#d65180', '#307a3a', '#735645', '#fc8c1c', '#8dc276', '#c4495f', 
   ]
 
-  const deckTypeData = {
+  const deckTypeData = metagame.deckTypes.length ? {
     labels: metagame.deckTypes.map((e) => e[0]),
     datasets: [
       {
@@ -76,9 +78,9 @@ const SingleEvent = (props) => {
         borderWidth: 1,
       },
     ]
-  }
+  } : {}
 
-  const deckCategoryData = {
+  const deckCategoryData = metagame.deckCategories.length ? {
     labels: metagame.deckCategories.map((e) => e[0]),
     datasets: [
       {
@@ -87,9 +89,9 @@ const SingleEvent = (props) => {
         borderWidth: 1,
       },
     ]
-  }
+  } : {}
 
-  const topMainDeckCardsData = {
+  const topMainDeckCardsData = metagame.topMainDeckCards.length ? {
     labels: metagame.topMainDeckCards.map((e) => e[0].name.length <= 30 ? e[0].name : e[0].name.slice(0, 30).split(' ').slice(0, -1).join(' ')),
     datasets: [
       {
@@ -98,9 +100,9 @@ const SingleEvent = (props) => {
         backgroundColor: '#1f4ed1'
       }
     ]
-  }
-
-  const topSideDeckCardsData = {
+  } : {}
+ 
+  const topSideDeckCardsData = metagame.topSideDeckCards.length ? {
     labels: metagame.topSideDeckCards.map((e) => e[0].name),
     datasets: [
       {
@@ -109,7 +111,7 @@ const SingleEvent = (props) => {
         backgroundColor: '#c24225'
       }
     ]
-  }
+  } : {}
 
   const options = {
     responsive: false,
@@ -168,8 +170,8 @@ const SingleEvent = (props) => {
                   </div>     
                 </td>
                 <td className="desktop-only">
-                  <div className="single-event-cell">
-                    <div style={{paddingRight:'7px'}}><b>Winning Deck:</b> {capitalize(topDecks[0].type, true)}</div> 
+                  <div className="single-event-cell">f
+                    <div style={{paddingRight:'7px'}}><b>Winning Deck:</b> {capitalize(topDecks ? topDecks[0].type : '', true)}</div> 
                   </div>   
                 </td>
                 <td>
