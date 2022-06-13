@@ -11,7 +11,7 @@ const RecentEvents = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const {data} = await axios.get(`/api/tournaments/recent/${props.format.name}`)
+                const {data} = await axios.get(`/api/events/recent/${props.format.name}`)
                 setRecentEvents(data.tournaments)
                 setWinners(data.winners)
             } catch (err) {

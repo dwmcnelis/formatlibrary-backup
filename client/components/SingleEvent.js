@@ -36,7 +36,7 @@ const SingleEvent = (props) => {
   useEffect(() => {
     const uploadEvent = async () => {
       try {
-        const {data} = await axios.get(`/api/tournaments/${props.match.params.id}`)
+        const {data} = await axios.get(`/api/events/${props.match.params.id}`)
         setEvent(data.event)
         setWinner(data.event.player)
         setTopDecks(data.topDecks)
