@@ -7,6 +7,7 @@ import axios from 'axios'
 
 const AdminPortal = () => {
     const [abbreviation, setAbbreviation] = useState(null)
+    const [challongeName, setChallongeName] = useState(null)
     const [community, setCommunity] = useState(null)
     const [deckTypes, setDeckTypes] = useState([])
     const [deckType, setDeckType] = useState(null)
@@ -36,6 +37,7 @@ const AdminPortal = () => {
 
     const reset = async () => {
         setAbbreviation(null)
+        setChallongeName(null)
         setCommunity(null)
         setDeckType(null)
         setDisplay(true)
@@ -136,7 +138,8 @@ const AdminPortal = () => {
 
     const getTournament = async (url) => {
         setReferenceUrl(url)
-        const name = url.slice(url.indexOf('challonge.com/') + 14)
+        let name = url.slice(url.indexOf('challonge.com/') + 14)
+        if (url.includes('formatlibrary.challonge')) name = 'formatlibrary-' + name
         setUrl(name)
 
         try {
@@ -146,6 +149,7 @@ const AdminPortal = () => {
                 }
             })
             
+            setChallongeName(data.name)
             setTournamentId(data.id.toString())
         } catch (err) {
             console.log(err)
@@ -234,15 +238,12 @@ const AdminPortal = () => {
                                     id="builder"
                                     className="login"
                                     type="search"
-                                    onKeyDown={(e) => { if (e.key === 'Enter') findPlayers(e.target.value)}}
+                                    onKeyDown={(e) => { if (e.key ==f= 'Enter') findPlayers(e.target.value)}}
                                 />
                                 <select
                                     id="builder"
                                     className="login"
-                                    onChange={(e) => {
-                                        e.preventDefault()
-                                        getPlayer(e.target.value)
-                                    }}
+                                    onChange={(e) => getPlayer(e.target.value)}
                                 >
                                 {
                                     players.map((e) => <option value={e.name}>{e.name}</option>)
@@ -253,10 +254,7 @@ const AdminPortal = () => {
                                 <select
                                     id="deck-type"
                                     className="login"
-                                    onChange={(e) => {
-                                        e.preventDefault()
-                                        getDeckType(e.target.value)}
-                                    }
+                                    onChange={(e) => getDeckType(e.target.value)}
                                 >
                                 <option value={null}></option>
                                 {
