@@ -56,6 +56,12 @@ router.get('/popular/:format', async (req, res, next) => {
                     deckTypeId: deckType.id
                 },
                 attributes: { exclude: ['id', 'name', 'createdAt', 'updatedAt'] }
+            }) || await DeckThumb.findOne({
+                where: {
+                    primary: true,
+                    deckTypeId: deckType.id
+                },
+                attributes: { exclude: ['id', 'name', 'createdAt', 'updatedAt'] }
             })
 
             if (!deckThumb) {

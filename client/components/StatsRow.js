@@ -42,7 +42,6 @@ const StatsRow = (props) => {
     const {elo, wins, losses, player} = stats
     if (!player) return <tr/>
     const evenOrOdd = props.index % 2 ? 'even' : 'odd'
-    console.log('player.name', player.name)
     const displayName = player.name.length <= 24 ? player.name : player.name.slice(0, 24).split(' ').slice(0, -1).join(' ')
     const history = useHistory()
     const goToPlayer = () => history.push(`/players/${player.tag.slice(0, -5)}${player.tag.slice(-4)}`)
