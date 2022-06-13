@@ -108,7 +108,10 @@ router.get('/:id', async (req, res, next) => {
     const topDecks = await Deck.findAll({
       where: {
         display: true,
-        eventId: event.id
+        [Op.or]: {
+            eventName: event.abbreviation,
+            eventId: event.id
+        }
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       order: [["placement", "ASC"], ["builder", "ASC"]]
@@ -116,7 +119,10 @@ router.get('/:id', async (req, res, next) => {
 
     const allDecks = await Deck.findAll({
       where: {
-        eventId: event.id
+        [Op.or]: {
+            eventName: event.abbreviation,
+            eventId: event.id
+        }
       }
     })
 
