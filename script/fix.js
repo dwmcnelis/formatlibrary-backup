@@ -1991,6 +1991,7 @@ const fixDeckThumbs = async () => {
         if (!thumb.leftCardYpdId) {
             const leftCard = await Card.findOne({ where: { name: thumb.leftCard }}) 
             if (leftCard) thumb.leftCardYpdId = leftCard.ypdId
+            await thumb.save()
 
             if (leftCard && !fs.existsSync(`./public/images/artworks/${leftCard.ypdId}.jpg`)) {
                 try {
@@ -2011,6 +2012,7 @@ const fixDeckThumbs = async () => {
         if (!thumb.centerCardYpdId) {
             const centerCard = await Card.findOne({ where: { name: thumb.centerCard }}) 
             if (centerCard) thumb.centerCardYpdId = centerCard.ypdId
+            await thumb.save()
 
             if (centerCard && !fs.existsSync(`./public/images/artworks/${centerCard.ypdId}.jpg`)) {
                 try {
@@ -2031,6 +2033,7 @@ const fixDeckThumbs = async () => {
         if (!thumb.rightCardYpdId) {
             const rightCard = await Card.findOne({ where: { name: thumb.rightCard }}) 
             if (rightCard) thumb.rightCardYpdId = rightCard.ypdId
+            await thumb.save()
 
             if (rightCard && !fs.existsSync(`./public/images/artworks/${rightCard.ypdId}.jpg`)) {
                 try {
