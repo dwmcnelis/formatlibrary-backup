@@ -438,7 +438,7 @@ const AdminPortal = () => {
                                 <input
                                     id="start-date"
                                     className="login"
-                                    type="date"
+                                    type="startDate"
                                     onChange={(e) => setStartDate(e.target.value)}
                                 />
                             </label>
