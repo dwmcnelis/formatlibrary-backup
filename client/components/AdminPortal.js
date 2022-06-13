@@ -100,7 +100,7 @@ const AdminPortal = () => {
         document.getElementById('display').value = true
         document.getElementById('community').value = null
         document.getElementById('event').value = null
-        document.getElementById('ydk').files = []
+        document.getElementById('ydk').files.pop()
     }
 
     const createDeck = async () => {
