@@ -25,6 +25,9 @@ DeckThumb.belongsTo(DeckType)
 Event.hasMany(Deck)
 Deck.belongsTo(Event)
 
+Event.belongsTo(Tournament)
+Tournament.hasOne(Event)
+
 //PLAYER
 Player.hasMany(BlogPost)
 BlogPost.belongsTo(Player)
@@ -56,9 +59,6 @@ Card.hasMany(Status)
 //TOURNAMENT
 Tournament.hasMany(Deck)
 Deck.belongsTo(Tournament)
-
-Tournament.belongsTo(Event)
-Event.hasOne(Tournament)
 
 Tournament.belongsTo(Server)
 Server.hasMany(Tournament)
