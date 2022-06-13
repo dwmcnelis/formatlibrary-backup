@@ -95,11 +95,11 @@ router.get('/first/:x', async (req, res, next) => {
     }
 })
 
-router.get('/:abbreviation', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const event = await Event.findOne({
       where: {
-        abbreviation: req.params.abbreviation
+        abbreviation: req.params.id
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       include: { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] } },
