@@ -13,6 +13,12 @@ const Stats = require('./Stats')
 const Status = require('./Status')
 const Tournament = require('./Tournament')
 
+Event.hasMany(Deck)
+Deck.belongsTo(Event)
+
+Player.hasMany(Event)
+Event.belongsTo(Player)
+
 Player.hasMany(BlogPost)
 BlogPost.belongsTo(Player)
 
@@ -21,9 +27,6 @@ Player.hasMany(Stats)
 
 Tournament.belongsTo(Server)
 Server.hasMany(Tournament)
-
-Event.hasOne(Player)
-Player.belongsTo(Event)
 
 Tournament.belongsTo(Event)
 Event.hasOne(Tournament)
@@ -46,8 +49,6 @@ Deck.belongsTo(Player)
 Tournament.hasMany(Deck)
 Deck.belongsTo(Tournament)
 
-Event.hasMany(Deck)
-Deck.belongsTo(Event)
 
 DeckType.hasMany(Deck)
 Deck.belongsTo(DeckType)
