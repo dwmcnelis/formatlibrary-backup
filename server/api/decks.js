@@ -39,12 +39,6 @@ router.get('/popular/:format', async (req, res, next) => {
             const name = arr[i]
             const deckType = await DeckType.findOne({
                 where: {
-                    name: name,
-                    format: {[Op.iLike]: req.params.format }
-                },
-                attributes: { exclude: ['createdAt', 'updatedAt'] }
-            }) || await DeckType.findOne({
-                where: {
                     name: name
                 },
                 attributes: { exclude: ['createdAt', 'updatedAt'] }
@@ -95,18 +89,18 @@ router.get('/frequent/:id', async (req, res, next) => {
             const format = elem.slice(0, elem.indexOf('_'))
             const deckType = await DeckType.findOne({
                 where: {
-                    name: {[Op.iLike]: name},
-                    format: {[Op.iLike]: format}
-                },
-                attributes: { exclude: ['createdAt', 'updatedAt'] }
-            }) || await DeckType.findOne({
-                where: {
                     name: {[Op.iLike]: name}
                 },
                 attributes: { exclude: ['createdAt', 'updatedAt'] }
             })
 
             const deckThumb = await DeckThumb.findOne({
+                where: {
+                    deckTypeId: deckType.id,
+                    format: format
+                },
+                attributes: { exclude: ['id', 'name', 'createdAt', 'updatedAt'] }
+            }) || await DeckThumb.findOne({
                 where: {
                     deckTypeId: deckType.id,
                     primary: true
