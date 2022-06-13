@@ -76,18 +76,21 @@ const DeckTable = (props) => {
   // SEARCH
   const search = () => {
     let data = [...decks]
-    const params = Object.keys(queryParams) 
+    const params = Object.keys(queryParams)
 
     for (let i = 0; i < params.length; i++) {
+      console.log('param', param)
       const param = params[i]
       const query = queryParams[param]
 
       if (query) {
-        data = data.filter((d) => d[param] && d[param].toLowerCase().includes(query.toLowerCase()))
+        console.log('query', query)
+        data = data.filter((d) => d[param].toLowerCase().includes(query.toLowerCase()))
       }
 
       if (format) {
-        data = data.filter((d) => d[format] && d.format.toLowerCase().includes(format.toLowerCase()))
+        console.log('format', format)
+        data = data.filter((d) => d.format.toLowerCase().includes(format.toLowerCase()))
       }
     }
     
