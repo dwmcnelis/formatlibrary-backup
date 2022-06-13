@@ -105,6 +105,8 @@ router.get('/:id', async (req, res, next) => {
       include: { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] } },
     })
 
+    console.log('event.id', event.id)
+
     const topDecks = await Deck.findAll({
       where: {
         display: true,
@@ -117,6 +119,8 @@ router.get('/:id', async (req, res, next) => {
       order: [["placement", "ASC"], ["builder", "ASC"]]
     })
 
+    console.log('topDecks.length', allDecks.length)
+
     const allDecks = await Deck.findAll({
       where: {
         [Op.or]: {
@@ -125,6 +129,8 @@ router.get('/:id', async (req, res, next) => {
         }
       }
     })
+
+    console.log('allDecks.length', allDecks.length)
 
     const deckTypes = Object.entries(arrayToObject(allDecks.map((d) => capitalize(d.type, true)))).sort((a, b) => b[1] - a[1])
     const deckCategories = Object.entries(arrayToObject(allDecks.map((d) => capitalize(d.category, true)))).sort((a, b) => b[1] - a[1])
@@ -171,6 +177,9 @@ router.get('/:id', async (req, res, next) => {
         console.log(err)
       }
   }
+
+  console.log('topMainDeckCards.length', topMainDeckCards.length)
+  console.log('topSideDeckCards.length', topSideDeckCards.length)
 
     const data = {
       event: event,
