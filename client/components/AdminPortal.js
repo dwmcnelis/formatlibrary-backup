@@ -241,7 +241,7 @@ const AdminPortal = () => {
                                     id="builder"
                                     className="login"
                                     type="search"
-                                    onKeyDown={(e) => { if (e.key ==f= 'Enter') findPlayers(e.target.value)}}
+                                    onKeyDown={(e) => { if (e.key === 'Enter') findPlayers(e.target.value)}}
                                 />
                                 <select
                                     id="builder"
