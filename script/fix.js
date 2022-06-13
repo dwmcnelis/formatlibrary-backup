@@ -2,7 +2,7 @@
 
 const axios = require('axios')
 const fs = require('fs')
-const { Card, Deck, DeckType, Format, Player, Print, Set, Stats, Status, Tournament } = require('../server/db/models')
+const { Card, Deck, DeckType, Event, Format, Player, Print, Set, Stats, Status, Tournament } = require('../server/db/models')
 const ygoprodeck = require('../static/ygoprodeck.json')
 const sets = require('../static/sets.json')
 const { Op } = require('sequelize')
@@ -1911,7 +1911,26 @@ const fixGames = async () => {
     return console.log('fixed stats')
 }
 
-fixGames()
+const fixDecks = async () => {
+    let b = 0
+    const decks = await Deck.findAll({ where: { tournamentId: {[Op.not]: null }}})
+    for (let i = 0; i < decks.length; i++) {
+        try {
+            const deck = decks[i]
+            const event = await Event.findOne({ where: { tournamentId: deck.tournamentId }})
+            deck.eventId = event.id
+            await deck.save()
+            b++
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    return console.log(`fixed ${b} decks`)
+}
+
+fixDecks()
+// fixGames()
 // fixYDKs()
 // fixDeckCreatedAt()
 // fixCardText()
