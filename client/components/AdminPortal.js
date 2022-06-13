@@ -141,6 +141,8 @@ const AdminPortal = () => {
         let name = url.slice(url.indexOf('challonge.com/') + 14)
         if (url.includes('formatlibrary.challonge')) name = 'formatlibrary-' + name
         setUrl(name)
+        console.log('url', url)
+        console.log('name', name)
 
         try {
             const {data} = await axios.get(`/api/tournaments/challonge/${name}`, {
@@ -149,6 +151,7 @@ const AdminPortal = () => {
                 }
             })
             
+            console.log('data', data)
             setChallongeName(data.name)
             setTournamentId(data.id.toString())
         } catch (err) {
