@@ -42,11 +42,13 @@ const AdminPortal = () => {
         setDeckType(null)
         setDisplay(true)
         setEvent(null)
+        setEvents([])
         setFormat(null)
         setFullName(null)
         setIsSeries(true)
         setPlacement(1)
-        setPlayer(null)      
+        setPlayer(null) 
+        setPlayers([])          
         setReferenceUrl(null)
         setStartDate(null)
         setSize(null)
@@ -56,16 +58,17 @@ const AdminPortal = () => {
         setYDK(null)  
 
         document.getElementById('builder').value = ''
-        document.getElementById('deckType').value = ''
+        document.getElementById('builder-select').value = null
+        document.getElementById('deckType').value = null
         document.getElementById('display').value = true
-        document.getElementById('community').value = ''
-        document.getElementById('event').value = ''
-        document.getElementById('format').value = ''
-        document.getElementById('placement').value = ''
+        document.getElementById('community').value = null
+        document.getElementById('event').value = null
+        document.getElementById('format').value = null
         document.getElementById('series').value = true
         document.getElementById('startDate').value = "mm/dd/yyyy"
-        document.getElementById('type').value = ''
+        document.getElementById('type').value = null
         document.getElementById('winner').value = ''
+        document.getElementById('winner-select').value = null
         document.getElementById('ydk').files = []
     }
 
@@ -244,7 +247,7 @@ const AdminPortal = () => {
                                     onKeyDown={(e) => { if (e.key === 'Enter') findPlayers(e.target.value)}}
                                 />
                                 <select
-                                    id="builder"
+                                    id="builder-select"
                                     className="login"
                                     onChange={(e) => getPlayer(e.target.value)}
                                 >
@@ -255,7 +258,7 @@ const AdminPortal = () => {
                             </label>
                             <label>Deck Type:
                                 <select
-                                    id="deck-type"
+                                    id="deckType"
                                     className="login"
                                     onChange={(e) => getDeckType(e.target.value)}
                                 >
@@ -425,7 +428,7 @@ const AdminPortal = () => {
                                     onKeyDown={(e) => { if (e.key === 'Enter') findPlayers(e.target.value)}}
                                 />
                                 <select
-                                    id="winner"
+                                    id="winner-select"
                                     className="login"
                                     onChange={(e) => setPlayer(e.target.value)}
                                 >
