@@ -150,8 +150,8 @@ const DeckTable = (props) => {
   // RUN QUERY
   const runQuery = () => {
     const id = document.getElementById('searchTypeSelector').value
-    const otherIds = id === 'deckType' ? ['builder', 'event'] : 
-        id === 'builder' ? ['deckType', 'event'] :
+    const otherIds = id === 'deckType' ? ['builder', 'eventName'] : 
+        id === 'builder' ? ['deckType', 'eventName'] :
         ['deckType', 'builder']
 
     setQueryParams(() => {
