@@ -8,7 +8,7 @@ const DeckThumbnail = (props = {}) => {
 
   return (
     <div>
-        <h3>{capitalize(deck.type, true)}</h3>
+        <h3>{capitalize(deck.type || deck.name, true)}</h3>
         <div className="deckThumbnail-flexbox">
             <img 
               className="deckThumbnail-image" 
