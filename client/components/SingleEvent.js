@@ -169,7 +169,7 @@ const SingleEvent = (props) => {
                 </td>
                 <td className="desktop-only">
                   <div className="single-event-cell">
-                    <div style={{paddingRight:'7px'}}><b>Winning Deck:</b> {capitalize(topDecks[0].deckType, true)}</div> 
+                    <div style={{paddingRight:'7px'}}><b>Winning Deck:</b> {capitalize(topDecks[0].type, true)}</div> 
                   </div>   
                 </td>
                 <td>
