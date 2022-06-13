@@ -119,7 +119,7 @@ router.get('/:id', async (req, res, next) => {
       order: [["placement", "ASC"], ["builder", "ASC"]]
     })
 
-    console.log('topDecks.length', allDecks.length)
+    console.log('topDecks.length', topDecks.length)
 
     const allDecks = await Deck.findAll({
       where: {
