@@ -130,6 +130,8 @@ router.get('/:id', async (req, res, next) => {
     const deckCategories = allDecks.length >= (event.size / 2) ? Object.entries(arrayToObject(allDecks.map((d) => capitalize(d.category, true)))).sort((a, b) => b[1] - a[1]) : []
     const mainDeckCards = []
     const sideDeckCards = []
+    const topMainDeckCards = []
+    const topSideDeckCards = []
 
     if (allDecks.length >= (event.size / 2)) {
       for (let i = 0; i < allDecks.length; i++) {
@@ -142,7 +144,6 @@ router.get('/:id', async (req, res, next) => {
   
       const mainDeckCardFrequencies = arrayToObject(mainDeckCards)
       const topMainDeckFrequencies = Object.entries(mainDeckCardFrequencies).sort((a, b) => b[1] - a[1]).slice(0, 10)
-      const topMainDeckCards = []
   
       for (let i = 0; i < topMainDeckFrequencies.length; i++) {
           const e = topMainDeckFrequencies[i]
@@ -158,7 +159,6 @@ router.get('/:id', async (req, res, next) => {
   
       const sideDeckCardFrequencies = arrayToObject(sideDeckCards)
       const topSideDeckFrequencies = Object.entries(sideDeckCardFrequencies).sort((a, b) => b[1] - a[1]).slice(0, 10)
-      const topSideDeckCards = []
   
       for (let i = 0; i < topSideDeckFrequencies.length; i++) {
         const e = topSideDeckFrequencies[i]
