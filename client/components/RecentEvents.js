@@ -12,7 +12,7 @@ const RecentEvents = (props) => {
         const fetchData = async () => {
             try {
                 const {data} = await axios.get(`/api/events/recent/${props.format.name}`)
-                setRecentEvents(data.tournaments)
+                setRecentEvents(data.events)
                 setWinners(data.winners)
             } catch (err) {
                 console.log(err)
