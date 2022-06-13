@@ -33,14 +33,14 @@ const DeckRow = (props) => {
           <td className="no-padding">
             <Link className="black-text" to={`/decks/${deck.id}`}>
               <div className="deckType-cell">
-                {capitalize(deck.deckType, true) || '?'}
+                {capitalize(deck.type, true) || '?'}
               </div>
             </Link>
           </td>
           <td className="no-padding">
             <Link className="black-text" to={`/decks/${deck.id}`}>
               <div className="deckCategory-cell">
-                {capitalize(deck.deckCategory, true) || '?'}
+                {capitalize(deck.category, true) || '?'}
               </div>
             </Link>
           </td>

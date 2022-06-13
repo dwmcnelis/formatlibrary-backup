@@ -84,26 +84,26 @@ const eventDESC = (a, b) => {
 }
 
 const typeASC = (a, b) => {
-    if (a.deckType < b.deckType) return -1
-    if (a.deckType > b.deckType) return 1
+    if (a.type < b.type) return -1
+    if (a.type > b.type) return 1
     return 0
 }
 
 const typeDESC = (a, b) => {
-    if (a.deckType < b.deckType) return 1
-    if (a.deckType > b.deckType) return -1
+    if (a.type < b.type) return 1
+    if (a.type > b.type) return -1
     return 0
 }
 
 const categoryASC = (a, b) => {
-    if (a.deckCategory < b.deckCategory) return -1
-    if (a.deckCategory > b.deckCategory) return 1
+    if (a.category < b.category) return -1
+    if (a.category > b.category) return 1
     return 0
 }
 
 const categoryDESC = (a, b) => {
-    if (a.deckCategory < b.deckCategory) return 1
-    if (a.deckCategory > b.deckCategory) return -1
+    if (a.category < b.category) return 1
+    if (a.category > b.category) return -1
     return 0
 }
 

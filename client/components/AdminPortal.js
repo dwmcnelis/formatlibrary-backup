@@ -2,10 +2,8 @@
 /* eslint-disable max-statements */
 
 import React, { useState, useEffect, useLayoutEffect } from 'react'
-import { Link } from 'react-router-dom'
 import NotFound from './NotFound'
 import axios from 'axios'
-import { challongeAPIKeys } from '../../secrets.js'
 
 const AdminPortal = () => {
     const [isAdmin, setIsAdmin] = useState(false)
@@ -20,6 +18,7 @@ const AdminPortal = () => {
     const [deckType, setDeckType] = useState(null)
     const [display, setDisplay] = useState(true)
     const [startDate, setStartDate] = useState(null)
+    const [referenceUrl, setReferenceUrl] = useState(null)
     const [url, setUrl] = useState(null)
     const [fullName, setFullName] = useState(null)
     const [abbreviation, setAbbreviation] = useState(null)
@@ -35,7 +34,6 @@ const AdminPortal = () => {
     const deckButtonClass = view === 'decks' ? 'clicked-admin-button' : 'admin-button'
 
     const reset = async () => {
-        console.log('reset')
         setFormat(null)
         setCommunity(null)
         setEvent(null)
@@ -43,6 +41,7 @@ const AdminPortal = () => {
         setDeckType(null)
         setDisplay(true)
         setStartDate(null)
+        setReferenceUrl(null)
         setUrl(null)
         setFullName(null)
         setAbbreviation(null)
@@ -64,17 +63,17 @@ const AdminPortal = () => {
         try {
             const { data } = await axios.post('/api/decks/create', {
                 builder: player.name,
-                name: deckType.name,
-                deckType: deckType.name,
-                deckCategory: deckType.category,
+                type: deckType.name,
+                category: deckType.category,
                 format: event.format,
                 ydk: ydk,
-                event: event.shortName,
+                event: event.abbreviation,
+                eventId: event.id,
                 placement: placement,
                 community: community,
                 display: display,
                 playerId: player.id,
-                tournamentId: event.id
+                eventId: event.id
             })
 
             alert(`Success! New Event: https://formatlibrary.com/decks/${data.id}`)
@@ -86,7 +85,7 @@ const AdminPortal = () => {
 
     const createEvent = async () => {
         if (!community) return alert('Please Select a Community.')
-        if (!url) return alert('No URL Found.')
+        if (!referenceUrl) return alert('No URL Found.')
         if (!fullName) return alert('Please provide a Full Name.')
         if (!abbreviation) return alert('Please provide an Abbreviation.')
         if (!format) return alert('Please select a Format.')
@@ -97,13 +96,14 @@ const AdminPortal = () => {
         if (!startDate) return alert('Please select a Start Date.')
         
         try {
-            const { data } = await axios.post('/api/tournaments/create', {
+            const { data } = await axios.post('/api/events/create', {
                 id: tournamentId,
                 community: community,
                 url: url,
-                name: fullName,
-                cleanName: fullName,
-                shortName: abbreviation,
+                referenceUrl: referenceUrl,
+                fullName: fullName,
+                name: challongeName,
+                abbreviation: abbreviation,
                 format: format,
                 size: size,
                 series: isSeries,
@@ -113,7 +113,7 @@ const AdminPortal = () => {
                 startDate: startDate
             })
 
-            alert(`Success! New Event: https://formatlibrary.com/events/${data.shortName}`)
+            alert(`Success! New Event: https://formatlibrary.com/events/${data.abbreviation}`)
             return reset()
         } catch (err) {
             console.log(err)
@@ -121,10 +121,11 @@ const AdminPortal = () => {
     }
 
     const getTournament = async (url) => {
-        setUrl(url)
+        setReferenceUrl(url)
+        const name = url.slice(url.indexOf('challonge.com/') + 14)
+        setUrl(name)
 
         try {
-            const name = url.slice(url.indexOf('challonge.com/') + 14)
             const {data} = await axios.get(`/api/tournaments/challonge/${name}`, {
                 headers: {
                     community: community
@@ -198,7 +199,7 @@ const AdminPortal = () => {
     // USE EFFECT
     useEffect(() => {
         const fetchEvents= async () => {
-            const {data} = await axios.get(`/api/tournaments/community/${community}`)
+            const {data} = await axios.get(`/api/events/community/${community}`)
             setEvents(data)
         }
 

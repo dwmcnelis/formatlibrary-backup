@@ -49,10 +49,10 @@ const SingleDeck = (props) => {
       deck.community === 'EdisonFormat.com' ? EF :
       ''
 
-  const categoryImage = deck.deckCategory.toLowerCase() === 'aggro' ? emojis.Helmet :
-    deck.deckCategory.toLowerCase() === 'combo' ? emojis.Controller :
-    deck.deckCategory.toLowerCase() === 'control' ? emojis.Orb :
-    deck.deckCategory.toLowerCase() === 'lockdown' ? emojis.Lock :
+  const categoryImage = deck.category.toLowerCase() === 'aggro' ? emojis.Helmet :
+    deck.category.toLowerCase() === 'combo' ? emojis.Controller :
+    deck.category.toLowerCase() === 'control' ? emojis.Orb :
+    deck.category.toLowerCase() === 'lockdown' ? emojis.Lock :
     emojis.Thinking
 
   const placementImage = deck.placement === 1 ? emojis.First :
@@ -76,11 +76,11 @@ const SingleDeck = (props) => {
   return (
     <div className="body">
       <div className="single-deck-title-flexbox">
-        <div className="single-deck-title">{capitalize(deck.deckType, true)}</div>
+        <div className="single-deck-title">{capitalize(deck.type, true)}</div>
         <a
           className="downloadButton"
           href={`/api/decks/download/${props.match.params.id}`}
-          download={`${deck.builder}-${deck.deckType}.ydk`}
+          download={`${deck.builder}-${deck.type}.ydk`}
           onClick={()=> addDownload()}
         >
           Download
@@ -120,7 +120,7 @@ const SingleDeck = (props) => {
             </td>
             <td>
               <div className="single-deck-cell">
-                <div className="single-deck-category" style={{paddingRight:'7px'}}><b>Category:</b> {capitalize(deck.deckCategory, true)}</div>
+                <div className="single-deck-category" style={{paddingRight:'7px'}}><b>Category:</b> {capitalize(deck.category, true)}</div>
                 <img className="single-deck-category-emoji" style={{width:'28px'}} src={categoryImage}/>
               </div>
             </td>
@@ -190,7 +190,7 @@ const SingleDeck = (props) => {
                 <div style={{paddingRight:'7px'}}><b className="deck-stats-label">Downloads: </b>{deck.downloads}</div> 
                 <a
                   href={`/api/decks/download/${props.match.params.id}`} 
-                  download={`${deck.builder}-${deck.deckType}.ydk`}
+                  download={`${deck.builder}-${deck.type}.ydk`}
                   onClick={()=> addDownload()}
                 >
                   <img style={{width:'28px'}} src={emojis.Disk}/>

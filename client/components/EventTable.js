@@ -130,7 +130,7 @@ const EventTable = (props) => {
   useEffect(() => {
     if (!firstXFetched && !allFetched) {
       const fetchData = async () => {
-        const {data} = await axios.get(`/api/tournaments/first/10`)
+        const {data} = await axios.get(`/api/events/first/10`)
         setEvents(data)
         setFilteredEvents(data)
         setFirstXFetched(true)
@@ -144,7 +144,7 @@ const EventTable = (props) => {
   useEffect(() => {
     if (firstXFetched && !allFetched) {
       const fetchData = async () => {
-        const {data} = await axios.get(`/api/tournaments/all`)
+        const {data} = await axios.get(`/api/events/all`)
         setEvents(data)
         setFilteredEvents(data)
         setAllFetched(true)

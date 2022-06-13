@@ -31,7 +31,7 @@ router.get('/popular/:format', async (req, res, next) => {
 
         if (!decks.length) return false
         
-        const freqs = decks.reduce((acc, curr) => (acc[curr.deckType] ? acc[curr.deckType]++ : acc[curr.deckType] = 1, acc), {})
+        const freqs = decks.reduce((acc, curr) => (acc[curr.type] ? acc[curr.type]++ : acc[curr.type] = 1, acc), {})
         const arr = Object.entries(freqs).sort((a, b) => b[1] - a[1]).map((e) => e[0]).slice(0, 6)
         const data = []
 
@@ -77,7 +77,7 @@ router.get('/frequent/:id', async (req, res, next) => {
         if (!decks.length) return false
 
         
-        const freqs = decks.reduce((acc, curr) => (acc[`${curr.format}_${curr.deckType}`] ? acc[`${curr.format}_${curr.deckType}`]++ : acc[`${curr.format}_${curr.deckType}`] = 1, acc), {})
+        const freqs = decks.reduce((acc, curr) => (acc[`${curr.format}_${curr.type}`] ? acc[`${curr.format}_${curr.type}`]++ : acc[`${curr.format}_${curr.type}`] = 1, acc), {})
         const arr = Object.entries(freqs).sort((a, b) => b[1] - a[1]).map((e) => e[0]).slice(0, 6)
         const data = []
 
@@ -318,9 +318,8 @@ router.post('/create', async (req, res, next) => {
     try {
         const deck = await Deck.create({
             builder: req.body.builder,
-            name: req.body.name,
-            deckType: req.body.deckType,
-            deckCategory: req.body.deckCategory,
+            type: req.body.type,
+            category: req.body.category,
             format: req.body.format,
             ydk: req.body.ydk,
             event: req.body.event,
@@ -328,7 +327,7 @@ router.post('/create', async (req, res, next) => {
             community: req.body.community,
             display: req.body.display,
             playerId: req.body.playerId,
-            tournamentId: req.body.tournamentId
+            eventId: req.body.eventId
         })
 
         res.json(deck)

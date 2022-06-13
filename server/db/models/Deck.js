@@ -1,14 +1,12 @@
 
 const Sequelize = require('sequelize')
 const db = require('../db')
+
 const Deck = db.define('decks', {
-  name: {
-    type: Sequelize.STRING
-  },
-  deckType: {
+  type: {
       type: Sequelize.STRING
   },
-  deckCategory: {
+  category: {
       type: Sequelize.STRING
   },
   builder: {
@@ -22,6 +20,9 @@ const Deck = db.define('decks', {
   },
   event: {
     type: Sequelize.STRING
+  },
+  eventDate: {
+      type: Sequelize.DATE
   },
   placement: {
     type: Sequelize.INTEGER

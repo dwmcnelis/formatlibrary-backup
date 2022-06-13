@@ -9,6 +9,7 @@ router.use('/cards', require('./cards'))
 router.use('/formats', require('./formats'))
 router.use('/players', require('./players'))
 router.use('/stats', require('./stats'))
+router.use('/events', require('./events'))
 router.use('/tournaments', require('./tournaments'))
 
 router.use((req, res, next) => {
