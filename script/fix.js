@@ -1913,7 +1913,11 @@ const fixGames = async () => {
 
 const fixDecks = async () => {
     let b = 0
-    const decks = await Deck.findAll({ where: { tournamentId: {[Op.not]: null }, include: Event }})
+    const decks = await Deck.findAll({ 
+        where: { eventId: {[Op.not]: null }, 
+        include: Event 
+    }})
+    
     for (let i = 0; i < decks.length; i++) {
         try {
             const deck = decks[i]
