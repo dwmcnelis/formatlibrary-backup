@@ -161,7 +161,7 @@ const AdminPortal = () => {
     }
 
     const getEvent = async (cleanName) => {
-        const elem = events.filter((e) => e.cleanName === cleanName)[0]
+        const elem = events.filter((e) => e.name === cleanName)[0]
         return setEvent(elem)
     }
 
@@ -271,7 +271,7 @@ const AdminPortal = () => {
                                 >
                                 <option value={null}></option>
                                 {
-                                    events.map((e) => <option value={e.cleanName}>{e.cleanName}</option>)
+                                    events.map((e) => <option value={e.name}>{e.name}</option>)
                                 }
                                 </select>
                             </label>

@@ -1664,7 +1664,7 @@ const countParticipants = async () => {
             
             const winningDeck = await Deck.findOne({
                 where: {
-                    event: tournament.shortName,
+                    event: tournament.abbreviation,
                     placement: 1
                 }
             })

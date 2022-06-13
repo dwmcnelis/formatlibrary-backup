@@ -18,9 +18,9 @@ const EventThumbnail = (props = {}) => {
     const backgroundImage = emojis[formats[formatName].logo] || ''
 
   return (
-        <Link className='link' to={`/events/${event.shortName}`}>
+        <Link className='link' to={`/events/${event.abbreviation}`}>
           <div className="eventThumbnail">  
-              <h3>{capitalize(event.shortName, true)}</h3>
+              <h3>{capitalize(event.abbreviation, true)}</h3>
               <div className="eventThumbnail-flexbox">
                   <img 
                     className="eventThumbnail-image" 

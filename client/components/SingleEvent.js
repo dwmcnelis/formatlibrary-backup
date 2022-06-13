@@ -51,7 +51,7 @@ const SingleEvent = (props) => {
   }, [])
 
   if (event === null) return <NotFound/>
-  if (!event.cleanName || !topDecks.length || !metagame.deckTypes.length) return <div></div>
+  if (!event.name || !topDecks.length || !metagame.deckTypes.length) return <div></div>
 
   const formatName = capitalize(event.format, true) || '?'
   const formatEmoji = emojis[formats[formatName].logo] || ''
@@ -127,7 +127,7 @@ const SingleEvent = (props) => {
     <div className="body">
       <div className="event-title-flexbox">
         <div className="event-info-container">
-          <div className="single-event-title">{event.cleanName}</div>
+          <div className="single-event-title">{event.name}</div>
             <table className="single-event-table">
             <tbody>
               <tr className="single-event-info-1">
@@ -200,13 +200,13 @@ const SingleEvent = (props) => {
       <div id="bracket">
         <div className="subcategory-title-flexbox">
           <img style={{ width:'64px'}} src={communityLogo}/>
-          <h2 className="subheading"><b>{event.shortName}</b> Bracket:</h2>
+          <h2 className="subheading"><b>{event.abbreviation}</b> Bracket:</h2>
           <img style={{ width:'64px'}} src={'/images/logos/Challonge.png'}/>
         </div>
         <img 
           style={{width:'800px'}}
           className="bracket" 
-          src={`/brackets/${event.shortName}.png`}
+          src={`/brackets/${event.abbreviation}.png`}
           onError={(e) => {
             e.target.onerror = null
             e.target.style.width = "300px"
@@ -227,7 +227,7 @@ const SingleEvent = (props) => {
       <div id="top-decks">
         <div className="subcategory-title-flexbox">
           <img style={{ width:'64px'}} src={communityLogo}/>
-          <h2 className="subheading"><b>{event.shortName}</b> {topDecks.length > 1 ? `Top ${topDecks.length} Decks` : 'Winning Deck'}:</h2>
+          <h2 className="subheading"><b>{event.abbreviation}</b> {topDecks.length > 1 ? `Top ${topDecks.length} Decks` : 'Winning Deck'}:</h2>
           <img style={{ height:'64px'}} src={'/images/emojis/deckbox.png'}/>
         </div>
         <div id="deckGalleryFlexBox">
@@ -253,7 +253,7 @@ const SingleEvent = (props) => {
       <div id="metagame-stats">
         <div className="subcategory-title-flexbox">
           <img style={{ width:'64px'}} src={communityLogo}/>
-          <h2 className="subheading"><b>{event.shortName}</b> Metagame Stats:</h2>
+          <h2 className="subheading"><b>{event.abbreviation}</b> Metagame Stats:</h2>
           <img style={{ height:'64px'}} src={'/images/emojis/microscope.png'}/>
         </div>
 

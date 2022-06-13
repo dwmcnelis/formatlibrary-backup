@@ -20,7 +20,7 @@ const EventRow = (props) => {
   return (
       <tr className={`${evenOrOdd}-search-results-row`}>
         <td className="no-padding">
-          <Link className="black-text" to={`/events/${event.shortName}`}>
+          <Link className="black-text" to={`/events/${event.abbreviation}`}>
             <div className="format-cell-flexbox">
               <img src={backgroundImage}/>
               <div>{formatName}</div>
@@ -28,14 +28,14 @@ const EventRow = (props) => {
           </Link>
         </td>
         <td className="no-padding">
-          <Link className="black-text" to={`/events/${event.shortName}`}>
+          <Link className="black-text" to={`/events/${event.abbreviation}`}>
             <div className="event-name-cell">
-              {event.cleanName}
+              {event.name}
             </div>
           </Link>
         </td>
         <td className="no-padding">
-          <Link className="black-text" to={`/events/${event.shortName}`}>
+          <Link className="black-text" to={`/events/${event.abbreviation}`}>
             <div className="player-cell">
               <img 
                   className="player-cell-pfp"
@@ -51,7 +51,7 @@ const EventRow = (props) => {
           </Link>
         </td>
         <td className="no-padding">
-          <Link className="black-text" to={`/events/${event.shortName}`}>
+          <Link className="black-text" to={`/events/${event.abbreviation}`}>
             <div className="community-cell-flexbox">
               <img src={communityLogo}/>
               <div>{event.community}</div>
@@ -59,14 +59,14 @@ const EventRow = (props) => {
           </Link>
         </td>
         <td className="no-padding">
-          <Link className="black-text" to={`/events/${event.shortName}`}>
+          <Link className="black-text" to={`/events/${event.abbreviation}`}>
             <div className="size-cell">
               {event.size} 👤
             </div>
           </Link>
         </td>
         <td className="no-padding">
-            <Link className="black-text" to={`/events/${event.shortName}`}>
+            <Link className="black-text" to={`/events/${event.abbreviation}`}>
               <div className="date-cell">
                   {event.startDate.substring(0, 10)}
               </div>

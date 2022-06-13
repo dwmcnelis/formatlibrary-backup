@@ -82,8 +82,7 @@ const EventTable = (props) => {
         if (param === 'name') {
           data = data.filter(
             (d) => d.name.toLowerCase().includes(query.toLowerCase()) || 
-              d.cleanName.toLowerCase().includes(query.toLowerCase()) || 
-              d.shortName.toLowerCase().includes(query.toLowerCase())
+              d.abbreviation.toLowerCase().includes(query.toLowerCase())
           )
         } else {
           data = data.filter((d) => d[param].toLowerCase().includes(query.toLowerCase()))
