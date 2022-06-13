@@ -40,6 +40,9 @@ Server.hasMany(Stats)
 Player.hasMany(Deck)
 Deck.belongsTo(Player)
 
+Tournament.hasMany(Deck)
+Deck.belongsTo(Tournament)
+
 Event.hasMany(Deck)
 Deck.belongsTo(Event)
 
