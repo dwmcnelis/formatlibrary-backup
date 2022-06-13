@@ -1964,12 +1964,14 @@ const fixDecks2 = async () => {
 }
 
 const fixDeckThumbs = async () => {
+    let b = 0
     const thumbs = await DeckThumb.findAll()
     for (let i = 0; i < thumbs.length; i++) {
         const thumb = thumbs[i]
-        const format = await Format.findOne({ where: { name: thumb.format }})
-        thumb.formatId = format.id
+        const deckType = await DeckType.findOne({ where: { name: thumb.name }})
+        thumb.deckTypeId = deckType.id
         await thumb.save()
+        b++
         // const count = await DeckThumb.count({ where: { name: thumb.name }})
         // if (count === 1) {
         //     thumb.primary = true
@@ -2030,6 +2032,8 @@ const fixDeckThumbs = async () => {
         //     }
         // }
     }
+
+    return console.log(`fixed ${b} deck thumbs`)
 } 
 
 fixDeckThumbs()

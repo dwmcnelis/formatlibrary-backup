@@ -22,6 +22,7 @@ router.get('/types', async (req, res, next) => {
 
 router.get('/popular/:format', async (req, res, next) => {
     try {
+        console.log('req.params.format', req.params.format)
         const decks = await Deck.findAll({ 
             where: {
                 format: {[Op.iLike]: req.params.format },
@@ -44,16 +45,21 @@ router.get('/popular/:format', async (req, res, next) => {
                 attributes: { exclude: ['createdAt', 'updatedAt'] }
             })
 
+            if (!deckType) {
+                console.log(`Unable to find DeckType: ${name}`)
+                continue
+            }
+
             const deckThumb = await DeckThumb.findOne({
                 where: {
-                    deckTypeId: deckType.id,
-                    format: {[Op.iLike]: req.params.format }
+                    format: {[Op.iLike]: req.params.format },
+                    deckTypeId: deckType.id
                 },
                 attributes: { exclude: ['id', 'name', 'createdAt', 'updatedAt'] }
             })
 
-            if (!deckType || !deckThumb) {
-                console.log(`Unable to find ${req.params.format} Format DeckType: ${name}`)
+            if (!deckThumb) {
+                console.log(`Unable to find ${req.params.format} Format DeckThumb: ${name}`)
                 continue
             }
 
