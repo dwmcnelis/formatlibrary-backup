@@ -1917,10 +1917,11 @@ const fixDecks = async () => {
         where: { eventId: {[Op.not]: null }, 
         include: Event 
     }})
-    
+    console.log('decks/length', decks.length)
     for (let i = 0; i < decks.length; i++) {
         try {
             const deck = decks[i]
+            console.log('deck', deck)
             deck.eventDate = deck.event.startDate
             await deck.save()
             b++
