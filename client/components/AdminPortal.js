@@ -6,51 +6,52 @@ import NotFound from './NotFound'
 import axios from 'axios'
 
 const AdminPortal = () => {
-    const [isAdmin, setIsAdmin] = useState(false)
-    const [view, setView] = useState(false)
-    const [formats, setFormats] = useState([])
-    const [format, setFormat] = useState(null)
+    const [abbreviation, setAbbreviation] = useState(null)
     const [community, setCommunity] = useState(null)
-    const [events, setEvents] = useState([])
-    const [event, setEvent] = useState(null)
-    const [placement, setPlacement] = useState(1)
     const [deckTypes, setDeckTypes] = useState([])
     const [deckType, setDeckType] = useState(null)
     const [display, setDisplay] = useState(true)
-    const [startDate, setStartDate] = useState(null)
-    const [referenceUrl, setReferenceUrl] = useState(null)
-    const [url, setUrl] = useState(null)
+    const [event, setEvent] = useState(null)
+    const [events, setEvents] = useState([])
+    const [formats, setFormats] = useState([])
+    const [format, setFormat] = useState(null)
     const [fullName, setFullName] = useState(null)
-    const [abbreviation, setAbbreviation] = useState(null)
-    const [size, setSize] = useState(null)
+    const [isAdmin, setIsAdmin] = useState(false)
     const [isSeries, setIsSeries] = useState(true)
-    const [tournamentType, setTournamentType] = useState(true)
-    const [tournamentId, setTournamentId] = useState(null)
-    const [ydk, setYDK] = useState(null)
+    const [placement, setPlacement] = useState(1)
     const [players, setPlayers] = useState([])
     const [player, setPlayer] = useState(null)
+    const [referenceUrl, setReferenceUrl] = useState(null)
+    const [size, setSize] = useState(null)
+    const [startDate, setStartDate] = useState(null)
+    const [tournamentType, setTournamentType] = useState(true)
+    const [tournamentId, setTournamentId] = useState(null)
+    const [url, setUrl] = useState(null)
+    const [view, setView] = useState(false)
+    const [ydk, setYDK] = useState(null)
+
     const placementArr = event ? Array.from({length: event.size}, (_, i) => i + 1) : []
     const eventButtonClass = view === 'events' ? 'clicked-admin-button' : 'admin-button'
     const deckButtonClass = view === 'decks' ? 'clicked-admin-button' : 'admin-button'
 
     const reset = async () => {
-        setFormat(null)
+        setAbbreviation(null)
         setCommunity(null)
-        setEvent(null)
-        setPlacement(1)
         setDeckType(null)
         setDisplay(true)
-        setStartDate(null)
-        setReferenceUrl(null)
-        setUrl(null)
+        setEvent(null)
+        setFormat(null)
         setFullName(null)
-        setAbbreviation(null)
-        setSize(null)
         setIsSeries(true)
+        setPlacement(1)
+        setPlayer(null)      
+        setReferenceUrl(null)
+        setStartDate(null)
+        setSize(null)
         setTournamentType(true)
         setTournamentId(null)
-        setYDK(null)
-        setPlayer(null)        
+        setUrl(null)
+        setYDK(null)  
     }
 
     const createDeck = async () => {
@@ -160,8 +161,8 @@ const AdminPortal = () => {
         return setDeckType(elem)
     }
 
-    const getEvent = async (cleanName) => {
-        const elem = events.filter((e) => e.name === cleanName)[0]
+    const getEvent = async (name) => {
+        const elem = events.filter((e) => e.name === name)[0]
         return setEvent(elem)
     }
 

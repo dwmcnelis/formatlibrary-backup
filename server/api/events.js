@@ -33,7 +33,7 @@ router.get('/community/:community', async (req, res, next) => {
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       include: { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] } },
-      order: [["cleanName", "ASC"]]
+      order: [["name", "ASC"]]
     })
     
     res.json(events)
