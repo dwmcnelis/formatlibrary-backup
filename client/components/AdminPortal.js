@@ -183,7 +183,7 @@ const AdminPortal = () => {
             try {
                 const {data} = await axios.get(`/api/tournaments/challonge/${name}`, {
                     headers: {
-                        community: community
+                        community: community || 'Format Library'
                     }
                 })
                 
@@ -475,7 +475,7 @@ const AdminPortal = () => {
                             <label>Start Date:
                                 <input
                                     id="startDate"
-                                    defaultValue={startDate || 'mm-dd-yyyy'}
+                                    defaultValue={startDate ? startDate.slice(0, 10) : 'mm-dd-yyyy'}
                                     className="login"
                                     type="date"
                                     onChange={(e) => {
