@@ -188,6 +188,7 @@ const AdminPortal = () => {
                 })
                 
                 setChallongeName(data.name)
+                setSize(data.participants_count)
                 setStartDate(data.started_at)
                 setEndDate(data.completed_at)
                 setTournamentId(data.id.toString())
@@ -425,7 +426,8 @@ const AdminPortal = () => {
                             </label>
                             <label>Size:
                                 <input
-                                    id="ydk"
+                                    id="size"
+                                    value={size || ''}
                                     className="size"
                                     type="text"
                                     onChange={(e) => setSize(e.target.value)}
