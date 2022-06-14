@@ -31,6 +31,8 @@ const AdminPortal = () => {
     const [url, setUrl] = useState(null)
     const [view, setView] = useState(false)
     const [ydk, setYDK] = useState(null)
+    console.log('builder', builder)
+    console.log('player', player)
 
     const placementArr = event ? Array.from({length: event.size}, (_, i) => i + 1) : []
     const eventButtonClass = view === 'events' ? 'clicked-admin-button' : 'admin-button'

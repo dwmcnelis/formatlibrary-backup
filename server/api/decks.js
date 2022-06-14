@@ -22,7 +22,6 @@ router.get('/types', async (req, res, next) => {
 
 router.get('/popular/:format', async (req, res, next) => {
     try {
-        console.log('req.params.format', req.params.format)
         const decks = await Deck.findAll({ 
             where: {
                 format: {[Op.iLike]: req.params.format },
