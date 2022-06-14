@@ -31,7 +31,6 @@ const AdminPortal = () => {
     const [url, setUrl] = useState(null)
     const [view, setView] = useState(false)
     const [ydk, setYDK] = useState(null)
-    console.log('builder', builder)
     console.log('player', player)
 
     const placementArr = event ? Array.from({length: event.size}, (_, i) => i + 1) : []
@@ -163,7 +162,8 @@ const AdminPortal = () => {
                 type: tournamentType,
                 winner: player.name,
                 playerId: player.id,
-                startDate: startDate
+                startDate: startDate,
+                endDate: endDate,
             })
 
             alert(`Success! New Event: https://formatlibrary.com/events/${data.abbreviation}`)
@@ -179,18 +179,21 @@ const AdminPortal = () => {
         if (url.includes('formatlibrary.challonge')) name = 'formatlibrary-' + name
         setUrl(name)
 
-        try {
-            const {data} = await axios.get(`/api/tournaments/challonge/${name}`, {
-                headers: {
-                    community: community
-                }
-            })
-            
-            setChallongeName(data.name)
-            setEndDate(data.completed_at)
-            setTournamentId(data.id.toString())
-        } catch (err) {
-            console.log(err)
+        if (url.includes('challonge')) {
+            try {
+                const {data} = await axios.get(`/api/tournaments/challonge/${name}`, {
+                    headers: {
+                        community: community
+                    }
+                })
+                
+                setChallongeName(data.name)
+                setStartDate(data.started_at)
+                setEndDate(data.completed_at)
+                setTournamentId(data.id.toString())
+            } catch (err) {
+                console.log(err)
+            }
         }
     }
 
@@ -472,9 +475,14 @@ const AdminPortal = () => {
                             <label>Start Date:
                                 <input
                                     id="startDate"
+                                    defaultValue={startDate || 'mm-dd-yyyy'}
                                     className="login"
                                     type="date"
-                                    onChange={(e) => setStartDate(e.target.value)}
+                                    onChange={(e) => {
+                                            if (!endDate) setEndDate(e.target.value)
+                                            setStartDate(e.target.value)
+                                        }
+                                    }
                                 />
                             </label>
                             <a

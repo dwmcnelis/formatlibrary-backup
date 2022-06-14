@@ -223,7 +223,8 @@ router.post('/create', async (req, res, next) => {
       playerId: req.body.playerId,
       community: req.body.community,
       emoji: req.body.emoji,
-      startDate: req.body.startDate
+      startDate: req.body.startDate,
+      endDate: req.body.endDate
     })
 
     res.json(event)
