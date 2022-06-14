@@ -468,7 +468,7 @@ const AdminPortal = () => {
                                 <select
                                     id="winner-select"
                                     className="login"
-                                    onChange={(e) => setPlayer(e.target.value)}
+                                    onChange={(e) => getPlayer(e.target.value)}
                                 >
                                 {
                                     players.map((e) => <option value={e.name}>{e.name}</option>)
