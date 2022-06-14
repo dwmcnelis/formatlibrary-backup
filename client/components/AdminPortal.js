@@ -31,11 +31,8 @@ const AdminPortal = () => {
     const [url, setUrl] = useState(null)
     const [view, setView] = useState(false)
     const [ydk, setYDK] = useState(null)
-    console.log('player', player)
-    console.log('startDate', startDate)
-    const slice = startDate ? startDate.slice(0, 10) : null
-    console.log('slice', slice)
 
+    const slice = startDate ? startDate.slice(0, 10) : null
     const placementArr = event ? Array.from({length: event.size}, (_, i) => i + 1) : []
     const eventButtonClass = view === 'events' ? 'clicked-admin-button' : 'admin-button'
     const deckButtonClass = view === 'decks' ? 'clicked-admin-button' : 'admin-button'
