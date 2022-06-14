@@ -127,6 +127,22 @@ const ordinalize = (int) => {
     }
 }
 
+const shouldDisplay = (placement = 1, size = 0) => {
+    const display = (size <= 8 && placement === 1) ||
+        (size > 8 && size <= 16 && placement <= 2) ||
+        (size > 16 && size <= 24 && placement <= 3) ||
+        (size > 24 && size <= 32 && placement <= 4) ||
+        (size > 32 && size <= 48 && placement <= 6) ||
+        (size > 48 && size <= 64 && placement <= 8) ||
+        (size > 64 && size <= 96 && placement <= 12) ||
+        (size > 96 && size <= 128 && placement <= 16) ||
+        (size > 128 && size <= 224 && placement <= 24) ||
+        (size > 224 && placement <= 32) ||
+        false
+
+    return display
+}
+
 //URLIZE
 const urlize = (str) => str.replace(/[\s]/g, '-').toLowerCase()
 
@@ -138,5 +154,6 @@ module.exports = {
     dateToVerbose,
     generateDefaultStatus,
     ordinalize,
+    shouldDisplay,
     urlize
 }

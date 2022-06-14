@@ -2,6 +2,7 @@
 /* eslint-disable max-statements */
 
 import React, { useState, useEffect, useLayoutEffect } from 'react'
+import { shouldDisplay } from '../../functions/utility'
 import NotFound from './NotFound'
 import axios from 'axios'
 
@@ -336,7 +337,10 @@ const AdminPortal = () => {
                                 <select
                                     id="placement"
                                     className="login"
-                                    onChange={(e) => setPlacement(e.target.value)}
+                                    onChange={(e) => {
+                                        setDisplay(shouldDisplay(e.target.value, event.size))
+                                        setPlacement(e.target.value)}
+                                    }
                                 >
                                 {
                                     placementArr.map((e) => <option value={e}>{e}</option>)
@@ -346,6 +350,7 @@ const AdminPortal = () => {
                             <label>Display:
                                 <select
                                     id="display"
+                                    value={display}
                                     className="login"
                                     onChange={(e) => setDisplay(e.target.value)}
                                 >
