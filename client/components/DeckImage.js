@@ -7,7 +7,6 @@ const DeckImage = (props = {}) => {
   if (!deck) return <div/>
   const deckType = capitalize(deck.type, true)
   const fullName = deck.player ? deck.player.name : deck.builder
-  console.log('fullName', fullName)
   const displayName = fullName.length <= 17 ? fullName : fullName.slice(0, 17).split(' ').slice(0, -1).join(' ')
   const placement = ordinalize(deck.placement)
   const title = coverage ? `${deckType} - ${displayName} - ${placement}` :

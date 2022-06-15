@@ -23,7 +23,7 @@ const DeckTable = (props) => {
   const [firstXFetched, setFirstXFetched] = useState(false)
 
   const [queryParams, setQueryParams] = useState({
-    deckType: null,
+    type: null,
     builder: null,
     eventName: null,
     deckCategory: null
@@ -79,18 +79,19 @@ const DeckTable = (props) => {
     const params = Object.keys(queryParams)
 
     for (let i = 0; i < params.length; i++) {
-      console.log('param', param)
-      const param = params[i]
-      const query = queryParams[param]
-
-      if (query) {
-        console.log('query', query)
-        data = data.filter((d) => d[param].toLowerCase().includes(query.toLowerCase()))
-      }
-
-      if (format) {
-        console.log('format', format)
-        data = data.filter((d) => d.format.toLowerCase().includes(format.toLowerCase()))
+      try {
+        const param = params[i]
+        const query = queryParams[param]
+  
+        if (query) {
+          data = data.filter((d) => d[param] && d[param].toLowerCase().includes(query.toLowerCase()))
+        }
+  
+        if (format) {
+          data = data.filter((d) =>  d[param] && d.format.toLowerCase().includes(format.toLowerCase()))
+        }
+      } catch (err) {
+        console.log(err)
       }
     }
     
