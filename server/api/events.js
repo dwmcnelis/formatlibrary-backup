@@ -194,7 +194,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/create', async (req, res, next) => {
   try {
-    req.body.bracket.pipe(fs.createWriteStream(`public/brackets/${body.req.abbreviation}.png`))
+    req.body.bracket.pipe(fs.createWriteStream(`public/brackets/${req.body.abbreviation}.png`))
 
     if (req.body.id) {
       await Tournament.create({
