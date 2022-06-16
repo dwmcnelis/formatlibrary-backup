@@ -5,7 +5,6 @@ import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { shouldDisplay } from '../../functions/utility'
 import NotFound from './NotFound'
 import axios from 'axios'
-import fs from 'fs'
 
 const AdminPortal = () => {
     const [abbreviation, setAbbreviation] = useState(null)
@@ -168,9 +167,9 @@ const AdminPortal = () => {
                 playerId: player.id,
                 startDate: startDate,
                 endDate: endDate,
+                bracket: bracket
             })
 
-            bracket.pipe(fs.createWriteStream(`public/brackets/${abbreviation}.png`))
             alert(`Success! New Event: https://formatlibrary.com/events/${data.abbreviation}`)
             return resetCreateEvent()
         } catch (err) {

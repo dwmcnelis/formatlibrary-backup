@@ -5,6 +5,7 @@ const {Op} = require('sequelize')
 const {arrayToObject, capitalize} = require('../../functions/utility')
 const { challongeAPIKeys } = require('../../secrets')
 const axios = require('axios')
+const fs = require('fs')
 
 module.exports = router
 
@@ -193,6 +194,8 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/create', async (req, res, next) => {
   try {
+    req.body.bracket.pipe(fs.createWriteStream(`public/brackets/${body.req.abbreviation}.png`))
+
     if (req.body.id) {
       await Tournament.create({
         id: req.body.id,
