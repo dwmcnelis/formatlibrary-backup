@@ -68,7 +68,7 @@ const EventRow = (props) => {
         <td className="no-padding">
             <Link className="black-text" to={`/events/${event.abbreviation}`}>
               <div className="date-cell">
-                  {event.startDate.substring(0, 10)}
+                  {event.startDate ? event.startDate.substring(0, 10) : ''}
               </div>
             </Link>
         </td>

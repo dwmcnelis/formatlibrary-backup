@@ -8,6 +8,7 @@ import axios from 'axios'
 
 const AdminPortal = () => {
     const [abbreviation, setAbbreviation] = useState(null)
+    const [bracket, setBracket] = useState(null)
     const [challongeName, setChallongeName] = useState(null)
     const [community, setCommunity] = useState(null)
     const [deckTypes, setDeckTypes] = useState([])
@@ -144,6 +145,7 @@ const AdminPortal = () => {
         if (!format) return alert('Please select a Format.')
         if (!size) return alert('Please specify the Tournament Size.')
         if (!tournamentType) return alert('Please select a Tournament Type.')
+        if (!bracket) return alert('Please upload a Bracket PNG file.')
         if (!tournamentId && url.includes('challonge')) return alert('Tournament not found on Challonge.')
         if (!player) return alert('No Winner Found.')
         if (!startDate) return alert('Please select a Start Date.')
@@ -167,6 +169,7 @@ const AdminPortal = () => {
                 endDate: endDate,
             })
 
+            bracket.pipe(fs.createWriteStream(`public/brackets/${abbreviation}.png`))
             alert(`Success! New Event: https://formatlibrary.com/events/${data.abbreviation}`)
             return resetCreateEvent()
         } catch (err) {
@@ -199,7 +202,13 @@ const AdminPortal = () => {
         }
     }
 
-    const read = (file) => {
+    const readBracket = (file) => {
+        const reader = new FileReader()
+        reader.readAsBinaryString(file)
+        reader.onloadend = () => setBracket(reader.result)
+    }
+
+    const readYDK = (file) => {
         const reader = new FileReader()
         reader.readAsBinaryString(file)
         reader.onloadend = () => setYDK(reader.result)
@@ -364,7 +373,7 @@ const AdminPortal = () => {
                                     className="login"
                                     type="file"
                                     accept=".ydk"
-                                    onChange={(e) => read(e.target.files[0])}
+                                    onChange={(e) => readYDK(e.target.files[0])}
                                 />
                             </label>
                             <a
@@ -461,6 +470,15 @@ const AdminPortal = () => {
                                     <option value="true">True</option>
                                     <option value="false">False</option>
                                 </select>
+                            </label>
+                            <label>Bracket:
+                                <input
+                                    id="bracket"
+                                    className="login"
+                                    type="file"
+                                    accept=".png"
+                                    onChange={(e) => readBracket(e.target.files[0])}
+                                />
                             </label>
                             <label>Winner:
                                 <input
