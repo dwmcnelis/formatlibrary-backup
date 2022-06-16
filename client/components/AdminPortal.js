@@ -205,7 +205,8 @@ const AdminPortal = () => {
     const readBracket = (file) => {
         const reader = new FileReader()
         reader.readAsDataURL(file)
-        reader.onloadend = () => setBracket(reader.result)
+        const img = new Image({ src: reader.result })
+        reader.onloadend = () => setBracket(img)
     }
 
     const readYDK = (file) => {
