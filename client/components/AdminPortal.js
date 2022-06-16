@@ -204,7 +204,7 @@ const AdminPortal = () => {
 
     const readBracket = (file) => {
         const reader = new FileReader()
-        reader.readAsBinaryString(file)
+        reader.readAsDataURL(file)
         reader.onloadend = () => setBracket(reader.result)
     }
 
