@@ -138,19 +138,20 @@ const AdminPortal = () => {
     }
 
     const createEvent = async () => {
-        if (!community) return alert('Please Select a Community.')
-        if (!referenceUrl) return alert('No URL Found.')
-        if (!fullName) return alert('Please provide a Full Name.')
-        if (!abbreviation) return alert('Please provide an Abbreviation.')
-        if (!format) return alert('Please select a Format.')
-        if (!size) return alert('Please specify the Tournament Size.')
-        if (!tournamentType) return alert('Please select a Tournament Type.')
-        if (!bracket) return alert('Please upload a Bracket PNG file.')
-        if (!tournamentId && url.includes('challonge')) return alert('Tournament not found on Challonge.')
-        if (!player) return alert('No Winner Found.')
-        if (!startDate) return alert('Please select a Start Date.')
+        // if (!community) return alert('Please Select a Community.')
+        // if (!referenceUrl) return alert('No URL Found.')
+        // if (!fullName) return alert('Please provide a Full Name.')
+        // if (!abbreviation) return alert('Please provide an Abbreviation.')
+        // if (!format) return alert('Please select a Format.')
+        // if (!size) return alert('Please specify the Tournament Size.')
+        // if (!tournamentType) return alert('Please select a Tournament Type.')
+        // if (!bracket) return alert('Please upload a Bracket PNG file.')
+        // if (!tournamentId && url.includes('challonge')) return alert('Tournament not found on Challonge.')
+        // if (!player) return alert('No Winner Found.')
+        // if (!startDate) return alert('Please select a Start Date.')
         
         try {
+            console.log('try')
             const { data } = await axios.post('/api/events/create', {
                 id: tournamentId,
                 community: community,
@@ -205,8 +206,7 @@ const AdminPortal = () => {
     const readBracket = (file) => {
         const reader = new FileReader()
         reader.readAsDataURL(file)
-        const img = new Image({ src: reader.result })
-        reader.onloadend = () => setBracket(img)
+        reader.onloadend = () => setBracket(reader.result)
     }
 
     const readYDK = (file) => {

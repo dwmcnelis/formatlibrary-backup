@@ -194,7 +194,8 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/create', async (req, res, next) => {
   try {
-    fs.writeFileSync(`./public/brackets/${req.body.abbreviation}.png`, req.body.bracket)
+    const buffer = req.body.bracket.replace(/^data:image\/png;base64,/, '')
+    fs.writeFileSync(`./public/brackets/${req.body.abbreviation}.png`, buffer, 'base64')
 
     if (req.body.id) {
       await Tournament.create({
@@ -229,7 +230,7 @@ router.post('/create', async (req, res, next) => {
       startDate: req.body.startDate,
       endDate: req.body.endDate
     })
-
+    
     res.json(event)
   } catch (err) {
     next(err)
