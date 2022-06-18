@@ -82,6 +82,9 @@ const DeckTable = (props) => {
       try {
         const param = params[i]
         const query = queryParams[param]
+        console.log('format', format)
+        console.log('param', param)
+        console.log('query', query)
   
         if (query) {
           data = data.filter((d) => d[param] && d[param].toLowerCase().includes(query.toLowerCase()))
