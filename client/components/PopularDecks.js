@@ -5,7 +5,6 @@ import axios from 'axios'
 
 const PopularDecks = (props) => {
     const [popularDecks, setPopularDecks] = useState([])
-    console.log('popularDecks', popularDecks)
   
     // USE EFFECT
     useEffect(() => {
