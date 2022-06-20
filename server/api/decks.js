@@ -34,6 +34,8 @@ router.get('/popular/:format', async (req, res, next) => {
         const freqs = decks.reduce((acc, curr) => (acc[curr.type] ? acc[curr.type]++ : acc[curr.type] = 1, acc), {})
         const arr = Object.entries(freqs).sort((a, b) => b[1] - a[1]).map((e) => e[0]).slice(0, 6)
         const data = []
+        console.log('freqs', freqs)
+        console.log('arr', arr)
 
         for (let i = 0; i < arr.length; i++) {
             const name = arr[i]
@@ -71,6 +73,7 @@ router.get('/popular/:format', async (req, res, next) => {
             data.push({...deckType.dataValues, ...deckThumb.dataValues})
         }
 
+        console.log('data', data)
         res.json(data)
     } catch (err) {
         next(err)

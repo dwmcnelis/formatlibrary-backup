@@ -4,6 +4,7 @@ import {capitalize} from '../../functions/utility'
 
 const DeckThumbnail = (props = {}) => {
   const {deck} = props
+  console.log('deck', deck)
   if (!deck) return <div/>
 
   return (
