@@ -1,6 +1,6 @@
 # Format Library
 
-Format Libray is a public resource for learning about the Yu-Gi-Oh! Trading Card Game and its competitive history in the West, which dates from 2002 to the present. Please note: trademarked artwork and card text is used for informational purposes under U.S. fair use copyright policy, and this website is not affiliated with 4K Media or Konami Digital Entertainment, who own said copyrights.
+Format Library is a public resource for learning about the Yu-Gi-Oh! Trading Card Game and its competitive history in the West, which dates from 2002 to the present. Please note: trademarked artwork and card text is used for informational purposes under U.S. fair use copyright policy, and this website is not affiliated with 4K Media or Konami Digital Entertainment, who own said copyrights.
 
 This website is built on extensive coverage of events, players, and deck lists, spanning the history of different Yu-Gi-Oh! "formats" (eras). Additionally, the website maintains a complete card database that is updated nightly. These databases (Cards, Decks, Events, Formats, and Players) provide a complete picture of the game's extensive history. These data are all related to each other, and one of my main goals with this project is to facilitate the natural connections between them. 
 

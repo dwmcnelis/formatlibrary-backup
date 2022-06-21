@@ -29,7 +29,7 @@ const Footer = () => (
             <p className="footer-item">Format Intros</p>
           </Link>
         </div>
-        <p className="disclaimer">Format Libray is a public resource for learning about the Yu-Gi-Oh! Trading Card Game and its history. Trademarked artwork and card text is used for informational purposes under U.S. fair use copyright policy. Not affiliated with 4K Media or Konami Digital Entertainment.</p>
+        <p className="disclaimer">Format Library is a public resource for learning about the Yu-Gi-Oh! Trading Card Game and its history. Trademarked artwork and card text is used for informational purposes under U.S. fair use copyright policy. Not affiliated with 4K Media or Konami Digital Entertainment.</p>
     </div>
     <Link to="/">
       <div className="footer-logo"/>
