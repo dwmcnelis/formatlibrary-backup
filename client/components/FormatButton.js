@@ -2,7 +2,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { capitalize } from '../../functions/utility'
-import * as emojis from '../../public/images/emojis'
+// import * as emojis from '../../public/images/emojis'
 
 //FORMAT BUTTONS
 const FormatButton = (props) => {
@@ -13,7 +13,7 @@ const FormatButton = (props) => {
   const year = `20${format.banlist.slice(-2)}`
 
   return (
-    <Link to={`/formats/${format.name}`} className="format-link" style={{ backgroundImage:`url(${emojis[format.icon]})`}}>
+    <Link to={`/formats/${format.name}`} className="format-link" style={{ backgroundImage:`../../public/images/emojis/${format.icon}`}}>
       <div className="format-button">
         <div>{format.name}</div>
         <div>{`${month}${period} ${year}`}</div>
