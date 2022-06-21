@@ -7,6 +7,7 @@ import { capitalize } from '../../functions/utility'
 import * as emojis from '../../public/images/emojis'
 
 const MiniBoard = (props) => {
+  const { format } = props
   const [miniboard, setMiniBoard] = useState([])
   const history = useHistory()
   const goToLeaderBoard = () => history.push(`/leaderboards/${props.format.name.toLowerCase()}`)
