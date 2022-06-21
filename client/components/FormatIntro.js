@@ -75,7 +75,7 @@ const FormatIntro = (props = {}) => {
             <a href="#banlist">Ban List</a>
           </li>
         </div>
-        <img id="format-icon-large" src={`/images/artworks/${format.icon.toLowerCase()}.jpg`} />
+        <img id="format-icon-large" src={`/images/artworks/${format.icon}`} />
       </div>
       {
         format.description ? (
