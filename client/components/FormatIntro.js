@@ -35,7 +35,7 @@ const FormatIntro = (props = {}) => {
   }, [])
 
   if (format === null) return <NotFound/>
-  if (!format.id) return <div />
+  if (!format || !format.id) return <div />
 
   return (
     <div className="body">
