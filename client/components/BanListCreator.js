@@ -32,7 +32,10 @@ const BanListCreator = () => {
 
     // CREATE
     const create = async () => {
-        if (!date) return alert('Please select a Date.')
+        if (!month) return alert('Please select a Month.')
+        if (!year) return alert('Please select a Year.')
+        if (!previous) return alert('Please select a Previous Ban List.')
+        if (!changes || !changes.length) return alert('Please add some changes.')
         
         try {
             const { data } = await axios.post('/api/banlists/create', {
