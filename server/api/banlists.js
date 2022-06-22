@@ -64,8 +64,8 @@ router.get('/:date', async (req, res, next) => {
 
 router.post('/create', async (req, res, next) => {
   try {
-      const changes = req.params.changes
-      const banlist = `${req.params.month}${req.params.year}`
+      const changes = req.body.changes
+      const banlist = `${req.body.month}${req.body.year}`
       let b = 0
 
       for (let i = 0; i < changes.length; i++) {
@@ -87,7 +87,7 @@ router.post('/create', async (req, res, next) => {
 
       const prevStatuses = await Status.findAll({
         where: {
-          banlist: req.params.previous
+          banlist: req.body.previous
         }
       })
 
