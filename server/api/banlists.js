@@ -65,7 +65,7 @@ router.get('/:date', async (req, res, next) => {
 router.post('/create', async (req, res, next) => {
   try {
       const changes = req.params.changes
-      const banlist = `${month}${year}`
+      const banlist = `${req.params.month}${req.params.year}`
       let b = 0
 
       for (let i = 0; i < changes.length; i++) {
