@@ -6,6 +6,22 @@ const {Op} = require('sequelize')
 
 module.exports = router
 
+router.get('/query/:query', async (req, res, next) => {
+  try {
+    const cards = await Card.findAll({
+      where: {
+        name: {[Op.substring]: req.params.query}
+      },
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      order: [['name', 'ASC']]
+    })
+
+    res.json(cards)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/all', async (req, res, next) => {
   try {
     const cards = await Card.findAll({

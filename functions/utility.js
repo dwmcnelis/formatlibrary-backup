@@ -8,11 +8,13 @@ const camelize = (str) => str.replace(/['"]/g, "").replace(/(?:^\w|[A-Z]|\b\w|\s
 
 //CAPITALIZE
 const capitalize = (str = '', eachWord = false) => {
+    if (!str) return
     if (eachWord) {
         const splt = str.split(' ').map((s) => capitalize(s))
         return splt.join(' ')
     } else {
-        return str.charAt(0).toUpperCase() + str.slice(1)
+        const charZero = str.charAt(0) || ''
+        return charZero.toUpperCase() + str.slice(1)
     }
 }
 

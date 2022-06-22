@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect, useLayoutEffect } from 'react'
+import axios from 'axios'
 
 const EventCreator = () => {
     const [abbreviation, setAbbreviation] = useState(null)
@@ -8,8 +9,6 @@ const EventCreator = () => {
     const [challongeName, setChallongeName] = useState(null)
     const [community, setCommunity] = useState(null)
     const [endDate, setEndDate] = useState(null)
-    const [event, setEvent] = useState(null)
-    const [events, setEvents] = useState([])
     const [formats, setFormats] = useState([])
     const [format, setFormat] = useState(null)
     const [fullName, setFullName] = useState(null)
@@ -33,8 +32,6 @@ const EventCreator = () => {
         setDeckType(null)
         setDisplay(true)
         setEndDate(null)
-        setEvent(null)
-        setEvents([])
         setFormat(null)
         setFullName(null)
         setIsSeries(true)

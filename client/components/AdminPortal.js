@@ -34,10 +34,10 @@ const AdminPortal = () => {
             <div className="body">
                 <h1>Admin Portal</h1>
                     <div className="admin-menu">
-                        <div onClick={() => setView('events')} className={view === 'events' ? 'clicked-admin-button' : 'admin-button'}>Create Event</div>
+                        <div onClick={() => setView('events')} className={view === 'events' ? 'clicked-admin-button' : 'admin-button'}>New Event</div>
                         <div onClick={() => setView('decks')} className={view === 'decks' ? 'clicked-admin-button' : 'admin-button'}>Upload Deck</div>
-                        <div onClick={() => setView('deckTypes')} className={view === 'deckTypes' ? 'clicked-admin-button' : 'admin-button'}>Create DeckType</div>
-                        <div onClick={() => setView('banLists')} className={view === 'banLists' ? 'clicked-admin-button' : 'admin-button'}>Create BanList</div>
+                        <div onClick={() => setView('deckTypes')} className={view === 'deckTypes' ? 'clicked-admin-button' : 'admin-button'}>New Deck Type</div>
+                        <div onClick={() => setView('banLists')} className={view === 'banLists' ? 'clicked-admin-button' : 'admin-button'}>New Ban List</div>
                     </div>
                 <div>
                 {
@@ -45,9 +45,9 @@ const AdminPortal = () => {
                         <DeckCreator/>
                     ) : view === 'events' ? (
                         <EventCreator/>
-                    ) : view === 'deckType' ? (
+                    ) : view === 'deckTypes' ? (
                         <DeckTypeCreator/>
-                    ) : view === 'banList' ? (
+                    ) : view === 'banLists' ? (
                         <BanListCreator/>
                     ) : ''
                 }

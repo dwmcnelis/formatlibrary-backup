@@ -826,7 +826,7 @@ h1 {
   border: 1px solid #000000;
   margin: 0.2em;
   height: 48px;
-  width: 164px;
+  width: 182px;
   border-radius: 8px;
   box-sizing: border-box;
   text-decoration: none;
@@ -843,6 +843,19 @@ h1 {
   color: white;
   font-weight: 600;
   background-color: #41474f;
+}
+
+.changes-flexbox {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0px;
+}
+
+.align-top {
+  margin: 0px 0px 12px;
 }
 
 .format-icon {

@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { shouldDisplay } from '../../functions/utility'
+import axios from 'axios'
 
 const CreateDeck = () => {
     const [community, setCommunity] = useState(null)
@@ -16,7 +17,7 @@ const CreateDeck = () => {
     
     const placementArr = event ? Array.from({length: event.size}, (_, i) => i + 1) : []
 
-    const resetCreateDeck = async () => {
+    const reset = async () => {
         setCommunity(null)
         setDeckType(null)
         setDisplay(true)
@@ -60,7 +61,7 @@ const CreateDeck = () => {
             })
 
             alert(`Success! New Event: https://formatlibrary.com/decks/${data.id}`)
-            return resetCreateDeck()
+            return reset()
         } catch (err) {
             console.log(err)
         }
