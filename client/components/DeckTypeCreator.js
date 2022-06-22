@@ -133,7 +133,7 @@ const DeckTypeCreator = () => {
                 >
                 <option value={null}></option>
                 {
-                    formats.map((e) => <option value={e.name}>{e.name}</option>)
+                    formats.map((e) => <option value={e}>{e.name}</option>)
                 }
                 </select>
             </label>
