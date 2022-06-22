@@ -13,6 +13,7 @@ const BanListCreator = () => {
     const [prevStatus, setPrevStatus] = useState(null)
     const [newStatus, setNewStatus] = useState(null)
     const [cards, setCards] = useState([])
+    console.log('changes', changes)
 
     // RESET
     const reset = async () => {
@@ -185,7 +186,7 @@ const BanListCreator = () => {
                     changes.map((c, index) => (
                         <tr>
                             <td>{c.name}</td>
-                            <td>{prevStatus ? capitalize(c.prevStatus) : 'N/A'}</td>
+                            <td>{c.prevStatus ? capitalize(c.prevStatus) : 'N/A'}</td>
                             <td>{capitalize(c.newStatus)}</td>
                             <td><div onClick={() => deleteChange(index)}>Delete</div></td>
                         </tr>
