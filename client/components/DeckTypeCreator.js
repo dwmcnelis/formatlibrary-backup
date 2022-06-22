@@ -14,6 +14,9 @@ const DeckTypeCreator = () => {
     const [centerCard, setCenterCard] = useState(null)
     const [rightCard, setRightCard] = useState(null)
 
+    console.log('formats', formats)
+    console.log('format', format)
+
     const reset = async () => {
         setName(null)  
         setCategory(null)  
