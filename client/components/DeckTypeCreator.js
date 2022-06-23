@@ -14,9 +14,6 @@ const DeckTypeCreator = () => {
     const [centerCard, setCenterCard] = useState(null)
     const [rightCard, setRightCard] = useState(null)
 
-    console.log('formats', formats)
-    console.log('format', format)
-
     const reset = async () => {
         setName(null)  
         setCategory(null)  
@@ -132,11 +129,7 @@ const DeckTypeCreator = () => {
                 <select
                     id="format"
                     className="login"
-                    onChange={(e) => {
-                        console.log('e.target.value', e.target.value)
-                        console.log('formats[e.target.value]', formats[e.target.value])
-                        setFormat(formats[e.target.value])}
-                    }
+                    onChange={(e) => setFormat(formats[e.target.value])}
                 >
                 <option value={null}></option>
                 {
