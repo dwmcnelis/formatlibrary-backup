@@ -358,20 +358,19 @@ const CardTable = () => {
 
   // USE EFFECT SET CUTOFF IF FORMAT CHANGES
   useEffect(() => {
+    console.log( 'format.date', format.date)
     const year = format.date ? parseInt(format.date.slice(0, 4)) : year
-    const month = format.date ? parseInt(format.date.slice(6, 7)) : year
-    const day = format.date ? parseInt(format.date.slice(-2)) : year
+    const month = format.date ? parseInt(format.date.slice(6, 7)) : 12
+    const day = format.date ? parseInt(format.date.slice(-2)) : 31
     setCutoff(format.date || `${year}-12-31`)
     setSliders({ ...sliders, year, month, day })
   }, [format])
 
   // USE EFFECT SET CUTOFF IF DATE SLIDERS CHANGE
   useEffect(() => {
-    console.log('format', format)
     if (format && format.id) return
     const month = sliders.month >= 10 ? sliders.month : `0${sliders.month}`
     const day = sliders.day >= 10 ? sliders.day : `0${sliders.day}`
-    console.log('sliders.year, month, day', sliders.year, month, day)
     setCutoff(`${sliders.year}-${month}-${day}`)
   }, [sliders])
 
