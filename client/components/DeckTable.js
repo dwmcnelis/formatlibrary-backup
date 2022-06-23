@@ -26,7 +26,7 @@ const DeckTable = (props) => {
     type: null,
     builder: null,
     eventName: null,
-    deckCategory: null
+    category: null
   })
 
   // USE LAYOUT EFFECT
@@ -109,8 +109,8 @@ const DeckTable = (props) => {
     setQueryParams({
       name: null,
       builder: null,
-      deckType: null,
-      deckCategory: null
+      type: null,
+      category: null
     })
   }
 
@@ -151,9 +151,9 @@ const DeckTable = (props) => {
   // RUN QUERY
   const runQuery = () => {
     const id = document.getElementById('searchTypeSelector').value
-    const otherIds = id === 'deckType' ? ['builder', 'eventName'] : 
-        id === 'builder' ? ['deckType', 'eventName'] :
-        ['deckType', 'builder']
+    const otherIds = id === 'type' ? ['builder', 'eventName'] : 
+        id === 'builder' ? ['type', 'eventName'] :
+        ['type', 'builder']
 
     setQueryParams(() => {
       return {
@@ -238,7 +238,7 @@ const DeckTable = (props) => {
             className="filter"
             onChange={() => runQuery()}
           >
-            <option value="deckType">Deck Type</option>
+            <option value="type">Deck Type</option>
             <option value="builder">Builder</option>
             <option value="eventName">Event</option>
           </select>
