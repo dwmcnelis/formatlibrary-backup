@@ -38,6 +38,8 @@ const CardTable = () => {
     def: [0, 5000]
   })
 
+  console.log('sliders', sliders)
+
   const [queryParams, setQueryParams] = useState({
     name: null,
     description: null,
@@ -365,9 +367,11 @@ const CardTable = () => {
 
   // USE EFFECT SET CUTOFF IF DATE SLIDERS CHANGE
   useEffect(() => {
+    console.log('format', format)
     if (format) return
     const month = sliders.month >= 10 ? sliders.month : `0${sliders.month}`
     const day = sliders.day >= 10 ? sliders.day : `0${sliders.day}`
+    console.log('sliders.year, month, day', sliders.year, month, day)
     setCutoff(`${sliders.year}-${month}-${day}`)
   }, [sliders])
 
