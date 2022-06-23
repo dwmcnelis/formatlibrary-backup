@@ -38,8 +38,6 @@ const CardTable = () => {
     def: [0, 5000]
   })
 
-  console.log('sliders', sliders)
-
   const [queryParams, setQueryParams] = useState({
     name: null,
     description: null,
@@ -358,8 +356,7 @@ const CardTable = () => {
 
   // USE EFFECT SET CUTOFF IF FORMAT CHANGES
   useEffect(() => {
-    console.log( 'format.date', format.date)
-    const year = format.date ? parseInt(format.date.slice(0, 4)) : year
+    const year = format.date ? parseInt(format.date.slice(0, 4)) : year || 2022
     const month = format.date ? parseInt(format.date.slice(6, 7)) : 12
     const day = format.date ? parseInt(format.date.slice(-2)) : 31
     setCutoff(format.date || `${year}-12-31`)
