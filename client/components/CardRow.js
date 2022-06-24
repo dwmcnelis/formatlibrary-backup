@@ -71,7 +71,13 @@ const CardRow = (props) => {
   return (
       <tr className={`${evenOrOdd}-search-results-row`}>
         <td className="no-padding-2" style={{verticalAlign: 'top'}}>
-          <Link className="black-text" to={`/cards/${card.name.replaceAll('/', '%2F')}`}>
+          <Link className="black-text" to={`/cards/${
+            card.name.replaceAll('%', '%25')
+              .replaceAll('/', '%2F')
+              .replaceAll(' ', '_')
+              .replaceAll('#', '%23')
+              .replaceAll('?', '%3F')
+            }`}>
             <div className="card-image-cell">
               <img
                 className="card-image"
@@ -83,7 +89,13 @@ const CardRow = (props) => {
           </Link>
         </td>
         <td className="no-padding-2" style={{verticalAlign: 'top'}}>
-          <Link className="black-text" to={`/cards/${card.name.replaceAll('/', '%2F')}`}>
+          <Link className="black-text" to={`/cards/${
+            card.name.replaceAll('%', '%25')
+              .replaceAll('/', '%2F')
+              .replaceAll(' ', '_')
+              .replaceAll('#', '%23')
+              .replaceAll('?', '%3F')
+            }`}>
             <table className="inner-cardRow-table">
               <tbody>
                 <tr>
