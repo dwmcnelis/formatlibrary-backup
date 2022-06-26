@@ -20,7 +20,7 @@ const EventTable = (props) => {
   const [allFetched, setAllFetched] = useState(false)
   const [firstXFetched, setFirstXFetched] = useState(false)
 
-  console.log('format', format)
+  console.log('format', formatf)
   
   const [queryParams, setQueryParams] = useState({
     name: null,
