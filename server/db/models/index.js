@@ -38,6 +38,9 @@ Deck.belongsTo(Player)
 Player.hasMany(Event)
 Event.belongsTo(Player)
 
+Format.hasMany(Event)
+Event.belongsTo(Format)
+
 //PRINT
 Print.belongsTo(Card)
 Card.hasMany(Print)

@@ -149,7 +149,13 @@ const EventTable = (props) => {
         setAllFetched(true)
       } 
 
+      const fetchFormats = async () => {
+        const {data} = await.get(`/api/formats/all`)
+        setFormats(data)
+      }
+
       fetchData()
+      fetchFormats()
     }
   }, [firstXFetched])
 

@@ -16,7 +16,10 @@ router.get('/all', async (req, res, next) => {
         display: true
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] },
-      include: { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] } },
+      include: [
+        { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}, 
+        { model: Format, attributes: { exclude: ['createdAt', 'updatedAt'] }} 
+      ],
       order: [["startDate", "DESC"], ["size", "DESC"]]
     })
     
@@ -33,7 +36,10 @@ router.get('/community/:community', async (req, res, next) => {
         community: {[Op.iLike]: req.params.community }
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] },
-      include: { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] } },
+      include: [
+        { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}, 
+        { model: Format, attributes: { exclude: ['createdAt', 'updatedAt'] }} 
+      ],
       order: [["name", "ASC"]]
     })
     
@@ -103,7 +109,10 @@ router.get('/:id', async (req, res, next) => {
         abbreviation: req.params.id
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] },
-      include: { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] } },
+      include: [
+        { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}, 
+        { model: Format, attributes: { exclude: ['createdAt', 'updatedAt'] }} 
+      ]
     })
 
     const topDecks = await Deck.findAll({

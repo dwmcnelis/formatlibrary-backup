@@ -12,6 +12,9 @@ const Event = db.define('events', {
     format: {
         type: Sequelize.STRING
     },
+    formatId: {
+        type: Sequelize.STRING
+    },
     referenceUrl: {
         type: Sequelize.STRING
     },

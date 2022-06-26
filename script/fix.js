@@ -26,6 +26,7 @@ const {
     tomato, tooncannon, tradein, treeborn, trio, trunade, tsuk, tuningware, turtle, underdog, valhalla, vayu, vrocket, 
     whirlwind, wicked, will, wmc, worl, wur, yata, zaloog, zanji, zombyra, zorc
 } = require('../static/cards.json')
+const { Events } = require('pg')
 
 /*eslint-disable*/
 const print = async () => {
@@ -2072,6 +2073,21 @@ const checkMissingThumbs = async () => {
     return console.log(`missing ${b} thumbnails`)
 }
 
+const fixEvents = async () => {
+    let b = 0
+    const events = await Event.findAll()
+    for (let i = 0; i < events.length; i++) {
+        const e = events[i]
+        const format = await Format.findOne({ where: { name: {[Op.iLike]: e.formatName }}})
+        e.formatId = format.id
+        await e.save()
+        b++
+    }
+
+    return console.log(`fixed ${b} events`)
+ }
+
+ fixEvents()
 fixDeckThumbs()
 checkMissingThumbs()
 // fixDecks()
