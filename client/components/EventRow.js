@@ -9,8 +9,9 @@ import { FL, GF, EF } from '../../public/images/logos'
 /*eslint-disable*/
 const EventRow = (props) => {
   const {event} = props
+  if (!event) return
   const evenOrOdd = props.index % 2 ? 'even' : 'odd'
-  const {format} = event.format || {}
+  const format = event.format || {}
   console.log('format', format)
   if (!format) return
   const communityLogo = event.community === 'Format Library' ? FL :
