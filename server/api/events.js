@@ -10,7 +10,9 @@ const fs = require('fs')
 module.exports = router
 
 router.get('/all', async (req, res, next) => {
+  console.log('/all')
   try {
+    console.log('try')
     const events = await Event.findAll({
       where: {
         display: true

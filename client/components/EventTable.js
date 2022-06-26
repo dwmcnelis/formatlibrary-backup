@@ -19,8 +19,6 @@ const EventTable = (props) => {
   const [format, setFormat] = useState(null)
   const [allFetched, setAllFetched] = useState(false)
   const [firstXFetched, setFirstXFetched] = useState(false)
-
-  console.log('format', format)
   
   const [queryParams, setQueryParams] = useState({
     name: null,
@@ -132,9 +130,13 @@ const EventTable = (props) => {
     if (!firstXFetched && !allFetched) {
       const fetchData = async () => {
         const {data} = await axios.get(`/api/events/first/10`)
+        console.log('147 !!data')
         setEvents(data)
+        console.log('SET EVENTS')
         setFilteredEvents(data)
+        console.log('SET FILTERED EVENTS')
         setFirstXFetched(true)
+        console.log('SET FIRST X FETCHTED')
       } 
 
       fetchData()
@@ -146,9 +148,13 @@ const EventTable = (props) => {
     if (firstXFetched && !allFetched) {
       const fetchData = async () => {
         const {data} = await axios.get(`/api/events/all`)
+        console.log('147 !!data')
         setEvents(data)
+        console.log('SET EVENTS')
         setFilteredEvents(data)
+        console.log('SET FILTERED EVENTS')
         setAllFetched(true)
+        console.log('SET ALL FETCHTED')
       } 
 
       fetchData()
