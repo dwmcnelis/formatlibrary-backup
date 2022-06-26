@@ -19,7 +19,7 @@ const EventThumbnail = (props = {}) => {
               <div className="eventThumbnail-flexbox">
                   <img 
                     className="eventThumbnail-image" 
-                    src={`/images/emojis${event.format.logo}`}
+                    src={`/images/emojis${event.format.icon}`}
                   />
                   <img 
                     className="eventThumbnail-player-pfp" 
