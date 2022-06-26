@@ -2,7 +2,7 @@
 
 const axios = require('axios')
 const fs = require('fs')
-const { Card, Deck, DeckThumb, DeckType, Event, Format, Player, Print, Set, Stats, Status, Tournament } = require('../server/db/models')
+const { BlogPost, Card, Deck, DeckThumb, DeckType, Event, Format, Player, Print, Set, Stats, Status, Tournament } = require('../server/db/models')
 const ygoprodeck = require('../static/ygoprodeck.json')
 const sets = require('../static/sets.json')
 const { Op } = require('sequelize')
@@ -2087,7 +2087,32 @@ const fixEvents = async () => {
     return console.log(`fixed ${b} events`)
  }
 
- fixEvents()
+const fixBlogPosts = async () => {
+    let b = 0
+    const blogposts = await BlogPost.findAll({ include: Player })
+    for (let i = 0; i < blogposts.length; i++) {
+        try {
+            const blogpost = blogposts[i]
+            const player = blogpost.player
+            const tag = player.tag.replace('#', '')
+            const content = post.content
+                .replaceAll(`/images/logos/FL.png`, `/images/logos/Format Library.png`)
+                .replaceAll(`/images/logos/GF.png`, `/images/logos/GoatFormat.com.png`)
+                .replaceAll(`/images/logos/EF.png`, `/images/logos/EdisonFormat.com.png`)
+                .replaceAll(tag, player.id)
+    
+            blogpost.content = content
+            await blogpost.save()
+            b++
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    return console.log(`fixed ${b} blogposts`)
+}
+
+// fixEvents()
 fixDeckThumbs()
 checkMissingThumbs()
 // fixDecks()
