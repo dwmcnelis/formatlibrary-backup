@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom'
 
 const EventThumbnail = (props = {}) => {
     const {event, winner} = props
-    if (!event || !winner) return <div/>
+    console.log('event.format', event.format)
+    if (!event || !winner || !event.format) return <div/>
     const communityLogo = event.community === 'Format Library' ? FL :
         event.community === 'GoatFormat.com' ? GF :
         event.community === 'EdisonFormat.com' ? EF :
