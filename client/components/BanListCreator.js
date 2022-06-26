@@ -13,7 +13,6 @@ const BanListCreator = () => {
     const [prevStatus, setPrevStatus] = useState(null)
     const [newStatus, setNewStatus] = useState(null)
     const [cards, setCards] = useState([])
-    console.log('changes', changes)
 
     // RESET
     const reset = async () => {

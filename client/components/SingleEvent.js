@@ -3,11 +3,9 @@ import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import DeckImage from './DeckImage'
-import {capitalize, dateToSimple, dateToVerbose, ordinalize} from '../../functions/utility'
+import {capitalize, dateToSimple, dateToVerbose} from '../../functions/utility'
 import formats from '../../static/formats.json'
 import * as emojis from '../../public/images/emojis'
-import * as artworks from '../../public/images/artworks'
-import { FL, GF, EF } from '../../public/images/logos'
 import NotFound from './NotFound'
 
 import { Chart as ChartJS, ArcElement, CategoryScale, BarElement, Title, LinearScale, Tooltip, Legend } from 'chart.js'
@@ -55,11 +53,7 @@ const SingleEvent = (props) => {
 
   const formatName = capitalize(event.formatName, true) || '?'
   const formatArtwork = `/images/artworks/${formats[formatName].logo.toLowerCase()}.jpg` || ''
-  const communityLogo = event.community === 'Format Library' ? `/images/logos/FL.png` :
-      event.community === 'GoatFormat.com' ? `/images/logos/GF.png` :
-      event.community === 'EdisonFormat.com' ? `/images/logos/EF.png` :
-      ''
-
+  
   const colors = [
       '#3d72e3', '#ff3c2e', '#ffd000', '#47ad53', '#43578f', '#b25cd6',
       '#6d9399', '#f5881b', '#31ada5', '#ffcd19', '#cf8ac5', '#8a8dcf', 
@@ -150,7 +144,7 @@ const SingleEvent = (props) => {
                 <td className="desktop-only">
                   <div className="single-event-cell">
                     <div style={{paddingRight:'7px'}}><b>Community:</b> {event.community}</div> 
-                    <img style={{width:'32px'}} src={communityLogo}/>
+                    <img style={{width:'32px'}} src={`/images/logos/${event.community}.png`}/>
                   </div>   
                 </td>
                 <td>   
@@ -206,7 +200,7 @@ const SingleEvent = (props) => {
 
       <div id="bracket">
         <div className="subcategory-title-flexbox">
-          <img style={{ width:'64px'}} src={communityLogo}/>
+          <img style={{ width:'64px'}} src={`/images/emojis/${event.format.icon}`}/>
           <h2 className="subheading"><b>{event.abbreviation}</b> Bracket:</h2>
           <img style={{ width:'64px'}} src={'/images/logos/Challonge.png'}/>
         </div>
@@ -233,7 +227,7 @@ const SingleEvent = (props) => {
         topDecks.length ? (
           <div id="top-decks">
             <div className="subcategory-title-flexbox">
-              <img style={{ width:'64px'}} src={communityLogo}/>
+              <img style={{ width:'64px'}} src={`/images/emojis/${event.format.icon}`}/>
               <h2 className="subheading"><b>{event.abbreviation}</b> {topDecks.length > 1 ? `Top ${topDecks.length} Decks` : 'Winning Deck'}:</h2>
               <img style={{ height:'64px'}} src={'/images/emojis/deckbox.png'}/>
             </div>
@@ -261,7 +255,7 @@ const SingleEvent = (props) => {
         metagame.deckTypes.length ? (
           <div id="metagame-stats">
             <div className="subcategory-title-flexbox">
-              <img style={{ width:'64px'}} src={communityLogo}/>
+              <img style={{ width:'64px'}} src={`/images/emojis/${event.format.icon}`}/>
               <h2 className="subheading"><b>{event.abbreviation}</b> Metagame Stats:</h2>
               <img style={{ height:'64px'}} src={'/images/emojis/microscope.png'}/>
             </div>

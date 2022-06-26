@@ -7,7 +7,6 @@ import axios from 'axios'
 import {capitalize, dateToSimple, dateToVerbose, ordinalize} from '../../functions/utility'
 import formats from '../../static/formats.json'
 import * as emojis from '../../public/images/emojis'
-import { FL, GF, EF } from '../../public/images/logos'
 
 const SingleDeck = (props) => {
     const [deck, setDeck] = useState({})
@@ -44,10 +43,6 @@ const SingleDeck = (props) => {
   if (!deck.id) return <div />
   const formatName = capitalize(deck.format, true) || '?'
   const formatImage = emojis[formats[formatName].icon] || ''
-  const communityLogo = deck.community === 'Format Library' ? FL :
-      deck.community === 'GoatFormat.com' ? GF :
-      deck.community === 'EdisonFormat.com' ? EF :
-      ''
 
   const categoryImage = deck.category.toLowerCase() === 'aggro' ? emojis.Helmet :
     deck.category.toLowerCase() === 'combo' ? emojis.Controller :
@@ -129,7 +124,7 @@ const SingleDeck = (props) => {
             <td>
               <div onClick={() => goToEvent()} className="single-deck-cell">
                 <div className="single-deck-event-link" style={{paddingRight:'7px'}}><b>Event:</b> {deck.eventName}</div> 
-                <img style={{width:'28px'}} src={communityLogo}/>
+                <img style={{width:'28px'}} src={`/images/logos/${deck.community}.png`}/>
               </div>   
             </td>
             <td>

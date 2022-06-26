@@ -1,23 +1,12 @@
 
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { capitalize, ordinalize } from '../../functions/utility'
-import formats from '../../static/formats.json'
-import * as emojis from '../../public/images/emojis'
-import { FL, GF, EF } from '../../public/images/logos'
 
 /*eslint-disable*/
 const EventRow = (props) => {
   const {event} = props
-  if (!event) return
   const evenOrOdd = props.index % 2 ? 'even' : 'odd'
   const format = event.format || {}
-  console.log('format', format)
-  if (!format) return
-  const communityLogo = event.community === 'Format Library' ? FL :
-      event.community === 'GoatFormat.com' ? GF :
-      event.community === 'EdisonFormat.com' ? EF :
-      ''      
   
   return (
       <tr className={`${evenOrOdd}-search-results-row`}>
@@ -55,7 +44,7 @@ const EventRow = (props) => {
         <td className="no-padding">
           <Link className="black-text" to={`/events/${event.abbreviation}`}>
             <div className="community-cell-flexbox">
-              <img src={communityLogo}/>
+              <img src={`/images/logos/${event.community}.png`}/>
               <div>{event.community}</div>
             </div>
           </Link>
