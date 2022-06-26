@@ -13,7 +13,7 @@ const EventRow = (props) => {
   const formatName = capitalize(event.format, true) || '?'
   console.log('formatName', formatName)
   const backgroundImage = emojis[formats[formatName].logo] || ''
-  console.log('backgroundImage', backgroundImage)
+  console.log('backgroundImage.length', backgroundImage.length)
   const communityLogo = event.community === 'Format Library' ? FL :
       event.community === 'GoatFormat.com' ? GF :
       event.community === 'EdisonFormat.com' ? EF :
