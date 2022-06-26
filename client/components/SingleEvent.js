@@ -53,8 +53,7 @@ const SingleEvent = (props) => {
   if (event === null) return <NotFound/>
   if (!event.name) return <div></div>
 
-  const formatName = capitalize(event.format, true) || '?'
-  const formatEmoji = emojis[formats[formatName].logo] || ''
+  const formatName = capitalize(event.formatName, true) || '?'
   const formatArtwork = `/images/artworks/${formats[formatName].logo.toLowerCase()}.jpg` || ''
   const communityLogo = event.community === 'Format Library' ? `/images/logos/FL.png` :
       event.community === 'GoatFormat.com' ? `/images/logos/GF.png` :
@@ -163,8 +162,8 @@ const SingleEvent = (props) => {
               <tr className="single-event-info-2">
                 <td>
                   <div className="single-event-cell">
-                    <div onClick={() => goToFormat()} className="single-event-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {capitalize(event.format, true)}</div>
-                    <img style={{width:'32px'}} src={formatEmoji}/>
+                    <div onClick={() => goToFormat()} className="single-event-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {capitalize(eventName, true)}</div>
+                    <img style={{width:'32px'}} src={`/images/emojis/${event.format.logo}`}/>
                   </div>     
                 </td>
                 <td className="desktop-only">

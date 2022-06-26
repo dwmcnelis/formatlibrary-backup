@@ -108,8 +108,8 @@ const categoryDESC = (a, b) => {
 }
 
 const formatASC = (a, b) => {
-    const formatA = formats[capitalize(a.format, true)]
-    const formatB = formats[capitalize(b.format, true)]
+    const formatA = formats[capitalize(a.format || a.formatName, true)]
+    const formatB = formats[capitalize(b.format || b.formatName, true)]
     const dateA = `${formatA.year}-${formatA.month}`
     const dateB = `${formatB.year}-${formatB.month}`
     if (dateA < dateB) return 1
@@ -118,8 +118,8 @@ const formatASC = (a, b) => {
 }
 
 const formatDESC = (a, b) => {
-    const formatA = formats[capitalize(a.format, true)]
-    const formatB = formats[capitalize(b.format, true)]
+    const formatA = formats[capitalize(a.format || a.formatName, true)]
+    const formatB = formats[capitalize(b.format || b.formatName, true)]
     const dateA = `${formatA.year}-${formatA.month}`
     const dateB = `${formatB.year}-${formatB.month}`
     if (dateA < dateB) return -1

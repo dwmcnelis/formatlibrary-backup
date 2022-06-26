@@ -1,8 +1,6 @@
 
 import React from 'react'
 import {capitalize} from '../../functions/utility'
-import formats from '../../static/formats.json'
-import * as emojis from '../../public/images/emojis'
 import { FL, GF, EF } from '../../public/images/logos'
 import { Link } from 'react-router-dom'
 
@@ -14,9 +12,6 @@ const EventThumbnail = (props = {}) => {
         event.community === 'EdisonFormat.com' ? EF :
         ''
 
-    const formatName = capitalize(event.format, true) || '?'
-    const backgroundImage = emojis[formats[formatName].logo] || ''
-
   return (
         <Link className='link' to={`/events/${event.abbreviation}`}>
           <div className="eventThumbnail">  
@@ -24,7 +19,7 @@ const EventThumbnail = (props = {}) => {
               <div className="eventThumbnail-flexbox">
                   <img 
                     className="eventThumbnail-image" 
-                    src={backgroundImage}
+                    src={`/images/emojis${event.format.logo}`}
                   />
                   <img 
                     className="eventThumbnail-player-pfp" 

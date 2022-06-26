@@ -50,7 +50,7 @@ const CreateDeck = () => {
                 type: deckType.name,
                 deckTypeId: deckType.id,
                 category: deckType.category,
-                format: event.format,
+                format: event.formatName,
                 ydk: ydk,
                 eventName: event.abbreviation,
                 eventId: event.id,

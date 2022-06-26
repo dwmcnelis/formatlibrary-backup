@@ -55,7 +55,7 @@ router.get('/recent/:format', async (req, res, next) => {
       const events = await Event.findAll({ 
           where: { 
             display: true,
-            format: {[Op.iLike]: req.params.format }
+            formatName: {[Op.iLike]: req.params.format }
           },
           include: { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] } },
           attributes: { exclude: ['createdAt', 'updatedAt'] },
@@ -225,7 +225,7 @@ router.post('/create', async (req, res, next) => {
     const event = await Event.create({
       name: req.body.fullName,
       abbreviation: req.body.abbreviation,
-      format: req.body.format,
+      formatName: req.body.format,
       referenceUrl: req.body.referenceUrl,
       tournamentId: req.body.id,
       display: true,
