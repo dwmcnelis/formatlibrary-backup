@@ -2112,6 +2112,7 @@ const fixBlogPosts = async () => {
     return console.log(`fixed ${b} blogposts`)
 }
 
+fixBlogPosts()
 // fixEvents()
 fixDeckThumbs()
 checkMissingThumbs()
