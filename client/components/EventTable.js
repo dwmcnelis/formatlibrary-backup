@@ -12,7 +12,7 @@ import axios from 'axios'
 const EventTable = (props) => {
   const [page, setPage] = useState(1)
   const [events, setEvents] = useState([])
-  const [filteredEvents, fsetFilteredEvents] = useState([])
+  const [filteredEvents, setFilteredEvents] = useState([])
   const [eventsPerPage, setEventsPerPage] = useState(10)
   const [view, setView] = useState('table')
   const [sortBy, setSortBy] = useState(null)
