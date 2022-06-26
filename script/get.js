@@ -641,7 +641,7 @@ const updateSets = async () => {
     return console.log(`created ${b} new sets and updated ${c} other(s)`)
 }
 
-addGroupIdsToSets()
+// addGroupIdsToSets()
 // updateSets()
 // downloadNewCards()
 // addTCGPlayerPrintData()

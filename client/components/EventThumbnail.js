@@ -18,7 +18,7 @@ const EventThumbnail = (props = {}) => {
                   />
                   <img 
                     className="eventThumbnail-player-pfp" 
-                    src={`https://cdn.discordapp.com/avatars/${winner.id}.png`} 
+                    src={`/images/avatars/${winner.id}.png`} 
                     onError={(e) => {
                             e.target.onerror = null
                             e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"

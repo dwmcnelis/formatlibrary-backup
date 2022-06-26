@@ -2096,6 +2096,9 @@ const fixBlogPosts = async () => {
             const player = blogpost.player
             const tag = player.tag.replace('#', '')
             const content = blogpost.content
+                .replaceAll(`src=/images/logos/Format Library.png`, `src="/images/logos/Format Library.png"`)
+                .replaceAll(`src=/images/logos/EdisonFormat.com.png`, `src="/images/logos/EdisonFormat.com.png"`)
+                .replaceAll(`src=/images/logos/GoatFormat.com.png`, `src="/images/logos/GoatFormat.com.png"`)
                 .replaceAll(`"/images/logos/FL.png"`, `"/images/logos/Format Library.png"`)
                 .replaceAll(`"/images/logos/GF.png"`, `"/images/logos/GoatFormat.com.png"`)
                 .replaceAll(`"/images/logos/EF.png"`, `"/images/logos/EdisonFormat.com.png"`)
@@ -2114,10 +2117,11 @@ const fixBlogPosts = async () => {
     return console.log(`fixed ${b} blogposts`)
 }
 
-fixBlogPosts()
+
+// fixBlogPosts()
 // fixEvents()
-fixDeckThumbs()
-checkMissingThumbs()
+// fixDeckThumbs()
+// checkMissingThumbs()
 // fixDecks()
 // fixDecks2()
 // fixGames()
