@@ -26,7 +26,7 @@ const SingleEvent = (props) => {
   })
 
   const history = useHistory()
-  const goToFormat = () => history.push(`/formats/${event.format}`)
+  const goToFormat = () => history.push(`/formats/${event.format ? event.format.name : null}`)
   const goToPlayer = () => history.push(`/players/${winner.tag.slice(0, -5)}${winner.tag.slice(-4)}`)
 
   // USE LAYOUT EFFECT
