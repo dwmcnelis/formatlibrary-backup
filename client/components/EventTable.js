@@ -150,7 +150,6 @@ const EventTable = (props) => {
       } 
 
       fetchData()
-      fetchFormats()
     }
   }, [firstXFetched])
 
