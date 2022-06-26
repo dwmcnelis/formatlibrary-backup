@@ -105,7 +105,6 @@ router.get('/first/:x', async (req, res, next) => {
             limit: req.params.x
         })
 
-        console.log('events', events)
         console.log('first X')
         console.log('events.length', events.length)
         res.json(events)
