@@ -11,7 +11,9 @@ const EventRow = (props) => {
   const {event} = props
   const evenOrOdd = props.index % 2 ? 'even' : 'odd'
   const formatName = capitalize(event.format, true) || '?'
+  console.log('formatName', formatName)
   const backgroundImage = emojis[formats[formatName].logo] || ''
+  console.log('backgroundImage', backgroundImage)
   const communityLogo = event.community === 'Format Library' ? FL :
       event.community === 'GoatFormat.com' ? GF :
       event.community === 'EdisonFormat.com' ? EF :
