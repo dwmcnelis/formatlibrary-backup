@@ -57,7 +57,10 @@ router.get('/recent/:format', async (req, res, next) => {
             display: true,
             formatName: {[Op.iLike]: req.params.format }
           },
-          include: { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] } },
+          include: [
+            { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}, 
+            { model: Format, attributes: { exclude: ['createdAt', 'updatedAt'] }} 
+          ],
           attributes: { exclude: ['createdAt', 'updatedAt'] },
           order: [["startDate", "DESC"], ["size", "DESC"]],
           limit: 6
@@ -91,7 +94,10 @@ router.get('/first/:x', async (req, res, next) => {
         const events = await Event.findAll({ 
             where: { display: true },
             attributes: { exclude: ['createdAt', 'updatedAt'] },
-            include: { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] } },
+            include: [
+              { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}, 
+              { model: Format, attributes: { exclude: ['createdAt', 'updatedAt'] }} 
+            ],
             order: [["startDate", "DESC"], ["size", "DESC"]],
             limit: req.params.x
         })
