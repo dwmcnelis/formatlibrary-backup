@@ -130,7 +130,7 @@ const EventTable = (props) => {
     if (!firstXFetched && !allFetched) {
       const fetchData = async () => {
         const {data} = await axios.get(`/api/events/first/10`)
-        console.log('147 !!data')
+        console.log('133 !!data', !!data)
         setEvents(data)
         console.log('SET EVENTS')
         setFilteredEvents(data)
