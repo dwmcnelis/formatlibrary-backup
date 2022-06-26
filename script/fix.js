@@ -2095,6 +2095,7 @@ const fixBlogPosts = async () => {
             const blogpost = blogposts[i]
             const player = blogpost.player
             const tag = player.tag.replace('#', '')
+            console.log('tag', tag)
             const content = blogpost.content
                 .replaceAll(`/images/logos/FL.png`, `/images/logos/Format Library.png`)
                 .replaceAll(`/images/logos/Format Library.png`, `"/images/logos/Format Library.png"`)
