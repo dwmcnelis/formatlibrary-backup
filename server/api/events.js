@@ -1,6 +1,6 @@
 
 const router = require('express').Router()
-const {Card, Deck, DeckType, Event, Player, Tournament} = require('../db/models')
+const {Card, Deck, DeckType, Event, Format, Player, Tournament} = require('../db/models')
 const {Op} = require('sequelize')
 const {arrayToObject, capitalize} = require('../../functions/utility')
 const { challongeAPIKeys } = require('../../secrets')
