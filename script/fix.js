@@ -2095,13 +2095,13 @@ const fixBlogPosts = async () => {
             const blogpost = blogposts[i]
             const player = blogpost.player
             const tag = player.tag.replace('#', '')
-            console.log('tag', tag)
             const content = blogpost.content
-                .replaceAll(`/images/logos/FL.png`, `/images/logos/Format Library.png`)
-                .replaceAll(`/images/logos/Format Library.png`, `"/images/logos/Format Library.png"`)
-                .replaceAll(`/images/logos/GF.png`, `/images/logos/GoatFormat.com.png`)
-                .replaceAll(`/images/logos/EF.png`, `/images/logos/EdisonFormat.com.png`)
+                .replaceAll(`"/images/logos/FL.png"`, `"/images/logos/Format Library.png"`)
+                .replaceAll(`"/images/logos/GF.png"`, `"/images/logos/GoatFormat.com.png"`)
+                .replaceAll(`"/images/logos/EF.png"`, `"/images/logos/EdisonFormat.com.png"`)
                 .replaceAll(tag, player.id)
+
+            if (!content.includes(player.id)) console.log(`missing playerId for ${player.name}'s blogpost`)
     
             blogpost.content = content
             await blogpost.save()
