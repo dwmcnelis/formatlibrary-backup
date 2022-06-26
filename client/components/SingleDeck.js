@@ -43,7 +43,7 @@ const SingleDeck = (props) => {
   if (deck === null) return <NotFound/>
   if (!deck.id) return <div />
   const formatName = capitalize(deck.format, true) || '?'
-  const formatImage = emojis[formats[formatName].logo] || ''
+  const formatImage = emojis[formats[formatName].icon] || ''
   const communityLogo = deck.community === 'Format Library' ? FL :
       deck.community === 'GoatFormat.com' ? GF :
       deck.community === 'EdisonFormat.com' ? EF :

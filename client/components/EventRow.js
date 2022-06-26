@@ -23,7 +23,7 @@ const EventRow = (props) => {
         <td className="no-padding">
           <Link className="black-text" to={`/events/${event.abbreviation}`}>
             <div className="format-cell-flexbox">
-              <img src={`/images/emojis/${format.logo}`}/>
+              <img src={`/images/emojis/${format.icon}`}/>
               <div>{formatName}</div>
             </div>
           </Link>

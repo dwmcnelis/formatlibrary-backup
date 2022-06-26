@@ -163,7 +163,7 @@ const SingleEvent = (props) => {
                 <td>
                   <div className="single-event-cell">
                     <div onClick={() => goToFormat()} className="single-event-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {capitalize(eventName, true)}</div>
-                    <img style={{width:'32px'}} src={`/images/emojis/${event.format.logo}`}/>
+                    <img style={{width:'32px'}} src={`/images/emojis/${event.format.icon}`}/>
                   </div>     
                 </td>
                 <td className="desktop-only">
