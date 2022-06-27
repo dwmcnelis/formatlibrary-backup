@@ -12,6 +12,7 @@ const FormatIntro = (props = {}) => {
   const [deckCount, setDeckCount] = useState(0)
   const [eventCount, setEventCount] = useState(0)
   const [statsCount, setStatsCount] = useState(0)
+  console.log('format', format)
 
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0))
