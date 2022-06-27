@@ -4,19 +4,19 @@ import { useHistory } from 'react-router-dom'
 import StatsRow from './StatsRow'
 import axios from 'axios'
 import { capitalize } from '../../functions/utility'
-import * as emojis from '../../public/images/emojis'
 
 const MiniBoard = (props) => {
-  const { format } = props
+  const { format, limit } = props
+  if (!format || !limit) return
   const [miniboard, setMiniBoard] = useState([])
   const history = useHistory()
-  const goToLeaderBoard = () => history.push(`/leaderboards/${props.format.name.toLowerCase()}`)
+  const goToLeaderBoard = () => history.push(`/leaderboards/${format.name.toLowerCase()}`)
 
   // USE EFFECT FETCH DATA
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const {data} = await axios.get(`/api/stats/leaders/${props.limit}/${props.format.name.toLowerCase()}`)
+        const {data} = await axios.get(`/api/stats/leaders/${limit}/${format.name.toLowerCase()}`)
         setMiniBoard(data)
       } catch (err) {
         console.log(err)
@@ -34,7 +34,7 @@ const MiniBoard = (props) => {
       <div id="leaderboard" className="miniboard">
         <div onClick={() => goToLeaderBoard()} className="miniboard-title-flexbox">
           <img style={{ width:'64px'}} src={`/images/emojis/${format.icon}`}/>
-          <h2 className="subheading">{capitalize(props.format.name, true)} Leaderboard</h2>
+          <h2 className="subheading">{capitalize(format.name, true)} Leaderboard</h2>
           <img style={{ width:'64px'}} src={`/images/emojis/${format.icon}`}/>
         </div>
         <table id="miniboard-table">
