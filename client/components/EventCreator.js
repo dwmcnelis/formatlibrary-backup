@@ -202,11 +202,11 @@ const EventCreator = () => {
                 <select
                     id="format"
                     className="login"
-                    onChange={(e) => setFormat(e.target.value)}
+                    onChange={(e) => setFormat(formats[e.target.value])}
                 >
                 <option value={null}></option>
                 {
-                    formats.map((e) => <option value={e.name}>{e.name}</option>)
+                    formats.map((e, index) => <option value={index}>{e.name}</option>)
                 }
                 </select>
             </label>

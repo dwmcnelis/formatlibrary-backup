@@ -222,7 +222,7 @@ router.post('/create', async (req, res, next) => {
         id: req.body.id,
         name: req.body.challongeName,
         url: req.body.url,
-        format: req.body.format,
+        format: req.body.format.name,
         community: req.body.community,
         emoji: req.body.emoji,
         type: req.body.type,
@@ -236,7 +236,8 @@ router.post('/create', async (req, res, next) => {
     const event = await Event.create({
       name: req.body.fullName,
       abbreviation: req.body.abbreviation,
-      formatName: req.body.format,
+      formatName: req.body.format.name,
+      formatId: req.body.format.id,
       referenceUrl: req.body.referenceUrl,
       tournamentId: req.body.id,
       display: true,
