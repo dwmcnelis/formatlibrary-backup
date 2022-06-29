@@ -8,8 +8,10 @@ module.exports = router
 
 router.post('/create', async (req, res, next) => {
     try {
-        const deckType = await DeckType.findOne({
-            name: req.body.name
+        const deckType = await DeckType.findOne({ 
+            where: {
+                name: req.body.name
+            }
         }) || await DeckType.create({
             name: req.body.name,
             category: req.body.category
