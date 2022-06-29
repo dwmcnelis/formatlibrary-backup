@@ -2118,7 +2118,7 @@ const fixBlogPosts = async () => {
 }
 
 
-// fixBlogPosts()
+fixBlogPosts()
 // fixEvents()
 // fixDeckThumbs()
 // checkMissingThumbs()
