@@ -17,6 +17,7 @@ const SingleDeck = (props) => {
       deck.player.tag.replaceAll('%', '%25')
         .replaceAll('/', '%2F')
         .replaceAll(' ', '_')
+        .replaceAll('#', '%23')
         .replaceAll('?', '%3F')
       }`)
 
