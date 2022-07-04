@@ -50,8 +50,7 @@ const StatsRow = (props) => {
           .replaceAll(' ', '_')
           .replaceAll('#', '%23')
           .replaceAll('?', '%3F')
-          .slice(0, -5)
-        }${player.tag.slice(-4)}`)
+        }`)
 
     return (
         <tr onClick={() => goToPlayer()} className={`${evenOrOdd}-search-results-row`}>

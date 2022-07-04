@@ -17,10 +17,8 @@ const SingleDeck = (props) => {
       deck.player.tag.replaceAll('%', '%25')
         .replaceAll('/', '%2F')
         .replaceAll(' ', '_')
-        .replaceAll('#', '%23')
         .replaceAll('?', '%3F')
-        .slice(0, -5)
-      }${deck.player.tag.slice(-4)}`)
+      }`)
 
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])

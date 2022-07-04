@@ -31,8 +31,7 @@ const SingleEvent = (props) => {
       .replaceAll(' ', '_')
       .replaceAll('#', '%23')
       .replaceAll('?', '%3F')
-      .slice(0, -5)
-    }${winner.tag.slice(-4)}`)
+    }`)
 
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])
