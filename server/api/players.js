@@ -26,7 +26,7 @@ router.get('/:id', async (req, res, next) => {
   try {
     const player = await Player.findOne({
       where: {
-        tag: req.params.id.replaceAll('%2F', '/').replaceAll('%3F', '?').replaceAll('%23', '#'),
+        tag: req.params.id.replaceAll('%3F', '?').replaceAll('%23', '#'),
         blacklisted: false
       },
       attributes: { exclude: ['blacklisted', 'password', 'createdAt', 'updatedAt'] }
