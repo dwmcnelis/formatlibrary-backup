@@ -25,7 +25,14 @@ const SingleEvent = (props) => {
 
   const history = useHistory()
   const goToFormat = () => history.push(`/formats/${event.format ? event.format.name : null}`)
-  const goToPlayer = () => history.push(`/players/${winner.tag.slice(0, -5)}${winner.tag.slice(-4)}`)
+  const goToPlayer = () => history.push(`/players/${
+    winner.tag.replaceAll('%', '%25')
+      .replaceAll('/', '%2F')
+      .replaceAll(' ', '_')
+      .replaceAll('#', '%23')
+      .replaceAll('?', '%3F')
+      .slice(0, -5)
+    }${winner.tag.slice(-4)}`)
 
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])

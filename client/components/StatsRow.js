@@ -44,8 +44,15 @@ const StatsRow = (props) => {
     const evenOrOdd = props.index % 2 ? 'even' : 'odd'
     const displayName = player.name.length <= 24 ? player.name : player.name.slice(0, 24).split(' ').slice(0, -1).join(' ')
     const history = useHistory()
-    const goToPlayer = () => history.push(`/players/${player.tag.slice(0, -5)}${player.tag.slice(-4)}`)
-    
+    const goToPlayer = () => history.push(`/players/${
+        player.tag.replaceAll('%', '%25')
+          .replaceAll('/', '%2F')
+          .replaceAll(' ', '_')
+          .replaceAll('#', '%23')
+          .replaceAll('?', '%3F')
+          .slice(0, -5)
+        }${player.tag.slice(-4)}`)
+
     return (
         <tr onClick={() => goToPlayer()} className={`${evenOrOdd}-search-results-row`}>
             <td className="leaderboard-cell-1">{ordinalize(index + 1)}</td>
