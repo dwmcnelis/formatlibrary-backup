@@ -24,6 +24,7 @@ router.get('/query/:query', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
+    console.log(`req.params.id.replaceAll('%3F', '?').replaceAll('%23', '#')`, req.params.id.replaceAll('%3F', '?').replaceAll('%23', '#'))
     const player = await Player.findOne({
       where: {
         tag: req.params.id.replaceAll('%3F', '?').replaceAll('%23', '#'),
