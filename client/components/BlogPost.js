@@ -10,7 +10,7 @@ const BlogPost = (props) => {
         <div className="post-content">{parse(props.content)}</div>
           {
             props.index === 0 ? (
-              <div>
+              <div className="vertical-ads-flexbox">
                 <a 
                   href="https://discord.com/invite/formatlibrary" 
                   target="_blank"
