@@ -355,7 +355,7 @@ const DeckTable = (props) => {
             nextPage={nextPage}
             previousPage={previousPage}
             goToPage={goToPage}
-            length={decks.length}
+            length={filteredDecks.length}
             page={page}
             itemsPerPage={decksPerPage}
           />
@@ -413,7 +413,7 @@ const DeckTable = (props) => {
           nextPage={nextPage}
           previousPage={previousPage}
           goToPage={goToPage}
-          length={decks.length}
+          length={filteredDecks.length}
           page={page}
           itemsPerPage={decksPerPage}
         />

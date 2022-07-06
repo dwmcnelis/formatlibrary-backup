@@ -302,7 +302,7 @@ const EventTable = (props) => {
             nextPage={nextPage}
             previousPage={previousPage}
             goToPage={goToPage}
-            length={events.length}
+            length={filteredEvents.length}
             page={page}
             itemsPerPage={eventsPerPage}
           />
@@ -359,7 +359,7 @@ const EventTable = (props) => {
           nextPage={nextPage}
           previousPage={previousPage}
           goToPage={goToPage}
-          length={events.length}
+          length={filteredEvents.length}
           page={page}
           itemsPerPage={eventsPerPage}
         />
