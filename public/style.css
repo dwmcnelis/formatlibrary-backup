@@ -574,6 +574,16 @@ h1 {
   color: rgb(209, 156, 70);
 }
 
+.discord-desc-black {
+  color: #151414;
+  padding: 0px;
+  margin: 6px 0px;
+}
+
+.discord-desc-black:hover {
+  color: rgb(209, 156, 70);
+}
+
 #searchBar {
   font-size: 14pt;
   width: 65%;
@@ -1220,6 +1230,11 @@ h1 {
 
 .blogpost-content-flexbox {
   max-width: 95%;
+}
+
+.vertical-ads-flexbox {
+  display: flex;
+  flex-direction: column;
 }
 
 .vertical-adsense {

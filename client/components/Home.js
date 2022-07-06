@@ -66,10 +66,11 @@ const Home = () => {
   return (
       <div className="blog">
         {
-          blogPosts.slice(firstIndex, lastIndex).map((bp) => {
+          blogPosts.slice(firstIndex, lastIndex).map((bp, index) => {
             return (
                 <BlogPost 
                       key={bp.title} 
+                      index={index}
                       id={bp.id} 
                       title={bp.title} 
                       content={bp.content}
