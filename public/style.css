@@ -1257,6 +1257,8 @@ h1 {
   min-height: 600px;
   max-width: 12%;
   margin-right: 10px;
+  align-items: center;
+  text-align: center;
 }
 
 /* BLOGPOST */
