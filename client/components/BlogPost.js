@@ -17,7 +17,7 @@ const BlogPost = (props) => {
                   href="https://discord.com/invite/formatlibrary" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{margin: "8px 0px"}}
+                  style={{margin: "8px 0px 12px"}}
                 >
                   <div className="discord-link">
                     <div className="discord-sidebar"/>
@@ -26,7 +26,7 @@ const BlogPost = (props) => {
                 </a>
                 <a 
                   href="https://twitter.com/formatlibrary"
-                  style={{margin: "8px 0px"}}
+                  style={{margin: "12px 0px"}}
                 >
                   <img 
                     src="/images/logos/Twitter.png" 
@@ -39,7 +39,7 @@ const BlogPost = (props) => {
                   href="https://www.buymeacoffee.com/danielmcnelis" 
                   target="_blank"
                   rel="noreferrer"
-                  style={{margin: "8px 0px"}}
+                  style={{margin: "12px 0px"}}
                 >
                   <img 
                     src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" 
@@ -51,7 +51,7 @@ const BlogPost = (props) => {
                   href="https://www.tcgplayer.com/search/yugioh/product?productLineName=yugioh&view=grid&utm_campaign=affiliate&utm_medium=FormatLibrary&utm_source=FormatLibrary" 
                   target="_blank"
                   rel="noreferrer"
-                  style={{margin: "8px 0px"}}
+                  style={{margin: "12px 0px 8px"}}
                 >
                   <img 
                     src="/images/logos/TCGPlayer.png" 
