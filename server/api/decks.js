@@ -247,7 +247,10 @@ router.get('/:id', async (req, res, next) => {
                 display: isAdmin ? {[Op.any]: [true, false]} : true
             }, 
             attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
-            include: [{ model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }],
+            include: [
+                { model: Format, attributes: { exclude: ['createdAt', 'updatedAt']} },
+                { model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }
+            ],
         })
 
         const main = []
