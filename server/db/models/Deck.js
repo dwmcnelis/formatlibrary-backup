@@ -15,7 +15,7 @@ const Deck = db.define('decks', {
   playerId: {
       type: Sequelize.STRING
   },
-  format: {
+  formatName: {
     type: Sequelize.STRING
   },
   formatId: {
