@@ -64,10 +64,10 @@ const Routes = () => {
       <Route exact path="/oct-2005---reaper"><Redirect to="/formats/Reaper"/></Route>
       <Route exact path="/apr-2006---chaos-return"><Redirect to="/formats/Chaos Return"/></Route>
       <Route exact path="/oct-2006---stein-monarch"><Redirect to="/formats/Stein"/></Route>
-      <Route exact path="/mar-2007---troop-dup"><Redirect to="/formats/Troop Dup"/></Route>
+      <Route exact path="/mar-2007---troop-dup"><Redirect to="/formats/Trooper"/></Route>
       <Route exact path="/jan-2008---perfect-circle"><Redirect to="/formats/Perfect Circle"/></Route>
       <Route exact path="/sep-2008---teledad"><Redirect to="/formats/TeleDAD"/></Route>
-      <Route exact path="/mar-2009---synchro-cat"><Redirect to="/formats/Synchro Cat"/></Route>
+      <Route exact path="/mar-2009---synchro-cat"><Redirect to="/formats/Cat"/></Route>
       <Route exact path="/mar-2010---edison"><Redirect to="/formats/Edison"/></Route>
       <Route exact path="/july-2010---glad-beast"><Redirect to="/formats/Frog"/></Route>
       <Route exact path="/oct-2011---tengu-plant"><Redirect to="/formats/Tengu Plant"/></Route>
