@@ -10,7 +10,6 @@ const fs = require('fs')
 module.exports = router
 
 router.get('/all', async (req, res, next) => {
-  console.log('/all')
   try {
     console.log('try')
     const events = await Event.findAll({
@@ -19,8 +18,8 @@ router.get('/all', async (req, res, next) => {
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       include: [
-        { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}, 
-        { model: Format, attributes: { exclude: ['createdAt', 'updatedAt'] }} 
+          { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
+          { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}
       ],
       order: [["startDate", "DESC"], ["size", "DESC"]]
     })
@@ -40,8 +39,8 @@ router.get('/community/:community', async (req, res, next) => {
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       include: [
-        { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}, 
-        { model: Format, attributes: { exclude: ['createdAt', 'updatedAt'] }} 
+        { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
+        { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}
       ],
       order: [["name", "ASC"]]
     })
@@ -61,8 +60,8 @@ router.get('/recent/:format', async (req, res, next) => {
             formatName: {[Op.iLike]: req.params.format }
           },
           include: [
-            { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}, 
-            { model: Format, attributes: { exclude: ['createdAt', 'updatedAt'] }} 
+            { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
+            { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}
           ],
           attributes: { exclude: ['createdAt', 'updatedAt'] },
           order: [["startDate", "DESC"], ["size", "DESC"]],
@@ -98,8 +97,8 @@ router.get('/first/:x', async (req, res, next) => {
             where: { display: true },
             attributes: { exclude: ['createdAt', 'updatedAt'] },
             include: [
-              { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}, 
-              { model: Format, attributes: { exclude: ['createdAt', 'updatedAt'] }} 
+              { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
+              { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}
             ],
             order: [["startDate", "DESC"], ["size", "DESC"]],
             limit: req.params.x
@@ -121,8 +120,8 @@ router.get('/:id', async (req, res, next) => {
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       include: [
-        { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}, 
-        { model: Format, attributes: { exclude: ['createdAt', 'updatedAt'] }} 
+        { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
+        { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}
       ]
     })
 
