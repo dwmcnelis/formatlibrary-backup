@@ -31,9 +31,9 @@ const BlogPost = (props) => {
                   <img 
                     src="/images/logos/Twitter.png" 
                     alt="Twitter" 
-                    style={{height: "45%", width: "45%"}}
+                    style={{height: "40%", width: "40%"}}
                   />
-                  <p className="ad-desc">Follow us for Event Announcements!</p>
+                  <p className="ad-desc">Follow Us for Event Announcements!</p>
                 </a>
                 <a 
                   href="https://www.buymeacoffee.com/danielmcnelis" 
