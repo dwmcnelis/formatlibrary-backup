@@ -585,14 +585,14 @@ h1 {
   color: rgb(209, 156, 70);
 }
 
-.discord-desc-black {
+.ad-desc {
   color: #151414;
   padding: 0px;
-  margin: 6px 0px;
+  margin: 4px 0px;
 }
 
-.discord-desc-black:hover {
-  color: rgb(209, 156, 70);
+.ad-desc:hover {
+  color: #34AD5A;
 }
 
 #searchBar {

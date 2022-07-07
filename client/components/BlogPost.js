@@ -21,10 +21,20 @@ const BlogPost = (props) => {
                 >
                   <div className="discord-link">
                     <div className="discord-sidebar"/>
-                    <p className="discord-desc-black">Join our Discord!</p>
+                    <p className="ad-desc">Join our Discord!</p>
                   </div>
                 </a>
                 <br/>
+                <a 
+                  href="https://twitter.com/formatlibrary"
+                >
+                  <img 
+                    src="/images/logos/Twitter.png" 
+                    alt="Twitter" 
+                    style={{height: "45%", width: "45%"}}
+                  />
+                  <p className="ad-desc">Follow us for Event Announcements!</p>
+                </a>
                 <br/>
                 <a 
                   href="https://www.buymeacoffee.com/danielmcnelis" 
@@ -38,7 +48,6 @@ const BlogPost = (props) => {
                   />
                 </a>
                 <br/>
-                <br/>
                 <a 
                   href="https://www.tcgplayer.com/search/yugioh/product?productLineName=yugioh&view=grid&utm_campaign=affiliate&utm_medium=FormatLibrary&utm_source=FormatLibrary" 
                   target="_blank"
@@ -49,7 +58,7 @@ const BlogPost = (props) => {
                     alt="TCG Player" 
                     style={{height: "22%", width: "80%"}}
                   />
-                  <p style={{color: "black", margin: "4px 0px"}}>Shop to support our site!</p>
+                  <p className="ad-desc">Shop to Support Our Site!</p>
                 </a>
               </div>
             ) : <Adsense.Google
