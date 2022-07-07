@@ -23,7 +23,6 @@ const FormatMenu = () => {
 
   if (!formats) return <div />
 
-/* eslint-disable complexity */
   return (
     <div className="body">
       <h1>Popular Formats</h1>

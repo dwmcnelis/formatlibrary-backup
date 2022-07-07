@@ -194,18 +194,7 @@ h1 {
   vertical-align: middle;
   background-size: 68px;
   background-position: center;
-  background-image: url('./images/discord.png');
-}
-
-.discord-sidebar {
-  display: inline-block;
-  background-repeat: no-repeat;
-  min-height: 108px;
-  min-width: 108px;
-  vertical-align: middle;
-  background-size: 96px;
-  background-position: center;
-  background-image: url('./images/discord.png');
+  background-image: url('./images/logos/Discord.png');
 }
 
 /* FOOTER */
@@ -585,14 +574,17 @@ h1 {
   color: rgb(209, 156, 70);
 }
 
-.ad-desc {
+.widget-link {
   color: #151414;
-  padding: 0px;
-  margin: 4px 0px;
 }
 
-.ad-desc:hover {
+.widget-link:hover {
   color: #34AD5A;
+}
+
+.ad-desc {
+  padding: 0px;
+  margin: 4px 0px;
 }
 
 #searchBar {

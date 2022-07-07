@@ -5,7 +5,6 @@ import CardImage from './CardImage'
 import NotFound from './NotFound'
 import axios from 'axios'
 import {capitalize, dateToSimple, dateToVerbose, ordinalize} from '../../functions/utility'
-import formats from '../../static/formats.json'
 import * as emojis from '../../public/images/emojis'
 
 const SingleDeck = (props) => {
@@ -20,7 +19,7 @@ const SingleDeck = (props) => {
 
   // USE EFFECT SET CARD
   useEffect(() => {
-    const uploadDeck = async () => {
+    const fetchData = async () => {
       try {
         const {data} = await axios.get(`/api/decks/${props.match.params.id}`, {
           headers: {
@@ -33,21 +32,20 @@ const SingleDeck = (props) => {
       } catch (err) {
         console.log(err)
         setDeck(null)
+        setFormat(null)
       }
     }
 
-    uploadDeck()
+    fetchData()
   }, [])
 
-  if (deck === null) return <NotFound/>
-  if (!deck.id) return <div />
-  const formatName = capitalize(deck.format, true) || '?'
-  const formatImage = emojis[formats[formatName].icon] || ''
+  if (!deck) return <NotFound/>
+  if (!deck.id) return <div/>
 
-  const categoryImage = deck.category.toLowerCase() === 'aggro' ? emojis.Helmet :
-    deck.category.toLowerCase() === 'combo' ? emojis.Controller :
-    deck.category.toLowerCase() === 'control' ? emojis.Orb :
-    deck.category.toLowerCase() === 'lockdown' ? emojis.Lock :
+  const categoryImage = deck.category === 'Aggro' ? emojis.Helmet :
+    deck.category === 'Combo' ? emojis.Controller :
+    deck.category === 'Control' ? emojis.Orb :
+    deck.category === 'Lockdown' ? emojis.Lock :
     emojis.Thinking
 
   const placementImage = deck.placement === 1 ? emojis.First :
@@ -109,13 +107,13 @@ const SingleDeck = (props) => {
             </td>
             <td>
               <div onClick={() => goToFormat()} className="single-deck-cell">
-                <div className="single-deck-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {capitalize(deck.format, true)}</div>
-                <img style={{width:'28px'}} src={formatImage}/>
+                <div className="single-deck-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {deck.format}</div>
+                <img style={{width:'28px'}} src={`/images/emojis/${deck.format.icon}.png`}/>
               </div>       
             </td>
             <td>
               <div className="single-deck-cell">
-                <div className="single-deck-category" style={{paddingRight:'7px'}}><b>Category:</b> {capitalize(deck.category, true)}</div>
+                <div className="single-deck-category" style={{paddingRight:'7px'}}><b>Category:</b> {deck.category}</div>
                 <img className="single-deck-category-emoji" style={{width:'28px'}} src={categoryImage}/>
               </div>
             </td>

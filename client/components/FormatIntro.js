@@ -34,8 +34,8 @@ const FormatIntro = (props = {}) => {
     fetchData()
   }, [])
 
-  if (format === null) return <NotFound/>
-  if (!format || !format.id) return <div />
+  if (!format) return <NotFound/>
+  if (!format.id) return <div />
 
   return (
     <div className="body">
@@ -75,7 +75,7 @@ const FormatIntro = (props = {}) => {
             <a href="#banlist">Ban List</a>
           </li>
         </div>
-        <img id="format-icon-large" src={`/images/artworks/${format.icon ? format.icon.slice(0, -4) : ''}.jpg`} />
+        <img id="format-icon-large" src={`/images/artworks/${format.icon}.jpg`} />
       </div>
       {
         format.description ? (
