@@ -32,7 +32,6 @@ const SingleDeck = (props) => {
       } catch (err) {
         console.log(err)
         setDeck(null)
-        setFormat(null)
       }
     }
 
