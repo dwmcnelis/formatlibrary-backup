@@ -1,6 +1,6 @@
 
 const router = require('express').Router()
-const {Card, Deck, DeckThumb, DeckType, Player} = require('../db/models')
+const {Card, Deck, DeckThumb, DeckType, Format, Player} = require('../db/models')
 const {capitalize, ordinalize} = require('../../functions/utility')
 const {Op} = require('sequelize')
 
@@ -248,7 +248,7 @@ router.get('/:id', async (req, res, next) => {
             }, 
             attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
             include: [
-                { model: Format, attributes: { exclude: ['createdAt', 'updatedAt']} },
+                { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
                 { model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }
             ],
         })
