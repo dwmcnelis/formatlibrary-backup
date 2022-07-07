@@ -14,6 +14,10 @@ const Stats = require('./Stats')
 const Status = require('./Status')
 const Tournament = require('./Tournament')
 
+//DECK
+Format.hasMany(Deck)
+Deck.belongsTo(Format)
+
 //DECKTYPE
 DeckType.hasMany(Deck)
 Deck.belongsTo(DeckType)
