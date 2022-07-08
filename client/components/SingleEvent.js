@@ -157,7 +157,7 @@ const SingleEvent = (props) => {
                 <td>
                   <div className="single-event-cell">
                     <div onClick={() => goToFormat()} className="single-event-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {capitalize(event.formatName, true)}</div>
-                    <img style={{width:'32px'}} src={`/images/emojis/${event.format.icon}`}/>
+                    <img style={{width:'32px'}} src={`/images/emojis/${event.format.icon}.png`}/>
                   </div>     
                 </td>
                 <td className="desktop-only">
@@ -200,7 +200,7 @@ const SingleEvent = (props) => {
 
       <div id="bracket">
         <div className="subcategory-title-flexbox">
-          <img style={{ width:'64px'}} src={`/images/emojis/${event.format.icon}`}/>
+          <img style={{ width:'64px'}} src={`/images/emojis/${event.format.icon}.png`}/>
           <h2 className="subheading"><b>{event.abbreviation}</b> Bracket:</h2>
           <img style={{ width:'64px'}} src={'/images/logos/Challonge.png'}/>
         </div>
@@ -227,7 +227,7 @@ const SingleEvent = (props) => {
         topDecks.length ? (
           <div id="top-decks">
             <div className="subcategory-title-flexbox">
-              <img style={{ width:'64px'}} src={`/images/emojis/${event.format.icon}`}/>
+              <img style={{ width:'64px'}} src={`/images/emojis/${event.format.icon}.png`}/>
               <h2 className="subheading"><b>{event.abbreviation}</b> {topDecks.length > 1 ? `Top ${topDecks.length} Decks` : 'Winning Deck'}:</h2>
               <img style={{ height:'64px'}} src={'/images/emojis/deckbox.png'}/>
             </div>
@@ -255,7 +255,7 @@ const SingleEvent = (props) => {
         metagame.deckTypes.length ? (
           <div id="metagame-stats">
             <div className="subcategory-title-flexbox">
-              <img style={{ width:'64px'}} src={`/images/emojis/${event.format.icon}`}/>
+              <img style={{ width:'64px'}} src={`/images/emojis/${event.format.icon}.png`}/>
               <h2 className="subheading"><b>{event.abbreviation}</b> Metagame Stats:</h2>
               <img style={{ height:'64px'}} src={'/images/emojis/microscope.png'}/>
             </div>

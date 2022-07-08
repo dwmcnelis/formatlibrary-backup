@@ -11,7 +11,7 @@ const SingleDeck = (props) => {
     const [deck, setDeck] = useState({})
     const history = useHistory()
     const goToEvent = () => history.push(`/events/${deck.eventName}`)
-    const goToFormat = () => history.push(`/formats/${deck.format}`)
+    const goToFormat = () => history.push(`/formats/${deck.formatName}`)
     const goToPlayer = () => history.push(`/players/${deck.player.tag.slice(0, -5) + deck.player.tag.slice(-4)}`)
 
   // USE LAYOUT EFFECT
@@ -106,8 +106,8 @@ const SingleDeck = (props) => {
             </td>
             <td>
               <div onClick={() => goToFormat()} className="single-deck-cell">
-                <div className="single-deck-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {deck.format}</div>
-                <img style={{width:'28px'}} src={`/images/emojis/${deck.format.icon}.png`}/>
+                <div className="single-deck-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {deck.formatName}</div>
+                <img style={{width:'28px'}} src={`/images/emojis/${deck.format ? deck.format.icon : 'null'}.png`}/>
               </div>       
             </td>
             <td>
