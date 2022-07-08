@@ -1912,58 +1912,6 @@ const fixGames = async () => {
     return console.log('fixed stats')
 }
 
-const fixDecks = async () => {
-    let b = 0
-    const decks = await Deck.findAll({ 
-        where: { eventId: {[Op.not]: null }}, 
-        include: [Event] 
-    })
-    
-    for (let i = 0; i < decks.length; i++) {
-        try {
-            const deck = decks[i]
-            deck.eventDate = deck.event.startDate            
-            await deck.save()
-            b++
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
-    return console.log(`fixed ${b} deck eventDates`)
-}
-
-
-const fixDecks2 = async () => {
-    let b = 0
-    const decks = await Deck.findAll()
-    
-    for (let i = 0; i < decks.length; i++) {
-        try {
-            const deck = decks[i]
-            const deckType = await DeckType.findOne({
-                where: {
-                    name: deck.type,
-                    format: deck.format
-                }
-            })          
-            
-            if (!deckType) {
-                console.log(`no ${deck.type} decktype for ${deck.format} format`)
-                continue
-            }
-
-            deck.deckTypeId = deckType.id
-            await deck.save()
-            b++
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
-    return console.log(`fixed ${b} deck decktypeIds`)
-}
-
 const fixDeckThumbs = async () => {
     let b = 0
     const thumbs = await DeckThumb.findAll()
@@ -2118,7 +2066,40 @@ const fixBlogPosts = async () => {
 }
 
 
-fixBlogPosts()
+const fixDecks = async () => {
+    let b = 0
+    const decks = await Deck.findAll()
+    for (let i = 0; i < decks.length; i++) {
+        try {
+            const deck = decks[i]
+            deck.formatName = capitalize(deck.formatName, true)
+            deck.category = capitalize(deck.category)
+            await deck.save()
+            const format = await Format.findOne({
+                where: {
+                    name: {[Op.iLike]: deck.formatName}
+                }
+            })
+    
+            if (!format) {
+                console.log(`no format ${formatName}`)
+                continue
+            }
+    
+            deck.formatId = format.id
+            await deck.save()
+            b++
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    return console.log(`fixed ${b} decks`)
+}
+
+
+
+// fixBlogPosts()
 // fixEvents()
 // fixDeckThumbs()
 // checkMissingThumbs()

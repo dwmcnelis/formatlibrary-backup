@@ -107,7 +107,7 @@ const SingleDeck = (props) => {
             <td>
               <div onClick={() => goToFormat()} className="single-deck-cell">
                 <div className="single-deck-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {deck.formatName}</div>
-                <img style={{width:'28px'}} src={`/images/emojis/${deck.format ? deck.format.icon : 'null'}.png`}/>
+                <img style={{width:'28px'}} src={`/images/emojis/${deck.format.icon}.png`}/>
               </div>       
             </td>
             <td>
