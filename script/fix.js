@@ -2098,12 +2098,11 @@ const fixDecks = async () => {
 }
 
 
-
+fixDecks()
 // fixBlogPosts()
 // fixEvents()
 // fixDeckThumbs()
 // checkMissingThumbs()
-// fixDecks()
 // fixDecks2()
 // fixGames()
 // fixYDKs()
