@@ -24,7 +24,7 @@ router.get('/popular/:format', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
             where: {
-                format: {[Op.iLike]: req.params.format },
+                formatName: {[Op.iLike]: req.params.format },
                 type: {[Op.not]: 'Other'} 
             }
         })
@@ -350,7 +350,7 @@ router.post('/create', async (req, res, next) => {
             type: req.body.type,
             deckTypeId: req.body.deckTypeId,
             category: req.body.category,
-            format: req.body.format,
+            formatName: req.body.format,
             ydk: req.body.ydk,
             eventName: req.body.eventName,
             eventId: req.body.eventId,

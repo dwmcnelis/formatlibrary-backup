@@ -88,7 +88,7 @@ const DeckTable = (props) => {
         }
   
         if (format) {
-          data = data.filter((d) =>  d.format.toLowerCase().includes(format.toLowerCase()))
+          data = data.filter((d) =>  d.formatName.toLowerCase().includes(format.toLowerCase()))
         }
       } catch (err) {
         console.log(err)

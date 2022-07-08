@@ -9,7 +9,7 @@ import * as emojis from '../../public/images/emojis'
 const DeckRow = (props) => {
   const {deck} = props
   const evenOrOdd = props.index % 2 ? 'even' : 'odd'
-  const formatName = capitalize(deck.format, true) || '?'
+  const formatName = capitalize(deck.formatName, true) || '?'
   const backgroundImage = emojis[formats[formatName].logo] || ''
   
   return (
