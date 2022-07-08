@@ -72,12 +72,13 @@ const BlogPost = (props) => {
                 </a>
               </div>
             ) : (
-              <Adsense.Google
-                className="vertical-adsense"
-                client="pub-2048547741313745"
-                slot="8384346734"
-                style={{ width: '100%', height: '75%' }}
-              />
+              // <Adsense.Google
+              //   className="vertical-adsense"
+              //   client="pub-2048547741313745"
+              //   slot="8384346734"
+              //   style={{ width: '100%', height: '75%' }}
+              // />
+              ''
             )
           }
         </div>
