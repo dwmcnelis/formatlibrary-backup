@@ -3014,6 +3014,10 @@ body {
     padding-top: 5px;
   }
 
+  .vertical-adsense {
+    display: none;
+  }
+
   .hamburger-item {
     color: #ede6e6;
     background-color: #000000;
@@ -3370,6 +3374,10 @@ body {
 
   #hamburger-button {
     font-size: 22pt;
+  }
+
+  .vertical-adsense {
+    display: none;
   }
 
   .hamburger-item {
