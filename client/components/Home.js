@@ -4,12 +4,13 @@ import Pagination from './Pagination'
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import axios from 'axios'
 
+
 const Home = () => {
   const [page, setPage] = useState(1)
   const [blogPosts, setBlogPosts] = useState([])
   const [firstXFetched, setFirstXFetched] = useState(false)
   const [allFetched, setAllFetched] = useState(false)
-
+  
   // GO TO PAGE
   const goToPage = (num) => {
     setPage(num)

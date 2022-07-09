@@ -20,6 +20,7 @@ const Footer = () => (
         href="https://www.buymeacoffee.com/danielmcnelis" 
         target="_blank"
         rel="noreferrer"
+        className="desktop-only"
       >
         <img 
           src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" 
@@ -55,6 +56,7 @@ const Footer = () => (
         href="https://www.tcgplayer.com/search/yugioh/product?productLineName=yugioh&view=grid&utm_campaign=affiliate&utm_medium=FormatLibrary&utm_source=FormatLibrary" 
         target="_blank"
         rel="noreferrer"
+        className="desktop-only"
       >
         <img 
           src="/images/logos/TCGPlayer.png" 

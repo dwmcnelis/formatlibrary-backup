@@ -641,6 +641,7 @@ h1 {
 .pagination {
   display: flex;
   min-width: 410px;
+  max-width: 100%;
   margin: 0px 8px;
   padding: 4px;
   align-items: center;
@@ -2225,6 +2226,7 @@ h1 {
 .paginationWrapper {
   width: 90%;
   min-width: 764px;
+  max-width: 100%;
   padding: 4px 4px 2px 4px;
   align-items: center;
   margin-left: auto;
@@ -2493,7 +2495,7 @@ body {
     min-width: 100%;
   }
 
-  .vertical-adsense {
+  .vertical-adsense, .desktop-only {
     display: none;
   }
 
@@ -3014,7 +3016,7 @@ body {
     padding-top: 5px;
   }
 
-  .vertical-adsense {
+  .pagination, .paginationWrapper, .vertical-adsense, .desktop-only {
     display: none;
   }
 
@@ -3376,7 +3378,7 @@ body {
     font-size: 22pt;
   }
 
-  .vertical-adsense {
+  .pagination, .paginationWrapper, .vertical-adsense, .desktop-only {
     display: none;
   }
 

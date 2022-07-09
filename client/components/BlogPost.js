@@ -2,8 +2,22 @@
 import React from 'react'
 import parse from 'html-react-parser'
 import Adsense from 'react-adsense';
+import { useMediaQuery } from 'react-responsive'
 
 const BlogPost = (props) => {
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+  
+  if (isTabletOrMobile) return (
+    <div className="blogpost">
+      <div className="blogpost-flexbox">
+        <div className="post-content">
+          {parse(props.content)}
+        </div>
+      </div>
+      <div className="blog-divider"/>
+    </div>
+  )
+
   return (
     <div className="blogpost">
       <div className="blogpost-flexbox">
@@ -77,7 +91,7 @@ const BlogPost = (props) => {
                 client="ca-pub-2048547741313745"
                 slot="8384346734"
                 style={{ width: '100%', height: '75%' }}
-              />
+              /> 
             )
           }
         </div>
