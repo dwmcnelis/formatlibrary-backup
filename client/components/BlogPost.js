@@ -69,6 +69,7 @@ const BlogPost = (props) => {
                     alt="Buy Me A Coffee" 
                     style={{ height: "22%", width: "80%"}}
                   />
+                  <p className="ad-desc">Small donations support our work!</p>
                 </a>
                 <a 
                   href="https://www.tcgplayer.com/search/yugioh/product?productLineName=yugioh&view=grid&utm_campaign=affiliate&utm_medium=FormatLibrary&utm_source=FormatLibrary" 
