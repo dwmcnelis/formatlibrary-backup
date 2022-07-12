@@ -2071,22 +2071,8 @@ const fixDecks = async () => {
     const decks = await Deck.findAll()
     for (let i = 0; i < decks.length; i++) {
         try {
-            const deck = decks[i]
-            deck.formatName = capitalize(deck.formatName, true)
-            deck.category = capitalize(deck.category)
-            await deck.save()
-            const format = await Format.findOne({
-                where: {
-                    name: {[Op.iLike]: deck.formatName}
-                }
-            })
-    
-            if (!format) {
-                console.log(`no format ${formatName}`)
-                continue
-            }
-    
-            deck.formatId = format.id
+            const deck = decks[i]    
+            deck.ydk = deck.ydk.replaceAll(' ', '\n')
             await deck.save()
             b++
         } catch (err) {

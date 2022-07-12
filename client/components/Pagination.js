@@ -37,6 +37,7 @@ const Pagination = (props = {}) => {
         totalPages > 3 && (page - 3) > 0 ? (
           <a
             className="pageButton"
+            id="to-minus-3"
             type="submit"
             onClick={() => {
               props.goToPage(
@@ -128,6 +129,7 @@ const Pagination = (props = {}) => {
         (page + 3) <= totalPages ? (
           <a
             className="pageButton"
+            id="to-plus-3"
             type="submit"
             onClick={() => {
               props.goToPage(

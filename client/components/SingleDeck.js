@@ -9,6 +9,7 @@ import * as emojis from '../../public/images/emojis'
 
 const SingleDeck = (props) => {
     const [deck, setDeck] = useState({})
+    console.log('deck', deck)
     const history = useHistory()
     const goToEvent = () => history.push(`/events/${deck.eventName}`)
     const goToFormat = () => history.push(`/formats/${deck.formatName}`)

@@ -6,6 +6,7 @@ import axios from 'axios'
 const RecentEvents = (props) => {
     const [recentEvents, setRecentEvents] = useState([])
     const [winners, setWinners] = useState([])
+    console.log(recentEvents)
   
     // USE EFFECT
     useEffect(() => {

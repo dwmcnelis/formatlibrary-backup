@@ -3,11 +3,13 @@
 
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import EventRow from './EventRow.js'
+import MobileEventRow from './MobileEventRow.js'
 // import EventImage from './EventImage.js'
 import Pagination from './Pagination.js'
 import * as sortFunctions from '../../functions/sort'
 import formats from '../../static/formats.json'
 import axios from 'axios'
+import { useMediaQuery } from 'react-responsive'
 
 const EventTable = (props) => {
   const [page, setPage] = useState(1)
@@ -164,6 +166,148 @@ const EventTable = (props) => {
   const formatKeys = Object.keys(formats)
 
   // RENDER
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+  
+  if (isTabletOrMobile) return (
+    <div className="body">
+      <div className="event-database-flexbox">
+        <img style={{ height:'80px'}} src={'/images/emojis/event.png'}/>
+        <h1>Event Database</h1>
+        <img style={{ height:'80px'}} src={'/images/emojis/event.png'}/>
+      </div>
+
+      <div className="searchWrapper">
+        <input
+          id="searchBar"
+          className="filter"
+          type="text"
+          placeholder="🔍"
+          onChange={() => runQuery()}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') search()
+          }}
+        />
+
+        <div className="buttonWrapper">
+          <select
+            id="searchTypeSelector"
+            defaultValue="name"
+            className="filter"
+            onChange={() => runQuery()}
+          >
+            <option value="name">Event</option>
+            <option value="winner">Winner</option>
+          </select>
+
+          <select
+            id="format"
+            defaultValue={null}
+            className="filter"
+            onChange={(e) => setFormat(e.target.value)}
+          >
+            <option key={'All Formats'} value={''}>All Formats</option>
+            {
+              formatKeys.map((f) => <option key={f} value={f}>{f}</option>)
+            }
+          </select>
+
+          <a
+            className="searchButton"
+            type="submit"
+            onClick={() => search()}
+          >
+            Search
+          </a>
+        </div>
+      </div>
+
+      <div id="resultsWrapper0" className="resultsWrapper0">
+        <div className="results" style={{width: '360px'}}>
+          Results:{' '}
+          {firstXFetched && allFetched
+            ? filteredEvents.length
+              ? `${eventsPerPage * page - eventsPerPage + 1} - ${
+                  filteredEvents.length >=
+                  eventsPerPage * page
+                    ? eventsPerPage * page
+                    : filteredEvents.length
+                } of ${filteredEvents.length}`
+              : '0'
+            : ''}
+        </div>
+
+        <div className="buttonWrapper">
+          <select
+            id="eventsPerPageSelector"
+            defaultValue="10"
+            style={{width: '195px'}}
+            onChange={() => changeEventsPerPage()}
+          >
+            <option value="10">10 / Page</option>
+            <option value="25">25 / Page</option>
+            <option value="50">50 / Page</option>
+            <option value="100">100 / Page</option>
+          </select>
+
+          <select
+            id="sortSelector"
+            defaultValue="startDateDESC"
+            style={{width: '230px'}}
+            onChange={() => sortEvents()}
+          >
+            <option value="startDateDESC">Date: New ⮕ Old</option>
+            <option value="startDateASC">Date: Old ⮕ New</option>
+            <option value="nameASC">Event: A ⮕ Z</option>
+            <option value="nameDESC">Event: Z ⮕ A</option>
+            <option value="formatASC">Format: New ⮕ Old</option>
+            <option value="formatDESC">Format: Old ⮕ New</option>
+          </select>
+
+          <a
+            className="searchButton"
+            type="submit"
+            onClick={() => reset()}
+          >
+            Reset
+          </a>
+        </div>
+      </div>
+
+      <div id="event-table">
+        <table id="events">
+          <thead>
+            <tr>
+              <th>Format</th>
+              <th>Event</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredEvents.length ? (
+              filteredEvents.slice(firstIndex, lastIndex).map((event, index) => {
+                return <MobileEventRow key={event.id} index={index} event={event} />
+              })
+            ) : (
+              <tr />
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="pagination">
+        <Pagination
+          location="bottom"
+          nextPage={nextPage}
+          previousPage={previousPage}
+          goToPage={goToPage}
+          length={filteredEvents.length}
+          page={page}
+          itemsPerPage={eventsPerPage}
+        />
+      </div>
+    </div>
+  )
+
   return (
     <div className="body">
       <div className="event-database-flexbox">

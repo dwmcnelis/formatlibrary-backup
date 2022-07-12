@@ -3016,7 +3016,32 @@ body {
     padding-top: 5px;
   }
 
-  .pagination, .paginationWrapper, .vertical-adsense, .desktop-only {
+
+  .pagination {
+    display: flex;
+    min-width: 0px;
+    max-width: 100%;
+    margin: 0px 8px;
+    padding: 4px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .paginationWrapper {
+    width: 90%;
+    min-width: 0px;
+    max-width: 100%;
+    padding: 4px 4px 2px 4px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #to-start, #to-end, #to-minus-3, #to-plus-3 {
+    display: none;
+  }
+
+  .vertical-adsense, .desktop-only {
     display: none;
   }
 
@@ -3378,7 +3403,31 @@ body {
     font-size: 22pt;
   }
 
-  .pagination, .paginationWrapper, .vertical-adsense, .desktop-only {
+  .pagination {
+    display: flex;
+    min-width: 0px;
+    max-width: 100%;
+    margin: 0px 8px;
+    padding: 4px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .paginationWrapper {
+    width: 90%;
+    min-width: 0px;
+    max-width: 100%;
+    padding: 4px 4px 2px 4px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #to-start, #to-end, #to-minus-3, #to-plus-3 {
+    display: none;
+  }
+
+  .vertical-adsense, .desktop-only {
     display: none;
   }
 
