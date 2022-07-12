@@ -50,9 +50,9 @@ const SingleEvent = (props) => {
 
   if (event === null) return <NotFound/>
   if (!event.name) return <div></div>
+  if (!event.format) return <div></div>
 
-  const formatName = capitalize(event.formatName, true) || '?'
-  const formatArtwork = `/images/artworks/${formats[formatName].logo.toLowerCase()}.jpg` || ''
+  const formatArtwork = `/images/artworks/${event.format.icon}.jpg` || ''
   
   const colors = [
       '#3d72e3', '#ff3c2e', '#ffd000', '#47ad53', '#43578f', '#b25cd6',
