@@ -45,7 +45,7 @@ const CreateDeck = () => {
         
         try {
             const { data } = await axios.post('/api/decks/create', {
-                builder: player.name,
+                builder: player.name || player.realName,
                 playerId: player.id,
                 type: deckType.name,
                 deckTypeId: deckType.id,

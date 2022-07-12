@@ -86,7 +86,7 @@ const EventCreator = () => {
                 size: size,
                 series: isSeries,
                 type: tournamentType,
-                winner: player.name,
+                winner: player.name || player.realName,
                 playerId: player.id,
                 startDate: startDate,
                 endDate: endDate,
