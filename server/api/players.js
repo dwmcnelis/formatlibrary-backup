@@ -11,8 +11,8 @@ router.get('/query/:query', async (req, res, next) => {
     const players = await Player.findAll({
       where: {
         [Op.or]: [
-          {name: {[Op.substring]: '%' + req.params.query}},
-          {realName: {[Op.substring]: '%' + req.params.query}}
+          {name: {[Op.substring]: req.params.query}},
+          {realName: {[Op.substring]: req.params.query}}
         ]
       },
       attributes: { exclude: ['blacklisted', 'password', 'createdAt', 'updatedAt'] },

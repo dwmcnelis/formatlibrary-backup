@@ -10,7 +10,7 @@ router.get('/query/:query', async (req, res, next) => {
   try {
     const cards = await Card.findAll({
       where: {
-        name: {[Op.substring]: '%' + req.params.query}
+        name: {[Op.substring]: req.params.query}
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       order: [['name', 'ASC']]
