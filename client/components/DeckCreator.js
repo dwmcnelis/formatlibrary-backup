@@ -80,7 +80,7 @@ const CreateDeck = () => {
     }
 
     const getPlayer = async (name) => {
-        const elem = players.filter((e) => e.name === name)[0]
+        const elem = players.filter((e) => e.name === name || e.realName === name)[0]
         return setPlayer(elem)
     }
 
@@ -129,7 +129,7 @@ const CreateDeck = () => {
                     onChange={(e) => getPlayer(e.target.value)}
                 >
                 {
-                    players.map((e) => <option value={e.name}>{e.name}</option>)
+                    players.map((e) => <option value={e.name || e.realName}>{e.name || e.realName}</option>)
                 }
                 </select>
             </label>
