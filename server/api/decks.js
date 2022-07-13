@@ -350,6 +350,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/create', async (req, res, next) => {
     try {
+        const format = await Format.findOne({ where: { name: {[Op.iLike]: req.body.format } }})
         const deck = await Deck.create({
             builder: req.body.builder,
             playerId: req.body.playerId,
@@ -357,6 +358,7 @@ router.post('/create', async (req, res, next) => {
             deckTypeId: req.body.deckTypeId,
             category: req.body.category,
             formatName: req.body.format,
+            formatId: format.id,
             ydk: req.body.ydk,
             eventName: req.body.eventName,
             eventId: req.body.eventId,
