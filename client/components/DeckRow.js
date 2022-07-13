@@ -13,7 +13,7 @@ const DeckRow = (props) => {
           <td className="no-padding">
             <Link className="black-text" to={`/decks/${deck.id}`}>
               <div className="format-cell-flexbox">
-                <img src={`./images/emojis/${deck.format.icon}.png`}/>
+                <img src={`/images/emojis/${deck.format.icon}.png`}/>
                 <div>{deck.formatName}</div>
               </div>
             </Link>
