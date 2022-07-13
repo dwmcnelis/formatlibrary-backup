@@ -1,16 +1,15 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {capitalize, ordinalize} from '../../functions/utility'
+import {ordinalize} from '../../functions/utility'
 
 const DeckImage = (props = {}) => {
   const {deck, width, margin, padding, coverage} = props
   if (!deck) return <div/>
-  const deckType = capitalize(deck.type, true)
-  const fullName = deck.player ? deck.player.name : deck.builder
+  const fullName = deck.player && deck.player.name ? deck.player.name : deck.builder || ''
   const displayName = fullName.length <= 17 ? fullName : fullName.slice(0, 17).split(' ').slice(0, -1).join(' ')
   const placement = ordinalize(deck.placement)
-  const title = coverage ? `${deckType} - ${displayName} - ${placement}` :
-    `${deckType} - ${displayName} - ${deck.eventName}`
+  const title = coverage ? `${deck.type} - ${displayName} - ${placement}` :
+    `${deck.type} - ${displayName} - ${deck.eventName}`
 
   return (
     <div className="DeckImage-box">
