@@ -2,23 +2,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { capitalize, ordinalize } from '../../functions/utility'
-import formats from '../../static/formats.json'
-import * as emojis from '../../public/images/emojis'
 
 /*eslint-disable*/
 const DeckRow = (props) => {
   const {deck} = props
   const evenOrOdd = props.index % 2 ? 'even' : 'odd'
-  const formatName = capitalize(deck.formatName, true) || '?'
-  const backgroundImage = emojis[formats[formatName].logo] || ''
   
   return (
         <tr className={`${evenOrOdd}-search-results-row`}>
           <td className="no-padding">
             <Link className="black-text" to={`/decks/${deck.id}`}>
               <div className="format-cell-flexbox">
-                <img src={backgroundImage}/>
-                <div>{formatName}</div>
+                <img src={`./images/emojis/${deck.format.icon}.png`}/>
+                <div>{deck.formatName}</div>
               </div>
             </Link>
           </td>

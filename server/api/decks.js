@@ -204,7 +204,10 @@ router.get('/all', async (req, res, next) => {
             where: { display: isAdmin ? {[Op.any]: [true, false]} : true },
             attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
             order: [["eventDate", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
-            include: [{ model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }],
+            include: [
+                { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
+                { model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }
+            ],
         })
 
         res.json(decks)
@@ -221,7 +224,10 @@ router.get('/first/:x', async (req, res, next) => {
             attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
             order: [["eventDate", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
             limit: req.params.x, 
-            include: [{ model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }],
+            include: [
+                { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
+                { model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }
+            ],
         })
 
         res.json(decks)
