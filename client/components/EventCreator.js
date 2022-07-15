@@ -22,9 +22,8 @@ const EventCreator = () => {
     const [tournamentType, setTournamentType] = useState(true)
     const [url, setUrl] = useState(null)
     console.log('startDate', startDate)
-
+    console.log('endDate', endDate)
     const slice = startDate ? startDate.slice(0, 10) : null
-    console.log('slice', slice)
 
     // RESET
     const reset = async () => {
@@ -278,8 +277,8 @@ const EventCreator = () => {
                     className="login"
                     type="date"
                     onChange={(e) => {
-                            if (!endDate) setEndDate(e.target.value)
-                            setStartDate(e.target.value)
+                            if (!endDate) setEndDate(e.target.value + ' 00:00:00+00')
+                            setStartDate(e.target.value + ' 00:00:00+00')
                         }
                     }
                 />
