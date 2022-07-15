@@ -21,8 +21,10 @@ const EventCreator = () => {
     const [tournamentId, setTournamentId] = useState(null)
     const [tournamentType, setTournamentType] = useState(true)
     const [url, setUrl] = useState(null)
+    console.log('startDate', startDate)
 
     const slice = startDate ? startDate.slice(0, 10) : null
+    console.log('slice', slice)
 
     // RESET
     const reset = async () => {
