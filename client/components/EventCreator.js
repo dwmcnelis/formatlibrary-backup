@@ -277,7 +277,7 @@ const EventCreator = () => {
                     className="login"
                     type="date"
                     onChange={(e) => {
-                            if (!endDate) setEndDate(e.target.value + ' 00:00:00+00')
+                            setEndDate(e.target.value + ' 00:00:00+00')
                             setStartDate(e.target.value + ' 00:00:00+00')
                         }
                     }
