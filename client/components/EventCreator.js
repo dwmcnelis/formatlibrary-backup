@@ -21,31 +21,27 @@ const EventCreator = () => {
     const [tournamentId, setTournamentId] = useState(null)
     const [tournamentType, setTournamentType] = useState(true)
     const [url, setUrl] = useState(null)
-    console.log('startDate', startDate)
-    console.log('endDate', endDate)
+    
     const slice = startDate ? startDate.slice(0, 10) : null
 
     // RESET
     const reset = async () => {
         setAbbreviation(null)
+        setBracket(null)
         setChallongeName(null)
         setCommunity(null)
-        setDeckType(null)
-        setDisplay(true)
         setEndDate(null)
         setFormat(null)
         setFullName(null)
         setIsSeries(true)
-        setPlacement(1)
         setPlayer(null) 
         setPlayers([])          
         setReferenceUrl(null)
-        setStartDate(null)
         setSize(null)
-        setTournamentType(true)
+        setStartDate(null)
         setTournamentId(null)
+        setTournamentType(true)
         setUrl(null)
-        setYDK(null)  
 
         document.getElementById('community').value = null
         document.getElementById('format').value = null
