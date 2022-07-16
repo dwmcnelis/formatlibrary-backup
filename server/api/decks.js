@@ -90,7 +90,7 @@ router.get('/frequent/:id', async (req, res, next) => {
         if (!decks.length) return false
 
         
-        const freqs = decks.reduce((acc, curr) => (acc[`${curr.format}_${curr.type}`] ? acc[`${curr.format}_${curr.type}`]++ : acc[`${curr.format}_${curr.type}`] = 1, acc), {})
+        const freqs = decks.reduce((acc, curr) => (acc[`${curr.formatName}_${curr.type}`] ? acc[`${curr.formatName}_${curr.type}`]++ : acc[`${curr.formatName}_${curr.type}`] = 1, acc), {})
         const arr = Object.entries(freqs).sort((a, b) => b[1] - a[1]).map((e) => e[0])
         const data = []
         const types = []

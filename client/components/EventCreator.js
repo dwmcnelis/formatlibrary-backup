@@ -43,15 +43,17 @@ const EventCreator = () => {
         setTournamentType(true)
         setUrl(null)
 
+        document.getElementById('abbreviation').value = null
+        document.getElementById('bracket').value = null
         document.getElementById('community').value = null
         document.getElementById('format').value = null
         document.getElementById('url').value = ''
-        document.getElementById('fullName').value = ''
+        document.getElementById('full-name').value = ''
         document.getElementById('abbreviation').value = ''
         document.getElementById('size').value = ''
         document.getElementById('format').value = null
         document.getElementById('series').value = true
-        document.getElementById('startDate').value = "mm/dd/yyyy"
+        document.getElementById('start-date').value = "mm/dd/yyyy"
         document.getElementById('type').value = null
         document.getElementById('winner').value = ''
     }
