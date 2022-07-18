@@ -17,23 +17,19 @@ const ImageCreator = () => {
         document.getElementById('folder').value = null
     }
 
-    console.log('image', image)
-    console.log('fileName', fileName)
-    console.log('folder', folder)
-
     //CREATE IMAGE
     const createImage = async () => {
         if (!image) return alert('Please upload an Image file.')
         if (!fileName) return alert('Please specify a File Name.')
         if (!folder) return alert('Please select a Folder.')
         try {
-            await axios.post('/api/images/create', {
+            const {data} = await axios.post('/api/images/create', {
                 image: image,
                 fileName: fileName,
                 folder: folder
             })
-            
-            alert(`Success! New Image: /images/${folder}/${fileName}`)
+
+            if (data.success) alert(`Success! New Image: /images/${folder}/${fileName}`)
             return reset()
         } catch (err) {
             console.log(err)
