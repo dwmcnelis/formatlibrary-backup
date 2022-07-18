@@ -65,7 +65,7 @@ const ImageCreator = () => {
             </label>
             <label>Image:
                 <input
-                    id="bracket"
+                    id="image"
                     className="login"
                     type="file"
                     accept="image/*"
