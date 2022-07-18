@@ -57,12 +57,12 @@ const ImageCreator = () => {
                     onChange={(e) => setFolder(e.target.value)}
                 >
                     <option value={null}></option>
-                    <option value="Artworks">Artworks</option>
-                    <option value="Brackets">Brackets</option>
-                    <option value="Cards">Cards</option>
-                    <option value="Emojis">Emojis</option>
-                    <option value="Logos">Logos</option>
-                    <option value="PFPs">PFPs</option>
+                    <option value="artworks">Artworks</option>
+                    <option value="brackets">Brackets</option>
+                    <option value="cards">Cards</option>
+                    <option value="emojis">Emojis</option>
+                    <option value="logos">Logos</option>
+                    <option value="pfps">PFPs</option>
                 </select>
             </label>
             <label>Image:
