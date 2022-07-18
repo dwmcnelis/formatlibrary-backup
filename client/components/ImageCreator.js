@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react'
+import fs from 'fs'
 
 const ImageCreator = () => {
     const [image, setImage] = useState(null)
