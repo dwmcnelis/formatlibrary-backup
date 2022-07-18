@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react'
+import axios from 'axios'
 
 const ImageCreator = () => {
     const [image, setImage] = useState(null)
