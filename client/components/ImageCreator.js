@@ -69,13 +69,17 @@ const ImageCreator = () => {
                     className="login"
                     type="file"
                     accept="image/*"
-                    onChange={(e) => readImage(e.target.files[0])}
+                    onChange={(e) => {
+                        setFileName(e.target.value)
+                        readImage(e.target.files[0])}
+                    }
                 />
             </label>
             <label>File Name:
                 <input
                     id="file-name"
                     className="login"
+                    value={fileName || ''}
                     type="text"
                     onChange={(e) => setFileName(e.target.value)}
                 />
