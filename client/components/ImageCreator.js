@@ -70,7 +70,7 @@ const ImageCreator = () => {
                     type="file"
                     accept="image/*"
                     onChange={(e) => {
-                        setFileName(e.target.value)
+                        setFileName(e.target.value.replace('C:\\fakepath\\', ''))
                         readImage(e.target.files[0])}
                     }
                 />
