@@ -27,8 +27,12 @@ const ImageCreator = () => {
         if (!fileName) return alert('Please specify a File Name.')
         if (!folder) return alert('Please select a Folder.')
         try {
-            const buffer = image.replace(/^data:image\/png;base64,/, '')
-            fs.writeFileSync(`./public/images/${folder}/${fileName}`, buffer, 'base64')
+            await axios.post('/api/images/create', {
+                image: image,
+                fileName: fileName,
+                folder: folder
+            })
+            
             alert(`Success! New Image: /images/${folder}/${fileName}`)
             return reset()
         } catch (err) {
