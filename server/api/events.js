@@ -214,7 +214,7 @@ router.get('/:id', async (req, res, next) => {
 router.post('/create', async (req, res, next) => {
   try {
     const buffer = req.body.bracket.replace(/^data:image\/png;base64,/, '')
-    fs.writeFileSync(`./public/brackets/${req.body.abbreviation}.png`, buffer, 'base64')
+    fs.writeFileSync(`./public/images/brackets/${req.body.abbreviation}.png`, buffer, 'base64')
 
     if (req.body.id) {
       await Tournament.create({

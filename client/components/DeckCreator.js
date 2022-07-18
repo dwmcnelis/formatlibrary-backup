@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { shouldDisplay } from '../../functions/utility'
 import axios from 'axios'
 
-const CreateDeck = () => {
+const DeckCreator = () => {
     const [community, setCommunity] = useState(null)
     const [deckType, setDeckType] = useState(null)
     const [deckTypes, setDeckTypes] = useState([])
@@ -218,4 +218,4 @@ const CreateDeck = () => {
     )
 }
 
-export default CreateDeck
+export default DeckCreator

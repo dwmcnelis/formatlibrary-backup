@@ -6,6 +6,7 @@ import BanListCreator from './BanListCreator'
 import DeckCreator from './DeckCreator'
 import DeckTypeCreator from './DeckTypeCreator'
 import EventCreator from './EventCreator'
+import ImageCreator from './ImageCreator'
 import NotFound from './NotFound'
 import axios from 'axios'
 
@@ -37,6 +38,7 @@ const AdminPortal = () => {
                         <div onClick={() => setView('events')} className={view === 'events' ? 'clicked-admin-button' : 'admin-button'}>New Event</div>
                         <div onClick={() => setView('decks')} className={view === 'decks' ? 'clicked-admin-button' : 'admin-button'}>Upload Deck</div>
                         <div onClick={() => setView('deckTypes')} className={view === 'deckTypes' ? 'clicked-admin-button' : 'admin-button'}>New Deck Type</div>
+                        <div onClick={() => setView('images')} className={view === 'images' ? 'clicked-admin-button' : 'admin-button'}>New Image</div>
                         <div onClick={() => setView('banLists')} className={view === 'banLists' ? 'clicked-admin-button' : 'admin-button'}>New Ban List</div>
                     </div>
                 <div>
@@ -47,6 +49,8 @@ const AdminPortal = () => {
                         <EventCreator/>
                     ) : view === 'deckTypes' ? (
                         <DeckTypeCreator/>
+                    ) : view === 'images' ? (
+                        <ImageCreator/>
                     ) : view === 'banLists' ? (
                         <BanListCreator/>
                     ) : ''
