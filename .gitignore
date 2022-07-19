@@ -2,10 +2,10 @@ certs
 node_modules
 public/bundle.js
 public/bundle.js.map
-public/decks
-public/images/decks
-public/images/cards
-public/images/pfps
+public/decks/*
+public/images/decks/*
+public/images/cards/*
+public/images/pfps/*
 secrets.js
 .DS_Store
 npm-debug.log
