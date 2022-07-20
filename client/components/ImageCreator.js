@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-//IMAGE CREATOR
 const ImageCreator = () => {
     const [image, setImage] = useState(null)
     const [fileName, setFileName] = useState(null)
