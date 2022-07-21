@@ -14,7 +14,7 @@ const DeckType = (props) => {
   // USE EFFECT SET CARD
   useEffect(() => {
     const fetchData = async () => {
-      const search = props.location.search
+      const search = props.location ? props.location.search : null
       const format = search ? search.slice(search.indexOf('?format=') + 8) : null
 
       try {
