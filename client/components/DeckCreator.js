@@ -158,6 +158,7 @@ const DeckCreator = () => {
                     <option value="Goat Format Europe">Goat Format Europe</option>
                     <option value="EdisonFormat.com">EdisonFormat.com</option>
                     <option value="Konami">Konami</option>
+                    <option value="Reaper Format">Reaper Format</option>
                     <option value="Upper Deck Entertainment">Upper Deck Entertainment</option>
                 </select>
             </label>
