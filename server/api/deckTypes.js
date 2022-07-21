@@ -108,15 +108,13 @@ router.get('/:id', async (req, res, next) => {
 
         for (let j = 0; j < main.length; j++) {
             const e = main[j]
-            if (e[1].total < (data.analyzed / 4)) {
+            if (e[1].decks < (0.25 * data.analyzed)) {
                 delete data.main[e[0]]
             } else {
                 let konamiCode = e[0]
                 while (konamiCode.length < 8) konamiCode = '0' + konamiCode
                 const card = await Card.findOne({ where: { konamiCode }, attributes: ['name', 'category', 'ypdId'] })
                 data.main[e[0]].card = card
-
-                
             }
         }
 
@@ -124,7 +122,7 @@ router.get('/:id', async (req, res, next) => {
 
         for (let j = 0; j < extra.length; j++) {
             const e = extra[j]
-            if (e[1].total < (data.analyzed / 4)) {
+            if (e[1].decks < (0.25 * data.analyzed)) {
                 delete data.extra[e[0]]
             } else {
                 let konamiCode = e[0]
@@ -138,7 +136,7 @@ router.get('/:id', async (req, res, next) => {
 
         for (let j = 0; j < side.length; j++) {
             const e = side[j]
-            if (e[1].total < (data.analyzed / 4)) {
+            if (e[1].decks < (0.25 * data.analyzed)) {
                 delete data.side[e[0]]
             } else {
                 let konamiCode = e[0]
