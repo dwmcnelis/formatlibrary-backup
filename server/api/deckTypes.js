@@ -16,7 +16,7 @@ router.get('/:id', async (req, res, next) => {
         })
 
         const freqs = decks.reduce((acc, curr) => (acc[curr.formatName] ? acc[curr.formatName]++ : acc[curr.formatName] = 1, acc), {})
-        const topFormat = Object.entries(freqs).sort((a, b) => b[1] - a[1]).map((e) => e[0])[0]
+        const topFormat = req.headers.format || Object.entries(freqs).sort((a, b) => b[1] - a[1]).map((e) => e[0])[0]
         const format = await Format.findOne({ where: { name: {[Op.iLike]: topFormat } }})
         const showExtra = format.date >= '2008-08-05'
 

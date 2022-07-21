@@ -32,7 +32,7 @@ const PopularDecks = (props) => {
                 <h2 onClick={() => goToDeckGallery()} id="popular-decks" className="subheading">Popular Decks:</h2>
                 <div className="popular-decks-flexbox">
                 {
-                    popularDecks.map((deck) => <DeckThumbnail deck={deck} key={deck.id}/>)
+                    popularDecks.map((deck) => <DeckThumbnail format={props.format.name} deck={deck} key={deck.id}/>)
                 }
                 </div>
             </div>

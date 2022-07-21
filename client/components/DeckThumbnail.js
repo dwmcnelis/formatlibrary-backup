@@ -8,7 +8,7 @@ const DeckThumbnail = (props = {}) => {
   if (!deck) return <div/>
 
   return (
-    <Link className='link' to={`/decktypes/${deck.type || deck.name}`}>
+    <Link className='link' to={`/decktypes/${deck.type || deck.name}${props.format ? `?format=${props.format}` : ''}`}>
       <div className="deckThumbnail">
         <h3 >{capitalize(deck.type || deck.name, true)}</h3>
         <div className="deckThumbnail-flexbox">

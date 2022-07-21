@@ -14,8 +14,16 @@ const DeckType = (props) => {
   // USE EFFECT SET CARD
   useEffect(() => {
     const fetchData = async () => {
+      const search = props.location.search
+      const format = search ? search.slice(search.indexOf('?format=') + 8) : null
+
       try {
-        const {data} = await axios.get(`/api/deckTypes/${props.match.params.id}`)
+        const {data} = await axios.get(`/api/deckTypes/${props.match.params.id}`, {
+          headers: {
+            format: format
+          }
+        })
+
         setSummary(data)
       } catch (err) {
         console.log(err)
@@ -61,8 +69,8 @@ const DeckType = (props) => {
                 `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
 
                 return (
-                  <div className="popular-main">
-                    <CardImage width='72px' padding='1px' margin='0px' key={'m' + data.card.ypdId} card={data.card}/>
+                  <div className="popular-main" key={'m' + data.card.ypdId}>
+                    <CardImage width='72px' padding='1px' margin='0px' card={data.card}/>
                     <p className="deckType-info">{info}</p>
                   </div>
                 )
@@ -75,8 +83,8 @@ const DeckType = (props) => {
                 `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
 
                 return (
-                  <div className="popular-main">
-                    <CardImage width='72px' padding='1px' margin='0px' key={'m' + data.card.ypdId} card={data.card}/>
+                  <div className="popular-main" key={'m' + data.card.ypdId} >
+                    <CardImage width='72px' padding='1px' margin='0px' card={data.card}/>
                     <p className="deckType-info">{info}</p>
                   </div>
                 )
@@ -89,8 +97,8 @@ const DeckType = (props) => {
                 `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
 
                 return (
-                  <div className="popular-main">
-                    <CardImage width='72px' padding='1px' margin='0px' key={'m' + data.card.ypdId} card={data.card}/>
+                  <div className="popular-main" key={'m' + data.card.ypdId} >
+                    <CardImage width='72px' padding='1px' margin='0px' card={data.card}/>
                     <p className="deckType-info">{info}</p>
                   </div>
                 )
@@ -113,8 +121,8 @@ const DeckType = (props) => {
                       `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
 
                       return (
-                        <div className="popular-side">
-                          <CardImage width='72px' padding='1px' margin='0px' key={'m' + data.card.ypdId} card={data.card}/>
+                        <div className="popular-side" key={'e' + data.card.ypdId} >
+                          <CardImage width='72px' padding='1px' margin='0px' card={data.card}/>
                           <p className="deckType-info">{info}</p>
                         </div>
                       )
@@ -138,8 +146,8 @@ const DeckType = (props) => {
                 `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
 
                 return (
-                  <div className="popular-side">
-                    <CardImage width='72px' padding='1px' margin='0px' key={'m' + data.card.ypdId} card={data.card}/>
+                  <div className="popular-side" key={'s' + data.card.ypdId} >
+                    <CardImage width='72px' padding='1px' margin='0px' card={data.card}/>
                     <p className="deckType-info">{info}</p>
                   </div>
                 )
@@ -152,8 +160,8 @@ const DeckType = (props) => {
                 `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
 
                 return (
-                  <div className="popular-side">
-                    <CardImage width='72px' padding='1px' margin='0px' key={'m' + data.card.ypdId} card={data.card}/>
+                  <div className="popular-side" key={'s' + data.card.ypdId}>
+                    <CardImage width='72px' padding='1px' margin='0px' card={data.card}/>
                     <p className="deckType-info">{info}</p>
                   </div>
                 )
@@ -166,8 +174,8 @@ const DeckType = (props) => {
                 `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
 
                 return (
-                  <div className="popular-side">
-                    <CardImage width='72px' padding='1px' margin='0px' key={'m' + data.card.ypdId} card={data.card}/>
+                  <div className="popular-side" key={'s' + data.card.ypdId}>
+                    <CardImage width='72px' padding='1px' margin='0px' card={data.card}/>
                     <p className="deckType-info">{info}</p>
                   </div>
                 )
