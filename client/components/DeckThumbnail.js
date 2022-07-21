@@ -6,10 +6,9 @@ import { Link } from 'react-router-dom'
 const DeckThumbnail = (props) => {
   const {deck} = props
   if (!deck) return <div/>
-  console.log('props.match', props.match)
 
   return (
-    <Link className='link' to={`/decktypes/${deck.type || deck.name}${props.format ? `?format=${props.format}` : `?format=${props.match.params.id}`}`}>
+    <Link className='link' to={`/decktypes/${deck.type || deck.name}${props.format ? `?format=${props.format}` : ''}`}>
       <div className="deckThumbnail">
         <h3 >{capitalize(deck.type || deck.name, true)}</h3>
         <div className="deckThumbnail-flexbox">
