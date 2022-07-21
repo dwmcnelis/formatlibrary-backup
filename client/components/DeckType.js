@@ -57,7 +57,7 @@ const DeckType = (props) => {
           {
             summary.mainMonsters.map((data) => {
               const info = data['1'] > data['2'] && data['1'] > data['3'] ? `1x in ${Math.round(data['1'] / summary.analyzed * 100)}%` :
-                data['2'] > data['1'] && data['2'] > data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
+                data['2'] >= data['1'] && data['2'] >= data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
                 `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
 
                 return (
@@ -71,7 +71,7 @@ const DeckType = (props) => {
           {
             summary.mainSpells.map((data) => {
               const info = data['1'] > data['2'] && data['1'] > data['3'] ? `1x in ${Math.round(data['1'] / summary.analyzed * 100)}%` :
-                data['2'] > data['1'] && data['2'] > data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
+                data['2'] >= data['1'] && data['2'] >= data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
                 `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
 
                 return (
@@ -85,7 +85,7 @@ const DeckType = (props) => {
           {
             summary.mainTraps.map((data) => {
               const info = data['1'] > data['2'] && data['1'] > data['3'] ? `1x in ${Math.round(data['1'] / summary.analyzed * 100)}%` :
-                data['2'] > data['1'] && data['2'] > data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
+                data['2'] >= data['1'] && data['2'] >= data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
                 `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
 
                 return (
@@ -109,7 +109,7 @@ const DeckType = (props) => {
                 {
                   summary.extraMonsters.map((data) => {
                     const info = data['1'] > data['2'] && data['1'] > data['3'] ? `1x in ${Math.round(data['1'] / summary.analyzed * 100)}%` :
-                      data['2'] > data['1'] && data['2'] > data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
+                      data['2'] >= data['1'] && data['2'] >= data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
                       `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
 
                       return (
@@ -134,7 +134,7 @@ const DeckType = (props) => {
           {
             summary.sideMonsters.map((data) => {
               const info = data['1'] > data['2'] && data['1'] > data['3'] ? `1x in ${Math.round(data['1'] / summary.analyzed * 100)}%` :
-                data['2'] > data['1'] && data['2'] > data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
+                data['2'] >= data['1'] && data['2'] >= data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
                 `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
 
                 return (
@@ -148,7 +148,7 @@ const DeckType = (props) => {
           {
             summary.sideSpells.map((data) => {
               const info = data['1'] > data['2'] && data['1'] > data['3'] ? `1x in ${Math.round(data['1'] / summary.analyzed * 100)}%` :
-                data['2'] > data['1'] && data['2'] > data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
+                data['2'] >= data['1'] && data['2'] >= data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
                 `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
 
                 return (
@@ -162,7 +162,7 @@ const DeckType = (props) => {
           {
             summary.sideTraps.map((data) => {
               const info = data['1'] > data['2'] && data['1'] > data['3'] ? `1x in ${Math.round(data['1'] / summary.analyzed * 100)}%` :
-                data['2'] > data['1'] && data['2'] > data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
+                data['2'] >= data['1'] && data['2'] >= data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
                 `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
 
                 return (
