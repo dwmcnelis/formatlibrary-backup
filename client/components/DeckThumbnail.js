@@ -3,12 +3,12 @@ import React from 'react'
 import {capitalize} from '../../functions/utility'
 import { Link } from 'react-router-dom'
 
-const DeckThumbnail = (props = {}) => {
+const DeckThumbnail = (props) => {
   const {deck} = props
   if (!deck) return <div/>
 
   return (
-    <Link className='link' to={`/decktypes/${deck.type || deck.name}${props.format ? `?format=${props.format}` : ''}`}>
+    <Link className='link' to={`/decktypes/${deck.type || deck.name}${props.format ? `?format=${props.format}` : `?format=${props.match.params.id}`}`}>
       <div className="deckThumbnail">
         <h3 >{capitalize(deck.type || deck.name, true)}</h3>
         <div className="deckThumbnail-flexbox">
