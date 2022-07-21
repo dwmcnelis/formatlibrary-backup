@@ -19,7 +19,7 @@ const DeckType = (props) => {
       const headers = format ? { format: format } : {}
 
       try {
-        const {data} = await axios.get(`/api/deckTypes/${props.match.params.id}`, headers)
+        const {data} = await axios.get(`/api/deckTypes/${props.match.params.id}`, {headers})
         setSummary(data)
       } catch (err) {
         console.log(err)

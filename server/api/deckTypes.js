@@ -15,7 +15,6 @@ router.get('/:id', async (req, res, next) => {
             }
         })
 
-
         const freqs = decks.reduce((acc, curr) => (acc[curr.formatName] ? acc[curr.formatName]++ : acc[curr.formatName] = 1, acc), {})
         const topFormat = Object.entries(freqs).sort((a, b) => b[1] - a[1]).map((e) => e[0])[0]
         const format = await Format.findOne({ where: { name: {[Op.iLike]: req.headers.format || topFormat } }})
@@ -39,7 +38,7 @@ router.get('/:id', async (req, res, next) => {
 
         for (let i = 0; i < decks.length; i++) {
             const deck = decks[i]
-            if (deck.formatName !== topFormat) continue
+            if (deck.formatName.toLowerCase() !== format.name.toLowerCase()) continue
             data.analyzed++
 
             const mainKonamiCodes = deck.ydk.split('#main')[1].split('#extra')[0].split('\n').filter((e) => e.length)
@@ -114,7 +113,7 @@ router.get('/:id', async (req, res, next) => {
             } else {
                 let konamiCode = e[0]
                 while (konamiCode.length < 8) konamiCode = '0' + konamiCode
-                const card = await Card.findOne({ where: { konamiCode }, attributes: ['name', 'category', 'ypdId'] })
+                const card = await Card.findOne({ where: { konamiCode }, attributes: ['name', 'category', 'ypdId'] }) || {}
                 data.main[e[0]].card = card
             }
         }
@@ -128,7 +127,7 @@ router.get('/:id', async (req, res, next) => {
             } else {
                 let konamiCode = e[0]
                 while (konamiCode.length < 8) konamiCode = '0' + konamiCode
-                const card = await Card.findOne({ where: { konamiCode }, attributes: ['name', 'category', 'ypdId']})
+                const card = await Card.findOne({ where: { konamiCode }, attributes: ['name', 'category', 'ypdId']}) || {}
                 data.extra[e[0]].card = card
             }
         }
@@ -142,7 +141,7 @@ router.get('/:id', async (req, res, next) => {
             } else {
                 let konamiCode = e[0]
                 while (konamiCode.length < 8) konamiCode = '0' + konamiCode
-                const card = await Card.findOne({ where: { konamiCode }, attributes: ['name', 'category', 'ypdId']})
+                const card = await Card.findOne({ where: { konamiCode }, attributes: ['name', 'category', 'ypdId']}) || {}
                 data.side[e[0]].card = card
             }
         }
