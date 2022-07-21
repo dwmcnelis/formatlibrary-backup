@@ -16,14 +16,10 @@ const DeckType = (props) => {
     const fetchData = async () => {
       const search = props.location ? props.location.search : null
       const format = search ? search.slice(search.indexOf('?format=') + 8) : null
+      const headers = format ? { format: format } : {}
 
       try {
-        const {data} = await axios.get(`/api/deckTypes/${props.match.params.id}`, {
-          headers: {
-            format: format
-          }
-        })
-
+        const {data} = await axios.get(`/api/deckTypes/${props.match.params.id}`, headers)
         setSummary(data)
       } catch (err) {
         console.log(err)
