@@ -1,0 +1,182 @@
+
+import React, { useState, useEffect, useLayoutEffect } from 'react'
+import CardImage from './CardImage'
+import NotFound from './NotFound'
+import axios from 'axios'
+import * as emojis from '../../public/images/emojis'
+
+const DeckType = (props) => {
+  const [summary, setSummary] = useState({})
+    
+  // USE LAYOUT EFFECT
+  useLayoutEffect(() => window.scrollTo(0, 0), [])
+
+  // USE EFFECT SET CARD
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const {data} = await axios.get(`/api/deckTypes/${props.match.params.id}`)
+        setSummary(data)
+      } catch (err) {
+        console.log(err)
+        setSummary(null)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  if (!summary) return <NotFound/>
+  if (!summary.deckType) return <div/>
+
+  const categoryImage = summary.deckCategory === 'Aggro' ? emojis.Helmet :
+    summary.deckCategory === 'Combo' ? emojis.Controller :
+    summary.deckCategory === 'Control' ? emojis.Orb :
+    summary.deckCategory === 'Lockdown' ? emojis.Lock :
+    emojis.Thinking
+  
+  const addLike = async () => {
+    const res = await axios.get(`/api/deckTypes/like/${props.match.params.id}`)
+    if (res.status === 200) {
+      const rating = summary.rating++
+      setSummary({rating, ...deck})
+    }
+  }
+
+  const addDownload = async () => {
+    const downloads = summary.downloads++
+    setSummary({downloads, ...deck})
+  }
+
+  return (
+    <div className="body">
+      <h1>{summary.deckType}</h1>
+      <h2>Popular Main Deck Cards</h2>
+      <div id="main" className="deck-bubble">
+          <div id="main" className="deck-flexbox">
+          {
+            summary.mainMonsters.map((data) => {
+              const info = data['1'] > data['2'] && data['1'] > data['3'] ? `1x in ${Math.round(data['1'] / summary.analyzed * 100)}%` :
+                data['2'] > data['1'] && data['2'] > data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
+                `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
+
+                return (
+                  <div className="popular-main">
+                    <CardImage width='72px' padding='1px' margin='0px' key={'m' + data.card.ypdId} card={data.card}/>
+                    <p className="deckType-info">{info}</p>
+                  </div>
+                )
+            })
+          }
+          {
+            summary.mainSpells.map((data) => {
+              const info = data['1'] > data['2'] && data['1'] > data['3'] ? `1x in ${Math.round(data['1'] / summary.analyzed * 100)}%` :
+                data['2'] > data['1'] && data['2'] > data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
+                `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
+
+                return (
+                  <div className="popular-main">
+                    <CardImage width='72px' padding='1px' margin='0px' key={'m' + data.card.ypdId} card={data.card}/>
+                    <p className="deckType-info">{info}</p>
+                  </div>
+                )
+            })
+          }
+          {
+            summary.mainTraps.map((data) => {
+              const info = data['1'] > data['2'] && data['1'] > data['3'] ? `1x in ${Math.round(data['1'] / summary.analyzed * 100)}%` :
+                data['2'] > data['1'] && data['2'] > data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
+                `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
+
+                return (
+                  <div className="popular-main">
+                    <CardImage width='72px' padding='1px' margin='0px' key={'m' + data.card.ypdId} card={data.card}/>
+                    <p className="deckType-info">{info}</p>
+                  </div>
+                )
+            })
+          }
+          </div>
+      </div>
+
+      {
+        summary.extraMonsters.length ? (
+          <>
+            <br/>
+            <h2>Popular Extra Deck Cards</h2>
+            <div id="extra" className="deck-bubble">
+                <div id="extra" className="deck-flexbox">
+                {
+                  summary.extraMonsters.map((data) => {
+                    const info = data['1'] > data['2'] && data['1'] > data['3'] ? `1x in ${Math.round(data['1'] / summary.analyzed * 100)}%` :
+                      data['2'] > data['1'] && data['2'] > data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
+                      `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
+
+                      return (
+                        <div className="popular-side">
+                          <CardImage width='72px' padding='1px' margin='0px' key={'m' + data.card.ypdId} card={data.card}/>
+                          <p className="deckType-info">{info}</p>
+                        </div>
+                      )
+                  })
+                }
+                </div>
+            </div>
+          </>
+        ) : ''
+      }
+
+
+      <br/>
+      <h2>Popular Side Deck Cards</h2>
+      <div id="side" className="deck-bubble">
+          <div id="side" className="deck-flexbox">
+          {
+            summary.sideMonsters.map((data) => {
+              const info = data['1'] > data['2'] && data['1'] > data['3'] ? `1x in ${Math.round(data['1'] / summary.analyzed * 100)}%` :
+                data['2'] > data['1'] && data['2'] > data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
+                `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
+
+                return (
+                  <div className="popular-side">
+                    <CardImage width='72px' padding='1px' margin='0px' key={'m' + data.card.ypdId} card={data.card}/>
+                    <p className="deckType-info">{info}</p>
+                  </div>
+                )
+            })
+          }
+          {
+            summary.sideSpells.map((data) => {
+              const info = data['1'] > data['2'] && data['1'] > data['3'] ? `1x in ${Math.round(data['1'] / summary.analyzed * 100)}%` :
+                data['2'] > data['1'] && data['2'] > data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
+                `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
+
+                return (
+                  <div className="popular-side">
+                    <CardImage width='72px' padding='1px' margin='0px' key={'m' + data.card.ypdId} card={data.card}/>
+                    <p className="deckType-info">{info}</p>
+                  </div>
+                )
+            })
+          }
+          {
+            summary.sideTraps.map((data) => {
+              const info = data['1'] > data['2'] && data['1'] > data['3'] ? `1x in ${Math.round(data['1'] / summary.analyzed * 100)}%` :
+                data['2'] > data['1'] && data['2'] > data['3'] ? `2x in ${Math.round(data['2'] / summary.analyzed * 100)}%` :
+                `3x in ${Math.round(data['3'] / summary.analyzed * 100)}%` 
+
+                return (
+                  <div className="popular-side">
+                    <CardImage width='72px' padding='1px' margin='0px' key={'m' + data.card.ypdId} card={data.card}/>
+                    <p className="deckType-info">{info}</p>
+                  </div>
+                )
+            })
+          }
+          </div>
+      </div>
+    </div>
+  )
+}
+
+export default DeckType

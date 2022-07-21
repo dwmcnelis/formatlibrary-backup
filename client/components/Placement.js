@@ -1,6 +1,7 @@
 
 import React from 'react'
 import {First, Second, Third, Consolation} from '../../public/images/emojis'
+import { Link } from 'react-router-dom'
 
 /*eslint-disable*/
 
@@ -15,10 +16,12 @@ const Placement = (props) => {
     Consolation
 
   return (
-    <div className="badge">
-        <img src={placementImage}/>
-        <div className="badge-label">{deck.eventName}</div>
-    </div>
+    <Link className='link' to={`/events/${deck.eventName}`}>
+      <div className="badge">
+          <img src={placementImage}/>
+          <div className="badge-label">{deck.eventName}</div>
+      </div>
+    </Link>
   )
 }
 

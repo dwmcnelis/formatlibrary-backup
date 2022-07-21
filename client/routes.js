@@ -6,7 +6,9 @@ import {
   SingleCard, 
   CardTable,  
   SingleDeck, 
+  DeckGallery,
   DeckTable,
+  DeckType,
   EventTable, 
   SingleEvent, 
   FormatMenu,
@@ -38,6 +40,8 @@ const Routes = () => {
       <Route exact path="/goat-deck-gallery" component={DeckTable} />
       <Route exact path="/decks/" component={DeckTable} />
       <Route path="/decks/:id" component={SingleDeck} />
+      <Route path="/decktypes/:id" component={DeckType} />
+      <Route path="/gallery/:id" component={DeckGallery} />
       <Route exact path="/events/" component={EventTable} />
       <Route path="/events/:id" component={SingleEvent} />
       <Route exact path="/ban-lists" component={FormatMenu} />

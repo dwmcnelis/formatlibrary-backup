@@ -9,7 +9,6 @@ module.exports = router
 
 router.get('/all', async (req, res, next) => {
   try {
-    console.log('try')
     const events = await Event.findAll({
       where: {
         display: true
@@ -102,8 +101,6 @@ router.get('/first/:x', async (req, res, next) => {
             limit: req.params.x
         })
 
-        console.log('first X')
-        console.log('events.length', events.length)
         res.json(events)
     } catch (err) {
         next(err)

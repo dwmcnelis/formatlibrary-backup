@@ -17,8 +17,6 @@ const ImageCreator = () => {
         document.getElementById('folder').value = null
     }
 
-    console.log('image', image)
-
     //CREATE IMAGE
     const createImage = async () => {
         if (!image) return alert('Please upload an Image file.')

@@ -2,6 +2,7 @@
 import React from 'react'
 import {capitalize} from '../../functions/utility'
 import {god, legend, master, diamond, platinum, gold, silver, bronze, rock, sad, mad} from '../../public/images/emojis'
+import { Link } from 'react-router-dom'
 
 /*eslint-disable*/
 //GET MEDAL
@@ -43,10 +44,12 @@ const Badge = (props) => {
   const medal = getMedal(stats.elo)
   
   return (
-    <div className="badge">
-        <img src={medal}/>
-        <div className="badge-label">{capitalize(stats.format.replace('_', ' '), true)}</div>
-    </div>
+    <Link className='link' to={`/formats/${stats.format}`}>
+      <div className="badge">
+          <img src={medal}/>
+          <div className="badge-label">{capitalize(stats.format.replace('_', ' '), true)}</div>
+      </div>
+    </Link>
   )
 }
 

@@ -443,6 +443,17 @@ h1 {
   flex-direction: row;
 }
 
+.popular-main, .popular-side {
+  padding: 0px 9.1px;
+}
+
+.deckType-info {
+  font-size: 10pt; 
+  font-weight: bold;
+  text-align: center;
+  margin: 5px 0px 10px;
+}
+
 .popular-decks-flexbox, .recent-events-flexbox {
   display: flex;
   max-width: 1100px;
@@ -499,7 +510,7 @@ h1 {
   border: 1px solid white;
 }
 
-.eventThumbnail:hover {
+.eventThumbnail:hover, .deckThumbnail:hover, .badge:hover, .subheading#popular-decks:hover {
   cursor: pointer;
   color: #34AD5A;
 }
@@ -1169,7 +1180,7 @@ h1 {
 
 .miniboard-title-flexbox:hover {
   cursor: pointer;
-  color: #4ebf71;
+  color: #34AD5A;
 }
 
 .miniboard-title-flexbox img, .subcategory-title-flexbox img {
@@ -1278,7 +1289,7 @@ h1 {
 
 /* BLOGPOST */
 .blogpost-title:hover {
-  color: #4ebf71;
+  color: #34AD5A;
 }
 
 /* BLOGPOST */
@@ -1351,7 +1362,7 @@ h1 {
 
 /* BLOGPOST */
 .blogpost-event-link:hover {
-  color: #4ebf71;
+  color: #34AD5A;
 }
 
 /* BLOGPOST */
@@ -1529,7 +1540,7 @@ h1 {
 
 .single-deck-builder-link:hover, .single-deck-event-link:hover, .single-deck-format-link:hover, .single-event-format-link:hover, .single-event-winner-link:hover {
   cursor: pointer;
-  color: #4ebf71;
+  color: #34AD5A;
 }
 
 .single-event-winner-link, .single-deck-builder-link {

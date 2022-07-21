@@ -77,6 +77,72 @@ router.get('/popular/:format', async (req, res, next) => {
     }
 })
 
+router.get('/gallery/:format', async (req, res, next) => {
+    try {
+        const format = await Format.findOne({
+            where: {
+                name: {[Op.iLike]: req.params.format },
+            }
+        })
+
+        const decks = await Deck.findAll({ 
+            where: {
+                formatName: {[Op.iLike]: req.params.format },
+                type: {[Op.not]: 'Other'} 
+            }
+        })
+
+        if (!decks.length) return false
+        
+        const freqs = decks.reduce((acc, curr) => (acc[curr.type] ? acc[curr.type]++ : acc[curr.type] = 1, acc), {})
+        const arr = Object.entries(freqs).filter((e) => e[1] >= 3).sort((a, b) => b[1] - a[1]).map((e) => e[0])
+        const data = []
+
+        for (let i = 0; i < arr.length; i++) {
+            const name = arr[i]
+            const deckType = await DeckType.findOne({
+                where: {
+                    name: name
+                },
+                attributes: { exclude: ['createdAt', 'updatedAt'] }
+            })
+
+            if (!deckType) {
+                console.log(`Unable to find DeckType: ${name}`)
+                continue
+            }
+
+            const deckThumb = await DeckThumb.findOne({
+                where: {
+                    format: {[Op.iLike]: req.params.format },
+                    deckTypeId: deckType.id
+                },
+                attributes: { exclude: ['id', 'name', 'createdAt', 'updatedAt'] }
+            }) || await DeckThumb.findOne({
+                where: {
+                    primary: true,
+                    deckTypeId: deckType.id
+                },
+                attributes: { exclude: ['id', 'name', 'createdAt', 'updatedAt'] }
+            })
+
+            if (!deckThumb) {
+                console.log(`Unable to find ${req.params.format} Format DeckThumb: ${name}`)
+                continue
+            }
+
+            data.push({...deckType.dataValues, ...deckThumb.dataValues})
+        }
+
+        res.json({
+            decks: data,
+            format: format
+        })
+    } catch (err) {
+        next(err)
+    }
+})
+
 /* eslint-disable complexity */
 router.get('/frequent/:id', async (req, res, next) => {
     try {

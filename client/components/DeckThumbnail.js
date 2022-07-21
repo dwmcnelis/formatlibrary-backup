@@ -1,14 +1,16 @@
 
 import React from 'react'
 import {capitalize} from '../../functions/utility'
+import { Link } from 'react-router-dom'
 
 const DeckThumbnail = (props = {}) => {
   const {deck} = props
   if (!deck) return <div/>
 
   return (
-    <div>
-        <h3>{capitalize(deck.type || deck.name, true)}</h3>
+    <Link className='link' to={`/decktypes/${deck.type || deck.name}`}>
+      <div className="deckThumbnail">
+        <h3 >{capitalize(deck.type || deck.name, true)}</h3>
         <div className="deckThumbnail-flexbox">
             <img 
               className="deckThumbnail-image" 
@@ -35,7 +37,8 @@ const DeckThumbnail = (props = {}) => {
               }}
             />
         </div>
-    </div>
+      </div>
+    </Link>
   )
 }
 
