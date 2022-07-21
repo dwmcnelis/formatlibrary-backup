@@ -1,12 +1,15 @@
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 import DeckThumbnail from './DeckThumbnail'
 import axios from 'axios'
 
 const DeckGallery = (props) => {
     const [decks, setDecks] = useState([])
     const [format, setFormat] = useState({})
-  
+    
+    // USE LAYOUT EFFECT
+    useLayoutEffect(() => window.scrollTo(0, 0))
+    
     // USE EFFECT
     useEffect(() => {
         const fetchData = async () => {
