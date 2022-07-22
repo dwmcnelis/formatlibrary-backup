@@ -1,7 +1,6 @@
 
 const router = require('express').Router()
 const {Card, Deck, DeckThumb, DeckType, Format, Player} = require('../db/models')
-const {capitalize, ordinalize} = require('../../functions/utility')
 const {Op} = require('sequelize')
 
 module.exports = router
@@ -207,8 +206,7 @@ router.get('/player/:id', async (req, res, next) => {
                 playerId: req.params.id
             },
             attributes: { exclude: ['ydk', 'createdAt', 'updatedAt'] },
-            order: [["placement", "ASC"], ["eventDate", "DESC"]],
-            limit: 10
+            order: [["placement", "ASC"], ["eventDate", "DESC"]]
         })
 
         return res.json(decks)
