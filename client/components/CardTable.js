@@ -449,12 +449,12 @@ const CardTable = () => {
   return (
     <div className="body">
       <div className="card-database-flexbox">
-        <img src={`/images/artworks/${format.icon ? `${format.icon.slice(0, -4)}.jpg` : 'bls.jpg'}`} className="format-icon-medium" />
+        <img src={`/images/artworks/${format.icon ? `${format.icon}.jpg` : 'bls.jpg'}`} className="format-icon-medium" />
         <div>
           <h1>Card Database</h1>
           <h2>{format.event || 'May 2002 - Present'}</h2>
         </div>
-        <img src={`/images/artworks/${format.icon ? `${format.icon.slice(0, -4)}.jpg` : 'bls.jpg'}`} className="format-icon-medium" />
+        <img src={`/images/artworks/${format.icon ? `${format.icon}.jpg` : 'bls.jpg'}`} className="format-icon-medium" />
       </div>
 
       <br />
