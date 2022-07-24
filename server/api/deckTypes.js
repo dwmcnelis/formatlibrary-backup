@@ -171,19 +171,28 @@ router.post('/create', async (req, res, next) => {
             category: req.body.category
         })
 
-        const deckThumb = await DeckThumb.create({
+        const count = await DeckThumb.count({ where: { name: req.body.name }}) 
+
+        const deckThumb = await DeckThumb.findOne({ 
+            where: {
+                name: req.body.name,
+                formatId: req.body.formatId
+            }
+        }) || await DeckThumb.create({
             name: deckType.name,
             deckTypeId: deckType.id,
             format: req.body.formatName,
             formatId: req.body.formatId,
-            primary: true,
-            leftCard: req.body.leftCardName,
-            leftCardYpdId: req.body.leftCardYpdId,
-            centerCard: req.body.centerCardName,
-            centerCardYpdId: req.body.centerCardYpdId,
-            rightCard: req.body.rightCardName,
-            rightCardYpdId: req.body.rightCardYpdId,
+            primary: !!count
         })
+
+        deckThumb.leftCard = req.body.leftCardName,
+        deckThumb.leftCardYpdId = req.body.leftCardYpdId,
+        deckThumb.centerCard = req.body.centerCardName,
+        deckThumb.centerCardYpdId = req.body.centerCardYpdId,
+        deckThumb.rightCard = req.body.rightCardName,
+        deckThumb.rightCardYpdId = req.body.rightCardYpdId,
+        await deckThumb.save()
         
         if (!fs.existsSync(`./public/images/artworks/${deckThumb.leftCardYpdId}.jpg`)) {
             try {
