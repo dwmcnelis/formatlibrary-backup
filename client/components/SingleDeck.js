@@ -10,21 +10,6 @@ import * as emojis from '../../public/images/emojis'
 const SingleDeck = (props) => {
     const [deck, setDeck] = useState({})
     const [banlist, setBanlist] = useState({})
-    
-    let str = (deck.player.tag || '').split('')
-    str.splice(-5, 1)
-
-    const extension = str.join('')
-        .replaceAll('%', '%25')
-        .replaceAll('/', '%2F')
-        .replaceAll(' ', '_')
-        .replaceAll('#', '%23')
-        .replaceAll('?', '%3F')
-
-    const history = useHistory()
-    const goToEvent = () => history.push(`/events/${deck.eventName}`)
-    const goToFormat = () => history.push(`/formats/${deck.formatName}`)
-    const goToPlayer = () => history.push(`/players/${extension}`)
 
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])
@@ -66,6 +51,21 @@ const SingleDeck = (props) => {
 
   if (!deck) return <NotFound/>
   if (!deck.id) return <div/>
+
+  let str = (deck.player.tag || '').split('')
+  str.splice(-5, 1)
+
+  const extension = str.join('')
+      .replaceAll('%', '%25')
+      .replaceAll('/', '%2F')
+      .replaceAll(' ', '_')
+      .replaceAll('#', '%23')
+      .replaceAll('?', '%3F')
+
+  const history = useHistory()
+  const goToEvent = () => history.push(`/events/${deck.eventName}`)
+  const goToFormat = () => history.push(`/formats/${deck.formatName}`)
+  const goToPlayer = () => history.push(`/players/${extension}`)
 
   const categoryImage = deck.category === 'Aggro' ? emojis.Helmet :
     deck.category === 'Combo' ? emojis.Controller :
