@@ -43,13 +43,13 @@ const StatsRow = (props) => {
     if (!player) return <tr/>
     let str = player.tag.split('')
     str.splice(-5, 1)
-    str.replaceAll('%', '%25')
+
+    const extension = str.replaceAll('%', '%25')
         .replaceAll('/', '%2F')
         .replaceAll(' ', '_')
         .replaceAll('#', '%23')
         .replaceAll('?', '%3F')
-
-    const extension = str.join('')
+        .join('')
     console.log('extension', extension)
 
     const evenOrOdd = props.index % 2 ? 'even' : 'odd'
