@@ -433,8 +433,6 @@ const EventTable = (props) => {
             <option value="nameDESC">Sort Event: Z ⮕ A</option>
             <option value="sizeASC">Sort Size: Large ⮕ Small </option>
             <option value="sizeDESC">Sort Size: Small ⮕ Large </option>
-            <option value="formatASC">Sort Format: New ⮕ Old</option>
-            <option value="formatDESC">Sort Format: Old ⮕ New</option>
           </select>
 
           <a

@@ -145,7 +145,5 @@ export {
     typeASC,
     typeDESC,
     categoryASC,
-    categoryDESC,
-    formatASC,
-    formatDESC
+    categoryDESC
 }
