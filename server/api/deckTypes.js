@@ -23,8 +23,8 @@ router.get('/:id', async (req, res, next) => {
         const showExtra = format.date >= '2008-08-05'
         console.log('topFormat', topFormat)
         console.log('count', count)
-        console.log('total', total)
         const total = await Deck.count({ where: { format }})
+        console.log('total', total)
 
         const data = {
             percent: Math.round(count / total * 100),
