@@ -16,11 +16,18 @@ router.get('/:id', async (req, res, next) => {
         })
 
         const freqs = decks.reduce((acc, curr) => (acc[curr.formatName] ? acc[curr.formatName]++ : acc[curr.formatName] = 1, acc), {})
-        const topFormat = Object.entries(freqs).sort((a, b) => b[1] - a[1]).map((e) => e[0])[0]
+        const sortedFreqs = Object.entries(freqs).sort((a, b) => b[1] - a[1])
+        const topFormat = sortedFreqs[0][0]
+        const count = sortedFreqs[0][1]
         const format = await Format.findOne({ where: { name: {[Op.iLike]: req.headers.format || topFormat } }})
         const showExtra = format.date >= '2008-08-05'
+        console.log('topFormat', topFormat)
+        console.log('count', count)
+        console.log('total', total)
+        const total = await Deck.count({ where: { format }})
 
         const data = {
+            percent: Math.round(count / total * 100),
             deckType: decks[0].type,
             deckCategory: decks[0].category,
             analyzed: 0,
