@@ -620,7 +620,7 @@ h1 {
 .status-icon {
   position: absolute;
   z-index: 1;
-  width: 24px;
+  width: 20%;
   top: 2px;
   left: 2px;
 }
