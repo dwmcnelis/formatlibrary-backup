@@ -69,7 +69,7 @@ router.get('/simple/:date', async (req, res, next) => {
       where: {
         banlist: date,
       },
-      attributes: ['cardId']
+      attributes: ['cardId', 'restriction']
     })].map((s) => [s.cardId, s.restriction])
 
     const banlist = Object.fromEntries(statuses)
