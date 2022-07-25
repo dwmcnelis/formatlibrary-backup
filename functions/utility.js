@@ -19,14 +19,14 @@ const capitalize = (str = '', eachWord = false) => {
 }
 
 //ARRAY TO OBJECT
-const arrayToObject = (arr) => {
+const arrayToObject = (arr = []) => {
     const obj = {}
     arr.forEach(e => obj[e] ? obj[e]++ : obj[e] = 1)
     return obj
 }
 
 //DATE TO SIMPLE
-const dateToSimple = (date) => {
+const dateToSimple = (date = '') => {
     const year = typeof date === 'string' ? date.slice(2, 4) : date.getFullYear().slice(2, 4)
     const month = typeof date === 'string' ? parseInt(date.slice(5, 7), 10) : date.getMonth() + 1
     const day = typeof date === 'string' ? parseInt(date.slice(8, 10), 10) : date.getDate()
@@ -35,7 +35,7 @@ const dateToSimple = (date) => {
 }
 
 //DATE TO VERBOSE
-const dateToVerbose = (date, long = true, ordinal = true, includeYear = true) => {
+const dateToVerbose = (date = '', long = true, ordinal = true, includeYear = true) => {
     const year = typeof date === 'string' ? date.slice(0, 4) : date.getFullYear()
     const longMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     const shortMonths = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."]
@@ -113,6 +113,10 @@ const generateDefaultStatus = (card) => {
         jun20: card.tcgDate <= '2020-09-01' ? 'unlimited' : null,
         sep20: card.tcgDate <= '2020-12-01' ? 'unlimited' : null,
         dec20: card.tcgDate <= '2021-03-01' ? 'unlimited' : null,
+        dec20: card.tcgDate <= '2021-07-01' ? 'unlimited' : null,
+        dec20: card.tcgDate <= '2021-10-01' ? 'unlimited' : null,
+        dec20: card.tcgDate <= '2022-02-01' ? 'unlimited' : null,
+        dec20: card.tcgDate <= '2022-05-01' ? 'unlimited' : null,
         mar21: 'unlimited'
     }
 }
