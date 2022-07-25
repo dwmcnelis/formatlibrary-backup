@@ -11,7 +11,7 @@ const SingleDeck = (props) => {
     const [deck, setDeck] = useState({})
     const [banlist, setBanlist] = useState({})
     
-    let str = (player.tag || '').split('')
+    let str = (deck.player.tag || '').split('')
     str.splice(-5, 1)
 
     const extension = str.join('')
