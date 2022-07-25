@@ -153,7 +153,8 @@ router.get('/:id', async (req, res, next) => {
         data.sideMonsters = Object.values(data.side).filter((v) => v.card.category === 'Monster').sort((a, b) => b.decks - a.decks)
         data.sideSpells = Object.values(data.side).filter((v) => v.card.category === 'Spell').sort((a, b) => b.decks - a.decks)
         data.sideTraps = Object.values(data.side).filter((v) => v.card.category === 'Trap').sort((a, b) => b.decks - a.decks)
-
+        data.format = format
+        
         res.json(data)
     } catch (err) { 
         console.log(err) 

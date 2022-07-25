@@ -7,6 +7,7 @@ import * as emojis from '../../public/images/emojis'
 
 const DeckType = (props) => {
   const [summary, setSummary] = useState({})
+  const [banlist, setBanList] = useState({})
     
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])
@@ -29,6 +30,20 @@ const DeckType = (props) => {
 
     fetchData()
   }, [])
+
+  // USE EFFECT SET CARD
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const {data} = await axios.get(`/api/banlists/simple/${summary.format}`)
+        setBanList(data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    fetchData()
+  }, [summary])
 
   if (!summary) return <NotFound/>
   if (!summary.deckType) return <div/>
@@ -66,7 +81,7 @@ const DeckType = (props) => {
 
                 return (
                   <div className="popular-main" key={'m' + data.card.ypdId}>
-                    <CardImage width='72px' padding='1px' margin='0px' card={data.card}/>
+                    <CardImage width='72px' padding='1px' margin='0px' card={data.card} status={banlist[data.card.id]}/>
                     <p className="deckType-info">{info}</p>
                   </div>
                 )
@@ -80,7 +95,7 @@ const DeckType = (props) => {
 
                 return (
                   <div className="popular-main" key={'m' + data.card.ypdId} >
-                    <CardImage width='72px' padding='1px' margin='0px' card={data.card}/>
+                    <CardImage width='72px' padding='1px' margin='0px' card={data.card} status={banlist[data.card.id]}/>
                     <p className="deckType-info">{info}</p>
                   </div>
                 )
@@ -94,7 +109,7 @@ const DeckType = (props) => {
 
                 return (
                   <div className="popular-main" key={'m' + data.card.ypdId} >
-                    <CardImage width='72px' padding='1px' margin='0px' card={data.card}/>
+                    <CardImage width='72px' padding='1px' margin='0px' card={data.card} status={banlist[data.card.id]}/>
                     <p className="deckType-info">{info}</p>
                   </div>
                 )
@@ -118,7 +133,7 @@ const DeckType = (props) => {
 
                       return (
                         <div className="popular-side" key={'e' + data.card.ypdId} >
-                          <CardImage width='72px' padding='1px' margin='0px' card={data.card}/>
+                          <CardImage width='72px' padding='1px' margin='0px' card={data.card} status={banlist[data.card.id]}/>
                           <p className="deckType-info">{info}</p>
                         </div>
                       )
@@ -143,7 +158,7 @@ const DeckType = (props) => {
 
                 return (
                   <div className="popular-side" key={'s' + data.card.ypdId} >
-                    <CardImage width='72px' padding='1px' margin='0px' card={data.card}/>
+                    <CardImage width='72px' padding='1px' margin='0px' card={data.card} status={banlist[data.card.id]}/>
                     <p className="deckType-info">{info}</p>
                   </div>
                 )
@@ -157,7 +172,7 @@ const DeckType = (props) => {
 
                 return (
                   <div className="popular-side" key={'s' + data.card.ypdId}>
-                    <CardImage width='72px' padding='1px' margin='0px' card={data.card}/>
+                    <CardImage width='72px' padding='1px' margin='0px' card={data.card} status={banlist[data.card.id]}/>
                     <p className="deckType-info">{info}</p>
                   </div>
                 )
@@ -171,7 +186,7 @@ const DeckType = (props) => {
 
                 return (
                   <div className="popular-side" key={'s' + data.card.ypdId}>
-                    <CardImage width='72px' padding='1px' margin='0px' card={data.card}/>
+                    <CardImage width='72px' padding='1px' margin='0px' card={data.card} status={banlist[data.card.id]}/>
                     <p className="deckType-info">{info}</p>
                   </div>
                 )

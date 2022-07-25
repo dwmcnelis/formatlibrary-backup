@@ -14,7 +14,6 @@ const SingleDeck = (props) => {
     const goToEvent = () => history.push(`/events/${deck.eventName}`)
     const goToFormat = () => history.push(`/formats/${deck.formatName}`)
     const goToPlayer = () => history.push(`/players/${deck.player.tag.slice(0, -5) + deck.player.tag.slice(-4)}`)
-    console.log('deck', deck)
 
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])
