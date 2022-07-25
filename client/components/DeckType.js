@@ -77,13 +77,13 @@ const DeckType = (props) => {
           <tr className="single-deck-info-1">
             <td>
               <div onClick={() => goToFormat()} className="single-deck-cell">
-                <div className="single-deck-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {deck.formatName}</div>
-                <img style={{width:'28px'}} src={`/images/emojis/${deck.format.icon}.png`}/>
+                <div className="single-deck-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {summary.format.name}</div>
+                <img style={{width:'28px'}} src={`/images/emojis/${summary.format.icon}.png`}/>
               </div>       
             </td>
             <td>
               <div className="single-deck-cell">
-                <div className="single-deck-category" style={{paddingRight:'7px'}}><b>Category:</b> {deck.category}</div>
+                <div className="single-deck-category" style={{paddingRight:'7px'}}><b>Category:</b> {summary.deckCategory}</div>
                 <img className="single-deck-category-emoji" style={{width:'28px'}} src={categoryImage}/>
               </div>
             </td>
