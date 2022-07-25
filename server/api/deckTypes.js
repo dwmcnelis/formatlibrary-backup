@@ -13,7 +13,7 @@ router.get('/:id', async (req, res, next) => {
             where: { 
                 type: {[Op.iLike]: req.params.id }
             }
-        })
+        }) || []
 
         const freqs = decks.reduce((acc, curr) => (acc[curr.formatName] ? acc[curr.formatName]++ : acc[curr.formatName] = 1, acc), {})
         const sortedFreqs = Object.entries(freqs).sort((a, b) => b[1] - a[1])
