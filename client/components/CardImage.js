@@ -26,7 +26,7 @@ const CardImage = (props = {}) => {
               .replaceAll('?', '%3F')
             }`}>
           {
-            status ? <img src={emojis[status]} className="status-icon"/> : null
+            status ? <img src={emojis[status].png} className="status-icon"/> : null
           }
           <img
             src={`/images/cards/${card.ypdId}.jpg`}
