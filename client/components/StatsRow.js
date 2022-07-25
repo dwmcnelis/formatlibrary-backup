@@ -43,7 +43,7 @@ const StatsRow = (props) => {
     if (!player) return <tr/>
     console.log('player', player)
     let extension = player.tag.split('')
-    extension.splice(-5, 1, '')
+    extension.splice(-5, 1)
     extension.join('')
         .replaceAll('%', '%25')
         .replaceAll('/', '%2F')
