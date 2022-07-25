@@ -27,12 +27,15 @@ router.get('/query/:query', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const tag = req.params.id.replaceAll('%25', '%')
+    let str = req.params.id.replaceAll('%25', '%')
         .replaceAll('%2F', '/')
         .replaceAll('%23', '#')
         .replaceAll('%3F', '?')
         .split('')
-        .splice(-4, 0, '#')
+
+    str.splice(-4, 0, '#')
+    const tag = str.join('')
+    console.log('tag', tag)
 
     const player = await Player.findOne({
       where: {
