@@ -26,7 +26,8 @@ const arrayToObject = (arr = []) => {
 }
 
 //DATE TO SIMPLE
-const dateToSimple = (date = '') => {
+const dateToSimple = (date) => {
+    if (!date) return ''
     const year = typeof date === 'string' ? date.slice(2, 4) : date.getFullYear().slice(2, 4)
     const month = typeof date === 'string' ? parseInt(date.slice(5, 7), 10) : date.getMonth() + 1
     const day = typeof date === 'string' ? parseInt(date.slice(8, 10), 10) : date.getDate()
@@ -35,7 +36,8 @@ const dateToSimple = (date = '') => {
 }
 
 //DATE TO VERBOSE
-const dateToVerbose = (date = '', long = true, ordinal = true, includeYear = true) => {
+const dateToVerbose = (date, long = true, ordinal = true, includeYear = true) => {
+    if (!date) return ''
     const year = typeof date === 'string' ? date.slice(0, 4) : date.getFullYear()
     const longMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     const shortMonths = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."]
