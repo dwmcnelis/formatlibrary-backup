@@ -4,7 +4,6 @@ import { camelize, capitalize } from '../../functions/utility'
 //ADVANCED SEARCH BUTTONS
 const AdvButton = (props) => {
   const { id, display, buttonClass, clicked, removeFilter, applyFilter } = props
-  const filterType = buttonClass === 'monster' ? null : buttonClass
    
   return (
     clicked ? (
