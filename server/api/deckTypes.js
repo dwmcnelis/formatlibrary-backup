@@ -20,7 +20,7 @@ router.get('/:id', async (req, res, next) => {
         const topFormat = sortedFreqs[0][0]
         const format = await Format.findOne({ where: { name: {[Op.iLike]: req.headers.format || topFormat } }})
         const showExtra = format.date >= '2008-08-05'
-        const count = sortedFreqs[format.name]
+        const count = freqs[format.name]
         console.log('format.name', format.name)
         console.log('count', count)
         const total = await Deck.count({ where: { formatName: {[Op.iLike]: format.name} }})
