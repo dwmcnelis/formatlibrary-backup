@@ -1,7 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import { camelize } from '../../functions/utility'
-import * as emojis from '../../public/images/emojis'
 
 const CardImage = (props = {}) => {
   const {card, status, width, margin, padding} = props
@@ -26,7 +24,7 @@ const CardImage = (props = {}) => {
               .replaceAll('?', '%3F')
             }`}>
           {
-            status ? <img src={emojis[status].png} className="status-icon"/> : null
+            status ? <img src={`/images/emojis/${status}.png`} className="status-icon"/> : null
           }
           <img
             src={`/images/cards/${card.ypdId}.jpg`}
