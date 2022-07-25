@@ -5,6 +5,7 @@ import * as emojis from '../../public/images/emojis'
 
 const CardImage = (props = {}) => {
   const {card, status, width, margin, padding} = props
+  console.log('status', status)
   return (
     <div className="CardImage-box">
       {
