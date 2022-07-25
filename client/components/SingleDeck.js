@@ -45,7 +45,7 @@ const SingleDeck = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const {data} = await axios.get(`/api/banlists/${deck.format.banlist}`)
+        const {data} = await axios.get(`/api/banlists/simple/${deck.format.banlist}`)
         setBanlist(data)
       } catch (err) {
         console.log(err)
@@ -159,7 +159,7 @@ const SingleDeck = (props) => {
       <div id="main" className="deck-bubble">
           <div id="main" className="deck-flexbox">
           {
-            deck.main.map((card, index) => <CardImage width='72px' padding='1px' margin='0px' key={`${deck.id}-${index}-${card.id}`} card={card}/>)
+            deck.main.map((card, index) => <CardImage width='72px' padding='1px' margin='0px' key={`${deck.id}-${index}-${card.id}`} card={card} status={banlist[card.id]}/>)
           }
           </div>
       </div>
@@ -168,7 +168,7 @@ const SingleDeck = (props) => {
           <div id="side" className="deck-bubble">
             <div id="side" className="deck-flexbox">
               {
-                deck.side.map((card, index) => <CardImage width='48px' padding='0.5px' margin='0px' key={`${deck.id}-${index}-${card.id}`} card={card}/>)
+                deck.side.map((card, index) => <CardImage width='48px' padding='0.5px' margin='0px' key={`${deck.id}-${index}-${card.id}`} card={card} status={banlist[card.id]}/>)
               }
             </div>
           </div>
@@ -179,7 +179,7 @@ const SingleDeck = (props) => {
           <div id="extra" className="deck-bubble">
             <div id="extra" className="deck-flexbox">
               {
-                deck.extra.map((card, index) => <CardImage width='48px' padding='0.5px' margin='0px' key={`${deck.id}-${index}-${card.id}`} card={card}/>)
+                deck.extra.map((card, index) => <CardImage width='48px' padding='0.5px' margin='0px' key={`${deck.id}-${index}-${card.id}`} card={card} status={banlist[card.id]}/>)
               }
             </div>
           </div>

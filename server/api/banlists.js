@@ -62,6 +62,23 @@ router.get('/:date', async (req, res, next) => {
   }
 })
 
+router.get('/simple/:date', async (req, res, next) => {
+  try {
+    const date = req.params.date
+    const statuses = [...await Status.findAll({
+      where: {
+        banlist: date,
+      },
+      attributes: ['cardId']
+    })].map((s) => [s.cardId, s.restriction])
+
+    const banlist = Object.fromEntries(statuses)
+    res.json(banlist)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/create', async (req, res, next) => {
   try {
       const changes = req.body.changes
