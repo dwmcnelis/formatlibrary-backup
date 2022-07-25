@@ -9,16 +9,18 @@ import * as emojis from '../../public/images/emojis'
 
 const SingleDeck = (props) => {
     const [deck, setDeck] = useState({})
+    const [banlist, setBanlist] = useState({})
     const history = useHistory()
     const goToEvent = () => history.push(`/events/${deck.eventName}`)
     const goToFormat = () => history.push(`/formats/${deck.formatName}`)
     const goToPlayer = () => history.push(`/players/${deck.player.tag.slice(0, -5) + deck.player.tag.slice(-4)}`)
     console.log('deck', deck)
+    console.log('banlist', banlist)
 
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])
 
-  // USE EFFECT SET CARD
+  // USE EFFECT SET DECK
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -38,6 +40,20 @@ const SingleDeck = (props) => {
 
     fetchData()
   }, [])
+
+  // USE EFFECT SET DECK
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const {data} = await axios.get(`/api/banlists/${deck.format.banlist}`)
+        setBanlist(data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    fetchData()
+  }, [deck])
 
   if (!deck) return <NotFound/>
   if (!deck.id) return <div/>

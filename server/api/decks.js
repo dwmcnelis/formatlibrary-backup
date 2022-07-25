@@ -337,18 +337,7 @@ router.get('/:id', async (req, res, next) => {
                 where: { 
                     konamiCode: konamiCode
                 },
-                attributes: ['name', 'id', 'sortPriority'],
-                include: {
-                    model: Status,
-                    where: {
-                        banlist: deck.format.banlist
-                    }
-                }
-            }) || await Card.findOne({ 
-                where: { 
-                    konamiCode: konamiCode
-                },
-                attributes: ['name', 'id', 'sortPriority'],
+                attributes: ['name', 'id', 'ypdId', , 'sortPriority'],
             })
 
             if (!card) continue
@@ -376,18 +365,7 @@ router.get('/:id', async (req, res, next) => {
                 where: { 
                     konamiCode: konamiCode
                 },
-                attributes: ['name', 'id', 'sortPriority'],
-                include: {
-                    model: Status,
-                    where: {
-                        banlist: deck.format.banlist
-                    }
-                }
-            }) || await Card.findOne({ 
-                where: { 
-                    konamiCode: konamiCode
-                },
-                attributes: ['name', 'id', 'sortPriority'],
+                attributes: ['name', 'id', 'ypdId', 'sortPriority'],
             })
 
             if (!card) continue
@@ -415,18 +393,7 @@ router.get('/:id', async (req, res, next) => {
                 where: { 
                     konamiCode: konamiCode
                 },
-                attributes: ['name', 'id', 'sortPriority'],
-                include: {
-                    model: Status,
-                    where: {
-                        banlist: deck.format.banlist
-                    }
-                }
-            }) || await Card.findOne({ 
-                where: { 
-                    konamiCode: konamiCode
-                },
-                attributes: ['name', 'id', 'sortPriority']
+                attributes: ['name', 'id', 'ypdId', 'sortPriority']
             })
             
             if (!card) continue
