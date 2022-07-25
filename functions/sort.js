@@ -1,8 +1,5 @@
 
 
-import * as formats from '../static/formats.json'
-import {capitalize} from './utility.js'
-
 const atkASC = (a, b) => b.atk - a.atk
 const atkDESC = (a, b) => a.atk - b.atk
 
@@ -104,26 +101,6 @@ const categoryASC = (a, b) => {
 const categoryDESC = (a, b) => {
     if (a.category < b.category) return 1
     if (a.category > b.category) return -1
-    return 0
-}
-
-const formatASC = (a, b) => {
-    const formatA = formats[capitalize(a.format || a.formatName, true)]
-    const formatB = formats[capitalize(b.format || b.formatName, true)]
-    const dateA = `${formatA.year}-${formatA.month}`
-    const dateB = `${formatB.year}-${formatB.month}`
-    if (dateA < dateB) return 1
-    if (dateA > dateB) return -1
-    return 0
-}
-
-const formatDESC = (a, b) => {
-    const formatA = formats[capitalize(a.format || a.formatName, true)]
-    const formatB = formats[capitalize(b.format || b.formatName, true)]
-    const dateA = `${formatA.year}-${formatA.month}`
-    const dateB = `${formatB.year}-${formatB.month}`
-    if (dateA < dateB) return -1
-    if (dateA > dateB) return 1
     return 0
 }
 

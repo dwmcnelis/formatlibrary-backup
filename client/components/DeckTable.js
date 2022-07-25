@@ -7,7 +7,6 @@ import DeckImage from './DeckImage.js'
 import DeckRow from './DeckRow.js'
 import Pagination from './Pagination.js'
 import * as sortFunctions from '../../functions/sort'
-import formats from '../../static/formats.json'
 import axios from 'axios'
 
 const DeckTable = (props) => {
@@ -18,6 +17,7 @@ const DeckTable = (props) => {
   const [view, setView] = useState('table')
   const [sortBy, setSortBy] = useState(null)
   const [format, setFormat] = useState(null)
+  const [formats, setFormats] = useState([])
   const [allFetched, setAllFetched] = useState(false)
   const [firstXFetched, setFirstXFetched] = useState(false)
 
@@ -174,7 +174,13 @@ const DeckTable = (props) => {
         setFirstXFetched(true)
       }
 
+      const fetchFormats = async () => {
+        const {data} = await axios.get(`/api/formats/`)
+        setFormats(data)
+      }
+
       fetchData()
+      fetchFormats()
     }
   }, [])
 
@@ -206,7 +212,6 @@ const DeckTable = (props) => {
   const lastIndex = page * decksPerPage
   const firstIndex = lastIndex - decksPerPage
   if (filteredDecks.length) filteredDecks.sort(sortFunctions[sortBy] || undefined)
-  const formatKeys = Object.keys(formats)
 
   // RENDER
   return (
@@ -263,7 +268,7 @@ const DeckTable = (props) => {
           >
             <option key={'All Formats'} value={''}>All Formats</option>
             {
-              formatKeys.map((f) => <option key={f} value={f}>{f}</option>)
+              formats.map((f) => <option key={f.id} value={f.name}>{f.name}</option>)
             }
           </select>
 
@@ -323,18 +328,12 @@ const DeckTable = (props) => {
           >
             <option value="uploadedDESC">Sort Uploaded: New ⮕ Old</option>
             <option value="uploadedASC">Sort Uploaded: Old ⮕ New</option>
-            <option value="placeASC">Sort Place: High ⮕ Low </option>
-            <option value="placeDESC">Sort Place: Low ⮕ High </option>
             <option value="builderASC">Sort Builder: A ⮕ Z</option>
             <option value="builderDESC">Sort Builder: Z ⮕ A</option>
             <option value="eventASC">Sort Event: A ⮕ Z</option>
             <option value="eventDESC">Sort Event: Z ⮕ A</option>
-            <option value="formatASC">Sort Format: New ⮕ Old</option>
-            <option value="formatDESC">Sort Format: Old ⮕ New</option>
             <option value="typeASC">Sort Deck Type: A ⮕ Z</option>
             <option value="typeDESC">Sort Deck Type: Z ⮕ A</option>
-            <option value="categoryASC">Sort Deck Category: A ⮕ Z</option>
-            <option value="categoryDESC">Sort Deck Category: Z ⮕ A</option>
           </select>
 
           <a

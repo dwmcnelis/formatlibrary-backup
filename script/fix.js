@@ -6,7 +6,6 @@ const { BlogPost, Card, Deck, DeckThumb, DeckType, Event, Format, Player, Print,
 const ygoprodeck = require('../static/ygoprodeck.json')
 const sets = require('../static/sets.json')
 const { Op } = require('sequelize')
-const formats = require('../static/formats.json')
 const { capitalize, arrayToObject } = require('../functions/utility')
 const { challongeAPIKeys, tcgPlayerAPI } = require('../secrets')
 const { 

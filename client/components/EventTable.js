@@ -7,7 +7,6 @@ import MobileEventRow from './MobileEventRow.js'
 // import EventImage from './EventImage.js'
 import Pagination from './Pagination.js'
 import * as sortFunctions from '../../functions/sort'
-import formats from '../../static/formats.json'
 import axios from 'axios'
 import { useMediaQuery } from 'react-responsive'
 
@@ -19,6 +18,7 @@ const EventTable = (props) => {
   const [view, setView] = useState('table')
   const [sortBy, setSortBy] = useState(null)
   const [format, setFormat] = useState(null)
+  const [formats, setFormats] = useState([])
   const [allFetched, setAllFetched] = useState(false)
   const [firstXFetched, setFirstXFetched] = useState(false)
   
@@ -137,7 +137,13 @@ const EventTable = (props) => {
         setFirstXFetched(true)
       } 
 
+      const fetchFormats = async () => {
+        const {data} = await axios.get(`/api/formats/`)
+        setFormats(data)
+      }
+
       fetchData()
+      fetchFormats()
     }
   }, [])
 
@@ -259,8 +265,6 @@ const EventTable = (props) => {
             <option value="startDateASC">Date: Old ⮕ New</option>
             <option value="nameASC">Event: A ⮕ Z</option>
             <option value="nameDESC">Event: Z ⮕ A</option>
-            <option value="formatASC">Format: New ⮕ Old</option>
-            <option value="formatDESC">Format: Old ⮕ New</option>
           </select>
 
           <a

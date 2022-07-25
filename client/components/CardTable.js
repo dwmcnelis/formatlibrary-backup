@@ -701,14 +701,14 @@ const CardTable = () => {
           >
             <option value="nameASC">Sort Name: A ⮕ Z</option>
             <option value="nameDESC">Sort Name: Z ⮕ A</option>
+            <option value="dateASC">Sort Date: Old ⮕ New</option>
+            <option value="dateDESC">Sort Date: New ⮕ Old</option>
             <option value="atkASC">Sort ATK: Desc. ⬇</option>
             <option value="atkDESC">Sort ATK: Asc. ⬆</option>
             <option value="defASC">Sort DEF: Desc. ⬇</option>
             <option value="defDESC">Sort DEF: Asc. ⬆</option>
             <option value="levelASC">Sort Level: Desc. ⬇</option>
             <option value="levelDESC">Sort Level: Asc. ⬆</option>
-            <option value="dateASC">Sort Date: Old ⮕ New</option>
-            <option value="dateDESC">Sort Date: New ⮕ Old</option>
           </select>
 
           <a

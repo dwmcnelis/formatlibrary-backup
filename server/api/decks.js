@@ -1,6 +1,6 @@
 
 const router = require('express').Router()
-const {Card, Deck, DeckThumb, DeckType, Format, Player} = require('../db/models')
+const {Card, Deck, DeckThumb, DeckType, Format, Player, Status} = require('../db/models')
 const {Op} = require('sequelize')
 
 module.exports = router
@@ -333,7 +333,18 @@ router.get('/:id', async (req, res, next) => {
         for (let i = 0; i < mainKonamiCodes.length; i++) {
             let konamiCode = mainKonamiCodes[i]
             while (konamiCode.length < 8) konamiCode = '0' + konamiCode
-            const card = await Card.findOne({ where: { konamiCode }})
+            const card = await Card.findOne({ 
+                where: { 
+                    konamiCode: konamiCode
+                },
+                include: {
+                    model: Status,
+                    where: {
+                        banlist: deck.format.banlist
+                    }
+                }
+            })
+
             if (!card) continue
             main.push(card)
         }
@@ -355,7 +366,18 @@ router.get('/:id', async (req, res, next) => {
         for (let i = 0; i < extraKonamiCodes.length; i++) {
             let konamiCode = extraKonamiCodes[i]
             while (konamiCode.length < 8) konamiCode = '0' + konamiCode
-            const card = await Card.findOne({ where: { konamiCode }})
+            const card = await Card.findOne({ 
+                where: { 
+                    konamiCode: konamiCode
+                },
+                include: {
+                    model: Status,
+                    where: {
+                        banlist: deck.format.banlist
+                    }
+                }
+            })
+
             if (!card) continue
             extra.push(card)
         }
@@ -377,7 +399,18 @@ router.get('/:id', async (req, res, next) => {
         for (let i = 0; i < sideKonamiCodes.length; i++) {
             let konamiCode = sideKonamiCodes[i]
             while (konamiCode.length < 8) konamiCode = '0' + konamiCode
-            const card = await Card.findOne({ where: { konamiCode }})
+            const card = await Card.findOne({ 
+                where: { 
+                    konamiCode: konamiCode
+                },
+                include: {
+                    model: Status,
+                    where: {
+                        banlist: deck.format.banlist
+                    }
+                }
+            })
+            
             if (!card) continue
             side.push(card)
         }

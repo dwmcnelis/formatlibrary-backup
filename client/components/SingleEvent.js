@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import DeckImage from './DeckImage'
 import {capitalize, dateToSimple, dateToVerbose} from '../../functions/utility'
-import formats from '../../static/formats.json'
 import * as emojis from '../../public/images/emojis'
 import NotFound from './NotFound'
 
