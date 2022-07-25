@@ -396,7 +396,7 @@ router.get('/:id', async (req, res, next) => {
         await deck.save()
 
         const data = {
-            ...deck, 
+            ...deck.dataValues, 
             main, 
             extra, 
             side
