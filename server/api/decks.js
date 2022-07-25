@@ -337,7 +337,7 @@ router.get('/:id', async (req, res, next) => {
                 where: { 
                     konamiCode: konamiCode
                 },
-                attributes: ['name', 'id', 'ypdId', , 'sortPriority'],
+                attributes: ['name', 'id', 'ypdId', 'sortPriority'],
             })
 
             if (!card) continue
