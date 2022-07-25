@@ -113,7 +113,7 @@ router.get('/:id', async (req, res, next) => {
             } else {
                 let konamiCode = e[0]
                 while (konamiCode.length < 8) konamiCode = '0' + konamiCode
-                const card = await Card.findOne({ where: { konamiCode }, attributes: ['name', 'category', 'ypdId'] }) || {}
+                const card = await Card.findOne({ where: { konamiCode }, attributes: ['id', 'name', 'category', 'ypdId'] }) || {}
                 data.main[e[0]].card = card
             }
         }
@@ -127,7 +127,7 @@ router.get('/:id', async (req, res, next) => {
             } else {
                 let konamiCode = e[0]
                 while (konamiCode.length < 8) konamiCode = '0' + konamiCode
-                const card = await Card.findOne({ where: { konamiCode }, attributes: ['name', 'category', 'ypdId']}) || {}
+                const card = await Card.findOne({ where: { konamiCode }, attributes: ['id', 'name', 'category', 'ypdId']}) || {}
                 data.extra[e[0]].card = card
             }
         }
@@ -141,7 +141,7 @@ router.get('/:id', async (req, res, next) => {
             } else {
                 let konamiCode = e[0]
                 while (konamiCode.length < 8) konamiCode = '0' + konamiCode
-                const card = await Card.findOne({ where: { konamiCode }, attributes: ['name', 'category', 'ypdId']}) || {}
+                const card = await Card.findOne({ where: { konamiCode }, attributes: ['id', 'name', 'category', 'ypdId']}) || {}
                 data.side[e[0]].card = card
             }
         }
@@ -154,7 +154,7 @@ router.get('/:id', async (req, res, next) => {
         data.sideSpells = Object.values(data.side).filter((v) => v.card.category === 'Spell').sort((a, b) => b.decks - a.decks)
         data.sideTraps = Object.values(data.side).filter((v) => v.card.category === 'Trap').sort((a, b) => b.decks - a.decks)
         data.format = format
-        
+
         res.json(data)
     } catch (err) { 
         console.log(err) 

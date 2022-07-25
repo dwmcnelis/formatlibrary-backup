@@ -8,8 +8,6 @@ import * as emojis from '../../public/images/emojis'
 const DeckType = (props) => {
   const [summary, setSummary] = useState({})
   const [banlist, setBanList] = useState({})
-  console.log('summary', summary)
-  console.log('banlist', banlist)
     
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])
