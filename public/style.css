@@ -620,7 +620,7 @@ h1 {
 .status-icon {
   position: absolute;
   z-index: 1;
-  width: 30%;
+  width: 33% !important;
   top: 2px;
   left: 2px;
 }
@@ -3050,6 +3050,10 @@ body {
 
   #to-start, #to-end, #to-minus-3, #to-plus-3 {
     display: none;
+  }
+
+  .status-icon {
+   display: none !important;
   }
 
   .vertical-adsense, .desktop-only {
