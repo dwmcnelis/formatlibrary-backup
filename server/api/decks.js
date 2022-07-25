@@ -319,7 +319,7 @@ router.get('/:id', async (req, res, next) => {
             attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
             include: [
                 { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
-                { model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }
+                { model: Player, attributes: { exclude: ['id', 'duelingBook', 'realName', 'admin', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }
             ],
         })
 
@@ -344,7 +344,7 @@ router.get('/:id', async (req, res, next) => {
             main.push(card)
         }
 
-        main.sort((a, b) => {
+        const sortFn = (a, b) => {
             if (a.sortPriority > b.sortPriority) {
                 return 1
             } else if (b.sortPriority > a.sortPriority) {
@@ -356,7 +356,9 @@ router.get('/:id', async (req, res, next) => {
             } else {
                 return false
             }
-        })
+        }
+
+        main.sort(sortFn)
 
         for (let i = 0; i < extraKonamiCodes.length; i++) {
             let konamiCode = extraKonamiCodes[i]
@@ -372,19 +374,7 @@ router.get('/:id', async (req, res, next) => {
             extra.push(card)
         }
 
-        extra.sort((a, b) => {
-            if (a.sortPriority > b.sortPriority) {
-                return 1
-            } else if (b.sortPriority > a.sortPriority) {
-                return -1
-            } else if (a.name > b.name) {
-                return 1
-            } else if (b.name > a.name) {
-                return -1
-            } else {
-                return false
-            }
-        })
+        extra.sort(sortFn)
 
         for (let i = 0; i < sideKonamiCodes.length; i++) {
             let konamiCode = sideKonamiCodes[i]
@@ -400,25 +390,13 @@ router.get('/:id', async (req, res, next) => {
             side.push(card)
         }
 
-        side.sort((a, b) => {
-            if (a.sortPriority > b.sortPriority) {
-                return 1
-            } else if (b.sortPriority > a.sortPriority) {
-                return -1
-            } else if (a.name > b.name) {
-                return 1
-            } else if (b.name > a.name) {
-                return -1
-            } else {
-                return false
-            }
-        })
+        side.sort(sortFn)
         
         deck.views++
         await deck.save()
 
         const data = {
-            ...deck.dataValues, 
+            ...deck, 
             main, 
             extra, 
             side

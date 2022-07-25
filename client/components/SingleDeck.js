@@ -15,7 +15,6 @@ const SingleDeck = (props) => {
     const goToFormat = () => history.push(`/formats/${deck.formatName}`)
     const goToPlayer = () => history.push(`/players/${deck.player.tag.slice(0, -5) + deck.player.tag.slice(-4)}`)
     console.log('deck', deck)
-    console.log('banlist', banlist)
 
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])
