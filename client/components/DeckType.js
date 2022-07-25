@@ -8,6 +8,8 @@ import * as emojis from '../../public/images/emojis'
 const DeckType = (props) => {
   const [summary, setSummary] = useState({})
   const [banlist, setBanList] = useState({})
+  console.log('summary', summary)
+  console.log('banlist', banlist)
     
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])
@@ -35,7 +37,7 @@ const DeckType = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const {data} = await axios.get(`/api/banlists/simple/${summary.format}`)
+        const {data} = await axios.get(`/api/banlists/simple/${summary.format.banlist}`)
         setBanList(data)
       } catch (err) {
         console.log(err)
@@ -70,6 +72,25 @@ const DeckType = (props) => {
   return (
     <div className="body">
       <h1>{summary.deckType}</h1>
+      <table className="single-deck-table">
+        <tbody>
+          <tr className="single-deck-info-1">
+            <td>
+              <div onClick={() => goToFormat()} className="single-deck-cell">
+                <div className="single-deck-format-link" style={{paddingRight:'7px'}}><b>Format:</b> {deck.formatName}</div>
+                <img style={{width:'28px'}} src={`/images/emojis/${deck.format.icon}.png`}/>
+              </div>       
+            </td>
+            <td>
+              <div className="single-deck-cell">
+                <div className="single-deck-category" style={{paddingRight:'7px'}}><b>Category:</b> {deck.category}</div>
+                <img className="single-deck-category-emoji" style={{width:'28px'}} src={categoryImage}/>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
       <h2>Popular Main Deck Cards</h2>
       <div id="main" className="deck-bubble">
           <div id="main" className="deck-flexbox">
