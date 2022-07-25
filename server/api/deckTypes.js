@@ -23,7 +23,7 @@ router.get('/:id', async (req, res, next) => {
         const showExtra = format.date >= '2008-08-05'
         console.log('topFormat', topFormat)
         console.log('count', count)
-        const total = await Deck.count({ where: { format }})
+        const total = await Deck.count({ where: { format: {[Op.iLike]format.name} }})
         console.log('total', total)
 
         const data = {

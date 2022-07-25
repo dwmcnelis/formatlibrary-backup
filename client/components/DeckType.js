@@ -85,6 +85,12 @@ const DeckType = (props) => {
                 <img className="single-deck-category-emoji" style={{width:'28px'}} src={categoryImage}/>
               </div>
             </td>
+            <td>
+              <div className="single-deck-cell">
+                <div className="single-deck-category" style={{paddingRight:'7px'}}><b>Frequency:</b> {summary.percent}%</div>
+                <img className="single-deck-category-emoji" style={{width:'28px'}} src={`/images/emojis/math.png`}/>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
