@@ -35,7 +35,6 @@ router.get('/:id', async (req, res, next) => {
 
     str.splice(-4, 0, '#')
     const tag = str.join('')
-    console.log('tag', tag)
 
     const player = await Player.findOne({
       where: {

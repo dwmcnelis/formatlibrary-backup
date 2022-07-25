@@ -50,8 +50,6 @@ const StatsRow = (props) => {
         .replaceAll(' ', '_')
         .replaceAll('#', '%23')
         .replaceAll('?', '%3F')
-        
-    console.log('extension', extension)
 
     const evenOrOdd = props.index % 2 ? 'even' : 'odd'
     const displayName = player.name.length <= 24 ? player.name : player.name.slice(0, 24).split(' ').slice(0, -1).join(' ')

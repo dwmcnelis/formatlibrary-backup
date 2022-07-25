@@ -1,6 +1,6 @@
 
 import React from 'react'
-import {capitalize, urlize} from '../../functions/utility'
+import {capitalize, underscorize} from '../../functions/utility'
 import {god, legend, master, diamond, platinum, gold, silver, bronze, rock, sad, mad} from '../../public/images/emojis'
 import { Link } from 'react-router-dom'
 
@@ -44,7 +44,7 @@ const Badge = (props) => {
   const medal = getMedal(stats.elo)
   
   return (
-    <Link className='link' to={urlize(`/formats/${stats.format}`)}>
+    <Link className='link' to={underscorize(`/formats/${stats.format}`)}>
       <div className="badge">
           <img src={medal}/>
           <div className="badge-label">{capitalize(stats.format.replace('_', ' '), true)}</div>

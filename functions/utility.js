@@ -154,6 +154,9 @@ const shouldDisplay = (placement = 1, size = 0) => {
 //URLIZE
 const urlize = (str) => str.replace(/[\s]/g, '-').toLowerCase()
 
+//UNDERSCORIZE
+const underscorize = (str) => str.replace(/[\s]/g, '_').toLowerCase()
+
 module.exports = {
     camelize,
     capitalize,
@@ -163,5 +166,6 @@ module.exports = {
     generateDefaultStatus,
     ordinalize,
     shouldDisplay,
+    underscorize,
     urlize
 }
