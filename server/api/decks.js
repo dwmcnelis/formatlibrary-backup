@@ -342,7 +342,11 @@ router.get('/:id', async (req, res, next) => {
                     where: {
                         banlist: deck.format.banlist
                     }
-                } || {}
+                }
+            }) || await Card.findOne({ 
+                where: { 
+                    konamiCode: konamiCode
+                }
             })
 
             if (!card) continue
@@ -375,7 +379,11 @@ router.get('/:id', async (req, res, next) => {
                     where: {
                         banlist: deck.format.banlist
                     }
-                } || {}
+                }
+            }) || await Card.findOne({ 
+                where: { 
+                    konamiCode: konamiCode
+                }
             })
 
             if (!card) continue
@@ -408,7 +416,11 @@ router.get('/:id', async (req, res, next) => {
                     where: {
                         banlist: deck.format.banlist
                     }
-                } || {}
+                }
+            }) || await Card.findOne({ 
+                where: { 
+                    konamiCode: konamiCode
+                }
             })
             
             if (!card) continue
