@@ -41,10 +41,19 @@ const StatsRow = (props) => {
     const {index, stats} = props
     const {elo, wins, losses, player} = stats
     if (!player) return <tr/>
+    const extension = player.tag.split('')
+        .splice(-5, 1)
+        .join('')
+        .replaceAll('%', '%25')
+        .replaceAll('/', '%2F')
+        .replaceAll(' ', '_')
+        .replaceAll('#', '%23')
+        .replaceAll('?', '%3F')
+
     const evenOrOdd = props.index % 2 ? 'even' : 'odd'
     const displayName = player.name.length <= 24 ? player.name : player.name.slice(0, 24).split(' ').slice(0, -1).join(' ')
     const history = useHistory()
-    const goToPlayer = () => history.push(`/players/${player.tag.slice(0, -5) + player.tag.slice(-4)}`)
+    const goToPlayer = () => history.push(`/players/${extension}`)
 
     return (
         <tr onClick={() => goToPlayer()} className={`${evenOrOdd}-search-results-row`}>

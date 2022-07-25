@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { capitalize } from '../../functions/utility'
+import { capitalize, urlize } from '../../functions/utility'
 
 //FORMAT BUTTONS
 const FormatButton = (props) => {
@@ -13,7 +13,7 @@ const FormatButton = (props) => {
 
   return (
     <Link 
-      to={`/formats/${format.name}`} 
+      to={urlize(`/formats/${format.name}`)} 
       className="format-link" 
       style={{ backgroundImage: `url(../../images/emojis/${format.icon}.png)`}}
     >

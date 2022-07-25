@@ -27,9 +27,16 @@ router.get('/query/:query', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
+    const tag = req.params.id.replaceAll('%25', '%')
+        .replaceAll('%2F', '/')
+        .replaceAll('%23', '#')
+        .replaceAll('%3F', '?')
+        .split('')
+        .splice(-4, 0, '#')
+
     const player = await Player.findOne({
       where: {
-        tag: req.params.id.slice(0, -4) + '#' + req.params.id.slice(-4),
+        tag: {[Op.iLike]: tag},
         blacklisted: false
       },
       attributes: { exclude: ['blacklisted', 'password', 'createdAt', 'updatedAt'] }
