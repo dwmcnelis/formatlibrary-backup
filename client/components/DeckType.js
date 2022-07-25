@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useLayoutEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import CardImage from './CardImage'
 import NotFound from './NotFound'
 import axios from 'axios'
@@ -8,6 +9,7 @@ import * as emojis from '../../public/images/emojis'
 const DeckType = (props) => {
   const [summary, setSummary] = useState({})
   const [banlist, setBanList] = useState({})
+  const goToFormat = () => history.push(`/formats/${deck.formatName}`)
     
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])
