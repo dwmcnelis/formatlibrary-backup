@@ -337,6 +337,7 @@ router.get('/:id', async (req, res, next) => {
                 where: { 
                     konamiCode: konamiCode
                 },
+                attributes: ['name', 'id', 'sortPriority'],
                 include: {
                     model: Status,
                     where: {
@@ -346,7 +347,8 @@ router.get('/:id', async (req, res, next) => {
             }) || await Card.findOne({ 
                 where: { 
                     konamiCode: konamiCode
-                }
+                },
+                attributes: ['name', 'id', 'sortPriority'],
             })
 
             if (!card) continue
@@ -374,6 +376,7 @@ router.get('/:id', async (req, res, next) => {
                 where: { 
                     konamiCode: konamiCode
                 },
+                attributes: ['name', 'id', 'sortPriority'],
                 include: {
                     model: Status,
                     where: {
@@ -383,7 +386,8 @@ router.get('/:id', async (req, res, next) => {
             }) || await Card.findOne({ 
                 where: { 
                     konamiCode: konamiCode
-                }
+                },
+                attributes: ['name', 'id', 'sortPriority'],
             })
 
             if (!card) continue
@@ -411,6 +415,7 @@ router.get('/:id', async (req, res, next) => {
                 where: { 
                     konamiCode: konamiCode
                 },
+                attributes: ['name', 'id', 'sortPriority'],
                 include: {
                     model: Status,
                     where: {
@@ -420,7 +425,8 @@ router.get('/:id', async (req, res, next) => {
             }) || await Card.findOne({ 
                 where: { 
                     konamiCode: konamiCode
-                }
+                },
+                attributes: ['name', 'id', 'sortPriority']
             })
             
             if (!card) continue
