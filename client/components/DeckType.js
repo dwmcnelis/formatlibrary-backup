@@ -9,7 +9,7 @@ import * as emojis from '../../public/images/emojis'
 const DeckType = (props) => {
   const [summary, setSummary] = useState({})
   const [banlist, setBanList] = useState({})
-  const goToFormat = () => history.push(`/formats/${deck.formatName}`)
+  const goToFormat = () => history.push(`/formats/${summary.format ? summary.format.name : ''}`)
     
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])
