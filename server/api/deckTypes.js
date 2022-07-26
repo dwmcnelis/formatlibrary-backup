@@ -7,21 +7,45 @@ const fs = require('fs')
 
 module.exports = router
 
+router.get('/all', async (req, res, next) => {
+    try {
+        const deckTypes = await DeckType.findAll({
+            attributes: ['id', 'name'],
+            order: [['name', 'ASC']]
+        })
+    
+        res.json(deckTypes)
+    } catch (err) {
+        next(err)
+    }
+})
+
 router.get('/:id', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
             where: { 
                 type: {[Op.iLike]: req.params.id }
-            }
+            },
+            attributes: ['id', 'type', 'category', 'ydk', 'formatName']
         }) || []
 
         const freqs = decks.reduce((acc, curr) => (acc[curr.formatName] ? acc[curr.formatName]++ : acc[curr.formatName] = 1, acc), {})
         const sortedFreqs = Object.entries(freqs).sort((a, b) => b[1] - a[1])
         const topFormat = sortedFreqs[0][0]
-        const format = await Format.findOne({ where: { name: {[Op.iLike]: req.headers.format || topFormat } }})
+        const format = await Format.findOne({ 
+            where: { 
+                name: {[Op.iLike]: req.headers.format || topFormat } 
+            },
+            attributes: ['id', 'name', 'banlist', 'date', 'icon']
+        })
+
         const showExtra = format.date >= '2008-08-05'
         const count = freqs[format.name]
-        const total = await Deck.count({ where: { formatName: {[Op.iLike]: format.name} }})
+        const total = await Deck.count({ 
+            where: { 
+                formatName: {[Op.iLike]: format.name} 
+            }
+        })
 
         const data = {
             percent: Math.round(count / total * 100) || '<1',
@@ -117,7 +141,13 @@ router.get('/:id', async (req, res, next) => {
             } else {
                 let konamiCode = e[0]
                 while (konamiCode.length < 8) konamiCode = '0' + konamiCode
-                const card = await Card.findOne({ where: { konamiCode }, attributes: ['id', 'name', 'category', 'ypdId'] }) || {}
+                const card = await Card.findOne({ 
+                    where: { 
+                        konamiCode
+                    }, 
+                    attributes: ['id', 'name', 'category', 'ypdId'] 
+                }) || {}
+
                 data.main[e[0]].card = card
             }
         }
@@ -131,7 +161,13 @@ router.get('/:id', async (req, res, next) => {
             } else {
                 let konamiCode = e[0]
                 while (konamiCode.length < 8) konamiCode = '0' + konamiCode
-                const card = await Card.findOne({ where: { konamiCode }, attributes: ['id', 'name', 'category', 'ypdId']}) || {}
+                const card = await Card.findOne({ 
+                    where: { 
+                        konamiCode
+                    },
+                    attributes: ['id', 'name', 'category', 'ypdId']
+                }) || {}
+
                 data.extra[e[0]].card = card
             }
         }
@@ -145,7 +181,13 @@ router.get('/:id', async (req, res, next) => {
             } else {
                 let konamiCode = e[0]
                 while (konamiCode.length < 8) konamiCode = '0' + konamiCode
-                const card = await Card.findOne({ where: { konamiCode }, attributes: ['id', 'name', 'category', 'ypdId']}) || {}
+                const card = await Card.findOne({ 
+                    where: {
+                        konamiCode
+                    }, 
+                    attributes: ['id', 'name', 'category', 'ypdId']
+                }) || {}
+                
                 data.side[e[0]].card = card
             }
         }

@@ -15,7 +15,7 @@ router.get('/query/:query', async (req, res, next) => {
           {realName: {[Op.substring]: req.params.query}}
         ]
       },
-      attributes: { exclude: ['blacklisted', 'password', 'createdAt', 'updatedAt'] },
+      attributes: ['id', 'name'],
       order: [['name', 'ASC']]
     })
 
@@ -41,7 +41,7 @@ router.get('/:id', async (req, res, next) => {
         tag: {[Op.iLike]: tag},
         blacklisted: false
       },
-      attributes: { exclude: ['blacklisted', 'password', 'createdAt', 'updatedAt'] }
+      attributes: ['id', 'name', 'tag', 'realName', 'duelingBook', 'avatar'],
     })
 
     res.json(player)
@@ -54,7 +54,7 @@ router.get('/:id', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
   try {
     const players = await Player.findAll({
-      attributes: { exclude: ['blacklisted', 'password', 'createdAt', 'updatedAt'] },
+      attributes: ['id', 'name', 'tag', 'realName', 'duelingBook', 'avatar'],
       order: [['name', 'ASC']]
     })
 

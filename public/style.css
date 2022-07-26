@@ -477,6 +477,10 @@ h1 {
   cursor: pointer;
 }
 
+.expanded-info:hover {
+  cursor: pointer;
+}
+
 .popular-decks-flexbox, .recent-events-flexbox {
   display: flex;
   max-width: 1100px;

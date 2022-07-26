@@ -168,7 +168,13 @@ const DeckTable = (props) => {
   useEffect(() => {
     if (!firstXFetched && !allFetched) {
       const fetchData = async () => {
-        const {data} = await axios.get(`/api/decks/first/12`)
+        const {data} = await axios.get(`/api/decks/first/12`, {
+          headers: {
+            username: localStorage.getItem('username'),
+            password: localStorage.getItem('password')
+          }
+        })
+        
         setDecks(data)
         setFilteredDecks(data)
         setFirstXFetched(true)

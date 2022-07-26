@@ -13,15 +13,14 @@ router.get('/all', async (req, res, next) => {
       where: {
         display: true
       },
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      attributes: ['id', 'name', 'abbreviation', 'formatName', 'formatId', 'size', 'winner', 'playerId', 'community', 'startDate', 'endDate'],
       include: [
-          { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
-          { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}
+          { model: Format, attributes: ['id', 'name', 'icon'] },
+          { model: Player, attributes: ['name', 'tag', 'avatar'] }
       ],
-      order: [["startDate", "DESC"], ["size", "DESC"]]
+      order: [['startDate', 'DESC']]
     })
     
-    console.log('events.length', events.length)
     res.json(events)
   } catch (err) {
     next(err)
@@ -32,14 +31,15 @@ router.get('/community/:community', async (req, res, next) => {
   try {
     const events = await Event.findAll({
       where: {
+        display: true,
         community: {[Op.iLike]: req.params.community }
       },
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      attributes: ['id', 'name', 'abbreviation', 'formatName', 'formatId', 'size', 'winner', 'playerId', 'community', 'startDate', 'endDate'],
       include: [
-        { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
-        { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}
+          { model: Format, attributes: ['id', 'name', 'icon'] },
+          { model: Player, attributes: ['name', 'tag', 'avatar'] }
       ],
-      order: [["name", "ASC"]]
+      order: [['startDate', 'DESC']]
     })
     
     res.json(events)
@@ -56,25 +56,17 @@ router.get('/recent/:format', async (req, res, next) => {
             display: true,
             formatName: {[Op.iLike]: req.params.format }
           },
+          attributes: ['id', 'name', 'abbreviation', 'winner', 'playerId', 'community', 'startDate', 'endDate'],
           include: [
-            { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
-            { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}
+              { model: Format, attributes: ['id', 'name', 'icon'] },
+              { model: Player, attributes: ['name', 'tag', 'avatar'] }
           ],
           attributes: { exclude: ['createdAt', 'updatedAt'] },
-          order: [["startDate", "DESC"], ["size", "DESC"]],
+          order: [['startDate', 'DESC']],
           limit: 6
       })
 
-      const winners = []
-
-      for (let i = 0; i < events.length; i++) {
-        const event = events[i]
-        const winner = await Player.findOne({ where: {
-          id: event.playerId
-        }})
-
-        winners.push(winner)
-      }
+      const winners = events.map((e) => e.player)
 
       const data = {
         events,
@@ -92,12 +84,12 @@ router.get('/first/:x', async (req, res, next) => {
     try {
         const events = await Event.findAll({ 
             where: { display: true },
-            attributes: { exclude: ['createdAt', 'updatedAt'] },
+            attributes: ['id', 'name', 'abbreviation', 'formatName', 'formatId', 'size', 'winner', 'playerId', 'community', 'startDate', 'endDate'],
             include: [
-              { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
-              { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}
+                { model: Format, attributes: ['id', 'name', 'icon'] },
+                { model: Player, attributes: ['name', 'tag', 'avatar'] }
             ],
-            order: [["startDate", "DESC"], ["size", "DESC"]],
+            order: [['startDate', 'DESC']],
             limit: req.params.x
         })
 
@@ -113,10 +105,10 @@ router.get('/:id', async (req, res, next) => {
       where: {
         abbreviation: req.params.id
       },
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      attributes: ['id', 'name', 'abbreviation', 'formatName', 'formatId', 'size', 'winner', 'playerId', 'community', 'startDate', 'endDate'],
       include: [
-        { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
-        { model: Player, attributes: { exclude: ['password', 'admin', 'blacklisted', 'createdAt', 'updatedAt'] }}
+          { model: Format, attributes: ['id', 'name', 'icon'] },
+          { model: Player, attributes: ['name', 'tag', 'avatar'] }
       ]
     })
 
@@ -128,8 +120,8 @@ router.get('/:id', async (req, res, next) => {
             eventId: event.id
         }
       },
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
-      order: [["placement", "ASC"], ["builder", "ASC"]]
+      attributes: ['id', 'type', 'builder', 'placement'],
+      order: [['placement', 'ASC'], ['builder', 'ASC']]
     })
 
     const allDecks = await Deck.findAll({
@@ -138,7 +130,8 @@ router.get('/:id', async (req, res, next) => {
             eventName: event.abbreviation,
             eventId: event.id
         }
-      }
+      },
+      attributes: ['id', 'type', 'category', 'builder', 'ydk', 'placement']
     })
 
     const deckTypes = allDecks.length >= (event.size / 2) ? Object.entries(arrayToObject(allDecks.map((d) => capitalize(d.type, true)))).sort((a, b) => b[1] - a[1]) : []
@@ -164,9 +157,14 @@ router.get('/:id', async (req, res, next) => {
           const e = topMainDeckFrequencies[i]
           const konamiCode = e[0]
           try {
-            const card = await Card.findOne({ where: { konamiCode }})
-            if (!card) continue
-            topMainDeckCards.push([card.dataValues, e[1]])
+            const card = await Card.findOne({ 
+              where: { 
+                konamiCode
+              },
+              attributes: ['name']
+            })
+
+            topMainDeckCards.push([card.name, e[1]])
           } catch (err) {
             console.log(err)
           }
@@ -179,9 +177,14 @@ router.get('/:id', async (req, res, next) => {
         const e = topSideDeckFrequencies[i]
         const konamiCode = e[0]
         try {
-          const card = await Card.findOne({ where: { konamiCode }})
-          if (!card) continue
-          topSideDeckCards.push([card.dataValues, e[1]])
+          const card = await Card.findOne({ 
+            where: { 
+              konamiCode
+            },
+            attributes: ['name']
+          })
+
+          topSideDeckCards.push([card.name, e[1]])
         } catch (err) {
           console.log(err)
         }

@@ -1,6 +1,5 @@
 
 const router = require('express').Router()
-const {Op} = require('sequelize')
 const {BlogPost} = require('../db/models')
 
 module.exports = router
@@ -9,11 +8,8 @@ module.exports = router
 router.get('/all', async (req, res, next) => {
   try {
     const blogposts = await BlogPost.findAll({
-        where: {
-            title: {[Op.not]: null}
-        },
-        attributes: { exclude: ['createdAt', 'updatedAt'] },
-        order: [['eventDate', 'DESC']]
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      order: [['eventDate', 'DESC']]
     })
 
     res.json(blogposts)
@@ -25,13 +21,11 @@ router.get('/all', async (req, res, next) => {
 router.get('/first/:x', async (req, res, next) => {
     try {
         const blogposts = await BlogPost.findAll({
-        where: {
-            title: {[Op.not]: null}
-        },
-        attributes: { exclude: ['createdAt', 'updatedAt'] },
-        limit: req.params.x,
-        order: [['eventDate', 'DESC']]
+          attributes: { exclude: ['createdAt', 'updatedAt'] },
+          limit: req.params.x,
+          order: [['eventDate', 'DESC']]
         })
+
         res.json(blogposts)
     } catch (err) {
         next(err)

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 //PLACEMENT
 const Placement = (props) => {
   const { deck } = props
-  if (!deck || deck.display === false) return <div/>
+  if (!deck) return <div/>
   
   const placementImage = deck.placement === 1 ? First :
     deck.placement === 2 ? Second :

@@ -11,7 +11,7 @@ router.get('/:name', async (req, res, next) => {
       where: {
         name: { [Op.iLike]: req.params.name.replace(' ', '_').replace('-', '_') }
       },
-      attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt'] }
+      attributes: ['id', 'name', 'icon', 'date', 'banlist', 'event', 'description']
     })
 
     const deckCount = await Deck.count({
@@ -52,7 +52,7 @@ router.get('/', async (req, res, next) => {
         where: {
             banlist: {[Op.not]: null}
         },
-        attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt'] },
+        attributes: ['id', 'name', 'icon', 'date', 'banlist', 'event', 'description', 'popular'],
         order: [['popular', 'DESC'], ['date', 'ASC']]
     })
 

@@ -6,18 +6,6 @@ const {Op} = require('sequelize')
 module.exports = router
 
 /* eslint-disable complexity */
-router.get('/types', async (req, res, next) => {
-    try {
-        const deckTypes = await DeckType.findAll({
-            attributes: { exclude: ['createdAt', 'updatedAt'] },
-            order: [["name", "ASC"]]
-        })
-    
-        res.json(deckTypes)
-    } catch (err) {
-        next(err)
-    }
-})
 
 router.get('/popular/:format', async (req, res, next) => {
     try {
@@ -25,7 +13,8 @@ router.get('/popular/:format', async (req, res, next) => {
             where: {
                 formatName: {[Op.iLike]: req.params.format },
                 type: {[Op.not]: 'Other'} 
-            }
+            },
+            attributes: ['id', 'type']
         })
 
         if (!decks.length) return false
@@ -35,39 +24,33 @@ router.get('/popular/:format', async (req, res, next) => {
         const data = []
 
         for (let i = 0; i < arr.length; i++) {
-            const name = arr[i]
-            const deckType = await DeckType.findOne({
-                where: {
-                    name: name
-                },
-                attributes: { exclude: ['createdAt', 'updatedAt'] }
-            })
-
-            if (!deckType) {
-                console.log(`Unable to find DeckType: ${name}`)
-                continue
+            try {
+                const name = arr[i]
+                const deckType = await DeckType.findOne({
+                    where: {
+                        name: name
+                    },
+                    attributes: ['name', 'id']
+                })
+        
+                const deckThumb = await DeckThumb.findOne({
+                    where: {
+                        format: {[Op.iLike]: req.params.format },
+                        deckTypeId: deckType.id
+                    },
+                    attributes: ['id', 'name', 'leftCardYpdId', 'centerCardYpdId', 'rightCardYpdId']
+                }) || await DeckThumb.findOne({
+                    where: {
+                        primary: true,
+                        deckTypeId: deckType.id
+                    },
+                    attributes: ['id', 'name', 'leftCardYpdId', 'centerCardYpdId', 'rightCardYpdId']
+                })
+    
+                data.push({...deckType.dataValues, ...deckThumb.dataValues})
+            } catch (err) {
+                console.log(err)
             }
-
-            const deckThumb = await DeckThumb.findOne({
-                where: {
-                    format: {[Op.iLike]: req.params.format },
-                    deckTypeId: deckType.id
-                },
-                attributes: { exclude: ['id', 'name', 'createdAt', 'updatedAt'] }
-            }) || await DeckThumb.findOne({
-                where: {
-                    primary: true,
-                    deckTypeId: deckType.id
-                },
-                attributes: { exclude: ['id', 'name', 'createdAt', 'updatedAt'] }
-            })
-
-            if (!deckThumb) {
-                console.log(`Unable to find ${req.params.format} Format DeckThumb: ${name}`)
-                continue
-            }
-
-            data.push({...deckType.dataValues, ...deckThumb.dataValues})
         }
 
         res.json(data)
@@ -81,14 +64,16 @@ router.get('/gallery/:format', async (req, res, next) => {
         const format = await Format.findOne({
             where: {
                 name: {[Op.iLike]: req.params.format },
-            }
+            },
+            attributes: ['id', 'name', 'icon']
         })
 
         const decks = await Deck.findAll({ 
             where: {
                 formatName: {[Op.iLike]: req.params.format },
                 type: {[Op.not]: 'Other'} 
-            }
+            },
+            attributes: ['id', 'type', 'deckTypeId']
         })
 
         if (!decks.length) return false
@@ -98,39 +83,33 @@ router.get('/gallery/:format', async (req, res, next) => {
         const data = []
 
         for (let i = 0; i < arr.length; i++) {
-            const name = arr[i]
-            const deckType = await DeckType.findOne({
-                where: {
-                    name: name
-                },
-                attributes: { exclude: ['createdAt', 'updatedAt'] }
-            })
-
-            if (!deckType) {
-                console.log(`Unable to find DeckType: ${name}`)
-                continue
+            try {
+                const name = arr[i]
+                const deckType = await DeckType.findOne({
+                    where: {
+                        name: name
+                    },
+                    attributes: ['name', 'id']
+                })
+    
+                const deckThumb = await DeckThumb.findOne({
+                    where: {
+                        format: {[Op.iLike]: req.params.format },
+                        deckTypeId: deckType.id
+                    },
+                    attributes: ['id', 'name', 'leftCardYpdId', 'centerCardYpdId', 'rightCardYpdId']
+                }) || await DeckThumb.findOne({
+                    where: {
+                        primary: true,
+                        deckTypeId: deckType.id
+                    },
+                    attributes: ['id', 'name', 'leftCardYpdId', 'centerCardYpdId', 'rightCardYpdId']
+                })
+    
+                data.push({...deckType.dataValues, ...deckThumb.dataValues})
+            } catch (err) {
+                console.log(err)
             }
-
-            const deckThumb = await DeckThumb.findOne({
-                where: {
-                    format: {[Op.iLike]: req.params.format },
-                    deckTypeId: deckType.id
-                },
-                attributes: { exclude: ['id', 'name', 'createdAt', 'updatedAt'] }
-            }) || await DeckThumb.findOne({
-                where: {
-                    primary: true,
-                    deckTypeId: deckType.id
-                },
-                attributes: { exclude: ['id', 'name', 'createdAt', 'updatedAt'] }
-            })
-
-            if (!deckThumb) {
-                console.log(`Unable to find ${req.params.format} Format DeckThumb: ${name}`)
-                continue
-            }
-
-            data.push({...deckType.dataValues, ...deckThumb.dataValues})
         }
 
         res.json({
@@ -149,11 +128,11 @@ router.get('/frequent/:id', async (req, res, next) => {
             where: {
                 playerId: req.params.id,
                 type: {[Op.not]: 'Other'}
-            }
+            },
+            attributes: ['id', 'type', 'formatName']
         })
 
         if (!decks.length) return false
-
         
         const freqs = decks.reduce((acc, curr) => (acc[`${curr.formatName}_${curr.type}`] ? acc[`${curr.formatName}_${curr.type}`]++ : acc[`${curr.formatName}_${curr.type}`] = 1, acc), {})
         const arr = Object.entries(freqs).sort((a, b) => b[1] - a[1]).map((e) => e[0])
@@ -161,35 +140,38 @@ router.get('/frequent/:id', async (req, res, next) => {
         const types = []
 
         for (let i = 0; i < arr.length; i++) {
-            const elem = arr[i]
-            const name = elem.slice(elem.indexOf('_') + 1)
-            const format = elem.slice(0, elem.indexOf('_'))
-            const deckType = await DeckType.findOne({
-                where: {
-                    name: {[Op.iLike]: name}
-                },
-                attributes: { exclude: ['createdAt', 'updatedAt'] }
-            })
-
-            if (!deckType || types.includes(deckType.id)) continue
-
-            const deckThumb = await DeckThumb.findOne({
-                where: {
-                    deckTypeId: deckType.id,
-                    format: format
-                },
-                attributes: { exclude: ['id', 'name', 'createdAt', 'updatedAt'] }
-            }) || await DeckThumb.findOne({
-                where: {
-                    deckTypeId: deckType.id,
-                    primary: true
-                },
-                attributes: { exclude: ['id', 'name', 'createdAt', 'updatedAt'] }
-            })
-
-            if (!deckThumb) continue
-            types.push(deckType.id)
-            data.push({...deckType.dataValues, ...deckThumb.dataValues})
+            try {
+                const elem = arr[i]
+                const name = elem.slice(elem.indexOf('_') + 1)
+                const format = elem.slice(0, elem.indexOf('_'))
+                const deckType = await DeckType.findOne({
+                    where: {
+                        name: {[Op.iLike]: name}
+                    },
+                    attributes: ['id', 'name']
+                })
+    
+                if (types.includes(deckType.id)) continue
+    
+                const deckThumb = await DeckThumb.findOne({
+                    where: {
+                        deckTypeId: deckType.id,
+                        format: format
+                    },
+                    attributes: ['id', 'name', 'leftCardYpdId', 'centerCardYpdId', 'rightCardYpdId']
+                }) || await DeckThumb.findOne({
+                    where: {
+                        deckTypeId: deckType.id,
+                        primary: true
+                    },
+                    attributes: ['id', 'name', 'leftCardYpdId', 'centerCardYpdId', 'rightCardYpdId']
+                })
+    
+                types.push(deckType.id)
+                data.push({...deckType.dataValues, ...deckThumb.dataValues})
+            } catch (err) {
+                console.log(err)
+            }
         }
 
         res.json(data.slice(0, 6))
@@ -203,10 +185,11 @@ router.get('/player/:id', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
             where: {
-                playerId: req.params.id
+                playerId: req.params.id,
+                display: true
             },
-            attributes: { exclude: ['ydk', 'createdAt', 'updatedAt'] },
-            order: [["placement", "ASC"], ["eventDate", "DESC"]]
+            attributes: ['placement', 'eventId', 'eventName', 'eventDate'],
+            order: [['placement', 'ASC'], ['eventDate', 'DESC']]
         })
 
         return res.json(decks)
@@ -222,10 +205,9 @@ router.get('/like/:id', async (req, res, next) => {
             where: {
                 id: req.params.id,
                 display: true
-            }
+            },
+            attributes: ['rating']
         })
-
-        if (!deck) return false
         
         deck.rating++
         await deck.save()
@@ -242,10 +224,10 @@ router.get('/download/:id', async (req, res, next) => {
             where: {
                 id: req.params.id,
                 display: true
-            }
+            },
+            attributes: ['ydk', 'downloads']
         })
 
-        if (!deck) return false
         deck.downloads++
         await deck.save()
         res.send(deck.ydk)
@@ -266,11 +248,11 @@ router.get('/all', async (req, res, next) => {
 
         const decks = await Deck.findAll({ 
             where: { display: isAdmin ? {[Op.any]: [true, false]} : true },
-            attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
-            order: [["eventDate", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
+            attributes: ['id', 'builder', 'type', 'category', 'formatName', 'formatId', 'community', 'eventName', 'eventId', 'eventDate', 'placement', 'downloads', 'views', 'rating'],
+            order: [['eventDate', 'DESC'], ['placement', 'ASC'], ['builder', 'ASC']],
             include: [
-                { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
-                { model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }
+                { model: Format, attributes: ['id', 'name', 'icon']},
+                { model: Player, attributes: ['id', 'name', 'tag', 'avatar'] }
             ],
         })
 
@@ -283,15 +265,23 @@ router.get('/all', async (req, res, next) => {
 /* eslint-disable complexity */
 router.get('/first/:x', async (req, res, next) => {
     try {
+        const isAdmin = await Player.count({
+            where: {
+                name: req.headers.username,
+                password: req.headers.password,
+                admin: true
+            }
+        })
+
         const decks = await Deck.findAll({ 
-            where: { display: true },
-            attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
-            order: [["eventDate", "DESC"], ["placement", "ASC"], ["builder", "ASC"]],
-            limit: req.params.x, 
+            where: { display: isAdmin ? {[Op.any]: [true, false]} : true },
+            attributes: ['id', 'builder', 'type', 'category', 'formatName', 'formatId', 'community', 'eventName', 'eventId', 'eventDate', 'placement', 'downloads', 'views', 'rating'],
+            order: [['eventDate', 'DESC'], ['placement', 'ASC'], ['builder', 'ASC']],
             include: [
-                { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
-                { model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }
+                { model: Format, attributes: ['id', 'name', 'icon']},
+                { model: Player, attributes: ['id', 'name', 'tag', 'avatar'] }
             ],
+            limit: req.params.x, 
         })
 
         res.json(decks)
@@ -316,10 +306,10 @@ router.get('/:id', async (req, res, next) => {
                 id: req.params.id,
                 display: isAdmin ? {[Op.any]: [true, false]} : true
             }, 
-            attributes: { exclude: ['display', 'createdAt', 'updatedAt'] },
+            attributes: ['id', 'ydk', 'builder', 'type', 'category', 'formatName', 'formatId', 'community', 'eventName', 'eventId', 'eventDate', 'placement', 'downloads', 'views', 'rating'],            
             include: [
-                { model: Format, attributes: { exclude: ['channel', 'emoji', 'role', 'createdAt', 'updatedAt']} },
-                { model: Player, attributes: { exclude: ['id', 'duelingBook', 'realName', 'admin', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }
+                { model: Format, attributes: ['id', 'name', 'icon']},
+                { model: Player, attributes: ['id', 'name', 'tag', 'avatar']}
             ],
         })
 
