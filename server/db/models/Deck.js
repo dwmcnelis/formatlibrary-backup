@@ -19,7 +19,7 @@ const Deck = db.define('decks', {
     type: Sequelize.STRING
   },
   formatId: {
-    type: Sequelize.STRING
+    type: Sequelize.INTEGER
   },
   eventName: {
     type: Sequelize.STRING
