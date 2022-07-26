@@ -9,8 +9,8 @@ import * as emojis from '../../public/images/emojis'
 const DeckType = (props) => {
   const [summary, setSummary] = useState({})
   const [banlist, setBanList] = useState({})
+  const history = useHistory()
   const goToFormat = () => history.push(`/formats/${summary.format ? summary.format.name : ''}`)
-  console.log('goToFormat', goToFormat)
     
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])
