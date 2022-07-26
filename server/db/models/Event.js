@@ -13,7 +13,7 @@ const Event = db.define('events', {
         type: Sequelize.STRING
     },
     formatId: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
     },
     referenceUrl: {
         type: Sequelize.STRING

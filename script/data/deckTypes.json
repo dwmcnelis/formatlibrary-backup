@@ -1,0 +1,1647 @@
+[
+    {
+      "id": 1,
+      "name": "Stall Burn",
+      "category": "Lockdown",
+      "createdAt": "2022-03-29 05:27:27.261+00",
+      "updatedAt": "2022-05-03 05:06:33.77+00"
+    },
+    {
+      "id": 3,
+      "name": "Warrior",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.27+00",
+      "updatedAt": "2022-05-03 05:06:34.5+00"
+    },
+    {
+      "id": 4,
+      "name": "Zombie",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.272+00",
+      "updatedAt": "2022-05-03 05:06:34.508+00"
+    },
+    {
+      "id": 5,
+      "name": "Chaos Control",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.274+00",
+      "updatedAt": "2022-05-03 05:06:34.514+00"
+    },
+    {
+      "id": 7,
+      "name": "Chaos Turbo",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.277+00",
+      "updatedAt": "2022-05-03 05:06:34.521+00"
+    },
+    {
+      "id": 8,
+      "name": "Chaos Warrior",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.28+00",
+      "updatedAt": "2022-05-03 05:06:34.526+00"
+    },
+    {
+      "id": 9,
+      "name": "Goat Control",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.289+00",
+      "updatedAt": "2022-05-03 05:06:34.531+00"
+    },
+    {
+      "id": 10,
+      "name": "Monarch",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.29+00",
+      "updatedAt": "2022-05-03 05:06:34.537+00"
+    },
+    {
+      "id": 11,
+      "name": "Reasoning Gate Turbo",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.293+00",
+      "updatedAt": "2022-05-03 05:06:34.543+00"
+    },
+    {
+      "id": 13,
+      "name": "Canceller Stun",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.3+00",
+      "updatedAt": "2022-05-03 05:06:34.556+00"
+    },
+    {
+      "id": 14,
+      "name": "Gearfried",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.304+00",
+      "updatedAt": "2022-05-03 05:06:34.561+00"
+    },
+    {
+      "id": 16,
+      "name": "Stein Gate Turbo",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.307+00",
+      "updatedAt": "2022-05-03 05:06:34.572+00"
+    },
+    {
+      "id": 18,
+      "name": "Chaos Recruiter",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.31+00",
+      "updatedAt": "2022-05-03 05:06:34.601+00"
+    },
+    {
+      "id": 19,
+      "name": "Dark Scorpion",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.314+00",
+      "updatedAt": "2022-05-03 05:06:34.608+00"
+    },
+    {
+      "id": 20,
+      "name": "Bazoo Return",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.317+00",
+      "updatedAt": "2022-05-03 05:06:34.619+00"
+    },
+    {
+      "id": 22,
+      "name": "Diva Hero",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.33+00",
+      "updatedAt": "2022-05-03 05:06:34.627+00"
+    },
+    {
+      "id": 24,
+      "name": "Frog Monarch",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.333+00",
+      "updatedAt": "2022-05-03 05:06:34.645+00"
+    },
+    {
+      "id": 27,
+      "name": "Blackwing",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.339+00",
+      "updatedAt": "2022-05-03 05:06:34.669+00"
+    },
+    {
+      "id": 28,
+      "name": "Machina",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.341+00",
+      "updatedAt": "2022-05-03 05:06:34.677+00"
+    },
+    {
+      "id": 31,
+      "name": "Soul Control",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.349+00",
+      "updatedAt": "2022-05-03 05:06:34.7+00"
+    },
+    {
+      "id": 32,
+      "name": "Flip Control",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.36+00",
+      "updatedAt": "2022-05-03 05:06:34.706+00"
+    },
+    {
+      "id": 34,
+      "name": "Volcanic Quickdraw",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.371+00",
+      "updatedAt": "2022-05-03 05:06:34.715+00"
+    },
+    {
+      "id": 36,
+      "name": "Gladiator Beast",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.383+00",
+      "updatedAt": "2022-05-03 05:06:34.727+00"
+    },
+    {
+      "id": 37,
+      "name": "Dragon Turbo",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.384+00",
+      "updatedAt": "2022-05-03 05:06:34.735+00"
+    },
+    {
+      "id": 39,
+      "name": "Vayu Turbo",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.386+00",
+      "updatedAt": "2022-05-03 05:06:34.75+00"
+    },
+    {
+      "id": 41,
+      "name": "Lightsworn",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.389+00",
+      "updatedAt": "2022-05-03 05:06:34.767+00"
+    },
+    {
+      "id": 43,
+      "name": "Quickdraw Zombie",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.399+00",
+      "updatedAt": "2022-05-03 05:06:34.775+00"
+    },
+    {
+      "id": 47,
+      "name": "Plant Burn",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.41+00",
+      "updatedAt": "2022-05-03 05:06:34.798+00"
+    },
+    {
+      "id": 48,
+      "name": "Six Samurai",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.418+00",
+      "updatedAt": "2022-05-03 05:06:34.803+00"
+    },
+    {
+      "id": 50,
+      "name": "Warrior Control",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.437+00",
+      "updatedAt": "2022-05-03 05:06:34.827+00"
+    },
+    {
+      "id": 51,
+      "name": "Scientist FTK",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.441+00",
+      "updatedAt": "2022-05-03 05:06:34.838+00"
+    },
+    {
+      "id": 54,
+      "name": "Tomato Aggro",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.453+00",
+      "updatedAt": "2022-05-03 05:06:34.862+00"
+    },
+    {
+      "id": 55,
+      "name": "Panda Burn",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.456+00",
+      "updatedAt": "2022-05-03 05:06:34.868+00"
+    },
+    {
+      "id": 57,
+      "name": "Cat Stein OTK",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.464+00",
+      "updatedAt": "2022-05-03 05:06:34.882+00"
+    },
+    {
+      "id": 58,
+      "name": "Dark Turbo",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.471+00",
+      "updatedAt": "2022-05-03 05:06:34.888+00"
+    },
+    {
+      "id": 59,
+      "name": "Tiger Stun",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.476+00",
+      "updatedAt": "2022-05-03 05:06:34.894+00"
+    },
+    {
+      "id": 61,
+      "name": "Morphtronic",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.482+00",
+      "updatedAt": "2022-05-03 05:06:34.908+00"
+    },
+    {
+      "id": 65,
+      "name": "Last Turn",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.572+00",
+      "updatedAt": "2022-05-03 05:06:34.935+00"
+    },
+    {
+      "id": 66,
+      "name": "Cat OTK",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.574+00",
+      "updatedAt": "2022-05-03 05:06:34.939+00"
+    },
+    {
+      "id": 68,
+      "name": "Chain Burn",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.578+00",
+      "updatedAt": "2022-05-03 05:06:34.95+00"
+    },
+    {
+      "id": 70,
+      "name": "Diva Zombie",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.272+00",
+      "updatedAt": "2022-05-03 05:06:34.958+00"
+    },
+    {
+      "id": 74,
+      "name": "Hero Frog",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.272+00",
+      "updatedAt": "2022-05-03 05:06:34.962+00"
+    },
+    {
+      "id": 75,
+      "name": "Cat Control",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.272+00",
+      "updatedAt": "2022-05-03 05:06:34.969+00"
+    },
+    {
+      "id": 29,
+      "name": "Chaos Return",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.342+00",
+      "updatedAt": "2022-05-03 05:06:34.685+00"
+    },
+    {
+      "id": 87,
+      "name": "Water",
+      "category": "Aggro",
+      "createdAt": "2022-05-17 02:57:20.661+00",
+      "updatedAt": "2022-05-17 02:57:20.661+00"
+    },
+    {
+      "id": 15,
+      "name": "Dimension Fusion Turbo",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.306+00",
+      "updatedAt": "2022-05-03 05:06:34.566+00"
+    },
+    {
+      "id": 88,
+      "name": "Gravekeeper",
+      "category": "Aggro",
+      "createdAt": "2022-05-17 02:57:20.661+00",
+      "updatedAt": "2022-05-17 02:57:20.661+00"
+    },
+    {
+      "id": 89,
+      "name": "Ancient Gear Machina",
+      "category": "Combo",
+      "createdAt": "2022-05-31 23:07:44.016902+00",
+      "updatedAt": "2022-05-31 23:07:44.016902+00"
+    },
+    {
+      "id": 35,
+      "name": "Quickdraw Plant",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.378+00",
+      "updatedAt": "2022-05-03 05:06:34.721+00"
+    },
+    {
+      "id": 30,
+      "name": "Hero Beat",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.344+00",
+      "updatedAt": "2022-05-03 05:06:34.694+00"
+    },
+    {
+      "id": 62,
+      "name": "Diva Frog",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.486+00",
+      "updatedAt": "2022-05-03 05:06:34.916+00"
+    },
+    {
+      "id": 63,
+      "name": "Fish OTK",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.515+00",
+      "updatedAt": "2022-05-03 05:06:34.923+00"
+    },
+    {
+      "id": 60,
+      "name": "Tethys Turbo",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.48+00",
+      "updatedAt": "2022-05-03 05:06:34.901+00"
+    },
+    {
+      "id": 46,
+      "name": "Fairy",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.404+00",
+      "updatedAt": "2022-05-03 05:06:34.79+00"
+    },
+    {
+      "id": 38,
+      "name": "X-Saber",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.385+00",
+      "updatedAt": "2022-05-03 05:06:34.743+00"
+    },
+    {
+      "id": 33,
+      "name": "PACMAN",
+      "category": "Lockdown",
+      "createdAt": "2022-03-29 05:27:27.367+00",
+      "updatedAt": "2022-05-03 05:06:34.71+00"
+    },
+    {
+      "id": 23,
+      "name": "Aggro Dragon",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.332+00",
+      "updatedAt": "2022-05-03 05:06:34.637+00"
+    },
+    {
+      "id": 56,
+      "name": "Drain Beat",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.458+00",
+      "updatedAt": "2022-05-03 05:06:34.874+00"
+    },
+    {
+      "id": 17,
+      "name": "Earth Beat",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.309+00",
+      "updatedAt": "2022-05-03 05:06:34.593+00"
+    },
+    {
+      "id": 2,
+      "name": "Emissary Aggro",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.268+00",
+      "updatedAt": "2022-05-03 05:06:34.491+00"
+    },
+    {
+      "id": 45,
+      "name": "Plant Control",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.403+00",
+      "updatedAt": "2022-05-03 05:06:34.785+00"
+    },
+    {
+      "id": 12,
+      "name": "Library FTK",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.296+00",
+      "updatedAt": "2022-05-03 05:06:34.55+00"
+    },
+    {
+      "id": 52,
+      "name": "Frog OTK",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.444+00",
+      "updatedAt": "2022-05-03 05:06:34.85+00"
+    },
+    {
+      "id": 90,
+      "name": "Saber Plant",
+      "category": "Control",
+      "createdAt": "2022-05-31 23:12:57.791579+00",
+      "updatedAt": "2022-05-31 23:12:57.791579+00"
+    },
+    {
+      "id": 40,
+      "name": "Flamvell",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.388+00",
+      "updatedAt": "2022-05-03 05:06:34.761+00"
+    },
+    {
+      "id": 42,
+      "name": "Machina Gadget",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.397+00",
+      "updatedAt": "2022-05-03 05:06:34.771+00"
+    },
+    {
+      "id": 44,
+      "name": "Gadget",
+      "category": "Aggro",
+      "createdAt": "2022-03-29 05:27:27.401+00",
+      "updatedAt": "2022-05-03 05:06:34.78+00"
+    },
+    {
+      "id": 49,
+      "name": "Gravekeeper Burn",
+      "category": "Lockdown",
+      "createdAt": "2022-03-29 05:27:27.427+00",
+      "updatedAt": "2022-05-03 05:06:34.809+00"
+    },
+    {
+      "id": 92,
+      "name": "Fiend",
+      "category": "Aggro",
+      "createdAt": "2022-06-02 04:18:00.137862+00",
+      "updatedAt": "2022-06-02 04:18:00.137862+00"
+    },
+    {
+      "id": 93,
+      "name": "Jar Burn",
+      "category": "Combo",
+      "createdAt": "2022-06-02 04:18:00.137862+00",
+      "updatedAt": "2022-06-02 04:18:00.137862+00"
+    },
+    {
+      "id": 94,
+      "name": "Light Beat",
+      "category": "Aggro",
+      "createdAt": "2022-06-02 04:18:00.137862+00",
+      "updatedAt": "2022-06-02 04:18:00.137862+00"
+    },
+    {
+      "id": 95,
+      "name": "Relinquished",
+      "category": "Control",
+      "createdAt": "2022-06-02 04:18:00.137862+00",
+      "updatedAt": "2022-06-02 04:18:00.137862+00"
+    },
+    {
+      "id": 97,
+      "name": "Hand Control",
+      "category": "Control",
+      "createdAt": "2022-06-02 04:23:43.099762+00",
+      "updatedAt": "2022-06-02 04:23:43.099762+00"
+    },
+    {
+      "id": 98,
+      "name": "Thunder",
+      "category": "Aggro",
+      "createdAt": "2022-06-02 05:44:53.235836+00",
+      "updatedAt": "2022-06-02 05:44:53.235836+00"
+    },
+    {
+      "id": 156,
+      "name": "Rank 4 Toolbox",
+      "category": "Aggro",
+      "createdAt": "2022-06-20 19:33:09.190324+00",
+      "updatedAt": "2022-06-20 19:33:09.190324+00"
+    },
+    {
+      "id": 100,
+      "name": "Mermail",
+      "category": "Control",
+      "createdAt": "2022-06-02 05:51:26.315549+00",
+      "updatedAt": "2022-06-02 05:51:26.315549+00"
+    },
+    {
+      "id": 101,
+      "name": "Evilswarm",
+      "category": "Aggro",
+      "createdAt": "2022-06-02 05:56:19.089047+00",
+      "updatedAt": "2022-06-02 05:56:19.089047+00"
+    },
+    {
+      "id": 103,
+      "name": "Dino Fist",
+      "category": "Aggro",
+      "createdAt": "2022-06-02 05:59:48.075906+00",
+      "updatedAt": "2022-06-02 05:59:48.075906+00"
+    },
+    {
+      "id": 104,
+      "name": "Dino Gladiator Fist",
+      "category": "Aggro",
+      "createdAt": "2022-06-02 06:03:32.379291+00",
+      "updatedAt": "2022-06-02 06:03:32.379291+00"
+    },
+    {
+      "id": 105,
+      "name": "Spellbook",
+      "category": "Control",
+      "createdAt": "2022-06-02 06:09:19.13463+00",
+      "updatedAt": "2022-06-02 06:09:19.13463+00"
+    },
+    {
+      "id": 106,
+      "name": "Infernity",
+      "category": "Combo",
+      "createdAt": "2022-06-02 06:09:19.13463+00",
+      "updatedAt": "2022-06-02 06:09:19.13463+00"
+    },
+    {
+      "id": 107,
+      "name": "Bubble Beat",
+      "category": "Aggro",
+      "createdAt": "2022-06-02 06:31:29.694043+00",
+      "updatedAt": "2022-06-02 06:31:29.694043+00"
+    },
+    {
+      "id": 108,
+      "name": "Dino Hero",
+      "category": "Aggro",
+      "createdAt": "2022-06-02 06:31:29.694043+00",
+      "updatedAt": "2022-06-02 06:31:29.694043+00"
+    },
+    {
+      "id": 109,
+      "name": "Chain Beat",
+      "category": "Aggro",
+      "createdAt": "2022-06-02 06:31:29.694043+00",
+      "updatedAt": "2022-06-02 06:31:29.694043+00"
+    },
+    {
+      "id": 110,
+      "name": "Wind-Up",
+      "category": "Combo",
+      "createdAt": "2022-06-02 06:31:29.694043+00",
+      "updatedAt": "2022-06-02 06:31:29.694043+00"
+    },
+    {
+      "id": 111,
+      "name": "Constellar",
+      "category": "Aggro",
+      "createdAt": "2022-06-02 06:31:29.694043+00",
+      "updatedAt": "2022-06-02 06:31:29.694043+00"
+    },
+    {
+      "id": 113,
+      "name": "Piper Chaos",
+      "category": "Control",
+      "createdAt": "2022-06-02 06:31:29.694043+00",
+      "updatedAt": "2022-06-02 06:31:29.694043+00"
+    },
+    {
+      "id": 102,
+      "name": "Fire Fist",
+      "category": "Aggro",
+      "createdAt": "2022-06-02 05:56:19.089047+00",
+      "updatedAt": "2022-06-02 05:56:19.089047+00"
+    },
+    {
+      "id": 115,
+      "name": "Machine Chaos",
+      "category": "Control",
+      "createdAt": "2022-06-06 07:41:24.996644+00",
+      "updatedAt": "2022-06-06 07:41:24.996644+00"
+    },
+    {
+      "id": 118,
+      "name": "Stein OTK",
+      "category": "Combo",
+      "createdAt": "2022-06-06 07:47:40.460137+00",
+      "updatedAt": "2022-06-06 07:47:40.460137+00"
+    },
+    {
+      "id": 120,
+      "name": "Macro Monarch",
+      "category": "Aggro",
+      "createdAt": "2022-06-12 08:10:57.577185+00",
+      "updatedAt": "2022-06-12 08:10:57.577185+00"
+    },
+    {
+      "id": 121,
+      "name": "Perfect Circle Monarch",
+      "category": "Control",
+      "createdAt": "2022-06-12 08:29:33.677826+00",
+      "updatedAt": "2022-06-12 08:29:33.677826+00"
+    },
+    {
+      "id": 122,
+      "name": "Diamond Dude Turbo",
+      "category": "Combo",
+      "createdAt": "2022-06-12 08:39:42.651674+00",
+      "updatedAt": "2022-06-12 08:39:42.651674+00"
+    },
+    {
+      "id": 64,
+      "name": "Salvo DAD",
+      "category": "Control",
+      "createdAt": "2022-03-29 05:27:27.529+00",
+      "updatedAt": "2022-05-03 05:06:34.929+00"
+    },
+    {
+      "id": 124,
+      "name": "Other",
+      "category": "Other",
+      "createdAt": "2022-06-13 22:56:19.198843+00",
+      "updatedAt": "2022-06-13 22:56:19.198843+00"
+    },
+    {
+      "id": 125,
+      "name": "Drain Burn",
+      "category": "Lockdown",
+      "createdAt": "2022-06-13 23:38:44.646248+00",
+      "updatedAt": "2022-06-13 23:38:44.646248+00"
+    },
+    {
+      "id": 127,
+      "name": "Economics FTK",
+      "category": "Combo",
+      "createdAt": "2022-06-14 08:25:39.02024+00",
+      "updatedAt": "2022-06-14 08:25:39.02024+00"
+    },
+    {
+      "id": 128,
+      "name": "Empty Jar",
+      "category": "Combo",
+      "createdAt": "2022-06-14 17:35:47.01036+00",
+      "updatedAt": "2022-06-14 17:35:47.01036+00"
+    },
+    {
+      "id": 129,
+      "name": "Jar Turbo",
+      "category": "Combo",
+      "createdAt": "2022-06-14 22:09:49.993676+00",
+      "updatedAt": "2022-06-14 22:09:49.993676+00"
+    },
+    {
+      "id": 130,
+      "name": "Tomato Control",
+      "category": "Control",
+      "createdAt": "2022-06-14 22:53:33.021899+00",
+      "updatedAt": "2022-06-14 22:53:33.021899+00"
+    },
+    {
+      "id": 131,
+      "name": "Malefic Ancient Gear",
+      "category": "Aggro",
+      "createdAt": "2022-06-15 05:06:13.847056+00",
+      "updatedAt": "2022-06-15 05:06:13.847056+00"
+    },
+    {
+      "id": 132,
+      "name": "Agent",
+      "category": "Control",
+      "createdAt": "2022-06-15 05:12:42.239749+00",
+      "updatedAt": "2022-06-15 05:12:42.239749+00"
+    },
+    {
+      "id": 133,
+      "name": "T.G. Stun",
+      "category": "Aggro",
+      "createdAt": "2022-06-15 05:23:12.039705+00",
+      "updatedAt": "2022-06-15 05:23:12.039705+00"
+    },
+    {
+      "id": 134,
+      "name": "Synchro Plant",
+      "category": "Control",
+      "createdAt": "2022-06-15 05:30:16.753261+00",
+      "updatedAt": "2022-06-15 05:30:16.753261+00"
+    },
+    {
+      "id": 135,
+      "name": "Karakuri",
+      "category": "Aggro",
+      "createdAt": "2022-06-15 05:55:48.953469+00",
+      "updatedAt": "2022-06-15 05:55:48.953469+00"
+    },
+    {
+      "id": 136,
+      "name": "Ocean Control",
+      "category": "Control",
+      "createdAt": "2022-06-15 07:05:32.022916+00",
+      "updatedAt": "2022-06-15 07:05:32.022916+00"
+    },
+    {
+      "id": 137,
+      "name": "Trooper Beast",
+      "category": "Aggro",
+      "createdAt": "2022-06-16 06:41:59.088878+00",
+      "updatedAt": "2022-06-16 06:41:59.088878+00"
+    },
+    {
+      "id": 138,
+      "name": "Trooper Hero",
+      "category": "Control",
+      "createdAt": "2022-06-16 07:06:18.010378+00",
+      "updatedAt": "2022-06-16 07:06:18.010378+00"
+    },
+    {
+      "id": 139,
+      "name": "Demise OTK",
+      "category": "Combo",
+      "createdAt": "2022-06-16 07:14:15.552933+00",
+      "updatedAt": "2022-06-16 07:14:15.552933+00"
+    },
+    {
+      "id": 140,
+      "name": "Trooper Burn",
+      "category": "Aggro",
+      "createdAt": "2022-06-16 07:37:40.883195+00",
+      "updatedAt": "2022-06-16 07:37:40.883195+00"
+    },
+    {
+      "id": 141,
+      "name": "Trooper Monarch",
+      "category": "Control",
+      "createdAt": "2022-06-16 07:46:45.977122+00",
+      "updatedAt": "2022-06-16 07:46:45.977122+00"
+    },
+    {
+      "id": 142,
+      "name": "Vanilla Beatdown",
+      "category": "Aggro",
+      "createdAt": "2022-06-16 16:25:21.603003+00",
+      "updatedAt": "2022-06-16 16:25:21.603003+00"
+    },
+    {
+      "id": 143,
+      "name": "Stall Mill",
+      "category": "Lockdown",
+      "createdAt": "2022-06-17 04:54:02.080549+00",
+      "updatedAt": "2022-06-17 04:54:02.080549+00"
+    },
+    {
+      "id": 144,
+      "name": "Hand Fist Traptrix",
+      "category": "Aggro",
+      "createdAt": "2022-06-17 06:02:14.230932+00",
+      "updatedAt": "2022-06-17 06:02:14.230932+00"
+    },
+    {
+      "id": 145,
+      "name": "Baboon Burn",
+      "category": "Aggro",
+      "createdAt": "2022-06-19 02:01:30.3709+00",
+      "updatedAt": "2022-06-19 02:01:30.3709+00"
+    },
+    {
+      "id": 146,
+      "name": "Hand Artifact Traptrix",
+      "category": "Control",
+      "createdAt": "2022-06-20 03:35:58.281479+00",
+      "updatedAt": "2022-06-20 03:35:58.281479+00"
+    },
+    {
+      "id": 147,
+      "name": "Artifact Traptrix",
+      "category": "Control",
+      "createdAt": "2022-06-20 03:58:23.530615+00",
+      "updatedAt": "2022-06-20 03:58:23.530615+00"
+    },
+    {
+      "id": 148,
+      "name": "Geargia",
+      "category": "Control",
+      "createdAt": "2022-06-20 16:34:38.122222+00",
+      "updatedAt": "2022-06-20 16:34:38.122222+00"
+    },
+    {
+      "id": 149,
+      "name": "Sylvan",
+      "category": "Combo",
+      "createdAt": "2022-06-20 17:04:11.057305+00",
+      "updatedAt": "2022-06-20 17:04:11.057305+00"
+    },
+    {
+      "id": 150,
+      "name": "Hand Fist",
+      "category": "Aggro",
+      "createdAt": "2022-06-20 17:55:41.354484+00",
+      "updatedAt": "2022-06-20 17:55:41.354484+00"
+    },
+    {
+      "id": 151,
+      "name": "Scrap",
+      "category": "Aggro",
+      "createdAt": "2022-06-20 18:23:35.927713+00",
+      "updatedAt": "2022-06-20 18:23:35.927713+00"
+    },
+    {
+      "id": 152,
+      "name": "Mythic Ruler",
+      "category": "Combo",
+      "createdAt": "2022-06-20 18:37:40.904489+00",
+      "updatedAt": "2022-06-20 18:37:40.904489+00"
+    },
+    {
+      "id": 153,
+      "name": "Hand Dino Traptrix",
+      "category": "Control",
+      "createdAt": "2022-06-20 18:54:52.193244+00",
+      "updatedAt": "2022-06-20 18:54:52.193244+00"
+    },
+    {
+      "id": 157,
+      "name": "Lightsworn Zombie",
+      "category": "Aggro",
+      "createdAt": "2022-06-20 20:44:15.134624+00",
+      "updatedAt": "2022-06-20 20:44:15.134624+00"
+    },
+    {
+      "id": 158,
+      "name": "Hand Fist Artifact Traptrix",
+      "category": "Control",
+      "createdAt": "2022-06-20 20:54:58.058101+00",
+      "updatedAt": "2022-06-20 20:54:58.058101+00"
+    },
+    {
+      "id": 159,
+      "name": "Rock Stun",
+      "category": "Aggro",
+      "createdAt": "2022-06-22 18:33:25.222+00",
+      "updatedAt": "2022-06-22 18:33:25.222+00"
+    },
+    {
+      "id": 161,
+      "name": "Machine Vayu Turbo",
+      "category": "Combo",
+      "createdAt": "2022-06-22 19:11:31.602+00",
+      "updatedAt": "2022-06-22 19:11:31.602+00"
+    },
+    {
+      "id": 160,
+      "name": "Quickdraw Frog",
+      "category": "Control",
+      "createdAt": "2022-06-22 19:01:49.468+00",
+      "updatedAt": "2022-06-22 19:01:49.468+00"
+    },
+    {
+      "id": 162,
+      "name": "Burning Abyss",
+      "category": "Control",
+      "createdAt": "2022-06-22 20:33:14.187+00",
+      "updatedAt": "2022-06-22 20:33:14.187+00"
+    },
+    {
+      "id": 164,
+      "name": "Yang Zing",
+      "category": "Aggro",
+      "createdAt": "2022-06-22 22:30:19.3+00",
+      "updatedAt": "2022-06-22 22:30:19.3+00"
+    },
+    {
+      "id": 165,
+      "name": "Shaddoll",
+      "category": "Control",
+      "createdAt": "2022-06-22 22:33:08.027+00",
+      "updatedAt": "2022-06-22 22:33:08.027+00"
+    },
+    {
+      "id": 166,
+      "name": "Satellarknight",
+      "category": "Control",
+      "createdAt": "2022-06-22 22:42:08.703+00",
+      "updatedAt": "2022-06-22 22:42:08.703+00"
+    },
+    {
+      "id": 169,
+      "name": "Exodia FTK",
+      "category": "Combo",
+      "createdAt": "2022-06-22 23:44:57.911+00",
+      "updatedAt": "2022-06-22 23:44:57.911+00"
+    },
+    {
+      "id": 170,
+      "name": "Dino Rabbit",
+      "category": "Aggro",
+      "createdAt": "2022-06-23 01:42:05.411+00",
+      "updatedAt": "2022-06-23 01:42:05.411+00"
+    },
+    {
+      "id": 171,
+      "name": "Chaos Dragon",
+      "category": "Combo",
+      "createdAt": "2022-06-23 01:49:21.572+00",
+      "updatedAt": "2022-06-23 01:49:21.572+00"
+    },
+    {
+      "id": 174,
+      "name": "Fabled",
+      "category": "Combo",
+      "createdAt": "2022-06-23 04:32:42.98+00",
+      "updatedAt": "2022-06-23 04:32:42.98+00"
+    },
+    {
+      "id": 175,
+      "name": "Rat Toolbox",
+      "category": "Aggro",
+      "createdAt": "2022-06-23 05:39:29.842+00",
+      "updatedAt": "2022-06-23 05:39:29.842+00"
+    },
+    {
+      "id": 176,
+      "name": "Hand Geargia",
+      "category": "Aggro",
+      "createdAt": "2022-06-23 05:58:16.555+00",
+      "updatedAt": "2022-06-23 05:58:16.555+00"
+    },
+    {
+      "id": 177,
+      "name": "Lightsworn Ruler",
+      "category": "Combo",
+      "createdAt": "2022-06-23 06:15:11.652+00",
+      "updatedAt": "2022-06-23 06:15:11.652+00"
+    },
+    {
+      "id": 178,
+      "name": "Ghostrick",
+      "category": "Control",
+      "createdAt": "2022-06-23 06:51:23.094+00",
+      "updatedAt": "2022-06-23 06:51:23.094+00"
+    },
+    {
+      "id": 179,
+      "name": "Dragon Ruler",
+      "category": "Combo",
+      "createdAt": "2022-06-23 07:41:51.571+00",
+      "updatedAt": "2022-06-23 07:41:51.571+00"
+    },
+    {
+      "id": 181,
+      "name": "Fire King",
+      "category": "Aggro",
+      "createdAt": "2022-06-23 17:55:57.113+00",
+      "updatedAt": "2022-06-23 17:55:57.113+00"
+    },
+    {
+      "id": 182,
+      "name": "Harpie",
+      "category": "Aggro",
+      "createdAt": "2022-06-23 18:16:52.094+00",
+      "updatedAt": "2022-06-23 18:16:52.094+00"
+    },
+    {
+      "id": 183,
+      "name": "Bujin",
+      "category": "Aggro",
+      "createdAt": "2022-06-23 18:32:19.09+00",
+      "updatedAt": "2022-06-23 18:32:19.09+00"
+    },
+    {
+      "id": 184,
+      "name": "Dark World",
+      "category": "Combo",
+      "createdAt": "2022-06-23 18:40:05.05+00",
+      "updatedAt": "2022-06-23 18:40:05.05+00"
+    },
+    {
+      "id": 185,
+      "name": "Zombie Plant",
+      "category": "Control",
+      "createdAt": "2022-06-24 04:03:56.669+00",
+      "updatedAt": "2022-06-24 04:03:56.669+00"
+    },
+    {
+      "id": 112,
+      "name": "Inzektor",
+      "category": "Aggro",
+      "createdAt": "2022-06-02 06:31:29.694043+00",
+      "updatedAt": "2022-06-02 06:31:29.694043+00"
+    },
+    {
+      "id": 155,
+      "name": "Anti-Meta Stun",
+      "category": "Aggro",
+      "createdAt": "2022-06-20 19:31:09.255088+00",
+      "updatedAt": "2022-06-20 19:31:09.255088+00"
+    },
+    {
+      "id": 126,
+      "name": "Mataza Aggro",
+      "category": "Aggro",
+      "createdAt": "2022-06-14 00:03:12.858063+00",
+      "updatedAt": "2022-06-14 00:03:12.858063+00"
+    },
+    {
+      "id": 117,
+      "name": "Chaos Monarch",
+      "category": "Control",
+      "createdAt": "2022-06-06 07:45:29.521405+00",
+      "updatedAt": "2022-06-06 07:45:29.521405+00"
+    },
+    {
+      "id": 168,
+      "name": "TeleDAD",
+      "category": "Control",
+      "createdAt": "2022-06-22 23:37:54.939+00",
+      "updatedAt": "2022-06-22 23:37:54.939+00"
+    },
+    {
+      "id": 167,
+      "name": "Zombie TeleDAD",
+      "category": "Control",
+      "createdAt": "2022-06-22 23:30:41.133+00",
+      "updatedAt": "2022-06-22 23:30:41.133+00"
+    },
+    {
+      "id": 25,
+      "name": "Saber Cat",
+      "category": "Combo",
+      "createdAt": "2022-03-29 05:27:27.335+00",
+      "updatedAt": "2022-05-03 05:06:34.66+00"
+    },
+    {
+      "id": 186,
+      "name": "Lightsworn Monarch",
+      "category": "Control",
+      "createdAt": "2022-06-24 04:07:23.276+00",
+      "updatedAt": "2022-06-24 04:07:23.276+00"
+    },
+    {
+      "id": 187,
+      "name": "Quickdraw Flamvell",
+      "category": "Aggro",
+      "createdAt": "2022-06-24 06:06:04.848+00",
+      "updatedAt": "2022-06-24 06:06:04.848+00"
+    },
+    {
+      "id": 188,
+      "name": "Nekroz",
+      "category": "Control",
+      "createdAt": "2022-06-24 06:21:02.907+00",
+      "updatedAt": "2022-06-24 06:21:02.907+00"
+    },
+    {
+      "id": 189,
+      "name": "Ritual Beast",
+      "category": "Aggro",
+      "createdAt": "2022-06-24 06:27:17.263+00",
+      "updatedAt": "2022-06-24 06:27:17.263+00"
+    },
+    {
+      "id": 190,
+      "name": "Masked Hero",
+      "category": "Aggro",
+      "createdAt": "2022-06-24 06:32:59.844+00",
+      "updatedAt": "2022-06-24 06:32:59.844+00"
+    },
+    {
+      "id": 191,
+      "name": "Star Seraph Shaddoll",
+      "category": "Control",
+      "createdAt": "2022-06-24 19:00:17.882+00",
+      "updatedAt": "2022-06-24 19:00:17.882+00"
+    },
+    {
+      "id": 192,
+      "name": "Machine Aggro",
+      "category": "Aggro",
+      "createdAt": "2022-06-24 19:12:33.366+00",
+      "updatedAt": "2022-06-24 19:12:33.366+00"
+    },
+    {
+      "id": 193,
+      "name": "Nordic",
+      "category": "Aggro",
+      "createdAt": "2022-06-24 22:45:03.983+00",
+      "updatedAt": "2022-06-24 22:45:03.983+00"
+    },
+    {
+      "id": 194,
+      "name": "Fusion Gate Hero",
+      "category": "Combo",
+      "createdAt": "2022-06-24 23:00:24.742+00",
+      "updatedAt": "2022-06-24 23:00:24.742+00"
+    },
+    {
+      "id": 195,
+      "name": "Masked Control",
+      "category": "Control",
+      "createdAt": "2022-06-25 01:38:25.345+00",
+      "updatedAt": "2022-06-25 01:38:25.345+00"
+    },
+    {
+      "id": 197,
+      "name": "Goblin Control",
+      "category": "Control",
+      "createdAt": "2022-06-25 01:58:50.993+00",
+      "updatedAt": "2022-06-25 01:58:50.993+00"
+    },
+    {
+      "id": 198,
+      "name": "Madolche",
+      "category": "Control",
+      "createdAt": "2022-06-25 03:48:36.553+00",
+      "updatedAt": "2022-06-25 03:48:36.553+00"
+    },
+    {
+      "id": 199,
+      "name": "Drain Dino Rabbit",
+      "category": "Aggro",
+      "createdAt": "2022-06-25 04:14:17.57+00",
+      "updatedAt": "2022-06-25 04:14:17.57+00"
+    },
+    {
+      "id": 200,
+      "name": "Flamvell Lightsworn",
+      "category": "Aggro",
+      "createdAt": "2022-06-25 04:45:45.449+00",
+      "updatedAt": "2022-06-25 04:45:45.449+00"
+    },
+    {
+      "id": 201,
+      "name": "Crusher Control",
+      "category": "Control",
+      "createdAt": "2022-06-25 05:18:05.105+00",
+      "updatedAt": "2022-06-25 05:18:05.105+00"
+    },
+    {
+      "id": 202,
+      "name": "Volcanic Monarch",
+      "category": "Control",
+      "createdAt": "2022-06-25 06:08:28.816+00",
+      "updatedAt": "2022-06-25 06:08:28.816+00"
+    },
+    {
+      "id": 204,
+      "name": "Neo-Spacian Diva Hero",
+      "category": "Aggro",
+      "createdAt": "2022-06-26 03:29:53.833+00",
+      "updatedAt": "2022-06-26 03:29:53.833+00"
+    },
+    {
+      "id": 205,
+      "name": "Lightsworn Fairy",
+      "category": "Aggro",
+      "createdAt": "2022-06-26 03:33:15.426+00",
+      "updatedAt": "2022-06-26 03:33:15.426+00"
+    },
+    {
+      "id": 206,
+      "name": "Psychic Zombie",
+      "category": "Aggro",
+      "createdAt": "2022-06-26 03:45:49.413+00",
+      "updatedAt": "2022-06-26 03:45:49.413+00"
+    },
+    {
+      "id": 207,
+      "name": "Psychic Diva Frog",
+      "category": "Control",
+      "createdAt": "2022-06-26 03:48:23.593+00",
+      "updatedAt": "2022-06-26 03:48:23.593+00"
+    },
+    {
+      "id": 208,
+      "name": "Vayu Diva Hero",
+      "category": "Control",
+      "createdAt": "2022-06-26 03:50:40.965+00",
+      "updatedAt": "2022-06-26 03:50:40.965+00"
+    },
+    {
+      "id": 271,
+      "name": "Clown Control",
+      "category": "Control",
+      "createdAt": "2022-07-26 20:05:21.076+00",
+      "updatedAt": "2022-07-26 20:05:21.076+00"
+    },
+    {
+      "id": 203,
+      "name": "Diva Hero Zombie",
+      "category": "Aggro",
+      "createdAt": "2022-06-26 03:24:46.693+00",
+      "updatedAt": "2022-06-26 03:24:46.693+00"
+    },
+    {
+      "id": 209,
+      "name": "Machina Gear Hero Beat",
+      "category": "Aggro",
+      "createdAt": "2022-06-26 03:55:35.146+00",
+      "updatedAt": "2022-06-26 03:55:35.146+00"
+    },
+    {
+      "id": 210,
+      "name": "Machina Gear Demise OTK",
+      "category": "Combo",
+      "createdAt": "2022-06-26 03:57:03.481+00",
+      "updatedAt": "2022-06-26 03:57:03.481+00"
+    },
+    {
+      "id": 211,
+      "name": "Synchro Warrior",
+      "category": "Aggro",
+      "createdAt": "2022-06-26 04:01:03.201+00",
+      "updatedAt": "2022-06-26 04:01:03.201+00"
+    },
+    {
+      "id": 212,
+      "name": "Ancient Gear Plant",
+      "category": "Combo",
+      "createdAt": "2022-06-26 04:09:34.126+00",
+      "updatedAt": "2022-06-26 04:09:34.126+00"
+    },
+    {
+      "id": 213,
+      "name": "Hieratic",
+      "category": "Aggro",
+      "createdAt": "2022-06-27 02:40:53.104+00",
+      "updatedAt": "2022-06-27 02:40:53.104+00"
+    },
+    {
+      "id": 214,
+      "name": "Cannon Burn",
+      "category": "Aggro",
+      "createdAt": "2022-06-27 03:13:21.549+00",
+      "updatedAt": "2022-06-27 03:13:21.549+00"
+    },
+    {
+      "id": 215,
+      "name": "Geargia Karakuri",
+      "category": "Aggro",
+      "createdAt": "2022-06-27 04:05:47.322+00",
+      "updatedAt": "2022-06-27 04:05:47.322+00"
+    },
+    {
+      "id": 216,
+      "name": "Spirit Chaos",
+      "category": "Control",
+      "createdAt": "2022-06-27 04:34:28.069+00",
+      "updatedAt": "2022-06-27 04:34:28.069+00"
+    },
+    {
+      "id": 217,
+      "name": "Naturia",
+      "category": "Control",
+      "createdAt": "2022-06-27 17:17:02.252+00",
+      "updatedAt": "2022-06-27 17:17:02.252+00"
+    },
+    {
+      "id": 218,
+      "name": "Worm",
+      "category": "Aggro",
+      "createdAt": "2022-06-27 17:32:59.367+00",
+      "updatedAt": "2022-06-27 17:32:59.367+00"
+    },
+    {
+      "id": 219,
+      "name": "Counter Fairy",
+      "category": "Control",
+      "createdAt": "2022-06-27 17:51:39.141+00",
+      "updatedAt": "2022-06-27 17:51:39.141+00"
+    },
+    {
+      "id": 221,
+      "name": "Dark World Archfiend",
+      "category": "Aggro",
+      "createdAt": "2022-06-27 19:18:31.019+00",
+      "updatedAt": "2022-06-27 19:18:31.019+00"
+    },
+    {
+      "id": 222,
+      "name": "Gishki Hieratic",
+      "category": "Combo",
+      "createdAt": "2022-06-27 19:27:08.238+00",
+      "updatedAt": "2022-06-27 19:27:08.238+00"
+    },
+    {
+      "id": 223,
+      "name": "Spaceship",
+      "category": "Aggro",
+      "createdAt": "2022-06-28 07:22:58.139+00",
+      "updatedAt": "2022-06-28 07:22:58.139+00"
+    },
+    {
+      "id": 224,
+      "name": "Nurse Burn",
+      "category": "Combo",
+      "createdAt": "2022-06-28 07:32:12.611+00",
+      "updatedAt": "2022-06-28 07:32:12.611+00"
+    },
+    {
+      "id": 225,
+      "name": "Spirit Ghostrick",
+      "category": "Control",
+      "createdAt": "2022-06-28 17:14:14.352+00",
+      "updatedAt": "2022-06-28 17:14:14.352+00"
+    },
+    {
+      "id": 226,
+      "name": "Exodia",
+      "category": "Combo",
+      "createdAt": "2022-06-28 18:24:08.193+00",
+      "updatedAt": "2022-06-28 18:24:08.193+00"
+    },
+    {
+      "id": 227,
+      "name": "Umi Beatdown",
+      "category": "Aggro",
+      "createdAt": "2022-06-28 18:26:35.487+00",
+      "updatedAt": "2022-06-28 18:26:35.487+00"
+    },
+    {
+      "id": 228,
+      "name": "Chaos Ninja",
+      "category": "Aggro",
+      "createdAt": "2022-06-28 18:49:28.422+00",
+      "updatedAt": "2022-06-28 18:49:28.422+00"
+    },
+    {
+      "id": 229,
+      "name": "Catapult OTK",
+      "category": "Combo",
+      "createdAt": "2022-06-29 05:46:14.764+00",
+      "updatedAt": "2022-06-29 05:46:14.764+00"
+    },
+    {
+      "id": 231,
+      "name": "Fusion Burn",
+      "category": "Combo",
+      "createdAt": "2022-06-29 17:47:27.236+00",
+      "updatedAt": "2022-06-29 17:47:27.236+00"
+    },
+    {
+      "id": 234,
+      "name": "Invoked Windwitch",
+      "category": "Combo",
+      "createdAt": "2022-06-29 20:52:40.968+00",
+      "updatedAt": "2022-06-29 20:52:40.968+00"
+    },
+    {
+      "id": 272,
+      "name": "Emissary Control",
+      "category": "Control",
+      "createdAt": "2022-07-26 20:10:11.565+00",
+      "updatedAt": "2022-07-26 20:10:11.565+00"
+    },
+    {
+      "id": 235,
+      "name": "True Draco Zoodiac",
+      "category": "Control",
+      "createdAt": "2022-06-29 20:57:46.749+00",
+      "updatedAt": "2022-06-29 20:57:46.749+00"
+    },
+    {
+      "id": 233,
+      "name": "True Draco",
+      "category": "Aggro",
+      "createdAt": "2022-06-29 20:48:36.007+00",
+      "updatedAt": "2022-06-29 20:48:36.007+00"
+    },
+    {
+      "id": 232,
+      "name": "Zoodiac",
+      "category": "Control",
+      "createdAt": "2022-06-29 20:40:17.935+00",
+      "updatedAt": "2022-06-29 20:40:17.935+00"
+    },
+    {
+      "id": 236,
+      "name": "Twilight",
+      "category": "Aggro",
+      "createdAt": "2022-07-03 01:49:08.136+00",
+      "updatedAt": "2022-07-03 01:49:08.136+00"
+    },
+    {
+      "id": 237,
+      "name": "Chaos Ghostrick",
+      "category": "Control",
+      "createdAt": "2022-07-04 17:44:17.991+00",
+      "updatedAt": "2022-07-04 17:44:17.991+00"
+    },
+    {
+      "id": 240,
+      "name": "Psychic",
+      "category": "Control",
+      "createdAt": "2022-07-11 05:25:04.953+00",
+      "updatedAt": "2022-07-11 05:25:04.953+00"
+    },
+    {
+      "id": 241,
+      "name": "Chaos Plant",
+      "category": "Control",
+      "createdAt": "2022-07-11 05:28:09.01+00",
+      "updatedAt": "2022-07-11 05:28:09.01+00"
+    },
+    {
+      "id": 242,
+      "name": "Hieratic Ruler",
+      "category": "Aggro",
+      "createdAt": "2022-07-12 19:25:58.895+00",
+      "updatedAt": "2022-07-12 19:25:58.895+00"
+    },
+    {
+      "id": 243,
+      "name": "Bujin Fist",
+      "category": "Aggro",
+      "createdAt": "2022-07-12 19:36:16.132+00",
+      "updatedAt": "2022-07-12 19:36:16.132+00"
+    },
+    {
+      "id": 244,
+      "name": "Goat Burn",
+      "category": "Lockdown",
+      "createdAt": "2022-07-14 22:58:31.514+00",
+      "updatedAt": "2022-07-14 22:58:31.514+00"
+    },
+    {
+      "id": 245,
+      "name": "Strike Ninja Return",
+      "category": "Aggro",
+      "createdAt": "2022-07-15 04:34:07.544+00",
+      "updatedAt": "2022-07-15 04:34:07.544+00"
+    },
+    {
+      "id": 246,
+      "name": "Crane Turbo",
+      "category": "Control",
+      "createdAt": "2022-07-15 04:51:46.037+00",
+      "updatedAt": "2022-07-15 04:51:46.037+00"
+    },
+    {
+      "id": 247,
+      "name": "Chaos Zombie",
+      "category": "Aggro",
+      "createdAt": "2022-07-15 07:52:38.258+00",
+      "updatedAt": "2022-07-15 07:52:38.258+00"
+    },
+    {
+      "id": 248,
+      "name": "Machina Roid",
+      "category": "Aggro",
+      "createdAt": "2022-07-18 00:12:00.693+00",
+      "updatedAt": "2022-07-18 00:12:00.693+00"
+    },
+    {
+      "id": 249,
+      "name": "Fabled Ghostrick",
+      "category": "Control",
+      "createdAt": "2022-07-18 00:20:41.419+00",
+      "updatedAt": "2022-07-18 00:20:41.419+00"
+    },
+    {
+      "id": 250,
+      "name": "Umbral",
+      "category": "Aggro",
+      "createdAt": "2022-07-18 00:42:06.799+00",
+      "updatedAt": "2022-07-18 00:42:06.799+00"
+    },
+    {
+      "id": 251,
+      "name": "Raccoon",
+      "category": "Combo",
+      "createdAt": "2022-07-18 00:44:20.656+00",
+      "updatedAt": "2022-07-18 00:44:20.656+00"
+    },
+    {
+      "id": 252,
+      "name": "Chaos Shaddoll",
+      "category": "Control",
+      "createdAt": "2022-07-21 17:08:29.853+00",
+      "updatedAt": "2022-07-21 17:08:29.853+00"
+    },
+    {
+      "id": 253,
+      "name": "Water Monarch",
+      "category": "Control",
+      "createdAt": "2022-07-22 05:57:25.607+00",
+      "updatedAt": "2022-07-22 05:57:25.607+00"
+    },
+    {
+      "id": 254,
+      "name": "Drain Zombie",
+      "category": "Aggro",
+      "createdAt": "2022-07-22 07:10:26.658+00",
+      "updatedAt": "2022-07-22 07:10:26.658+00"
+    },
+    {
+      "id": 255,
+      "name": "Wind Beat",
+      "category": "Aggro",
+      "createdAt": "2022-07-22 07:28:22.501+00",
+      "updatedAt": "2022-07-22 07:28:22.501+00"
+    },
+    {
+      "id": 256,
+      "name": "Water Return",
+      "category": "Aggro",
+      "createdAt": "2022-07-22 20:15:59.226+00",
+      "updatedAt": "2022-07-22 20:15:59.226+00"
+    },
+    {
+      "id": 257,
+      "name": "Coin Control",
+      "category": "Control",
+      "createdAt": "2022-07-23 06:32:54.737+00",
+      "updatedAt": "2022-07-23 06:32:54.737+00"
+    },
+    {
+      "id": 258,
+      "name": "Stein Monarch",
+      "category": "Combo",
+      "createdAt": "2022-07-23 06:38:24.215+00",
+      "updatedAt": "2022-07-23 06:38:24.215+00"
+    },
+    {
+      "id": 259,
+      "name": "Ladybug Control",
+      "category": "Control",
+      "createdAt": "2022-07-23 18:55:18.402+00",
+      "updatedAt": "2022-07-23 18:55:18.402+00"
+    },
+    {
+      "id": 260,
+      "name": "Light Return",
+      "category": "Aggro",
+      "createdAt": "2022-07-24 02:39:43.769+00",
+      "updatedAt": "2022-07-24 02:39:43.769+00"
+    },
+    {
+      "id": 261,
+      "name": "Plant",
+      "category": "Control",
+      "createdAt": "2022-07-24 06:27:32.551+00",
+      "updatedAt": "2022-07-24 06:27:32.551+00"
+    },
+    {
+      "id": 262,
+      "name": "Zombie Stun",
+      "category": "Aggro",
+      "createdAt": "2022-07-24 06:43:24.283+00",
+      "updatedAt": "2022-07-24 06:43:24.283+00"
+    },
+    {
+      "id": 263,
+      "name": "Insect",
+      "category": "Aggro",
+      "createdAt": "2022-07-24 22:05:00.967+00",
+      "updatedAt": "2022-07-24 22:05:00.967+00"
+    },
+    {
+      "id": 264,
+      "name": "Chaos Burn",
+      "category": "Aggro",
+      "createdAt": "2022-07-25 01:41:23.095+00",
+      "updatedAt": "2022-07-25 01:41:23.095+00"
+    },
+    {
+      "id": 265,
+      "name": "Ben Kei OTK",
+      "category": "Combo",
+      "createdAt": "2022-07-25 01:47:34.489+00",
+      "updatedAt": "2022-07-25 01:47:34.489+00"
+    },
+    {
+      "id": 266,
+      "name": "Manticore Turbo",
+      "category": "Combo",
+      "createdAt": "2022-07-25 01:57:39.363+00",
+      "updatedAt": "2022-07-25 01:57:39.363+00"
+    },
+    {
+      "id": 267,
+      "name": "Flip Warrior",
+      "category": "Aggro",
+      "createdAt": "2022-07-26 19:07:35.596+00",
+      "updatedAt": "2022-07-26 19:07:35.596+00"
+    },
+    {
+      "id": 268,
+      "name": "Spellcaster Control",
+      "category": "Control",
+      "createdAt": "2022-07-26 19:13:15.587+00",
+      "updatedAt": "2022-07-26 19:13:15.587+00"
+    },
+    {
+      "id": 269,
+      "name": "Final Countdown",
+      "category": "Lockdown",
+      "createdAt": "2022-07-26 19:15:52.094+00",
+      "updatedAt": "2022-07-26 19:15:52.094+00"
+    },
+    {
+      "id": 270,
+      "name": "Gladiator Fist",
+      "category": "Aggro",
+      "createdAt": "2022-07-26 20:04:46.555+00",
+      "updatedAt": "2022-07-26 20:04:46.555+00"
+    }
+   ]
