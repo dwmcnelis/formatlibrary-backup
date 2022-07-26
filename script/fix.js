@@ -1384,44 +1384,44 @@ const addCardDetails = async () => {
                 card.sortPriority = 9
                 await card.save()
                 a++
-            } else if (card.pendulum && card.effect) {
-                card.color = 'orange-green'
-                card.extraDeck = false
-                card.sortPriority = 8
-                await card.save()
-                a++
-            } else if (card.pendulum && !card.effect) {
-                card.color = 'yellow-green'
-                card.extraDeck = false
-                card.sortPriority = 7
-                await card.save()
-                a++
             } else if (card.xyz) {
                 card.color = 'black'
                 card.extraDeck = true
-                card.sortPriority = 6
+                card.sortPriority = 8
                 await card.save()
                 a++
             } else if (card.synchro) {
                 card.color = 'white'
                 card.extraDeck = true
-                card.sortPriority = 5
-                await card.save()
-                a++
-            } else if (card.ritual) {
-                card.color = 'light-blue'
-                card.extraDeck = false
-                card.sortPriority = 4
+                card.sortPriority = 7
                 await card.save()
                 a++
             } else if (card.fusion) {
                 card.color = 'purple'
                 card.extraDeck = true
-                card.sortPriority = 3
+                card.sortPriority = 6
+                await card.save()
+                a++
+            } else if (card.ritual) {
+                card.color = 'light-blue'
+                card.extraDeck = false
+                card.sortPriority = 5
+                await card.save()
+                a++
+            } else if (card.pendulum && card.effect) {
+                card.color = 'orange-green'
+                card.extraDeck = false
+                card.sortPriority = 4
                 await card.save()
                 a++
             } else if (card.effect) {
                 card.color = 'orange'
+                card.extraDeck = false
+                card.sortPriority = 3
+                await card.save()
+                a++
+            } else if (card.pendulum && !card.effect) {
+                card.color = 'yellow-green'
                 card.extraDeck = false
                 card.sortPriority = 2
                 await card.save()
@@ -1438,7 +1438,6 @@ const addCardDetails = async () => {
 
     return console.log(`updated ${a} cards`)
 }
-
 
 //GET DECK TYPE
 const getDeckType = (raw = '', format = 'Goat') => {
@@ -2082,8 +2081,8 @@ const fixDecks = async () => {
     return console.log(`fixed ${b} decks`)
 }
 
-
-fixDecks()
+addCardDetails()
+// fixDecks()
 // fixBlogPosts()
 // fixEvents()
 // fixDeckThumbs()
