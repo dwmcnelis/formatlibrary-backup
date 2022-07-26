@@ -1,11 +1,9 @@
 
 const router = require('express').Router()
-const {Op} = require('sequelize')
-const {Card, Status} = require('../db/models')
+const {Status} = require('../db/models')
 
 module.exports = router
 
-/* eslint-disable complexity */
 router.get('/query', async (req, res, next) => {
   try {
     const status = await Status.findOne({

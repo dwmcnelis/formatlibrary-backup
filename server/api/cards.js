@@ -1,5 +1,4 @@
-/* eslint-disable max-statements */
-/* eslint-disable complexity */
+
 const router = require('express').Router()
 const {Card, Print, Set, Status} = require('../db/models')
 const {Op} = require('sequelize')

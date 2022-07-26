@@ -48,7 +48,6 @@ router.get('/community/:community', async (req, res, next) => {
   }
 })
 
-/* eslint-disable complexity */
 router.get('/recent/:format', async (req, res, next) => {
   try {
       const events = await Event.findAll({ 
@@ -79,7 +78,6 @@ router.get('/recent/:format', async (req, res, next) => {
   }
 })
 
-/* eslint-disable complexity */
 router.get('/first/:x', async (req, res, next) => {
     try {
         const events = await Event.findAll({ 
@@ -87,7 +85,7 @@ router.get('/first/:x', async (req, res, next) => {
             attributes: ['id', 'name', 'abbreviation', 'formatName', 'formatId', 'size', 'winner', 'playerId', 'community', 'startDate', 'endDate'],
             include: [
                 { model: Format, attributes: ['id', 'name', 'icon'] },
-                { model: Player, attributes: ['name', 'tag', 'avatar'] }
+                { model: Player, attributes: ['id', 'name', 'tag', 'avatar'] }
             ],
             order: [['startDate', 'DESC']],
             limit: req.params.x
@@ -108,7 +106,7 @@ router.get('/:id', async (req, res, next) => {
       attributes: ['id', 'name', 'abbreviation', 'formatName', 'formatId', 'size', 'winner', 'playerId', 'community', 'startDate', 'endDate'],
       include: [
           { model: Format, attributes: ['id', 'name', 'icon'] },
-          { model: Player, attributes: ['name', 'tag', 'avatar'] }
+          { model: Player, attributes: ['id', 'name', 'tag', 'avatar'] }
       ]
     })
 

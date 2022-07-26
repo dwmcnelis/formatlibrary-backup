@@ -70,7 +70,6 @@ const convertToTitle = (param = '') => {
                       margin='0px'
                       key={el.card.id} 
                       card={el.card}
-                      status="forbidden"
                     />
                   )
                   }
@@ -92,7 +91,6 @@ const convertToTitle = (param = '') => {
               margin='0px'
               key={el.card.id} 
               card={el.card}
-              status="limited"
             />
           )
           }
@@ -110,7 +108,6 @@ const convertToTitle = (param = '') => {
                 margin='0px'
                 key={el.card.id}
                 card={el.card}
-                status="semiLimited"
               />
             )
           }

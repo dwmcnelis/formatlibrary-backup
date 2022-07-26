@@ -5,7 +5,6 @@ const {Player, Stats} = require('../db/models')
 
 module.exports = router
 
-/* eslint-disable complexity */
 router.get('/leaders/:limit/:format', async (req, res, next) => {
   try {
     const stats = await Stats.findAll({
@@ -15,8 +14,8 @@ router.get('/leaders/:limit/:format', async (req, res, next) => {
         serverId: '414551319031054346',
         '$player.blacklisted$': false
       },
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
-      include: [{ model: Player, attributes: { exclude: ['id', 'password', 'blacklisted', 'createdAt', 'updatedAt']} }],
+      attributes: ['id', 'format', 'elo', 'wins', 'losses', 'playerId'],
+      include: [{ model: Player, attributes: ['id', 'name', 'tag', 'avatar'] }],
       limit: parseInt(req.params.limit) || 10,
       order: [['elo', 'DESC']]
     })
@@ -35,7 +34,7 @@ router.get('/:playerId', async (req, res, next) => {
         games: {[Op.gte]: 3},
         serverId: '414551319031054346'
       },
-      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      attributes: ['id', 'format', 'elo', 'wins', 'losses', 'playerId'],
       order: [['elo', 'DESC']],
       limit: 10
     })
@@ -46,14 +45,4 @@ router.get('/:playerId', async (req, res, next) => {
   }
 })
 
-
-/* eslint-disable complexity */
-// router.get('/', async (req, res, next) => {
-//   try {
-//     const stats = await Stats.findAll()
-//     res.json(stats)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
 

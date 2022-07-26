@@ -4,7 +4,6 @@ const {BlogPost} = require('../db/models')
 
 module.exports = router
 
-/* eslint-disable complexity */
 router.get('/all', async (req, res, next) => {
   try {
     const blogposts = await BlogPost.findAll({

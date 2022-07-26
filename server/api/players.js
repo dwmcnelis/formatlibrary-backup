@@ -1,11 +1,10 @@
 
 const router = require('express').Router()
-const {Player, Stats} = require('../db/models')
+const {Player} = require('../db/models')
 const {Op} = require('sequelize')
 
 module.exports = router
 
-/* eslint-disable complexity */
 router.get('/query/:query', async (req, res, next) => {
   try {
     const players = await Player.findAll({
@@ -50,7 +49,6 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-/* eslint-disable complexity */
 router.get('/', async (req, res, next) => {
   try {
     const players = await Player.findAll({

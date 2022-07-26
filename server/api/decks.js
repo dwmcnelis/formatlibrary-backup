@@ -1,11 +1,9 @@
 
 const router = require('express').Router()
-const {Card, Deck, DeckThumb, DeckType, Format, Player, Status} = require('../db/models')
+const {Card, Deck, DeckThumb, DeckType, Format, Player} = require('../db/models')
 const {Op} = require('sequelize')
 
 module.exports = router
-
-/* eslint-disable complexity */
 
 router.get('/popular/:format', async (req, res, next) => {
     try {
@@ -121,7 +119,6 @@ router.get('/gallery/:format', async (req, res, next) => {
     }
 })
 
-/* eslint-disable complexity */
 router.get('/frequent/:id', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
@@ -180,7 +177,6 @@ router.get('/frequent/:id', async (req, res, next) => {
     }
 })
 
-/* eslint-disable complexity */
 router.get('/player/:id', async (req, res, next) => {
     try {
         const decks = await Deck.findAll({ 
@@ -198,7 +194,6 @@ router.get('/player/:id', async (req, res, next) => {
     }
 })
 
-/* eslint-disable complexity */
 router.get('/like/:id', async (req, res, next) => {
     try {
         const deck = await Deck.findOne({ 
@@ -217,7 +212,6 @@ router.get('/like/:id', async (req, res, next) => {
     }
 })
 
-/* eslint-disable complexity */
 router.get('/download/:id', async (req, res, next) => {
     try {
         const deck = await Deck.findOne({ 
@@ -248,7 +242,7 @@ router.get('/all', async (req, res, next) => {
 
         const decks = await Deck.findAll({ 
             where: { display: isAdmin ? {[Op.any]: [true, false]} : true },
-            attributes: ['id', 'builder', 'type', 'category', 'formatName', 'formatId', 'community', 'eventName', 'eventId', 'eventDate', 'placement', 'downloads', 'views', 'rating'],
+            attributes: ['id', 'builder', 'playerId', 'type', 'category', 'formatName', 'formatId', 'community', 'eventName', 'eventId', 'eventDate', 'placement', 'downloads', 'views', 'rating'],
             order: [['eventDate', 'DESC'], ['placement', 'ASC'], ['builder', 'ASC']],
             include: [
                 { model: Format, attributes: ['id', 'name', 'icon']},
@@ -262,7 +256,6 @@ router.get('/all', async (req, res, next) => {
     }
 })
 
-/* eslint-disable complexity */
 router.get('/first/:x', async (req, res, next) => {
     try {
         const isAdmin = await Player.count({
@@ -275,7 +268,7 @@ router.get('/first/:x', async (req, res, next) => {
 
         const decks = await Deck.findAll({ 
             where: { display: isAdmin ? {[Op.any]: [true, false]} : true },
-            attributes: ['id', 'builder', 'type', 'category', 'formatName', 'formatId', 'community', 'eventName', 'eventId', 'eventDate', 'placement', 'downloads', 'views', 'rating'],
+            attributes: ['id', 'builder', 'playerId', 'type', 'category', 'formatName', 'formatId', 'community', 'eventName', 'eventId', 'eventDate', 'placement', 'downloads', 'views', 'rating'],
             order: [['eventDate', 'DESC'], ['placement', 'ASC'], ['builder', 'ASC']],
             include: [
                 { model: Format, attributes: ['id', 'name', 'icon']},
@@ -290,7 +283,6 @@ router.get('/first/:x', async (req, res, next) => {
     }
 })
 
-/* eslint-disable complexity */
 router.get('/:id', async (req, res, next) => {
     try {
         const isAdmin = await Player.count({
@@ -306,9 +298,9 @@ router.get('/:id', async (req, res, next) => {
                 id: req.params.id,
                 display: isAdmin ? {[Op.any]: [true, false]} : true
             }, 
-            attributes: ['id', 'ydk', 'builder', 'type', 'category', 'formatName', 'formatId', 'community', 'eventName', 'eventId', 'eventDate', 'placement', 'downloads', 'views', 'rating'],            
+            attributes: ['id', 'ydk', 'builder', 'playerId', 'type', 'category', 'formatName', 'formatId', 'community', 'eventName', 'eventId', 'eventDate', 'placement', 'downloads', 'views', 'rating'],            
             include: [
-                { model: Format, attributes: ['id', 'name', 'icon']},
+                { model: Format, attributes: ['id', 'name', 'icon', 'banlist']},
                 { model: Player, attributes: ['id', 'name', 'tag', 'avatar']}
             ],
         })
