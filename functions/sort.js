@@ -34,14 +34,14 @@ const nameDESC = (a, b) => {
 }
 
 const uploadedASC = (a, b) => {
-    if (a.createdAt < b.createdAt) return -1
-    if (a.createdAt > b.createdAt) return 1
+    if (a.eventDate < b.eventDate) return -1
+    if (a.eventDate > b.eventDate) return 1
     return 0
 }
 
 const uploadedDESC = (a, b) => {
-    if (a.createdAt < b.createdAt) return 1
-    if (a.createdAt > b.createdAt) return -1
+    if (a.eventDate < b.eventDate) return 1
+    if (a.eventDate > b.eventDate) return -1
     return 0
 }
 

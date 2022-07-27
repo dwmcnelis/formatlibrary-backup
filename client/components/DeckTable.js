@@ -254,10 +254,10 @@ const DeckTable = (props) => {
           </select>
 
           <select
-            id="deckCategory"
+            id="category"
             defaultValue="All Categories"
             className="filter"
-            onChange={(e) => setQueryParams({ ...queryParams, deckCategory: e.target.value })}
+            onChange={(e) => setQueryParams({ ...queryParams, category: e.target.value })}
           >
             <option value="All Categories">All Categories</option>
             <option value="Aggro">Aggro</option>
