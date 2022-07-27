@@ -10,7 +10,7 @@ module.exports = router
 router.get('/all', async (req, res, next) => {
     try {
         const deckTypes = await DeckType.findAll({
-            attributes: ['id', 'name'],
+            attributes: ['id', 'name', 'category'],
             order: [['name', 'ASC']]
         })
     
