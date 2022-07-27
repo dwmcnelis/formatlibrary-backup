@@ -7,7 +7,7 @@ const ygoprodeck = require('../static/ygoprodeck.json')
 const sets = require('../static/sets.json')
 const { Op } = require('sequelize')
 const { capitalize, arrayToObject } = require('../functions/utility')
-const { challongeAPIKeys, tcgPlayerAPI } = require('../secrets')
+const config = require('../../config')
 const { 
     accum, aggolem, airbellum, alius, alo, andal, angel, archfiend, arma, artemis, barrel, batteries, bazoo, bear, ben_kei, bfadd, bigbang, bigshield, blackgarden, blade,
     bls, boomboxen, brain, bubbleman, bushi, bwc, caius, canceller, cannon, cardd, castor, cat, catapult, celfon, chariot, codarus, coelacanth, 
@@ -1129,7 +1129,7 @@ const fixCollectorsRares = async () => {
             const { data } = await axios.get(endpoint, {
                 headers: {
                     "Accept": "application/json",
-                    "Authorization": `bearer ${tcgPlayerAPI.access_token}`
+                    "Authorization": `bearer ${config.tcgPlayer.accessToken}`
                 }
             })
 
@@ -1171,7 +1171,7 @@ const fixAs = async () => {
             const { data } = await axios.get(endpoint, {
                 headers: {
                     "Accept": "application/json",
-                    "Authorization": `bearer ${tcgPlayerAPI.access_token}`
+                    "Authorization": `bearer ${config.tcgPlayer.accessToken}`
                 }
             })
 
@@ -1229,7 +1229,7 @@ const fixHeros = async () => {
             const { data } = await axios.get(endpoint, {
                 headers: {
                     "Accept": "application/json",
-                    "Authorization": `bearer ${tcgPlayerAPI.access_token}`
+                    "Authorization": `bearer ${config.tcgPlayer.accessToken}`
                 }
             })
 
@@ -1320,7 +1320,7 @@ const fixGhosts = async () => {
             const { data } = await axios.get(endpoint, {
                 headers: {
                     "Accept": "application/json",
-                    "Authorization": `bearer ${tcgPlayerAPI.access_token}`
+                    "Authorization": `bearer ${config.tcgPlayer.accessToken}`
                 }
             })
 

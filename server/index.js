@@ -1,4 +1,5 @@
 
+const config = require('../config')
 const fs = require('fs')
 const http = require('http')
 const https = require('https')
@@ -13,8 +14,7 @@ const db = require('./db')
 const api = require('./api')
 const auth = require('./auth')
 const sessionStore = new SequelizeStore({ db })
-const onAWS = fs.existsSync('certs/privkey.pem')
-const PORT = onAWS ? 443 : 8080
+const PORT = config.server.port
 const app = express()
 module.exports = app
 let httpServer
@@ -25,16 +25,6 @@ let httpsServer
 if (process.env.NODE_ENV === 'test') {
 	after('close the session store', () => sessionStore.stopExpiringSessions())
 }
-
-/**
- * In your development environment, you can keep all of your
- * app's secret API keys in a file called `secrets.js`, in your project
- * root. This file is included in the .gitignore - it will NOT be tracked
- * or show up on Github. On your production server, you can add these
- * keys as environment variables, so that they can still be read by the
- * Node process on process.env
- */
-if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 // // passport registration
 // passport.serializeUser((user, done) => done(null, user.id))
@@ -54,8 +44,8 @@ const createApp = () => {
 	app.use(morgan('dev'))
 
 	// body parsing middleware
-	app.use(express.json({limit: '1mb'}))
-	app.use(express.urlencoded({ extended: true, limit: '1mb'}))
+	app.use(express.json({ limit: '1mb' }))
+	app.use(express.urlencoded({ extended: true, limit: '1mb' }))
 
 	// compression middleware
 	app.use(compression())
@@ -128,13 +118,13 @@ const startListening = () => {
 	// const server = app.listen(PORT, () =>
 	// 	console.log(`Mixing it up on port ${PORT}`)
 	// )
-	if (onAWS) {
+	if (config.server.http === '1' || config.server.http === 'true') {
 		const server = httpsServer.listen(PORT, () =>
-			console.log(`Mixing it up on port ${PORT}`)
+			console.log(`Listening on https://${config.server.host ? config.server.host : '0.0.0.0'}:${PORT}`)
 		)
 	} else {
 		const server = httpServer.listen(PORT, () =>
-			console.log(`Testing things out on port ${PORT}`)
+			console.log(`Listening on http://${config.server.host ? config.server.host : '0.0.0.0'}:${PORT}`)
 		)
 	}
 }
