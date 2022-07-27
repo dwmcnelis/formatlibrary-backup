@@ -36,6 +36,7 @@ const Routes = () => {
       <Route exact path="/goat-card-pool.html" component={CardTable} />
       <Route exact path="/goat-card-pool" component={CardTable} />
       <Route exact path="/cards/" component={CardTable} />
+      <Route path="/cards?format=:id" component={CardTable} />
       <Route path="/cards/:id" component={SingleCard} />
       <Route exact path="/goat-deck-gallery"><Redirect to="/gallery/Goat"/></Route>
       <Route exact path="/decks/" component={DeckTable} />

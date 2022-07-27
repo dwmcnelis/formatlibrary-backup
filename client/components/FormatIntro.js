@@ -53,6 +53,13 @@ const FormatIntro = (props = {}) => {
           {
             deckCount ? (
               <li>
+                <a href={`/gallery/${format.name}`}>Deck Gallery</a>
+              </li>
+            ) : ''
+          }
+          {
+            deckCount ? (
+              <li>
                 <a href="#popular-decks">Popular Decks</a>
               </li>
             ) : ''
@@ -67,10 +74,13 @@ const FormatIntro = (props = {}) => {
           {
             statsCount ? (
               <li>
-                <a href="#leaderboard">Leaderboard</a>
+                <a href={`/leaderboards/${format.name}`}>Leaderboard</a>
               </li>
             ) : ''
           }
+          <li>
+            <a href={`/cards?format=${format.name}`}>Card Pool</a>
+          </li>
           <li>
             <a href="#banlist">Ban List</a>
           </li>

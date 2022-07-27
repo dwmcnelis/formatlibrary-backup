@@ -13,7 +13,7 @@ import { Calendar, Shield, Swords } from '../../public/images/emojis'
 import axios from 'axios'
 import { capitalize } from '../../functions/utility'
 
-const CardTable = () => {
+const CardTable = (props) => {
   const now = new Date()
   const year = now.getFullYear()
   const [page, setPage] = useState(1)
@@ -275,7 +275,6 @@ const CardTable = () => {
     if (e.target.value.length) {
       const {data} = await axios.get(`/api/formats/${e.target.value}`) 
       setFormat(data.format)
-
     } else {
       setFormat({})
     }
@@ -344,10 +343,11 @@ const CardTable = () => {
   useEffect(() => {
     if (firstXFetched && !allFetched) {
       const fetchData = async () => {
-        const {data} = await axios.get(`/api/cards/all`)
-        setCards(data)
-        setFilteredCards([...data])
-        setAllFetched(true)
+          const {data} = await axios.get(`/api/cards/all`)
+          setCards(data)
+          setFilteredCards([...data])
+          setAllFetched(true)
+          if (props.location && props.location.search) updateFormat({target: { value: props.location.search.slice(8)} })
       } 
 
       fetchData()
@@ -494,17 +494,21 @@ const CardTable = () => {
             <option value="Trap">Traps</option>
           </select>
 
-          <select
-            id="format"
-            defaultValue=""
-            className="filter"
-            onChange={(e) => updateFormat(e)}
-          >
-            <option key="All Formats" value="">All Formats</option>
-            {
-              formats.map((f) => <option key={f.name} value={f.name}>{capitalize(f.name, true)}</option>)
-            }
-          </select>
+          {
+            props.location && props.location.search ? '' : (
+              <select
+              id="format"
+              defaultValue=""
+              className="filter"
+              onChange={(e) => updateFormat(e)}
+              >
+              <option key="All Formats" value="">All Formats</option>
+              {
+                formats.map((f) => <option key={f.name} value={f.name}>{capitalize(f.name, true)}</option>)
+              }
+              </select>
+            )
+          }
 
           <a
             className="searchButton"
