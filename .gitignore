@@ -3,6 +3,7 @@ node_modules
 public/bundle.js
 public/bundle.js.map
 public/decks
+public/iamges
 public/images/decks/*
 public/images/cards
 public/images/pfps
