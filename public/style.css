@@ -644,8 +644,16 @@ h1 {
   position: absolute;
   z-index: 1;
   width: 33% !important;
-  top: 2px;
-  left: 2px;
+  top: 1%;
+  left: 2.5%;
+}
+
+.small-status-icon {
+  position: relative;
+  z-index: 1;
+  width: 10%;
+  top:  10px;
+  left:  20px;
 }
 
 .CardImages, .SmallCardImages {

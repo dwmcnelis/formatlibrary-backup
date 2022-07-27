@@ -14,7 +14,7 @@ router.get('/query/:query', async (req, res, next) => {
           {realName: {[Op.substring]: req.params.query}}
         ]
       },
-      attributes: ['id', 'name'],
+      attributes: ['id', 'name', 'realName'],
       order: [['name', 'ASC']]
     })
 

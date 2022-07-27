@@ -24,10 +24,12 @@ const CardTable = (props) => {
   const [sortBy, setSortBy] = useState(null)
   const [formats, setFormats] = useState([])
   const [format, setFormat] = useState({})
+  const [banlist, setBanlist] = useState({})
   const [firstXFetched, setFirstXFetched] = useState(false)
   const [allFetched, setAllFetched] = useState(false)
   const [advanced, setAdvanced] = useState(false)
   const [cutoff, setCutoff] = useState(`${year}-12-31`)
+  console.log(banlist)
 
   const [sliders, setSliders] = useState({
     year: year,
@@ -354,16 +356,27 @@ const CardTable = (props) => {
     }
   }, [firstXFetched])
 
-  // USE EFFECT SET CUTOFF IF FORMAT CHANGES
+  // USE EFFECT IF FORMAT CHANGES
   useEffect(() => {
     const year = format.date ? parseInt(format.date.slice(0, 4)) : year || 2022
     const month = format.date ? parseInt(format.date.slice(6, 7)) : 12
     const day = format.date ? parseInt(format.date.slice(-2)) : 31
     setCutoff(format.date || `${year}-12-31`)
     setSliders({ ...sliders, year, month, day })
+
+    const fetchData = async () => {
+      try {
+        const {data} = await axios.get(`/api/banlists/simple/${format.banlist}`)
+        setBanlist(data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    fetchData()
   }, [format])
 
-  // USE EFFECT SET CUTOFF IF DATE SLIDERS CHANGE
+  // USE EFFECT IF DATE SLIDERS CHANGE
   useEffect(() => {
     if (format && format.id) return
     const month = sliders.month >= 10 ? sliders.month : `0${sliders.month}`
@@ -371,7 +384,7 @@ const CardTable = (props) => {
     setCutoff(`${sliders.year}-${month}-${day}`)
   }, [sliders])
 
-  // USE EFFECT SEARCH IF RELEVANT STATES CHANGE
+  // USE EFFECT IF RELEVANT SEARCH PARAM STATES CHANGE
   useEffect(() => {
     search(false)
   }, [format, cutoff, sliders, queryParams, groupParams, iconParams, attributeParams, typeParams])
@@ -745,7 +758,7 @@ const CardTable = (props) => {
             <tbody>
               {filteredCards.length ? (
                 filteredCards.slice(firstIndex, lastIndex).map((card, index) => {
-                  return <CardRow key={card.id} index={index} card={card} />
+                  return <CardRow key={card.id} index={index} card={card} status={banlist[card.id]}/>
                 })
               ) : (
                 <tr />
@@ -756,15 +769,15 @@ const CardTable = (props) => {
       ) : (
         <div id="galleryFlexBox">
           {filteredCards.length ? (
-            filteredCards.slice(firstIndex, lastIndex).map((card, index) => {
+            filteredCards.slice(firstIndex, lastIndex).map((card) => {
               return <
                         CardImage 
                         key={card.id} 
-                        index={index} 
                         card={card} 
                         width="184px"
                         margin="4px"
                         padding="2px"
+                        status={banlist[card.id]}
                       />
             })
           ) : (
