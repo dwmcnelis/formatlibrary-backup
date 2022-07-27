@@ -32,7 +32,7 @@ const {
 } = require('../server/db/models')
     
 const seed = async () => {
-    await db.sync({force: false})
+    await db.sync({force: true})
     console.log('db synced!')
 
     for (let i = 0; i < formats.length; i++) {
@@ -44,6 +44,9 @@ const seed = async () => {
     for (let i = 0; i < cards.length; i++) {
         console.log(`creating card ${i}`)
         const row = cards[i]
+        let konamiCode = row.konamiCode.toString()
+        while (konamiCode.length < 8) konamiCode = '0' + konamiCode
+        row.konamiCode = konamiCode
         await Card.create(row)
     }
 
@@ -116,6 +119,7 @@ const seed = async () => {
     for (let i = 0; i < decks.length; i++) {
         console.log(`creating deck ${i}`)
         const row = decks[i]
+        row.ydk = row.ydk.replaceAll(' ', '\n').replaceAll('created\nby...', 'created by...')
         await Deck.create(row)
     }
 

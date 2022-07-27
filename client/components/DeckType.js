@@ -11,7 +11,7 @@ const DeckType = (props) => {
   const [banlist, setBanList] = useState({})
   const history = useHistory()
   const goToFormat = () => history.push(`/formats/${summary.format ? summary.format.name : ''}`)
-    
+
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])
 

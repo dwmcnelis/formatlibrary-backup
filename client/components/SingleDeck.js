@@ -37,6 +37,7 @@ const SingleDeck = (props) => {
 
   // USE EFFECT SET DECK
   useEffect(() => {
+    if (!deck.id) return
     const fetchData = async () => {
       try {
         const {data} = await axios.get(`/api/banlists/simple/${deck.format.banlist}`)
@@ -77,7 +78,7 @@ const SingleDeck = (props) => {
     deck.placement === 2 ? emojis.Second :
     deck.placement === 3 ? emojis.Third :
     emojis.Consolation
-  
+
   const addLike = async () => {
     const res = await axios.get(`/api/decks/like/${props.match.params.id}`)
     if (res.status === 200) {
@@ -90,6 +91,8 @@ const SingleDeck = (props) => {
     const downloads = deck.downloads++
     setDeck({downloads, ...deck})
   }
+
+  console.log('RENDER')
 
   return (
     <div className="body">
