@@ -2102,7 +2102,6 @@ const determineOriginals = async () => {
             where: {
                 cardId: card.id
             },
-            include: { model: Set, as: 'Instruments' },
             order: [[Set, 'tcgDate', 'ASC']]
         })
 
