@@ -2124,7 +2124,7 @@ const countOriginals = async () => {
     const sets = await Set.findAll()
     for (let i = 0; i < sets.length; i++) {
         const set = sets[i]
-        console.log(set.name)
+        console.log()
         const count = await Print.count({
             where: {
                 original: true,
@@ -2132,7 +2132,7 @@ const countOriginals = async () => {
             }
         })
 
-        console.log(count, 'originals')
+        console.log(set.name.toUpperCase() + ':', count, 'originals out of', set.size)
         set.originals = count
         await set.save()
     }
