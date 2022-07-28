@@ -2107,17 +2107,14 @@ const determineOriginals = async () => {
         })
 
         console.log(card.name, 'prints.length:', prints.length)
-        
-        const firstPrint = prints[0]
-        console.log('firstPrint.cardCode', firstPrint.cardCode)
-        console.log('firstPrint.original', firstPrint.original)
-        await firstPrint.update({ original: true})
-        console.log('first print saved')
 
-        for (let j = 1; j < prints.length; j++) {
+        for (let j = 0; j < prints.length; j++) {
             const print = prints[j]
-            print.original = false
+            console.log('print.cardCode', print.cardCode)
+            console.log('print.original', print.original)
+            print.original = j === 0
             await print.save()
+            console.log('print saved')
         }
     }
 }
