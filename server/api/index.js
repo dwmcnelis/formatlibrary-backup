@@ -16,8 +16,8 @@ router.use('/statuses', require('./statuses'))
 router.use('/events', require('./events'))
 router.use('/tournaments', require('./tournaments'))
 
-router.use((req, res, next) => {
-  const error = new Error('Not Found')
-  error.status = 404
-  next(error)
-})
+// router.use((req, res, next) => {
+//   const error = new Error('Not Found')
+//   error.status = 404
+//   next(error)
+// })
