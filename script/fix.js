@@ -2098,6 +2098,7 @@ const determineOriginals = async () => {
     const cards = await Card.findAll()
     for (let i = 0; i < cards.length; i++) {
         const card = cards[i]
+        console.log(`---- ${card.name} ----`)
         const prints = await Print.findAll({
             where: {
                 cardId: card.id
@@ -2109,17 +2110,21 @@ const determineOriginals = async () => {
 
         for (let j = 0; j < prints.length; j++) {
             const print = await Print.findOne({ where: { id: prints[j].id }})
-            print.original = j === 0
+            const original = (j === 0) || ((j + 1) >= prints.length) || ((j + 1) < prints.length && print.setId === prints[j+1].setId)
+            console.log('original =', original)
+            print.original = original
             await print.save()
-            console.log('print saved')
         }
     }
+
+    return console.log('DONE')
 }
 
 const countOriginals = async () => {
     const sets = await Set.findAll()
     for (let i = 0; i < sets.length; i++) {
         const set = sets[i]
+        console.log(set.name)
         const count = await Print.count({
             where: {
                 original: true,
@@ -2127,14 +2132,15 @@ const countOriginals = async () => {
             }
         })
 
+        console.log(count, 'originals')
         set.originals = count
         await set.save()
     }
 }
 
 // fixSets()
-// determineOriginals()
-countOriginals()
+determineOriginals()
+// countOriginals()
 // addCardDetails()
 // fixDecks()
 // fixBlogPosts()
