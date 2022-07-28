@@ -2102,8 +2102,8 @@ const determineOriginals = async () => {
             where: {
                 cardId: card.id
             },
-            include: [Set],
-            order: [[Set, 'tcgDate', 'ASC']]
+            include: { model: Set, as: 'Instruments' },
+            order: [[Instruments, 'tcgDate', 'ASC']]
         })
 
         console.log(card.name, 'prints.length:', prints.length)
