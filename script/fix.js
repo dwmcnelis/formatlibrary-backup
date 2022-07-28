@@ -2102,7 +2102,7 @@ const determineOriginals = async () => {
         p.original = false
         await p.save()
     }
-    
+
     const cards = await Card.findAll()
     for (let i = 0; i < cards.length; i++) {
         const card = cards[i]
@@ -2118,7 +2118,7 @@ const determineOriginals = async () => {
 
         for (let j = 0; j < prints.length; j++) {
             const print = await Print.findOne({ where: { id: prints[j].id }})
-            const prev = j > 0 ? await Print.findOne({ where: { id: prints[j-0].id }}) : null
+            const prev = j > 0 ? await Print.findOne({ where: { id: prints[j-1].id }}) : null
             const original = (j === 0) || (prev && prev.original && print.setId === prev.setId)
             console.log('original =', original)
             print.original = original
