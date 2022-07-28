@@ -2095,7 +2095,7 @@ const fixSets = async () => {
 }
 
 const determineOriginals = async () => {
-    const cards = await Card.findAll({ attributes: ['id'] })
+    const cards = await Card.findAll()
     for ( let i = 0; i < cards.length; i++) {
         const card = cards[i]
         const prints = await Print.findAll({
@@ -2106,7 +2106,7 @@ const determineOriginals = async () => {
             order: [[Set, 'tcgDate', 'ASC']]
         })
 
-        console.log('prints.length', prints.length)
+        console.log(card.name, 'prints.length:', prints.length)
         
         const firstPrint = prints[0]
         console.log('firstPrint.original', firstPrint.original)
