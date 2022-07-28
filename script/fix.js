@@ -2103,7 +2103,7 @@ const determineOriginals = async () => {
                 cardId: card.id
             },
             include: { model: Set, as: 'Instruments' },
-            order: [[Instruments, 'tcgDate', 'ASC']]
+            order: [[Set, 'tcgDate', 'ASC']]
         })
 
         console.log(card.name, 'prints.length:', prints.length)
