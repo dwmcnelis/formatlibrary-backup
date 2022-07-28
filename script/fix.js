@@ -2102,19 +2102,16 @@ const determineOriginals = async () => {
             where: {
                 cardId: card.id
             },
+            attributes: ['id', 'setId'],
             include: Set,
             order: [[Set, 'tcgDate', 'ASC']]
         }) || []
 
-        console.log(card.name, 'prints.length:', prints.length)
-
         for (let j = 0; j < prints.length; j++) {
-            const print = prints[j]
-            console.log('print.cardCode', print.cardCode)
-            console.log('j === 0', j === 0)
-            // print.original = j === 0
-            // await print.save()
-            // console.log('print saved')
+            const print = await Print.findOne({ where: { id: prints[j].id }})
+            print.original = j === 0
+            await print.save()
+            console.log('print saved')
         }
     }
 }
