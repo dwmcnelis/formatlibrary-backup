@@ -6,8 +6,6 @@ import { Card, Format, Set, Print } from  '../server/db/models'
 import sets from  '../static/sets.json'
 import { Op } from  'sequelize'
 import {capitalize} from '../functions/utility'
-import { tcgPlayerAPI } from  '../secrets'
-
 
 const countDuplicates = async () => {
     let a = 0

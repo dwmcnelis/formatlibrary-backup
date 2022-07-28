@@ -4,7 +4,7 @@ const axios = require('axios')
 const fs = require('fs')
 const { Card, Format, Set, Print } = require('../server/db/models')
 const { Op } = require('sequelize')
-const { tcgPlayerAPI } = require('../secrets')
+const config = require('../../config')
 
 // FIND NEW PRINTS
 const findNewPrints = async (set, groupId) => {
@@ -17,7 +17,7 @@ const findNewPrints = async (set, groupId) => {
         const { data } = await axios.get(endpoint, {
             headers: {
                 "Accept": "application/json",
-                "Authorization": `bearer ${tcgPlayerAPI.access_token}`
+                "Authorization": `bearer ${config.tcgPlayer.accessToken}`
             }
         })
         
@@ -91,7 +91,7 @@ const addGroupIdsToSets = async () => {
         const { data } = await axios.get(endpoint, {
             headers: {
                 "Accept": "application/json",
-                "Authorization": `bearer ${tcgPlayerAPI.access_token}`
+                "Authorization": `bearer ${config.tcgPlayer.accessToken}`
             }
         })
     
@@ -119,7 +119,7 @@ const addGroupIdsToSets = async () => {
         const { data } = await axios.get(endpoint, {
             headers: {
                 "Accept": "application/json",
-                "Authorization": `bearer ${tcgPlayerAPI.access_token}`
+                "Authorization": `bearer ${config.tcgPlayer.accessToken}`
             }
         })
     
@@ -154,7 +154,7 @@ const getNewGroupId = async (setId) => {
         const { data } = await axios.get(endpoint, {
             headers: {
                 "Accept": "application/json",
-                "Authorization": `bearer ${tcgPlayerAPI.access_token}`
+                "Authorization": `bearer ${config.tcgPlayer.accessToken}`
             }
         })
     
@@ -202,7 +202,7 @@ const addTCGPlayerPrintData = async () => {
             const { data } = await axios.get(endpoint, {
                 headers: {
                     "Accept": "application/json",
-                    "Authorization": `bearer ${tcgPlayerAPI.access_token}`
+                    "Authorization": `bearer ${config.tcgPlayer.accessToken}`
                 }
             })
     
@@ -264,7 +264,7 @@ const addMissingTCGPlayerPrintData = async () => {
             const { data } = await axios.get(endpoint, {
                 headers: {
                     "Accept": "application/json",
-                    "Authorization": `bearer ${tcgPlayerAPI.access_token}`
+                    "Authorization": `bearer ${config.tcgPlayer.accessToken}`
                 }
             })
         
@@ -365,7 +365,7 @@ const addShatterfoils = async () => {
             const { data } = await axios.get(endpoint, {
                 headers: {
                     "Accept": "application/json",
-                    "Authorization": `bearer ${tcgPlayerAPI.access_token}`
+                    "Authorization": `bearer ${config.tcgPlayer.accessToken}`
                 }
             })
 
