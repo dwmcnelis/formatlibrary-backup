@@ -2112,9 +2112,9 @@ const determineOriginals = async () => {
             const print = prints[j]
             console.log('print.cardCode', print.cardCode)
             console.log('j === 0', j === 0)
-            print.original = j === 0
-            await print.save()
-            console.log('print saved')
+            // print.original = j === 0
+            // await print.save()
+            // console.log('print saved')
         }
     }
 }
