@@ -2110,14 +2110,15 @@ const determineOriginals = async () => {
 
         for (let j = 0; j < prints.length; j++) {
             const print = await Print.findOne({ where: { id: prints[j].id }})
-            const original = (j === 0) || ((j + 1) >= prints.length) || ((j + 1) < prints.length && print.setId === prints[j+1].setId)
+            const original = (j === 0) || (prints[j-1].original && print.setId === prints[j-1].setId)
             console.log('original =', original)
             print.original = original
             await print.save()
         }
     }
 
-    return console.log('DONE')
+    console.log('DONE')
+    return countOriginals()
 }
 
 const countOriginals = async () => {
@@ -2139,8 +2140,7 @@ const countOriginals = async () => {
 }
 
 // fixSets()
-// determineOriginals()
-countOriginals()
+determineOriginals()
 // addCardDetails()
 // fixDecks()
 // fixBlogPosts()
