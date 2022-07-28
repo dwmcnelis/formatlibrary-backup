@@ -2105,6 +2105,8 @@ const determineOriginals = async () => {
             include: Set,
             order: [[Set, 'tcgDate', 'ASC']]
         })
+
+        console.log('prints.length', prints.length)
         
         const firstPrint = prints[i]
         firstPrint.original = true
