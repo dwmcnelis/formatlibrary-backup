@@ -2102,7 +2102,7 @@ const determineOriginals = async () => {
             where: {
                 cardId: card.id
             },
-            include: Set,
+            include: [Set],
             order: [[Set, 'tcgDate', 'ASC']]
         })
 
