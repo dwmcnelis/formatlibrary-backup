@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = {
 	server: {
-		http: process.env.SERVER_HTTP,
+		https: process.env.SERVER_HTTPS,
 		host: process.env.SERVER_HOST,
 		port: process.env.SERVER_PORT
 	},
@@ -18,13 +18,13 @@ module.exports = {
 	},
 	tcgPlayer: {
 		accessToken: process.env.TCG_PLAYER_ACCESS_TOKEN, // tcgPlayerAPI.access_token
-		tokenType: 'bearer', // tcgPlayerAPI.token_type
-		expiresIn: process.env.TCG_PLAYER_EXPIRES_IN, // tcgPlayerAPI.expires_in
-		username: process.env.TCG_PLAYER_ISSUED, // tcgPlayerAPI.userName
-		issued: process.env.TCG_PLAYER_ISSUED, // tcgPlayerAPI.'.issued'
-		expires: process.env.TCG_PLAYER_EXPIRES, // tcgPlayerAPI.'.expires'
-		publicKey: process.env.TCG_PLAYER_PUBLIC_KEY, // tcgPlayerAPI.public_key
-		privateKey: process.env.TCG_PLAYER_PRIVATE_KEY // tcgPlayerAPI.private_key
+		// tokenType: 'bearer', // tcgPlayerAPI.token_type
+		// expiresIn: process.env.TCG_PLAYER_EXPIRES_IN, // tcgPlayerAPI.expires_in
+		// username: process.env.TCG_PLAYER_ISSUED, // tcgPlayerAPI.userName
+		// issued: process.env.TCG_PLAYER_ISSUED, // tcgPlayerAPI.'.issued'
+		// expires: process.env.TCG_PLAYER_EXPIRES, // tcgPlayerAPI.'.expires'
+		// publicKey: process.env.TCG_PLAYER_PUBLIC_KEY, // tcgPlayerAPI.public_key
+		// privateKey: process.env.TCG_PLAYER_PRIVATE_KEY // tcgPlayerAPI.private_key
 
 	},
 	challonge: {
