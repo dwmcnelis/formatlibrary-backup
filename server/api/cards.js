@@ -28,6 +28,7 @@ router.get('/all', async (req, res, next) => {
         tcgLegal: true
       },
       attributes: { exclude: ['konamiCode', 'tcgLegal', 'ocgLegal', 'ocgDate', 'color', 'extraDeck', 'createdAt', 'updatedAt'] },
+      include: [{ model: Print, attributes: ['id', 'cardCode', 'rarity', 'setId'] }],
       order: [['name', 'ASC']]
     })
 
@@ -44,6 +45,7 @@ router.get('/first/:x', async (req, res, next) => {
         tcgLegal: true
       },
       attributes: { exclude: ['konamiCode', 'tcgLegal', 'ocgLegal', 'ocgDate', 'color', 'extraDeck', 'createdAt', 'updatedAt'] },
+      include: [{ model: Print, attributes: ['id', 'cardCode', 'rarity', 'setId'] }],
       limit: req.params.x,
       order: [['name', 'ASC']]
     })

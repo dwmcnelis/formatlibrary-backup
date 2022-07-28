@@ -2081,7 +2081,63 @@ const fixDecks = async () => {
     return console.log(`fixed ${b} decks`)
 }
 
-addCardDetails()
+const fixSets = async () => {
+    const sets = await Set.findAll()
+    for (let i = 0; i < sets.length; i++) {
+        const set = sets[i]
+        const count = await Print.count({ where: { setId: set.id }})
+        if (set.size !== count) {
+            console.log(`changing set size from ${set.size} => ${count}`)
+            set.size = count
+            await set.save()
+        }
+    }
+}
+
+const determineOriginals = async () => {
+    const cards = await Card.findAll({ attributes: ['id'] })
+    for ( let i = 0; i < cards.length; i++) {
+        const card = cards[i]
+        const prints = await Print.findAll({
+            where: {
+                cardId: card.id,
+                include: [{ model: Set, attributes: ['id', 'tcgDate'] }],
+                order: [[Set, 'tcgDate', 'ASC']]
+            }
+        })
+        
+        const firstPrint = prints[i]
+        firstPrint.original = true
+        await firstPrint.save()
+
+        for (let j = 1; j < prints.length; j++) {
+            const print = prints[j]
+            print.original = false
+            await print.save()
+        }
+    }
+}
+
+const countOriginals = async () => {
+    const sets = await Set.findAll()
+    for (let i = 0; i < sets.length; i++) {
+        const set = sets[i]
+        const count = await Print.count({
+            where: {
+                original: true,
+                setId: set.id
+            }
+        })
+
+        set.originals = count
+        await set.save()
+    }
+}
+
+fixSets()
+// determineOriginals()
+// countOriginals()
+// addCardDetails()
 // fixDecks()
 // fixBlogPosts()
 // fixEvents()
