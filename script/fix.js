@@ -2096,6 +2096,13 @@ const fixSets = async () => {
 }
 
 const determineOriginals = async () => {
+    const clearThese = await Print.findAll()
+    for (let i = 0; i < clearThese.length; i++) {
+        const p = clearThese[i]
+        p.original = false
+        await p.save()
+    }
+    
     const cards = await Card.findAll()
     for (let i = 0; i < cards.length; i++) {
         const card = cards[i]
