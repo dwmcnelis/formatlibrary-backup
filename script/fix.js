@@ -2095,7 +2095,7 @@ const fixSets = async () => {
 }
 
 const determineOriginals = async () => {
-    const cards = await Card.findAll({ attributes: ['id', 'setId'] })
+    const cards = await Card.findAll({ attributes: ['id'] })
     for ( let i = 0; i < cards.length; i++) {
         const card = cards[i]
         const prints = await Print.findAll({
