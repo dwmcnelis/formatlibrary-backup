@@ -2109,8 +2109,10 @@ const determineOriginals = async () => {
         console.log('prints.length', prints.length)
         
         const firstPrint = prints[0]
+        console.log('firstPrint.original', firstPrint.original)
         firstPrint.original = true
         await firstPrint.save()
+        console.log('first print saved')
 
         for (let j = 1; j < prints.length; j++) {
             const print = prints[j]
