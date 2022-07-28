@@ -2133,8 +2133,8 @@ const countOriginals = async () => {
 }
 
 // fixSets()
-determineOriginals()
-// countOriginals()
+// determineOriginals()
+countOriginals()
 // addCardDetails()
 // fixDecks()
 // fixBlogPosts()
