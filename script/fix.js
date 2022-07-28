@@ -2096,21 +2096,22 @@ const fixSets = async () => {
 
 const determineOriginals = async () => {
     const cards = await Card.findAll()
-    for ( let i = 0; i < cards.length; i++) {
+    for (let i = 0; i < cards.length; i++) {
         const card = cards[i]
         const prints = await Print.findAll({
             where: {
                 cardId: card.id
             },
+            include: Set,
             order: [[Set, 'tcgDate', 'ASC']]
-        })
+        }) || []
 
         console.log(card.name, 'prints.length:', prints.length)
 
         for (let j = 0; j < prints.length; j++) {
             const print = prints[j]
             console.log('print.cardCode', print.cardCode)
-            console.log('print.original', print.original)
+            console.log('j === 0', j === 0)
             print.original = j === 0
             await print.save()
             console.log('print saved')
