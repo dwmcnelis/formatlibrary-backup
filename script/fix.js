@@ -2134,8 +2134,8 @@ const countOriginals = async () => {
     }
 }
 
-fixSets()
-// determineOriginals()
+// fixSets()
+determineOriginals()
 // countOriginals()
 // addCardDetails()
 // fixDecks()
