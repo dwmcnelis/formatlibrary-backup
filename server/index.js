@@ -131,7 +131,7 @@ const startListening = () => {
 	// const server = app.listen(PORT, () =>
 	// 	console.log(`Mixing it up on port ${PORT}`)
 	// )
-	if (config.server.http === '1' || config.server.http === 'true') {
+	if (config.server.https === '1' || config.server.https === 'true') {
 		const server = httpsServer.listen(PORT, () =>
 			console.log(`Listening on https://${config.server.host ? config.server.host : '0.0.0.0'}:${PORT}`)
 		)
