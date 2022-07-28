@@ -26,6 +26,7 @@ const {
     whirlwind, wicked, will, wmc, worl, wur, yata, zaloog, zanji, zombyra, zorc
 } = require('../static/cards.json')
 const { Events } = require('pg')
+const { privateEncrypt } = require('crypto')
 
 /*eslint-disable*/
 const print = async () => {
@@ -2110,7 +2111,8 @@ const determineOriginals = async () => {
 
         for (let j = 0; j < prints.length; j++) {
             const print = await Print.findOne({ where: { id: prints[j].id }})
-            const original = (j === 0) || (prints[j-1].original && print.setId === prints[j-1].setId)
+            const prev = j > 0 ? await Print.findOne({ where: { id: prints[j-0].id }}) : null
+            const original = (j === 0) || (prev && prev.original && print.setId === prev.setId)
             console.log('original =', original)
             print.original = original
             await print.save()
