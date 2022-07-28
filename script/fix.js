@@ -2095,13 +2095,13 @@ const fixSets = async () => {
 }
 
 const determineOriginals = async () => {
-    const cards = await Card.findAll({ attributes: ['id'] })
+    const cards = await Card.findAll({ attributes: ['id', 'setId'] })
     for ( let i = 0; i < cards.length; i++) {
         const card = cards[i]
         const prints = await Print.findAll({
             where: {
                 cardId: card.id,
-                include: [{ model: Set, attributes: ['id', 'tcgDate'] }],
+                include: { model: Set, attributes: ['id', 'tcgDate'] },
                 order: [[Set, 'tcgDate', 'ASC']]
             }
         })
