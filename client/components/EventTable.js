@@ -369,7 +369,7 @@ const EventTable = (props) => {
           >
             <option key={'All Formats'} value={''}>All Formats</option>
             {
-              formatKeys.map((f) => <option key={f} value={f}>{f}</option>)
+              formats.map((format) => <option key={format.id} value={format.name}>{format.name}</option>)
             }
           </select>
 
