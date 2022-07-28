@@ -2132,7 +2132,7 @@ const countOriginals = async () => {
             }
         })
 
-        console.log(set.name.toUpperCase() + ':', count, 'originals out of', set.size)
+        console.log(set.setName.toUpperCase() + ':', count, 'originals out of', set.size)
         set.originals = count
         await set.save()
     }
