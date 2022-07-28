@@ -2108,7 +2108,7 @@ const determineOriginals = async () => {
 
         console.log('prints.length', prints.length)
         
-        const firstPrint = prints[i]
+        const firstPrint = prints[0]
         firstPrint.original = true
         await firstPrint.save()
 
