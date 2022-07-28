@@ -76,10 +76,8 @@ router.get('/gallery/:format', async (req, res, next) => {
 
         if (!decks.length) return false
         
-        const freqs = decks.reduce((acc, curr) => (acc[curr.type] ? acc[curr.type]++ : acc[curr.type] = 1, acc), {})
-        
-        // REMOVED THIS FILTER: .filter((e) => e[1] >= 3)
-        const arr = Object.entries(freqs).sort((a, b) => b[1] - a[1]).map((e) => e[0])
+        const freqs = decks.reduce((acc, curr) => (acc[curr.type] ? acc[curr.type]++ : acc[curr.type] = 1, acc), {})        
+        const arr = Object.entries(freqs).sort((a, b) => b[1] - a[1]).filter((e, index) => e[1] >= 3 || index <= 5).map((e) => e[0])
         const data = []
 
         for (let i = 0; i < arr.length; i++) {
