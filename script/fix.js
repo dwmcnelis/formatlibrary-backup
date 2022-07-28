@@ -2111,8 +2111,7 @@ const determineOriginals = async () => {
         const firstPrint = prints[0]
         console.log('firstPrint.cardCode', firstPrint.cardCode)
         console.log('firstPrint.original', firstPrint.original)
-        firstPrint.original = true
-        await firstPrint.save()
+        await firstPrint.update({ original: true})
         console.log('first print saved')
 
         for (let j = 1; j < prints.length; j++) {
