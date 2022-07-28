@@ -92,7 +92,8 @@ const SingleDeck = (props) => {
     setDeck({downloads, ...deck})
   }
 
-  console.log('RENDER')
+  const fullName = deck.player && deck.player.name ? deck.player.name : deck.builder
+  const displayName = fullName.length <= 24 ? fullName : fullName.slice(0, 24).split(' ').slice(0, -1).join(' ')
 
   return (
     <div className="body">
@@ -116,7 +117,7 @@ const SingleDeck = (props) => {
                   deck.player && deck.player.tag ? (
                     <div onClick={() => goToPlayer()} className="single-deck-builder-link">
                       <b>Builder: </b>
-                      <p>{deck.player.name}</p>
+                      <p>{displayName}</p>
                       <img 
                         className="single-deck-builder-cell-pfp"
                         src={`/images/pfps/${deck.playerId}.png`}
@@ -128,7 +129,7 @@ const SingleDeck = (props) => {
                       />
                     </div>
                   ) : (
-                    <div style={{paddingRight:'7px'}}><b>Builder:</b> {deck.builder}</div>
+                    <div style={{paddingRight:'7px'}}><b>Builder:</b> {displayName}</div>
                   )
                 }
               </div>       
