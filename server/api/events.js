@@ -103,7 +103,7 @@ router.get('/:id', async (req, res, next) => {
       where: {
         abbreviation: req.params.id
       },
-      attributes: ['id', 'name', 'abbreviation', 'formatName', 'formatId', 'size', 'winner', 'playerId', 'community', 'startDate', 'endDate'],
+      attributes: ['id', 'name', 'abbreviation', 'referenceUrl', 'formatName', 'formatId', 'size', 'winner', 'playerId', 'community', 'startDate', 'endDate'],
       include: [
           { model: Format, attributes: ['id', 'name', 'icon'] },
           { model: Player, attributes: ['id', 'name', 'tag', 'avatar'] }

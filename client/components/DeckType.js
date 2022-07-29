@@ -8,6 +8,7 @@ import * as emojis from '../../public/images/emojis'
 
 const DeckType = (props) => {
   const [summary, setSummary] = useState({})
+  console.log('summary', summary)
   const [banlist, setBanList] = useState({})
   const history = useHistory()
   const goToFormat = () => history.push(`/formats/${summary.format ? summary.format.name : ''}`)
