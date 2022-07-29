@@ -25,7 +25,6 @@ module.exports = {
 		// expires: process.env.TCG_PLAYER_EXPIRES, // tcgPlayerAPI.'.expires'
 		// publicKey: process.env.TCG_PLAYER_PUBLIC_KEY, // tcgPlayerAPI.public_key
 		// privateKey: process.env.TCG_PLAYER_PRIVATE_KEY // tcgPlayerAPI.private_key
-
 	},
 	challonge: {
 		"Format Library": process.env.CHALLONGE_FORMAT_LIBRARY_API_KEY, // formatLibraryChallongeAPIKey or challongeAPIKeys.'Format Library'
