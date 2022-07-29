@@ -16,6 +16,8 @@ import { capitalize } from '../../functions/utility'
 const CardTable = (props) => {
   const now = new Date()
   const year = now.getFullYear()
+  const formatName = props.location && props.location.search ? props.location.search.slice(8) : null
+
   const [page, setPage] = useState(1)
   const [cards, setCards] = useState([])
   const [filteredCards, setFilteredCards] = useState([])
@@ -25,11 +27,12 @@ const CardTable = (props) => {
   const [formats, setFormats] = useState([])
   const [format, setFormat] = useState({})
   const [banlist, setBanlist] = useState({})
+  const [boosters, setBoosters] = useState({})
+  const [booster, setBooster] = useState({})
   const [firstXFetched, setFirstXFetched] = useState(false)
   const [allFetched, setAllFetched] = useState(false)
   const [advanced, setAdvanced] = useState(false)
   const [cutoff, setCutoff] = useState(`${year}-12-31`)
-  console.log(banlist)
 
   const [sliders, setSliders] = useState({
     year: year,
@@ -145,7 +148,6 @@ const CardTable = (props) => {
     if (location === 'bottom') window.scrollTo(0, document.getElementById('resultsWrapper0').offsetTop - 10)
   }
 
-
   // SEARCH
   const search = () => {
     let data = [...cards]
@@ -184,9 +186,11 @@ const CardTable = (props) => {
 
   // RESET
   const reset = () => {
-    document.getElementById('format').value = ''
-    document.getElementById('category').value = 'All Cards'
+    const formatSelector = document.getElementById('format')
+    if (formatSelector) formatSelector.value = ''
+    document.getElementById('category').value = ''
     document.getElementById('searchTypeSelector').value = 'name'
+
     setSliders({
       year: year,
       month: 12,
@@ -197,7 +201,7 @@ const CardTable = (props) => {
     })
     
     setPage(1)
-    setFormat({})
+    if (!formatName) setFormat({})
     setSortBy(null)
     setFilteredCards([...cards])
     
@@ -324,8 +328,16 @@ const CardTable = (props) => {
   // USE EFFECT FETCH FIRST X
   useEffect(() => {
     if (!firstXFetched && !allFetched) {
+      if (formatName) updateFormat({target: { value: formatName } })
+
       const fetchData = async () => {
-        const {data} = await axios.get(`/api/cards/first/100`)
+        const {data} = await axios.get(`/api/cards/first/100`, {
+          headers: {
+            format: formatName,
+            booster: booster.name
+          }
+        })
+
         setCards(data)
         setFilteredCards(data)
         setFirstXFetched(true)
@@ -345,11 +357,15 @@ const CardTable = (props) => {
   useEffect(() => {
     if (firstXFetched && !allFetched) {
       const fetchData = async () => {
-          const {data} = await axios.get(`/api/cards/all`)
+          const {data} = await axios.get(`/api/cards/all`, {
+            headers: {
+              format: formatName,
+              booster: booster.name
+            }
+          })
           setCards(data)
           setFilteredCards([...data])
           setAllFetched(true)
-          if (props.location && props.location.search) updateFormat({target: { value: props.location.search.slice(8)} })
       } 
 
       fetchData()
@@ -457,6 +473,7 @@ const CardTable = (props) => {
   }
 
   const advancedButtonKeys = Object.keys(advancedButtons)
+  if (!firstXFetched) return <div></div>
 
   // RENDER
   return (
@@ -508,7 +525,7 @@ const CardTable = (props) => {
           </select>
 
           {
-            props.location && props.location.search ? '' : (
+            formatName ? '' : (
               <select
               id="format"
               defaultValue=""
@@ -758,7 +775,7 @@ const CardTable = (props) => {
             <tbody>
               {filteredCards.length ? (
                 filteredCards.slice(firstIndex, lastIndex).map((card, index) => {
-                  return <CardRow key={card.id} index={index} card={card} status={banlist[card.id]}/>
+                  return <CardRow key={card.id} index={index} card={card} status={banlist[card.id.toString()]}/>
                 })
               ) : (
                 <tr />

@@ -649,11 +649,12 @@ h1 {
 }
 
 .small-status-icon {
-  position: relative;
+  position: relative !important;
   z-index: 1;
-  width: 10%;
-  top:  10px;
-  left:  20px;
+  width: 28px !important;
+  height: 30px !important;
+  top: 10px;
+  left: -136px;
 }
 
 .CardImages, .SmallCardImages {
@@ -1658,7 +1659,7 @@ h1 {
   height: 48.5px;
 }
 
-.placement-cell, .deckType-cell, .deckCategory-cell, .date-cell, .event-name-cell, .size-cell, .card-image-cell {
+.placement-cell, .deckType-cell, .deckCategory-cell, .date-cell, .event-name-cell, .size-cell {
   height: 100%;
   width: 100%;
   vertical-align: middle;
@@ -1674,11 +1675,10 @@ h1 {
 
 .card-image-cell {
   display: flex;
-  align-items: flex-start;
 }
 
 .card-image {
-  padding: 10px 20px 10px 10px;
+  padding: 10px 40px;
 }
 
 .inner-cardRow-table {
@@ -2624,6 +2624,14 @@ body {
     padding: 0px;
     margin: 0px;
   }
+  
+  .status-icon {
+    position: absolute;
+    z-index: 1;
+    max-width: 33% !important;
+    top: 1%;
+    left: 2.5%;
+  }
 
   .blog-divider {
     margin: 10px auto;
@@ -2715,7 +2723,7 @@ body {
     width: 99vw;
   }
 
-  .deck-flexbox img {
+  .deck-flexbox.card-image {
     display: block;
     min-width: 98%;
     width: 98%;
@@ -3081,10 +3089,6 @@ body {
 
   #to-start, #to-end, #to-minus-3, #to-plus-3 {
     display: none;
-  }
-
-  .status-icon {
-   display: none !important;
   }
 
   .vertical-adsense, .desktop-only {

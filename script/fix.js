@@ -6,8 +6,7 @@ const { BlogPost, Card, Deck, DeckThumb, DeckType, Event, Format, Player, Print,
 const ygoprodeck = require('../static/ygoprodeck.json')
 const sets = require('../static/sets.json')
 const { Op } = require('sequelize')
-const { capitalize, arrayToObject } = require('../functions/utility')
-const config = require('../../config')
+const { arrayToObject } = require('../functions/utility')
 const { 
     accum, aggolem, airbellum, alius, alo, andal, angel, archfiend, arma, artemis, barrel, batteries, bazoo, bear, ben_kei, bfadd, bigbang, bigshield, blackgarden, blade,
     bls, boomboxen, brain, bubbleman, bushi, bwc, caius, canceller, cannon, cardd, castor, cat, catapult, celfon, chariot, codarus, coelacanth, 
@@ -25,7 +24,6 @@ const {
     tomato, tooncannon, tradein, treeborn, trio, trunade, tsuk, tuningware, turtle, underdog, valhalla, vayu, vrocket, 
     whirlwind, wicked, will, wmc, worl, wur, yata, zaloog, zanji, zombyra, zorc
 } = require('../static/cards.json')
-const { Events } = require('pg')
 
 /*eslint-disable*/
 const print = async () => {
@@ -1110,255 +1108,6 @@ const removeWGRT = async () => {
     return console.log(`destroyed ${c} prints`)
 }
 
-const fixCollectorsRares = async () => {
-    let c = 0
-    let z = 0
-
-    const prints = await Print.findAll({
-        where: {
-            rarity: `Collector's Rare`
-        }
-    })
-    
-    for (let i = 0; i < prints.length; i++) {
-        const print = prints[i]
-        const productName = print.cardName + ' (CR)'
-        console.log('productName', productName)
-        try {
-            const endpoint = `https://api.tcgplayer.com/v1.39.0/catalog/products?categoryId=2&productName=${productName}&getExtendedFields=true&limit=100`
-            const { data } = await axios.get(endpoint, {
-                headers: {
-                    "Accept": "application/json",
-                    "Authorization": `bearer ${config.tcgPlayer.accessToken}`
-                }
-            })
-
-            if (!data) {
-                console.log(`could not find data for printId ${print.id}`)
-                continue
-            }
-
-            print.tcgPlayerUrl = data.results[0].url
-            print.productId = data.results[0].productId
-            await print.save()
-            c++
-        } catch (err) {
-            console.log(err)
-            z++
-        }
-    }
-    
-    return console.log(`added TCGPlayer data for ${c} prints\n- encountered ${z} errors`)
-}
-
-
-const fixAs = async () => {
-    let c = 0
-    let z = 0
-
-    const prints = await Print.findAll({
-        where: {
-            setName: `Yugi's Legendary Decks`
-        }
-    })
-    
-    for (let i = 0; i < prints.length; i++) {
-        const print = prints[i]
-        const productName = print.cardName + ' (A)'
-        console.log('productName', productName)
-        try {
-            const endpoint = `https://api.tcgplayer.com/v1.39.0/catalog/products?categoryId=2&productName=${productName}&getExtendedFields=true&limit=100`
-            const { data } = await axios.get(endpoint, {
-                headers: {
-                    "Accept": "application/json",
-                    "Authorization": `bearer ${config.tcgPlayer.accessToken}`
-                }
-            })
-
-            if (!data) {
-                console.log(`could not find data for printId ${print.id}`)
-                continue
-            }
-
-            if (data.results.length > 1) {
-                console.log(`more than 1 result ??????`)
-                continue
-            }
-
-            print.tcgPlayerUrl = data.results[0].url
-            print.productId = data.results[0].productId
-            await print.save()
-            c++
-        } catch (err) {
-            console.log(err)
-            z++
-        }
-    }
-    
-    return console.log(`added TCGPlayer data for ${c} prints\n- encountered ${z} errors`)
-}
-
-const purgeEND = async () => {
-    const prints = await Print.findAll({
-        where: {
-
-        }
-    })
-}
-
-
-const fixHeros = async () => {
-    let c = 0
-    let z = 0
-
-    const prints = await Print.findAll({
-        where: {
-            tcgPlayerProductId: null
-        },
-        order: [['cardName', 'ASC']]
-    })
-
-    console.log('prints.length', prints.length)
-    
-    for (let i = 0; i < prints.length; i++) {
-        const print = prints[i]
-        const productName = print.cardName + ` (${print.cardCode.slice(0, print.cardCode.indexOf('-'))})`
-        console.log('productName', productName)
-        try {
-            const endpoint = `https://api.tcgplayer.com/v1.39.0/catalog/products?categoryId=2&productName=${productName}&getExtendedFields=true&limit=100`
-            const { data } = await axios.get(endpoint, {
-                headers: {
-                    "Accept": "application/json",
-                    "Authorization": `bearer ${config.tcgPlayer.accessToken}`
-                }
-            })
-
-            if (!data) {
-                console.log(`could not find data for printId ${print.id}`)
-                continue
-            }
-
-            for (let i = 0; i < data.results.length; i++) {
-                const result = data.results[i]
-                const cardCode = result.extendedData[0].value
-                const rarity = result.extendedData[1].value
-
-                // if (rarity !== 'Shatterfoil Rare') {
-                //     console.log('RESULT NOT Shatterfoil Rare???')
-                //     continue
-                // }
-
-                if (cardCode !== print.cardCode) {
-                    console.log(`cardCode ${cardCode} does not match print.cardCode ${print.cardCode}`)
-                    continue
-                }
-
-                print.productId = result.productId
-                print.tcgPlayerUrl = result.url
-                await print.save()
-                c++
-            }
-        } catch (err) {
-            console.log(err)
-            z++
-        }
-    }
-    
-    return console.log(`added TCGPlayer data for ${c} prints\n- encountered ${z} errors`)
-}
-
-const fixMissingProductIds = async () => {
-    let c = 0
-    let d = 0
-    let w = 0
-    const prints = await Print.findAll({
-        where: {
-            tcgPlayerUrl: {[Op.not]: null }
-        }
-    })
-
-    for (let i = 0; i < prints.length; i++) {
-        const print = prints[i]
-        if (!print.tcgPlayerUrl.includes('https://www.tcgplayer.com/product/')) {
-            console.log('strange tcgPlayerUrl')
-            continue
-        }
-        const trunc = print.tcgPlayerUrl.slice(print.tcgPlayerUrl.indexOf('https://www.tcgplayer.com/product/') + 34)
-        const productId = parseInt(trunc.slice(0, trunc.indexOf('/')))
-        if (print.tcgPlayerProductId !== productId) {
-            console.log(`changing productId to ${productId}: ${print.dataValues}`)
-            print.tcgPlayerProductId = productId
-            await print.save()
-            c++
-        } else {
-            d++
-            continue
-        }
-    }
-
-    return console.log(`modified TCGPlayer data for ${c} prints\n-kept ${d} prints the same\n encountered ${w} weird tcgPlayerUrls`)
-}
-
-
-const fixGhosts = async () => {
-    let c = 0
-    let z = 0
-
-    const prints = await Print.findAll({
-        where: {
-            rarity: `Super Rare`
-        },
-        order: [['cardName', 'ASC']]
-    })
-    
-    for (let i = 0; i < prints.length; i++) {
-        const print = prints[i]
-        const productName = print.cardName + ` (SR)`
-        console.log('productName', productName)
-        try {
-            const endpoint = `https://api.tcgplayer.com/v1.39.0/catalog/products?categoryId=2&productName=${productName}&getExtendedFields=true&limit=100`
-            const { data } = await axios.get(endpoint, {
-                headers: {
-                    "Accept": "application/json",
-                    "Authorization": `bearer ${config.tcgPlayer.accessToken}`
-                }
-            })
-
-            if (!data) {
-                console.log(`could not find data for printId ${print.id}`)
-                continue
-            }
-
-            for (let i = 0; i < data.results.length; i++) {
-                const result = data.results[i]
-                const cardCode = result.extendedData[0].value
-                const rarity = result.extendedData[1].value
-
-                if (rarity !== `Super Rare`) {
-                    console.log('RESULT NOT SUPER RARE???')
-                    continue
-                }
-
-                if (cardCode !== print.cardCode) {
-                    console.log(`cardCode ${cardCode} does not match print.cardCode ${print.cardCode}`)
-                    continue
-                }
-
-                console.log(`FIXING SUPER RARE`)
-                print.productId = result.productId
-                print.tcgPlayerUrl = result.url
-                await print.save()
-                c++
-            }
-        } catch (err) {
-            console.log(err)
-            z++
-        }
-    }
-    
-    return console.log(`modified TCGPlayer data for ${c} prints\n- encountered ${z} errors`)
-}
-
 const addCardDetails = async () => {
     let a = 0
     const cards = await Card.findAll()
@@ -2081,7 +1830,75 @@ const fixDecks = async () => {
     return console.log(`fixed ${b} decks`)
 }
 
-addCardDetails()
+const fixSets = async () => {
+    const sets = await Set.findAll()
+    for (let i = 0; i < sets.length; i++) {
+        const set = sets[i]
+        const count = await Print.count({ where: { setId: set.id }})
+        if (set.size !== count) {
+            console.log(`changing set size from ${set.size} => ${count}`)
+            set.size = count
+            await set.save()
+        }
+    }
+}
+
+const determineOriginals = async () => {
+    const clearThese = await Print.findAll()
+    for (let i = 0; i < clearThese.length; i++) {
+        const p = clearThese[i]
+        p.original = false
+        await p.save()
+    }
+
+    const cards = await Card.findAll()
+    for (let i = 0; i < cards.length; i++) {
+        const card = cards[i]
+        console.log(`---- ${card.name} ----`)
+        const prints = await Print.findAll({
+            where: {
+                cardId: card.id
+            },
+            attributes: ['id', 'setId'],
+            include: Set,
+            order: [[Set, 'tcgDate', 'ASC']]
+        }) || []
+
+        for (let j = 0; j < prints.length; j++) {
+            const print = await Print.findOne({ where: { id: prints[j].id }})
+            const prev = j > 0 ? await Print.findOne({ where: { id: prints[j-1].id }}) : null
+            const original = (j === 0) || (prev && prev.original && print.setId === prev.setId)
+            console.log('original =', original)
+            print.original = original
+            await print.save()
+        }
+    }
+
+    console.log('DONE')
+    return countOriginals()
+}
+
+const countOriginals = async () => {
+    const sets = await Set.findAll()
+    for (let i = 0; i < sets.length; i++) {
+        const set = sets[i]
+        console.log()
+        const count = await Print.count({
+            where: {
+                original: true,
+                setId: set.id
+            }
+        })
+
+        console.log(set.setName.toUpperCase() + ':', count, 'originals out of', set.size)
+        set.originals = count
+        await set.save()
+    }
+}
+
+// fixSets()
+determineOriginals()
+// addCardDetails()
 // fixDecks()
 // fixBlogPosts()
 // fixEvents()

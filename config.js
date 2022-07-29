@@ -16,17 +16,6 @@ module.exports = {
 		password: process.env.DATABASE_PASSWORD, // pgPassword
 		database: 'formatlibrary'
 	},
-	tcgPlayer: {
-		accessToken: process.env.TCG_PLAYER_ACCESS_TOKEN, // tcgPlayerAPI.access_token
-		// tokenType: 'bearer', // tcgPlayerAPI.token_type
-		// expiresIn: process.env.TCG_PLAYER_EXPIRES_IN, // tcgPlayerAPI.expires_in
-		// username: process.env.TCG_PLAYER_ISSUED, // tcgPlayerAPI.userName
-		// issued: process.env.TCG_PLAYER_ISSUED, // tcgPlayerAPI.'.issued'
-		// expires: process.env.TCG_PLAYER_EXPIRES, // tcgPlayerAPI.'.expires'
-		// publicKey: process.env.TCG_PLAYER_PUBLIC_KEY, // tcgPlayerAPI.public_key
-		// privateKey: process.env.TCG_PLAYER_PRIVATE_KEY // tcgPlayerAPI.private_key
-
-	},
 	challonge: {
 		"Format Library": process.env.CHALLONGE_FORMAT_LIBRARY_API_KEY, // formatLibraryChallongeAPIKey or challongeAPIKeys.'Format Library'
 		"GoatFormat.com": process.env.CHALLONGE_GOAT_FORMAT_API_KEY, // goatformatChallongeAPIKey or challongeAPIKeys.'GoatFormat.com'

@@ -79,15 +79,23 @@ const CardRow = (props) => {
               .replaceAll('#', '%23')
               .replaceAll('?', '%3F')
             }`}>
-            <div>
-              <CardImage 
-                key={card.id} 
-                card={card} 
-                width="96px"
-                padding="10px 20px 10px 10px"
-                status={status}
-              />
-            </div>
+              <div className='card-image-cell'>
+                <img
+                  className="card-image"
+                  src={filePath}
+                  style={{width: '96px'}}
+                  alt={card.name}
+                />
+                {
+                  status ? (
+                    <img
+                      className="small-status-icon"
+                      src={`/images/emojis/${status}.png`}
+                      alt={status}
+                    />
+                  ) : ''
+                }
+              </div>
           </Link>
         </td>
         <td className="no-padding-2" style={{verticalAlign: 'top'}}>

@@ -172,7 +172,7 @@ const SingleDeck = (props) => {
       <div id="main" className="deck-bubble">
           <div id="main" className="deck-flexbox">
           {
-            deck.main.map((card, index) => <CardImage width='72px' padding='1px' margin='0px' key={`${deck.id}-${index}-${card.id}`} card={card} status={banlist[card.id]}/>)
+            deck.main.map((card, index) => <CardImage className="card-image" width='72px' padding='1px' margin='0px' key={`${deck.id}-${index}-${card.id}`} card={card} status={banlist[card.id]}/>)
           }
           </div>
       </div>
@@ -181,7 +181,7 @@ const SingleDeck = (props) => {
           <div id="side" className="deck-bubble">
             <div id="side" className="deck-flexbox">
               {
-                deck.side.map((card, index) => <CardImage width='48px' padding='0.5px' margin='0px' key={`${deck.id}-${index}-${card.id}`} card={card} status={banlist[card.id]}/>)
+                deck.side.map((card, index) => <CardImage className="card-image" width='48px' padding='0.5px' margin='0px' key={`${deck.id}-${index}-${card.id}`} card={card} status={banlist[card.id]}/>)
               }
             </div>
           </div>
@@ -192,7 +192,7 @@ const SingleDeck = (props) => {
           <div id="extra" className="deck-bubble">
             <div id="extra" className="deck-flexbox">
               {
-                deck.extra.map((card, index) => <CardImage width='48px' padding='0.5px' margin='0px' key={`${deck.id}-${index}-${card.id}`} card={card} status={banlist[card.id]}/>)
+                deck.extra.map((card, index) => <CardImage className="card-image"f width='48px' padding='0.5px' margin='0px' key={`${deck.id}-${index}-${card.id}`} card={card} status={banlist[card.id]}/>)
               }
             </div>
           </div>

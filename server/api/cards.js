@@ -1,6 +1,6 @@
 
 const router = require('express').Router()
-const {Card, Print, Set, Status} = require('../db/models')
+const {Card, Print, Set, Status, Format} = require('../db/models')
 const {Op} = require('sequelize')
 
 module.exports = router
@@ -23,11 +23,20 @@ router.get('/query/:query', async (req, res, next) => {
 
 router.get('/all', async (req, res, next) => {
   try {
+    const format = await Format.findOne({ 
+      where: { 
+        name: {[Op.iLike]: req.headers.format },
+      },
+      attributes: ['id', 'date']
+    })
+    
     const cards = await Card.findAll({
       where: {
-        tcgLegal: true
+        tcgLegal: true,
+        tcgDate: format ? {[Op.lte]: format.date} : {[Op.not]: null}
       },
-      attributes: { exclude: ['konamiCode', 'tcgLegal', 'ocgLegal', 'ocgDate', 'color', 'extraDeck', 'createdAt', 'updatedAt'] },
+      attributes: { exclude: ['konamiCode', 'tcgLegal', 'ocgLegal', 'ocgDate', 'extraDeck', 'createdAt', 'updatedAt'] },
+      include: [{ model: Print, attributes: ['id', 'cardCode', 'rarity', 'setId'] }],
       order: [['name', 'ASC']]
     })
 
@@ -39,11 +48,20 @@ router.get('/all', async (req, res, next) => {
 
 router.get('/first/:x', async (req, res, next) => {
   try {
+    const format = await Format.findOne({ 
+      where: { 
+        name: {[Op.iLike]: req.headers.format },
+      },
+      attributes: ['id', 'date']
+    })
+
     const cards = await Card.findAll({
       where: {
-        tcgLegal: true
+        tcgLegal: true,
+        tcgDate: format ? {[Op.lte]: format.date} : {[Op.not]: null}
       },
-      attributes: { exclude: ['konamiCode', 'tcgLegal', 'ocgLegal', 'ocgDate', 'color', 'extraDeck', 'createdAt', 'updatedAt'] },
+      attributes: { exclude: ['konamiCode', 'tcgLegal', 'ocgLegal', 'ocgDate', 'extraDeck', 'createdAt', 'updatedAt'] },
+      include: [{ model: Print, attributes: ['id', 'cardCode', 'rarity', 'setId'] }],
       limit: req.params.x,
       order: [['name', 'ASC']]
     })
