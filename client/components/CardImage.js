@@ -23,16 +23,18 @@ const CardImage = (props = {}) => {
               .replaceAll('#', '%23')
               .replaceAll('?', '%3F')
             }`}>
-          {
-            status ? <img src={`/images/emojis/${status}.png`} className="status-icon"/> : null
-          }
-          <img
-            src={`/images/cards/${card.ypdId}.jpg`}
-            card={card}
-            style={{width, margin, padding}}
-            className="CardImages"
-            alt={card.name}
-          />
+              <div className="card-image-cell">
+                {
+                  status ? <img src={`/images/emojis/${status}.png`} className="status-icon"/> : null
+                }
+                <img
+                  src={`/images/cards/${card.ypdId}.jpg`}
+                  card={card}
+                  style={{width, margin, padding}}
+                  className="CardImages"
+                  alt={card.name}
+                />
+              </div>
         </Link>
         )
       }

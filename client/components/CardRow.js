@@ -1,7 +1,6 @@
 /* eslint-disable max-statements */
 
 import React from 'react'
-import CardImage from './CardImage'
 import { Link } from 'react-router-dom'
 import { Aqua, Beast, BeastWarrior, Continuous, Counter, Cyberse, DARK, Dinosaur, 
   DIVINE, DivineBeast, Dragon, EARTH, Equip, Fairy, Field, Fiend, FIRE, Fish, 
@@ -79,14 +78,23 @@ const CardRow = (props) => {
               .replaceAll('#', '%23')
               .replaceAll('?', '%3F')
             }`}>
-            <div>
-              <CardImage 
-                key={card.id} 
-                card={card} 
-                width="96px"
-                padding="10px 20px 10px 10px"
-                status={status}
+            <div className="card-image-cell">
+              <img
+                className="card-image"
+                src={filePath}
+                style={{width: '96px'}}
+                alt={card.name}
               />
+              {
+                status ? (
+                  <img
+                    className="small-status-icon"
+                    src={`/images/emojis/${status}.png`}
+                    style={{width: '16px'}}
+                    alt={status}
+                  />
+                ) : ''
+              }
             </div>
           </Link>
         </td>
