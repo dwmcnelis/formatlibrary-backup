@@ -652,8 +652,9 @@ h1 {
   position: relative !important;
   z-index: 1;
   width: 28px !important;
-  top:  -55px;
-  left:  -116px;
+  height: 30px !important;
+  top: 10px;
+  left: -136px;
 }
 
 .CardImages, .SmallCardImages {
@@ -1672,20 +1673,12 @@ h1 {
   padding-right: 10px;
 }
 
-
 .card-image-cell {
-  height: 100%;
-  width: 100%;
   display: flex;
-  vertical-align: middle;
-  align-items: center;
-  display: flex;
-  text-align: center;
-  justify-content: center;
 }
 
 .card-image {
-  padding: 10px 20px 10px 10px;
+  padding: 10px 40px;
 }
 
 .inner-cardRow-table {
