@@ -1,10 +1,12 @@
 
 const config = require('../config')
 const fs = require('fs')
+const { resolve } = require('path')
 const http = require('http')
 const https = require('https')
 const path = require('path')
 const express = require('express')
+const expressLayouts = require('express-ejs-layouts')
 const morgan = require('morgan')
 const compression = require('compression')
 const session = require('express-session')
@@ -13,6 +15,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
 const api = require('./api')
 const auth = require('./auth')
+const { auth2 } = require('./routes')
 const sessionStore = new SequelizeStore({ db })
 const PORT = config.server.port
 const app = express()
@@ -62,11 +65,21 @@ const createApp = () => {
 	// app.use(passport.initialize())
 	// app.use(passport.session())
 
+	// Templates
+	app.set('view engine', 'ejs')
+	app.use(expressLayouts)
+	console.log('views dir: ', resolve(__dirname, './views'))
+	app.set('views', resolve(__dirname, './views'))
+	app.set('layout', './layout')
+
 	// api routes
 	app.use('/api', api)
 
 	// auth routes
 	app.use('/auth', auth)
+
+	// auth2 routes
+	app.use('/auth2', auth2)
 
 	// static file-serving middleware
 	app.use(express.static(path.join(__dirname, '..', 'public')))
