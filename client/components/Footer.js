@@ -44,7 +44,14 @@ const Footer = () => (
             <p className="footer-item">Format Intros</p>
           </Link>
         </div>
-        <p className="disclaimer">Format Library is a public resource for learning about the Yu-Gi-Oh! Trading Card Game and its history. Trademarked artwork and card text is used for informational purposes under U.S. fair use copyright policy. Not affiliated with 4K Media or Konami Digital Entertainment.</p>
+        <p className="disclaimer">Format Library is a public resource for learning about the Yu-Gi-Oh! Trading Card Game and its history. Trademarked artwork and card text is used for informational purposes under U.S. fair use copyright policy. Not affiliated with 4K Media or Konami Digital Entertainment.</p><div id="footer-menu">
+          <Link to="/terms.html" target="_blank" rel="noopener noreferrer">
+            <p className="footer-item">Terms & Conditions</p>
+          </Link>
+          <Link to="/privacy.html" target="_blank" rel="noopener noreferrer">
+            <p className="footer-item">Privacy Policy</p>
+          </Link>
+        </div>
     </div>
     
     <div style={{textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
