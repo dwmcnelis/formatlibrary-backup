@@ -352,12 +352,13 @@ const EventTable = (props) => {
             onChange={(e) => setQueryParams({ ...queryParams, community: e.target.value })}
           >
             <option value="All Communities">All Communities</option>
+            <option value="EdisonFormat.com">EdisonFormat.com</option>
             <option value="Format Library">Format Library</option>
             <option value="GoatFormat.com">GoatFormat.com</option>
             <option value="Goat Format Europe">Goat Format Europe</option>
-            <option value="EdisonFormat.com">EdisonFormat.com</option>
-            <option value="Reaper Format">Reaper Format</option>
             <option value="Konami">Konami</option>
+            <option value="Reaper Format">Reaper Format</option>
+            <option value="Tengu Plant Town">Tengu Plant Town</option>
             <option value="Upper Deck Entertainment">Upper Deck Entertainment</option>
           </select>
 

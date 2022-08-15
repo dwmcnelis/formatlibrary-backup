@@ -11,6 +11,7 @@ router.get('/leaders/:limit/:format', async (req, res, next) => {
       where: {
         format: {[Op.iLike]: req.params.format.replace(' ', '_').replace('-', '_')},
         games: {[Op.gte]: 3},
+        inactive: false,
         serverId: '414551319031054346',
         '$player.blacklisted$': false
       },
