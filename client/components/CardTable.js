@@ -27,8 +27,8 @@ const CardTable = (props) => {
   const [formats, setFormats] = useState([])
   const [format, setFormat] = useState({})
   const [banlist, setBanlist] = useState({})
-  const [boosters, setBoosters] = useState({})
-  const [booster, setBooster] = useState({})
+  const [boosters, setBoosters] = useState([])
+  const [booster, setBooster] = useState(null)
   const [firstXFetched, setFirstXFetched] = useState(false)
   const [allFetched, setAllFetched] = useState(false)
   const [advanced, setAdvanced] = useState(false)
@@ -180,6 +180,14 @@ const CardTable = (props) => {
     if (sliders.def[0] !== 0 || sliders.def[1] !== 5000) data = data.filter((d) => d.link || d.def === '?' || (d.def >= sliders.def[0] && d.def <= sliders.def[1]))
     data = data.filter((d) => d.tcgDate <= cutoff)
 
+    if (booster && booster.length) data = data.filter((d) => {
+      const prints = d.prints
+      for (let i = 0; i < prints.length; i++) {
+        const print = prints[i]
+        if (print.cardCode.startsWith(booster)) return d
+      }
+    })
+
     setFilteredCards(data)
     setPage(1)
   }
@@ -201,7 +209,12 @@ const CardTable = (props) => {
     })
     
     setPage(1)
-    if (!formatName) setFormat({})
+    if (!formatName) {
+      setFormat({})
+      document.getElementById('format').value = ""
+    }
+    setBooster(null)
+    document.getElementById('booster').value = ""
     setSortBy(null)
     setFilteredCards([...cards])
     
@@ -333,8 +346,7 @@ const CardTable = (props) => {
       const fetchData = async () => {
         const {data} = await axios.get(`/api/cards/first/100`, {
           headers: {
-            format: formatName,
-            booster: booster.name
+            format: formatName
           }
         })
 
@@ -348,8 +360,14 @@ const CardTable = (props) => {
         setFormats(data)
       }
 
+      const fetchData3 = async () => {
+        const {data} = await axios.get(`/api/sets/boosters`)
+        setBoosters(data)
+      }
+
       fetchData()
       fetchData2()
+      fetchData3()
     }
   }, [])
 
@@ -359,8 +377,7 @@ const CardTable = (props) => {
       const fetchData = async () => {
           const {data} = await axios.get(`/api/cards/all`, {
             headers: {
-              format: formatName,
-              booster: booster.name
+              format: formatName
             }
           })
           setCards(data)
@@ -402,8 +419,8 @@ const CardTable = (props) => {
 
   // USE EFFECT IF RELEVANT SEARCH PARAM STATES CHANGE
   useEffect(() => {
-    search(false)
-  }, [format, cutoff, sliders, queryParams, groupParams, iconParams, attributeParams, typeParams])
+    search()
+  }, [format, booster, cutoff, sliders, queryParams, groupParams, iconParams, attributeParams, typeParams])
 
   const lastIndex = page * cardsPerPage
   const firstIndex = lastIndex - cardsPerPage
@@ -539,6 +556,18 @@ const CardTable = (props) => {
               </select>
             )
           }
+
+          <select
+            id="booster"
+            defaultValue=""
+            className="filter"
+            onChange={(e) => setBooster(e.target.value)}
+            >
+            <option key="All Sets" value="">All Sets</option>
+            {
+              boosters.map((b) => <option key={b.id} value={b.setCode}>{b.setCode}</option>)
+            }
+          </select>
 
           <a
             className="searchButton"
