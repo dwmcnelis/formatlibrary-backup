@@ -67,8 +67,8 @@ const oidcResponse = (options) => {
 
 		res.redirect(returnTo)
 
-		next()
+		// next()
 	}
 }
 
-module.exports = oidcResponse
+module.exports = { oidcResponse }

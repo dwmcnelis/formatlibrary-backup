@@ -54,8 +54,8 @@ const oauth2Authorize = (options) => {
 
 		res.redirect(authorizationUrl)
 
-		next()
+		// next()
 	}
 }
 
-module.exports = oauth2Authorize
+module.exports = { oauth2Authorize }

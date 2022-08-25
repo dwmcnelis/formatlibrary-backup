@@ -3,6 +3,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = {
+	siteUrl: process.env.SITE_URL,
+	sessionSecret: process.env.SESSION_SECRET,
 	server: {
 		https: process.env.SERVER_HTTPS,
 		host: process.env.SERVER_HOST,
@@ -15,6 +17,21 @@ module.exports = {
 		user: process.env.DATABASE_USER,
 		password: process.env.DATABASE_PASSWORD, // pgPassword
 		database: 'formatlibrary'
+	},
+	google: {
+		clientId: process.env.GOOGLE_CLIENT_ID,
+		clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+		redirectUrl: process.env.GOOGLE_REDIRECT_URL,
+		discoveryUrl: 'https://accounts.google.com/'
+	},
+	discord: {
+		clientId: process.env.DISCORD_CLIENT_ID,
+		clientSecret: process.env.DISCORD_CLIENT_SECRET,
+		redirectUrl: process.env.DISCORD_REDIRECT_URL,
+		scope: 'identify email',
+		authorizeUrl: 'https://discord.com/api/oauth2/authorize',
+		tokenUrl: 'https://discord.com/api/oauth2/token',
+		userInfoUrl: 'https://discord.com/api/users/@me'
 	},
 	challonge: {
 		"Format Library": process.env.CHALLONGE_FORMAT_LIBRARY_API_KEY, // formatLibraryChallongeAPIKey or challongeAPIKeys.'Format Library'

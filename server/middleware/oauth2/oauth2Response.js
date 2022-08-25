@@ -89,8 +89,8 @@ const oauth2Response = (options) => {
 
 		res.redirect(returnTo)
 
-		next()
+		// next()
 	}
 }
 
-module.exports = oauth2Response
+module.exports = { oauth2Response }

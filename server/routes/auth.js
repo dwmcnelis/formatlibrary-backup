@@ -1,5 +1,7 @@
 const { login } = require('../middleware')
 const router = require('express').Router()
+const { siteUrl, google, discord } = require('../../config')
+const { oauth2Authorize, oauth2Response, oidcAuthorize, oidcResponse } = require('../middleware')
 
 const GOOGLE_SVG = `
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="c-third_party_auth__icon">
@@ -11,6 +13,7 @@ const GOOGLE_SVG = `
 		<path fill="none" d="M0 0h48v48H0z"></path>
 	</g>
 </svg >`
+
 const DISCORD_SVG = `
 <svg viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
 	<g clip-path="url(#clip0)">
@@ -20,7 +23,18 @@ const DISCORD_SVG = `
 
 router.get('/login', login({
 	app: 'Format Library',
-	providers: []
+	providers: [
+		{
+			image: DISCORD_SVG,
+			loginUrl: '/auth/discord/authorize',
+			name: 'Discord'
+		},
+		{
+			image: GOOGLE_SVG,
+			loginUrl: '/auth/google/authorize',
+			name: 'Google'
+		}
+	]
 }))
 
 //router.post('/login', login)
@@ -39,5 +53,52 @@ router.get('/signup', async (req, res, next) => {
 })
 
 //router.post('/signup', signup)
+
+// clientId: process.env.DISCORD_CLIENT_ID,
+// 		clientSecret: process.env.DISCORD_CLIENT_SECRET,
+// 		redirectUrl: process.env.DISCORD_REDIRECT_URI,
+// 		scope: 'identify email',
+// 		authorizeUrl: 'https://discord.com/api/oauth2/authorize',
+// 		tokenUrl: 'https://discord.com/api/oauth2/token',
+// 		userInfoUrl: 'https://discord.com/api/users/@me'
+
+router.get('/discord/authorize', oauth2Authorize({
+	clientId: discord.clientId, 
+	clientSecret: discord.clientSecret, 
+	redirectUrl: discord.redirectUrl, 
+	scope: discord.scope, 
+	authorizeUrl: discord.authorizeUrl, 
+	tokenUrl: discord.tokenUrl, 
+	returnTo: siteUrl
+}))
+
+router.get('/discord/response', oauth2Response({
+	clientId: discord.clientId, 
+	clientSecret: discord.clientSecret, 
+	redirectUrl: discord.redirectUrl, 
+	scope: discord.scope, 
+	authorizeUrl: discord.authorizeUrl, 
+	tokenUrl: discord.tokenUrl, 
+	userinfoUrl: discord.userInfoUrl
+}))
+
+
+
+router.get('/google/authorize', oidcAuthorize({
+	clientId: google.clientId, 
+	clientSecret: google.clientSecret, 
+	redirectUrl: google.redirectUrl, 
+	discoveryUrl: google.discoveryUrl, 
+	returnTo: siteUrl
+}))
+
+//	const { clientId, clientSecret, redirectUrl, discoveryUrl } = options
+
+router.get('/google/response', oidcResponse({
+	clientId: google.clientId, 
+	clientSecret: google.clientSecret, 
+	redirectUrl: google.redirectUrl, 
+	discoveryUrl: google.discoveryUrl
+}))
 
 module.exports = router

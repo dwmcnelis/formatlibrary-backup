@@ -50,8 +50,8 @@ const oidcAuthorize = (options) => {
 
 		res.redirect(authorizationUrl)
 
-		next()
+		// next()
 	}
 }
 
-module.exports = oidcAuthorize
+module.exports = { oidcAuthorize }

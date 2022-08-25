@@ -17,7 +17,7 @@ const AdminPortal = () => {
     // USE EFFECT
     useEffect(() => {
         const checkIfAdmin = async () => {
-            const {data} = await axios.get(`/auth/admin`, {
+            const {data} = await axios.get(`/authX/admin`, {
                 headers: {
                     username: localStorage.getItem('username'),
                     password: localStorage.getItem('password')

@@ -9,37 +9,16 @@ const express = require('express')
 const expressLayouts = require('express-ejs-layouts')
 const morgan = require('morgan')
 const compression = require('compression')
-const session = require('express-session')
-// const passport = require('passport')
-const SequelizeStore = require('connect-session-sequelize')(session.Store)
+const session = require('cookie-session')
 const db = require('./db')
 const api = require('./api')
-const auth = require('./auth')
-const { auth2 } = require('./routes')
-const sessionStore = new SequelizeStore({ db })
+const authX = require('./authX')
+const { auth } = require('./routes')
 const PORT = config.server.port
 const app = express()
 module.exports = app
 let httpServer
 let httpsServer
-
-// This is a global Mocha hook, used for resource cleanup.
-// Otherwise, Mocha v4+ never quits after tests.
-if (process.env.NODE_ENV === 'test') {
-	after('close the session store', () => sessionStore.stopExpiringSessions())
-}
-
-// // passport registration
-// passport.serializeUser((user, done) => done(null, user.id))
-
-// passport.deserializeUser(async (id, done) => {
-//   try {
-//     const user = await db.models.user.findByPk(id)
-//     done(null, user)
-//   } catch (err) {
-//     done(err)
-//   }
-// })
 
 const createApp = () => {
 	console.log('creating App...')
@@ -53,17 +32,21 @@ const createApp = () => {
 	// compression middleware
 	app.use(compression())
 
-	// // session middleware with passport
-	// app.use(
-	//   session({
-	//     secret: process.env.SESSION_SECRET || 'my best friend is Cody',
-	//     store: sessionStore,
-	//     resave: false,
-	//     saveUninitialized: false
-	//   })
-	// )
-	// app.use(passport.initialize())
-	// app.use(passport.session())
+	// session
+	app.use(
+		session({
+			name: 'session',
+			keys: [
+				'PP5a_iRGac8uIAmAPPkzohSo7bB_zeYA8-aws8StHRjgpx9A9iU_E73nTfTxqg4y5MTFGcib5T35593QuH_rW9AoBQFv_joIz5fEdIJbebKKxkxB63mo2oxz5_qoNLcNFmqlbEdN2s8FRuSp4opf3I8YRSvWhJdbrz7RyeRCAHQ',
+				'p8mGwge6s62W_e16ZHpp9u-GJOm_9BQZEvNo1L6L6hyjqfk9R7Xy1OkHapBEh-PdiFQdL1VtXWzBrml6BOqzpQV1CwdzYtB-8WFFiz29LvNdEhJHIR1ImqRQxkdeeljzBlBqXslZYfpEc0A6qj5zBh_3ndSzYpsXGGjWgN6pqsc',
+				'AkbhrDysvMuJsHu4dCl2qqwrDe2hVlWXQBJu6x7XOOTc3dXwkDG4AZd9kgAywtRqYJvdDcQLIUERLEQ8rBfsMxx6yNnn5WXEegAajkAae0ERvhnVoAqGCoNpydCTkumNAqpHUkzPF3LLlOvQOt8dhFVMoad5QZBgHuR8QYRTG7w',
+				'a3WwsJD3EibWaK0PQDEjthSlzMXnJudLRqXk6M4HWz9kqWy17u9QQryrezjVTdHMiEC52rEYjajEb_DewUE11tjxIEhuLzWCD6Gi9kHkCmqHQnVJLU3SnaTOKt7Se95bQj7f9V90B3s4wlf6G_DzBis-wiqMpyHBJFpgHEPopxM'
+			],
+		
+			// Cookie Options
+			maxAge: 15 * 60 * 1000 // 15 minutes
+		})
+	)
 
 	// Templates
 	app.set('view engine', 'ejs')
@@ -78,8 +61,8 @@ const createApp = () => {
 	// auth routes
 	app.use('/auth', auth)
 
-	// auth2 routes
-	app.use('/auth2', auth2)
+	// authX routes
+	app.use('/authX', authX)
 
 	// static file-serving middleware
 	app.use(express.static(path.join(__dirname, '..', 'public')))
@@ -144,12 +127,12 @@ const startListening = () => {
 
 const syncDb = () => db.sync()
 
-async function bootApp() {
-	await sessionStore.sync()
+const bootApp = async () => {
 	await syncDb()
 	await createApp()
 	await startListening()
 }
+
 // This evaluates as true when this file is run directly from the command line,
 // i.e. when we say 'node server/index.js' (or 'nodemon server/index.js', or 'nodemon server', etc)
 // It will evaluate false when this module is required by another module - for example,
