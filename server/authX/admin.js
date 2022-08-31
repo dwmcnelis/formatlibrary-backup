@@ -9,7 +9,7 @@ router.get('/', async (req, res, next) => {
     const player = await Player.findOne({
         where: {
             name: req.headers.username,
-            password: req.headers.password,
+            hash: req.headers.password,
         }
     })
 

@@ -11,7 +11,7 @@ router.get('/:username/:password', async (req, res, next) => {
     const player = await Player.findOne({
         where: {
             name: req.params.username,
-            password: req.params.password
+            hash: req.params.password
         }
     })
 
