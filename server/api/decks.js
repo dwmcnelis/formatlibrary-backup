@@ -195,6 +195,7 @@ router.get('/player/:id', async (req, res, next) => {
 })
 
 router.get('/like/:id', async (req, res, next) => {
+    console.log('req.params.id', req.params.id)
     try {
         const deck = await Deck.findOne({ 
             where: {
@@ -205,7 +206,6 @@ router.get('/like/:id', async (req, res, next) => {
         })
         
         deck.rating++
-         
         await deck.save()
         return res.status(200).send('ok')
     } catch (err) {
