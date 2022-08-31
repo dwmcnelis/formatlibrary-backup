@@ -1896,8 +1896,34 @@ const countOriginals = async () => {
     }
 }
 
+const fixDiscriminators = async () => {
+    const players = await Player.findAll({
+        where: {
+            tag: {[Op.not]: null}
+        }
+    })
+
+    let b = 0
+    let e = 0
+
+    for (let i = 0; i < players.length; i++) {
+        try {
+            const p = players[i]
+            const disc = d.discriminator.slice(-4)
+            p.discriminator = disc
+            await p.save()
+            b++
+        } catch (err) {
+            console.log(err)
+            e++
+        }
+    }
+
+    return console.log(`fixed ${b} discriminators; encountered ${e} errors`)
+}
+
 // fixSets()
-determineOriginals()
+// determineOriginals()
 // addCardDetails()
 // fixDecks()
 // fixBlogPosts()
