@@ -53,15 +53,7 @@ const SingleDeck = (props) => {
   if (!deck) return <NotFound/>
   if (!deck.id) return <div/>
 
-  let str = deck.player.name + deck.player.discriminator
-
-  const extension = str.join('')
-      .replaceAll('%', '%25')
-      .replaceAll('/', '%2F')
-      .replaceAll(' ', '_')
-      .replaceAll('#', '%23')
-      .replaceAll('?', '%3F')
-
+  const extension = deck.player.name + deck.player.discriminator
   const history = useHistory()
   const goToEvent = () => history.push(`/events/${deck.eventName}`)
   const goToFormat = () => history.push(`/formats/${deck.formatName}`)
