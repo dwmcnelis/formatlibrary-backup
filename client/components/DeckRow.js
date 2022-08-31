@@ -37,7 +37,7 @@ const DeckRow = (props) => {
               <div className="player-cell">
                 <img 
                     className="player-cell-pfp"
-                    src={`/images/pfps/${deck.playerId}.png`}
+                    src={`/images/pfps/${deck.player.discordId}.png`}
                     onError={(e) => {
                             e.target.onerror = null
                             e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"
