@@ -13,7 +13,7 @@ router.get('/leaders/:limit/:format', async (req, res, next) => {
         games: {[Op.gte]: 3},
         inactive: false,
         serverId: '414551319031054346',
-        '$player.blacklisted$': false
+        '$player.hidden$': false
       },
       attributes: ['id', 'format', 'elo', 'wins', 'losses', 'playerId'],
       include: [{ model: Player, attributes: ['id', 'name', 'tag', 'avatar'] }],

@@ -45,7 +45,7 @@ const DeckCreator = () => {
         
         try {
             const { data } = await axios.post('/api/decks/create', {
-                builder: player.name || player.realName,
+                builder: player.name,
                 playerId: player.id,
                 type: deckType.name,
                 deckTypeId: deckType.id,
@@ -80,7 +80,7 @@ const DeckCreator = () => {
     }
 
     const getPlayer = async (name) => {
-        const elem = players.filter((e) => e.name === name || e.realName === name)[0]
+        const elem = players.filter((e) => e.name === name)[0]
         return setPlayer(elem)
     }
 
@@ -129,7 +129,7 @@ const DeckCreator = () => {
                     onChange={(e) => getPlayer(e.target.value)}
                 >
                 {
-                    players.map((e) => <option value={e.name || e.realName}>{e.name || e.realName}</option>)
+                    players.map((e) => <option value={e.name}>{e.name}</option>)
                 }
                 </select>
             </label>

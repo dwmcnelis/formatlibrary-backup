@@ -8,8 +8,8 @@ import Placement from './Placement'
 import DeckThumbnail from './DeckThumbnail'
 import NotFound from './NotFound'
 
-const PlayerProfile = (props = {}) => {
-    const [player, setPlayer] = useState({})
+const UserProfile = (props = {}) => {
+    const [user, setUser] = useState({})
     const [stats, setStats] = useState([])
     const [decks, setDecks] = useState([])
     const [deckTypes, setDeckTypes] = useState([])
@@ -17,15 +17,15 @@ const PlayerProfile = (props = {}) => {
     // USE LAYOUT EFFECT
     useLayoutEffect(() => window.scrollTo(0, 0))
 
-    // USE EFFECT SET PLAYER
+    // USE EFFECT SET USER
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const {data} = await axios.get(`/api/players/${props.match.params.id}`)
-                setPlayer(data)
+                const {data} = await axios.get(`/api/users/${props.match.params.id}`)
+                setUser(data)
             } catch (err) {
                 console.log(err)
-                setPlayer(null)
+                setUser(null)
             }
         }
 
@@ -36,7 +36,7 @@ const PlayerProfile = (props = {}) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const {data} = await axios.get(`/api/stats/${player.id}`)
+                const {data} = await axios.get(`/api/stats/${user.id}`)
                 setStats(data)
             } catch (err) {
                 console.log(err)
@@ -44,13 +44,13 @@ const PlayerProfile = (props = {}) => {
         }
 
         fetchData()
-    }, [player])
+    }, [user])
 
     // USE EFFECT SET DECKS
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const {data} = await axios.get(`/api/decks/player/${player.id}`)
+                const {data} = await axios.get(`/api/decks/user/${user.id}`)
                 setDecks(data)
             } catch (err) {
                 console.log(err)
@@ -58,14 +58,14 @@ const PlayerProfile = (props = {}) => {
         }
 
         fetchData()
-    }, [player])
+    }, [user])
 
 
     // USE EFFECT SET DECKS
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const {data} = await axios.get(`/api/decks/frequent/${player.id}`)
+                const {data} = await axios.get(`/api/decks/frequent/${user.id}`)
                 setDeckTypes(data)
             } catch (err) {
                 console.log(err)
@@ -73,59 +73,59 @@ const PlayerProfile = (props = {}) => {
         }
 
         fetchData()
-    }, [player])
+    }, [user])
 
-    if (player === null) return <NotFound/>
-    if (!player.id) return <div />
+    if (user === null) return <NotFound/>
+    if (!user.id) return <div />
 
     return (
         <div className="body">
-            <div className="player-profile-flexbox">
-                <div className="player-info">
-                    <div className="player-profile-title">{player.tag.slice(0, -5)}</div>
+            <div className="user-profile-flexbox">
+                <div className="user-info">
+                    <div className="user-profile-title">{user.discordName}</div>
                     <img
-                        className="player-pfp" 
-                        src={`/images/pfps/${player.discordId}.png`} 
+                        className="user-pfp" 
+                        src={`/images/pfps/${user.id}.png`} 
                         onError={(e) => {
                                 e.target.onerror = null
                                 e.target.src="https://cdn.discordapp.com/embed/avatars/1.png"
                             }
                         }
                     />
-                    <table className="player-profile-table">
+                    <table className="user-profile-table">
                         <tbody>
-                            <tr className="player-profile-info">
+                            <tr className="user-profile-info">
                                 <td>
-                                    <div className="player-profile-cell">
-                                        <div><b>Name:</b> {player.firstName && player.lastName ? `${player.firstName} ${player.lastName}` : 'N/A'}</div>
+                                    <div className="user-profile-cell">
+                                        <div><b>Name:</b> {user.firstName || 'N/A'} {user.lastName || ''}</div>
                                     </div>       
                                 </td>
                             </tr>
-                            <tr className="player-profile-info">
+                            <tr className="user-profile-info">
                                 <td>
-                                    <div className="player-profile-cell">
+                                    <div className="user-profile-cell">
                                         <div>
                                             <span>
-                                                <b>Discord:</b> {player.tag.slice(0, -5) + ' '}
+                                                <b>Discord:</b> {user.discordName}
                                             </span>
                                             <span style={{color:"gray"}}>
-                                                {player.tag.slice(-5)} 
+                                                {user.discriminator} 
                                             </span>
                                         </div>
                                     </div>       
                                 </td>
                             </tr>
-                            <tr className="player-profile-info">
+                            <tr className="user-profile-info">
                                 <td>
-                                    <div className="player-profile-cell">
-                                        <div><b>DuelingBook:</b> {player.duelingBook || 'N/A'}</div>
+                                    <div className="user-profile-cell">
+                                        <div><b>DuelingBook:</b> {user.duelingBook || 'N/A'}</div>
                                     </div>       
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div className="player-awards">
+                <div className="user-awards">
                 {
                     stats.length ? (   
                         <div> 
@@ -168,4 +168,4 @@ const PlayerProfile = (props = {}) => {
     )
 }
 
-export default PlayerProfile
+export default UserProfile

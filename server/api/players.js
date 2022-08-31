@@ -9,12 +9,9 @@ router.get('/query/:query', async (req, res, next) => {
   try {
     const players = await Player.findAll({
       where: {
-        [Op.or]: [
-          {name: {[Op.substring]: req.params.query}},
-          {realName: {[Op.substring]: req.params.query}}
-        ]
+        name: {[Op.substring]: req.params.query}
       },
-      attributes: ['id', 'name', 'realName'],
+      attributes: ['id', 'name', 'discordId', 'firstName', 'lastName'],
       order: [['name', 'ASC']]
     })
 
@@ -38,9 +35,9 @@ router.get('/:id', async (req, res, next) => {
     const player = await Player.findOne({
       where: {
         tag: {[Op.iLike]: tag},
-        blacklisted: false
+        hidden: false
       },
-      attributes: ['id', 'name', 'tag', 'realName', 'duelingBook', 'avatar'],
+      attributes: ['id', 'name', 'discordId', 'discriminator', 'firstName', 'lastName', 'duelingBook', 'avatar'],
     })
 
     res.json(player)
@@ -52,7 +49,7 @@ router.get('/:id', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
   try {
     const players = await Player.findAll({
-      attributes: ['id', 'name', 'tag', 'realName', 'duelingBook', 'avatar'],
+      attributes: ['id', 'name', 'discordId', 'discriminator', 'firstName', 'lastName', 'duelingBook', 'avatar'],
       order: [['name', 'ASC']]
     })
 
