@@ -1922,6 +1922,8 @@ const fixDiscriminators = async () => {
     return console.log(`fixed ${b} discriminators; encountered ${e} errors`)
 }
 
+fixDiscriminators()
+
 // fixSets()
 // determineOriginals()
 // addCardDetails()
