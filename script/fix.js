@@ -1909,7 +1909,7 @@ const fixDiscriminators = async () => {
     for (let i = 0; i < players.length; i++) {
         try {
             const p = players[i]
-            const disc = d.discriminator.slice(-4)
+            const disc = p.discriminator.slice(-4)
             p.discriminator = disc
             await p.save()
             b++
