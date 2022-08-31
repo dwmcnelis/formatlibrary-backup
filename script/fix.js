@@ -1899,7 +1899,7 @@ const countOriginals = async () => {
 const fixDiscriminators = async () => {
     const players = await Player.findAll({
         where: {
-            tag: {[Op.not]: null}
+            discriminator: {[Op.not]: null}
         }
     })
 
