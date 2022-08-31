@@ -202,7 +202,7 @@ router.get('/like/:id', async (req, res, next) => {
                 id: req.params.id,
                 display: true
             },
-            attributes: ['id', 'rating']
+            attributes: ['id', 'display', 'rating']
         })
         
         deck.rating++
@@ -220,7 +220,7 @@ router.get('/download/:id', async (req, res, next) => {
                 id: req.params.id,
                 display: true
             },
-            attributes: ['id', 'ydk', 'downloads']
+            attributes: ['id', 'display', 'ydk', 'downloads']
         })
 
         deck.downloads++
