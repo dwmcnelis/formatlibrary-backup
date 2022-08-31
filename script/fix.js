@@ -1789,7 +1789,7 @@ const fixBlogPosts = async () => {
         try {
             const blogpost = blogposts[i]
             const player = blogpost.player
-            const tag = player.tag.replace('#', '')
+            const tag = player.name + player.discriminator
             const content = blogpost.content
                 .replaceAll(`src=/images/logos/Format Library.png`, `src="/images/logos/Format Library.png"`)
                 .replaceAll(`src=/images/logos/EdisonFormat.com.png`, `src="/images/logos/EdisonFormat.com.png"`)

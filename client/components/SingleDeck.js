@@ -53,8 +53,7 @@ const SingleDeck = (props) => {
   if (!deck) return <NotFound/>
   if (!deck.id) return <div/>
 
-  let str = (deck.player.tag || '').split('')
-  str.splice(-5, 1)
+  let str = deck.player.name + deck.player.discriminator
 
   const extension = str.join('')
       .replaceAll('%', '%25')
@@ -114,7 +113,7 @@ const SingleDeck = (props) => {
             <td id="single-deck-builder-td">
               <div className="single-deck-cell">
                 {
-                  deck.player && deck.player.tag ? (
+                  deck.player && deck.player.discriminator ? (
                     <div onClick={() => goToPlayer()} className="single-deck-builder-link">
                       <b>Builder: </b>
                       <p>{displayName}</p>

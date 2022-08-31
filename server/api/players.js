@@ -23,18 +23,9 @@ router.get('/query/:query', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    let str = req.params.id.replaceAll('%25', '%')
-        .replaceAll('%2F', '/')
-        .replaceAll('%23', '#')
-        .replaceAll('%3F', '?')
-        .split('')
-
-    str.splice(-4, 0, '#')
-    const tag = str.join('')
-
     const player = await Player.findOne({
       where: {
-        tag: {[Op.iLike]: tag},
+        name: {[Op.iLike]: req.params.id },
         hidden: false
       },
       attributes: ['id', 'name', 'discordId', 'discriminator', 'firstName', 'lastName', 'duelingBook', 'avatar'],

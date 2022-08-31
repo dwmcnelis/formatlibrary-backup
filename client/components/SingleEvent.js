@@ -24,7 +24,7 @@ const SingleEvent = (props) => {
 
   const history = useHistory()
   const goToFormat = () => history.push(`/formats/${event.format ? event.format.name : null}`)
-  const goToPlayer = () => history.push(`/players/${winner.tag.slice(0, -5) + winner.tag.slice(-4)}`)
+  const goToPlayer = () => history.push(`/players/${winner.name + winner.discriminator}`)
   
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])

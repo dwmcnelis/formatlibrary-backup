@@ -82,7 +82,7 @@ const PlayerProfile = (props = {}) => {
         <div className="body">
             <div className="player-profile-flexbox">
                 <div className="player-info">
-                    <div className="player-profile-title">{player.tag.slice(0, -5)}</div>
+                    <div className="player-profile-title">{player.name}</div>
                     <img
                         className="player-pfp" 
                         src={`/images/pfps/${player.discordId}.png`} 
@@ -106,10 +106,10 @@ const PlayerProfile = (props = {}) => {
                                     <div className="player-profile-cell">
                                         <div>
                                             <span>
-                                                <b>Discord:</b> {player.tag.slice(0, -5) + ' '}
+                                                <b>Discord:</b> {player.name}
                                             </span>
                                             <span style={{color:"gray"}}>
-                                                {player.tag.slice(-5)} 
+                                                {"#" + player.discriminator} 
                                             </span>
                                         </div>
                                     </div>       

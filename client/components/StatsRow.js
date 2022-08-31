@@ -41,8 +41,7 @@ const StatsRow = (props) => {
     const {index, stats} = props
     const {elo, wins, losses, player} = stats
     if (!player) return <tr/>
-    let str = (player.tag || '').split('')
-    str.splice(-5, 1)
+    let str = player.name + player.discriminator
 
     const extension = str.join('')
         .replaceAll('%', '%25')
