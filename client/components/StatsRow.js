@@ -41,12 +41,12 @@ const StatsRow = (props) => {
     const {index, stats} = props
     const {elo, wins, losses, player} = stats
     if (!player) return <tr/>
-    const extension =  player.name.join('')
+    const extension =  (player.name.join('')
         .replaceAll('%', '%25')
         .replaceAll('/', '%2F')
         .replaceAll(' ', '_')
         .replaceAll('#', '%23')
-        .replaceAll('?', '%3F') + '#' + player.discriminator
+        .replaceAll('?', '%3F')) + '#' + player.discriminator
 
     const evenOrOdd = props.index % 2 ? 'even' : 'odd'
     const displayName = player.name.length <= 24 ? player.name : player.name.slice(0, 24).split(' ').slice(0, -1).join(' ')
