@@ -205,6 +205,7 @@ router.get('/like/:id', async (req, res, next) => {
         })
         
         deck.rating++
+         
         await deck.save()
         return res.status(200).send('ok')
     } catch (err) {
