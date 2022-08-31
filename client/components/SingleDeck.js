@@ -53,8 +53,7 @@ const SingleDeck = (props) => {
   if (!deck) return <NotFound/>
   if (!deck.id) return <div/>
 
-  const extension =  player.name.join('')
-    .replaceAll('%', '%25')
+  const extension =  player.name.replaceAll('%', '%25')
     .replaceAll('/', '%2F')
     .replaceAll(' ', '_')
     .replaceAll('#', '%23')
