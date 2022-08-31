@@ -24,7 +24,11 @@ const SingleEvent = (props) => {
 
   const history = useHistory()
   const goToFormat = () => history.push(`/formats/${event.format ? event.format.name : null}`)
-  const goToPlayer = () => history.push(`/players/${winner.name + winner.discriminator}`)
+  const goToPlayer = () => history.push(`/players/${winner.name.replaceAll('%', '%25')
+  .replaceAll('/', '%2F')
+  .replaceAll(' ', '_')
+  .replaceAll('#', '%23')
+  .replaceAll('?', '%3F') + '#' + winner.discriminator}`)
   
   // USE LAYOUT EFFECT
   useLayoutEffect(() => window.scrollTo(0, 0), [])
