@@ -11,7 +11,7 @@ router.get('/query/:query', async (req, res, next) => {
       where: {
         name: {[Op.substring]: req.params.query}
       },
-      attributes: ['id', 'name', 'discordId', 'firstName', 'lastName'],
+      attributes: ['id', 'name', 'discriminator', 'discordId', 'firstName', 'lastName'],
       order: [['name', 'ASC']]
     })
 

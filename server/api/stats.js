@@ -16,7 +16,7 @@ router.get('/leaders/:limit/:format', async (req, res, next) => {
         '$player.hidden$': false
       },
       attributes: ['id', 'format', 'elo', 'wins', 'losses', 'playerId'],
-      include: [{ model: Player, attributes: ['id', 'name', 'discriminator', 'avatar'] }],
+      include: [{ model: Player, attributes: ['id', 'name', 'discriminator', 'discordId', 'avatar'] }],
       limit: parseInt(req.params.limit) || 10,
       order: [['elo', 'DESC']]
     })
