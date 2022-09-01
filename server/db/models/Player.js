@@ -6,6 +6,9 @@ const Player = db.define('players', {
     name: {
         type: Sequelize.STRING
     },
+    email: {
+        type: Sequelize.STRING
+    },
     discordId: {
         type: Sequelize.STRING
     },
