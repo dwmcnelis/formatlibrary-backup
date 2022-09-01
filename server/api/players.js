@@ -28,7 +28,7 @@ router.get('/:id', async (req, res, next) => {
         name: {[Op.iLike]: req.params.id },
         hidden: false
       },
-      attributes: ['id', 'name', 'discordId', 'discriminator', 'firstName', 'lastName', 'duelingBook', 'avatar'],
+      attributes: ['id', 'name', 'discordId', 'discriminator', 'firstName', 'lastName', 'duelingBook'],
     })
 
     res.json(player)
@@ -40,7 +40,7 @@ router.get('/:id', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
   try {
     const players = await Player.findAll({
-      attributes: ['id', 'name', 'discordId', 'discriminator', 'firstName', 'lastName', 'duelingBook', 'avatar'],
+      attributes: ['id', 'name', 'discordId', 'discriminator', 'firstName', 'lastName', 'duelingBook'],
       order: [['name', 'ASC']]
     })
 

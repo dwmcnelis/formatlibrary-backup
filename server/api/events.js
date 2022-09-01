@@ -16,7 +16,7 @@ router.get('/all', async (req, res, next) => {
       attributes: ['id', 'name', 'abbreviation', 'formatName', 'formatId', 'size', 'winner', 'playerId', 'community', 'startDate', 'endDate'],
       include: [
           { model: Format, attributes: ['id', 'name', 'icon'] },
-          { model: Player, attributes: ['id', 'name', 'discriminator', 'discordId', 'avatar'] }
+          { model: Player, attributes: ['id', 'name', 'discriminator', 'discordId'] }
       ],
       order: [['startDate', 'DESC']]
     })
@@ -37,7 +37,7 @@ router.get('/community/:community', async (req, res, next) => {
       attributes: ['id', 'name', 'abbreviation', 'formatName', 'formatId', 'size', 'winner', 'playerId', 'community', 'startDate', 'endDate'],
       include: [
           { model: Format, attributes: ['id', 'name', 'icon'] },
-          { model: Player, attributes: ['id', 'name', 'discriminator', 'discordId', 'avatar'] }
+          { model: Player, attributes: ['id', 'name', 'discriminator', 'discordId'] }
       ],
       order: [['startDate', 'DESC']]
     })
@@ -58,7 +58,7 @@ router.get('/recent/:format', async (req, res, next) => {
           attributes: ['id', 'name', 'abbreviation', 'winner', 'playerId', 'community', 'startDate', 'endDate'],
           include: [
               { model: Format, attributes: ['id', 'name', 'icon'] },
-              { model: Player, attributes: ['id', 'name', 'discriminator', 'discordId', 'avatar'] }
+              { model: Player, attributes: ['id', 'name', 'discriminator', 'discordId'] }
           ],
           attributes: { exclude: ['createdAt', 'updatedAt'] },
           order: [['startDate', 'DESC']],
@@ -85,7 +85,7 @@ router.get('/first/:x', async (req, res, next) => {
             attributes: ['id', 'name', 'abbreviation', 'formatName', 'formatId', 'size', 'winner', 'playerId', 'community', 'startDate', 'endDate'],
             include: [
                 { model: Format, attributes: ['id', 'name', 'icon'] },
-                { model: Player, attributes: ['id', 'name', 'discriminator', 'discordId', 'avatar'] }
+                { model: Player, attributes: ['id', 'name', 'discriminator', 'discordId'] }
             ],
             order: [['startDate', 'DESC']],
             limit: req.params.x
@@ -106,7 +106,7 @@ router.get('/:id', async (req, res, next) => {
       attributes: ['id', 'name', 'abbreviation', 'referenceUrl', 'formatName', 'formatId', 'size', 'winner', 'playerId', 'community', 'startDate', 'endDate'],
       include: [
           { model: Format, attributes: ['id', 'name', 'icon'] },
-          { model: Player, attributes: ['id', 'name', 'discriminator', 'discordId', 'avatar'] }
+          { model: Player, attributes: ['id', 'name', 'discriminator', 'discordId'] }
       ]
     })
 
