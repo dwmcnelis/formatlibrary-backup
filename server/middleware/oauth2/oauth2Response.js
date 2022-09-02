@@ -1,5 +1,6 @@
 const { AuthorizationCode } = require('simple-oauth2')
 const axios = require('axios')
+const Player = require('../../db/models/Player')
 
 const oauth2Response = (options) => {
 	const { clientId, clientSecret, redirectUrl, scope, authorizeUrl, tokenUrl, userinfoUrl } = options
