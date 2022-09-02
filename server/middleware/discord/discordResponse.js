@@ -1,5 +1,6 @@
 const { AuthorizationCode } = require('simple-oauth2')
 const axios = require('axios')
+const Player = require('../../db/models/Player')
 
 const discordResponse = (options) => {
 	const { clientId, clientSecret, redirectUrl, scope, authorizeUrl, tokenUrl, userinfoUrl, guildsUrl } = options
@@ -53,11 +54,9 @@ const discordResponse = (options) => {
 		} catch (error) {
 			console.error('middleware.discordResponse: error: ', error.message)
 		}
+
 		console.log('middleware.discordResponse: userinfo: ', userinfo.data)
-
-		const { email, username, discriminator, id, avatar } = userinfo.data
-
-        const player
+        await Player.discordLogin(userinfo.data)
 
 		// res.cookie('id', idToken, {
 		// 	maxAge: 15 * 60 * 1000 // 15 minutes

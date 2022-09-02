@@ -1,5 +1,6 @@
 const { Issuer } = require('openid-client')
 const { decodeJwt } = require('jose')
+const Player = require('../../db/models/Player')
 
 const oidcResponse = (options) => {
 	const { clientId, clientSecret, redirectUrl, discoveryUrl } = options
@@ -54,12 +55,7 @@ const oidcResponse = (options) => {
 		const payload = decodeJwt(idToken)
 		console.log('middleware.oidcResponse: payload: ', payload)
 
-		const { sub, email, name, given_name: givenName, family_name: familyName } = payload
-		console.log('middleware.oidcResponse: sub: ', sub)
-		console.log('middleware.oidcResponse: email: ', email)
-		console.log('middleware.oidcResponse: name: ', name)
-		console.log('middleware.oidcResponse: givenName: ', givenName)
-		console.log('middleware.oidcResponse: familyName: ', familyName)
+		await Player.googleLogin(payload)
 
 		res.cookie('id', idToken, {
 			maxAge: 15 * 60 * 1000 // 15 minutes
