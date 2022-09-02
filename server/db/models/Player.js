@@ -21,14 +21,11 @@ const Player = db.define('players', {
     discordPfp: {
         type: Sequelize.STRING
     },
-    googleName: {
-        type: Sequelize.STRING
-    },
     googleId: {
         type: Sequelize.STRING
     },
     googlePfp: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
     },
     duelingBook: {
         type: Sequelize.STRING
@@ -55,39 +52,70 @@ const Player = db.define('players', {
     }
 })
 
-// Player.findByDiscordId = (id) => Player.findOne({ where: { discordId: id }})
+Player.findByDiscordId = (id) => Player.findOne({ where: { discordId: id }})
 
-// Player.resolveDiscord = async (user) => {
-//     let existingPlayer = await Player.findOne({ 
-//         where: { 
-//             discordId: user.id
-//         }
-//     })
+Player.discordLogin = async (user) => {
+    const existingPlayer = await Player.findOne({ 
+        where: { 
+            discordId: user.id
+        }
+    }) || await Player.findOne({ 
+        where: { 
+            email: user.email
+        }
+    })
 
-//     if (existingPlayer) {
+    if (existingPlayer) {
+        return await existingPlayer.update({
+            name: existingPlayer.name || user.username,
+            discordName: user.username,
+            discriminator: user.discriminator,
+            discordPfp: user.avatar,
+            email: existingPlayer.email || user.email
+        })
+    } else {
+        return await Player.create({
+            name: user.username,
+            discordName: user.username,
+            discriminator: user.discriminator,
+            discordPfp: user.avatar,
+            email: user.email
+        })
+    }
+}
 
-//         await existingPlayer.update({
-//             avatar: user.avatar
-//         })
+Player.googleLogin = async (payload) => {
+    const existingPlayer = await Player.findOne({ 
+        where: { 
+            googleId: payload.email.slice(0, -10)
+        }
+    }) || await Player.findOne({ 
+        where: { 
+            email: payload.email
+        }
+    })
 
-//         return existingPlayer
+    if (existingPlayer) {
+        return await existingPlayer.update({
+            name: existingPlayer.name || payload.name,
+            googleId: payload.email.slice(0, -10),
+            googlePfp: payload.picture,
+            firstName: existingPlayer.firstName || payload.given_name,
+            lastName: existingPlayer.lastName || payload.family_name,
+            email: existingPlayer.email || payload.email
+        })
+    } else {
+        return await Player.create({
+            name: payload.name,
+            googleId: payload.email.slice(0, -10),
+            googlePfp: payload.picture,
+            firstName: payload.given_name,
+            lastName: payload.family_name,
+            email: payload.email
+        })
+    }
+}
 
-//     } else {
-//         existingPlayer = await Player.findOne({ 
-//             where: { 
-//                 email: user.email    
-//             }
-//         })
-
-//         if (existingPlayer) {
-
-//             return existingPlayer
-//         }
-//     }
-
-//    return await Player.create({})
-// }
-
-// Player.prototype.hide = () => this.update({ hidden: true })
+Player.prototype.hide = () => this.update({ hidden: true })
 
 module.exports = Player
