@@ -1,0 +1,82 @@
+#!/usr/bin/env node
+const { SignJWT, CompactSign, jwtVerify, calculateJwkThumbprint, importJWK, exportJWK } = require('jose')
+
+const config = require('../config')
+
+const algorithm = 'RS256'
+const issuer = 'urn:formatlibrary:auth'
+const audience = 'urn:formatlibrary:api'
+const exires = '15m'
+const subject = 'Jz9uAKouzDfjEQ5bap1Tgu'
+const payload =  {
+	email: 'someone@example.com'
+}
+const jwt = 'eyJhbGciOiJSUzI1NiJ9.eyJlbWFpbCI6InNvbWVvbmVAZXhhbXBsZS5jb20iLCJzdWIiOiJKejl1QUtvdXpEZmpFUTViYXAxVGd1IiwiYXVkIjoidXJuOmZvcm1hdGxpYnJhcnk6YXBpIiwiaXNzIjoidXJuOmZvcm1hdGxpYnJhcnk6YXV0aCIsImlhdCI6MTY2MjU5NDI1MCwiZXhwIjoxNjYyNTk1MTUwfQ.Kd7byBHbts-LS677aGKZNDu4tUg5CgAjP2HmojpbV9n4DrmQLMxAdavxorcGoxp6FVpOOGz9-oLOLb8ptDHaO6hwhy4q7S1Ac8_c2nTxNAETccOqbZaFrlVHGHqjOCANyyZdTmpdhAQ9epH4HPyKIwTGa_RRT5vgItqcl2re141wNx5a8UgkU0EgECEx80P2-1-BvLfOKRNd_cN86Sp2i6FPenkNAzZwAuT2uxh9NMubhFnSkZSexGdf5jwVBPmDNXxUo56M2blegQ1NYQBEDt4zswJ2rWXHOhRKNKS9PbRg54hnPW_Ov-w7yExchtA3l2fNZxiQOGZoH5qxx6qyaw'
+const sign = true
+const verify = false
+
+;(async () => {
+
+	const privateJwks = (config.siteJWKS || [])
+	console.log('jwks (private): ', privateJwks)
+
+	const keys = await Promise.all(privateJwks.map((privateJwk) => importJWK(privateJwk, algorithm)))
+	console.log('keys (raw): ', keys)
+
+	const publicKeys = await Promise.all(keys.map((key) => exportJWK(key, false)))
+	console.log('jwks (public): ', publicKeys)
+
+
+	if (sign) {
+		console.log("\n\n")
+		console.log('*** sign ***')
+
+		console.log('payload: ', payload)
+		const privateJwk = privateJwks[0]
+		console.log('jwk (private): ', privateJwk)
+		const kid = await calculateJwkThumbprint(privateJwk, 'sha256')
+		console.log('kid: ', kid)
+		const key = keys[0]
+		console.log('key (raw): ', key)
+
+		let signed
+		try {
+			signed = await new SignJWT(payload)
+				.setProtectedHeader({ alg: algorithm })
+				.setSubject(subject)
+				.setAudience(audience)
+				.setIssuer(issuer)
+				.setIssuedAt()
+				.setExpirationTime(exires)
+				.sign(key)
+		} catch (error) {
+			console.error(error)
+			throw new Error('Failed to sign JWT!')
+		}
+		console.log('signed: ', signed)
+	}
+
+	if (verify) {
+		console.log("\n\n")
+		console.log('*** verify ***')
+
+		console.log('jwt: ', jwt)
+		const publicKey = publicKeys[0]
+		console.log('jwk (public): ', publicKey)
+
+		const key = await importJWK(publicKey, algorithm)
+		console.log('publicKey (raw): ', key)
+		let claims
+		try {
+			claims = await jwtVerify(jwt, key, {
+				issuer,
+				audience
+			})
+		} catch (error) {
+			console.error(error)
+			throw new Error('Failed to verify JWT!')
+		}
+		console.log('claims: ', claims && claims.payload)
+	}
+
+})()

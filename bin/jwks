@@ -1,0 +1,58 @@
+#!/usr/bin/env node
+const { calculateJwkThumbprint, exportJWK, generateKeyPair } = require('jose')
+const { createPublicKey } = require( 'crypto')
+
+const JWS_VALUES = ['HS256', 'RS256', 'ES256']
+const JWE_VALUES = ['RSA-OAEP', 'ECDH-ES']
+
+const algorithm =  'RS256'
+const size = 2048
+const number = 4
+const stringify = true
+const minimize = true 
+
+const generateKeys = async (number) => {
+	return Promise.all(
+		Array(number)
+			.fill(0)
+			.map(() =>
+				generateKeyPair(algorithm, {
+					extractable: true,
+					modulusLength: size,
+					crv: size
+				}).then(({ privateKey }) => privateKey)
+			)
+	)
+}
+
+const exportJwks = async (keys, privateKeys) => {
+	const jwks = []
+	for (const keylike of keys) {
+		const jwk = await exportJWK(privateKeys ? keylike : createPublicKey(keylike))
+		const kid = await calculateJwkThumbprint(jwk, 'sha256')
+		const use = JWS_VALUES.includes(algorithm) ? 'sig' : JWE_VALUES.includes(algorithm) ? 'enc' : '--'
+		jwks.push({ ...jwk, alg: algorithm, kid, use })
+	}
+	return jwks
+}
+
+;(async () => {
+	const keys = await generateKeys(number)
+	console.log('jwks (raw): ', keys)
+
+	const jwksPrivate = await exportJwks(keys, true)
+	if (stringify) {
+		console.log('jwks (private): ', minimize ? JSON.stringify(jwksPrivate) : JSON.stringify(jwksPrivate, null, 2))
+	} else {
+		console.log('jwks (private): ', jwksPrivate)
+	}
+
+	const jwksPublic = await exportJwks(keys, false)
+	if (stringify) {
+		console.log('jwks (public): ', minimize ? JSON.stringify(jwksPublic) : JSON.stringify(jwksPublic, null, 2))
+	} else {
+		console.log('jwks (public): ', jwksPublic)
+	}
+
+})()
+

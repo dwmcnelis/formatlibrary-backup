@@ -4,6 +4,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = {
 	siteUrl: process.env.SITE_URL,
+	siteJWKS: JSON.parse(process.env.SITE_JWKS),
+	siteIKS: JSON.parse(process.env.SITE_IKS),
 	sessionSecret: process.env.SESSION_SECRET,
 	server: {
 		https: process.env.SERVER_HTTPS,

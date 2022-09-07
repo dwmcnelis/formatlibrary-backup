@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+;(async () => {
+	const id = async () => {
+		const base58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
+		return import('nanoid').then(({ customAlphabet }) => customAlphabet(base58, 22)())
+	}
+
+	console.log('id: ', await id())
+})()
