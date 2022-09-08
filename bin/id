@@ -1,4 +1,18 @@
 #!/usr/bin/env node
+var argv = require('minimist')(process.argv.slice(2))
+
+if (argv.help) {
+	console.log(`
+usage: id [--help] [--number]
+
+Options:
+--number       Generate number of ids
+--help         Show available options	
+`)
+	process.exit()
+}
+
+const number = argv.number || 1
 
 ;(async () => {
 	const id = async () => {
@@ -6,5 +20,5 @@
 		return import('nanoid').then(({ customAlphabet }) => customAlphabet(base58, 22)())
 	}
 
-	console.log('id: ', await id())
+	;[...Array(number).keys()].map(async () => console.log(await id()))
 })()
