@@ -57,7 +57,7 @@ const audience = 'urn:formatlibrary:api'
 		let signed
 		try {
 			signed = await new SignJWT(payload)
-				.setProtectedHeader({ alg: algorithm })
+				.setProtectedHeader({ alg: algorithm, kid })
 				.setSubject(subject)
 				.setAudience(audience)
 				.setIssuer(issuer)
