@@ -59,6 +59,7 @@
     "history": "^4.10.1",
     "html-react-parser": "^1.4.9",
     "jose": "^4.8.3",
+    "minimist": "^1.2.6",
     "morgan": "^1.10.0",
     "nanoid": "^4.0.0",
     "openid-client": "^5.1.8",
