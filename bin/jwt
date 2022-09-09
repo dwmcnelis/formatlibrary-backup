@@ -1,0 +1,95 @@
+#!/usr/bin/env node
+const { SignJWT, CompactSign, jwtVerify, calculateJwkThumbprint, importJWK, exportJWK } = require('jose')
+const config = require('../config')
+
+var argv = require('minimist')(process.argv.slice(2))
+
+if (argv.help) {
+	console.log(`
+usage: jwt [--help] [--sign] [--subject] [--payload] [--verify] [--jwt] [--expires] [--verbose]
+
+Options:
+--sign         Sign payload
+--subject      Subject of jwt
+--payload      Payload to sign
+--verify       Verify jwt
+--jwt          JWT tp verify
+--expires      Expires in
+--verbose      Show keys
+--help         Show available options	
+`)
+	process.exit()
+}
+
+const sign = (argv.sign && !argv.verify) ? true : (!argv.sign && !argv.verify ? true : false)
+const subject = argv.subject || 'Jz9uAKouzDfjEQ5bap1Tgu'
+const payload = argv.payload || JSON.parse('{"email": "someone@example.com"}')
+const verify = (argv.verify && !argv.sign) ? true : false
+const jwt = argv.jwt || 'eyJhbGciOiJSUzI1NiJ9.eyJlbWFpbCI6InNvbWVvbmVAZXhhbXBsZS5jb20iLCJzdWIiOiJKejl1QUtvdXpEZmpFUTViYXAxVGd1IiwiYXVkIjoidXJuOmZvcm1hdGxpYnJhcnk6YXBpIiwiaXNzIjoidXJuOmZvcm1hdGxpYnJhcnk6YXV0aCIsImlhdCI6MTY2MjY3ODAxMiwiZXhwIjoxOTc4MjU0MDEyfQ.IW6L1ZORp3VHoPqKnEzPBgIGLtDXQ_pYHKFAQcjQQf8jQkYjmx51q4S7geCCWOiDKclyDIgbcSWToCJU08joTBQiht7LHvW63eXD78rNSbBaxeBWFrNKK1hkQHc1nOCGoW9XAraEm-doIjGYqLaqr7BXZp8jtatGRSDM3hYiRQiiXpjfuHV6bIKmyn79sL_iKZWYHB7hpYDaDDQVVRSY5kipBgvg8_Ld7rEAszMXCZtnTy9Lw8gs-ziQa46vdkyNpWG35FQJDRrVs8GSbLNmxhXbyesSjIKib1PAlcNDjHn9E0Dxi3CwS8Orx5ZrYDK1Fj_ljEHI96OAuB6EuX_EcQ'
+const expires = argv.expires || '15m'
+const verbose = argv.verbose || false
+
+const algorithm = 'RS256'
+const issuer = 'urn:formatlibrary:auth'
+const audience = 'urn:formatlibrary:api'
+
+;(async () => {
+
+	const privateJwks = (config.siteJWKS || [])
+	verbose && console.log('jwks (private): ', privateJwks)
+
+	const keys = await Promise.all(privateJwks.map((privateJwk) => importJWK(privateJwk, algorithm)))
+	verbose && console.log('keys (raw): ', keys)
+
+	const publicKeys = await Promise.all(keys.map((key) => exportJWK(key, false)))
+	verbose && console.log('jwks (public): ', publicKeys)
+
+
+	if (sign) {
+		console.log('payload: ', payload)
+		const privateJwk = privateJwks[0]
+		verbose && console.log('jwk (private): ', privateJwk)
+		const kid = await calculateJwkThumbprint(privateJwk, 'sha256')
+		verbose && console.log('kid: ', kid)
+		const key = keys[0]
+		verbose && console.log('key (raw): ', key)
+
+		let signed
+		try {
+			signed = await new SignJWT(payload)
+				.setProtectedHeader({ alg: algorithm, kid })
+				.setSubject(subject)
+				.setAudience(audience)
+				.setIssuer(issuer)
+				.setIssuedAt()
+				.setExpirationTime(expires)
+				.sign(key)
+		} catch (error) {
+			console.error(error)
+			throw new Error('Failed to sign JWT!')
+		}
+		console.log('signed: ', signed)
+	}
+
+	if (verify) {
+		console.log('jwt: ', jwt)
+		const publicKey = publicKeys[0]
+		verbose && console.log('jwk (public): ', publicKey)
+
+		const key = await importJWK(publicKey, algorithm)
+		verbose && console.log('publicKey (raw): ', key)
+
+		let claims
+		try {
+			claims = await jwtVerify(jwt, key, {
+				issuer,
+				audience
+			})
+		} catch (error) {
+			console.error(error)
+			throw new Error('Failed to verify JWT!')
+		}
+		console.log('claims: ', claims && claims.payload)
+	}
+
+})()
