@@ -52,6 +52,11 @@ const Player = db.define('players', {
     }
 })
 
+Player.genid = async () => {
+  const base58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
+  return import('nanoid').then(({ customAlphabet }) => customAlphabet(base58, 22)())
+}
+
 Player.findByDiscordId = (id) => Player.findOne({ where: { discordId: id }})
 
 Player.discordLogin = async (user) => {
