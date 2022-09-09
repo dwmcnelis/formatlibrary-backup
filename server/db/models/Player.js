@@ -55,7 +55,6 @@ const Player = db.define('players', {
 Player.findByDiscordId = (id) => Player.findOne({ where: { discordId: id }})
 
 Player.discordLogin = async (user) => {
-    console.log('DISCORD LOGIN METHOD')
     const existingPlayer = await Player.findOne({ 
         where: { 
             discordId: user.id
@@ -67,12 +66,14 @@ Player.discordLogin = async (user) => {
     })
 
     if (existingPlayer) {
+        const googleId = user.email.includes('@gmail.com') ? user.email.slice(0, -10) : null
         return await existingPlayer.update({
             name: existingPlayer.name || user.username,
             discordName: user.username,
             discriminator: user.discriminator,
             discordPfp: user.avatar,
-            email: existingPlayer.email || user.email
+            email: existingPlayer.email || user.email,
+            googleId: existingPlayer.googleId || googleId
         })
     } else {
         return await Player.create({
@@ -86,7 +87,6 @@ Player.discordLogin = async (user) => {
 }
 
 Player.googleLogin = async (payload) => {
-    console.log('GOOGLE LOGIN METHOD')
     const existingPlayer = await Player.findOne({ 
         where: { 
             googleId: payload.email.slice(0, -10)
