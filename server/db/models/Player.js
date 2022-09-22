@@ -52,7 +52,7 @@ const Player = db.define('players', {
     }
 })
 
-Player.genid = async () => {
+Player.generateId = async () => {
   const base58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
   return import('nanoid').then(({ customAlphabet }) => customAlphabet(base58, 22)())
 }
