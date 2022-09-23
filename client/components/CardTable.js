@@ -516,7 +516,7 @@ const CardTable = (props) => {
                         id="searchBar"
                         className="filter"
                         type="text"
-                        style={{maxWidth: '56vw'}}
+                        style={{maxWidth: '60vw'}}
                         placeholder="🔍"
                         onChange={() => runQuery()}
                         onKeyDown={(e) => {
@@ -528,7 +528,7 @@ const CardTable = (props) => {
                         id="searchTypeSelector"
                         defaultValue="name"
                         className="filter"
-                        style={{maxWidth: '28vw'}}
+                        style={{maxWidth: '30vw'}}
                         onChange={() => runQuery()}
                         >
                         <option value="name">Name</option>
