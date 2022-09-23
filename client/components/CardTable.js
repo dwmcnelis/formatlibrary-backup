@@ -515,6 +515,7 @@ const CardTable = (props) => {
                         id="searchBar"
                         className="filter"
                         type="text"
+                        style={{maxWidth: '60vw'}}
                         placeholder="🔍"
                         onChange={() => runQuery()}
                         onKeyDown={(e) => {
@@ -526,6 +527,7 @@ const CardTable = (props) => {
                         id="searchTypeSelector"
                         defaultValue="name"
                         className="filter"
+                        style={{maxWidth: '34vw'}}
                         onChange={() => runQuery()}
                         >
                         <option value="name">Card Name</option>
@@ -536,6 +538,7 @@ const CardTable = (props) => {
                     <select
                         id="category"
                         defaultValue=""
+                        style={{maxWidth: '27vw'}}
                         className="filter"
                         onChange={() => setQueryParams({ ...queryParams, category: document.getElementById('category').value })}
                     >
@@ -550,6 +553,7 @@ const CardTable = (props) => {
                         <select
                         id="format"
                         defaultValue=""
+                        style={{maxWidth: '33vw'}}
                         className="filter"
                         onChange={(e) => updateFormat(e)}
                         >
@@ -565,6 +569,7 @@ const CardTable = (props) => {
                         id="booster"
                         defaultValue=""
                         className="filter"
+                        style={{maxWidth: '27vw'}}
                         onChange={(e) => setBooster(e.target.value)}
                         >
                         <option key="All Sets" value="">All Sets</option>
@@ -830,7 +835,7 @@ const CardTable = (props) => {
           <select
             id="cardsPerPageSelector"
             defaultValue="10"
-            style={{width: '160px'}}
+            style={{width: '160px', maxWidth: '45vw'}}
             onChange={(e) => changeCardsPerPage(e)}
           >
             <option value="10"> 10 Cards / Page</option>
@@ -842,7 +847,7 @@ const CardTable = (props) => {
           <select
             id="sortSelector"
             defaultValue="nameASC"
-            style={{width: '160px'}}
+            style={{width: '160px', maxWidth: '45vw'}}
             onChange={(e) => sortCards(e)}
           >
             <option value="nameASC">Name: A ⮕ Z</option>

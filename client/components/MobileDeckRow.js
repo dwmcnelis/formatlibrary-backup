@@ -46,14 +46,6 @@ const MobileDeckRow = (props) => {
             </div>
         </Link>
       </td>
-      <td className="no-padding">
-        <Link className="black-text" to={`/decks/${deck.id}`}>
-          <div className="community-cell-flexbox">
-            <img src={`/images/logos/${deck.community}.png`}/>
-            <div>{deck.eventName || '-'}</div>
-          </div>
-        </Link>
-      </td>
     </tr>
     )
 }

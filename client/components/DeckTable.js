@@ -231,7 +231,7 @@ const DeckTable = (props) => {
         <h1>Deck Database</h1>
         <img style={{ height:'80px'}} src={'/images/emojis/deckbox.png'}/>
       </div>
-      
+
       <div className="searchWrapper">
         <input
           id="searchBar"
@@ -378,7 +378,6 @@ const DeckTable = (props) => {
                 <th>Deck</th>
                 <th>Builder</th>
                 <th>Place</th>
-                <th>Event</th>
               </tr>
             </thead>
             <tbody>

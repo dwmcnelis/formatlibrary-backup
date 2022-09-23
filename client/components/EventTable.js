@@ -283,7 +283,6 @@ const EventTable = (props) => {
               <th>Format</th>
               <th>Event</th>
               <th>Winner</th>
-              <th>Date</th>
             </tr>
           </thead>
           <tbody>

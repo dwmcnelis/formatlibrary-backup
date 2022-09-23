@@ -1,7 +1,6 @@
 
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { dateToSimple } from '../../functions/utility'
 
 /*eslint-disable*/
 const MobileEventRow = (props) => {
@@ -39,13 +38,6 @@ const MobileEventRow = (props) => {
                     }
                 />
             </div>
-            </Link>
-        </td>
-        <td className="no-padding">
-            <Link className="black-text" to={`/events/${event.abbreviation}`}>
-              <div className="date-cell">
-                  {dateToSimple(event.startDate)}
-              </div>
             </Link>
         </td>
       </tr>
