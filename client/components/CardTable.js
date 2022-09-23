@@ -37,6 +37,7 @@ const CardTable = (props) => {
   const [allFetched, setAllFetched] = useState(false)
   const [advanced, setAdvanced] = useState(false)
   const [cutoff, setCutoff] = useState(`${year}-12-31`)
+  console.log('filteredCards', filteredCards)
 
   const [sliders, setSliders] = useState({
     year: year,
