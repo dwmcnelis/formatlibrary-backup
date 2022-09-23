@@ -1,7 +1,6 @@
 /* eslint-disable max-statements */
 
 import React from 'react'
-import CardImage from './CardImage'
 import { Link } from 'react-router-dom'
 import { Aqua, Beast, BeastWarrior, Continuous, Counter, Cyberse, DARK, Dinosaur, 
   DIVINE, DivineBeast, Dragon, EARTH, Equip, Fairy, Field, Fiend, FIRE, Fish, 

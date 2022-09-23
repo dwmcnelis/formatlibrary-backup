@@ -1922,17 +1922,16 @@ const fixDiscriminators = async () => {
     return console.log(`fixed ${b} discriminators; encountered ${e} errors`)
 }
 
-fixDiscriminators()
+// fixDiscriminators()
 
 // fixSets()
 // determineOriginals()
 // addCardDetails()
-// fixDecks()
+fixDecks()
 // fixBlogPosts()
 // fixEvents()
 // fixDeckThumbs()
 // checkMissingThumbs()
-// fixDecks2()
 // fixGames()
 // fixYDKs()
 // fixDeckCreatedAt()

@@ -169,7 +169,7 @@ const EventTable = (props) => {
   const lastIndex = page * eventsPerPage
   const firstIndex = lastIndex - eventsPerPage
   if (filteredEvents.length) filteredEvents.sort(sortFunctions[sortBy] || undefined)
-  const formatKeys = Object.keys(formats)
+  const formatKeys = formats.map((f) => f.name)
 
   // RENDER
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
@@ -198,7 +198,7 @@ const EventTable = (props) => {
           <select
             id="searchTypeSelector"
             defaultValue="name"
-            className="filter"
+            className="filter desktop-only"
             onChange={() => runQuery()}
           >
             <option value="name">Event</option>
@@ -218,7 +218,7 @@ const EventTable = (props) => {
           </select>
 
           <a
-            className="searchButton"
+            className="searchButton desktop-only"
             type="submit"
             onClick={() => search()}
           >
@@ -227,8 +227,8 @@ const EventTable = (props) => {
         </div>
       </div>
 
-      <div id="resultsWrapper0" className="resultsWrapper0">
-        <div className="results" style={{width: '360px'}}>
+      <div id="resultsWrapper0" className="resultsWrapper0 desktop-only">
+        <div className="desktop-only results" style={{width: '360px'}}>
           Results:{' '}
           {firstXFetched && allFetched
             ? filteredEvents.length
@@ -268,7 +268,7 @@ const EventTable = (props) => {
           </select>
 
           <a
-            className="searchButton"
+            className="searchButton desktop-only"
             type="submit"
             onClick={() => reset()}
           >
@@ -283,6 +283,7 @@ const EventTable = (props) => {
             <tr>
               <th>Format</th>
               <th>Event</th>
+              <th>Winner</th>
               <th>Date</th>
             </tr>
           </thead>
@@ -375,7 +376,7 @@ const EventTable = (props) => {
           </select>
 
           <a
-            className="searchButton"
+            className="searchButton desktop-only"
             type="submit"
             onClick={() => search()}
           >
@@ -437,7 +438,7 @@ const EventTable = (props) => {
           </select>
 
           <a
-            className="searchButton"
+            className="searchButton desktop-only"
             type="submit"
             onClick={() => reset()}
           >
