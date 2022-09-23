@@ -515,7 +515,7 @@ const CardTable = (props) => {
                         id="searchBar"
                         className="filter"
                         type="text"
-                        style={{maxWidth: '60vw'}}
+                        style={{maxWidth: '50vw'}}
                         placeholder="🔍"
                         onChange={() => runQuery()}
                         onKeyDown={(e) => {
