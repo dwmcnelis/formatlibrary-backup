@@ -515,7 +515,7 @@ const CardTable = (props) => {
                         id="searchBar"
                         className="filter"
                         type="text"
-                        style={{maxWidth: '48vw'}}
+                        style={{maxWidth: '50vw'}}
                         placeholder="🔍"
                         onChange={() => runQuery()}
                         onKeyDown={(e) => {
@@ -527,11 +527,11 @@ const CardTable = (props) => {
                         id="searchTypeSelector"
                         defaultValue="name"
                         className="filter"
-                        style={{maxWidth: '32vw'}}
+                        style={{maxWidth: '28vw'}}
                         onChange={() => runQuery()}
                         >
-                        <option value="name">Card Name</option>
-                        <option value="description">Card Text</option>
+                        <option value="name">Name</option>
+                        <option value="description">Text</option>
                     </select>
                 </div>
                 <div className="query-box">
@@ -542,10 +542,10 @@ const CardTable = (props) => {
                         className="filter"
                         onChange={() => setQueryParams({ ...queryParams, category: document.getElementById('category').value })}
                     >
-                        <option value="">All Cards</option>
-                        <option value="Monster">Monsters</option>
-                        <option value="Spell">Spells</option>
-                        <option value="Trap">Traps</option>
+                        <option value="">Cards</option>
+                        <option value="Monster">Monster</option>
+                        <option value="Spell">Spell</option>
+                        <option value="Trap">Trap</option>
                     </select>
 
                     {
@@ -557,7 +557,7 @@ const CardTable = (props) => {
                         className="filter"
                         onChange={(e) => updateFormat(e)}
                         >
-                        <option key="All Formats" value="">All Formats</option>
+                        <option key="All Formats" value="">Formats</option>
                         {
                             formats.map((f) => <option key={f.name} value={f.name}>{capitalize(f.name, true)}</option>)
                         }
@@ -572,7 +572,7 @@ const CardTable = (props) => {
                         style={{maxWidth: '27vw'}}
                         onChange={(e) => setBooster(e.target.value)}
                         >
-                        <option key="All Sets" value="">All Sets</option>
+                        <option key="All Sets" value="">Sets</option>
                         {
                         boosters.map((b) => <option key={b.id} value={b.setCode}>{b.setCode}</option>)
                         }
