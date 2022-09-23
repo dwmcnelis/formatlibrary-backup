@@ -527,7 +527,7 @@ const CardTable = (props) => {
                         id="searchTypeSelector"
                         defaultValue="name"
                         className="filter"
-                        style={{maxWidth: '30vw'}}
+                        style={{maxWidth: '33vw'}}
                         onChange={() => runQuery()}
                         >
                         <option value="name">Card Name</option>
@@ -538,7 +538,7 @@ const CardTable = (props) => {
                     <select
                         id="category"
                         defaultValue=""
-                        style={{maxWidth: '28vw'}}
+                        style={{maxWidth: '30vw'}}
                         className="filter"
                         onChange={() => setQueryParams({ ...queryParams, category: document.getElementById('category').value })}
                     >
@@ -553,7 +553,7 @@ const CardTable = (props) => {
                         <select
                         id="format"
                         defaultValue=""
-                        style={{maxWidth: '34vw'}}
+                        style={{maxWidth: '36vw'}}
                         className="filter"
                         onChange={(e) => updateFormat(e)}
                         >
