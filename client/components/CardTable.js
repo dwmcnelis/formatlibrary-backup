@@ -503,7 +503,7 @@ const CardTable = (props) => {
         <img src={`/images/artworks/${format.icon ? `${format.icon}.jpg` : 'bls.jpg'}`} className="format-icon-medium desktop-only" />
         <div>
           <h1>{format.name} Card Database</h1>
-          <h2>{format.event || 'May 2002 - Present'}</h2>
+          <h2 className="desktop-only">{format.event || 'May 2002 - Present'}</h2>
         </div>
         <img src={`/images/artworks/${format.icon ? `${format.icon}.jpg` : 'bls.jpg'}`} className="format-icon-medium" />
       </div>
@@ -673,7 +673,7 @@ const CardTable = (props) => {
             type="submit"
             onClick={() => setAdvanced(!advanced)}
           >
-            Show Advanced Search Options
+            Show Advanced Options
           </a>
         </div>
       ) : (
@@ -683,7 +683,7 @@ const CardTable = (props) => {
             type="submit"
             onClick={() => setAdvanced(!advanced)}
           >
-            Hide Advanced Search Options
+            Hide Advanced Options
           </a>
           <br />
           {
@@ -817,44 +817,44 @@ const CardTable = (props) => {
 
         <div className="buttonWrapper">
           <select
+            className="desktop-only"
             id="viewSwitch"
             defaultValue="spoilers"
-            style={{width: '130px'}}
+            style={{width: '100px'}}
             onChange={() => setView(document.getElementById('viewSwitch').value)}
           >
-            <option value="spoilers">View Spoilers</option>
-            <option value="gallery">View Gallery</option>
+            <option value="spoilers">Spoilers</option>
+            <option value="gallery">Gallery</option>
           </select>
 
           <select
             id="cardsPerPageSelector"
             defaultValue="10"
-            className="desktop-only"
-            style={{width: '195px'}}
+            style={{width: '160px'}}
             onChange={(e) => changeCardsPerPage(e)}
           >
-            <option value="10"> Show 10 Cards / Page</option>
-            <option value="25">Show 25 Cards / Page</option>
-            <option value="50">Show 50 Cards / Page</option>
-            <option value="100">Show 100 Cards / Page</option>
+            <option value="10"> 10 Cards / Page</option>
+            <option value="25">25 Cards / Page</option>
+            <option value="50">50 Cards / Page</option>
+            <option value="100">100 Cards / Page</option>
           </select>
 
           <select
             id="sortSelector"
             defaultValue="nameASC"
-            style={{width: '190px'}}
+            style={{width: '160px'}}
             onChange={(e) => sortCards(e)}
           >
-            <option value="nameASC">Sort Name: A ⮕ Z</option>
-            <option value="nameDESC">Sort Name: Z ⮕ A</option>
-            <option value="dateASC">Sort Date: Old ⮕ New</option>
-            <option value="dateDESC">Sort Date: New ⮕ Old</option>
-            <option value="atkASC">Sort ATK: Desc. ⬇</option>
-            <option value="atkDESC">Sort ATK: Asc. ⬆</option>
-            <option value="defASC">Sort DEF: Desc. ⬇</option>
-            <option value="defDESC">Sort DEF: Asc. ⬆</option>
-            <option value="levelASC">Sort Level: Desc. ⬇</option>
-            <option value="levelDESC">Sort Level: Asc. ⬆</option>
+            <option value="nameASC">Name: A ⮕ Z</option>
+            <option value="nameDESC">Name: Z ⮕ A</option>
+            <option value="dateASC">Date: Old ⮕ New</option>
+            <option value="dateDESC">Date: New ⮕ Old</option>
+            <option value="atkASC">ATK: Desc. ⬇</option>
+            <option value="atkDESC">ATK: Asc. ⬆</option>
+            <option value="defASC">DEF: Desc. ⬇</option>
+            <option value="defDESC">DEF: Asc. ⬆</option>
+            <option value="levelASC">Level: Desc. ⬇</option>
+            <option value="levelDESC">Level: Asc. ⬆</option>
           </select>
 
           <a

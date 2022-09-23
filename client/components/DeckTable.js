@@ -227,12 +227,11 @@ const DeckTable = (props) => {
   return (
     <div className="body">
       <div className="event-database-flexbox">
-        <img style={{ height:'80px'}} src={'/images/emojis/deckbox.png'}/>
+        <img className="desktop-only" style={{ height:'80px'}} src={'/images/emojis/deckbox.png'}/>
         <h1>Deck Database</h1>
         <img style={{ height:'80px'}} src={'/images/emojis/deckbox.png'}/>
       </div>
-      <br />
-
+      
       <div className="searchWrapper">
         <input
           id="searchBar"

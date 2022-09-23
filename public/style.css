@@ -55,6 +55,11 @@ hr {
   font-size: 30px;
 }
 
+.format-menu-title {
+    padding: 2px 6px 15px;
+    font-size: 42px;
+}
+
 hr {
   border: 2px solid black;
 }
@@ -2317,7 +2322,7 @@ h1 {
   min-width: 764px;
   margin-left: auto;
   margin-right: auto;
-  display: flex;
+  display: flex;f
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -2875,12 +2880,13 @@ body {
         width: 98vw;
         max-width: 98vw;
         display: grid;
-        grid-template-columns:repeat(auto-fit, 95vw); /* the width is define here */
-        grid-template-rows:auto auto; /* 2 rows */
-        grid-auto-rows:0px; /* next rows equal to 0 */
-        overflow:hidden; /* hide the overflow */
+        grid-template-columns:repeat(auto-fit, 95vw);
+        grid-template-rows:auto auto;
+        grid-auto-rows:0px;
+        overflow:hidden;
         align-items: center;
         text-align: center;
+        justify-content: center;
         padding: 2px;
         margin: 4px auto;
     }
@@ -2927,7 +2933,7 @@ body {
 
 
   #searchBar {
-    width: 100%;
+    width: 90vw;
   }
 
   .eventThumbnail-flexbox {
@@ -3169,6 +3175,14 @@ body {
     vertical-align: middle;
     text-align: center;
     padding-top: 5px;
+  }
+
+  .filter {
+    margin: 2px 4px;
+  }
+
+  td {
+    padding: 4px 2px;
   }
 
 
@@ -3419,7 +3433,8 @@ body {
       width: 80px;
       border: 4px ridge #bf9c60;
       border-radius: 2px;
-      margin: 4px;
+      margin: 4px 8px;
+      padding: 0px;
   }
 
   .flexy {

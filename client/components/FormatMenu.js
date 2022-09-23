@@ -25,8 +25,7 @@ const FormatMenu = () => {
 
   return (
     <div className="body">
-      <h1>Popular Formats</h1>
-      <br />
+      <h1 className="format-menu-title">Popular Formats</h1>
       <div className="format-menu">
           {
             formats.filter((f) => f.popular).map((format) => <FormatButton key={format.id} format={format}/>)
@@ -35,8 +34,7 @@ const FormatMenu = () => {
       
       <div className="divider"/>
 
-      <h1>Other Formats</h1>
-      <br />
+      <h1 className="format-menu-title">Other Formats</h1>
       <div className="format-menu">
           {
             formats.filter((f) => !f.popular).map((format) => <FormatButton key={format.id} format={format}/>)

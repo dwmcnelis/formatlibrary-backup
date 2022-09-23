@@ -61,7 +61,7 @@ const MobileCardRow = (props) => {
                         <img
                         className="card-image"
                         src={filePath}
-                        style={{width: '96px'}}
+                        style={{width: '82px'}}
                         alt={card.name}
                         />
                         {
@@ -124,7 +124,7 @@ const MobileCardRow = (props) => {
                             )}
                             {
                                 card.category === 'Monster' ? (
-                                    <td height="25px" width="300px" style={{borderRight: '2px solid #CFDCE5'}}>
+                                    <td height="25px" width="120px" style={{borderRight: '2px solid #CFDCE5'}}>
                                         <img
                                             src={symbol3}
                                             margin="0px"
@@ -135,7 +135,7 @@ const MobileCardRow = (props) => {
                                         {' ' + line}
                                     </td>
                                 ) : (
-                                    <td height="25px" width="220px" />
+                                    <td height="25px" width="120px" />
                                 )
                             }
                             {

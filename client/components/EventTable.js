@@ -177,7 +177,6 @@ const EventTable = (props) => {
   if (isTabletOrMobile) return (
     <div className="body">
       <div className="event-database-flexbox">
-        <img style={{ height:'80px'}} src={'/images/emojis/event.png'}/>
         <h1>Event Database</h1>
         <img style={{ height:'80px'}} src={'/images/emojis/event.png'}/>
       </div>
