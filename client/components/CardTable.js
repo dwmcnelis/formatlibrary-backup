@@ -515,7 +515,7 @@ const CardTable = (props) => {
                         id="searchBar"
                         className="filter"
                         type="text"
-                        style={{maxWidth: '50vw'}}
+                        style={{maxWidth: '48vw'}}
                         placeholder="🔍"
                         onChange={() => runQuery()}
                         onKeyDown={(e) => {
@@ -527,7 +527,7 @@ const CardTable = (props) => {
                         id="searchTypeSelector"
                         defaultValue="name"
                         className="filter"
-                        style={{maxWidth: '33vw'}}
+                        style={{maxWidth: '32vw'}}
                         onChange={() => runQuery()}
                         >
                         <option value="name">Card Name</option>
@@ -538,7 +538,7 @@ const CardTable = (props) => {
                     <select
                         id="category"
                         defaultValue=""
-                        style={{maxWidth: '30vw'}}
+                        style={{maxWidth: '29vw'}}
                         className="filter"
                         onChange={() => setQueryParams({ ...queryParams, category: document.getElementById('category').value })}
                     >
@@ -553,7 +553,7 @@ const CardTable = (props) => {
                         <select
                         id="format"
                         defaultValue=""
-                        style={{maxWidth: '36vw'}}
+                        style={{maxWidth: '35vw'}}
                         className="filter"
                         onChange={(e) => updateFormat(e)}
                         >
@@ -569,7 +569,7 @@ const CardTable = (props) => {
                         id="booster"
                         defaultValue=""
                         className="filter"
-                        style={{maxWidth: '28vw'}}
+                        style={{maxWidth: '27vw'}}
                         onChange={(e) => setBooster(e.target.value)}
                         >
                         <option key="All Sets" value="">All Sets</option>
