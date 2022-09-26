@@ -368,7 +368,7 @@ const CardTable = (props) => {
       }
 
       const fetchData3 = async () => {
-        const {data} = await axios.get(`/api/banlists/simple/${format.banlist}`)
+        const {data} = await axios.get(`/api/banlists/simple/oct22`)
         setBanlist(data)
       }
 
