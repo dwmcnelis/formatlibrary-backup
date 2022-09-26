@@ -368,16 +368,11 @@ const CardTable = (props) => {
       }
 
       const fetchData3 = async () => {
-        const {data} = await axios.get(`/api/banlists/simple/oct22`)
-        setBanlist(data)
-      }
-
-      const fetchData4 = async () => {
         const {data} = await axios.get(`/api/formats`)
         setFormats(data)
       }
 
-      const fetchData5 = async () => {
+      const fetchData4 = async () => {
         const {data} = await axios.get(`/api/sets/boosters`)
         setBoosters(data)
       }
@@ -386,7 +381,6 @@ const CardTable = (props) => {
       fetchData2()
       fetchData3()
       fetchData4()
-      fetchData5()
     }
   }, [])
 
@@ -418,7 +412,7 @@ const CardTable = (props) => {
 
     const fetchData = async () => {
       try {
-        const {data} = await axios.get(`/api/banlists/simple/${format.banlist}`)
+        const {data} = await axios.get(`/api/banlists/simple/${format.banlist || 'oct22'}`)
         setBanlist(data)
       } catch (err) {
         console.log(err)
