@@ -15,7 +15,6 @@ import axios from 'axios'
 import { capitalize } from '../../functions/utility'
 import { useMediaQuery } from 'react-responsive'
 
-
 const CardTable = (props) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 860px)' })
   const now = new Date()
@@ -37,7 +36,6 @@ const CardTable = (props) => {
   const [allFetched, setAllFetched] = useState(false)
   const [advanced, setAdvanced] = useState(false)
   const [cutoff, setCutoff] = useState(`${year}-12-31`)
-  console.log('filteredCards', filteredCards)
 
   const [sliders, setSliders] = useState({
     year: year,
@@ -198,7 +196,7 @@ const CardTable = (props) => {
   }
 
   // RESET
-  const reset = () => {
+  const reset = async () => {
     const formatSelector = document.getElementById('format')
     if (formatSelector) formatSelector.value = ''
     document.getElementById('category').value = ''
@@ -215,9 +213,11 @@ const CardTable = (props) => {
     
     setPage(1)
     if (!formatName) {
-      setFormat({})
-      document.getElementById('format').value = ""
+        const {data} = await axios.get(`/api/formats/current`)
+        setFormat(data)
+        document.getElementById('format').value = "Current"
     }
+
     setBooster(null)
     document.getElementById('booster').value = ""
     setSortBy(null)
@@ -361,11 +361,16 @@ const CardTable = (props) => {
       }
 
       const fetchData2 = async () => {
+        const {data} = await axios.get(`/api/formats/current`)
+        setFormat(data)
+      }
+
+      const fetchData3 = async () => {
         const {data} = await axios.get(`/api/formats`)
         setFormats(data)
       }
 
-      const fetchData3 = async () => {
+      const fetchData4 = async () => {
         const {data} = await axios.get(`/api/sets/boosters`)
         setBoosters(data)
       }
@@ -373,6 +378,7 @@ const CardTable = (props) => {
       fetchData()
       fetchData2()
       fetchData3()
+      fetchData4()
     }
   }, [])
 
@@ -558,7 +564,7 @@ const CardTable = (props) => {
                         className="filter"
                         onChange={(e) => updateFormat(e)}
                         >
-                        <option key="All Formats" value="">Formats</option>
+                        <option key="Current" value="">Current</option>
                         {
                             formats.map((f) => <option key={f.name} value={f.name}>{capitalize(f.name, true)}</option>)
                         }
@@ -636,7 +642,7 @@ const CardTable = (props) => {
                         className="filter"
                         onChange={(e) => updateFormat(e)}
                         >
-                        <option key="All Formats" value="">All Formats</option>
+                        <option key="Current" value="">Current</option>
                         {
                             formats.map((f) => <option key={f.name} value={f.name}>{capitalize(f.name, true)}</option>)
                         }

@@ -6,23 +6,12 @@ import { Aqua, Beast, BeastWarrior, Continuous, Counter, Cyberse, DARK, Dinosaur
   Reptile, Ritual, Rock, Scale, SeaSerpent, Spell, Spellcaster, Star, Thunder, Trap, Warrior, 
   WATER, WIND, WingedBeast, Wyrm, Zombie } from '../../public/images/symbols'
 
-import { B_BL, B_L, B, BL_B, BR_B_BL, BR_BL, L_B_R, L, R_B, R_BL_L, R_BL, R_BR_B_L, 
-  R_L, T_B_BL_L, T_B, T_BL, T_BR_B, T_BR_BL, T_L, T_R_B_L, T_R_B, T_R_BR_B, T_R_L, 
-  T_R, T_TR_BR, T, TL } from '../../public/images/arrows'
-
-
 const symbols = {
   Aqua, Beast, BeastWarrior, Continuous, Counter, Cyberse, DARK, Dinosaur, 
   DIVINE, DivineBeast, Dragon, EARTH, Equip, Fairy, Field, Fiend, FIRE, Fish, 
   Insect, LIGHT, LinkSymbol, Machine, Normal, Plant, Psychic, Pyro, QuickPlay, Rank, 
   Reptile, Ritual, Rock, Scale, SeaSerpent, Spell, Spellcaster, Star, Thunder, Trap, Warrior,
   WATER, WIND, WingedBeast, Wyrm, Zombie
-}
-
-const arrows = {
-  B_BL, B_L, B, BL_B, BR_B_BL, BR_BL, L_B_R, L, R_B, R_BL_L, R_BL, R_BR_B_L, 
-  R_L, T_B_BL_L, T_B, T_BL, T_BR_B, T_BR_BL, T_L, T_R_B_L, T_R_B, T_R_BR_B, T_R_L, 
-  T_R, T_TR_BR, T, TL
 }
 
 /* eslint-disable complexity */
@@ -32,7 +21,7 @@ const MobileCardRow = (props) => {
   const line = card.type
   
   const symbol = symbols[card.attribute] || symbols[card.category]
-  const symbol2 = card.link ? arrows[card.arrows] :
+  const symbol2 = card.link ? `/images/arrows/${card.arrows}.png` :
     card.xyz ? Rank :
     category === 'Monster' ? Star :
     card.icon ? symbols[card.icon.replace('-', '')] :
