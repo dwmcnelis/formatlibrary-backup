@@ -568,7 +568,7 @@ const CardTable = (props) => {
                         >
                         <option key="Current" value="">Current</option>
                         {
-                            formats.map((f) => <option key={f.name} value={f.name}>{capitalize(f.name, true)}</option>)
+                            formats.filter((f) => !!f.date).map((f) => <option key={f.name} value={f.name}>{capitalize(f.name, true)}</option>)
                         }
                         </select>
                         )
@@ -646,7 +646,7 @@ const CardTable = (props) => {
                         >
                         <option key="Current" value="">Current</option>
                         {
-                            formats.map((f) => <option key={f.name} value={f.name}>{capitalize(f.name, true)}</option>)
+                            formats.filter((f) => !!f.date).map((f) => <option key={f.name} value={f.name}>{capitalize(f.name, true)}</option>)
                         }
                         </select>
                         )
