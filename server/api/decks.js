@@ -247,7 +247,7 @@ router.get('/all', async (req, res, next) => {
             order: [['eventDate', 'DESC'], ['placement', 'ASC'], ['builder', 'ASC']],
             include: [
                 { model: Format, attributes: ['id', 'name', 'icon']},
-                { model: Player, attributes: ['id', 'name', 'discriminator', 'discordId', 'avatar'] }
+                { model: Player, attributes: ['id', 'name', 'discriminator', 'discordId'] }
             ],
         })
 
@@ -273,7 +273,7 @@ router.get('/first/:x', async (req, res, next) => {
             order: [['eventDate', 'DESC'], ['placement', 'ASC'], ['builder', 'ASC']],
             include: [
                 { model: Format, attributes: ['id', 'name', 'icon']},
-                { model: Player, attributes: ['id', 'name', 'discriminator', 'discordId', 'avatar'] }
+                { model: Player, attributes: ['id', 'name', 'discriminator', 'discordId'] }
             ],
             limit: req.params.x, 
         })
@@ -302,7 +302,7 @@ router.get('/:id', async (req, res, next) => {
             attributes: ['id', 'ydk', 'builder', 'playerId', 'type', 'category', 'formatName', 'formatId', 'community', 'eventName', 'eventId', 'eventDate', 'placement', 'downloads', 'views', 'rating'],            
             include: [
                 { model: Format, attributes: ['id', 'name', 'icon', 'banlist']},
-                { model: Player, attributes: ['id', 'name', 'discriminator', 'discordId', 'avatar']}
+                { model: Player, attributes: ['id', 'name', 'discriminator', 'discordId']}
             ],
         })
 

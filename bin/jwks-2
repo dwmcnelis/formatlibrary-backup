@@ -1,0 +1,80 @@
+#!/usr/bin/env node
+const { calculateJwkThumbprint, exportJWK, generateKeyPair } = require('jose')
+const { createPublicKey } = require( 'crypto')
+
+var argv = require('minimist')(process.argv.slice(2))
+
+if (argv.help) {
+	console.log(`
+usage: jwks [--help] [--number] [--private] [--raw] [--json] [--minimize]
+
+Options:
+--number       Generate number of keys
+--private      Export private key
+--json         Serialize as JSON pretty
+--minimize     Serialize as JSON minimized
+--help         Show available options	
+`)
+	process.exit()
+}
+
+const number = argv.number || 4
+const minimize = argv.minimize || false
+const json = argv.json || (minimize ? true : false)
+const raw = argv.raw || ((!json && !minimize) ? true: false)
+const eprivate = argv.private
+
+const JWS_VALUES = ['HS256', 'RS256', 'ES256']
+const JWE_VALUES = ['RSA-OAEP', 'ECDH-ES']
+
+const algorithm =  'RS256'
+const size = 2048
+
+const generateKeys = async (number) => {
+	return Promise.all(
+		Array(number)
+			.fill(0)
+			.map(() =>
+				generateKeyPair(algorithm, {
+					extractable: true,
+					modulusLength: size,
+					crv: size
+				}).then(({ privateKey }) => privateKey)
+			)
+	)
+}
+
+const exportJwks = async (keys, privateKeys) => {
+	const jwks = []
+	for (const keylike of keys) {
+		const jwk = await exportJWK(privateKeys ? keylike : createPublicKey(keylike))
+		const kid = await calculateJwkThumbprint(jwk, 'sha256')
+		const use = JWS_VALUES.includes(algorithm) ? 'sig' : JWE_VALUES.includes(algorithm) ? 'enc' : '--'
+		jwks.push({ ...jwk, alg: algorithm, kid, use })
+	}
+	return jwks
+}
+
+;(async () => {
+	const keys = await generateKeys(number)
+
+	if (raw) {
+		console.log('jwks (raw): ', keys)
+	} else if (eprivate) {
+		const jwksPrivate = await exportJwks(keys, true)
+		if (minimize) {
+			console.log('jwks (private): ', JSON.stringify(jwksPrivate))
+		} else if (json)  {
+			console.log('jwks (private): ', JSON.stringify(jwksPrivate, null, 2))
+		}
+	} else {
+		const jwksPublic = await exportJwks(keys, false)
+		if (minimize) {
+			console.log('jwks (public): ', JSON.stringify(jwksPublic))
+		} else if (json)  {
+			console.log('jwks (public): ', JSON.stringify(jwksPublic, null, 2))
+		}
+	}
+
+})()
+

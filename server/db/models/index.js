@@ -33,9 +33,6 @@ Event.belongsTo(Tournament)
 Tournament.hasOne(Event)
 
 //PLAYER
-Player.hasMany(BlogPost)
-BlogPost.belongsTo(Player)
-
 Player.hasMany(Deck)
 Deck.belongsTo(Player)
 

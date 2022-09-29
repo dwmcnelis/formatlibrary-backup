@@ -44,6 +44,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "axios": "^0.21.4",
+    "bcrypt": "^5.0.1",
     "buffer": "^6.0.3",
     "chart.js": "^3.7.1",
     "compression": "^1.7.3",
@@ -58,7 +59,9 @@
     "history": "^4.10.1",
     "html-react-parser": "^1.4.9",
     "jose": "^4.8.3",
+    "minimist": "^1.2.6",
     "morgan": "^1.10.0",
+    "nanoid": "^4.0.0",
     "openid-client": "^5.1.8",
     "pg": "8.5.1",
     "pg-hstore": "2.3.3",

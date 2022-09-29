@@ -65,8 +65,9 @@ const download = async () => {
 		if (err) console.log(err)
 	})
 
-	console.log(`Successfully consted the latest data = require(ygoprodeck.com.`)
+	return console.log(`Successfully saved the latest data from ygoprodeck.com.`)
 }
+
 
 const images = async () => {
     const { data } = ygoprodeck
@@ -457,8 +458,7 @@ const fixArrows = async () => {
             const card = await Card.findOne({
                 where: {
                     name: d.name,
-                    link: true,
-                    arrows: null
+                    link: true
                 }
             })
 
@@ -467,7 +467,7 @@ const fixArrows = async () => {
             console.log('card.name', card.name)
             let arrows = ''
             if (d.linkmarkers && d.linkmarkers.length) {
-                d.linkmarkers.forEach((lm) => arrows += `-${lm.charAt(0)}`)
+                d.linkmarkers.forEach((lm) => arrows += `-${lm.split('-').map((c) => c.charAt(0)).join('')}`)
                 card.arrows = arrows.slice(1)
             } else {
                 console.log('MISSING LINK MARKERS????')
@@ -1922,7 +1922,7 @@ const fixDiscriminators = async () => {
     return console.log(`fixed ${b} discriminators; encountered ${e} errors`)
 }
 
-fixDiscriminators()
+// fixDiscriminators()
 
 // fixSets()
 // determineOriginals()
@@ -1932,7 +1932,6 @@ fixDiscriminators()
 // fixEvents()
 // fixDeckThumbs()
 // checkMissingThumbs()
-// fixDecks2()
 // fixGames()
 // fixYDKs()
 // fixDeckCreatedAt()
@@ -1957,6 +1956,7 @@ fixDiscriminators()
 // makeDeckTypes()
 // createDecks('PatreonPlayOff2', 'Goat', 'GoatFormat.com', true)
 // download()
+fixArrows()
 // images()
 // print()
 // fix()

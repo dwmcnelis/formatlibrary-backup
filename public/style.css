@@ -55,6 +55,11 @@ hr {
   font-size: 30px;
 }
 
+.format-menu-title {
+    padding: 2px 6px 15px;
+    font-size: 42px;
+}
+
 hr {
   border: 2px solid black;
 }
@@ -490,16 +495,6 @@ h1 {
   flex-direction: row;
 }
 
-.event-database-flexbox {
-  display: flex;
-  align-items: top;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 84%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px;
-}
 
 .event-icon-large {
   height: 77px;
@@ -1234,6 +1229,7 @@ h1 {
   display: flex;
   width: 640px;
   justify-content: space-between;
+  flex-direction: row;
   align-items: center;
   vertical-align: middle;
   text-align: center;
@@ -2326,7 +2322,7 @@ h1 {
   min-width: 764px;
   margin-left: auto;
   margin-right: auto;
-  display: flex;
+  display: flex;f
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -2532,6 +2528,7 @@ body {
     display: none;
   }
 
+
   .post-content {
     width: 100%;
     min-width: 100%;
@@ -2691,6 +2688,12 @@ body {
     font-size: 11pt;
   }
 
+  .blogpost-content-flexbox {
+    max-width: 100vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .blogpost-title {
     padding: 0px 10px 0px 0px;
     margin: 0px;
@@ -2738,12 +2741,10 @@ body {
   .blogpost-deck-box, .blogpost-images-flexbox {
     display: block;
     min-width: 98vw;
-    width: 98vw;
-    max-width: 98vw;
     height: auto;
     padding: 0px;
-    margin-left: 1%;
-    margin-right: 1%;
+    margin-left: 0px;
+    margin-right: 0px;
     overflow: none;
   }
 
@@ -2836,6 +2837,105 @@ body {
     padding: 4px 0px;
   }
 
+  .card-database-flexbox {
+    margin: 0px;
+    padding: 0px;
+    width: 100vw;
+    max-width: 100vw;
+    justify-content: space-around;
+  }
+
+  .event-database-flexbox {
+    margin: 0px;
+    padding: 0px;
+    max-width: 100vw;
+    justify-content: space-around;
+  }
+
+  .card-database-flexbox h1 {
+    font-size: 24pt;
+    padding: 2px 10px;
+  }
+
+  .event-database-flexbox h1 {
+    font-size: 24pt;
+    padding: 2px 10px;
+  }
+
+  .event-database-flexbox img {
+    max-height: 56px;
+    max-width: 64.81px;
+    padding: 5px 0px;
+  }
+
+    .query-box {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        padding: 4px 0px;
+    }
+
+    .searchWrapper {
+        min-width: 0px;
+        width: 98vw;
+        max-width: 98vw;
+        display: grid;
+        grid-template-columns:repeat(auto-fit, 95vw);
+        grid-template-rows:auto auto;
+        grid-auto-rows:0px;
+        overflow:hidden;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        padding: 2px;
+        margin: 4px auto;
+    }
+
+    .refinedWrapper {
+        min-width: 0px;
+        width: 98vw;
+        max-width: 98vw;
+        display: table;
+        text-align: center;
+        padding: 2px 0px;
+        font-size: 15px;
+    }
+
+    .refinedInnerWrapper {
+        min-width: 0px;
+        width: 100%;
+        max-width: 100%;
+        display: table;
+        text-align: center;
+        padding: 2px 0px;
+        font-size: 15px;
+    }
+
+    .sliderWrapper0 {
+        min-width: 0px;
+        width: 98vw;
+        max-width: 98vw;
+    }
+    
+    .sliderWrapper1 {
+        min-width: 0px;
+        width: 98vw;
+        max-width: 98vw;
+    }
+
+    .resultsWrapper0 {
+        min-width: 0px;
+        width: 98vw;
+        max-width: 98vw;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+
+  #searchBar {
+    width: 90vw;
+  }
+
   .eventThumbnail-flexbox {
     width: 80%;
     margin: 0px auto 10px;
@@ -2891,6 +2991,9 @@ body {
     border-radius: 0px;
   }
 
+  #event-table,
+  #deck-table,
+  #card-table,
   #leaderboard-table, 
   #miniboard-table {
     width: 99vw;
@@ -2990,6 +3093,14 @@ body {
     margin: 7px 0px 7px 20px;
   }
 
+    .format-icon-medium {
+        height: 90px;
+        width: 90px;
+        border: 5px ridge #bf9c60;
+        border-radius: 2.5px;
+        margin: 5px;
+    }
+
   .print-box {
     width: 100%;
     max-width: 100%;
@@ -3066,6 +3177,14 @@ body {
     padding-top: 5px;
   }
 
+  .filter {
+    margin: 2px 4px;
+  }
+
+  td {
+    padding: 4px 2px;
+  }
+
 
   .pagination {
     display: flex;
@@ -3128,6 +3247,10 @@ body {
 
   .footer-logo, .discord-link {
     display: none;
+  }
+
+  .card-image {
+    padding: 2px 4px;
   }
 
   .downloadButton {
@@ -3303,6 +3426,15 @@ body {
     border: 4px ridge #bf9c60;
     border-radius: 2px;
     margin: 0px 0px 0px 10px;
+  }
+
+  .format-icon-medium {
+      height: 80px;
+      width: 80px;
+      border: 4px ridge #bf9c60;
+      border-radius: 2px;
+      margin: 4px 8px;
+      padding: 0px;
   }
 
   .flexy {

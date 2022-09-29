@@ -5,6 +5,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react'
 import AdvButton from './AdvButton.js'
 import CardRow from './CardRow.js'
 import CardImage from './CardImage.js'
+import MobileCardRow from './MobileCardRow.js'
 import PrettoSlider from './Slider.js'
 import Pagination from './Pagination.js'
 import { Star } from '../../public/images/symbols'
@@ -12,8 +13,10 @@ import * as sortFunctions from '../../functions/sort'
 import { Calendar, Shield, Swords } from '../../public/images/emojis'
 import axios from 'axios'
 import { capitalize } from '../../functions/utility'
+import { useMediaQuery } from 'react-responsive'
 
 const CardTable = (props) => {
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 860px)' })
   const now = new Date()
   const year = now.getFullYear()
   const formatName = props.location && props.location.search ? props.location.search.slice(8) : null
@@ -33,6 +36,8 @@ const CardTable = (props) => {
   const [allFetched, setAllFetched] = useState(false)
   const [advanced, setAdvanced] = useState(false)
   const [cutoff, setCutoff] = useState(`${year}-12-31`)
+  console.log('format', format)
+  console.log('banlist', banlist)
 
   const [sliders, setSliders] = useState({
     year: year,
@@ -193,7 +198,7 @@ const CardTable = (props) => {
   }
 
   // RESET
-  const reset = () => {
+  const reset = async () => {
     const formatSelector = document.getElementById('format')
     if (formatSelector) formatSelector.value = ''
     document.getElementById('category').value = ''
@@ -210,9 +215,11 @@ const CardTable = (props) => {
     
     setPage(1)
     if (!formatName) {
-      setFormat({})
-      document.getElementById('format').value = ""
+        const {data} = await axios.get(`/api/formats/current`)
+        setFormat(data)
+        document.getElementById('format').value = "Current"
     }
+
     setBooster(null)
     document.getElementById('booster').value = ""
     setSortBy(null)
@@ -356,11 +363,16 @@ const CardTable = (props) => {
       }
 
       const fetchData2 = async () => {
+        const {data} = await axios.get(`/api/formats/current`)
+        setFormat(data)
+      }
+
+      const fetchData3 = async () => {
         const {data} = await axios.get(`/api/formats`)
         setFormats(data)
       }
 
-      const fetchData3 = async () => {
+      const fetchData4 = async () => {
         const {data} = await axios.get(`/api/sets/boosters`)
         setBoosters(data)
       }
@@ -368,6 +380,7 @@ const CardTable = (props) => {
       fetchData()
       fetchData2()
       fetchData3()
+      fetchData4()
     }
   }, [])
 
@@ -399,7 +412,7 @@ const CardTable = (props) => {
 
     const fetchData = async () => {
       try {
-        const {data} = await axios.get(`/api/banlists/simple/${format.banlist}`)
+        const {data} = await axios.get(`/api/banlists/simple/${format.banlist || 'oct22'}`)
         setBanlist(data)
       } catch (err) {
         console.log(err)
@@ -496,93 +509,176 @@ const CardTable = (props) => {
   return (
     <div className="body">
       <div className="card-database-flexbox">
-        <img src={`/images/artworks/${format.icon ? `${format.icon}.jpg` : 'bls.jpg'}`} className="format-icon-medium" />
+        <img src={`/images/artworks/${format.icon ? `${format.icon}.jpg` : 'bls.jpg'}`} className="format-icon-medium desktop-only" />
         <div>
           <h1>{format.name} Card Database</h1>
-          <h2>{format.event || 'May 2002 - Present'}</h2>
+          <h2 className="desktop-only">{format.event || 'May 2002 - Present'}</h2>
         </div>
         <img src={`/images/artworks/${format.icon ? `${format.icon}.jpg` : 'bls.jpg'}`} className="format-icon-medium" />
       </div>
+      {
+        isTabletOrMobile ? (
+            <div className="searchWrapper">
+                <div className="query-box">
+                    <input
+                        id="searchBar"
+                        className="filter"
+                        type="text"
+                        style={{maxWidth: '60vw'}}
+                        placeholder="🔍"
+                        onChange={() => runQuery()}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') search()
+                        }}
+                    />
 
-      <br />
+                    <select
+                        id="searchTypeSelector"
+                        defaultValue="name"
+                        className="filter"
+                        style={{maxWidth: '30vw'}}
+                        onChange={() => runQuery()}
+                        >
+                        <option value="name">Name</option>
+                        <option value="description">Text</option>
+                    </select>
+                </div>
+                <div className="query-box">
+                    <select
+                        id="category"
+                        defaultValue=""
+                        style={{maxWidth: '29vw'}}
+                        className="filter"
+                        onChange={() => setQueryParams({ ...queryParams, category: document.getElementById('category').value })}
+                    >
+                        <option value="">Cards</option>
+                        <option value="Monster">Monster</option>
+                        <option value="Spell">Spell</option>
+                        <option value="Trap">Trap</option>
+                    </select>
 
-      <div className="searchWrapper">
-        <input
-          id="searchBar"
-          className="filter"
-          type="text"
-          placeholder="🔍"
-          onChange={() => runQuery()}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') search()
-          }}
-        />
+                    {
+                        formatName ? '' : (
+                        <select
+                        id="format"
+                        defaultValue=""
+                        style={{maxWidth: '35vw'}}
+                        className="filter"
+                        onChange={(e) => updateFormat(e)}
+                        >
+                        <option key="Current" value="">Current</option>
+                        {
+                            formats.filter((f) => !!f.date).map((f) => <option key={f.name} value={f.name}>{capitalize(f.name, true)}</option>)
+                        }
+                        </select>
+                        )
+                    }
 
-        <div className="buttonWrapper">
-          <select
-            id="searchTypeSelector"
-            defaultValue="name"
-            className="filter"
-            onChange={() => runQuery()}
-          >
-            <option value="name">Card Name</option>
-            <option value="description">Card Text</option>
-          </select>
+                    <select
+                        id="booster"
+                        defaultValue=""
+                        className="filter"
+                        style={{maxWidth: '27vw'}}
+                        onChange={(e) => setBooster(e.target.value)}
+                        >
+                        <option key="All Sets" value="">Sets</option>
+                        {
+                        boosters.map((b) => <option key={b.id} value={b.setCode}>{b.setCode}</option>)
+                        }
+                    </select>
 
-          <select
-            id="category"
-            defaultValue=""
-            className="filter"
-            onChange={() => setQueryParams({ ...queryParams, category: document.getElementById('category').value })}
-          >
-            <option value="">All Cards</option>
-            <option value="Monster">Monsters</option>
-            <option value="Spell">Spells</option>
-            <option value="Trap">Traps</option>
-          </select>
+                    <a
+                        className="searchButton desktop-only"
+                        type="submit"
+                        onClick={() => {
+                            search()
+                            if (advanced) setAdvanced(false)
+                        }
+                        }
+                        
+                    >
+                        Search
+                    </a>
+                </div>
+            </div>
+            ) : (
+                <div className="searchWrapper">
+                    <input
+                        id="searchBar"
+                        className="filter"
+                        type="text"
+                        placeholder="🔍"
+                        onChange={() => runQuery()}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') search()
+                        }}
+                    />
 
-          {
-            formatName ? '' : (
-              <select
-              id="format"
-              defaultValue=""
-              className="filter"
-              onChange={(e) => updateFormat(e)}
-              >
-              <option key="All Formats" value="">All Formats</option>
-              {
-                formats.map((f) => <option key={f.name} value={f.name}>{capitalize(f.name, true)}</option>)
-              }
-              </select>
+                    <select
+                        id="searchTypeSelector"
+                        defaultValue="name"
+                        className="filter"
+                        onChange={() => runQuery()}
+                        >
+                        <option value="name">Card Name</option>
+                        <option value="description">Card Text</option>
+                    </select>
+
+                    <select
+                        id="category"
+                        defaultValue=""
+                        className="filter"
+                        onChange={() => setQueryParams({ ...queryParams, category: document.getElementById('category').value })}
+                    >
+                        <option value="">All Cards</option>
+                        <option value="Monster">Monsters</option>
+                        <option value="Spell">Spells</option>
+                        <option value="Trap">Traps</option>
+                    </select>
+
+                    {
+                        formatName ? '' : (
+                        <select
+                        id="format"
+                        defaultValue=""
+                        className="filter"
+                        onChange={(e) => updateFormat(e)}
+                        >
+                        <option key="Current" value="">Current</option>
+                        {
+                            formats.filter((f) => !!f.date).map((f) => <option key={f.name} value={f.name}>{capitalize(f.name, true)}</option>)
+                        }
+                        </select>
+                        )
+                    }
+
+                    <select
+                        id="booster"
+                        defaultValue=""
+                        className="filter"
+                        onChange={(e) => setBooster(e.target.value)}
+                        >
+                        <option key="All Sets" value="">All Sets</option>
+                        {
+                        boosters.map((b) => <option key={b.id} value={b.setCode}>{b.setCode}</option>)
+                        }
+                    </select>
+
+                    <a
+                        className="searchButton desktop-only"
+                        type="submit"
+                        onClick={() => {
+                            search()
+                            if (advanced) setAdvanced(false)
+                        }
+                        }
+                        
+                    >
+                        Search
+                    </a>
+                </div>
             )
-          }
-
-          <select
-            id="booster"
-            defaultValue=""
-            className="filter"
-            onChange={(e) => setBooster(e.target.value)}
-            >
-            <option key="All Sets" value="">All Sets</option>
-            {
-              boosters.map((b) => <option key={b.id} value={b.setCode}>{b.setCode}</option>)
-            }
-          </select>
-
-          <a
-            className="searchButton"
-            type="submit"
-            onClick={() => {
-                search()
-                if (advanced) setAdvanced(false)
-              }
-            }
-            
-          >
-            Search
-          </a>
-        </div>
-      </div>
+        }
 
       {!advanced ? (
         <div className="refinedWrapper">
@@ -591,7 +687,7 @@ const CardTable = (props) => {
             type="submit"
             onClick={() => setAdvanced(!advanced)}
           >
-            Show Advanced Search Options
+            Show Advanced Options
           </a>
         </div>
       ) : (
@@ -601,7 +697,7 @@ const CardTable = (props) => {
             type="submit"
             onClick={() => setAdvanced(!advanced)}
           >
-            Hide Advanced Search Options
+            Hide Advanced Options
           </a>
           <br />
           {
@@ -673,7 +769,7 @@ const CardTable = (props) => {
               />
             </div>
 
-            <div className="sliderWrapper1">
+            <div className="sliderWrapper1 desktop-only">
               <PrettoSlider
                 id="year"
                 type="continuous-slider"
@@ -719,7 +815,7 @@ const CardTable = (props) => {
       )}
 
       <div id="resultsWrapper0" className="resultsWrapper0">
-        <div className="results" style={{width: '360px'}}>
+        <div className="results desktop-only" style={{width: '360px'}}>
           Results:{' '}
           {firstXFetched && allFetched
             ? filteredCards.length
@@ -735,47 +831,48 @@ const CardTable = (props) => {
 
         <div className="buttonWrapper">
           <select
+            className="desktop-only"
             id="viewSwitch"
             defaultValue="spoilers"
-            style={{width: '130px'}}
+            style={{width: '100px'}}
             onChange={() => setView(document.getElementById('viewSwitch').value)}
           >
-            <option value="spoilers">View Spoilers</option>
-            <option value="gallery">View Gallery</option>
+            <option value="spoilers">Spoilers</option>
+            <option value="gallery">Gallery</option>
           </select>
 
           <select
             id="cardsPerPageSelector"
             defaultValue="10"
-            style={{width: '195px'}}
+            style={{width: '160px', maxWidth: '45vw'}}
             onChange={(e) => changeCardsPerPage(e)}
           >
-            <option value="10"> Show 10 Cards / Page</option>
-            <option value="25">Show 25 Cards / Page</option>
-            <option value="50">Show 50 Cards / Page</option>
-            <option value="100">Show 100 Cards / Page</option>
+            <option value="10"> 10 Cards / Page</option>
+            <option value="25">25 Cards / Page</option>
+            <option value="50">50 Cards / Page</option>
+            <option value="100">100 Cards / Page</option>
           </select>
 
           <select
             id="sortSelector"
             defaultValue="nameASC"
-            style={{width: '190px'}}
+            style={{width: '160px', maxWidth: '45vw'}}
             onChange={(e) => sortCards(e)}
           >
-            <option value="nameASC">Sort Name: A ⮕ Z</option>
-            <option value="nameDESC">Sort Name: Z ⮕ A</option>
-            <option value="dateASC">Sort Date: Old ⮕ New</option>
-            <option value="dateDESC">Sort Date: New ⮕ Old</option>
-            <option value="atkASC">Sort ATK: Desc. ⬇</option>
-            <option value="atkDESC">Sort ATK: Asc. ⬆</option>
-            <option value="defASC">Sort DEF: Desc. ⬇</option>
-            <option value="defDESC">Sort DEF: Asc. ⬆</option>
-            <option value="levelASC">Sort Level: Desc. ⬇</option>
-            <option value="levelDESC">Sort Level: Asc. ⬆</option>
+            <option value="nameASC">Name: A ⮕ Z</option>
+            <option value="nameDESC">Name: Z ⮕ A</option>
+            <option value="dateASC">Date: Old ⮕ New</option>
+            <option value="dateDESC">Date: New ⮕ Old</option>
+            <option value="atkASC">ATK: Desc. ⬇</option>
+            <option value="atkDESC">ATK: Asc. ⬆</option>
+            <option value="defASC">DEF: Desc. ⬇</option>
+            <option value="defDESC">DEF: Asc. ⬆</option>
+            <option value="levelASC">Level: Desc. ⬇</option>
+            <option value="levelDESC">Level: Asc. ⬆</option>
           </select>
 
           <a
-            className="searchButton"
+            className="searchButton desktop-only"
             type="submit"
             onClick={() => reset()}
           >
@@ -785,7 +882,7 @@ const CardTable = (props) => {
       </div>
 
       <div className="paginationWrapper">
-        <div className="pagination">
+        <div className="pagination desktop-only">
           <Pagination
             location="top"
             nextPage={nextPage}
@@ -804,7 +901,11 @@ const CardTable = (props) => {
             <tbody>
               {filteredCards.length ? (
                 filteredCards.slice(firstIndex, lastIndex).map((card, index) => {
-                  return <CardRow key={card.id} index={index} card={card} status={banlist[card.id.toString()]}/>
+                    if (isTabletOrMobile) {
+                        return <MobileCardRow key={card.id} index={index} card={card} status={banlist[card.id.toString()]}/>
+                    } else {
+                        return <CardRow key={card.id} index={index} card={card} status={banlist[card.id.toString()]}/>
+                    }
                 })
               ) : (
                 <tr />

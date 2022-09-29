@@ -50,7 +50,10 @@ router.get('/', async (req, res, next) => {
   try {
     const formats = await Format.findAll({
         where: {
-            banlist: {[Op.not]: null}
+            [Op.or]: {
+                popular: true,
+                date: {[Op.not]: null}
+            }
         },
         attributes: ['id', 'name', 'icon', 'date', 'banlist', 'event', 'description', 'popular'],
         order: [['popular', 'DESC'], ['date', 'ASC']]

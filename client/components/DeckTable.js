@@ -5,9 +5,11 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import DeckImage from './DeckImage.js'
 import DeckRow from './DeckRow.js'
+import MobileDeckRow from './MobileDeckRow.js'
 import Pagination from './Pagination.js'
 import * as sortFunctions from '../../functions/sort'
 import axios from 'axios'
+import { useMediaQuery } from 'react-responsive'
 
 const DeckTable = (props) => {
   const [page, setPage] = useState(1)
@@ -220,14 +222,15 @@ const DeckTable = (props) => {
   if (filteredDecks.length) filteredDecks.sort(sortFunctions[sortBy] || undefined)
 
   // RENDER
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+
   return (
     <div className="body">
       <div className="event-database-flexbox">
-        <img style={{ height:'80px'}} src={'/images/emojis/deckbox.png'}/>
+        <img className="desktop-only" style={{ height:'80px'}} src={'/images/emojis/deckbox.png'}/>
         <h1>Deck Database</h1>
         <img style={{ height:'80px'}} src={'/images/emojis/deckbox.png'}/>
       </div>
-      <br />
 
       <div className="searchWrapper">
         <input
@@ -245,7 +248,7 @@ const DeckTable = (props) => {
           <select
             id="searchTypeSelector"
             defaultValue="name"
-            className="filter"
+            className="filter desktop-only"
             onChange={() => runQuery()}
           >
             <option value="type">Deck Type</option>
@@ -256,7 +259,7 @@ const DeckTable = (props) => {
           <select
             id="category"
             defaultValue="All Categories"
-            className="filter"
+            className="filter desktop-only"
             onChange={(e) => setQueryParams({ ...queryParams, category: e.target.value })}
           >
             <option value="All Categories">All Categories</option>
@@ -279,7 +282,7 @@ const DeckTable = (props) => {
           </select>
 
           <a
-            className="searchButton"
+            className="searchButton desktop-only"
             type="submit"
             onClick={() => search()}
           >
@@ -288,7 +291,7 @@ const DeckTable = (props) => {
         </div>
       </div>
 
-      <div id="resultsWrapper0" className="resultsWrapper0">
+      <div id="resultsWrapper0" className="resultsWrapper0 desktop-only">
         <div className="results" style={{width: '360px'}}>
           Results:{' '}
           {firstXFetched && allFetched
@@ -352,7 +355,7 @@ const DeckTable = (props) => {
         </div>
       </div>
 
-      <div className="paginationWrapper">
+      <div className="paginationWrapper desktop-only">
         <div className="pagination">
           <Pagination
             location="top"
@@ -366,7 +369,29 @@ const DeckTable = (props) => {
         </div>
       </div>
 
-      {view === 'table' ? (
+      { isTabletOrMobile ? (
+        <div id="deck-table">
+          <table id="decks">
+            <thead>
+              <tr>
+                <th>Format</th>
+                <th>Deck</th>
+                <th>Builder</th>
+                <th>Place</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredDecks.length ? (
+                filteredDecks.slice(firstIndex, lastIndex).map((deck, index) => {
+                  return <MobileDeckRow key={deck.id} index={index} deck={deck}/>
+                })
+              ) : (
+                <tr />
+              )}
+            </tbody>
+          </table>
+        </div>
+      ) : (view === 'table') ? (
         <div id="deck-table">
           <table id="decks">
             <thead>
@@ -408,8 +433,8 @@ const DeckTable = (props) => {
           ) : (
             <div />
           )}
-        </div>
-      )}
+          </div>
+        )}
 
       <div className="pagination">
         <Pagination

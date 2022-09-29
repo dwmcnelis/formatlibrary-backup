@@ -16,6 +16,7 @@ router.use('/stats', require('./stats'))
 router.use('/statuses', require('./statuses'))
 router.use('/events', require('./events'))
 router.use('/tournaments', require('./tournaments'))
+router.use('/stub', require('./stub'))
 
 // router.use((req, res, next) => {
 //   const error = new Error('Not Found')

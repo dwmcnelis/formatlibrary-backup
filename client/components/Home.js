@@ -77,7 +77,6 @@ const Home = () => {
                       content={bp.content}
                       images={bp.images}
                       components={bp.components}
-                      author={bp.author}
                       format={bp.format}
                       views={bp.views}
                       rating={bp.rating}
